@@ -10,21 +10,23 @@ from a committee of model judges.
 The prototype passes only when every applicable gate below has current evidence for the same commit.
 An unrun gate is not a pass. A blocked gate blocks the release.
 
-The order matters:
+The order matters (amended by owner decision, 2026-07-19 — steps 2 and 3 no longer precede 4
+and 5; the pleasure and journey gates are proven against the wired reader before release):
 
 1. Establish the application, real Postgres, private bucket, and health route on the designated
    Railway prototype from the first executable commit.
-2. Prove the complete static garden is pleasurable with generation disconnected.
-3. Prove the reader journey and exact navigation in the in-app Browser.
-4. Prove the text and image provider contracts under an explicit spend ceiling.
-5. Connect pagewise generation, prefetch, and cold apertures.
-6. Repeat the complete journey against the deployed prototype.
+2. Prove the text and image provider contracts under an explicit spend ceiling.
+3. Connect pagewise generation, prefetch, and cold apertures.
+4. Prove the wired reader is pleasurable and the complete reader journey and exact navigation
+   work in the in-app Browser.
+5. Repeat the complete journey against the deployed prototype.
 
-An early healthy deployment proves only the runtime and infrastructure boundary. It is not a static
+An early healthy deployment proves only the runtime and infrastructure boundary. It is not a
 garden pass, provider pass, literary pass, or release.
 
-If the static garden is not worth reading and exploring, stop. Generation is not a remedy for an
-unpleasant reader.
+If the wired reader is not worth reading and exploring, stop before release. Generation running
+is not a remedy for an unpleasant reader, and it is not evidence of delight (owner decision
+2026-07-19 withdrew the static-first ordering, not the delight standard itself).
 
 ## Evidence standard
 
@@ -40,9 +42,11 @@ Each gate report records:
 Store feel-gate and release evidence under docs/qa/ by date. Tests introduced for a behavior must be
 observed failing for the intended reason before the implementation makes them pass.
 
-## 1. Static garden gate
+## 1. Garden content gate
 
-Generation and provider credentials remain disconnected for this gate.
+Amended by owner decision 2026-07-19: this gate's criteria are judged as part of the wired reader
+review (C3 → F0) rather than as a static-first prerequisite; proving the loop with credentials
+disconnected is no longer a sequencing requirement. The content criteria below stand unchanged.
 
 Required proof:
 

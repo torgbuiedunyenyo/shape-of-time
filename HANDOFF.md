@@ -50,8 +50,10 @@ The prototype is an illustrated Shape of Time hyperbook in a stable e-reader. Pa
 120–250-word folio through finite narrative movements; the root and child books can continue through
 further movements without a predetermined terminal folio. Suggested phrases, arbitrary highlights,
 and explicit title creation open adjacent books with independent founding premises; Back restores
-the exact source passage. Text and images share narrative work. A static prepared garden must be
-delightful before generation is connected.
+the exact source passage. Text and images share narrative work. By owner decision on 2026-07-19,
+the static-first ordering was withdrawn: the delight gate (C3) is judged on the wired reader and
+blocks release, not the generation track. The prepared garden remains the shipping content
+substrate.
 
 The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. Images use the pinned GPT Image 2 contract with explicit reference packs. The complete Fable request has a hard 400,000-token ceiling. The initial architecture is one TypeScript application, Postgres, and image storage.
 
@@ -303,3 +305,29 @@ Run B2 as a bounded visual-direction study: record a spend ceiling and inspect e
 manifest before generating two or three distinct shared-medium treatments, then build the 8–12-image
 continuity sequence and scoped `anchors.json`. Do not make another paid B1 call merely to retrofit the
 historical pre-journal endpoint evidence.
+
+## D track complete on the server side — isolated worktree (2026-07-19)
+
+- Owner decisions 2026-07-19: (1) C3 withdrawn as a D-track blocker — the delight gate runs on
+  the wired reader and blocks F0; amended in PLAN (work rule 4, dependency map, C3, D0, F0),
+  EVALS (release order, garden gate), SPEC (reader contract), and this section. (2) Standing
+  goal: build the plan through D6 without further confirmation, collaborating across agents.
+- The Fable session's worktree is `/Users/ratpartyserver/git/shape-of-time-d0`, branch
+  `fable/d0-fable-adapter` (off main `6fc0038`). **D0–D6 server slices are all landed there**,
+  each red-first with full local gates green before push; the per-slice evidence is under
+  `docs/qa/2026-07-19-d0…d6-*.md` and the running lane log is
+  `docs/handoffs/fable-d-track.md`.
+- Landed: D0 strict Fable contract + client (live probe **BLOCKED on ANTHROPIC_API_KEY**,
+  unblock command in the D0 QA doc); D1 deterministic full-history compiler; D2 baseline harness
+  + blind-read scorecard (live 8–14-folio run **BLOCKED on the key and on the merged
+  prose-guidance template**); D3 movement planner + pagewise folio generator (mutation-verified
+  sibling isolation); D4 provenance seam with reconstruction + lineage refusal; D5 reading-time
+  preparation (prepared turns are cache hits); D6 confirmed-only child founding from selection
+  or title with persisted ancestry and atomic entry.
+- The image side of generation runs behind `NarrativeImagePort` with contract fakes until the
+  approved visual bible / anchors work on `codex/b2-visual-study` merges; wiring the durable
+  GPT-Image-2 dispatch into that port is a named follow-up.
+- Reader-slice wiring rules recorded for whoever lands C1/C2: preparation may only be triggered
+  from POST-bodied exposure/visibility events (a GET must never purchase generation), and the
+  D6 UI halves (mounted source reader, reload return, no global spinner) are named in the D6 QA
+  doc.

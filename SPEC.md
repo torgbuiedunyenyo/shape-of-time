@@ -203,8 +203,10 @@ immediate. A cold path leaves the reader in the book with a quiet, truthful stat
 the reader with a generic loading screen. Global generation banners, cross-book notices, unrelated
 activity, auth walls, and silent spending do not belong in the reading experience.
 
-The first reader is a deliberately pre-generated static garden. Its reading and exploration loop
-must be delightful before dynamic generation is connected.
+The first reader ships with a deliberately pre-generated garden as its content substrate. By owner
+decision (2026-07-19), the reading and exploration loop is judged for delight on the wired reader —
+with dynamic generation connected — and must be delightful before release, not before generation is
+connected.
 
 ## Generation and continuity
 

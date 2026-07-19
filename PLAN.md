@@ -127,7 +127,10 @@ local state holds bookmarks, discoveries, and current place during the prototype
    implementing. Never weaken a gate to make it pass.
 3. Paid calls require a written spend ceiling and dry-run request inspection first. Live contract
    tests use the smallest useful sample.
-4. Static-reader delight must be green before Fable or dynamic generation is connected.
+4. OWNER DECISION 2026-07-19: static-reader delight no longer gates connecting Fable or dynamic
+   generation. The delight gate (C3) is judged hands-on against the WIRED reader and blocks
+   release (F0), not development. The static garden remains the content substrate the reader
+   ships with, but a static walkthrough is not a prerequisite for the D track.
 5. Prefer deletion and a smaller composition over abstraction added for hypothetical scale.
 6. Use current official documentation before selecting or implementing changing library/provider
    contracts. Pin the resulting versions and record the decision.
@@ -143,11 +146,12 @@ A0 canon/story/visual lock [DONE]
   -> A1 one-app stack decision [DONE] -> A2 app + Postgres/Railway spine [DONE]
 A0 -> B0 movement beats and continuation topology [DONE]
 A0 + A2 -> B1 image adapter -> B2 continuity proof
-B0 + B2 -> C0 static garden -> C1 reader -> C2 navigation -> C3 delight gate
-C3 + A2 -> D0 Fable/count adapter -> D1 full-history compiler -> D2 prose baseline
+B0 + B2 -> C0 static garden -> C1 reader -> C2 navigation
+A0 + A2 -> D0 Fable/count adapter -> D1 full-history compiler -> D2 prose baseline
 D2 + B2 -> D3 movement planning + pagewise generation -> D4 dormant provenance seam
 D4 + C2 -> D5 predictive preparation -> D6 dynamic highlight/title
-D6 -> F0 release gate -> F1 Railway release hardening -> F2 deployed Browser QA
+C2 -> C3 wired delight gate (owner 2026-07-19: blocks F0, not the D track)
+D6 + C3 -> F0 release gate -> F1 Railway release hardening -> F2 deployed Browser QA
 D4 + D6 --only if measured trigger fires--> E0 long-form reconstruction -> F0
 ```
 
@@ -369,9 +373,11 @@ and Back to passage. `popstate` must restore and never push.
 **Green:** Every mechanic uses the same state model; exact return and bookmark/resume survive reload
 and responsive reflow; filtering cannot call generation; no mechanic is a disconnected demo.
 
-### C3 — Pass the static in-app Browser delight gate
+### C3 — Pass the in-app Browser delight gate on the wired reader
 
-**Depends on:** C2.
+**Depends on:** C2. **OWNER DECISION 2026-07-19: C3 no longer blocks D0–D6.** The owner judged
+that a static walkthrough tells them nothing they can act on; delight is evaluated hands-on
+against the wired reader (generation connected), and C3 blocks F0 — release, not development.
 
 **Red:** Use the in-app Browser on desktop and mobile-sized layouts to perform the entire clean-reader
 journey. Record every friction, comprehension break, dead affordance, visual discontinuity, flicker,
@@ -385,12 +391,14 @@ walkthrough, screenshots, and findings under `docs/qa/`.
 phrase, return exactly, highlight later text, distinguish filter from creation, reload/resume, and
 wants to continue both forward and laterally.
 
-**Stop:** If the static garden is not pleasurable after focused iteration, revisit concept/content.
-Do not connect text generation to compensate for a dull reader.
+**Stop (amended 2026-07-19):** the original rule — "do not connect text generation to compensate
+for a dull reader" — was withdrawn as a sequencing constraint by the owner. What survives: if the
+WIRED reader is not pleasurable after focused iteration, revisit concept/content before release;
+generation running is still not evidence of delight.
 
 ### D0 — Pin Fable xhigh and exact 400k admission
 
-**Depends on:** A2, A0, C3.
+**Depends on:** A2, A0. (C3 withdrawn as a blocker by the owner on 2026-07-19; it now gates F0.)
 
 **Red:** Dry-run and minimal live-contract tests fail until the served model is exactly Fable,
 `xhigh` is accepted, the exact multimodal request is officially counted, and empty/refusal/
@@ -542,7 +550,7 @@ may cross 363,136 input tokens while waiting.
 
 ### F0 — Pass the release gate
 
-**Depends on:** D6; E0 only if its trigger fired.
+**Depends on:** D6 and C3 (the wired delight gate); E0 only if its trigger fired.
 
 **Red:** Run the complete suite plus a fresh human reading and in-app Browser journey.
 
