@@ -5,7 +5,16 @@ _Updated 2026-07-19._
 ## Current state
 
 - Repository: `torgbuiedunyenyo/shape-of-time`.
-- Branch: `main`.
+- Active implementation branch: `codex/reader-first-slice`.
+- Active isolated worktree: `/Users/ratpartyserver/git/shape-of-time-reader-first`.
+- Checkpoint base: `b5d7e35`; another agent may be working in the `main` checkout, which this
+  worktree must not modify.
+- **CURRENT ITEM: C0 — reader-first vertical slice.** The authority pivot is complete in this
+  worktree; reader/content implementation is the next change.
+- The reader-first authority checkpoint now passes its named verifier and the complete exact-runtime
+  repository gate: 39 content/architecture tests, 97 unit tests, 20 real-Postgres integration tests,
+  the built-reader browser regression, lint, typecheck, and production build. The gate used isolated
+  local Postgres port 55434 and made no provider call.
 - Genesis commit: `7f7b5b112140db7ecb0bc2a85f28a0f38adda441`.
 - The repository has been separated from the retired `auto-biblio` implementation.
 - The initial authority, verified expanded world source, source provenance, and implementation queue
@@ -30,9 +39,10 @@ _Updated 2026-07-19._
 - B1 is complete. The exact GPT Image 2 request adapter, required-anchor/reference compiler, strict
   opaque-PNG response validator, replay v2, durable one-dispatch journal, and external recovery path
   pass the complete repository gate and three final independent adversarial reviews.
-- No generated corpus or approved narrative image exists. Two paid generic endpoint-contract outputs
-  and two historical sanitized replay records are retained only in the owner-controlled external
-  archive. No paid or synthetic image remains in the Railway bucket.
+- No generated narrative corpus or approved narrative plate exists yet. Treatment B is approved only
+  as the shared medium. Paid generic endpoint-contract and visual-study outputs remain protected in
+  the owner-controlled external archive; no narrative slice asset has been published to the Railway
+  bucket.
 
 ## Reorganization record
 
@@ -50,10 +60,18 @@ The prototype is an illustrated Shape of Time hyperbook in a stable e-reader. Pa
 120–250-word folio through finite narrative movements; the root and child books can continue through
 further movements without a predetermined terminal folio. Suggested phrases, arbitrary highlights,
 and explicit title creation open adjacent books with independent founding premises; Back restores
-the exact source passage. Text and images share narrative work. A static prepared garden must be
-delightful before generation is connected.
+the exact source passage. Text and images share narrative work. The first proof is a file-backed
+reader-first slice: eight root folios, the independent two-folio *Map on the Wall*, four actual
+narrative plates, and one exact aperture/return. It must be delightful before generation is connected
+to the reader runtime; broader garden expansion follows the complete dynamic-reader gate.
 
-The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. Images use the pinned GPT Image 2 contract with explicit reference packs. The complete Fable request has a hard 400,000-token ceiling. The initial architecture is one TypeScript application, Postgres, and image storage.
+The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. For every new folio,
+Fable receives prior current-book prose and actual narrative images interleaved in story order. It
+returns new prose plus an optional natural-language image direction. Images use the pinned GPT Image
+2 contract: the application supplies that Fable-authored direction plus the smallest relevant ordered
+prior-image references while retaining control of scope and technical settings. The complete Fable
+request has a hard 400,000-token ceiling. The architecture remains one TypeScript application,
+Postgres, and image storage.
 
 ## Canon provenance
 
@@ -307,10 +325,10 @@ The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. Imag
   The earlier documentation-only deployment `dd843fec-b1bd-4305-b5a2-2c880d44ebfd` remains historical
   failed/stopped evidence.
 
-## B2 in flight — isolated worktree
+## B2 frozen historical checkpoint
 
-- Active implementation branch: `codex/b2-visual-study` in
-  `/Users/ratpartyserver/git/shape-of-time-b2`. The `main` checkout remains clean for another agent.
+- Historical branch: `codex/b2-visual-study` in
+  `/Users/ratpartyserver/git/shape-of-time-b2`. It is not the active product worktree.
 - Treatment A completed and is recovered. Original B/C are immutable indeterminate operations.
 - Replacement B is also immutable indeterminate after HTTP 200 because a duplicated durable-journal
   base64 regex overflowed. Its terminal digest is
@@ -331,9 +349,10 @@ The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. Imag
   Treatment B: observational varied ink, transparent restrained color, tactile paper and wear,
   natural perspective, and concrete faces and hands. Every person, place, palette, and compositional
   choice in the comparison scene remains incidental.
-- B2 remains PENDING overall. There is no approved continuity stress sequence or `anchors.json`, and
-  no model review may be described as the required later human continuity approval.
-- Continuity Stage 1 is prepared and not executed (2026-07-19). The checked-in eight-image
+- B2 is frozen at the owner-approved Treatment B medium. There is no `anchors.json`, and the
+  previously proposed continuity matrix is no longer a prerequisite. Actual reader plates are the
+  evidence; a targeted repair is allowed only if those plates reveal a concrete continuity failure.
+- Continuity Stage 1 is historical dry-run evidence and must not dispatch. The checked-in eight-image
   Treatment B plan is `content/shape-of-time/visual-continuity-plan.md`; the Stage 1 harness is
   `src/server/images/b2-continuity-stage1.ts` (idempotency key `b2-continuity-root-payment-v1`,
   text-only 1024x1536 medium, zero references, exactly one provider operation, written $0.05 cap,
@@ -350,7 +369,9 @@ The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. Imag
 
 ## Next action
 
-Independent inspection of the exact Stage 1 dry run (`pnpm exec tsx
-src/server/images/b2-continuity-stage1.ts --dry-run`; digests in
-`docs/qa/2026-07-19-b2-continuity-stage-1.md`) before a separately authorized one-call live
-execution bound to the literal $0.05 cap and the exact current study digest.
+Finish the reader-first authority verifier, run the complete existing gate, and commit the pivot on
+`codex/reader-first-slice`. Then **Build the reader-first vertical slice** under C0 in the same
+isolated worktree: its ten finished folios, four actual plates, file-backed fixture, Library and
+cover, page turns, suggested aperture, exact return, arbitrary selection, title filtering and
+explicit creation demonstration, bookmark/reload/resume, keyboard, swipe, responsive layout, and
+reduced-motion behavior. Do not execute the frozen Stage 1 continuity call.

@@ -1,8 +1,8 @@
 # Shape of Time — Compaction-Safe Execution Plan
 
 > **Status:** A0 authority, A1 architecture, A2 application/Railway spine, B0 movement topology,
-> and B1 image/recovery contract are complete.
-> **CURRENT ITEM: B2 — visual direction and continuity proof.**
+> B1 image/recovery contract, and Treatment B medium selection are complete and frozen.
+> **CURRENT ITEM: C0 — reader-first vertical slice.**
 
 This is the dependency-ordered work queue for a small illustrated hyperbook. It intentionally does
 not inherit code, data, schemas, corpus, or compatibility obligations from `auto-biblio`. Git in the
@@ -21,10 +21,10 @@ old repository is sufficient evidence of that experiment.
   it does not choose a protagonist's action and is not a chatbot prompt.
 - The generation/publication unit is one **folio**, initially about 120–250 words plus an image when
   the beat calls for one. Parts and chapters are literary groupings only.
-- The initial garden is a 14-folio Shape of Time movement plus the opening of its next movement,
-  three prepared 2–4-folio child opening movements, and at least one child continuation across a
-  movement boundary. Each movement reaches a real emotional and causal threshold without pretending
-  the book is over.
+- The first proof is an eight-folio Shape of Time movement, the independent two-folio *Map on the
+  Wall* movement, and four actual narrative plates. This complete reader-first slice precedes both
+  dynamic generation and any larger garden. Each movement reaches a real emotional and causal
+  threshold without pretending the book is over.
 - Prose owns action, motives, dialogue, causality, thought, and orientation. Images own material
   evidence, place, atmosphere, contradiction, relationship, or deliberate omission; they may not
   merely paraphrase the prose.
@@ -40,7 +40,7 @@ old repository is sufficient evidence of that experiment.
   a true cold path leaves the reader in place with an honest, book-native creation state.
 - Human consecutive reading and hands-on reader use are the primary literary and experience gates.
   A model judge may diagnose but cannot certify delight.
-- Oakland anchors the root but does not bound the library. The initial garden must include a
+- Oakland anchors the root but does not bound the library. The reader-first slice must include a
   non-root viewpoint, a primary setting beyond Oakland or the Bay Area, and a materially meaningful
   use of Phantas or Mystas.
 
@@ -113,10 +113,11 @@ cache-adjusted count, silent attachment removal, or request-time truncation is a
 ### Small-system boundary
 
 The target is one TypeScript package, one deployable Node process, one composition root, one
-Postgres database, and one image bucket/CDN. A small Postgres-leased in-process generation loop is
-allowed. Do not introduce a workspace graph, Redis, a separate worker, graph/vector service,
-multi-model tribunal, accounts, auth, or backward-compatibility layer without new evidence and a
-plan revision.
+Postgres database, and one image bucket/CDN. A small in-process generation loop may claim work
+atomically in Postgres. Leases and fencing are conditional on measured overlapping workers or an
+observed recovery failure. Do not introduce a workspace graph, Redis, a separate worker,
+graph/vector service, multi-model tribunal, accounts, auth, or backward-compatibility layer without
+new evidence and a plan revision.
 
 Initial durable entities are `Book`, `Folio`, `Aperture`, `Asset`, and `GenerationAttempt`. Browser
 local state holds bookmarks, discoveries, and current place during the prototype. A sixth derived
@@ -129,7 +130,8 @@ local state holds bookmarks, discoveries, and current place during the prototype
    implementing. Never weaken a gate to make it pass.
 3. Paid calls require a written spend ceiling and dry-run request inspection first. Live contract
    tests use the smallest useful sample.
-4. Static-reader delight must be green before Fable or dynamic generation is connected.
+4. Reader-first-slice delight must be green before Fable is connected to the reader runtime or
+   dynamic generation. Bounded editorial Fable calls may author the checked-in slice under C0.
 5. Prefer deletion and a smaller composition over abstraction added for hypothetical scale.
 6. Use current official documentation before selecting or implementing changing library/provider
    contracts. Pin the resulting versions and record the decision.
@@ -141,16 +143,24 @@ local state holds bookmarks, discoveries, and current place during the prototype
 ## Dependency map
 
 ```text
-A0 canon/story/visual lock [DONE]
-  -> A1 one-app stack decision [DONE] -> A2 app + Postgres/Railway spine [DONE]
-A0 -> B0 movement beats and continuation topology [DONE]
-A0 + A2 -> B1 image adapter -> B2 continuity proof
-B0 + B2 -> C0 static garden -> C1 reader -> C2 navigation -> C3 delight gate
-C3 + A2 -> D0 Fable/count adapter -> D1 full-history compiler -> D2 prose baseline
-D2 + B2 -> D3 movement planning + pagewise generation -> D4 dormant provenance seam
-D4 + C2 -> D5 predictive preparation -> D6 dynamic highlight/title
-D6 -> F0 release gate -> F1 Railway release hardening -> F2 deployed Browser QA
-D4 + D6 --only if measured trigger fires--> E0 long-form reconstruction -> F0
+A0/A1/A2/B0/B1 [DONE, FROZEN]
+Treatment B medium [DONE]
+  -> C0 reader-first vertical slice
+  -> C1 in-app Browser + consecutive-reading delight
+  -> D0 Fable/count adapter
+  -> D1 deterministic interleaved-history compiler
+  -> D2 consecutive prose baseline
+  -> D3 simple pagewise prose-and-image generation
+  -> D4 live highlight and explicit-title cold creation
+  -> D5 next-folio preparation only
+  -> D6 complete dynamic-reader experience gate
+  -> G0 incremental garden expansion
+  -> F0 release gate
+  -> F1 Railway release hardening
+  -> F2 deployed in-app Browser QA
+
+D6/G0 --only if the measured context trigger fires--> E0 long-form reconstruction -> F0
+An observed plate continuity failure is repaired inside C0 or D3; it never creates a separate gate.
 ```
 
 ## Queue
@@ -306,102 +316,93 @@ binary leakage; replay verifies the recorded result and does not regenerate pixe
 changes the manifest; invalid/rejected outputs cannot become assets or anchors; every retained paid
 image has a verified recoverable copy outside the live Railway bucket.
 
-### B2 — Select visual direction and prove continuity **[CURRENT]**
+### B2 — Select the shared visual medium **[DONE, FROZEN]**
 
 **Depends on:** B1.
 
-**Red:** The human scorecard and 8–12-image stress sequence are absent.
+**Red observed:** The human medium scorecard and side-by-side candidates were absent.
 
-**Implement:** Compare two or three genuinely distinct treatments of the location-neutral shared
-medium, then select one. Create only the reusable identity anchors the actual sequence needs; create
-place, object, and open-concept references at book scope. Stress a recurring root figure in close and
-wide views, a purposeful appearance change, return to a changed place, two materially distinct
-cultures at different Primas coordinates, one non-Oakland place, a non-root central figure,
-meaningful Phantas or Mystas geography, parent-to-child inheritance, a book-local realization of an
-open object, and a neighbor repair. Iterate prompt/reference roles, not reader architecture.
+**Implemented:** The owner selected Treatment B: observational varied ink, restrained transparent
+color, tactile paper and repair, natural perspective, and concrete faces and hands. The comparison
+scene remains incidental. No character, place, Clef form, object, or palette became an anchor.
 
-**Green:** Side-by-side human review approves identity, place, purposeful change, coherent medium,
-temporal-coordinate plurality, geographic/temporal range, and meaningful text/image division of labor.
-`anchors.json` records scope: shared, recurring identity, or book-local. No Clef form, shop plan,
-device silhouette, or generic coordinate style is promoted globally by accident.
+**Green:** The medium is sufficient to author actual slice plates. The abandoned eight-image Stage 1
+plan remains historical dry-run evidence and must not dispatch. A targeted continuity experiment is
+permitted only when the actual plates show an identity, place, object, or purposeful-change problem.
+There is no `anchors.json` prerequisite.
 
-### C0 — Build the complete static garden fixture
+### C0 — Build the reader-first vertical slice **[CURRENT]**
 
-**Depends on:** B0, B2.
+**Depends on:** B0, B1, Treatment B medium.
 
-**Red:** Fixture validation fails on missing root/child folios, successor openings, movement-boundary
-metadata, images, alt text, aperture spans, return coordinates, layouts, or portfolio range.
+**Red:** The application is still a placeholder. One integrated test fails until a fresh reader can
+use a complete file-backed fixture and reader in the same item, rather than waiting for a finished
+content platform.
 
-**Implement:** Produce the full 14-folio first root movement, one or two folios of its successor,
-three prepared child opening movements, and at least one child successor opening with approved
-prose/images. Human writing and heavy editing are allowed: this fixture tests the product, not the
-generator. Add cover, discovered-library metadata, image roles, exact apertures, and deterministic
-cold-path demo states. No placeholder title or legacy generated corpus is permitted.
+**Implement:** Author exactly eight finished root folios and the independent two-folio child *The Map
+on the Wall*. Compress only the first root movement, from Payment through Jay's informed yes; do not
+compress the later six-part arc. The child follows Eniola through one Lagos ferry movement in which
+Phantas Minor, licensed charts, witnessed soundings, and public correction materially determine the
+action. Its exact founding phrase is “The maps were always becoming wrong.”
 
-**Green:** Every visible aperture resolves, ordinary Next crosses root and child movement boundaries,
-every required image contributes new narrative information, the portfolio proves temporal and
-geographic range, and the entire journey can run without network or paid calls.
+Create four actual narrative plates: Payment, The band, The map, and The terminal wall. During this
+bounded editorial authoring run, Fable sees all earlier prose and narrative images interleaved in
+story order and returns new prose plus a natural-language image direction when a plate is required.
+The application chooses the eligible ordered references and fixed GPT Image settings; it does not
+rewrite Fable's narrative direction. Record those authoring requests and outputs as slice provenance,
+not as proof that the D0/D1 production adapters already exist.
 
-### C1 — Build the instant reader shell
+Build the file-backed fixture and reader in the same item. Include a restrained Library and explicit
+cover entry; varied folio layouts; Previous/Next, keyboard and swipe; one suggested aperture; exact
+Back to passage; arbitrary selection with Open as a book; local title filtering; a distinct explicit
+title-creation affordance; bookmark/reload/resume; responsive and reduced-motion behavior. Selection
+and missing-title creation honestly say generation is disconnected and perform no request.
 
-**Depends on:** A2, C0.
+Use stable book, folio, block, and aperture IDs. Record the aperture as exact UTF-16 block offsets and
+quote. Keep navigation transitions pure and URL-led; browser history and one versioned local record
+own return, discoveries, bookmarks, and resume. No database seed, new API, bucket integration,
+generation loop, or dependency is allowed for this slice.
 
-**Red:** Browser tests expose cover auto-advance, title flicker, global/banner leakage, dead page
-controls, unstable mounts, inaccessible controls, or broken responsive layout.
+**Green:** All ten folios and four plates validate; every image has accurate alt text and adds a fact
+the prose withholds; the Map child opens instantly and returns to the exact phrase after a child page
+turn and reload; all reader mechanics work without network or paid calls. The slice reaches real
+resting points without pretending the books end.
 
-**Implement:** Add restrained library and explicit cover entry; composed folio layouts; readable
-typography controls; Previous/Next, keyboard arrows, swipe, bookmark/resume; stable focus; reduced
-motion; responsive behavior; and quiet book-scoped status placement.
+### C1 — Pass the reader-first delight gate
 
-**Green:** Ten fixture turns work without flicker or duplicate history; keyboard/touch/focus/contrast
-checks pass; no global status or cross-book banner can render over a page.
+**Depends on:** C0.
 
-### C2 — Unify apertures, selection, search, and exact return
+**Red:** Use the in-app Browser, not Playwright, on desktop and mobile-sized layouts. Exercise every
+visible feature and record each comprehension break, dead affordance, visual discontinuity, focus
+loss, flicker, stranded state, or incorrect return before fixing it.
 
-**Depends on:** C1.
+**Implement:** Read all eight root folios consecutively, open the exact phrase, read both Map folios,
+return to the root phrase, finish the root movement, select cross-paragraph text, try title search and
+explicit creation, bookmark, reload, resume, use keyboard and swipe, and repeat at mobile width.
+Iterate prose, plates, layout, typography, control language, and navigation until the reader feels
+like one calm object and the owner wants another page and another aperture.
 
-**Red:** One integrated journey fails prepared phrase travel, arbitrary later-page/cross-paragraph
-selection, local shelf filtering, explicit title-creation handoff, browser Back, reload, reflow, or
-exact return to the founding passage.
+**Green:** Automated regressions pass, but the gate passes only with recorded in-app Browser evidence
+for every UI feature plus consecutive human reading. No title flicker, auto-advance, banner leakage,
+dead Next, duplicate history, approximate return, inaccessible control, horizontal overflow, or fake
+creation is accepted.
 
-**Implement:** Use one navigation state machine with opaque entries containing book/folio, source
-span, selection, scroll/viewport, aperture ancestry, and return target. Add subtle phrase apertures,
-a selection toolbar, “Open as a book,” distinct “Create a book called …” confirmation, shelf/history,
-and Back to passage. `popstate` must restore and never push.
-
-**Green:** Every mechanic uses the same state model; exact return and bookmark/resume survive reload
-and responsive reflow; filtering cannot call generation; no mechanic is a disconnected demo.
-
-### C3 — Pass the static in-app Browser delight gate
-
-**Depends on:** C2.
-
-**Red:** Use the in-app Browser on desktop and mobile-sized layouts to perform the entire clean-reader
-journey. Record every friction, comprehension break, dead affordance, visual discontinuity, flicker,
-stranded state, and incorrect return before fixing anything.
-
-**Implement:** Iterate only the static content, composition, navigation, and interaction until the
-reader feels like one stable object that invites another page and another aperture. Commit the
-walkthrough, screenshots, and findings under `docs/qa/`.
-
-**Green:** A reader can enter deliberately, read, turn, cross a movement boundary, open a prepared
-phrase, return exactly, highlight later text, distinguish filter from creation, reload/resume, and
-wants to continue both forward and laterally.
-
-**Stop:** If the static garden is not pleasurable after focused iteration, revisit concept/content.
-Do not connect text generation to compensate for a dull reader.
+**Stop:** If focused iteration cannot make the slice pleasurable, revisit content or concept. Do not
+connect generation or expand the garden to compensate for a dull reader.
 
 ### D0 — Pin Fable xhigh and exact 400k admission
 
-**Depends on:** A2, A0, C3.
+**Depends on:** A2, A0, C1.
 
 **Red:** Dry-run and minimal live-contract tests fail until the served model is exactly Fable,
 `xhigh` is accepted, the exact multimodal request is officially counted, and empty/refusal/
 truncation/unsupported-stop/count failures are distinct. Record a spend ceiling first.
 
 **Implement:** Add the strict adapter, request archive, exact token preflight, usage/cost/latency
-postflight, resilient async transport, and same-key transient retry. Caching may improve latency but
-may not alter the manifest or count. There is no fallback writer.
+postflight, and resilient async transport. A same-key retry is allowed only after a proven
+pre-dispatch failure or an explicit provider rejection that proves no result exists; an ambiguous
+dispatch is terminal pending reconciliation. Caching may improve latency but may not alter the
+manifest or count. There is no fallback writer.
 
 **Green:** Fable mismatch, Opus alias, refusal, empty output, truncation, count error, and any request
 over the hard equation fail before publication or additional spend.
@@ -411,9 +412,9 @@ over the hard equation fail before publication or additional spend.
 **Depends on:** D0, B0.
 
 **Red:** A randomized-insertion test fails until folio N receives, exactly once and in order: the
-full world source, `BOOK_ORIGIN`, `CURRENT_MOVEMENT_BRIEF`, every prior exposed current-book folio
-and narrative image, the approved temporal-rules block, current folio brief, then the compact writing
-request with its fixed prose-guidance block and output contract.
+full world source, `BOOK_ORIGIN`, `CURRENT_MOVEMENT_BRIEF`, every prior exposed current-book prose
+and narrative image interleaved in story order, the approved temporal-rules block, current folio
+brief, then the compact writing request with its fixed prose-guidance block and output contract.
 
 **Implement:** Build a stateless compiler with stable document boundaries, IDs/digests/order,
 exclusions, prompt-cache hints, exact rendered-request archive, context manifest, and official token
@@ -422,14 +423,14 @@ count. Full history remains active while admitted.
 **Green:** Identical sources produce identical context digests; any source/image/plan change changes
 the digest. The rendered baseline contains the complete world exactly once and contains no Undertow,
 visual-production authority, or optional craft examples. No rolling summary, recent-N window,
-provider memory/compaction, `chars/4`, or silent truncation path exists. The initial garden never enters
-long-form mode.
+provider memory/compaction, `chars/4`, or silent truncation path exists. The reader-first slice and
+ordinary early books never enter long-form mode.
 
 ### D2 — Establish the lightly steered prose baseline
 
 **Depends on:** D1, B0.
 
-**Red:** There is no uninterrupted 8–14-folio Fable run or blind human scorecard.
+**Red:** There is no uninterrupted eight-folio Fable run or blind human scorecard.
 
 **Implement:** Generate one consecutive run without line splicing. Archive exact prompts, model,
 counts, outputs, latency, and cost. Readers record what physically happened, what each actor wanted,
@@ -447,15 +448,14 @@ paraphrasable, and worth continuing. A model score cannot override human failure
 **Stop:** If a small number of targeted experiments cannot make the baseline readable, reconsider
 the story plan or writing contract; do not build a multi-model tribunal.
 
-### D3 — Add movement planning and pagewise generation
+### D3 — Add simple pagewise prose-and-image generation
 
-**Depends on:** D2, B2.
+**Depends on:** D2, C1, B1.
 
-**Red:** Real-DB integration tests fail until one idempotent movement plan reserves exactly one folio,
-obtains one Fable result and the required reference-bound image, validates both, and exposes them in
-one atomic ready transition. Separate mutations catch root-phase replay, a post-arc movement that
-undoes the true ending, child continuation of the parent scene, root-plot recasting, and sibling
-contamination.
+**Red:** A real-DB integration journey fails until one explicit Next operation claims exactly one
+folio, obtains one Fable result containing prose and an optional natural-language image direction,
+uses that direction with application-selected ordered image references, and exposes one valid folio.
+Duplicate actions spend once. An ambiguous provider dispatch never resends automatically.
 
 **Implement:** Keep anchor/prepared plans human-authored. At a movement boundary, use one bounded
 planning call to produce a short natural-prose brief before generating the next folio. Before the
@@ -466,64 +466,94 @@ its own viewpoint, place/time, question, intended change, and boundary; the root
 not its template. Later child movements grow only from that book's exposed history and lineage-local
 decisions. Enforce sibling isolation in the normal path.
 
-After planning, use one prose call and normally one image call per folio. Persist attempts, exact
-origin, movement brief, and scoped visual profile; use Postgres leases; retry only a named failure.
+After planning, use one Fable call per folio. Fable receives the complete interleaved current-book
+history and returns new prose plus a natural-language image direction when the beat calls for a
+plate. The direction names the narrative job, concrete scene, fact left to the image, must-remain
+continuity, purposeful change, and unresolved facts. It cannot choose the model, endpoint, quality,
+scope, or reference assets. The application chooses the eligible ordered references, compiles the
+fixed GPT Image request, and normally makes at most one image call.
+
+Use and freeze the existing one-process claim, paid-dispatch, and exposure boundaries without adding
+another worker, lease mechanism, or recovery abstraction. Text-led folios are first-class and omit
+image direction; a plate is never added merely to satisfy a quota. Retry only a named safe failure.
 Never generate a movement as one blocking prose unit and never stream prose into normal reading.
 
-**Green:** Duplicate requests spend once; a process crash resumes safely; required text and image
-appear together; unseen work can be replaced; exposed work cannot mutate; root and child books cross
-movement boundaries without replay, terminal screens, or scope leakage.
+**Green:** Duplicate requests spend once; a process crash cannot duplicate spend and leaves the
+operation honestly recoverable or indeterminate; required text and image appear together; unseen
+work can be replaced; exposed work cannot mutate; root and child books cross movement boundaries
+without replay, terminal screens, or scope leakage.
 
-### D4 — Prove the dormant long-form provenance seam
+### D4 — Connect live highlight and explicit title creation
 
-**Depends on:** D3.
+**Depends on:** D3, C1.
 
-**Red:** Provenance reconstruction fails because stable entity/time/causal/epistemic/visual IDs,
-direct source spans/digests, state deltas, aperture scope, and exact context manifests are incomplete.
+**Red:** A later-page arbitrary selection or novel-title request fails end to end, spends without an
+explicit action, duplicates a child, loses its exact source, replaces the reader with a generic
+loader, or cannot return after reload.
 
-**Implement:** Persist this source-grounded metadata in the existing five entities and attempts.
-Build no retrieval runtime, embeddings, graph, rolling summary, or sixth table.
+**Implement:** Make the cold path work before speculative preparation. Persist exact founding
+span/title intent and navigation ancestry, create an independent first-movement brief and book-local
+visual profile, and keep the source reader mounted with a quiet book-native creation state. Search
+filtering and title creation remain distinct; typing alone never spends.
 
-**Green:** After deleting all derived development artifacts, the same folio and asset provenance can
-be reconstructed from exact primary records. No generated prose or image is silently promoted to
-canon.
+Default a new child's first folio to text-led unless its narrative beat genuinely requires a plate.
+This lets a reader enter after one admitted Fable result while the next folio can prepare. If the
+opening requires an image, retain atomic composed-surface readiness. Use the same exact return model
+as prepared apertures; nested books and reload may not weaken it.
 
-### D5 — Prepare likely pages and apertures during reading time
+**Green:** Dynamic selection and explicit title creation produce independent continuable books,
+preserve their exact source, spend once, remain honest during latency, and return to the precise
+passage. No auth wall, global spinner, root replay, or sibling leakage appears.
 
-**Depends on:** D4, C2.
+### D5 — Prepare only the next likely folio
 
-**Red:** A latency fixture reaches the next/second-next folio or visible prepared aperture before a
-durable reservation exists, or duplicates work under concurrency.
+**Depends on:** D4.
 
-**Implement:** On exposure reserve next, second-next, and visible suggested-aperture openings inside
-a small concurrency/cost budget. Visibility/hover/touch may reprioritize. Measure dwell, generation
-latency, prepared-hit rate, and waste before tuning the horizon. A GET route and browser-only lock may
-never purchase generation.
+**Red:** The next expected turn starts without a durable claim, duplicates work, or preparation hides
+a failure by exposing incomplete content.
+
+**Implement:** On folio exposure, prepare only the next folio inside a small explicit cost budget.
+Measure dwell time, text/image latency, prepared-hit rate, and unused work. Do not add second-next,
+hover, touch, or visible-aperture speculation until measured data shows the simple horizon is
+insufficient. A GET route and browser-only lock may never purchase generation.
 
 **Green:** Normal prepared turns are cache hits; duplicate spend is impossible; failed preparation
-leaves navigation honest; measured hit/waste data justifies the horizon.
+leaves navigation honest; recorded hit and waste data justifies retaining preparation.
 
-### D6 — Connect dynamic highlight and explicit title creation
+### D6 — Pass the complete dynamic-reader experience gate
 
 **Depends on:** D5.
 
-**Red:** A later-page arbitrary selection or novel-title request fails end to end, spends without
-explicit action, duplicates a child, loses its source, replaces the reader with a generic loader, or
-cannot return exactly after reload.
+**Red:** From a clean local session, use the in-app Browser to exercise every visible UI feature
+against real pagewise generation. Playwright may supply repeatable regressions but is not evidence
+for this gate.
 
-**Implement:** Persist exact founding span/title intent and navigation ancestry, create the child's
-independent first-movement brief and book-local visual profile, keep the source reader mounted with a
-book-native creation state, and enter only when the first folio is atomically ready. Search filtering
-and title creation remain distinct paths.
+**Implement:** On desktop and mobile-sized layouts, use Library and cover entry; every page control;
+keyboard and swipe; prepared Next; suggested aperture; exact Back; arbitrary cross-paragraph
+selection; real cold child creation; local title filtering; explicit novel-title creation; nested
+return; bookmark; reload/resume; responsive reflow; reduced motion; and accessibility focus. Inspect
+every generated folio and plate at reading size. Read at least eight consecutive dynamic folios and
+record comprehension, motives, causal change, prose mannerisms, image contribution, latency, cost,
+prepared-hit rate, and desire to continue.
 
-**Green:** Dynamic children have independent premises, are idempotent, continue through finite
-movements, and remain returnable through nested books and reload; selection and explicit
-confirmation survive the cold path; no auth wall, global spinner, root replay, or sibling leakage
-appears.
+**Green:** Every UI feature has recorded in-app Browser evidence; dynamic children remain independent,
+idempotent, continuable, and exactly returnable; prepared reading is calm; cold creation is honest;
+prose and images pass human review; and the owner wants to continue forward and laterally. Only then
+is work through D6 complete.
+
+### G0 — Expand the garden after delight and generation
+
+**Depends on:** D6.
+
+Expand the root at its natural pace, add successor movements and the other prepared children, and
+broaden the geographic and temporal image portfolio incrementally. Each addition must pass the same
+reader, literary, image, and exact-navigation gates. Do not restore a 30-folio prerequisite or a
+continuity matrix as a ceremony. Expansion is product content, not proof that the core interaction
+exists.
 
 ### E0 — Add long-form reconstruction only when measured **[CONDITIONAL / DEFERRED]**
 
-**Depends on:** D4, D6, all static/dynamic gates, and an exact projected request above 300,000 input
+**Depends on:** D6 and a specific G0 expansion whose exact projected request exceeds 300,000 input
 tokens. This task is not on the initial prototype critical path.
 
 **Red:** First build a 400k+ fixture with ancient causal callbacks, irrelevant recent distractors,
@@ -547,7 +577,7 @@ may cross 363,136 input tokens while waiting.
 
 ### F0 — Pass the release gate
 
-**Depends on:** D6; E0 only if its trigger fired.
+**Depends on:** G0; E0 only if its trigger fired.
 
 **Red:** Run the complete suite plus a fresh human reading and in-app Browser journey.
 
@@ -558,8 +588,8 @@ may cross 363,136 input tokens while waiting.
 - eight consecutive generated folios passing human clarity and desire review;
 - root and child movement-boundary crossings that begin from changed state rather than replay;
 - a child with an independent premise plus normal-path sibling isolation;
-- approved visual identity/place continuity, two distinct futures, a non-Oakland setting, and
-  meaningful images;
+- approved visual identity/place continuity, materially distinct temporal places without generic
+  past/future shorthand, a non-Oakland setting, and meaningful images;
 - keyboard, touch, focus, contrast, alt text, reduced motion, responsive layout, reload, bookmark,
   exact Back, and nested-return coverage;
 - hard proof every text attempt is Fable + `xhigh`, exactly counted, below 400k, and has no fallback;

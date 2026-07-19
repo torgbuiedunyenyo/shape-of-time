@@ -305,9 +305,10 @@ export async function auditArchitectureDecision(rootUrl) {
     !authority["PLAN.md"].includes("A2 — Scaffold the application and durable state spine **[DONE]**") ||
     !authority["PLAN.md"].includes("B0 — Author movement beats and continuation topology **[DONE]**") ||
     !authority["PLAN.md"].includes("B1 — Build the GPT Image 2 adapter and replay contract **[DONE]**") ||
-    !authority["PLAN.md"].includes("B2 — Select visual direction and prove continuity **[CURRENT]**")
+    !authority["PLAN.md"].includes("B2 — Select the shared visual medium **[DONE, FROZEN]**") ||
+    !authority["PLAN.md"].includes("C0 — Build the reader-first vertical slice **[CURRENT]**")
   ) {
-    issues.push("PLAN.md must record completed A2/B0/B1 and identify B2 as the current item");
+    issues.push("PLAN.md must freeze completed A2/B0/B1/B2 and identify C0 as the current item");
   }
   issues.push(
     ...railwaySequenceIssues(

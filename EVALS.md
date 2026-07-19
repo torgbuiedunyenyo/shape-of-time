@@ -13,18 +13,19 @@ An unrun gate is not a pass. A blocked gate blocks the release.
 The order matters:
 
 1. Establish the application, real Postgres, private bucket, and health route on the designated
-   Railway prototype from the first executable commit.
-2. Prove the complete static garden is pleasurable with generation disconnected.
-3. Prove the reader journey and exact navigation in the in-app Browser.
-4. Prove the text and image provider contracts under an explicit spend ceiling.
-5. Connect pagewise generation, prefetch, and cold apertures.
-6. Repeat the complete journey against the deployed prototype.
+   Railway prototype from the first executable commit. **Complete.**
+2. Build the **Reader-first vertical slice** and prove it as one coherent reading object.
+3. Pass the **In-app Browser and consecutive-reading delight gate** before connecting generation.
+4. Prove the Fable and image provider contracts under explicit spend ceilings.
+5. Connect **Simple pagewise generation and real cold paths** before speculative preparation.
+6. Perform **Incremental garden expansion and deployed release QA** only after the core experience
+   works.
 
-An early healthy deployment proves only the runtime and infrastructure boundary. It is not a static
-garden pass, provider pass, literary pass, or release.
+An early healthy deployment proves only the runtime and infrastructure boundary. It is not a
+reader-first-slice pass, provider pass, literary pass, or release.
 
-If the static garden is not worth reading and exploring, stop. Generation is not a remedy for an
-unpleasant reader.
+If the slice is not worth reading and exploring, stop. Generation and a larger garden are not
+remedies for an unpleasant reader.
 
 ## Evidence standard
 
@@ -40,34 +41,36 @@ Each gate report records:
 Store feel-gate and release evidence under docs/qa/ by date. Tests introduced for a behavior must be
 observed failing for the intended reason before the implementation makes them pass.
 
-## 1. Static garden gate
+## 1. Reader-first vertical slice gate
 
-Generation and provider credentials remain disconnected for this gate.
+Generation and provider credentials remain disconnected from the reader runtime for this gate.
+Bounded editorial calls may author the checked-in prose and images, but reading the slice performs no
+network request or paid operation.
 
 Required proof:
 
-- The first root Shape of Time movement has a complete local change and contains the approved
-  illustrated folios; the following prepared folio proves that Next can cross a movement boundary
-  without replay, reset, or a terminal interstitial.
-- Each prepared child has its own founding premise and complete opening movement. At least one child
-  also crosses into a following movement, and none merely continues the parent scene or replays the
-  root plot.
-- The prepared garden collectively includes a central perspective other than Jay or Tan, a primary
-  setting outside Oakland or the Bay Area, and a story in which Phantas or Mystas materially changes
-  the place, movement, causation, or stakes.
-- Every visible suggested phrase opens a real prepared destination.
+- Eight finished root folios complete one compressed but intelligible movement from Payment through
+  Jay's informed yes. They do not compress the later six-part arc or pretend the root book ends.
+- The exact phrase “The maps were always becoming wrong” opens the independent two-folio child
+  *The Map on the Wall*. Eniola's Lagos ferry movement makes Phantas Minor materially consequential
+  and reaches a public, contested trace without replaying Jay and Tan.
+- Four actual reader plates use the approved Treatment B medium and perform distinct narrative jobs.
+- The file-backed fixture, Library, cover, reader, navigation, and cold-path demonstrations ship in
+  the same slice. There is no database seed, provider call, or fake generated child in this gate.
+- The sole visible suggested phrase opens its real prepared destination. Unprepared phrases remain
+  ordinary prose.
 - Prose and image share narrative work. An image adds place, evidence, relationship, contradiction,
   atmosphere, or deliberately unspoken information; it does not merely paraphrase nearby text.
-- A fresh reader can open the cover, read, turn pages, cross a movement boundary, explore laterally,
-  and return without instructions from the builder.
+- A fresh reader can open the cover, read all ten folios, explore laterally, and return to the exact
+  root phrase without instructions from the builder.
 - There is no title-page auto-advance, global generation banner, dead Next action, stranded child
   book, generic loading takeover, or unexplained control.
 
 PASS requires an in-app Browser walkthrough on desktop and a mobile-sized viewport plus a
 consecutive human read. Any comprehension or interaction break is a failure to repair before paid
-generation work begins.
+generation is connected to the reader runtime.
 
-## 2. Complete reader journey
+## 2. Complete reader-first journey
 
 A clean session must complete this sequence:
 
@@ -76,14 +79,14 @@ A clean session must complete this sequence:
 3. Open a suggested phrase into a prepared book.
 4. Use Back to passage and return to the exact source phrase and reading position.
 5. Select arbitrary text on a later folio and invoke Open as a book.
-6. Remain in the source reader while the cold child is being created; enter only when its opening
-   folio is atomically ready.
+6. Remain in the source reader while an honest confirmation explains that dynamic creation is not
+   connected in this slice. Do not invent a child, start a timer, or make a network request.
 7. Filter the shelf by an existing title.
-8. Explicitly choose Create a book called … for a missing title; typing alone must never spend.
+8. Explicitly choose Create a book called … for a missing title and see the same honest disconnected
+   confirmation; typing alone must never spend.
 9. Bookmark, reload, and resume the exact book, folio, and place.
-10. Finish a movement, use ordinary Next to enter the following movement, and verify that it begins
-    from the changed situation rather than restarting the prior tension.
-11. Stop at a later movement boundary or open an available aperture, then return to the shelf.
+10. Finish the available root or child movement without a terminal fiction that the book is over.
+11. Return to the shelf from either book.
 
 The journey fails if a mechanic exists only as an isolated demo, if navigation state is duplicated,
 or if an auth wall or generic spinner replaces the reading surface.
@@ -93,7 +96,7 @@ or if an auth wall or generic spinner replaces the reading surface.
 Literary quality is judged by consecutive human reading, not isolated excerpts or automated style
 scores.
 
-For the static garden, read every root folio and prepared child in order. For generated prose, use
+For the reader-first slice, read every root folio and prepared child in order. For generated prose, use
 one uninterrupted run of at least eight consecutive folios from the same prompt version; do not
 cherry-pick or splice candidates.
 
@@ -107,9 +110,9 @@ At least two fresh readers independently record:
   substitutes performance for a concrete event, thought, or consequence;
 - whether they wanted to turn the next page, and why.
 
-For every prepared child, readers must also be able to state its local premise, how it grew from the
+For the prepared child, readers must also be able to state its local premise, how it grew from the
 founding phrase, what changed during its movement, and why it does not replay the Jay and Tan trajectory
-or collapse into an encyclopedia entry. Across the garden, readers judge whether the
+or collapse into an encyclopedia entry. Across the slice and later generated reading, readers judge whether the
 world feels larger than one couple, Oakland, and a binary past/future corridor.
 
 PASS requires that readers can accurately paraphrase events, motives, and consequences; no reader
@@ -126,27 +129,21 @@ from that baseline. They may be tested only as one complete, versioned A/B after
 identifies placeless abstraction, above-the-scene reporting, or explanatory summary as a repeated
 failure; the beat, history, and every other prompt input remain fixed.
 
-## 4. Image sequence gate
+## 4. Actual reader plates gate
 
-Before production plates are approved, review an 8–12-image continuity sequence containing:
-
-- a recurring root character across changes of pose, scale, clothing, lighting, and time;
-- a non-root central figure and a primary place beyond Oakland;
-- two materially distinct cultures at different Primas coordinates rather than one generic
-  "future" style;
-- a place where Phantas or Mystas has visible material consequences;
-- at least one recurring location seen from materially different views;
-- a book-local object or open visual fact whose continuity matters within that book without becoming
-  global canon;
-- one purposeful change that must not be mistaken for drift;
-- a parent or neighboring image used as a reference for a new scene.
-
-Review the sequence side by side at reading size, not only as individual full-resolution images.
+Review all four actual reader plates together in their folio layouts and side by side at reading
+size, not only as individual full-resolution images. They must cover recurring Jay/Tan identity,
+Oakland material life, the root map, a non-root Lagos center outside Oakland or the Bay Area, and
+visible Phantas Minor consequences.
+For editorially authored slice plates, Fable's image direction and the application's ordered
+prior-image references remain separately inspectable as checked-in provenance. The production
+adapter proves the same separation again when dynamic generation is connected.
 
 PASS requires stable character and location identity, legible intentional changes, consistent
 medium, useful composition beside the prose, and meaningful narrative contribution. Every approved
 image has accurate alt text. Rejected images cannot become reference anchors merely because they
-were generated first.
+were generated first. An 8–12-image matrix is a conditional diagnostic after an observed identity,
+place, or purposeful-change failure; it is not a prerequisite for this gate.
 
 ## 5. Exact navigation and reader state
 
@@ -193,19 +190,27 @@ PASS requires:
 - narrative images have useful alt text and decorative elements are hidden appropriately;
 - live creation messages are announced without repeatedly interrupting reading.
 
-## 8. Atomic exposure, idempotency, and spend
+## 8. Dynamic atomic exposure, idempotency, and spend
 
-These claims require integration tests against a real test Postgres instance.
+This gate becomes applicable only when dynamic generation is connected. The static slice neither
+claims nor needs it. These claims then require integration tests against a real test Postgres
+instance.
 
 Tests must prove:
 
-- concurrent duplicate requests reserve one book/folio task and purchase at most one attempt;
-- a crash between reservation, provider completion, asset storage, and publication resumes safely;
+- repeated duplicate actions reserve one book/folio task and purchase at most one attempt;
+- one process claims a paid operation atomically before dispatch;
 - a folio becomes ready only when its required prose and image assets are valid;
 - exposure is one atomic transition;
 - exposed prose, layout, aperture source spans, and required asset IDs cannot be mutated;
 - a failed unseen folio may be retried without changing an exposed folio;
 - repeated highlight, title, refresh, and prefetch actions preserve the same idempotency identity.
+- root and child books cross a movement boundary from the changed state without chapter-sized
+  generation, replay, or a terminal interstitial.
+
+Leases, fencing, and overlapping-worker recovery are required only if the deployed topology or an
+observed recovery failure introduces overlapping workers. They are not prerequisites for the
+reader-first slice or the first one-process generator.
 
 Mocks may test pure decision logic. They cannot prove database locking, transactionality,
 uniqueness, provider behavior, browser geometry, or object-storage durability.
@@ -245,7 +250,8 @@ retried.
 The release suite includes:
 
 - real Postgres migration and repository tests from an empty database;
-- concurrent reservation, crash/retry, and immutable-exposure tests;
+- atomic-claim, duplicate-idempotency, indeterminate-dispatch, and immutable-exposure tests;
+- overlapping-worker concurrency recovery only when its measured topology trigger fires;
 - real HTTP tests through the application composition root;
 - real-browser automated tests for geometry, selection, history, keyboard, touch, and reflow;
 - explicit live provider contract tests under a recorded spend cap;

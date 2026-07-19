@@ -35,23 +35,31 @@ folio initially contains about 120–250 words and may be text-led, image-led, s
 a document, or an artifact. Chapters and parts may organize the literature, but they never block
 generation.
 
-The initial garden contains:
+The first proof is a **reader-first experience slice**, not a miniature content platform. It contains
+eight root folios, one independent two-folio child named *The Map on the Wall*, four narrative
+plates in the approved medium, and one prepared phrase aperture on “The maps were always becoming
+wrong” with exact return. The slice is file-backed and runs without database seeding, provider
+credentials, or a generation service. Content authoring and reader construction proceed together so
+the first real evidence is a complete felt experience.
 
-- one root movement of approximately 14 folios, with its own satisfying emotional and causal shape;
-- the opening one or two folios of the following root movement, so the static reader can cross a
-  movement boundary without encountering a dead Next action;
-- normally 10–12 root illustrations, with omissions or shared plates only when they improve rhythm;
-- three prepared child-book opening movements of 2–4 folios and 1–3 images each; and
-- at least one prepared child continuation across a movement boundary.
+The eight root folios form a deliberately compressed first movement: payment, courtship, an
+intelligible encounter with temporal difference and power, the map and invitation, and Jay's
+informed yes. The two child folios form their own Lagos ferry movement in which Eniola contests a
+licensed route through Phantas Minor and makes the disputed trace public. Both movements reach a
+causal resting point without pretending either book ends.
+
+The larger garden is an expansion after the slice passes its consecutive-reading and in-app Browser
+gate. It may then restore more root breathing room, successor movements, additional children, and a
+broader image portfolio. None of that postpones building or judging the first reader.
 
 The first root movement draws from the beginning of Jay and Tan's story: their meeting, the
 phone/payment incident, courtship, the first intelligible account of temporal movement, and an
 honest decision or threshold. It must not compress the entire six-part novel merely to claim
 completion. The root book follows the remaining source story through later movements.
 
-The prepared children arise from actual source phrases but are stories, experiences, documents, or
+Prepared children arise from actual source phrases but are stories, experiences, documents, or
 other literary forms in their own right—not encyclopedia entries and not displaced Jay and Tan
-chapters. Across the initial garden, at least one central perspective is not Jay or Tan, at least one
+chapters. Across the slice and later garden, at least one central perspective is not Jay or Tan, at least one
 primary setting lies outside Oakland or the Bay Area, and at least one movement makes Phantas or
 Mystas materially consequential rather than merely naming an axis.
 
@@ -140,11 +148,21 @@ inheritance, or neighboring continuity; what must remain; what must change; and 
 the new image performs. A repair between folios may use both neighbors. Generated incidental details
 remain nonbinding outside their exposed local context unless deliberately promoted at a named scope.
 
+Fable receives prior prose and narrative images interleaved in story order before producing the
+next folio. When a folio calls for an image, Fable returns the prose together with a Fable-authored
+image direction in natural language: the image's narrative job, concrete scene, what the prose
+leaves for the image, and what has purposefully changed. The application, not Fable, controls model
+settings and scope. GPT Image 2 receives that direction plus the smallest relevant ordered set of
+approved prior images selected by the application for identity, place, object, parent, or neighboring
+continuity.
+
 There is no universal visual future. Each future place is designed as a lived culture with its own
 architecture, clothing, infrastructure, interfaces, maintenance, access, and relationship to other
 times. Generic chrome, neon, hologram, and tower-city shorthand is rejected unless the local book
-earns it. A continuity stress sequence must include materially different futures and a non-Oakland
-place before the shared direction is approved.
+earns it. Treatment B's inked-reportage medium is approved. Its actual reader plates are reviewed
+together at reading size. A larger continuity stress sequence is a conditional diagnostic only when
+repeated characters, objects, or places show an observed continuity problem; it is not a prerequisite
+for constructing the reader.
 
 ## Writing
 
@@ -209,8 +227,9 @@ immediate. A cold path leaves the reader in the book with a quiet, truthful stat
 the reader with a generic loading screen. Global generation banners, cross-book notices, unrelated
 activity, auth walls, and silent spending do not belong in the reading experience.
 
-The first reader is a deliberately pre-generated static garden. Its reading and exploration loop
-must be delightful before dynamic generation is connected.
+The first reader is the curated file-backed experience slice. Its prose, imagery, page turns,
+aperture, selection, search/title affordances, exact return, and resume behavior must be delightful
+before dynamic generation is connected.
 
 ## Generation and continuity
 
@@ -225,12 +244,18 @@ Writing uses Claude Fable 5 with `xhigh` effort through a direct, verified Messa
 - every request reproducible from application data.
 
 The writer receives the complete corrected world verbatim, the book origin and lineage, the short
-current-movement brief, all prior exposed current-book folios and narrative images while they fit,
-the strong temporal rules, and the current folio's situation and intended change. The prompt states
+current-movement brief, then all prior exposed current-book prose and narrative images interleaved in
+exact story order, followed by the strong temporal rules and the current folio's situation and
+intended change. The complete request must pass admission intact; no prior prose or image is silently
+dropped to make it fit. The prompt states
 that the root trajectory is not a child-book plot template and that a parent aperture is a founding
 premise rather than a scene to continue. Long source documents come first and the writing request
 comes last. The exact ordered request manifest, prompt version, source and asset digests, token count,
 provider identity, usage, latency, cost, and result are retained.
+
+For an illustrated folio, one Fable response contains new prose plus a natural-language image
+direction. The direction coordinates narrative labor but cannot select provider settings, approve an
+anchor, or introduce facts outside the book and folio scopes. A text-led folio omits it explicitly.
 
 Movement planning happens only at a boundary, never as chapter-sized prose generation. The root
 planner advances the unresolved source arc and, after its true ending, establishes a new post-arc
@@ -252,9 +277,10 @@ transport or server result as indeterminate instead of automatically resending i
 inputs are intrinsically high fidelity; `input_fidelity` is omitted because the model does not accept
 that option.
 
-Human review selects the visual direction and approves an 8–12-image continuity stress sequence.
-Automated similarity may diagnose drift but cannot certify character, location, or narrative
-continuity.
+Human review has selected the shared medium and now reviews actual narrative plates in their folio
+layouts. Automated similarity may diagnose drift but cannot certify character, location, or
+narrative continuity. A targeted multi-image stress sequence is warranted only after an observed
+identity or place failure cannot be judged from the production plates themselves.
 
 ### Hard context boundary
 
@@ -274,7 +300,7 @@ it only when the equation holds. Counting failure blocks generation. There is no
 silent truncation, cache-adjusted count, recent-page fallback, or image dropping.
 
 The prototype uses full current-book text-and-image history and must remain far below the ceiling.
-Long-form reconstruction must not activate during the initial garden.
+Long-form reconstruction must not activate during the reader-first slice or ordinary early books.
 
 If a real book later approaches the boundary, exact folios, images, plans, apertures, and human
 decisions remain permanently stored and authoritative. A derived, rebuildable index may reconstruct
@@ -301,8 +327,9 @@ exist and validate. Reader exposure is one atomic transition. After exposure, pr
 spans, and required asset IDs are immutable. Unseen candidates may be replaced; an exposed result may
 not. A failed unseen folio may receive a linked retry.
 
-Reservations and generation attempts use durable application idempotency keys. Repeated clicks,
-reloads, or lease recovery must not duplicate a book, folio, or locally undispatched paid operation.
+Reservations and generation attempts use durable application idempotency keys. Repeated clicks or
+reloads must not duplicate a book, folio, or locally undispatched paid operation. One process claims
+an operation atomically before dispatch.
 Once a provider dispatch may have occurred, an ambiguous result is never automatically replayed;
 known rejection and explicit replacement are recorded as separate dispatch evidence. Every attempt
 records its exact inputs, provider request ID when returned, result, usage, latency, pricing version,
@@ -318,9 +345,10 @@ image adapters, small durable generation loop, schema, and repositories live in 
 
 The initial durable model needs only books, folios, apertures, assets, and generation attempts.
 Bookmarks, discoveries, reading place, and local navigation history remain browser-local. A small
-Postgres reservation/lease loop may perform generation work in process. There is no Redis, separate
-worker, microservice graph, model committee, Turbo workspace graph, compatibility layer, account, or
-authentication system.
+in-process loop claims generation work atomically in Postgres. Leases and fencing are conditional on
+measured overlapping workers or actual recovery failures; they are not reader-slice prerequisites.
+There is no Redis, separate worker, microservice graph, model committee, Turbo workspace graph,
+compatibility layer, account, or authentication system.
 
 EPUB may later be an export artifact. It is not the live storage model and must not distort the
 reader architecture.
