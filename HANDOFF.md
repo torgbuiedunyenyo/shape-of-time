@@ -6,9 +6,20 @@ _Updated 2026-07-18._
 
 - Repository: `torgbuiedunyenyo/shape-of-time`.
 - Branch: `main`.
+- Genesis commit: `7f7b5b112140db7ecb0bc2a85f28a0f38adda441`.
 - The repository has been separated from the retired `auto-biblio` implementation.
 - The initial authority, verified expanded world source, source provenance, and implementation queue are present.
 - No application code, package manifest, generated corpus, database, model output, paid generation, Railway project, or deployment exists yet.
+
+## Reorganization record
+
+- The private GitHub successor is published at `https://github.com/torgbuiedunyenyo/shape-of-time` with `main` as its default branch.
+- Genesis integrity CI passed for the genesis commit.
+- `node --test scripts/verify-genesis.test.mjs` passes all three tests, and `node scripts/verify-genesis.mjs` passes the repository audit.
+- The retired `auto-biblio` repository now opens on a docs-only archive `main` at `5290dfb41a7ba0d22f3e44c82d097b6cac6eb531`; its root instructions forbid resuming the old plan.
+- Historical refs `legacy/deployed-2026-07-18`, `legacy/recovery-checkpoint-2026-07-18`, and `archive/recovery-2026-07-18` are published. The recovery ref is explicitly incomplete, not a release.
+- The old repository's full local gate and GitHub CI passed for the archive freeze. Railway staging and production remain healthy on deployed commit `a07d2f2f61176c3737b3b52a4a29dd3160039c29`; no service redeployed.
+- Eleven clean temporary or agent worktrees and eight stale worktree registrations were removed. Five dirty forensic worktrees and the user's existing old-repository edits were preserved.
 
 ## Locked product direction
 
