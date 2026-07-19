@@ -55,8 +55,59 @@ Contract to enforce (all red-first, per AGENTS.md method):
   style content test if doc evidence is pinned; QA record `docs/qa/2026-07-1X-d0-fable-contract.md`
   (red evidence, commands, results, spend); HANDOFF update in b2 worktree at slice end.
 
-## Then D1–D6 in order (PLAN is authority)
+## D0 verdict: DONE except live probe
 
+Full gates GREEN in this worktree (lint, typecheck, content, unit, integration, browser, build —
+exit 0, 2026-07-19), pushed through `7ec46b1`. Live probe stays BLOCKED on ANTHROPIC_API_KEY
+(unblock command in docs/qa/2026-07-19-d0-fable-contract.md).
+
+## D1 — CORE LANDED 2026-07-19 (was CURRENT)
+
+`src/server/text/folio-context.ts` + unit test: 18/18 text tests green (12 D0 + 6 D1), typecheck
+and lint green, committed+pushed. Covers: every source exactly once in template order, request
+last, exposure-order enforcement, per-source digests + deterministic contextDigest, refusals for
+Undertow/visual-bible/craft-examples/empty sources, no summary/truncation path. D1 REMAINING to
+call it done per PLAN: a QA note in docs/qa/ (red evidence: 'Cannot find module
+./folio-context.js'; commands; results) and full-gates + push — do first thing next session.
+NOTE: this worktree's template (main@6fc0038) predates the B2 agent's <prose_guidance> work in
+the b2 worktree; the compiler is placeholder-driven and survives that template change, but D2
+should run AFTER their template lands on main (coordinate/merge).
+
+## D2–D6 continuation (after D1 QA)
+
+D2 (prose baseline): BLOCKED on ANTHROPIC_API_KEY (same as D0 live probe) + needs the merged
+template + B0 movement briefs as inputs; run one uninterrupted 8–14 folio root run via
+folio-context + fable-client, archive everything, then HUMAN blind read — surface to owner.
+D3 (movement planning + pagewise generation): real-DB integration (books/folios/apertures/assets/
+generation_attempts repos from A2), one prose + one image call per folio, atomic ready/expose —
+image side needs B2 anchors (coordinate with B2 agent; build behind ports with contract fixtures
+if still pending). D4 provenance seam; D5 prefetch (needs C2!); D6 dynamic highlight/title (needs
+C2 reader). C0–C2 are unclaimed — after D2, claim C0–C2 in the b2-worktree HANDOFF and build them
+(the owner's goal is a PLAYABLE wired reader; D5/D6 cannot wire into a reader that lacks
+selection/apertures/navigation).
+
+## Old D1 design notes (implemented; kept for reference)
+
+Template `prompts/fable/write-folio.md` has EXACTLY these placeholders, in this order:
+{{WORLD_DOCUMENT}}, {{BOOK_ORIGIN}}, {{CURRENT_MOVEMENT_BRIEF}}, {{STORY_SO_FAR}} (all four inside
+<documents>/<document_content> blocks), then {{TEMPORAL_RULES}}, then <current_folio>
+{{CURRENT_FOLIO_BRIEF}}, then <writing_request> (contains <prose_guidance>; output contract asks
+for <folio_prose>). Sources on disk: content/shape-of-time/world.md, prompts/fable/
+temporal-rules.md; origin/brief/folios come from the caller (later the DB).
+
+Design: `src/server/text/folio-context.ts` — pure compileFolioContext({world, temporalRules,
+bookOrigin, movementBrief, priorFolios: [{ordinal, prose, images:[{altText, digest}]}] IN ORDER,
+currentFolioBrief}) → renders the template with each placeholder substituted EXACTLY ONCE (refuse
+unresolved or duplicate placeholders), STORY_SO_FAR = ordered folio sections with image entries
+inline, returns { request: compileFableRequest(...), contextManifest: {slot digests in order},
+contextDigest }. Refusals by name: empty world, world inserted twice, out-of-order/duplicate
+ordinals, Undertow content detected (world must not contain undertow marker; template output must
+not contain 'undertow', 'visual bible', craft-example marker per verify-content-authority's
+exclusion approach). Red test `src/server/text/folio-context.unit.test.ts`: randomized-insertion
+(shuffled priors ≠ ordered priors digest; identical inputs → identical digest; any single-source
+change changes digest; world exactly once — count occurrences of a world sentinel line; excluded
+sources rejected if passed in). THEN: D2 needs the live key (8–14 folio consecutive Fable run +
+HUMAN blind read — surface to owner when reached); D3–D6 per PLAN.
 D1 deterministic full-history compiler → D2 prose baseline (8–14 consecutive folios, HUMAN read —
 flag to owner when ready; a model can't certify) → D3 movement planning + pagewise generation
 (needs B2 for images — coordinate with B2 agent; if B2 continuity still pending, build behind the
