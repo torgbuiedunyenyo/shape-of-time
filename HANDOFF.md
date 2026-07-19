@@ -321,7 +321,8 @@ historical pre-journal endpoint evidence.
   key at invocation, served claude-fable-5 xhigh, count==usage, msg_011CdCHc2Vbtj2mDZjjPA7C2);
   D1 deterministic full-history compiler; D2 baseline harness + blind-read scorecard (live
   8–14-folio run now gated on the **merged prose-guidance template** and an owner-attended run —
-  the key is proven and supplied per invocation, never stored); D3 movement planner + pagewise folio generator (mutation-verified
+  the key is proven; by later owner decision the same day both provider keys are stored in
+  gitignored .env files and Railway service variables — see the D0 QA doc); D3 movement planner + pagewise folio generator (mutation-verified
   sibling isolation); D4 provenance seam with reconstruction + lineage refusal; D5 reading-time
   preparation (prepared turns are cache hits); D6 confirmed-only child founding from selection
   or title with persisted ancestry and atomic entry.

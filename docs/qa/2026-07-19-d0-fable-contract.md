@@ -33,7 +33,7 @@ PLAN/EVALS/SPEC/HANDOFF), and the standing goal is to proceed through D6.
 
 ## Live contract proof — PASS (2026-07-19, owner-supplied key at invocation)
 
-Judgment: **PASS**. The owner supplied ANTHROPIC_API_KEY at run time (never stored) and the
+Judgment: **PASS**. The owner supplied ANTHROPIC_API_KEY at run time (stored later that day by owner decision — see below) and the
 probe ran under the written $2.00 cap:
 
 ```
@@ -46,6 +46,5 @@ request at 70 input tokens and billed usage matched exactly (70 in / 11 out — 
 spend); prose "Request received and confirmed." The count→admit→send→validate chain is proven
 against the live provider. D0 is fully green.
 
-Provider calls executed for this proof: 1. The key exists only at invocation; it is not in git,
-.env, logs, or Railway (verified by name 2026-07-19: art-thing's .env holds only OpenRouter and
-Langfuse keys; the shape-of-time Railway service holds only DB/S3/asset variables).
+Provider calls executed for this proof: 1. At proof time the key existed only at invocation.
+Owner decision 2026-07-19 (later the same day): both provider keys are now STORED — in gitignored `.env` files (mode 600) at `~/git/shape-of-time/.env` and `~/git/shape-of-time-d0/.env`, and as service variables on Railway project `lucky-magic` (8b20e07d), service `shape-of-time` (verified by name read-back). Runners still read `process.env`; load with `set -a; source .env; set +a` before invoking.

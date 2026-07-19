@@ -43,8 +43,9 @@ branch `fable/d0-fable-adapter`.
 
 ## Live run — BLOCKED
 
-Judgment: **BLOCKED**. The live baseline needs `ANTHROPIC_API_KEY` at invocation; it is not in
-the environment and no `.env` exists. Two further gating notes:
+Judgment: **BLOCKED** (amended 2026-07-19, later the same day: the key is now proven working —
+D0 probe PASS — and stored in the gitignored `.env`, so the remaining blocks are the two notes
+below, chiefly the template merge):
 
 1. **Template drift**: the B2 agent's approved `<prose_guidance>` work (branch
    `codex/b2-visual-study`, `b5d7e35`) is not on main. The D2 run should use the merged
@@ -56,7 +57,8 @@ tree):
 
 ```bash
 cd ~/git/shape-of-time-d0
-ANTHROPIC_API_KEY=<key> mise x node@24.18.0 -- pnpm exec tsx src/server/text/d2-baseline-run.ts \
+set -a; source .env; set +a
+mise x node@24.18.0 -- pnpm exec tsx src/server/text/d2-baseline-run.ts \
   --confirm-spend-cap 25.00 --folios 10 --archive-root "$HOME/shape-of-time-archives/d2-baseline-01"
 ```
 

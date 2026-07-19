@@ -64,7 +64,7 @@ Contract to enforce (all red-first, per AGENTS.md method):
 
 Full gates GREEN in this worktree (lint, typecheck, content, unit, integration, browser, build —
 exit 0, 2026-07-19), pushed through `7ec46b1`. Live probe **PASSED 2026-07-19**: owner supplied
-the key at invocation (never stored), served claude-fable-5 xhigh, end_turn, count==usage 70 in /
+the key at invocation (stored later that day by owner decision — see D0 QA doc), served claude-fable-5 xhigh, end_turn, count==usage 70 in /
 11 out, response msg_011CdCHc2Vbtj2mDZjjPA7C2 — D0 fully green. (Earlier text: stays BLOCKED on ANTHROPIC_API_KEY
 (unblock command in docs/qa/2026-07-19-d0-fable-contract.md).
 
@@ -84,7 +84,7 @@ should run AFTER their template lands on main (coordinate/merge).
 
 D2 HARNESS LANDED 2026-07-19: d2-baseline.ts/-run.ts + scorecard, 31/31 text tests, dry-run
 verified on real sources (folio-1 digest ea8d48c2…). LIVE RUN BLOCKED only on the template now —
-the key is proven working (D0 probe 2026-07-19) and the owner supplies it per run; still needs +
+the key is proven working (D0 probe 2026-07-19) and now lives in the gitignored .env; still needs +
 merged <prose_guidance> template from b2 branch b5d7e35 (rerun after template change invalidates
 the steering variable — wait for merge). Unblock command in docs/qa/2026-07-19-d2-baseline-harness.md.
 D3 LANDED 2026-07-19: movement-planner.ts (+plan-movement.md template) and
