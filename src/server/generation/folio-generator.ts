@@ -1,5 +1,6 @@
 import type { AssetStore } from "../assets/asset-store.js";
 import type { JsonValue } from "../db/types.js";
+import { sha256 } from "../domain/digests.js";
 import type { FolioRecord, LibraryRepository } from "../repositories/library-repository.js";
 import { parseFolioProse } from "../text/d2-baseline.js";
 import { compileFolioContext, type PriorFolio } from "../text/folio-context.js";
@@ -134,11 +135,34 @@ export async function generateNextFolio(
       evidence: {
         latencyMs: Date.now() - startedAt,
         providerRequestId: evidence.providerResponseId,
+        // D4: the dormant provenance seam. Everything a future long-form pass needs to
+        // reconstruct this folio's derivation lives here, in the attempt row — no sixth table.
         result: {
           contextDigest: compiled.contextDigest,
           countedInputTokens: evidence.countedInputTokens,
+          dormant: {
+            causalIds: null,
+            entityIds: null,
+            epistemicIds: null,
+            reason:
+              "not yet extracted; a future long-form pass fills these from the archived context",
+            timeIds: null,
+            visualProfile: null,
+          },
+          imageAltText: image.altText,
           imageAssetId: asset.id,
+          imageDigest: sha256(image.bytes),
           manifestDigest: evidence.manifestDigest,
+          movementId: movement.id,
+          priorFolios: exposed.map((prior) => ({
+            folioId: prior.id,
+            ordinal: prior.ordinal,
+            proseDigest: sha256(prior.prose ?? ""),
+          })),
+          promptVersion: compiled.contextManifest.promptVersion,
+          proseDigest: sha256(prose),
+          provenanceVersion: "shape-of-time.provenance.v1",
+          sourceDigests: { ...compiled.contextManifest.sourceDigests },
         },
         usage: { ...evidence.usage },
       },

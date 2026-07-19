@@ -84,10 +84,12 @@ generation/folio-generator.ts; LibraryRepository gained evidence-on-ready, getBo
 listExposedFolios, getAttemptEvidence. 26/26 integration (testcontainers), 105/105 unit,
 mutation-verified sibling isolation. Image side is behind NarrativeImagePort with fakes —
 FOLLOW-UP: wire durable GPT-Image-2 dispatch into that port once b2 branch merges. Semantic
-halves (post-arc ending, child premise independence) named as human-read territory in QA doc. D4 provenance seam; D5 prefetch (needs C2!); D6 dynamic highlight/title (needs
-C2 reader). C0–C2 are unclaimed — after D2, claim C0–C2 in the b2-worktree HANDOFF and build them
-(the owner's goal is a PLAYABLE wired reader; D5/D6 cannot wire into a reader that lacks
-selection/apertures/navigation).
+halves (post-arc ending, child premise independence) named as human-read territory in QA doc. D4 LANDED 2026-07-19: provenance.ts + manifest in attempt result (v1 schema), reconstruction
+verifies all digests from primary records only, refuses lineage-less prose; 28/28 integration.
+D5 prefetch (needs C2!) and D6 dynamic highlight/title (needs C2 reader) are NEXT.
+LANE UPDATE 2026-07-19 ~16:00: the other agent pivoted to a READER-FIRST VERTICAL SLICE
+(branch codex/reader-first-slice, commit 8fafde0) — C-track is CLAIMED by them; do NOT build
+C0–C2 here. Build D5/D6 behind ports/contracts so they wire into that reader when it lands.
 
 ## Old D1 design notes (implemented; kept for reference)
 
