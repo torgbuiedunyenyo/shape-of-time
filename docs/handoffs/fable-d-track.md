@@ -21,7 +21,12 @@ POSITION (2026-07-19, second increment): contract module (8 tests) AND Anthropic
 (4 tests: exact endpoints/headers, redirect error, no auto-retry, typed 429, key hygiene) are
 green — 12/12, typecheck+lint green, committed on the branch. The manifest digest binds body and
 manifest; count runs before send; failure taxonomy is closed.
-REMAINING for D0: (a) key-gated live contract test (script or test that runs ONLY with
+UPDATE: (a)+(b) DONE — src/server/text/d0-live-contract.ts (dry-run mode keyless; live mode
+needs --confirm-spend-cap 2.00 + ANTHROPIC_API_KEY, refuses as BLOCKED otherwise) and
+docs/qa/2026-07-19-d0-fable-contract.md (12/12 results, live proof BLOCKED on key) are written
+and committed. REMAINING: full-gates verdict (background run), then push; live probe stays
+BLOCKED until the owner supplies the key. Then D1.
+Superseded detail below: (a) key-gated live contract test (script or test that runs ONLY with
 ANTHROPIC_API_KEY + a written ceiling in the QA doc; without the key it must report BLOCKED, not
 pass) — key is NOT in env and no .env exists; unblock = owner provides key at run time;
 (b) QA record docs/qa/2026-07-19-d0-fable-contract.md (red evidence: 'Cannot find module
