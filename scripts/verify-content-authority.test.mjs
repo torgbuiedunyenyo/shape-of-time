@@ -109,9 +109,20 @@ function writerTemplateIssues(template) {
     "### Part Seven: The Undertow",
     "# Shape of Time — Visual Bible",
     "# Shape of Time — Visual Development Proposal",
+    "# Shape of Time — Visual Direction",
     "<craft_examples>",
   ]) {
     if (template.includes(forbidden)) issues.push(`baseline includes forbidden input ${forbidden}`);
+  }
+
+  const guidanceOpen = template.indexOf("<prose_guidance>");
+  const guidanceClose = template.indexOf("</prose_guidance>");
+  const requestOpen = template.indexOf("<writing_request>");
+  const requestClose = template.indexOf("</writing_request>");
+  if (count(template, "<prose_guidance>") !== 1 || count(template, "</prose_guidance>") !== 1) {
+    issues.push("baseline must contain exactly one prose-guidance block");
+  } else if (!(requestOpen < guidanceOpen && guidanceOpen < guidanceClose && guidanceClose < requestClose)) {
+    issues.push("prose-guidance block must remain inside the writing request");
   }
 
   return issues;
@@ -176,9 +187,9 @@ test("world.md is the sole comprehensive narrative authority", async () => {
   requireAll(
     visual,
     [
-      "Visual Development Proposal",
-      "PENDING_OWNER_REVIEW",
-      "not approved visual authority",
+      "# Shape of Time — Visual Direction",
+      "REVIEW_STATUS: MEDIUM_APPROVED_CONTINUITY_PENDING",
+      "not a scene plan",
       "never an input to the Fable prose prompt",
     ],
     "visual-bible.md",
@@ -273,6 +284,9 @@ test("the baseline Fable template keeps long documents first and the request las
       "</folio_prose>",
       "clear, absorbing narrative prose",
       "concise orienting exposition",
+      "<prose_guidance>",
+      "Good prose sounds like a person who knows exactly what they mean and says it once.",
+      "Do not flatten the register",
       "Return only",
     ],
     "write-folio.md",
@@ -283,10 +297,19 @@ test("the baseline Fable template keeps long documents first and the request las
     template.replace("{{WORLD_DOCUMENT}}", "{{WORLD_DOCUMENT}}{{WORLD_DOCUMENT}}"),
     template.replace("<writing_request>", "story-bible.md\n<writing_request>"),
     template.replace("{{TEMPORAL_RULES}}", "").concat("\n{{TEMPORAL_RULES}}"),
+    template.replace("<prose_guidance>", "<removed_prose_guidance>"),
+    template.replace(
+      "</writing_request>",
+      `${template.match(/<prose_guidance>[\s\S]*?<\/prose_guidance>/)[0]}\n</writing_request>`,
+    ),
+    template.replace(
+      /(<prose_guidance>[\s\S]*?<\/prose_guidance>)\s*/,
+      "</writing_request>\n$1\n<writing_request>\n",
+    ),
     ...excludedSources.map((source) => template.concat("\n", source)),
   ];
-  for (const mutation of mutations) {
-    assert.ok(writerTemplateIssues(mutation).length > 0, "writer-template mutation escaped");
+  for (const [index, mutation] of mutations.entries()) {
+    assert.ok(writerTemplateIssues(mutation).length > 0, `writer-template mutation ${index} escaped`);
   }
 });
 
@@ -355,6 +378,70 @@ test("the adapted craft examples are optional evidence, never baseline authority
   assert.ok(!baseline.includes("Ritual and specificity over summary"));
 });
 
+test("the baseline includes one compact human-authored fiction register", async () => {
+  const [template, spec, evals, plan] = await Promise.all([
+    prompt("write-folio.md"),
+    rootDocument("SPEC.md"),
+    rootDocument("EVALS.md"),
+    rootDocument("PLAN.md"),
+  ]);
+  const matches = [...template.matchAll(/<prose_guidance>([\s\S]*?)<\/prose_guidance>/g)];
+
+  assert.equal(matches.length, 1, "write-folio.md must contain exactly one prose-guidance block");
+  const guidance = matches[0][1];
+  const normalizedGuidance = guidance.replace(/\s+/gu, " ").trim();
+  requireAll(
+    normalizedGuidance,
+    [
+      "Good prose sounds like a person who knows exactly what they mean and says it once.",
+      "Established world terms",
+      "manufactured profundity",
+      "physical action, choice, speech, thought, or consequence",
+      "one unambiguous antecedent",
+      "fewer well-chosen things",
+      "Do not use em dashes or en dashes in narration",
+      "Do not flatten the register",
+      "not a rigid show-don't-tell rule",
+    ],
+    "write-folio.md prose guidance",
+  );
+  const requestStart = template.indexOf("<writing_request>");
+  const requestEnd = template.indexOf("</writing_request>");
+  const guidanceStart = template.indexOf("<prose_guidance>");
+  const guidanceEnd = template.indexOf("</prose_guidance>");
+  assert.ok(requestStart < guidanceStart && guidanceEnd < requestEnd, "prose guidance must stay inside the request");
+  assert.doesNotMatch(guidance, /(?:^|\n)(?:BAD|GOOD):/m);
+  assert.doesNotMatch(guidance, /^\s*[-*]\s/m, "the register must not grow into a checklist");
+  assert.ok(guidance.split(/\s+/u).length < 400, "the register has become an accumulating style bible");
+
+  requireAll(
+    spec.replace(/\s+/gu, " "),
+    [
+      "One fixed, human-authored prose-guidance block",
+      "an editing register, not a style sample or automated prose filter",
+      "requires a repeated named failure from consecutive human reading",
+    ],
+    "SPEC.md writing authority",
+  );
+  requireAll(
+    evals.replace(/\s+/gu, " "),
+    [
+      "compact human-authored prose-guidance block",
+      "may not certify prose quality with vocabulary regexes or a style score",
+    ],
+    "EVALS.md literary gate",
+  );
+  requireAll(
+    plan.replace(/\s+/gu, " "),
+    [
+      "one compact human-authored prose-guidance block",
+      "fixed prose-guidance block",
+      "Structural tests prove only that the compact prose guidance is present and bounded",
+    ],
+    "PLAN.md prompt contract",
+  );
+});
+
 test("Undertow, visual authority, and retired concepts cannot enter the prose baseline", async () => {
   const template = await prompt("write-folio.md");
   const pilot = await content("root-movement-01.md", "utf8");
@@ -381,7 +468,7 @@ test("visual authority stays story-wide while Clef, places, and scenes stay book
   requireAll(
     visual,
     [
-      "story-wide visual grammar",
+      "owner-approved story-wide medium",
       "book-local visual profile",
       "folio image brief",
       "Clef remains visually indeterminate at world scope",

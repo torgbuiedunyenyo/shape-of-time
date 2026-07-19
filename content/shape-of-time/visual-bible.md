@@ -1,23 +1,28 @@
-# Shape of Time — Visual Development Proposal
+# Shape of Time — Visual Direction
 
-**REVIEW_STATUS: PENDING_OWNER_REVIEW**
+**REVIEW_STATUS: MEDIUM_APPROVED_CONTINUITY_PENDING**
 
-This is a proposal for the story-wide visual grammar, not approved visual authority and not a scene
-plan. It is never an input to the Fable prose prompt. It does not decide Jay or Tan's face, the form
-of Clef, the plan of a shop, the look of a PRMTT, or the staging of a future folio. Those decisions
-are made only at the scope where they are needed: a recurring identity reference, a book-local visual
-profile, or a folio image brief.
+This records the owner-approved story-wide medium and the still-pending continuity proposal; it is
+not a scene plan. It is never an input to the Fable prose prompt. It does not decide Jay or Tan's
+face, the form of Clef, the plan of a shop, the look of a PRMTT, or the staging of a future folio.
+Those decisions are made only at the scope where they are needed: a recurring identity candidate, a
+book-local visual profile, or a folio image brief, and become anchors only after human approval.
 
 A generated image is a candidate. Once an image is deliberately approved and exposed, its relevant
 details bind the book or lineage named by its production record; they do not silently become facts
 about every book in the library.
 
-## Proposed shared direction
+## Approved shared medium
 
-The working direction is **observed material illustration**: concrete people, rooms, streets,
-landscapes, tools, products, maps, and documents rendered with the tactility of matte gouache,
-graphite construction, and restrained print texture. This shared medium should make the library feel
-like one illustrated object without making its many places and times look like one place.
+The owner selected **inked reportage with transparent color** from the side-by-side B2 comparison.
+Its binding qualities are observational varied ink; transparent, restrained color; tactile paper,
+wear, and repair; natural perspective; and concrete faces and hands. These qualities should let
+people, rooms, streets, landscapes, tools, products, maps, and documents remain specific while the
+library still feels like one illustrated object.
+
+The selection does not authorize the comparison image's people, ferry terminal, ticket, counter,
+palette, clothing, arrangement, composition, or inferred place or era. All of that scene content is
+incidental. The medium must not make the library's many places and times look like one place.
 
 This is deliberately location-neutral. Each book derives its palette, light, density, materials,
 clothing logic, graphic language, and compositional habits from its own setting and viewpoint. There
@@ -107,7 +112,7 @@ No local realization becomes global Clef canon.
 ## Where decisions belong
 
 World scope contains only shared physical rules, source-defined social relationships, and the
-candidate common medium. It does not contain scene layouts or a catalogue of objects.
+approved common medium. It does not contain scene layouts or a catalogue of objects.
 
 Recurring identity scope contains only reference images deliberately approved for a person who must
 remain recognizable. Clothing, grooming, injury, age, fatigue, and posture belong to a named
@@ -172,22 +177,24 @@ Every planned narrative image records:
 8. **Incidental detail:** texture allowed to appear without wider authority.
 9. **Accessible equivalent:** alt text that carries the image's narrative contribution.
 
-## Continuity experiment before approval
+## Continuity experiment before anchor approval
 
-B2 should compare two or three genuinely different treatments of the proposed shared direction,
-then test an 8–12-image sequence rather than approving the first attractive image. The sequence
-should include a recurring person across close and wide views, a purposeful appearance change, a
-return to a changed place, two materially distinct cultures at different Primas coordinates, a
-non-Oakland location, a non-root central figure, meaningful Phantas or Mystas geography, a book-local
-open object, a parent-to-child inheritance, and one neighbor repair.
+B2 compared three genuinely different treatments and the owner selected Treatment B's medium. It
+must now test an 8–12-image sequence before approving any anchor. The sequence should include a
+recurring person across close and wide views, a purposeful appearance change, a return to a changed
+place, two materially distinct cultures at different Primas coordinates, a non-Oakland location, a
+non-root central figure, meaningful Phantas or Mystas geography, a book-local open object, a
+parent-to-child inheritance, and one neighbor repair.
 
 Human review decides whether the sequence preserves identity and place, makes change intelligible,
 distinguishes cultures at different coordinates without cliché, supports geographic and temporal
 range, and gives each image narrative work. Approval should produce a small set of actual reference
 assets and local profiles, not restore the deleted catalogue of speculative scene details.
 
-## Pending decision
+## Pending continuity decision
 
-The owner must approve or revise the shared medium and the scope rules above. Character casting,
-Clef, specific locations, devices, maps, cultures at other coordinates, and folio compositions remain
-deliberately undecided until an actual book, visual experiment, or scene needs them.
+The shared medium has human approval. The continuity sequence and its recurring identity,
+appearance-period, place, object, parent, and neighbor-repair references still require human review.
+No `anchors.json` exists and B2 is not complete. Character casting, Clef, specific locations,
+devices, maps, cultures at other coordinates, and folio compositions remain deliberately undecided
+until an actual book, visual experiment, or scene needs them.

@@ -41,7 +41,7 @@ test("A2 deployment config preserves one healthy US-West process and durable loc
 
   const compose = `
     image: postgres:18.4-alpine
-    ports:\n      - "127.0.0.1:55432:5432"
+    ports:\n      - "127.0.0.1:\${SHAPE_OF_TIME_POSTGRES_PORT:-55432}:5432"
     volumes:\n      - shape_of_time_postgres:/var/lib/postgresql
   `;
   assert.deepEqual(composeConfigIssues(compose), []);
@@ -65,7 +65,7 @@ test("A2 deployment config preserves one healthy US-West process and durable loc
   assert.deepEqual(ciConfigIssues(ci), []);
   assert.notDeepEqual(ciConfigIssues(ci.replace("checkout@v6", "checkout@v4")), []);
 
-  const playwright = `pnpm run build && pnpm run dev:infra && pnpm run db:migrate && pnpm run start`;
+  const playwright = `SHAPE_OF_TIME_POSTGRES_PORT pnpm run build && pnpm run dev:infra && pnpm run db:migrate && pnpm run start`;
   assert.deepEqual(playwrightConfigIssues(playwright), []);
   assert.notDeepEqual(playwrightConfigIssues("pnpm exec vite --host 127.0.0.1"), []);
 

@@ -66,9 +66,11 @@ seventh act.
   Opus alias, fallback, repair writer, manual thinking budget, provider compaction, or provider
   memory.
 - Send the complete world verbatim as the sole comprehensive factual and plot authority. Start with
-  a light instruction for clear, absorbing, physically and causally legible prose plus the explicit
-  temporal-rules block that protects the world from familiar loops, branches, paradoxes, fate, and
-  supernatural time effects. Canon is factual authority, never a style sample.
+  a light request for clear, absorbing, physically and causally legible prose, one compact
+  human-authored prose-guidance block, and the explicit temporal-rules block that protects the world
+  from familiar loops, branches, paradoxes, fate, and supernatural time effects. The prose guidance
+  protects directness, orientation, and earned specificity without supplying a voice to imitate.
+  Canon is factual authority, never a style sample.
 - Keep the adapted craft examples outside the baseline. They may enter one versioned, controlled
   A/B experiment only after consecutive human reading identifies placeless abstraction,
   above-the-scene reporting, or explanatory flattening as a repeated failure. Do not add generated
@@ -173,8 +175,9 @@ scope, and exclusion rule deliberately.
 - add prompts/fable/temporal-rules.md, preserving the useful false-versus-true anti-trope function
   without IDs, citations, a fact taxonomy, or a compressed substitute for the world;
 - add prompts/fable/write-folio.md with whole-document XML boundaries, `BOOK_ORIGIN`,
-  `CURRENT_MOVEMENT_BRIEF`, full current-book history, and the current folio and light writing
-  request last; make the child founding premise explicit and reject root-plot replay;
+  `CURRENT_MOVEMENT_BRIEF`, full current-book history, and the current folio and compact writing
+  request last; keep one natural-prose register block inside that request, make the child founding
+  premise explicit, and reject root-plot replay;
 - preserve the teaching function of the three older micro-demonstrations as clearly labeled
   adaptations in prompts/fable/craft-examples.md, explicitly excluded from baseline and available
   only for one controlled experiment;
@@ -409,8 +412,8 @@ over the hard equation fail before publication or additional spend.
 
 **Red:** A randomized-insertion test fails until folio N receives, exactly once and in order: the
 full world source, `BOOK_ORIGIN`, `CURRENT_MOVEMENT_BRIEF`, every prior exposed current-book folio
-and narrative image, the approved temporal-rules block, current folio brief, then the light writing
-request and output contract.
+and narrative image, the approved temporal-rules block, current folio brief, then the compact writing
+request with its fixed prose-guidance block and output contract.
 
 **Implement:** Build a stateless compiler with stable document boundaries, IDs/digests/order,
 exclusions, prompt-cache hints, exact rendered-request archive, context manifest, and official token
@@ -430,11 +433,13 @@ long-form mode.
 
 **Implement:** Generate one consecutive run without line splicing. Archive exact prompts, model,
 counts, outputs, latency, and cost. Readers record what physically happened, what each actor wanted,
-why the page changed, missing orientation, forced exposition, uncashable abstraction, desire to turn,
-and desire to open an aperture. Change one prompt/beat variable only for a repeated named failure,
-then rerun blind. If the repeated failure is placeless abstraction, above-the-scene reporting, or
-explanatory summary, the first tested change is one controlled A/B that adds the complete adapted
-craft-example block and changes nothing else.
+why the page changed, missing orientation, forced exposition, uncashable abstraction, coined thematic
+labels, unclear referents, narrator self-grading, manufactured aphorisms, desire to turn, and desire
+to open an aperture. Change one prompt/beat variable only for a repeated named failure, then rerun
+blind. Structural tests prove only that the compact prose guidance is present and bounded; they do
+not reject generated prose by vocabulary. If the repeated failure is placeless abstraction,
+above-the-scene reporting, or explanatory summary, the first tested change is one controlled A/B
+that adds the complete adapted craft-example block and changes nothing else.
 
 **Green:** At least eight consecutive folios are concrete, causally intelligible, canon-compatible,
 paraphrasable, and worth continuing. A model score cannot override human failure.

@@ -398,6 +398,33 @@ describe("GPT Image 2 transport and replay", () => {
     expect(result.digest).toBe(sha256(png));
   });
 
+  it("validates a multi-megabyte base64 response without overflowing the JavaScript call stack", async () => {
+    const oversizedNonPng = Buffer.alloc(4_000_000, 255).toString("base64");
+    const client = new OpenAiImageClient({
+      apiKey: "secret-test-key",
+      fetch: vi.fn(async () =>
+        new Response(JSON.stringify({ data: [{ b64_json: oversizedNonPng }] }), {
+          headers: { "content-type": "application/json", "x-request-id": "req_large_base64" },
+        }),
+      ),
+    });
+    const compiled = compileImageRequest({
+      idempotencyKey: "large-base64-regression",
+      kind: "generate",
+      prompt: "A large opaque image response used to test transport validation.",
+      promptVersion: "v1",
+      quality: "medium",
+      size: "1536x1024",
+    });
+
+    await expect(
+      client.execute(compiled, { clientRequestId: "12121212-1212-4212-8212-121212121212" }),
+    ).rejects.toMatchObject({
+      code: "invalid_image_response",
+      providerRequestId: "req_large_base64",
+    });
+  });
+
   it("sends edit reference blobs in manifest order and omits input_fidelity", async () => {
     const identity = reference("identity", "identity", "The recurring face");
     const neighbor = reference("neighbor", "causal-neighbor", "The previous moment");

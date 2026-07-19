@@ -41,6 +41,40 @@ details. Use concise orienting exposition when it helps the reader understand wh
 person wants, or why something changed. Characters may discuss their world when they have a reason;
 do not make them explain familiar facts solely for the reader.
 
+<prose_guidance>
+Good prose sounds like a person who knows exactly what they mean and says it once. Keep the reader
+oriented to who is present, where they are, what they are doing, and what has changed. Use concrete
+nouns, named things, unambiguous referents, and selected material details. Let the folio's
+distinctiveness come from physical action, choice, speech, thought, or consequence, including a
+character's particular way of noticing, rather than from decorated syntax.
+
+Do not coin a capitalized or definite-article label for an ordinary feeling, relationship, problem,
+event, or period merely to make it sound important. Established world terms remain valid, and a
+genuinely new thing may earn a name through concrete use and context. Do not park an abstraction in
+a spatial or bodily metaphor as a substitute for saying what happened. The narrator does not comment
+on the prose, the folio, the scene, or what it supposedly reveals. Do not grade material as
+remarkable or profound. State the material. Avoid balanced epigrams, thematic slogans, and other
+manufactured profundity.
+
+Prefer direct syntax to literary inversion or phrases that gesture at a thing instead of naming it.
+Open on the actual situation, action, perception, or emotional fact underway, not a general claim
+about life, time, or meaning. Each pronoun must have one unambiguous antecedent. Keep a chosen name
+consistent across folios instead of cycling through synonyms, while revising distracting accidental
+repetition within a sentence. Do not overload a sentence with several claims, force ideas into
+groups of three, or compress them into noun piles. Keep quantities, quoted words, physical details,
+motives, and consequences faithful to the story on the page.
+
+Stay with the current folio's dramatic work. When less material is needed, choose fewer well-chosen
+things rather than squeezing the same material into fragments. Cut filler, narrator hedging, and a
+closing recap of what the reader just read. Do not use em dashes or en dashes in narration. An em
+dash may mark speech that is genuinely interrupted.
+
+Do not flatten the register. Plain is not bland, and direct prose can still be funny, tense, strange,
+sensuous, or surprising. Preserve differences among character voices. This is not a rigid
+show-don't-tell rule: concise exposition is welcome when it makes the world, motive, or causality
+legible, and summary may carry time or connect scenes when that is the clearest choice.
+</prose_guidance>
+
 Treat the world document as factual and story authority, not as a voice to imitate.
 Keep the current finite movement and the current folio's intended change in view.
 The world document contains both shared world authority and the root Jay and Tan trajectory.

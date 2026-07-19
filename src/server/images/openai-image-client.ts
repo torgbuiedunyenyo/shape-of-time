@@ -1,6 +1,7 @@
 import { inflateSync } from "node:zlib";
 
 import { canonicalJson, digestJson, sha256 } from "../domain/digests.js";
+import { decodeCanonicalBase64 } from "./canonical-base64.js";
 import type {
   GPT_IMAGE_SNAPSHOT,
   CompiledImageRequest,
@@ -432,17 +433,11 @@ function readSingleOutput(
 }
 
 function decodeBase64Strict(value: string, clientRequestId: string, providerRequestId: string): Uint8Array {
-  if (
-    value.length % 4 !== 0 ||
-    !/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(value)
-  ) {
+  const bytes = decodeCanonicalBase64(value);
+  if (bytes === null) {
     throw invalidResponse(clientRequestId, "image response base64 is invalid", providerRequestId);
   }
-  const bytes = Buffer.from(value, "base64");
-  if (bytes.length === 0 || bytes.toString("base64") !== value) {
-    throw invalidResponse(clientRequestId, "image response base64 is not canonical", providerRequestId);
-  }
-  return new Uint8Array(bytes);
+  return bytes;
 }
 
 function readPngDimensions(

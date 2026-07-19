@@ -97,6 +97,15 @@ The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. Imag
 - The legacy repository investigation recovered the useful post-arc new-engine and independent-child
   principles while explicitly rejecting its endless seventh act, running summaries, fact taxonomy,
   and global title identity.
+- At the owner's direction on 2026-07-19, the baseline folio request now contains one compact
+  human-authored `<prose_guidance>` block adapted for fiction. It asks for direct, concrete,
+  well-oriented narration and guards against invented thematic labels, empty abstraction, narrator
+  self-grading, and manufactured profundity. It explicitly preserves character voice, texture,
+  summary, and useful exposition, so it is neither a rigid show-don't-tell rule nor a style sample.
+- The guidance lives inside `prompts/fable/write-folio.md`, not in a second style bible. The named red
+  first failed because the block was absent; focused structural tests now prove that exactly one
+  sub-400-word block remains inside the writing request and that prose quality stays a consecutive
+  human-reading judgment rather than a vocabulary filter. No provider call or spend occurred.
 - The owner approved this authority layer on 2026-07-18. A0 is complete.
 
 ## A1 architecture decision
@@ -292,14 +301,56 @@ The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. Imag
   text input).
 - Infrastructure mutation: the owner-designated Railway project now has the one-app, one-Postgres,
   one-private-bucket topology recorded above. Railway usage is active; no dollar cost was queried.
-- Deployment: active and healthy at `https://shape-of-time-production.up.railway.app`; the last
-  verified application build is the A2 deployment on `b068cf7`.
+- Deployment: active and healthy at `https://shape-of-time-production.up.railway.app`; deployment
+  `81ca9edd-7e22-4b51-9096-e3bb085ac5ef` is `SUCCESS` on exact B1 commit `6fc0038` after GitHub
+  Application gates run `29701491746` passed.
   The earlier documentation-only deployment `dd843fec-b1bd-4305-b5a2-2c880d44ebfd` remains historical
   failed/stopped evidence.
 
+## B2 in flight — isolated worktree
+
+- Active implementation branch: `codex/b2-visual-study` in
+  `/Users/ratpartyserver/git/shape-of-time-b2`. The `main` checkout remains clean for another agent.
+- Treatment A completed and is recovered. Original B/C are immutable indeterminate operations.
+- Replacement B is also immutable indeterminate after HTTP 200 because a duplicated durable-journal
+  base64 regex overflowed. Its terminal digest is
+  `a4b2f9659c137e67eb3abd9877d968cd68dfb80dc8a07592d1677ec038c6c0c8`; provider request
+  `req_739fd4bdd47549648f844ed65006b163`. It must never be retried.
+- Replacement C completed and is recovered under output digest `93498bd84304576bfa3a9f2886ae6fb69a3d45a74fa2dc092602e204e1483d44`;
+  provider request `req_5c4dbec2154343878378ee21b668fccc`; usage-derived estimate $0.042205.
+  Provider and durable decoding now share one bounded linear canonical-base64 decoder, with
+  multi-megabyte regressions at both boundaries.
+- Treatment B v2 completed and is recovered under output digest
+  `85e55625e3a8bcf3e31c3546689287dc306736bf8deef59172ae8511c6dd2b06`; provider request
+  `req_e0f6415b63674914bda51745a8b63987`; usage-derived estimate $0.042215. The requested snapshot was
+  `gpt-image-2-2026-04-21`; the Image API supplied no served-model evidence.
+- The original treatment tranche authorized $0.15, the B/C replacement tranche $0.10, and the
+  recorded one-call B-v2 tranche $0.05. Aggregate B2 request-scope authorization is $0.30; the bill
+  for indeterminate calls is unknown. No text spend has occurred.
+- The project owner reviewed A/B/C together and gave the medium-selection gate a human PASS for
+  Treatment B: observational varied ink, transparent restrained color, tactile paper and wear,
+  natural perspective, and concrete faces and hands. Every person, place, palette, and compositional
+  choice in the comparison scene remains incidental.
+- B2 remains PENDING overall. There is no approved continuity stress sequence or `anchors.json`, and
+  no model review may be described as the required later human continuity approval.
+- Continuity Stage 1 is prepared and not executed (2026-07-19). The checked-in eight-image
+  Treatment B plan is `content/shape-of-time/visual-continuity-plan.md`; the Stage 1 harness is
+  `src/server/images/b2-continuity-stage1.ts` (idempotency key `b2-continuity-root-payment-v1`,
+  text-only 1024x1536 medium, zero references, exactly one provider operation, written $0.05 cap,
+  archive `b2-visual-study-2026-07`, review root
+  `/Users/ratpartyserver/git/shape-of-time-b2-review/continuity-v1`). Its three red tests were
+  observed failing first, then pass 9/9 + 2/2 with typecheck, lint, and `git diff --check` green;
+  two malformed cost fixtures were narrowly repaired to satisfy B1's usage-arithmetic invariants,
+  with assertions untouched. The exact dry run was executed and inspected: study digest
+  `bd93dc513e7b002bb8515210ec3a3dfdd8dd93eba2cd9c5b6d5c7bd2797a64b6`, manifest digest
+  `f96a6acbc722198467460136382905c773a980d114351c84e622ea79b97b050d`. **No Stage 1 provider call
+  and no new spend occurred; provider calls executed: 0.** Treatment B remains human-approved at
+  medium scope only; continuity and every anchor remain pending. Evidence:
+  `docs/qa/2026-07-19-b2-continuity-stage-1.md`.
+
 ## Next action
 
-Run B2 as a bounded visual-direction study: record a spend ceiling and inspect every exact dry-run
-manifest before generating two or three distinct shared-medium treatments, then build the 8–12-image
-continuity sequence and scoped `anchors.json`. Do not make another paid B1 call merely to retrofit the
-historical pre-journal endpoint evidence.
+Independent inspection of the exact Stage 1 dry run (`pnpm exec tsx
+src/server/images/b2-continuity-stage1.ts --dry-run`; digests in
+`docs/qa/2026-07-19-b2-continuity-stage-1.md`) before a separately authorized one-call live
+execution bound to the literal $0.05 cap and the exact current study digest.

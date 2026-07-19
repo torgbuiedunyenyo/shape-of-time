@@ -1,7 +1,7 @@
 # B1 GPT Image 2 contract and recovery evidence
 
-_Run date: 2026-07-19 PDT. Current item: B1. The worktree is based on commit `8255730`; the
-containing B1 commit is the release identity for this report._
+_Run date: 2026-07-19 PDT. B1 release commit:
+`6fc00380031692ad3cc85cec4f589dd1163976bf`._
 
 ## Judgment and scope
 
@@ -178,6 +178,22 @@ concurrent fresh-root initialization, external archive integrity, secret leakage
 redirect behavior, opaque PNG semantics, and end-to-end replay/reconciliation. One full-gate attempt
 timed out waiting for the browser web server while concurrent audits were active; the browser gate
 then passed alone in 6 seconds, and the clean final full-gate run passed end to end.
+
+GitHub Application gates run `29701491746` passed for the exact release commit. Railway then created
+Git-triggered deployment `81ca9edd-7e22-4b51-9096-e3bb085ac5ef`; it reached `SUCCESS`, and production
+`/healthz` reported the exact B1 commit, migration `001_initial`, schema digest
+`66eaee6423b1e99b4e8a29e5acc206ed25c6b48531834a81256bb45cf0049fb0`, and PostgreSQL 18.4. No
+`railway up` deployment was used.
+
+### Post-release B2 regression correction
+
+B2's first multi-megabyte outputs exposed two duplicated base64 validators that B1's small PNG
+fixtures had not stressed. The provider adapter and then the durable received-result journal each
+overflowed the JavaScript call stack after a successful provider response. The B2 branch records
+both immutable indeterminate operations and never retries them. A red multi-megabyte regression now
+runs through each boundary, and both call sites use one bounded linear canonical decoder. This is a
+corrective B1 contract hardening discovered during B2; it does not rewrite the B1 release evidence
+or claim that the lost outputs were recovered.
 
 ## Railway recovery smoke
 

@@ -25,6 +25,24 @@ export function validPng(width: number, height: number, color: readonly [number,
   ]);
 }
 
+export function validPngWithAncillaryPayload(
+  width: number,
+  height: number,
+  color: readonly [number, number, number],
+  payloadBytes: number,
+): Uint8Array {
+  if (!Number.isSafeInteger(payloadBytes) || payloadBytes < 0) {
+    throw new Error("PNG ancillary payload length must be a nonnegative safe integer");
+  }
+  const base = validPng(width, height, color);
+  const afterHeader = 33;
+  return Buffer.concat([
+    Buffer.from(base.subarray(0, afterHeader)),
+    chunk("tEXt", Buffer.alloc(payloadBytes, 0x61)),
+    Buffer.from(base.subarray(afterHeader)),
+  ]);
+}
+
 export function pngWithoutImageData(width: number, height: number): Uint8Array {
   const header = Buffer.alloc(13);
   header.writeUInt32BE(width, 0);

@@ -148,16 +148,22 @@ place before the shared direction is approved.
 
 ## Writing
 
-Canon documents are factual and plot reference, not style samples. The initial writer prompt is
-light: write clear, absorbing narrative prose; favor scenes, actions, and specific details; use
-concise orienting exposition when it helps; keep events, motives, and consequences legible.
+Canon documents are factual and plot reference, not style samples. The baseline writer prompt stays
+compact: write clear, absorbing narrative prose; favor scenes, actions, and specific details; use
+concise orienting exposition when it helps; keep events, motives, and consequences legible. One
+fixed, human-authored prose-guidance block also asks for concrete and direct narration, clear
+referents, faithful details, and distinctiveness earned through events and character perception. It
+rejects invented thematic labels, narrator self-grading, empty abstraction, and manufactured
+profundity while explicitly preserving texture, character voice, summary, and useful explanation.
 
 There is no rigid “show, don't tell” rule. Characters may discuss the world when they have a reason
 to, but they must not explain familiar facts to one another solely because a reader needs a lecture.
-Legibility outranks withholding. The product must not impose a house style through generated
+Legibility outranks withholding. The fixed prose-guidance block is an editing register, not a style
+sample or automated prose filter. The product must not impose a house style through generated
 exemplars, recursive prose conditioning, pseudo-literary vocabulary, or an accumulating stylistic
-ban list. The baseline does include the strong temporal-rules block because generic time-travel
-conventions would change the world itself.
+ban list. Any later change to the block requires a repeated named failure from consecutive human
+reading, one versioned revision, and a new uninterrupted run. The baseline also includes the strong
+temporal-rules block because generic time-travel conventions would change the world itself.
 
 Three short, human-selected contrastive examples adapted from the earlier prompt remain available
 as optional craft examples. They are excluded from the baseline. If consecutive prose repeatedly

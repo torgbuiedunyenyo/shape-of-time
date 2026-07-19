@@ -16,7 +16,7 @@ import {
 } from "./durable-image-dispatch.js";
 import { GPT_IMAGE_SNAPSHOT } from "./image-contract.js";
 import { ImageProviderError, type ImageProviderResult } from "./openai-image-client.js";
-import { validPng } from "./png-test-support.js";
+import { validPng, validPngWithAncillaryPayload } from "./png-test-support.js";
 
 const roots: string[] = [];
 
@@ -117,6 +117,25 @@ describe("durable image dispatch", () => {
     expect(setup.client.execute).toHaveBeenCalledTimes(1);
     expect({ ...second, bytes: undefined }).toEqual({ ...first, bytes: undefined });
     expect(Buffer.from(second.bytes).equals(Buffer.from(first.bytes))).toBe(true);
+    expect((await setup.journal.inspect("durable-operation")).status).toBe("completed");
+  });
+
+  it("persists and replays a multi-megabyte provider result without overflowing the JavaScript call stack", async () => {
+    const bytes = validPngWithAncillaryPayload(1024, 1024, [12, 34, 56], 4_000_000);
+    const largeResult: ImageProviderResult = {
+      ...providerResult(),
+      byteLength: bytes.byteLength,
+      bytes,
+      digest: sha256(bytes),
+    };
+    const setup = await harness(async () => largeResult);
+
+    const first = await setup.dispatcher.execute(request());
+    const second = await setup.dispatcher.execute(request());
+
+    expect(first.digest).toBe(sha256(bytes));
+    expect(Buffer.from(second.bytes).equals(Buffer.from(bytes))).toBe(true);
+    expect(setup.client.execute).toHaveBeenCalledTimes(1);
     expect((await setup.journal.inspect("durable-operation")).status).toBe("completed");
   });
 

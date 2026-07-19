@@ -9,6 +9,7 @@ import {
   writeImmutable,
 } from "../assets/filesystem-recovery-archive.js";
 import { canonicalJson, digestJson, sha256 } from "../domain/digests.js";
+import { decodeCanonicalBase64 } from "./canonical-base64.js";
 import {
   snapshotCompiledImageRequest,
   type CompiledImageRequest,
@@ -815,22 +816,17 @@ function isUuid(value: string): boolean {
 }
 
 function decodeReceivedBytes(received: ReceivedImageOperation): Uint8Array {
-  if (
-    received.outputBase64.length === 0 ||
-    received.outputBase64.length % 4 !== 0 ||
-    !/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(received.outputBase64)
-  ) {
+  const bytes = decodeCanonicalBase64(received.outputBase64);
+  if (bytes === null) {
     throw new Error("received image output is not canonical base64");
   }
-  const bytes = Buffer.from(received.outputBase64, "base64");
   if (
-    bytes.toString("base64") !== received.outputBase64 ||
     bytes.byteLength !== received.fixture.result.byteLength ||
     sha256(bytes) !== received.fixture.result.digest
   ) {
     throw new Error("received image output does not match its fixture digest and length");
   }
-  return new Uint8Array(bytes);
+  return bytes;
 }
 
 function validateTerminal(

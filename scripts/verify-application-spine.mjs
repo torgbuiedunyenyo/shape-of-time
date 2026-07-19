@@ -114,7 +114,7 @@ export function composeConfigIssues(text) {
   const issues = [];
   for (const fragment of [
     "image: postgres:18.4-alpine",
-    '"127.0.0.1:55432:5432"',
+    '"127.0.0.1:${SHAPE_OF_TIME_POSTGRES_PORT:-55432}:5432"',
     "shape_of_time_postgres:/var/lib/postgresql",
   ]) {
     if (!text.includes(fragment)) issues.push(`compose config is missing: ${fragment}`);
@@ -143,7 +143,13 @@ export function ciConfigIssues(text) {
 
 export function playwrightConfigIssues(text) {
   const issues = [];
-  for (const fragment of ["pnpm run build", "pnpm run dev:infra", "pnpm run db:migrate", "pnpm run start"]) {
+  for (const fragment of [
+    "pnpm run build",
+    "pnpm run dev:infra",
+    "pnpm run db:migrate",
+    "pnpm run start",
+    "SHAPE_OF_TIME_POSTGRES_PORT",
+  ]) {
     if (!text.includes(fragment)) issues.push(`browser config is missing production-spine command: ${fragment}`);
   }
   if (/pnpm exec vite|vite preview/.test(text)) {

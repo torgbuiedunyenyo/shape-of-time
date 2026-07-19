@@ -103,6 +103,8 @@ At least two fresh readers independently record:
 - what the central characters wanted and what changed;
 - any passage they could not interpret;
 - any repeated pseudo-literary, meta-referential, abstract, or allusive mannerism;
+- any coined thematic label, unclear referent, narrator self-grading, or aphorism-shaped claim that
+  substitutes performance for a concrete event, thought, or consequence;
 - whether they wanted to turn the next page, and why.
 
 For every prepared child, readers must also be able to state its local premise, how it grew from the
@@ -112,14 +114,17 @@ world feels larger than one couple, Oakland, and a binary past/future corridor.
 
 PASS requires that readers can accurately paraphrase events, motives, and consequences; no reader
 finds the run broadly unintelligible; and the project owner judges it worth continuing. A repeated
-failure may motivate one targeted prompt change followed by a blinded rerun. Do not add a tribunal,
-ban-list accretion, generated style exemplar, or fallback writer.
+failure may motivate one targeted prompt change followed by a blinded rerun. Automated checks may
+prove that the compact prose-guidance block is present, singular, and correctly placed; they may not
+certify prose quality with vocabulary regexes or a style score. Do not add a tribunal, ban-list
+accretion, generated style exemplar, or fallback writer.
 
-The explicit temporal-rules block is present from the first baseline because it protects world
-physics rather than imposing a literary voice. The three adapted, human-selected craft examples
-remain absent from that baseline. They may be tested only as one complete, versioned A/B after
-consecutive reading identifies placeless abstraction, above-the-scene reporting, or explanatory
-summary as a repeated failure; the beat, history, and every other prompt input remain fixed.
+The compact human-authored prose-guidance block and explicit temporal-rules block are present from
+the first baseline. The first protects directness and legibility without supplying a voice to copy;
+the second protects world physics. The three adapted, human-selected craft examples remain absent
+from that baseline. They may be tested only as one complete, versioned A/B after consecutive reading
+identifies placeless abstraction, above-the-scene reporting, or explanatory summary as a repeated
+failure; the beat, history, and every other prompt input remain fixed.
 
 ## 4. Image sequence gate
 

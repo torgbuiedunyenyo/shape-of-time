@@ -1,5 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const postgresPort = process.env.SHAPE_OF_TIME_POSTGRES_PORT ?? "55432";
+
 export default defineConfig({
   expect: { timeout: 5_000 },
   fullyParallel: false,
@@ -13,10 +15,11 @@ export default defineConfig({
     env: {
       ...process.env,
       ASSET_DRIVER: "filesystem",
-      DATABASE_URL: "postgresql://shape_of_time:shape_of_time@127.0.0.1:55432/shape_of_time",
+      DATABASE_URL: `postgresql://shape_of_time:shape_of_time@127.0.0.1:${postgresPort}/shape_of_time`,
       HOST: "127.0.0.1",
       NODE_ENV: "development",
       PORT: "4173",
+      SHAPE_OF_TIME_POSTGRES_PORT: postgresPort,
     },
     reuseExistingServer: false,
     timeout: 120_000,
