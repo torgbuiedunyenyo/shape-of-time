@@ -590,8 +590,10 @@ export class LibraryRepository {
   }
 
   async getAttemptEvidence(folioId: string): Promise<{
+    exactInputs: { [key: string]: JsonValue };
     latencyMs: string | null;
     providerRequestId: string | null;
+    result: { [key: string]: JsonValue } | null;
     usage: { [key: string]: JsonValue } | null;
   }> {
     const folio = await this.#database
@@ -601,13 +603,36 @@ export class LibraryRepository {
       .executeTakeFirstOrThrow();
     const attempt = await this.#database
       .selectFrom("generation_attempts")
-      .select(["latency_ms", "provider_request_id", "usage"])
+      .select(["exact_inputs", "latency_ms", "provider_request_id", "result", "usage"])
       .where("id", "=", folio.generation_attempt_id)
       .executeTakeFirstOrThrow();
     return {
+      exactInputs: attempt.exact_inputs,
       latencyMs: attempt.latency_ms,
       providerRequestId: attempt.provider_request_id,
+      result: attempt.result,
       usage: attempt.usage,
+    };
+  }
+
+  async getAsset(assetId: string): Promise<{
+    byteLength: number;
+    digest: string;
+    id: string;
+    mediaType: string;
+    objectKey: string;
+  }> {
+    const asset = await this.#database
+      .selectFrom("assets")
+      .selectAll()
+      .where("id", "=", assetId)
+      .executeTakeFirstOrThrow();
+    return {
+      byteLength: Number(asset.byte_length),
+      digest: asset.digest,
+      id: asset.id,
+      mediaType: asset.media_type,
+      objectKey: asset.object_key,
     };
   }
 }
