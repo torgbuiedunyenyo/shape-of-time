@@ -1,8 +1,9 @@
 # Shape of Time — Compaction-Safe Execution Plan
 
-> **Status:** A0 authority and A1 architecture are accepted; no application implementation exists.
-> **CURRENT / NEXT TASK: A2 — scaffold the application, durable state, and first Railway runtime.**
-> Do not begin B1 or the reader before the A2 spine is green locally and on Railway.
+> **Status:** A0 authority, A1 architecture, and A2 application/Railway spine are complete. B0's
+> movement documents and structural proof are implemented.
+> **CURRENT GATE: B0 — owner consecutive read.**
+> Do not begin B1 or the reader until that read makes B0 human-green.
 
 This is the dependency-ordered work queue for a small illustrated hyperbook. It intentionally does
 not inherit code, data, schemas, corpus, or compatibility obligations from `auto-biblio`. Git in the
@@ -135,8 +136,8 @@ local state holds bookmarks, discoveries, and current place during the prototype
 
 ```text
 A0 canon/story/visual lock [DONE]
-  -> A1 one-app stack decision [DONE] -> A2 app + Postgres/Railway spine [CURRENT]
-A0 -> B0 movement beats and continuation topology
+  -> A1 one-app stack decision [DONE] -> A2 app + Postgres/Railway spine [DONE]
+A0 -> B0 movement beats and continuation topology [CURRENT: OWNER READ]
 A0 + A2 -> B1 image adapter -> B2 continuity proof
 B0 + B2 -> C0 static garden -> C1 reader -> C2 navigation -> C3 delight gate
 C3 + A2 -> D0 Fable/count adapter -> D1 full-history compiler -> D2 prose baseline
@@ -208,7 +209,7 @@ Railway project `8b20e07d-c256-44c9-85be-d1c7e50ac83d` from the first executable
 process, one composition root, and no Redis/worker/workspace graph. The decision explains tradeoffs
 rather than inheriting a familiar stack by reflex.
 
-### A2 — Scaffold the application and durable state spine **[CURRENT / NEXT]**
+### A2 — Scaffold the application and durable state spine **[DONE]**
 
 **Depends on:** A1.
 
@@ -244,14 +245,15 @@ digest and Postgres 18.4 server version match, backups are enabled, the database
 and the bucket round trip passes. `/healthz` and the post-health generated-domain reader smoke test
 are green.
 
-### B0 — Author movement beats and continuation topology
+### B0 — Author movement beats and continuation topology **[CURRENT / OWNER REVIEW]**
 
 **Depends on:** A0.
 
 **Red:** A movement-map validator rejects the missing/incomplete 14-folio root movement, its prepared
 successor opening, three 2–4-folio child opening movements, and one child movement-boundary crossing.
-Portfolio mutations also fail when every story remains in Oakland, every viewpoint is Jay/Tan, or
-Phantas and Mystas are only vocabulary.
+Structural mutations reject missing portfolio evidence and an axis omitted from the actual child.
+The consecutive human read, rather than a keyword proxy, rejects an Oakland-only garden, root
+viewpoint replay, or Phantas and Mystas used only as vocabulary.
 
 **Implement:** Write `content/prototype-movements.md` and `content/prepared-children.md` in natural
 prose. Each finite movement names its dramatic question, the situation it begins from, the concrete

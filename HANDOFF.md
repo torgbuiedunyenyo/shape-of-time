@@ -22,10 +22,13 @@ _Updated 2026-07-18._
 - A1 selects a Vite-built React SPA, React Router Data Mode, one Hono Node process, Kysely/`pg`, real
   Postgres tests, and a private Railway bucket. Exact versions and rejected alternatives are in
   `docs/adr/0001-one-process-stack.md`.
-- A2's runnable one-package application spine is complete and green locally. It has not yet been
-  pushed or deployed: Railway resource staging remains the second half of A2.
-- No generated corpus, model output, paid generation, retained Railway image object, or successful
-  runnable Railway deployment exists yet.
+- A2's runnable one-package application spine is complete locally and on Railway. Its first verified
+  Git-triggered deployment matched commit `b068cf73d5891da9d9d4af0521ea6fdec9921e9a`.
+- B0's movement documents and structural validator are implemented. Independent adversarial reviews
+  of the repaired root, children, and validator pass. The owner’s consecutive read remains the only
+  open B0 gate, so B1 has not begun.
+- No generated corpus, model output, paid generation, or retained Railway image object exists. The
+  private bucket is empty after its synthetic verification object was deleted.
 
 ## Reorganization record
 
@@ -122,7 +125,7 @@ The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. Imag
 - A1 is complete. No package or Railway resource was provisioned early to make the decision appear
   implemented.
 
-## A2 local application spine
+## A2 application spine
 
 - Red was observed first: the application-spine audit reported 26 absent files; Vitest then failed
   to resolve the missing state, configuration, storage, database, repository, and HTTP modules.
@@ -168,20 +171,79 @@ The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. Imag
   stable folio surface and one honestly disabled future Library control; there are intentionally no
   reader mechanics to exercise before C1/C2.
 
+## A2 Railway completion
+
+- Local commits `17f3491` (A1) and `b068cf7` (A2) were pushed to `main` once after app autodeploy was
+  disabled, all resource/configuration changes were staged, and the GitHub trigger was proven to
+  wait for CI. GitHub `Application gates` run `29675936565` passed before Railway built the app.
+- App service `39bf3c12-b426-40ce-836a-2839ea1bc213` runs one replica in `us-west2`. Deployment
+  `2e40fc50-3c26-4a56-904f-30aa3cdacee8` is `SUCCESS` on the exact A2 SHA.
+- Postgres service `294c4570-91e2-4bb2-8639-4a802a475ab8` is pinned to
+  `ghcr.io/railwayapp-templates/postgres-ssl:18.4`, with image auto-updates disabled and one replica
+  plus volume in `us-west2`. Deployment `47be411f-a1a7-4ddd-9880-31ac806a4e9e` is `SUCCESS`.
+- Volume instance `ee3a66a6-9b2a-4628-836b-4e9a86b1f771` has one daily backup schedule
+  (`78995e1d-eb8b-4bf8-96e4-bb05a3392d45`, six-day retention). The database has zero TCP proxies.
+- Private bucket `545eb437-32e7-4100-a154-3cffd145fac1` (`assets`) is in SJC. A synthetic SDK test
+  proved conditional duplicate rejection, digest/length/content-type checks, SDK GET, presigned HTTP
+  GET, and deletion; the final object and byte counts are zero.
+- Deployment trigger `8dafbd34-688a-4b94-8883-d627e01009fd` watches
+  `torgbuiedunyenyo/shape-of-time:main`, has `checkSuites=true`, and reports one valid check suite.
+- Generated domain `https://shape-of-time-production.up.railway.app` was created only after the
+  deployment became healthy. `/healthz` reports the exact A2 commit, migration `001_initial`, schema
+  digest `66eaee6423b1e99b4e8a29e5acc206ed25c6b48531834a81256bb45cf0049fb0`, and PostgreSQL 18.4.
+- The production in-app Browser walkthrough passed direct folio deep links, reload, exact Back and
+  Forward URLs, visible shell content, and the honestly disabled Library control. A2 intentionally
+  has no page-turn, selection, title, aperture, or generation UI to exercise yet.
+- A2 is complete.
+
+## B0 movement topology
+
+- The first red ran before either movement document existed. One absence assertion passed and four
+  implementation tests failed on the two missing files, including the expected diagnostics
+  `missing content/prototype-movements.md` and `missing content/prepared-children.md`.
+- `content/prototype-movements.md` now contains a 14-folio first root movement and folios 15–16 of
+  its successor. Jay and Tan move from the failed phone payment through a concrete courtship to a
+  positive, conditional yes. The successor begins with company paperwork and a substantial crossing;
+  it does not replay the romance or compress arrival into the second prepared folio.
+- Admission sponsorship, the father’s facilitation, the return carrier, and Tan’s role are distinct.
+  Jay can hold a return passage and documents in his own name while remaining practically dependent
+  on trained travelers and current maps.
+- `content/prepared-children.md` contains three independent four-folio openings: a Phantas-Minor
+  municipal ferry in Lagos, shelter labor inside the managed Blitz in Stepney, and music authorship
+  under future extraction in Recife. The Lagos child also prepares folios 05–06 of its following
+  movement.
+- Each child opening calls for three images and makes folio 03 text-led. Image jobs were revised so
+  maps, documents, shelter structure, and artifact routes reveal facts the prose withholds. Lagoon
+  water and the temporal vector field are explicitly separate. Clef remains open until the root
+  lineage realizes it.
+- The final validator is strict about the Markdown topology, folio ranges, exact parent citations,
+  unique origins, bounded prose, successor continuity, portfolio presence, axis omission, copied
+  planning blocks, and code-shaped records. It deliberately does not claim to certify motive,
+  viewpoint, place, causality, or material temporal consequence through keywords.
+- The initial adversarial reads each returned REVISE and drove causal, visual, canon, and parser
+  repairs. Fresh reads of the root and children returned PASS. A final validator review returned PASS
+  after four additional red mutations closed portfolio-axis, preamble-heading, empty-title, and
+  single-line JSON holes.
+- Focused B0 result: 9 tests pass, 0 fail. The exact-runtime full gate also passes: 30
+  content/architecture tests, 12 unit tests, 20 real-Postgres integration tests, one built-reader
+  Chromium regression, lint, typecheck, and production build. Detailed evidence and the
+  consecutive-read checklist are in `docs/qa/2026-07-18-b0-movement-review.md`.
+- B0 is structurally eligible, not complete. The owner must still read the movements consecutively
+  and judge their causality, pleasure, independence, image labor, and desire to continue.
+
 ## Spend and deployment
 
 - Text-generation spend: `$0`.
 - Image-generation spend: `$0`.
-- Infrastructure mutation: the local repository was linked to the owner-designated Railway project;
-  no remote service, variable, region, database, bucket, domain, or deployment setting changed.
-- Deployment: no active deployment. The existing documentation-only deployment
-  `dd843fec-b1bd-4305-b5a2-2c880d44ebfd` is failed/stopped as expected.
+- Infrastructure mutation: the owner-designated Railway project now has the one-app, one-Postgres,
+  one-private-bucket topology recorded above. Railway usage is active; no dollar cost was queried.
+- Deployment: active and healthy at `https://shape-of-time-production.up.railway.app`; the last
+  verified application build is the A2 deployment on `b068cf7`.
+  The earlier documentation-only deployment `dd843fec-b1bd-4305-b5a2-2c880d44ebfd` remains historical
+  failed/stopped evidence.
 
 ## Next action
 
-Commit the locally green A2 application without pushing. Disable app autodeploy, then provision only
-the designated Railway project's pinned Postgres and private SJC bucket, enable daily backups, remove
-the database's exact public proxy, and stage app references plus US-West runtime configuration without
-an app deployment. Re-enable autodeploy and push once. Verify the Git-triggered deployment SHA,
-migration checksum, PostgreSQL 18.4, bucket round trip, and `/healthz`; only then create the generated
-domain and repeat the visible in-app Browser smoke test.
+The owner reads `content/prototype-movements.md` and `content/prepared-children.md` consecutively using
+the checklist in `docs/qa/2026-07-18-b0-movement-review.md`. Record PASS or concrete revisions. Do not
+begin B1 until that gate is green.

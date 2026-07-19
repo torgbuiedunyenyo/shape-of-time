@@ -519,7 +519,7 @@ test("project authority documents describe the world-first prompt architecture",
     [
       "world.md is the sole comprehensive factual and plot authority",
       "The rejected story-bible, duplicated arc, and typed authority manifest were deleted",
-      "A2's runnable one-package application spine is complete and green locally",
+      "A2's runnable one-package application spine is complete locally and on Railway",
       "No generated corpus, model output, paid generation",
     ],
     "HANDOFF.md",

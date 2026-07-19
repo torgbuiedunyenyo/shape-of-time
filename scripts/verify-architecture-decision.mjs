@@ -299,8 +299,13 @@ export async function auditArchitectureDecision(rootUrl) {
     authorityNames.map(async (name) => [name, await readFile(path.join(root, name), "utf8")]),
   );
   const authority = Object.fromEntries(authorityEntries);
-  if (!authority["PLAN.md"].includes("A2 — Scaffold the application and durable state spine **[CURRENT / NEXT]**")) {
-    issues.push("PLAN.md must identify A2 as the current task after accepted A1");
+  if (
+    !authority["PLAN.md"].includes("A2 — Scaffold the application and durable state spine **[DONE]**") ||
+    !authority["PLAN.md"].includes(
+      "B0 — Author movement beats and continuation topology **[CURRENT / OWNER REVIEW]**",
+    )
+  ) {
+    issues.push("PLAN.md must record deployed A2 and identify B0 owner review as the current gate");
   }
   issues.push(
     ...railwaySequenceIssues(
