@@ -95,8 +95,12 @@ D5 LANDED 2026-07-19: generation/preparation.ts — shares D3's idempotency name
 prepared turns are cache hits and duplicate spend is impossible (33/33 integration). Reader-slice
 wiring rule: prepareOnExposure/prepareSuggestedAperture may only be called from POST-bodied
 exposure/visibility events — a GET route or browser lock must NEVER purchase generation. Dwell
-measurement + horizon tuning wait for the reader's exposure events. D6 dynamic highlight/title
-is NEXT (behind contracts until the C2 reader lands).
+measurement + horizon tuning wait for the reader's exposure events. D6 LANDED 2026-07-19: generation/child-books.ts — confirmed-only founding, exact-span
+validation, span/title-scoped idempotency (no duplicate children), persisted ancestry, one
+bounded child_first planning call, selection aperture rows on immutable exposed folios, atomic
+entry (37/37 integration). UI halves (mounted reader, reload return, no spinner) bind the
+reader slice and are named in the D6 QA doc. D0–D6 SERVER TRACK IS COMPLETE except the
+key-gated live proofs (D0 probe, D2 baseline run) — see BLOCKED list in QA docs.
 LANE UPDATE 2026-07-19 ~16:00: the other agent pivoted to a READER-FIRST VERTICAL SLICE
 (branch codex/reader-first-slice, commit 8fafde0) — C-track is CLAIMED by them; do NOT build
 C0–C2 here. Build D5/D6 behind ports/contracts so they wire into that reader when it lands.
