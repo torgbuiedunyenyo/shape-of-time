@@ -60,7 +60,34 @@ Contract to enforce (all red-first, per AGENTS.md method):
   style content test if doc evidence is pinned; QA record `docs/qa/2026-07-1X-d0-fable-contract.md`
   (red evidence, commands, results, spend); HANDOFF update in b2 worktree at slice end.
 
-## Then D1–D6 in order (PLAN is authority)
+## D0 verdict: DONE except live probe
+
+Full gates GREEN in this worktree (lint, typecheck, content, unit, integration, browser, build —
+exit 0, 2026-07-19), pushed through `7ec46b1`. Live probe stays BLOCKED on ANTHROPIC_API_KEY
+(unblock command in docs/qa/2026-07-19-d0-fable-contract.md).
+
+## D1 — CURRENT: deterministic full-history compiler
+
+Template `prompts/fable/write-folio.md` has EXACTLY these placeholders, in this order:
+{{WORLD_DOCUMENT}}, {{BOOK_ORIGIN}}, {{CURRENT_MOVEMENT_BRIEF}}, {{STORY_SO_FAR}} (all four inside
+<documents>/<document_content> blocks), then {{TEMPORAL_RULES}}, then <current_folio>
+{{CURRENT_FOLIO_BRIEF}}, then <writing_request> (contains <prose_guidance>; output contract asks
+for <folio_prose>). Sources on disk: content/shape-of-time/world.md, prompts/fable/
+temporal-rules.md; origin/brief/folios come from the caller (later the DB).
+
+Design: `src/server/text/folio-context.ts` — pure compileFolioContext({world, temporalRules,
+bookOrigin, movementBrief, priorFolios: [{ordinal, prose, images:[{altText, digest}]}] IN ORDER,
+currentFolioBrief}) → renders the template with each placeholder substituted EXACTLY ONCE (refuse
+unresolved or duplicate placeholders), STORY_SO_FAR = ordered folio sections with image entries
+inline, returns { request: compileFableRequest(...), contextManifest: {slot digests in order},
+contextDigest }. Refusals by name: empty world, world inserted twice, out-of-order/duplicate
+ordinals, Undertow content detected (world must not contain undertow marker; template output must
+not contain 'undertow', 'visual bible', craft-example marker per verify-content-authority's
+exclusion approach). Red test `src/server/text/folio-context.unit.test.ts`: randomized-insertion
+(shuffled priors ≠ ordered priors digest; identical inputs → identical digest; any single-source
+change changes digest; world exactly once — count occurrences of a world sentinel line; excluded
+sources rejected if passed in). THEN: D2 needs the live key (8–14 folio consecutive Fable run +
+HUMAN blind read — surface to owner when reached); D3–D6 per PLAN.
 
 D1 deterministic full-history compiler → D2 prose baseline (8–14 consecutive folios, HUMAN read —
 flag to owner when ready; a model can't certify) → D3 movement planning + pagewise generation
