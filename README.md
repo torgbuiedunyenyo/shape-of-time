@@ -12,8 +12,9 @@ rest; every book can continue.
 This repository is the clean successor to the retired `auto-biblio` experiment. It contains the
 governing product contract, proof model, verified Shape of Time source, and the first runnable
 one-process application spine. The reader shell, Hono server, five-table Postgres model, immutable
-publication transitions, and content-addressed storage adapters are implemented. The prepared story
-garden and paid generation adapters do not exist yet.
+publication transitions, and content-addressed storage adapters are implemented. The B1 GPT Image 2
+request/replay/durable-dispatch/recovery contract is complete but is not connected to the reader. B2
+visual direction is current; the prepared story garden and narrative generation loop do not exist yet.
 
 Start here, in order:
 

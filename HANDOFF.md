@@ -1,6 +1,6 @@
 # Handoff
 
-_Updated 2026-07-18._
+_Updated 2026-07-19._
 
 ## Current state
 
@@ -24,11 +24,15 @@ _Updated 2026-07-18._
   `docs/adr/0001-one-process-stack.md`.
 - A2's runnable one-package application spine is complete locally and on Railway. Its first verified
   Git-triggered deployment matched commit `b068cf73d5891da9d9d4af0521ea6fdec9921e9a`.
-- B0's movement documents and structural validator are implemented. Independent adversarial reviews
-  of the repaired root, children, and validator pass. The owner’s consecutive read remains the only
-  open B0 gate, so B1 has not begun.
-- No generated corpus, model output, paid generation, or retained Railway image object exists. The
-  private bucket is empty after its synthetic verification object was deleted.
+- B0 is complete. The owner read the folio bodies, requested direct titles and relational Primas
+  language, and then delegated subsequent decisions; the requested revisions and three independent
+  adversarial rereads all pass.
+- B1 is complete. The exact GPT Image 2 request adapter, required-anchor/reference compiler, strict
+  opaque-PNG response validator, replay v2, durable one-dispatch journal, and external recovery path
+  pass the complete repository gate and three final independent adversarial reviews.
+- No generated corpus or approved narrative image exists. Two paid generic endpoint-contract outputs
+  and two historical sanitized replay records are retained only in the owner-controlled external
+  archive. No paid or synthetic image remains in the Railway bucket.
 
 ## Reorganization record
 
@@ -247,10 +251,45 @@ The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. Imag
   not masquerade as additional human readers.
 - B0 is complete.
 
+## B1 image contract and recovery
+
+- B1 pins `gpt-image-2-2026-04-21`, uses generation for an unanchored first candidate and edit for
+  ordered reference work, and omits `input_fidelity` because GPT Image 2 edit inputs are intrinsically
+  high fidelity. The Image API exposes no served-model field and no documented provider idempotency.
+- Request compilation copies caller-owned reference bytes, requires explicit human-approved,
+  exposed-folio, or contract-only provenance, binds required anchors and exact reference order, and
+  caps the complete post-guidance prompt at 32,000 characters.
+- The adapter sends bearer credentials only to exact `https://api.openai.com` endpoints with redirect
+  following disabled. It performs no automatic transport/server retry after a durable dispatch claim.
+- Successful output requires canonical base64, exact dimensions, an opaque structurally valid PNG,
+  safe usage/cost arithmetic, and request-bound model/cost/timing evidence. Replay fixtures are built
+  from an exact allowlist and pass the same semantic validator before durable receipt and replay.
+- The filesystem journal archives exact edit references before dispatch, creates one immutable
+  prepared record, one dispatch marker, and one atomic received-or-failed resolution. A received
+  result can be reconciled into external recovery without redispatch; an ambiguous dispatch without
+  received bytes remains indeterminate.
+- Paid output recovery lives outside Git and Railway at
+  `/Users/ratpartyserver/git/shape-of-time-recovery`, archive ID `owner-archive-2026-07`. Its four
+  object/receipt pairs restore cleanly; snapshot digest is
+  `86748ab97055f0ad2de402c05b6f033c577ff263a8b59f0aa68a330a2a5c4ae6`.
+- The production Railway bucket recovery smoke v4 created, restored, verified, and removed only its
+  synthetic owned object. Final bucket count remained zero.
+- The two historical low-quality endpoint-contract calls succeeded without retry and have an
+  estimated usage-derived total of `$0.028649` under the written `$0.10` scope cap. They predate the
+  journal and are not misrepresented as journaled narrative assets.
+- Three final independent Sol/xhigh adversarial audits returned PASS after red-first repairs. The
+  clean exact-runtime full gate passes 33 content tests, 67 unit tests, 20 real-Postgres integration
+  tests, one built-reader Chromium regression, lint, typecheck, and production build. Complete
+  evidence is in `docs/qa/2026-07-19-b1-image-contract.md`.
+- B1 is complete. No generated narrative image or visual anchor has yet been approved.
+
 ## Spend and deployment
 
 - Text-generation spend: `$0`.
-- Image-generation spend: `$0`.
+- Image-generation provider bill: not reported by the Image API. B1 authorized exactly two calls
+  within a `$0.10` request-scope bound. Captured usage and the 2026-07-19 standard rates yield an
+  estimated total of `$0.028649` (`$0.011760` image output, `$0.016384` image input, and `$0.000505`
+  text input).
 - Infrastructure mutation: the owner-designated Railway project now has the one-app, one-Postgres,
   one-private-bucket topology recorded above. Railway usage is active; no dollar cost was queried.
 - Deployment: active and healthy at `https://shape-of-time-production.up.railway.app`; the last
@@ -260,6 +299,7 @@ The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. Imag
 
 ## Next action
 
-Begin B1. Build the GPT Image 2 adapter and replay contract red-first, including a restore-tested
-content-addressed export path before retaining any paid result in the Railway bucket. Recheck the
-official current API contract and record the spend ceiling before the minimal live call.
+Run B2 as a bounded visual-direction study: record a spend ceiling and inspect every exact dry-run
+manifest before generating two or three distinct shared-medium treatments, then build the 8–12-image
+continuity sequence and scoped `anchors.json`. Do not make another paid B1 call merely to retrofit the
+historical pre-journal endpoint evidence.

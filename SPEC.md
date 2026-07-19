@@ -239,6 +239,13 @@ generation is for first canonical candidates; requests with continuity reference
 Edits API. Reference images and their order are explicit, persisted first-class inputs. Failed or
 rejected outputs never become references.
 
+The exact requested snapshot is retained as request evidence. The Image API does not currently
+return a served-model field and does not document provider-side idempotency, so the system does not
+invent either proof: it dispatches a durable application operation once and treats an ambiguous
+transport or server result as indeterminate instead of automatically resending it. GPT Image 2 edit
+inputs are intrinsically high fidelity; `input_fidelity` is omitted because the model does not accept
+that option.
+
 Human review selects the visual direction and approves an 8–12-image continuity stress sequence.
 Automated similarity may diagnose drift but cannot certify character, location, or narrative
 continuity.
@@ -288,10 +295,14 @@ exist and validate. Reader exposure is one atomic transition. After exposure, pr
 spans, and required asset IDs are immutable. Unseen candidates may be replaced; an exposed result may
 not. A failed unseen folio may receive a linked retry.
 
-Reservations and generation attempts use durable idempotency keys. Repeated clicks, retries, reloads,
-or lease recovery must not duplicate a book, folio, or paid request. Every attempt records its exact
-inputs, provider request ID, result, usage, latency, cost, and failure. Content becomes visible only
-after the entire composed surface is ready.
+Reservations and generation attempts use durable application idempotency keys. Repeated clicks,
+reloads, or lease recovery must not duplicate a book, folio, or locally undispatched paid operation.
+Once a provider dispatch may have occurred, an ambiguous result is never automatically replayed;
+known rejection and explicit replacement are recorded as separate dispatch evidence. Every attempt
+records its exact inputs, provider request ID when returned, result, usage, latency, pricing version,
+a usage-derived total-cost estimate when every component is priced (or explicit unavailable
+components), and failure. An estimate is never mislabeled as provider-billed cost. Content becomes
+visible only after the entire composed surface is ready.
 
 ## Architecture boundary
 

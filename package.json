@@ -22,6 +22,8 @@
     "test": "pnpm run test:content && pnpm run test:unit && pnpm run test:integration && pnpm run test:browser",
     "db:migrate:dev": "tsx src/server/db/migrate.ts",
     "db:migrate": "node dist/server/db/migrate.js",
+    "assets:recovery": "tsx src/server/assets/recovery-cli.ts",
+    "image:contract:live": "tsx src/server/images/live-image-contract.ts",
     "gates": "pnpm run lint && pnpm run typecheck && pnpm run test && pnpm run build"
   },
   "dependencies": {

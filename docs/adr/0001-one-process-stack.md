@@ -192,8 +192,13 @@ test:browser       playwright test
 test               pnpm run test:content && pnpm run test:unit && pnpm run test:integration && pnpm run test:browser
 db:migrate:dev     tsx src/server/db/migrate.ts
 db:migrate         node dist/server/db/migrate.js
+assets:recovery    tsx src/server/assets/recovery-cli.ts
+image:contract:live tsx src/server/images/live-image-contract.ts
 gates              pnpm run lint && pnpm run typecheck && pnpm run test && pnpm run build
 ```
+
+The two B1 commands are short-lived, operator-invoked verification commands. They do not listen,
+remain resident, or add a worker or second deployed process.
 
 The complete gate therefore requires Docker and the Chromium binary; CI installs both before
 `pnpm run gates`. CI uses the current `actions/checkout@v6`, `pnpm/action-setup@v6`, and

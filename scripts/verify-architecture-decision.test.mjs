@@ -63,12 +63,21 @@ test("the eventual package manifest must implement the accepted stack exactly", 
   delete missingIntegrationScript["test:integration"];
   const missingDevInfraScript = { ...baseline.scripts };
   delete missingDevInfraScript["dev:infra"];
+  const missingRecoveryScript = { ...baseline.scripts };
+  delete missingRecoveryScript["assets:recovery"];
+  const missingImageContractScript = { ...baseline.scripts };
+  delete missingImageContractScript["image:contract:live"];
   const mutations = [
     { ...baseline, packageManager: "pnpm@latest" },
     { ...baseline, workspaces: ["packages/*"] },
     { ...baseline, scripts: { ...baseline.scripts, start: "vite preview" } },
     { ...baseline, scripts: missingIntegrationScript },
     { ...baseline, scripts: missingDevInfraScript },
+    { ...baseline, scripts: missingRecoveryScript },
+    { ...baseline, scripts: missingImageContractScript },
+    { ...baseline, scripts: { ...baseline.scripts, "assets:recovery": "tsx unsafe.ts" } },
+    { ...baseline, scripts: { ...baseline.scripts, "image:contract:live": "tsx unsafe.ts" } },
+    { ...baseline, scripts: { ...baseline.scripts, worker: "tsx worker.ts" } },
     { ...baseline, dependencies: { ...baseline.dependencies, react: "^19.2.7" } },
     { ...baseline, dependencies: { ...baseline.dependencies, ioredis: "5.0.0" } },
   ];

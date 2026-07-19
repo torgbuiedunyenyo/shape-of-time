@@ -29,7 +29,9 @@ For every implementation step:
 
 Never make a gate pass by weakening it, widening an allowlist, adding a skip, or exempting the artifact it caught. Tests that touch persistence use a real test database. Provider contract tests use real APIs only when the plan explicitly authorizes a small spend ceiling.
 
-Use current official documentation before implementing against external frameworks or model APIs. Pin provider contracts and record the served model.
+Use current official documentation before implementing against external frameworks or model APIs.
+Pin provider contracts and record the served model when the provider returns it; otherwise retain the
+exact requested snapshot and explicitly record that served-model evidence is unavailable.
 
 ## Reader QA
 

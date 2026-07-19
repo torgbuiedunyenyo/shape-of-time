@@ -1,8 +1,8 @@
 # Shape of Time — Compaction-Safe Execution Plan
 
-> **Status:** A0 authority, A1 architecture, A2 application/Railway spine, and B0 movement topology
-> are complete.
-> **CURRENT ITEM: B1 — GPT Image 2 adapter and replay contract.**
+> **Status:** A0 authority, A1 architecture, A2 application/Railway spine, B0 movement topology,
+> and B1 image/recovery contract are complete.
+> **CURRENT ITEM: B2 — visual direction and continuity proof.**
 
 This is the dependency-ordered work queue for a small illustrated hyperbook. It intentionally does
 not inherit code, data, schemas, corpus, or compatibility obligations from `auto-biblio`. Git in the
@@ -97,7 +97,12 @@ cache-adjusted count, silent attachment removal, or request-time truncation is a
   parent/opposite-neighbor references.
 - Each prompt separates `must remain`, `must change`, the image's narrative job, composition, and
   prohibitions. Persist the snapshot, exact prompt/version, ordered inputs, output digest, provider
-  request ID, moderation/error, latency, and cost.
+  request ID, moderation/error, latency, pricing version, and usage-derived estimated total cost or
+  explicitly unavailable components.
+- The Image API does not expose the served model or document provider idempotency. Persist the exact
+  requested snapshot without relabeling it as response evidence. One application operation dispatches
+  once; an ambiguous transport or server result requires reconciliation rather than an automatic
+  resend that could duplicate spend.
 - A rejected image is never a reference. Shared direction and reusable recurring-identity anchors
   require deliberate human approval. A validated exposed image may become a book-local continuity
   reference without becoming world canon. Clef and other source-open forms are decided only within
@@ -275,25 +280,30 @@ filler, lore-only beat, arbitrary cutoff, hidden CYOA action, child root replay,
 or image that merely restates the text. The prepared successor demonstrates continuation through a
 changed state rather than indefinite tension.
 
-### B1 — Build the GPT Image 2 adapter and replay contract **[CURRENT]**
+### B1 — Build the GPT Image 2 adapter and replay contract **[DONE]**
 
 **Depends on:** A0, A2.
 
-**Red:** Dry-run and minimal live-contract tests fail until snapshot pinning, ordered reference
-inputs, high-fidelity edit behavior, request provenance, idempotency, moderation/error handling, and
-cost/latency capture are enforced.
+**Red:** Dry-run and minimal live-contract tests fail until exact snapshot pinning, ordered reference
+inputs, GPT Image 2's intrinsic high-fidelity edit behavior, request provenance, application-level
+idempotency, one-dispatch failure semantics, moderation/error handling, and honest
+usage/pricing/cost/latency capture are enforced.
 
 **Implement:** Add typed generation/edit requests, reference-pack compilation, content-addressed
-storage, exact request archival, transient retry with one idempotency key, and a sanitized metadata
-record/replay fixture. Before retaining a paid result in the Railway bucket, implement and restore-test
-an export/recovery path for content-addressed image objects. Reject served-model mismatch, missing
-required anchors, failed moderation, or an unprotected sole copy.
+storage, exact request archival, one application idempotency identity, and a sanitized metadata
+record/replay fixture. Omit `input_fidelity`, because GPT Image 2 applies high fidelity intrinsically,
+and do not send an undocumented provider idempotency header. The requested snapshot is exact evidence;
+the served model is not exposed by the Image API. An ambiguous dispatch is never retried automatically.
+Before a paid result enters the Railway bucket, write and restore-test an operator-owned recovery
+archive outside the repository and live Railway bucket. Reject missing required anchors, moderation
+failure, malformed output, or an unprotected sole copy.
 
-**Green:** Replay is deterministic without secrets or generated binary leakage; input order changes
-the manifest; invalid/rejected outputs cannot become assets or anchors; every retained paid image has
-a verified recoverable copy outside the live Railway bucket.
+**Green:** Request compilation and sanitized replay are deterministic without secrets or generated
+binary leakage; replay verifies the recorded result and does not regenerate pixels. Input order
+changes the manifest; invalid/rejected outputs cannot become assets or anchors; every retained paid
+image has a verified recoverable copy outside the live Railway bucket.
 
-### B2 — Select visual direction and prove continuity
+### B2 — Select visual direction and prove continuity **[CURRENT]**
 
 **Depends on:** B1.
 

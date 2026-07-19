@@ -226,9 +226,14 @@ A live contract test, run only after an explicit spend ceiling is recorded, prov
 provider accepts Fable with xhigh and reports count/usage as expected. Recorded fixtures cover
 ordinary CI afterward, but a replay fixture does not prove the live provider contract.
 
-Every accepted narrative image attempt likewise records the requested and served GPT Image 2 model,
-reference assets, prompt version, usage, latency, cost, and output digest. Missing required
-references or an unexpected served model is a failed attempt.
+Every accepted narrative image attempt records the exact requested GPT Image 2 snapshot, reference
+assets, prompt version, provider request ID, usage when returned, latency, pricing version, a
+usage-derived total-cost estimate when every component is priced (or explicit unavailable
+components), and output digest. Estimated cost is not provider-billed cost. The served model is not
+exposed by the Image API, so requested-model provenance must never be presented as provider-reported
+evidence. Missing required references, malformed output, moderation failure, or an unprotected sole
+copy is a failed attempt. An ambiguous dispatch remains indeterminate and is not automatically
+retried.
 
 ## 10. Integration and in-app Browser release gate
 

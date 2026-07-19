@@ -118,6 +118,8 @@ export const ACCEPTED_SCRIPTS = Object.freeze({
   test: "pnpm run test:content && pnpm run test:unit && pnpm run test:integration && pnpm run test:browser",
   "db:migrate:dev": "tsx src/server/db/migrate.ts",
   "db:migrate": "node dist/server/db/migrate.js",
+  "assets:recovery": "tsx src/server/assets/recovery-cli.ts",
+  "image:contract:live": "tsx src/server/images/live-image-contract.ts",
   gates: "pnpm run lint && pnpm run typecheck && pnpm run test && pnpm run build",
 });
 
@@ -302,9 +304,10 @@ export async function auditArchitectureDecision(rootUrl) {
   if (
     !authority["PLAN.md"].includes("A2 — Scaffold the application and durable state spine **[DONE]**") ||
     !authority["PLAN.md"].includes("B0 — Author movement beats and continuation topology **[DONE]**") ||
-    !authority["PLAN.md"].includes("B1 — Build the GPT Image 2 adapter and replay contract **[CURRENT]**")
+    !authority["PLAN.md"].includes("B1 — Build the GPT Image 2 adapter and replay contract **[DONE]**") ||
+    !authority["PLAN.md"].includes("B2 — Select visual direction and prove continuity **[CURRENT]**")
   ) {
-    issues.push("PLAN.md must record completed A2/B0 and identify B1 as the current item");
+    issues.push("PLAN.md must record completed A2/B0/B1 and identify B2 as the current item");
   }
   issues.push(
     ...railwaySequenceIssues(
