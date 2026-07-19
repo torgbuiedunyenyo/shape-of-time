@@ -127,7 +127,8 @@ Before production plates are approved, review an 8–12-image continuity sequenc
 
 - a recurring root character across changes of pose, scale, clothing, lighting, and time;
 - a non-root central figure and a primary place beyond Oakland;
-- two materially distinct future cultures rather than one generic future style;
+- two materially distinct cultures at different Primas coordinates rather than one generic
+  "future" style;
 - a place where Phantas or Mystas has visible material consequences;
 - at least one recurring location seen from materially different views;
 - a book-local object or open visual fact whose continuity matters within that book without becoming

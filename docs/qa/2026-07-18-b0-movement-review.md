@@ -1,8 +1,10 @@
 # B0 movement-topology review
 
-**Status:** Structurally eligible; awaiting the owner’s consecutive read
+**Status:** Revised after the owner's consecutive read; awaiting owner reread
 
-**Date:** 2026-07-18
+**Initial date:** 2026-07-18
+
+**Latest revision:** 2026-07-19
 
 **Environment:** local worktree, Node 24.18.0
 
@@ -91,52 +93,71 @@ before the parser was repaired. The final validator review returned PASS. Two ca
 the later recording in root folio 05 must remain evidence rather than fate, and root folio 07 should
 show the shop’s intervening life instead of explaining the one-person temporal rule.
 
+## Owner review revision
+
+The owner's consecutive read returned REVISE on 2026-07-19. The folio bodies seemed sound, but two
+surface problems blocked approval:
+
+- "later-Primas Lagos" treated a relative position as though it were a named era; and
+- many folio and movement titles used self-conscious, pseudo-literary abstraction instead of naming
+  the scene.
+
+The canon identifies Primas as the familiar past/future axis but does not assign either relation to
+Major or Minor. The revised notes therefore describe travel between named coordinates along Primas
+without inventing "later Primas," a futureward direction, or a global past/future. Related planning
+language for Oakland, Stepney, Recife, and Tan's home now uses the same coordinate-relative frame.
+The visual bible and B2 review criteria use that frame as well, and the A0 authority test now requires
+the explicit statement that past and future describe travel along Primas rather than kinds of era.
+
+The heading pass preserved "Your tomorrow or mine" and "Yesterday's safe route," which the owner
+identified as acceptable. Other headings now use the event, place, object, or action on the folio:
+"Late shift," "Payment," "The bus stop," "Thursday," "Laundry," "The application," "The terminal
+wall," and "The offer" are representative. No folio body was re-plotted.
+
+A new test captured the requested coordinate wording and direct prototype title set before the
+documents changed. It failed with the complete old-versus-new root title diff, then passed after the
+revision. This test protects the reviewed fixture; it is not a general literary-quality heuristic.
+
 ## Current automated result
 
 The focused audit and mutation suite pass:
 
 ```text
 Shape of Time movement topology is structurally eligible for human review.
-tests 9
-pass 9
+tests 10
+pass 10
 fail 0
 ```
 
 The final reviewed artifact digests are:
 
 ```text
-45cb20ac35d469e58a150012b7c6c99bca4838ee8ffbf94c2b15dab620636393  content/prototype-movements.md
-79e620c1fdc0561dc343c4a464661f7abaaf67b83ae2ed49953aab2c0f624ee0  content/prepared-children.md
+2f48dbaf9649d2d290c2b3bafa2ea3fd1777e9e147f549dece5446768b7c413d  content/prototype-movements.md
+a993ce5393eff75003bbf367c6e5298b12397ff6e59cdee3498e290c462f64e4  content/prepared-children.md
 41f174e5c826312aec1315421aad399294858de71a2aee9b67855263cfd405c3  scripts/verify-movement-topology.mjs
-a7bc1db86408d4b76da2185506c5640e79950593ceb80b672e8abc623aab8dd3  scripts/verify-movement-topology.test.mjs
+1151deb93cdb8a1a301e2b0f39826ccc7a3ee5b24408436d377f97759d75daba  scripts/verify-movement-topology.test.mjs
 ```
 
 The exact-runtime repository gate passed after the authority and handoff state were updated:
 
 ```text
 mise exec node@24.18.0 -- npx -y pnpm@11.15.0 run gates
-content/architecture: 30 passed
+content/architecture: 31 passed
 unit: 12 passed
 real-Postgres integration: 20 passed
 built-reader Chromium regression: 1 passed
 lint, typecheck, and production build: passed
 ```
 
-## Consecutive-read gate still required
+## Owner reread still required
 
-The owner should read the root folios 01 through 16 in order, then each child opening and the Map
-successor in order. The read should answer, from the notes rather than outside explanation:
+The owner has read the root and child folios and found the bodies broadly sound. The remaining read
+is the revised heading set and coordinate language in context. It should confirm that:
 
-- What happens on every folio, and what causes the next one?
-- Why do the central people act, and what concretely changes by each movement boundary?
-- Why do Jay and Tan enjoy each other, and why does Jay choose to travel?
-- Could Jay return legally without Tan, and what practical dependence remains?
-- Does every child have a local premise and an earned resting point?
-- Does Phantas Minor materially alter the Lagos commute and its stakes?
-- Does each planned image contribute information the prose intentionally leaves to it?
-- Do the opening phrases feel native to the parent scene rather than planted as links?
-- Is any beat filler, a lore entry, a disguised choice, a fake cliffhanger, or generated-sounding
-  abstraction?
+- Primas coordinates remain relational rather than eras labeled past or future;
+- no Major/Minor direction has been invented for Primas;
+- each changed title names the scene without sounding like commentary on its meaning; and
+- the two intentionally less literal titles still feel earned in context.
 
 B0 is not a human PASS until that read is complete. B1 must not begin merely because the structural
 audit is green.

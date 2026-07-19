@@ -10,14 +10,15 @@ quoted founding words are the passages the static reader may expose as prepared 
 
 The wall in the title is a terminal wall, and the map will be there by the end of the opening
 movement. Eniola Akinyemi, a probationary municipal temporal-ferry navigator, is the person whose
-experience shapes the book. She works in later-Primas Lagos. Repaired ferry-PRMTTs run spatial
-circuits on the lagoon, using those circles, mirrors, and heat to carry commuters toward an inhabited
-coordinate along Phantas Minor. Water and the temporal vector field have separate instruments. This
-book keeps the shared rules of changing currents, physical travel, and bodily effort. Its Lagos crews
-keep handwritten temporal soundings because the city’s licensed chart subscription is expiring and
-local readings often outlast the chart.
+experience shapes the book. She works in Lagos, at a coordinate people from 2025 Oakland reach by
+traveling along Primas. Repaired ferry-PRMTTs run spatial circuits on the lagoon, using those circles,
+mirrors, and heat to carry commuters toward an inhabited coordinate along Phantas Minor. Water and
+the temporal vector field have separate instruments. This book keeps the shared rules of changing
+currents, physical travel, and bodily effort. Its Lagos crews keep handwritten temporal soundings
+because the city's licensed chart subscription is expiring and local readings often outlast the
+chart.
 
-### Opening movement - A route somebody owns
+### Opening movement - The last ferry
 
 On the last scheduled run toward Phantas Minor before the city loses chart access, Eniola must decide
 whether to violate a locked corporate chart and trust witnessed local readings. She gets the
@@ -34,7 +35,7 @@ around the delay. A wide illustration makes the crossing ordinary public transit
 crowding, and unequal protective equipment. "The notebooks of failed crossings" could later open the
 history the licensed chart omits.
 
-#### Folio 02 - Return is worse
+#### Folio 02 - The order to return
 
 Mid-crossing, the console orders the ferry back to its starting berth. The latest handwritten
 temporal soundings make the return more dangerous than continuing. Eniola wants to keep her
@@ -43,7 +44,7 @@ and follows the local readings. A typeset map image adds a fact the prose withho
 chart omits a municipal outer berth that the crew’s route can still reach. "The company’s blank
 territory" could later open what its cartographers left unrecorded.
 
-#### Folio 03 - The slow crossing
+#### Folio 03 - The crossing
 
 The crossing takes hours of circular maneuver, mirror and heat adjustment, fatigue, and passenger
 cooperation. Eniola works entirely from instruments, other people’s observations, and correction
@@ -51,7 +52,7 @@ after correction. This folio stays text-led so the accumulated labor and her cha
 experienced in sequence after two plates. "The woman who tuned the mirror vanes" could later open
 the maintainer’s own book.
 
-#### Folio 04 - Public trace
+#### Folio 04 - The terminal wall
 
 They reach a secondary public berth. The company locks the console and suspends Eniola before the
 last passenger disembarks. Before surrendering it, she copies the actual trace onto the terminal
@@ -60,7 +61,7 @@ routes they add, where two veteran crews contradict Eniola, and which outer stop
 on each line. The map has escaped one owner without becoming settled truth. "A route nobody owned"
 could later open one of the risky crossings that follows.
 
-### Following movement - Yesterday’s safe route
+### Following movement - Yesterday's safe route
 
 The next morning, the successful crossing, Eniola’s lost credential, and the exposed trace are all
 settled facts. Now crews must work out how to keep a public map open to correction without making
@@ -68,7 +69,7 @@ Eniola its new sole authority. The movement will carry the first disputed correc
 public witnessing process. It can rest once a revision survives without her signature, even though
 the route itself remains contested.
 
-#### Folio 05 - One official copy
+#### Folio 05 - The official copy
 
 Copies of the wall trace have spread through the terminal and already carry mutually inconsistent
 additions. A city official offers to reopen the line if Eniola signs one copy as authoritative. She
@@ -92,11 +93,12 @@ later open the cost of following a map after its conditions changed.
 
 Blue badges separate two levels of safety inside one shelter. Mara Bell issues them for a living, and
 her wages support her household. Her book begins in a cinema shelter in Stepney during the winter of
-1941, after later tourism has reorganized the Blitz. The bombings remain real, but a future tour
-operator publishes a nightly programme from forecasts and the dangers it can control. Unmanaged
-bombs still fall. Visitors use a reinforced gallery while local households earn ration and rent
-credits for sitting in the weaker room below. Once the siren locks the gallery roster, removing a
-cleared badge cancels the event and its local payouts under the operator’s rules.
+1941, after tourism from wealthier Primas coordinates has reorganized the Blitz. The bombings remain
+real, but an operator based at one of those coordinates publishes a nightly programme from forecasts
+and the dangers it can control. Unmanaged bombs still fall. Visitors use a reinforced gallery while
+local households earn ration and rent credits for sitting in the weaker room below. Once the siren
+locks the gallery roster, removing a cleared badge cancels the event and its local payouts under the
+operator's rules.
 
 ### Opening movement - The safer room
 
@@ -114,7 +116,7 @@ illustration should reveal the two standards of construction and comfort before 
 for opposing them; prose stays with the competent work that pays her rent. "The tourists’ refund
 slips" could later open the system that prices a disappointing air raid.
 
-#### Folio 02 - Tomorrow’s programme
+#### Folio 02 - Tomorrow's programme
 
 The tour operator revises its damage programme and shifts the expected concussive lane onto Mara’s
 block. The gallery remains reserved for visitors, and her family appears on the resident roster
@@ -123,7 +125,7 @@ placed. A deterministic programme-and-roster image adds the badge lock time and 
 cancels payouts if a cleared gallery is emptied. "A raid not listed in the programme" could later
 open the limits of managed danger.
 
-#### Folio 03 - The badge stock
+#### Folio 03 - The badges
 
 At the siren, Mara clears gallery badges to residents first and lets the roster lock. The escort can
 remove them only by cancelling the event, refunding the visitors, and forfeiting the neighborhood
@@ -147,22 +149,23 @@ another.
 
 "Performer unknown" is the false credit on a profitable recording. Ana Lúcia, a working composer and
 bandleader, occupies the center of the book. She rehearses and records in her Recife neighborhood in
-1998. Causation still runs in every temporal direction and weakens with distance; a later market can
-therefore extract and resell earlier music. Ana’s ensemble and melody belong to this book. A souvenir
-label sells a later recording as "Traditional Recife / performer unknown," and a local broker handles
-future-origin rights purchases.
+1998. Causation still runs in every temporal direction and weakens with distance, so a market at
+another Primas coordinate can extract and resell music from Ana's. Her ensemble and melody belong to
+this book. A souvenir label there sells the recording as "Traditional Recife / performer unknown,"
+and a local broker handles rights purchases from that market.
 
-### Opening movement - Whose unwritten song
+### Opening movement - The recording
 
 During an ordinary rehearsal, a visitor knows a bar Ana has only just improvised. His interruption
-forces a practical question: does a profitable later version of unfinished music already belong to
-somebody else? Ana answers by making a different local master, naming every contributor, and sending
-out several copies. She gives up the broker’s immediate money. The extraction market remains, but it
-no longer has the only artifact claiming where the music came from.
+forces a practical question: does a profitable version circulating at another Primas coordinate
+already belong to somebody else? Ana answers by making a different local master, naming every
+contributor, and sending out several copies. She gives up the broker's immediate money. The
+extraction market remains, but it no longer has the only artifact claiming where the music came from.
 
 #### Folio 01 - The last bar
 
-At rehearsal, a visitor from later Primas finishes the last bar of a melody Ana has only just played.
+At rehearsal, a visitor from another coordinate along Primas finishes the last bar of a melody Ana
+has only just played.
 She stops the ensemble and asks him to do it again. His knowledge proves that the music travels; it
 does not require her to reproduce his version. A rehearsal-room illustration establishes working
 relationships, Recife, and the visitor’s social mismatch through clothing, equipment, and behavior.
@@ -170,13 +173,14 @@ relationships, Recife, and the visitor’s social mismatch through clothing, equ
 
 #### Folio 02 - Performer unknown
 
-The visitor plays a retained later recording: an older voice that resembles Ana’s over an arrangement
-none of the musicians has made. The artifact remains physically stable, and Ana is free to answer it
-as she chooses. He passes her the sleeve without reading it aloud. A typeset image reveals what the
+The visitor plays a retained recording from his home coordinate: an older voice that resembles Ana's
+over an arrangement none of the musicians has made. The artifact remains physically stable, and Ana
+is free to answer it as she chooses. He passes her the sleeve without reading it aloud. A typeset
+image reveals what the
 prose withholds: "Traditional Recife / performer unknown," a corporate label, and no individual
 credits. "The missing credits" could later open the labor of someone who tried to identify the voice.
 
-#### Folio 03 - Authentic origin
+#### Folio 03 - The offer
 
 A local rights broker offers immediate money if the ensemble will ratify the souvenir label’s
 "authentic origin." Ana needs the money; the band also sees exactly which names the proposed deal
@@ -187,7 +191,7 @@ of the arrangement that no label can honestly attribute to one composer.
 #### Folio 04 - Three bicycles
 
 Ana records a materially different local master with every contributor named and sends three copies
-out. She gives up the broker’s immediate payment and knows the later market still exists. The final
+out. She gives up the broker's immediate payment and knows the other market still exists. The final
 illustration adds the redundancy she cannot follow herself: one copy reaches a neighborhood radio
 booth, one goes into a print-shop safe, and one travels with the club’s sound engineer. "Three
 bicycles carrying the master" could later open any one copy’s route through the city and through time.

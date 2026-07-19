@@ -69,8 +69,8 @@ The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. Imag
 - A second red proved the durable project documents still required the rejected story-bible
   architecture.
 - A later owner-review red recorded eight expected failures for the missing root-movement rename,
-  finite-movement continuation, child root-plot isolation, Clef openness, future plurality,
-  non-Oakland range, and separation of shared/book/folio visual scope.
+  finite-movement continuation, child root-plot isolation, Clef openness, temporal-coordinate
+  plurality, non-Oakland range, and separation of shared/book/folio visual scope.
 - Current local result: `node --test scripts/*.test.mjs` passes 18/18;
   `node scripts/verify-genesis.mjs` and `git diff --check` pass.
 - The checked-in world remains byte-exact. No compressed story summary, fact taxonomy, or
@@ -83,13 +83,13 @@ The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. Imag
 - The three older teaching patterns are retained as explicitly adapted examples outside baseline for
   one controlled A/B only if consecutive reading reveals the specific failures they address.
 - The old Oakland Offset catalogue was deleted. The revised visual proposal retains only an observed
-  material-illustration candidate, story-wide physical/medium rules, future plurality, and contracts
-  for book-local profiles, folio briefs, and ordered reference images.
+  material-illustration candidate, story-wide physical/medium rules, temporal-coordinate plurality,
+  and contracts for book-local profiles, folio briefs, and ordered reference images.
 - Clef remains materially open. A book may realize it locally and preserve that occurrence through
   image references; another book may decide differently.
 - Oakland anchors the root but does not bound the library. Static and generated coverage must include
-  non-root viewpoints, places beyond the Bay Area, distinct future cultures, and meaningful Phantas
-  or Mystas settings.
+  non-root viewpoints, places beyond the Bay Area, distinct cultures at other Primas coordinates,
+  and meaningful Phantas or Mystas settings.
 - The legacy repository investigation recovered the useful post-arc new-engine and independent-child
   principles while explicitly rejecting its endless seventh act, running summaries, fact taxonomy,
   and global title identity.
@@ -210,8 +210,8 @@ The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. Imag
   on trained travelers and current maps.
 - `content/prepared-children.md` contains three independent four-folio openings: a Phantas-Minor
   municipal ferry in Lagos, shelter labor inside the managed Blitz in Stepney, and music authorship
-  under future extraction in Recife. The Lagos child also prepares folios 05–06 of its following
-  movement.
+  under cross-coordinate extraction in Recife. The Lagos child also prepares folios 05–06 of its
+  following movement.
 - Each child opening calls for three images and makes folio 03 text-led. Image jobs were revised so
   maps, documents, shelter structure, and artifact routes reveal facts the prose withholds. Lagoon
   water and the temporal vector field are explicitly separate. Clef remains open until the root
@@ -224,12 +224,24 @@ The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. Imag
   repairs. Fresh reads of the root and children returned PASS. A final validator review returned PASS
   after four additional red mutations closed portfolio-axis, preamble-heading, empty-title, and
   single-line JSON holes.
-- Focused B0 result: 9 tests pass, 0 fail. The exact-runtime full gate also passes: 30
+- The owner's first consecutive read found the folio bodies broadly sound and returned two concrete
+  revisions: "later-Primas" incorrectly treated a relative Primas coordinate as an era, and many
+  headings sounded pseudo-literary instead of naming their scenes. The planning language now relates
+  Primas coordinates without assigning future/past to Major or Minor. The root and child folio titles
+  are direct scene names, while the owner-accepted "Your tomorrow or mine" and "Yesterday's safe
+  route" remain.
+- The same correction is explicit in the visual bible and B2 image review criteria: past and future
+  describe travel along Primas, not kinds of era. The A0 authority test protects that statement so a
+  generic "future culture" visual style cannot return unnoticed.
+- A tenth B0 test was added red-first. It fixes the reviewed direct-title set and rejects
+  "later-Primas" / "later Primas" in the child plans. This is a fixture regression test, not an
+  automated claim about literary quality.
+- Focused B0 result: 10 tests pass, 0 fail. The exact-runtime full gate also passes: 31
   content/architecture tests, 12 unit tests, 20 real-Postgres integration tests, one built-reader
   Chromium regression, lint, typecheck, and production build. Detailed evidence and the
   consecutive-read checklist are in `docs/qa/2026-07-18-b0-movement-review.md`.
-- B0 is structurally eligible, not complete. The owner must still read the movements consecutively
-  and judge their causality, pleasure, independence, image labor, and desire to continue.
+- B0 is structurally eligible, not complete. The owner must reread the revised titles and coordinate
+  language in context before recording a human PASS.
 
 ## Spend and deployment
 
@@ -244,6 +256,7 @@ The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. Imag
 
 ## Next action
 
-The owner reads `content/prototype-movements.md` and `content/prepared-children.md` consecutively using
-the checklist in `docs/qa/2026-07-18-b0-movement-review.md`. Record PASS or concrete revisions. Do not
-begin B1 until that gate is green.
+The owner rereads the revised titles and coordinate language in `content/prototype-movements.md` and
+`content/prepared-children.md` using the final checklist in
+`docs/qa/2026-07-18-b0-movement-review.md`. Record PASS or concrete revisions. Do not begin B1 until
+that gate is green.

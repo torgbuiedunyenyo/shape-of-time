@@ -304,14 +304,14 @@ a verified recoverable copy outside the live Railway bucket.
 medium, then select one. Create only the reusable identity anchors the actual sequence needs; create
 place, object, and open-concept references at book scope. Stress a recurring root figure in close and
 wide views, a purposeful appearance change, return to a changed place, two materially distinct
-future eras, one non-Oakland place, a non-root central figure, meaningful Phantas or Mystas
-geography, parent-to-child inheritance, a book-local realization of an open object, and a neighbor
-repair. Iterate prompt/reference roles, not reader architecture.
+cultures at different Primas coordinates, one non-Oakland place, a non-root central figure,
+meaningful Phantas or Mystas geography, parent-to-child inheritance, a book-local realization of an
+open object, and a neighbor repair. Iterate prompt/reference roles, not reader architecture.
 
 **Green:** Side-by-side human review approves identity, place, purposeful change, coherent medium,
-future plurality, geographic/temporal range, and meaningful text/image division of labor.
+temporal-coordinate plurality, geographic/temporal range, and meaningful text/image division of labor.
 `anchors.json` records scope: shared, recurring identity, or book-local. No Clef form, shop plan,
-device silhouette, or future style is promoted globally by accident.
+device silhouette, or generic coordinate style is promoted globally by accident.
 
 ### C0 — Build the complete static garden fixture
 

@@ -7,14 +7,15 @@ whose destinations have been prepared.
 
 ## Root movement one - The invitation
 
-Jay begins competent on his own ground in an Oakland shop that depends on future money. A failed
-transaction with Tan grows into a relationship, even as the difference between his home and her
+Jay begins competent on his own ground in an Oakland shop that depends on money from wealthier
+Primas coordinates. A failed transaction with Tan grows into a relationship, even as the difference
+between his home and her
 destination becomes harder to ignore. The question is whether he can enter her world without
 pretending her freedom of movement belongs to him. He eventually accepts the invitation for positive
 reasons and on explicit terms. The movement rests on that calm yes. Their affection is real, the
 unequal access is real, and travel has not begun.
 
-### Folio 01 - The ordinary shift
+### Folio 01 - Late shift
 
 Jay serves Oakland regulars and visitors from other times; he needs no explanation of either group.
 His work, and the small practical cues by which he recognizes a visitor, orient the reader before
@@ -23,7 +24,7 @@ counter: tourist-facing improvements, ordinary accumulated wear, and who is made
 The phrase "money from years away" could later open a book about the route a payment took before it
 reached this shop.
 
-### Folio 02 - The manual way
+### Folio 02 - Payment
 
 Tan tries to buy Clef. Jay turns his phone toward her for payment; she waits for a neural action the
 physical screen cannot perform, then becomes embarrassed and suspects he changed something. He
@@ -33,7 +34,7 @@ exchange legible through hands, phone, glances, and distance. C0 may realize Cle
 image; whatever it chooses binds this root lineage alone. "The
 manual way" could later open onto another obsolete interface that remains somebody’s daily life.
 
-### Folio 03 - A gift she could not settle
+### Folio 03 - The gift
 
 Tan returns after learning enough to complete a physical payment. She apologizes specifically for
 assuming Jay was tricking her and tries to pay for the first Clef; he accepts payment only for the
@@ -42,7 +43,7 @@ folio should remain text-led. The apology needs to be heard, and the absence of 
 rhythm after two plates. "A gift she could
 not settle" could later open a book about an obligation that money cannot close.
 
-### Folio 04 - The route the guide did not name
+### Folio 04 - The bus stop
 
 Tan waits until closing and asks about the Oakland sold by her guide. It calls a bus shelter "the
 original 2025 stop," though Jay watched it moved across the street so tour coaches could have the
@@ -51,10 +52,11 @@ listens, laughs at the guide with him, and asks better questions. The illustrati
 anchor bolts, the new coach bay, and residents crossing between them. A kiosk nearby sells a "fully
 managed Blitz night," words that could later open the working life behind that promise.
 
-### Folio 05 - Already old where she came from
+### Folio 05 - The band
 
 On a later outing they stop for a local band. Tan recognizes a melody and sings the next bar before
-the musicians reach it. She heard the song on a later compilation credited only "performer unknown."
+the musicians reach it. She heard the song on a compilation sold at her home coordinate, credited
+only "performer unknown."
 Jay asks whether this band will share in whatever that compilation earns; Tan honestly does not
 know. They keep listening, but the question stays with her. The illustration alone reveals a visitor
 recording at the edge of the crowd while the musicians look elsewhere. "Performer unknown" could
@@ -69,7 +71,7 @@ His question is practical, and it makes her
 laugh at her own assumption. The moment is text-led so their timing survives intact. "Your tomorrow
 or mine" could later open a correspondence whose two writers cannot share a calendar.
 
-### Folio 07 - What continued
+### Folio 07 - Thursday
 
 Tan returns when promised, physically tired by a journey that took experienced time and effort. She
 starts with her trip before asking what happened to Jay while she was away; he interrupts with the
@@ -79,7 +81,7 @@ the intervening life of the shop and the wear of Tan’s travel. "The place kept
 away" could
 later open the story of someone whose home changed between visits.
 
-### Folio 08 - Locals admitted as guests
+### Folio 08 - The venue
 
 Tan takes Jay to a traveler-oriented Oakland venue. The staff assumes he is a hired local guide, and
 Tan gets him admitted by saying he is with her. Inside, Jay tells her that the correction still made
@@ -88,7 +90,7 @@ difference. The image should reveal the separate guest and service routes and th
 Tan crosses between them. "Locals admitted as guests" could later open a book centered on the workers
 who keep such a place functioning.
 
-### Folio 09 - After the shutters came down
+### Folio 09 - After closing
 
 Tan returns to the shop empty-handed. She apologizes for treating "with me" as though it solved what
 happened at the venue, and Jay tells her he will not be a purchased experience. She stays after
@@ -98,10 +100,10 @@ illustration looks through the open storeroom toward the delivery driver and sta
 adding the labor chain behind the polished front shelves. "After the shutters came down" could later
 open the night life of the shop after Jay goes home.
 
-### Folio 10 - The ordinary things she could not explain
+### Folio 10 - Laundry
 
 Weeks later, they wash Jay’s work shirts and sheets at the laundromat below his apartment. A machine
-eats their coins, Tan’s future competence is useless, and Jay coaxes the tray loose with the practiced
+eats their coins, Tan's technical competence is useless, and Jay coaxes the tray loose with the practiced
 knock everyone there knows. They eat takeout upstairs while folding, and her failed descriptions of
 home turn into an escalating game of wrong guesses. They plainly enjoy each other. The illustration
 adds an older neighbor leaving a basket with Jay for safekeeping, one small tie to the life that would
@@ -117,7 +119,7 @@ obstacles as handled. Jay asks what the company would require, how long the cros
 would get him home. Tan admits she does not know each answer and offers to find out. He asks for time.
 This folio stays text-led. "See my world" could later open a book whose speaker misjudged the cost.
 
-### Folio 12 - A map that keeps changing
+### Folio 12 - The map
 
 Tan comes back with a temporal map because Jay cannot decide without understanding the trip. He asks
 how she reads this route, how long the crossing takes, what the calibration feels like, and what
@@ -127,7 +129,7 @@ between independently living places. The illustration carries Primas, Phantas, M
 times, confidence, and the bounded route. "The maps were always becoming wrong" could later open a
 story about the people who revise them while others are already traveling.
 
-### Folio 13 - A ticket in his own name
+### Folio 13 - The return ticket
 
 Tan returns with answers from her father. His company can sponsor Jay’s admission, and her father can
 get the application heard; neither fact requires Jay to depend on Tan for legal return. A
@@ -137,7 +139,7 @@ separated. Tan says she wants him to know the ordinary world that made her, as s
 his. A document image adds the separate sponsor, carrier, and return-expiry fields. "A ticket in his
 own name" could later open someone else’s journey home.
 
-### Folio 14 - What yes means
+### Folio 14 - Jay says yes
 
 During an ordinary shift, Jay turns his fears into conditions he can act on: company sponsorship,
 copies of every document, a return passage in his own name, and an Oakland return date. He asks the
@@ -152,9 +154,9 @@ things he intended to come back to" could later open one of those lives.
 Several days after Jay says yes, the company’s real requirements arrive. He must carry his decision
 through a process the company controls and still act for himself. The full movement will complete his
 legal crossing and turn personal dependence into institutional fact. It will rest after his arrival
-and first night in one particular future culture, before the later disappearance movement begins.
+and first night at Tan's home coordinate, before the later disappearance movement begins.
 
-### Folio 15 - Place of temporal origin
+### Folio 15 - The application
 
 The company’s mobility office sends the application Tan’s father arranged: screening requirements,
 fixed dates, corporate sponsorship, and questions that treat temporal origin as a risk category. Jay
@@ -163,7 +165,7 @@ is settled, and this is the first work it requires. A
 document image reveals which answers trigger extra review and which rights belong to the sponsor.
 "Place of temporal origin" could later open the life of the clerk who decides what that answer permits.
 
-### Folio 16 - The permitted route
+### Folio 16 - Departure
 
 Departure begins through the company route named in Jay’s papers. Tan checks the calibration while a
 company operator verifies their passage; Jay watches both because he wants to understand who can

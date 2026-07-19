@@ -38,21 +38,23 @@ library should eventually contain many places and times, including settlements, 
 preservation zones, tourist economies, underground spaces, and ordinary homes that no planning
 document has named in advance.
 
-The words past and future are relational descriptions, not two visual genres. Every time is the
-present to the people living there, continues changing while unoccupied, and may already bear causal,
-economic, or cultural pressure from several temporal directions. Phantas and Mystas must not become
-palette filters attached to an otherwise ordinary past/future corridor; when they matter, the local
-book must work out how their geography, currents, access, and causal relationships become materially
-visible.
+The words past and future are relational descriptions of travel along Primas, not two kinds of era
+and not coordinates in their own right. Every time is the present to the people living there,
+continues changing while unoccupied, and may already bear causal, economic, or cultural pressure
+from several temporal directions. Phantas and Mystas must not become palette filters attached to an
+otherwise ordinary one-axis corridor. When they matter, the local book must work out how their
+geography, currents, access, and causal relationships become materially visible.
 
-There is no single visual shorthand for “the future.” Future eras should not default to chrome,
-neon, white seamless rooms, blue holograms, flying traffic, or a generic tower city. They are plural
-cultures separated by time and place. Their technologies may be bodily, infrastructural, ambient,
-repaired, inherited, invisible to an expert, or visible mainly through a visitor's inability to use
-them. Different future eras should have genuinely different built environments, clothing, transit,
-interfaces, typography, maintenance, and relationships to older times.
+There is no single visual shorthand for “the future.” Cultures reached from a given book by travel
+along Primas should not default to chrome, neon, white seamless rooms, blue holograms, flying traffic,
+or a generic tower city. They are cultures separated by temporal coordinate and place. Their
+technologies may be bodily, infrastructural, ambient, repaired, inherited, invisible to an expert, or
+visible mainly through a visitor's inability to use them. Different Primas coordinates should have
+genuinely different built environments, clothing, transit, interfaces, typography, maintenance, and
+relationships to other times.
 
-For every new place and era, the book-local visual profile should answer in ordinary language:
+For every new place and temporal coordinate, the book-local visual profile should answer in ordinary
+language:
 
 - What is normal here from a resident's point of view?
 - Which other times have altered the economy, ecology, architecture, language, or daily habits?
@@ -61,7 +63,7 @@ For every new place and era, the book-local visual profile should answer in ordi
 - What does the focal person notice, misunderstand, or take for granted?
 - What local palette, materials, light, density, and composition belong to this book?
 
-These questions make a future legible without prebuilding a universal future style.
+These questions make an unfamiliar coordinate legible without prebuilding a universal style for it.
 
 ## World-grounded visual constraints
 
@@ -89,8 +91,9 @@ leaves open.
 ## Clef stays open
 
 Clef remains visually indeterminate at world scope. The source establishes its unusual social and
-economic position and the role of future demand in its existence; it does not establish whether
-Clef is a drink, food, drug, preparation, package, or something that fits none of those categories.
+economic position and the role of demand from wealthier Primas coordinates in its existence; it does
+not establish whether Clef is a drink, food, drug, preparation, package, or something that fits none
+of those categories.
 This document must not decide its substance, shape, color, packaging, method of consumption, or
 effect.
 
@@ -174,17 +177,17 @@ Every planned narrative image records:
 B2 should compare two or three genuinely different treatments of the proposed shared direction,
 then test an 8–12-image sequence rather than approving the first attractive image. The sequence
 should include a recurring person across close and wide views, a purposeful appearance change, a
-return to a changed place, two materially distinct future eras, a non-Oakland location, a non-root
-central figure, meaningful Phantas or Mystas geography, a book-local open object, a parent-to-child
-inheritance, and one neighbor repair.
+return to a changed place, two materially distinct cultures at different Primas coordinates, a
+non-Oakland location, a non-root central figure, meaningful Phantas or Mystas geography, a book-local
+open object, a parent-to-child inheritance, and one neighbor repair.
 
 Human review decides whether the sequence preserves identity and place, makes change intelligible,
-distinguishes future cultures without cliché, supports geographic and temporal range, and gives each
-image narrative work. Approval should produce a small set of actual reference assets and local
-profiles—not restore the deleted catalogue of speculative scene details.
+distinguishes cultures at different coordinates without cliché, supports geographic and temporal
+range, and gives each image narrative work. Approval should produce a small set of actual reference
+assets and local profiles, not restore the deleted catalogue of speculative scene details.
 
 ## Pending decision
 
 The owner must approve or revise the shared medium and the scope rules above. Character casting,
-Clef, specific locations, devices, maps, future cultures, and folio compositions remain deliberately
-undecided until an actual book, visual experiment, or scene needs them.
+Clef, specific locations, devices, maps, cultures at other coordinates, and folio compositions remain
+deliberately undecided until an actual book, visual experiment, or scene needs them.

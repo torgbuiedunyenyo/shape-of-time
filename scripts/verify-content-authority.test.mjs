@@ -388,7 +388,7 @@ test("visual authority stays story-wide while Clef, places, and scenes stay book
       "Different books may realize it differently",
       "There is no single visual shorthand for “the future.”",
       "Oakland is an anchor, not a boundary",
-      "past and future are relational descriptions",
+      "past and future are relational descriptions of travel along Primas, not two kinds of era",
       "many places and times",
     ],
     "visual-bible.md",

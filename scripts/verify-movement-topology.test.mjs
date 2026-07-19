@@ -35,6 +35,55 @@ test("B0 provides a structurally complete root and prepared-child topology", asy
   assert.deepEqual(movementTopologyIssues(await documents()), []);
 });
 
+test("B0 uses relational Primas language and owner-requested direct titles", async () => {
+  const { root, children } = await documents();
+  const rootTitles = [...root.matchAll(/^### Folio \d{2} - (.+)$/gm)].map((match) => match[1]);
+  const childTitles = [...children.matchAll(/^#### Folio \d{2} - (.+)$/gm)].map((match) => match[1]);
+  const rootMovementTitles = [...root.matchAll(/^## Root movement (?:one|two) - (.+)$/gm)].map((match) => match[1]);
+  const childMovementTitles = [...children.matchAll(/^### (?:Opening|Following) movement - (.+)$/gm)].map(
+    (match) => match[1],
+  );
+
+  assert.deepEqual(rootMovementTitles, ["The invitation", "The crossing"]);
+  assert.deepEqual(rootTitles, [
+    "Late shift",
+    "Payment",
+    "The gift",
+    "The bus stop",
+    "The band",
+    "Your tomorrow or mine",
+    "Thursday",
+    "The venue",
+    "After closing",
+    "Laundry",
+    "Come see it",
+    "The map",
+    "The return ticket",
+    "Jay says yes",
+    "The application",
+    "Departure",
+  ]);
+  assert.deepEqual(childMovementTitles, ["The last ferry", "Yesterday's safe route", "The safer room", "The recording"]);
+  assert.deepEqual(childTitles, [
+    "The licensed route",
+    "The order to return",
+    "The crossing",
+    "The terminal wall",
+    "The official copy",
+    "The correction",
+    "Two rooms",
+    "Tomorrow's programme",
+    "The badges",
+    "After the all-clear",
+    "The last bar",
+    "Performer unknown",
+    "The offer",
+    "Three bicycles",
+  ]);
+  assert.doesNotMatch(children, /\blater[- ]Primas\b/i);
+  assert.match(children, /a visitor from another coordinate along Primas/);
+});
+
 test("B0 rejects missing, reversed, and extra root structure", async () => {
   const { root, children } = await documents();
   includesIssue(movementTopologyIssues({ root: root.replace(/^# [^\n]+\n/, ""), children }), "exactly one H1");
@@ -106,17 +155,17 @@ test("B0 enforces the complete child heading tree and one founding citation", as
 
 test("B0 rejects child range and continuation-boundary mutations", async () => {
   const { root, children } = await documents();
-  const oneFolio = children.replace(/^#### Folio 02 - Tomorrow’s programme[\s\S]*?(?=^## Child book: Performer)/m, "");
+  const oneFolio = children.replace(/^#### Folio 02 - Tomorrow's programme[\s\S]*?(?=^## Child book: Performer)/m, "");
   includesIssue(movementTopologyIssues({ root, children: oneFolio }), "opening movement must contain 2–4 folios; found 1");
 
   const fifthFolio = replaceExactlyOnce(
     children,
-    "### Following movement - Yesterday’s safe route",
-    "#### Folio 05 - Extra opening\n\nThis deliberately extra folio contains enough ordinary planning prose to clear the broad length floor while proving that a five-folio child opening is rejected by structure. It adds no valid movement.\n\n### Following movement - Yesterday’s safe route",
+    "### Following movement - Yesterday's safe route",
+    "#### Folio 05 - Extra opening\n\nThis deliberately extra folio contains enough ordinary planning prose to clear the broad length floor while proving that a five-folio child opening is rejected by structure. It adds no valid movement.\n\n### Following movement - Yesterday's safe route",
   );
   includesIssue(movementTopologyIssues({ root, children: fifthFolio }), "opening movement must contain 2–4 folios; found 5");
 
-  const resetSuccessor = replaceExactlyOnce(children, "#### Folio 05 - One official copy", "#### Folio 01 - One official copy");
+  const resetSuccessor = replaceExactlyOnce(children, "#### Folio 05 - The official copy", "#### Folio 01 - The official copy");
   includesIssue(movementTopologyIssues({ root, children: resetSuccessor }), "following movement folios must be contiguous");
 
   const thirdSuccessor = replaceExactlyOnce(
@@ -141,7 +190,7 @@ test("B0 verifies exact root origins and catches copied planning prose", async (
   const reused = replaceExactlyOnce(children, "fully managed Blitz night", "The maps were always becoming wrong");
   includesIssue(movementTopologyIssues({ root, children: reused }), "founding phrases must be unique");
 
-  const mapBrief = /### Opening movement - A route somebody owns\n\n([\s\S]*?)(?=^#### Folio 01)/m.exec(children)?.[1];
+  const mapBrief = /### Opening movement - The last ferry\n\n([\s\S]*?)(?=^#### Folio 01)/m.exec(children)?.[1];
   const blueBrief = /### Opening movement - The safer room\n\n([\s\S]*?)(?=^#### Folio 01)/m.exec(children)?.[1];
   assert.ok(mapBrief && blueBrief);
   const copiedBrief = replaceExactlyOnce(children, blueBrief, mapBrief);
