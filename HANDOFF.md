@@ -7,10 +7,10 @@ _Updated 2026-07-19._
 - Repository: `torgbuiedunyenyo/shape-of-time`.
 - Active implementation branch: `codex/reader-first-slice`.
 - Active isolated worktree: `/Users/ratpartyserver/git/shape-of-time-reader-first`.
-- Checkpoint base: `b5d7e35`; another agent may be working in the `main` checkout, which this
+- Authority checkpoint: `8fafde0`; another agent may be working in the `main` checkout, which this
   worktree must not modify.
-- **CURRENT ITEM: C0 — reader-first vertical slice.** The authority pivot is complete in this
-  worktree; reader/content implementation is the next change.
+- **CURRENT ITEM: C0 — reader-first vertical slice.** Reader mechanics and a deliberately unaccepted
+  working content fixture are in flight in this worktree. They are not C0 completion evidence.
 - The reader-first authority checkpoint now passes its named verifier and the complete exact-runtime
   repository gate: 39 content/architecture tests, 97 unit tests, 20 real-Postgres integration tests,
   the built-reader browser regression, lint, typecheck, and production build. The gate used isolated
@@ -39,10 +39,51 @@ _Updated 2026-07-19._
 - B1 is complete. The exact GPT Image 2 request adapter, required-anchor/reference compiler, strict
   opaque-PNG response validator, replay v2, durable one-dispatch journal, and external recovery path
   pass the complete repository gate and three final independent adversarial reviews.
-- No generated narrative corpus or approved narrative plate exists yet. Treatment B is approved only
-  as the shared medium. Paid generic endpoint-contract and visual-study outputs remain protected in
-  the owner-controlled external archive; no narrative slice asset has been published to the Railway
-  bucket.
+- No generated narrative corpus or approved narrative plate exists yet. The working 8+2 prose in
+  `content/reader-first/slice.json` is an editorial draft, not a Fable-authored accepted run.
+  Treatment B is approved only as the shared medium. Paid generic endpoint-contract and visual-study outputs
+  remain protected in the owner-controlled external archive; no narrative slice asset has been published to
+  the Railway bucket.
+
+## C0 reader-first slice in flight
+
+- The file-backed shell now has an explicit Library/cover, eight root and two child folios, varied
+  layouts, Previous/Next, arrows, touch swipe, the exact prepared aperture, exact Back, arbitrary
+  cross-paragraph selection, local title filtering, distinct disconnected title creation, bookmark,
+  reload/resume, responsive layout, reduced motion, and movement-rest surfaces. It makes no runtime
+  API or provider request.
+- Reader state is one versioned local record. Resume stores a stable nearest-block anchor and returns
+  to that focused block. The header remains quietly sticky so using Library does not first erase the
+  reader's place. Updates are persisted synchronously so an immediate reload cannot lose the latest
+  place.
+- Aperture journeys are scoped to their destination book and share one tested pure page-turn
+  decision with the production hook. A child-to-Library-to-root visit no longer leaks “Back to
+  passage”; browser-history reversal is symmetric and does not push duplicate folios.
+- The disconnected creation surface is a native modal dialog with contained focus. Page-turn keys
+  ignore interactive/modal targets. Swipe cancellation and interactive origins are ignored; mobile
+  bookmark state is visible; filtered children retain child-cover styling; invalid client routes do
+  not change hook order; selection state clears on folio change.
+- Six browser regressions were observed red before those repairs: stable-block resume, journey leak,
+  Previous-then-Next duplication, modal focus/background navigation, cancelled swipe, and 320px
+  bookmark/dialog behavior. The current non-acceptance checkpoint passes 39 authority/architecture
+  tests, 110 unit tests, 20 real-Postgres integration tests, and 11 built-reader browser tests plus
+  lint, typecheck, and production build. Two historical B2 filesystem orchestration tests received
+  15-second per-test ceilings after the complete unit run proved their former 5-second limit flaky;
+  their assertions are unchanged. The two C0 production-content tests remain deliberately red.
+- Early in-app Browser inspection found the Library, desktop reader, and mobile reader visually
+  coherent; it directly verified exact block resume and modal key containment after repair. This is
+  development evidence only, not the complete C1 or D6 walkthrough.
+- `scripts/verify-reader-first-content.test.mjs` remains intentionally red because
+  `content/reader-first/production-manifest.json` and all four final WebP plates are absent. The four
+  current plate URLs 404 and their alt text is explicitly draft text. C0 cannot pass in this state.
+- Claude Code 2.1.207 can run Fable 5 xhigh with actual prior images supplied as ordered base64 image
+  blocks through stream-json. This is suitable bounded editorial provenance for C0 but does not
+  substitute for D0's official count/API contract.
+- The exact GPT Image 2 route is the existing direct Image API adapter and journal. It proves the
+  requested `gpt-image-2-2026-04-21` snapshot, request ID, usage, latency, and output digest; the API
+  exposes no served-model field. The Codex image-generation tool cannot prove that contract and must
+  not be used for accepted assets. `OPENAI_API_KEY` is absent from the current process and no approved
+  secret-manager reference is documented; no C0 provider dispatch has occurred.
 
 ## Reorganization record
 
@@ -369,9 +410,11 @@ Postgres, and image storage.
 
 ## Next action
 
-Finish the reader-first authority verifier, run the complete existing gate, and commit the pivot on
-`codex/reader-first-slice`. Then **Build the reader-first vertical slice** under C0 in the same
-isolated worktree: its ten finished folios, four actual plates, file-backed fixture, Library and
-cover, page turns, suggested aperture, exact return, arbitrary selection, title filtering and
-explicit creation demonstration, bookmark/reload/resume, keyboard, swipe, responsive layout, and
-reduced-motion behavior. Do not execute the frozen Stage 1 continuity call.
+Checkpoint the tested C0 reader mechanics, then **Build the reader-first vertical slice** by adding
+the bounded C0 editorial authoring harness.
+Run Fable 5 xhigh sequentially and interleave each accepted narrative image before the following
+folio. Generate the four plates only through fresh C0 operations in the existing exact GPT Image 2
+adapter after an approved API credential is safely injected; never dispatch the frozen Stage 1
+operation or silently substitute the Codex image-generation tool. Replace the draft fixture, add
+production provenance and digest-named WebPs, pass the content verifier, then perform the complete C1
+consecutive read and every-feature in-app Browser walkthrough before beginning D0.

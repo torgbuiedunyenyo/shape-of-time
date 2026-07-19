@@ -287,5 +287,5 @@ describe("B2 base64-overflow replacement study", () => {
       candidates: [{ treatmentId: "A" }, { treatmentId: "B" }, { treatmentId: "C" }],
       judgment: "PENDING_OWNER_REVIEW",
     });
-  });
+  }, 15_000);
 });

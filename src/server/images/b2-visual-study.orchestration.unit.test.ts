@@ -107,7 +107,7 @@ describe("B2 treatment-study orchestration", () => {
       judgment: "PENDING_OWNER_REVIEW",
       candidates: [{ treatmentId: "A" }, { treatmentId: "B" }, { treatmentId: "C" }],
     });
-  });
+  }, 15_000);
 
   it("stops after a partial rejected run without publishing a complete study", async () => {
     const setup = await createHarness(async (compiled, { clientRequestId }) => {

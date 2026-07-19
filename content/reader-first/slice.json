@@ -1,0 +1,243 @@
+{
+  "version": 1,
+  "books": [
+    {
+      "id": "shape-of-time",
+      "title": "Shape of Time",
+      "subtitle": "Oakland, and elsewhere",
+      "description": "Jay meets Tan across an ordinary counter in Oakland. Before he agrees to travel with her, he needs to know what the invitation will cost and what will still belong to him.",
+      "folios": [
+        {
+          "id": "root-folio-01",
+          "ordinal": 1,
+          "title": "Payment",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "root-folio-01-block-01",
+              "text": "The late rush began when the tour coach stopped at the corner. Jay saw its passengers through the shop window before they came in: clean shoes, careful excitement, and the quick look up and down the block that meant they had bought an Oakland itinerary. Regulars shifted their baskets closer to the counter. A refrigerator motor knocked behind him. He rang up two beers, a bus card, and a portion of Clef without needing to explain any of them."
+            },
+            {
+              "id": "root-folio-01-block-02",
+              "text": "The last visitor in line held out her phone. Jay turned the payment screen toward her. She stared at it, then at him, waiting for something the glass could not do. When the people behind her began to watch, she asked whether he had changed the price. Her clothes were almost ordinary; her embarrassment was not. Jay canceled the sale, slid the Clef across the counter, and said she could take it. She looked at the small parcel, then at him. The gift seemed to make less sense to her than the phone."
+            }
+          ],
+          "plate": {
+            "id": "plate-root-payment",
+            "assetKey": "root-payment",
+            "alt": "Draft plate pending final image generation.",
+            "narrativeJob": "Reveal the queue, tourist-facing refurbishment, accumulated shop wear, and the failed exchange through hands and glances.",
+            "proseWithholds": "Who is made to wait for whom, and the material contrast between the polished visitor counter and the working shop."
+          },
+          "apertures": []
+        },
+        {
+          "id": "root-folio-02",
+          "ordinal": 2,
+          "title": "The gift",
+          "layout": "text",
+          "blocks": [
+            {
+              "id": "root-folio-02-block-01",
+              "text": "She came back three days later at an hour when the shop was empty. This time she carried coins and a folded note with the denominations written in order. She put enough money on the counter for two purchases and said, before Jay could greet her, that she had been wrong to accuse him. She had thought he was making her look stupid. He counted out the price of one portion and pushed the rest back. The first one had been a gift, he said. Paying for it now would turn it into something else."
+            },
+            {
+              "id": "root-folio-02-block-02",
+              "text": "Her name was Tan. She waited while he locked up and walked with him toward the bus stop her guide called original. Jay showed her the plugged bolt holes where the shelter had stood until a tour company paid to move it across the street. Coaches had wanted the curb. Tan checked the guide, then looked at the empty concrete instead of explaining it away. When Jay's bus arrived, she asked whether he worked Thursday. He told her the hours. She repeated them carefully, as though Oakland Thursdays needed their own notation."
+            }
+          ],
+          "apertures": []
+        },
+        {
+          "id": "root-folio-03",
+          "ordinal": 3,
+          "title": "The band",
+          "layout": "image-led",
+          "blocks": [
+            {
+              "id": "root-folio-03-block-01",
+              "text": "By the time Tan heard the band, she and Jay had stopped pretending that every meeting was an accident. They stood near the back of a crowded room while four musicians worked through a song Jay knew from block parties. Tan smiled at the first line. Before the singer reached the turn, she sang the next bar under her breath. The words were right. Jay asked where she had heard it. She named a compilation sold at her home coordinate, then had to search her memory for the credit. It had said only performer unknown."
+            },
+            {
+              "id": "root-folio-03-block-02",
+              "text": "Jay nodded toward the stage. The bassist was fixing a cable with tape while the drummer filled the silence. Would any of them be paid when Tan's compilation sold? She did not know. Her answer was immediate and unprotected; she had never followed the recording backward to this room. The band started again. Jay and Tan stayed for the rest of the set, close enough that their shoulders kept touching. Pleasure did not settle the question. When Tan left, she wrote down the venue name instead of saving it through her guide."
+            }
+          ],
+          "plate": {
+            "id": "plate-root-band",
+            "assetKey": "root-band",
+            "alt": "Draft plate pending final image generation.",
+            "narrativeJob": "Hold Jay and Tan inside the pleasure of the performance while revealing an unnoticed visitor recording at the crowd's edge.",
+            "proseWithholds": "The live act of extraction that makes Jay's payment question immediate rather than theoretical."
+          },
+          "apertures": []
+        },
+        {
+          "id": "root-folio-04",
+          "ordinal": 4,
+          "title": "Your tomorrow or mine",
+          "layout": "text",
+          "blocks": [
+            {
+              "id": "root-folio-04-block-01",
+              "text": "After the show, they walked without checking a route. Tan admitted that she had been returning for Jay, not for another visit to the past. Jay told her he had traded two shifts so he would be free when she usually appeared. They stopped beside a closed upholstery shop. Tan kissed him, then laughed once from nerves and kissed him again. The street stayed ordinary around them: a delivery bicycle at the light, music leaking from a parked car, somebody dragging bins toward the curb."
+            },
+            {
+              "id": "root-folio-04-block-02",
+              "text": "Tan said she had to leave in the morning and would be back Thursday. Jay asked, Your tomorrow or mine? She began to answer quickly, then understood. He made her name the date in Oakland and say how much time she expected to experience before returning. The trip would take work. She would come back tired, not vanish and reappear untouched. Thursday for Jay would contain four shop openings, a rent payment, and everything else that happened here. Tan entered the date into her route notes. It was the first promise between them that belonged to both calendars."
+            }
+          ],
+          "apertures": []
+        },
+        {
+          "id": "root-folio-05",
+          "ordinal": 5,
+          "title": "The venue",
+          "layout": "text",
+          "blocks": [
+            {
+              "id": "root-folio-05-block-01",
+              "text": "Tan returned on the Oakland date, tired enough to sit on a crate while Jay closed. A week later she brought him to a venue that catered to travelers. At the door, an attendant asked Tan whether her local guide would wait in the service room. Tan said, He's with me. The attendant changed expression, checked Tan's credential, and admitted Jay without looking at him again. Inside, people crossed between private booths and a terrace with the ease of guests who had never been asked to account for their route."
+            },
+            {
+              "id": "root-folio-05-block-02",
+              "text": "Jay waited until they were outside. Tan thought she had corrected the attendant. He told her the correction still made his access depend on her. With me could mean guest, employee, purchase, or responsibility; only Tan had been allowed to decide. She started to say that she had defended him, heard the sentence, and stopped. Jay was angry, but not theatrical. He did not want to be the authentic Oakland part of an evening she could buy. Tan went home alone. For the first time since the phone, neither of them knew whether she would return."
+            }
+          ],
+          "apertures": []
+        },
+        {
+          "id": "root-folio-06",
+          "ordinal": 6,
+          "title": "After closing",
+          "layout": "text",
+          "blocks": [
+            {
+              "id": "root-folio-06-block-01",
+              "text": "Tan came back to the shop without an itinerary or a purchase. She said that with me had sounded generous only because she was the person whose presence opened the door. Jay let the apology stand. A cold case had leaked under two shelves, so he handed her a mop and moved the stock. She stayed. They worked past closing, arguing about where a warped carton could safely sit and laughing when Tan's solution trapped both of them behind a stack of tourist Clef."
+            },
+            {
+              "id": "root-folio-06-block-02",
+              "text": "On the sidewalk afterward, Tan asked Jay to visit her home. He thought she meant another venue. She said no: the place where she lived, reached by a route she knew how to travel. Her father could get an application considered. Jay asked what the company would require, how long the crossing took, and how he would come home if they were separated. Tan could answer the route question, but not the legal ones. She did not call that handled. She promised to find out. Jay said he would listen when she had facts."
+            }
+          ],
+          "apertures": []
+        },
+        {
+          "id": "root-folio-07",
+          "ordinal": 7,
+          "title": "The map",
+          "layout": "plate",
+          "blocks": [
+            {
+              "id": "root-folio-07-block-01",
+              "text": "Tan returned with a map large enough to cover the shop's break table. It did not look like a calendar. Three axes crossed a field of curved routes, each marked with observation times and confidence bands. Tan showed Jay where one licensed passage left Oakland's coordinate, where a Phantas current complicated the turn, and where the company expected a pilot to recalibrate. The maps were always becoming wrong. Currents changed while places continued, and every useful chart recorded when and how somebody had measured it."
+            },
+            {
+              "id": "root-folio-07-block-02",
+              "text": "Jay asked what the circular sections would feel like, who could change the route after departure, and how long the crossing would take for his own body. Tan answered what she knew and wrote down what she did not. Her fluency was physical: she traced a correction without rotating the map, then showed him the instruments a traveler watched while a pilot worked the mirrors and heat. The route was difficult, not magical. By closing time Jay understood enough to describe the risk himself. He still needed a return passage in his own name."
+            }
+          ],
+          "plate": {
+            "id": "plate-root-map",
+            "assetKey": "root-map",
+            "alt": "Draft plate pending final image generation.",
+            "narrativeJob": "Make the bounded three-axis route, revision times, confidence, changing currents, and unequal access materially legible.",
+            "proseWithholds": "The map's graphic evidence and the difference between a route the company licenses and observations it does not own."
+          },
+          "apertures": [
+            {
+              "id": "aperture-maps-wrong",
+              "blockId": "root-folio-07-block-01",
+              "startOffset": 375,
+              "endOffset": 410,
+              "quote": "The maps were always becoming wrong",
+              "targetBookId": "map-on-the-wall",
+              "targetFolioId": "map-folio-01"
+            }
+          ]
+        },
+        {
+          "id": "root-folio-08",
+          "ordinal": 8,
+          "title": "Jay says yes",
+          "layout": "text",
+          "blocks": [
+            {
+              "id": "root-folio-08-block-01",
+              "text": "The answers arrived in separate documents. Tan's father could get Jay's application heard; the company, not Tan, would sponsor admission. A return carrier could issue a passage in Jay's own name with an Oakland date and papers he kept. None of that made him able to pilot the route, but it gave dependence edges he could see. Jay copied every page at the print shop and asked his manager for a week away. Month-end inventory fixed the latest date he could return without losing the job."
+            },
+            {
+              "id": "root-folio-08-block-02",
+              "text": "When Tan came in, Jay named his conditions without presenting them as a test. He wanted his documents, his own return booking, and time to understand every change in route. Then he told her the part that was not fear. He loved her. He wanted to know the ordinary place that had made her assumptions seem ordinary, and he wanted their relationship to exist on both people's ground. Tan listened without improving the answer. Jay said yes. The shop door opened behind her, and he turned to serve the next customer before they made plans."
+            }
+          ],
+          "apertures": [],
+          "movementRest": {
+            "label": "The invitation",
+            "continuation": "The next movement begins with the application and the physical crossing. Shape of Time continues."
+          }
+        }
+      ]
+    },
+    {
+      "id": "map-on-the-wall",
+      "title": "The Map on the Wall",
+      "subtitle": "Lagos lagoon route notes",
+      "description": "On the last municipal ferry run before licensed chart access expires, Eniola must decide which map deserves the passengers' trust.",
+      "origin": {
+        "sourceBookId": "shape-of-time",
+        "sourceFolioId": "root-folio-07",
+        "apertureId": "aperture-maps-wrong",
+        "quote": "The maps were always becoming wrong"
+      },
+      "folios": [
+        {
+          "id": "map-folio-01",
+          "ordinal": 1,
+          "title": "The licensed route",
+          "layout": "text",
+          "blocks": [
+            {
+              "id": "map-folio-01-block-01",
+              "text": "The console told Eniola to return before the ferry had completed its third circle on the lagoon. Its licensed route showed a stable approach to the municipal berth; the field instrument beside it showed the Phantas current shifting across that line. The spatial pilot kept the boat inside its ordinary water circuit while Eniola compared the display with three handwritten notebooks. Two crews had recorded the same change that morning. Passengers watched the delay appear on their work schedules and pickup messages before anyone made an announcement."
+            },
+            {
+              "id": "map-folio-01-block-02",
+              "text": "Automatic return would send them back across the strongest part of the changed current. Continuing toward the outer berth required Eniola to disable a protection attached to her probationary credential. She asked the pilot and mirror technician to read their instruments aloud, then asked two veteran passengers what they had felt on yesterday's crossing. Their observations did not agree exactly, but none supported the console. Eniola logged every name. She opened the physical cover over the return control and turned the switch. The ferry kept circling, building the slow movement toward Phantas Minor."
+            }
+          ],
+          "apertures": []
+        },
+        {
+          "id": "map-folio-02",
+          "ordinal": 2,
+          "title": "The terminal wall",
+          "layout": "image-led",
+          "blocks": [
+            {
+              "id": "map-folio-02-block-01",
+              "text": "They reached the outer berth after the evening connections had gone. The company locked the console as soon as it joined the terminal network. Eniola's credential changed from probationary to suspended before the last passenger stepped off. She copied the route trace anyway, first onto the back of a timetable and then onto the terminal wall. She marked the console's order to return, each witnessed correction, and the time at which the ferry crossed. The line was evidence of one passage, not a claim that tomorrow would repeat it."
+            },
+            {
+              "id": "map-folio-02-block-02",
+              "text": "Other crews gathered before security arrived. A pilot from the morning run moved one turn east. Two women who worked the outer stops argued about the depth of the Phantas correction and drew both readings. Someone added the licensed line in a different color so nobody would mistake its absence for agreement. By the time an official ordered them away, the wall held several incompatible routes and the names of people willing to answer for each mark. Eniola had lost the ferry. The trace had escaped the console, and it no longer belonged to her alone."
+            }
+          ],
+          "plate": {
+            "id": "plate-map-terminal-wall",
+            "assetKey": "map-terminal-wall",
+            "alt": "Draft plate pending final image generation.",
+            "narrativeJob": "Show the closed console, ferry and lagoon context, and several crews making visible, incompatible corrections used by outer stops.",
+            "proseWithholds": "The exact disagreements among the public traces and which commuters depend on each line."
+          },
+          "apertures": [],
+          "movementRest": {
+            "label": "The last ferry",
+            "continuation": "The next movement asks how a public correction earns trust after Eniola's credential is gone. The Map on the Wall continues."
+          }
+        }
+      ]
+    }
+  ]
+}
