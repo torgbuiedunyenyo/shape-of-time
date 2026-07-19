@@ -17,17 +17,19 @@ content tests green with it).
 
 ## D0 — Pin Fable xhigh and exact 400k admission (CURRENT)
 
-POSITION (2026-07-19): red observed (`Cannot find module './fable-contract.js'`), then
-`src/server/text/fable-contract.ts` + unit test landed — 8/8 green, typecheck+lint green.
-REMAINING for D0: (1) live HTTP adapter (AnthropicFableClient: /v1/messages/count_tokens +
-/v1/messages, api key ctor arg, no retry that changes the request, redirects disabled — mirror
-openai-image-client.ts discipline); (2) exact request archive (canonicalJson to disk or DB via
-generation_attempts later — keep minimal for D0: archive module with digests); (3) QA record
-docs/qa/2026-07-19-d0-fable-contract.md (red evidence above, commands, live test status);
-(4) live contract test — BLOCKED without ANTHROPIC_API_KEY (not in env; no .env exists; record
-BLOCKED honestly with unblock condition per EVALS result semantics) — write it key-gated so it
-runs when a ceiling+key are provided; (5) full gates in this worktree (browser step: use
-COMPOSE_PROJECT_NAME=shape-of-time), commit, push branch.
+POSITION (2026-07-19, second increment): contract module (8 tests) AND AnthropicFableClient
+(4 tests: exact endpoints/headers, redirect error, no auto-retry, typed 429, key hygiene) are
+green — 12/12, typecheck+lint green, committed on the branch. The manifest digest binds body and
+manifest; count runs before send; failure taxonomy is closed.
+REMAINING for D0: (a) key-gated live contract test (script or test that runs ONLY with
+ANTHROPIC_API_KEY + a written ceiling in the QA doc; without the key it must report BLOCKED, not
+pass) — key is NOT in env and no .env exists; unblock = owner provides key at run time;
+(b) QA record docs/qa/2026-07-19-d0-fable-contract.md (red evidence: 'Cannot find module
+./fable-contract.js' then './fable-client.js'; commands + 12/12 results; live test BLOCKED);
+(c) full gates here (COMPOSE_PROJECT_NAME=shape-of-time for the browser step), push.
+THEN D1 (deterministic full-history compiler — PLAN §D1: world verbatim once + BOOK_ORIGIN +
+CURRENT_MOVEMENT_BRIEF + prior folios/images + temporal rules + folio brief + light request last;
+prompts live in prompts/fable/write-folio.md; red = randomized-insertion test).
 
 Authority: PLAN §D0, EVALS §9, SPEC "Generation and continuity/Text" + "Hard context boundary".
 
