@@ -66,7 +66,32 @@ Full gates GREEN in this worktree (lint, typecheck, content, unit, integration, 
 exit 0, 2026-07-19), pushed through `7ec46b1`. Live probe stays BLOCKED on ANTHROPIC_API_KEY
 (unblock command in docs/qa/2026-07-19-d0-fable-contract.md).
 
-## D1 — CURRENT: deterministic full-history compiler
+## D1 — CORE LANDED 2026-07-19 (was CURRENT)
+
+`src/server/text/folio-context.ts` + unit test: 18/18 text tests green (12 D0 + 6 D1), typecheck
+and lint green, committed+pushed. Covers: every source exactly once in template order, request
+last, exposure-order enforcement, per-source digests + deterministic contextDigest, refusals for
+Undertow/visual-bible/craft-examples/empty sources, no summary/truncation path. D1 REMAINING to
+call it done per PLAN: a QA note in docs/qa/ (red evidence: 'Cannot find module
+./folio-context.js'; commands; results) and full-gates + push — do first thing next session.
+NOTE: this worktree's template (main@6fc0038) predates the B2 agent's <prose_guidance> work in
+the b2 worktree; the compiler is placeholder-driven and survives that template change, but D2
+should run AFTER their template lands on main (coordinate/merge).
+
+## D2–D6 continuation (after D1 QA)
+
+D2 (prose baseline): BLOCKED on ANTHROPIC_API_KEY (same as D0 live probe) + needs the merged
+template + B0 movement briefs as inputs; run one uninterrupted 8–14 folio root run via
+folio-context + fable-client, archive everything, then HUMAN blind read — surface to owner.
+D3 (movement planning + pagewise generation): real-DB integration (books/folios/apertures/assets/
+generation_attempts repos from A2), one prose + one image call per folio, atomic ready/expose —
+image side needs B2 anchors (coordinate with B2 agent; build behind ports with contract fixtures
+if still pending). D4 provenance seam; D5 prefetch (needs C2!); D6 dynamic highlight/title (needs
+C2 reader). C0–C2 are unclaimed — after D2, claim C0–C2 in the b2-worktree HANDOFF and build them
+(the owner's goal is a PLAYABLE wired reader; D5/D6 cannot wire into a reader that lacks
+selection/apertures/navigation).
+
+## Old D1 design notes (implemented; kept for reference)
 
 Template `prompts/fable/write-folio.md` has EXACTLY these placeholders, in this order:
 {{WORLD_DOCUMENT}}, {{BOOK_ORIGIN}}, {{CURRENT_MOVEMENT_BRIEF}}, {{STORY_SO_FAR}} (all four inside
