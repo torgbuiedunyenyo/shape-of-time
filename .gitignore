@@ -1,0 +1,16 @@
+node_modules/
+dist/
+coverage/
+.turbo/
+.cache/
+test-results/
+playwright-report/
+.DS_Store
+*.log
+
+.env
+.env.*
+!.env.example
+
+.claude/worktrees/
+.memory/
