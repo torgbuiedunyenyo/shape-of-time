@@ -577,6 +577,17 @@ export class LibraryRepository {
     return mapBook(book);
   }
 
+  /** Every folio of a book in ordinal order, whatever its state — the measurement view. */
+  async listFolios(bookId: string): Promise<FolioRecord[]> {
+    const rows = await this.#database
+      .selectFrom("folios")
+      .selectAll()
+      .where("book_id", "=", bookId)
+      .orderBy("ordinal", "asc")
+      .execute();
+    return rows.map(mapFolio);
+  }
+
   /** This book's exposed folios only, in exposure order — the lineage-local reading history. */
   async listExposedFolios(bookId: string): Promise<FolioRecord[]> {
     const rows = await this.#database

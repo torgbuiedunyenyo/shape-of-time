@@ -86,7 +86,12 @@ mutation-verified sibling isolation. Image side is behind NarrativeImagePort wit
 FOLLOW-UP: wire durable GPT-Image-2 dispatch into that port once b2 branch merges. Semantic
 halves (post-arc ending, child premise independence) named as human-read territory in QA doc. D4 LANDED 2026-07-19: provenance.ts + manifest in attempt result (v1 schema), reconstruction
 verifies all digests from primary records only, refuses lineage-less prose; 28/28 integration.
-D5 prefetch (needs C2!) and D6 dynamic highlight/title (needs C2 reader) are NEXT.
+D5 LANDED 2026-07-19: generation/preparation.ts — shares D3's idempotency namespace so
+prepared turns are cache hits and duplicate spend is impossible (33/33 integration). Reader-slice
+wiring rule: prepareOnExposure/prepareSuggestedAperture may only be called from POST-bodied
+exposure/visibility events — a GET route or browser lock must NEVER purchase generation. Dwell
+measurement + horizon tuning wait for the reader's exposure events. D6 dynamic highlight/title
+is NEXT (behind contracts until the C2 reader lands).
 LANE UPDATE 2026-07-19 ~16:00: the other agent pivoted to a READER-FIRST VERTICAL SLICE
 (branch codex/reader-first-slice, commit 8fafde0) — C-track is CLAIMED by them; do NOT build
 C0–C2 here. Build D5/D6 behind ports/contracts so they wire into that reader when it lands.
