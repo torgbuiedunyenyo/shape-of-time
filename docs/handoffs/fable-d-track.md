@@ -25,7 +25,7 @@ UPDATE: (a)+(b) DONE — src/server/text/d0-live-contract.ts (dry-run mode keyle
 needs --confirm-spend-cap 2.00 + ANTHROPIC_API_KEY, refuses as BLOCKED otherwise) and
 docs/qa/2026-07-19-d0-fable-contract.md (12/12 results, live proof BLOCKED on key) are written
 and committed. REMAINING: full-gates verdict (background run), then push; live probe stays
-BLOCKED until the owner supplies the key. Then D1.
+BLOCKED until the owner supplies the key. Then D1. [Since resolved: probe PASSED 2026-07-19.]
 Superseded detail below: (a) key-gated live contract test (script or test that runs ONLY with
 ANTHROPIC_API_KEY + a written ceiling in the QA doc; without the key it must report BLOCKED, not
 pass) — key is NOT in env and no .env exists; unblock = owner provides key at run time;
@@ -63,7 +63,9 @@ Contract to enforce (all red-first, per AGENTS.md method):
 ## D0 verdict: DONE except live probe
 
 Full gates GREEN in this worktree (lint, typecheck, content, unit, integration, browser, build —
-exit 0, 2026-07-19), pushed through `7ec46b1`. Live probe stays BLOCKED on ANTHROPIC_API_KEY
+exit 0, 2026-07-19), pushed through `7ec46b1`. Live probe **PASSED 2026-07-19**: owner supplied
+the key at invocation (never stored), served claude-fable-5 xhigh, end_turn, count==usage 70 in /
+11 out, response msg_011CdCHc2Vbtj2mDZjjPA7C2 — D0 fully green. (Earlier text: stays BLOCKED on ANTHROPIC_API_KEY
 (unblock command in docs/qa/2026-07-19-d0-fable-contract.md).
 
 ## D1 — CORE LANDED 2026-07-19 (was CURRENT)
@@ -81,7 +83,8 @@ should run AFTER their template lands on main (coordinate/merge).
 ## D2–D6 continuation (after D1 QA)
 
 D2 HARNESS LANDED 2026-07-19: d2-baseline.ts/-run.ts + scorecard, 31/31 text tests, dry-run
-verified on real sources (folio-1 digest ea8d48c2…). LIVE RUN BLOCKED: needs ANTHROPIC_API_KEY +
+verified on real sources (folio-1 digest ea8d48c2…). LIVE RUN BLOCKED only on the template now —
+the key is proven working (D0 probe 2026-07-19) and the owner supplies it per run; still needs +
 merged <prose_guidance> template from b2 branch b5d7e35 (rerun after template change invalidates
 the steering variable — wait for merge). Unblock command in docs/qa/2026-07-19-d2-baseline-harness.md.
 D3 LANDED 2026-07-19: movement-planner.ts (+plan-movement.md template) and
@@ -100,7 +103,8 @@ validation, span/title-scoped idempotency (no duplicate children), persisted anc
 bounded child_first planning call, selection aperture rows on immutable exposed folios, atomic
 entry (37/37 integration). UI halves (mounted reader, reload return, no spinner) bind the
 reader slice and are named in the D6 QA doc. D0–D6 SERVER TRACK IS COMPLETE except the
-key-gated live proofs (D0 probe, D2 baseline run) — see BLOCKED list in QA docs.
+key-gated live proofs — D0 probe PASSED 2026-07-19 (owner-supplied key); the D2 baseline run
+remains, gated on the merged prose-guidance template + owner-attended run.
 LANE UPDATE 2026-07-19 ~16:00: the other agent pivoted to a READER-FIRST VERTICAL SLICE
 (branch codex/reader-first-slice, commit 8fafde0) — C-track is CLAIMED by them; do NOT build
 C0–C2 here. Build D5/D6 behind ports/contracts so they wire into that reader when it lands.

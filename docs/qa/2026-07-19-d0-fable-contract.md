@@ -31,18 +31,21 @@ PLAN/EVALS/SPEC/HANDOFF), and the standing goal is to proceed through D6.
 - `mise x node@24.18.0 -- pnpm run typecheck` — pass. `pnpm run lint` — pass.
 - Full `pnpm run gates` result is recorded in the commit that closes this slice.
 
-## Live contract proof — BLOCKED
+## Live contract proof — PASS (2026-07-19, owner-supplied key at invocation)
 
-Judgment: **BLOCKED**. The live probe (`src/server/text/d0-live-contract.ts`) requires
-`ANTHROPIC_API_KEY` at invocation and the literal written cap `--confirm-spend-cap 2.00`; the key
-is not present in the environment and no `.env` exists in any checkout. Without the key the
-runner refuses with a BLOCKED error rather than passing. Blocking condition: owner provides the
-key at run time. Unblock command (spend ceiling $2.00, smallest useful sample — a one-sentence
-acknowledgement probe):
+Judgment: **PASS**. The owner supplied ANTHROPIC_API_KEY at run time (never stored) and the
+probe ran under the written $2.00 cap:
 
-```bash
+```
 mise x node@24.18.0 -- pnpm exec tsx src/server/text/d0-live-contract.ts --confirm-spend-cap 2.00
 ```
 
-Provider calls executed in this slice: 0. Text spend: $0. Recorded fixtures cannot substitute for
-this live proof (EVALS §9); D0 is not fully green until it runs.
+Evidence: served model exactly `claude-fable-5` with `output_config.effort: xhigh`; stop
+`end_turn`; response id `msg_011CdCHc2Vbtj2mDZjjPA7C2`; official count endpoint admitted the
+request at 70 input tokens and billed usage matched exactly (70 in / 11 out — ~81 tokens total
+spend); prose "Request received and confirmed." The count→admit→send→validate chain is proven
+against the live provider. D0 is fully green.
+
+Provider calls executed for this proof: 1. The key exists only at invocation; it is not in git,
+.env, logs, or Railway (verified by name 2026-07-19: art-thing's .env holds only OpenRouter and
+Langfuse keys; the shape-of-time Railway service holds only DB/S3/asset variables).
