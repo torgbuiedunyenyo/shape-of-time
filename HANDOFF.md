@@ -8,9 +8,17 @@ _Updated 2026-07-18._
 - Branch: `main`.
 - Genesis commit: `7f7b5b112140db7ecb0bc2a85f28a0f38adda441`.
 - The repository has been separated from the retired `auto-biblio` implementation.
-- The initial authority, verified expanded world source, source provenance, and implementation queue are present.
-- A0's cited story bible, complete six-part arc, pilot boundary, and visual bible are drafted and structurally green, but remain explicitly pending project-owner review.
-- No application code, package manifest, generated corpus, database, model output, paid generation, Railway project, or deployment exists yet.
+- The initial authority, verified expanded world source, source provenance, and implementation queue
+  are present.
+- A0's prose architecture has been corrected:
+  world.md is the sole comprehensive factual and plot authority; the finite pilot brief, explicit
+  temporal rules, XML baseline, and optional-example experiment are separate.
+- The rejected story-bible, duplicated arc, and typed authority manifest were deleted instead of
+  deprecated.
+- The visual bible remains a separate pending proposal and is explicitly excluded from the prose
+  baseline.
+- No application code, package manifest, generated corpus, database, model output, paid generation,
+  Railway project, or deployment exists yet.
 
 ## Reorganization record
 
@@ -39,13 +47,26 @@ The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. Imag
 
 ## A0 review state
 
-- Red observed: the source-digest test passed while five authority tests failed because `authority.json`, `story-bible.md`, `arc.md`, and `visual-bible.md` were absent.
-- Current local result: `node --test scripts/*.test.mjs` passes 9/9; `node scripts/verify-genesis.mjs` and `git diff --check` pass.
-- Proposed pilot boundary: Part One ends after Jay knowingly accepts Tan's invitation and authorizes sponsorship, before travel begins.
-- Proposed visual direction: **Oakland Offset**, a grounded gouache-and-graphite illustrated novel with restrained print texture and artifact/map folios.
-- Proposed binding additions include Jay and Tan's physical designs, Clef as a packaged amber-red pressed flake, fixed shop geometry, a cracked cobalt-cased payment phone, tri-axial map grammar, a three-rail PRMTT harness, and a material visa folio.
-- Deep unmapped time, Tan's exact future year, company identity and hidden motives, Clef chemistry/effect/consumption, and the exact Part Five reunion location remain intentionally unspecified rather than delegated to generation.
-- `content/shape-of-time/authority.json` records `pending-owner`; A0 is not complete and A1 must not begin until the owner approves or revises these decisions.
+- Red observed on the replacement contract: the world digest passed while six tests failed because
+  the rejected duplicate files still existed and pilot-brief.md, temporal-rules.md, write-folio.md,
+  and craft-examples.md did not.
+- A second red proved the durable project documents still required the rejected story-bible
+  architecture.
+- Current local result: `node --test scripts/*.test.mjs` passes 12/12;
+  `node scripts/verify-genesis.mjs` and `git diff --check` pass.
+- The checked-in world remains byte-exact. No compressed story summary, fact taxonomy, or
+  machine-shaped narrative manifest competes with it.
+- The first-book brief ends after Jay knowingly accepts Tan's invitation, before travel. It removes
+  the invented sponsorship-authorization threshold and does not restate Parts Two through Six.
+- The temporal block retains the earlier prompt's useful false-versus-true guardrails while
+  correcting overbroad language about repetition, atmosphere, branching, and temporal “glimpses.”
+- The three older teaching patterns are retained as explicitly adapted examples outside baseline for
+  one controlled A/B only if consecutive reading reveals the specific failures they address.
+- The proposed visual direction remains **Oakland Offset**, with unapproved AI-authored character,
+  object, location, map, and PRMTT specifics. It is not prose context and it is not yet approved
+  visual authority.
+- A0 remains open for owner editorial review of the pilot, prompt materials, and visual proposal.
+  A1 must not begin until that review resolves the remaining visual decisions.
 
 ## Spend and deployment
 
@@ -56,4 +77,7 @@ The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. Imag
 
 ## Next action
 
-Project owner reviews `content/shape-of-time/story-bible.md`, `arc.md`, and `visual-bible.md`, especially the pilot boundary, cast, Clef, shop, phone/payment mechanic, map/PRMTT forms, and preserved unknowns. After explicit approval or revisions, record the review in `authority.json`, rerun the authority gate, mark A0 complete, and only then begin A1 stack selection.
+Project owner reviews content/shape-of-time/pilot-brief.md, prompts/fable/temporal-rules.md,
+prompts/fable/write-folio.md, prompts/fable/craft-examples.md, and the separate pending
+content/shape-of-time/visual-bible.md proposal. After any revisions, rerun the content gate, mark A0
+complete in this handoff, and only then begin A1 stack selection.

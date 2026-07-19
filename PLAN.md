@@ -59,9 +59,14 @@ seventh act.
 - Writer: direct Anthropic Messages API with `claude-fable-5`, `output_config.effort: xhigh`, no
   Opus alias, fallback, repair writer, manual thinking budget, provider compaction, or provider
   memory.
-- Start with a light instruction for clear, absorbing, physically and causally legible prose. Canon
-  is factual authority, never a style sample. Do not add generated exemplars, recursive voice
-  conditioning, a literary ban list, or a model committee.
+- Send the complete world verbatim as the sole comprehensive factual and plot authority. Start with
+  a light instruction for clear, absorbing, physically and causally legible prose plus the explicit
+  temporal-rules block that protects the world from familiar loops, branches, paradoxes, fate, and
+  supernatural time effects. Canon is factual authority, never a style sample.
+- Keep the adapted craft examples outside the baseline. They may enter one versioned, controlled
+  A/B experiment only after consecutive human reading identifies placeless abstraction,
+  above-the-scene reporting, or explanatory flattening as a repeated failure. Do not add generated
+  exemplars, recursive voice conditioning, a literary ban list, or a model committee.
 - Every request is stateless and reproducible from immutable application records.
 - The hard limit covers the exact complete multimodal request:
 
@@ -138,26 +143,37 @@ D4 + D6 --only if measured trigger fires--> E0 long-form reconstruction -> F0
 
 **Depends on:** nothing.
 
-**Red:** Create an implementation-independent content contract test first. It must confirm the
-checked-in source digest, then fail because the complete six-part arc, finite pilot boundary, stable
-character/place/object decisions, visual rules, and machine-checked Undertow exclusion do not yet
-exist.
+**Red:** Create an implementation-independent content and prompt contract first. It must preserve the
+checked-in source digest, then fail while lossy duplicate canon remains or the finite pilot brief,
+temporal guardrail, XML baseline, optional-example boundary, and rendered Undertow/visual exclusion
+do not exist. Break each source-count, ordering, and exclusion rule deliberately.
 
-**Implement:** Add reviewed `content/shape-of-time/` authority:
+**Implement:**
 
-- preserve the existing byte-exact `world.md` and its separate `SOURCE.md` provenance;
-- `story-bible.md`: cited invariants, terminology, known unknowns, and forbidden contradictions;
-- `arc.md`: the complete finite six-part Jay/Tan story, including its true ending;
-- `visual-bible.md`: selected art direction and binding/variable/unspecified traits for Jay, Tan,
-  Clef, recurring Oakland locations, temporal maps/transit, and important objects;
-- `undertow.md`: clearly separated sequel seed.
+- preserve content/shape-of-time/world.md byte-exactly as the sole comprehensive factual and plot
+  authority, with content/shape-of-time/SOURCE.md as provenance;
+- add content/shape-of-time/pilot-brief.md in natural prose with only the first finite movement's
+  beginning, dramatic question, and stopping boundary;
+- add prompts/fable/temporal-rules.md, preserving the useful false-versus-true anti-trope function
+  without IDs, citations, a fact taxonomy, or a compressed substitute for the world;
+- add prompts/fable/write-folio.md with whole-document XML boundaries, long sources first, the full
+  current-book history, and the current folio and light writing request last;
+- preserve the teaching function of the three older micro-demonstrations as clearly labeled
+  adaptations in prompts/fable/craft-examples.md, explicitly excluded from baseline and available
+  only for one controlled experiment;
+- keep content/shape-of-time/visual-bible.md separate and pending visual review; it is never a prose
+  prompt input;
+- keep content/shape-of-time/undertow.md byte-exact and excluded from the current narrative; and
+- delete the derived story bible, duplicated six-part arc, and typed narrative-authority manifest.
 
-Resolve open authorial questions before generation; a first image cannot silently decide canon.
-Human review is part of this task.
+Resolve visible character, place, and object decisions through visual review before image
+generation; a first image cannot silently decide canon. Human review remains part of this task.
 
-**Green:** The exact digest passes; mutation tests reject preamble and retired material; a reviewer
-can answer what happens, where the pilot may stop, and what must remain visually consistent without
-consulting generated prose or images.
+**Green:** The exact source digests pass; prompt mutations reject missing/duplicated/reordered world
+input, code-shaped canon, Undertow, visual production material, and accidental activation of the
+optional examples. A reviewer can read the complete original world, understand the small pilot
+boundary, inspect the exact baseline prompt shape, and distinguish unresolved visual proposals from
+approved anchors.
 
 ### A1 — Deliberately select the one-app stack
 
@@ -321,18 +337,20 @@ over the hard equation fail before publication or additional spend.
 
 **Depends on:** D0, B0.
 
-**Red:** A randomized-insertion test fails until folio N receives, exactly once and in order: output
-contract, full world source, finite book arc, parent aperture/source when applicable, every prior
-exposed current-book folio and narrative image, explicit current state/open threads, current beat and
-causal predecessor, then the writing request.
+**Red:** A randomized-insertion test fails until folio N receives, exactly once and in order: the
+full world source, short current-book brief, parent aperture/source when applicable, every prior
+exposed current-book folio and narrative image, the approved temporal-rules block, current folio
+brief, then the light writing request and output contract.
 
 **Implement:** Build a stateless compiler with stable document boundaries, IDs/digests/order,
 exclusions, prompt-cache hints, exact rendered-request archive, context manifest, and official token
 count. Full history remains active while admitted.
 
 **Green:** Identical sources produce identical context digests; any source/image/plan change changes
-the digest. No rolling summary, recent-N window, provider memory/compaction, `chars/4`, or silent
-truncation path exists. The pilot never enters long-form mode.
+the digest. The rendered baseline contains the complete world exactly once and contains no Undertow,
+visual-production authority, or optional craft examples. No rolling summary, recent-N window,
+provider memory/compaction, `chars/4`, or silent truncation path exists. The pilot never enters
+long-form mode.
 
 ### D2 — Establish the lightly steered prose baseline
 
@@ -344,7 +362,9 @@ truncation path exists. The pilot never enters long-form mode.
 counts, outputs, latency, and cost. Readers record what physically happened, what each actor wanted,
 why the page changed, missing orientation, forced exposition, uncashable abstraction, desire to turn,
 and desire to open an aperture. Change one prompt/beat variable only for a repeated named failure,
-then rerun blind.
+then rerun blind. If the repeated failure is placeless abstraction, above-the-scene reporting, or
+explanatory summary, the first tested change is one controlled A/B that adds the complete adapted
+craft-example block and changes nothing else.
 
 **Green:** At least eight consecutive folios are concrete, causally intelligible, canon-compatible,
 paraphrasable, and worth continuing. A model score cannot override human failure.

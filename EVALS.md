@@ -98,6 +98,12 @@ finds the run broadly unintelligible; and the project owner judges it worth cont
 failure may motivate one targeted prompt change followed by a blinded rerun. Do not add a tribunal,
 ban-list accretion, generated style exemplar, or fallback writer.
 
+The explicit temporal-rules block is present from the first baseline because it protects world
+physics rather than imposing a literary voice. The three adapted, human-selected craft examples
+remain absent from that baseline. They may be tested only as one complete, versioned A/B after
+consecutive reading identifies placeless abstraction, above-the-scene reporting, or explanatory
+summary as a repeated failure; the beat, history, and every other prompt input remain fixed.
+
 ## 4. Image sequence gate
 
 Before production plates are approved, review an 8–12-image continuity sequence containing:

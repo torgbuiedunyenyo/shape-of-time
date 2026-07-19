@@ -1,11 +1,13 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { readFile } from "node:fs/promises";
+import { readdir, readFile } from "node:fs/promises";
 import { test } from "node:test";
 
+import { EXPECTED_UNDERTOW_SHA256, EXPECTED_WORLD_SHA256 } from "./verify-genesis.mjs";
+
 const CONTENT = new URL("../content/shape-of-time/", import.meta.url);
-const WORLD_SHA256 = "e47afa2fc5db4350008f65fcea9bf6b32569e79a6ee4aeb212e066ddd139576c";
-const UNDERTOW_SHA256 = "9dc8f105dac17a8a751a397026ff9b243d1de529633be1cc1431819e19c55dd3";
+const FABLE_PROMPTS = new URL("../prompts/fable/", import.meta.url);
+const ROOT = new URL("../", import.meta.url);
 
 const retiredPatterns = [
   /\bdark thing\b/i,
@@ -13,6 +15,14 @@ const retiredPatterns = [
   /(?:scattered|duplicate|multiple)\s+(?:copies|selves|versions)\s+of\s+(?:a person|someone|Jay)/i,
   /Jay.{0,80}(?:mystical|supernatural|innate).{0,40}(?:temporal|time)/i,
   /(?:fixed|immutable|unchanging).{0,30}2150/i,
+];
+const codeShapedCanonPatterns = [
+  /\[(?:ARC|TIME|TECH|EDGE|ECON|CHAR|FORBID)-[^\]]+\]/,
+  /\bSOURCE FACT\b/,
+  /\bPROPOSED A0 DECISION\b/,
+  /\bINTENTIONALLY UNSPECIFIED\b/,
+  /world\.md:L\d/,
+  /\bschemaVersion\b/,
 ];
 
 function sha256(bytes) {
@@ -23,114 +33,333 @@ async function content(name, encoding) {
   return readFile(new URL(name, CONTENT), encoding);
 }
 
+async function prompt(name) {
+  return readFile(new URL(name, FABLE_PROMPTS), "utf8");
+}
+
+async function rootDocument(name) {
+  return readFile(new URL(name, ROOT), "utf8");
+}
+
 function requireAll(text, fragments, label) {
   for (const fragment of fragments) {
     assert.ok(text.includes(fragment), `${label} is missing ${fragment}`);
   }
 }
 
+function count(text, fragment) {
+  return text.split(fragment).length - 1;
+}
+
 function retiredMaterialIssues(text) {
   return retiredPatterns.flatMap((pattern) => (pattern.test(text) ? [pattern.source] : []));
 }
 
-test("A0 begins from the byte-exact corrected world and segregated Undertow source", async () => {
-  assert.equal(sha256(await content("world.md")), WORLD_SHA256);
-  assert.equal(sha256(await content("undertow.md")), UNDERTOW_SHA256);
-});
+function codeShapedCanonIssues(text) {
+  return codeShapedCanonPatterns.flatMap((pattern) => (pattern.test(text) ? [pattern.source] : []));
+}
 
-test("A0 has a machine-readable authority manifest that excludes Undertow from the main narrative", async () => {
-  const manifest = JSON.parse(await content("authority.json", "utf8"));
+function writerTemplateIssues(template) {
+  const issues = [];
+  const requiredOnce = [
+    "{{WORLD_DOCUMENT}}",
+    "{{CURRENT_BOOK_BRIEF}}",
+    "{{PARENT_APERTURE_OR_NONE}}",
+    "{{STORY_SO_FAR}}",
+    "{{TEMPORAL_RULES}}",
+    "{{CURRENT_FOLIO_BRIEF}}",
+  ];
 
-  assert.equal(manifest.schemaVersion, 1);
-  assert.ok(["pending-owner", "approved"].includes(manifest.review?.status));
-  if (manifest.review.status === "approved") {
-    assert.equal(typeof manifest.review.reviewer, "string");
-    assert.ok(manifest.review.reviewer.length > 0);
-    assert.match(manifest.review.reviewedAt, /^\d{4}-\d{2}-\d{2}$/);
-  } else {
-    assert.equal(manifest.review.reviewer, null);
-    assert.equal(manifest.review.reviewedAt, null);
+  for (const placeholder of requiredOnce) {
+    if (count(template, placeholder) !== 1) {
+      issues.push(`${placeholder} must occur exactly once`);
+    }
   }
-  assert.deepEqual(manifest.canonSource, { path: "world.md", sha256: WORLD_SHA256 });
-  assert.deepEqual(manifest.mainNarrativeDocuments, ["story-bible.md", "arc.md", "visual-bible.md"]);
-  assert.deepEqual(manifest.sequelSeeds, [
-    { path: "undertow.md", sha256: UNDERTOW_SHA256, status: "excluded" },
-  ]);
-  assert.ok(!manifest.mainNarrativeDocuments.includes("undertow.md"));
-});
 
-test("A0 story bible states cited invariants, terminology, unknowns, and forbidden contradictions", async () => {
-  const bible = await content("story-bible.md", "utf8");
+  const orderedMarkers = [
+    "<documents>",
+    "{{WORLD_DOCUMENT}}",
+    "{{CURRENT_BOOK_BRIEF}}",
+    "{{PARENT_APERTURE_OR_NONE}}",
+    "{{STORY_SO_FAR}}",
+    "{{TEMPORAL_RULES}}",
+    "<current_folio>",
+    "{{CURRENT_FOLIO_BRIEF}}",
+    "<writing_request>",
+    "<output_format>",
+  ];
+  let previous = -1;
+  for (const marker of orderedMarkers) {
+    const position = template.indexOf(marker);
+    if (position < 0) {
+      issues.push(`missing ordered marker ${marker}`);
+    } else if (position <= previous) {
+      issues.push(`marker is out of order: ${marker}`);
+    }
+    previous = Math.max(previous, position);
+  }
 
-  requireAll(
-    bible,
-    [
-      "## Canon invariants",
-      "## Terminology",
-      "## Character and relationship authority",
-      "## Known unknowns",
-      "## Forbidden contradictions",
-      "[TIME-01]",
-      "[TIME-02]",
-      "[TIME-03]",
-      "[TECH-01]",
-      "[ECON-01]",
-      "[CHAR-JAY]",
-      "[CHAR-TAN]",
-      "[PLOT-END]",
-      "[FORBID-DARK]",
-      "[FORBID-AMPLIFICATION]",
-      "[FORBID-DUPLICATES]",
-      "[FORBID-MYSTIC-JAY]",
-      "[FORBID-2150]",
-    ],
+  for (const forbidden of [
     "story-bible.md",
-  );
-  assert.ok((bible.match(/world\.md:L\d+(?:-L\d+)?/g) ?? []).length >= 16, "story bible lacks citations");
-});
-
-test("A0 arc contains six finite parts, the true ending, and a deliberate pilot boundary", async () => {
-  const arc = await content("arc.md", "utf8");
-
-  for (let part = 1; part <= 6; part += 1) requireAll(arc, [`[ARC-${part}]`], "arc.md");
-  assert.equal((arc.match(/\[ARC-[1-6]\]/g) ?? []).length, 6, "arc must define exactly six numbered parts");
-  requireAll(
-    arc,
-    [
-      "## Complete six-part arc",
-      "## Pilot movement boundary [PILOT-BOUNDARY]",
-      "Meeting",
-      "phone and payment incident",
-      "courtship",
-      "temporal orientation",
-      "decision threshold",
-      "[TRUE-END]",
-      "UNDERTOW_STATUS: EXCLUDED_SEQUEL_SEED",
-    ],
     "arc.md",
-  );
-  assert.ok((arc.match(/world\.md:L\d+(?:-L\d+)?/g) ?? []).length >= 10, "arc lacks citations");
-});
-
-test("A0 visual bible resolves a direction and classifies binding, variable, and unspecified traits", async () => {
-  const visual = await content("visual-bible.md", "utf8");
-  const subjects = ["Jay", "Tan", "Clef", "Oakland", "Temporal maps and transit", "Important objects"];
-
-  requireAll(visual, ["## Selected direction [VISUAL-DIRECTION]", "## Reference and continuity rules"], "visual-bible.md");
-  for (const subject of subjects) {
-    const start = visual.indexOf(`### ${subject}`);
-    assert.ok(start >= 0, `visual-bible.md is missing ${subject}`);
-    const next = visual.indexOf("\n### ", start + 5);
-    const section = visual.slice(start, next < 0 ? visual.length : next);
-    requireAll(section, ["**Binding:**", "**Variable:**", "**Unspecified:**"], `${subject} section`);
+    "authority.json",
+    "visual-bible.md",
+    "undertow.md",
+    "CRAFT_EXAMPLES",
+    "### Part Seven: The Undertow",
+    "# Shape of Time — Visual Bible",
+    "# Shape of Time — Visual Development Proposal",
+    "<craft_examples>",
+  ]) {
+    if (template.includes(forbidden)) issues.push(`baseline includes forbidden input ${forbidden}`);
   }
-  assert.ok((visual.match(/world\.md:L\d+(?:-L\d+)?/g) ?? []).length >= 8, "visual bible lacks citations");
+
+  return issues;
+}
+
+function renderWriterTemplate(template, inputs) {
+  let rendered = template;
+  for (const [name, value] of Object.entries(inputs)) {
+    rendered = rendered.replace("{{" + name + "}}", value);
+  }
+  return rendered;
+}
+
+function renderedPromptIssues(rendered, expected) {
+  const issues = [];
+  for (const [name, value] of Object.entries({
+    world: expected.world,
+    brief: expected.brief,
+    rules: expected.rules,
+  })) {
+    if (count(rendered, value) !== 1) issues.push(name + " must render byte-exactly once");
+  }
+  if (/{{[A-Z0-9_]+}}/.test(rendered)) issues.push("rendered prompt has an unresolved placeholder");
+
+  const orderedValues = [
+    expected.world,
+    expected.brief,
+    expected.parent,
+    expected.history,
+    expected.rules,
+    expected.current,
+    "<writing_request>",
+  ];
+  let previous = -1;
+  for (const value of orderedValues) {
+    const position = rendered.indexOf(value);
+    if (position < 0 || position <= previous) issues.push("rendered prompt order is invalid");
+    previous = Math.max(previous, position);
+  }
+  for (const source of expected.excluded) {
+    if (rendered.includes(source)) issues.push("rendered prompt contains an excluded source");
+  }
+
+  return issues;
+}
+
+test("A0 begins from the byte-exact corrected world and segregated Undertow source", async () => {
+  assert.equal(sha256(await content("world.md")), EXPECTED_WORLD_SHA256);
+  assert.equal(sha256(await content("undertow.md")), EXPECTED_UNDERTOW_SHA256);
 });
 
-test("A0 content gate rejects source-preamble and retired-concept mutations", async () => {
-  const world = await content("world.md");
-  const preambleMutation = Buffer.concat([Buffer.from("EDITORIAL PREAMBLE\n"), world]);
-  assert.notEqual(sha256(preambleMutation), WORLD_SHA256);
+test("world.md is the sole comprehensive narrative authority", async () => {
+  const files = await readdir(CONTENT);
+  const visual = await content("visual-bible.md", "utf8");
+
+  assert.ok(files.includes("world.md"));
+  assert.ok(files.includes("pilot-brief.md"));
+  assert.ok(files.includes("visual-bible.md"));
+  assert.ok(!files.includes("story-bible.md"), "lossy story-bible duplicate must be removed");
+  assert.ok(!files.includes("arc.md"), "duplicated six-part arc must be removed");
+  assert.ok(!files.includes("authority.json"), "narrative authority must not be a typed manifest");
+  requireAll(
+    visual,
+    [
+      "Visual Development Proposal",
+      "PENDING_OWNER_REVIEW",
+      "not approved visual authority",
+      "never an input to the Fable prose prompt",
+    ],
+    "visual-bible.md",
+  );
+});
+
+test("the pilot brief adds only the finite local movement in natural prose", async () => {
+  const brief = await content("pilot-brief.md", "utf8");
+
+  requireAll(
+    brief,
+    [
+      "Jay",
+      "Tan",
+      "phone",
+      "Clef",
+      "courtship",
+      "temporal movement",
+      "invitation",
+      "Travel has not begun",
+      "world.md",
+    ],
+    "pilot-brief.md",
+  );
+  assert.ok(brief.split(/\s+/).length < 700, "pilot brief has become a second story summary");
+  assert.deepEqual(codeShapedCanonIssues(brief), []);
+  assert.doesNotMatch(brief, /authoriz(?:e|es|ed|ing) sponsorship/i);
+});
+
+test("the temporal guardrail preserves the old anti-trope function without a fact taxonomy", async () => {
+  const rules = await prompt("temporal-rules.md");
+
+  requireAll(
+    rules,
+    [
+      "<temporal_rules>",
+      "</temporal_rules>",
+      "Time Travel Tropes: What's False vs. What's True",
+      "never resets",
+      "one continuous existence",
+      "branching timelines",
+      "causation operates in every temporal direction",
+      "weaken with distance",
+      "butterfly effects",
+      "grandfather paradoxes",
+      "predestination",
+      "prophecy",
+      "subjective time",
+      "PRMTTs",
+      "maps",
+      "currents",
+      "does not make anyone younger",
+      "physics, not magic",
+      "continues living and changing",
+      "unmapped and unstable",
+      "study and practice",
+      "frightening, strange, or beautiful",
+    ],
+    "temporal-rules.md",
+  );
+  assert.deepEqual(codeShapedCanonIssues(rules), []);
+  assert.doesNotMatch(rules, /fixed 2150/i);
+
+  for (const mutation of [
+    "[TIME-01] SOURCE FACT",
+    "PROPOSED A0 DECISION",
+    "INTENTIONALLY UNSPECIFIED",
+    "world.md:L20-L21",
+    "\"schemaVersion\": 1",
+  ]) {
+    assert.ok(codeShapedCanonIssues(rules + "\n" + mutation).length > 0, "code-shaped mutation escaped");
+  }
+});
+
+test("the baseline Fable template keeps long documents first and the request last", async () => {
+  const template = await prompt("write-folio.md");
+  const excludedSources = await Promise.all([
+    content("undertow.md", "utf8"),
+    content("visual-bible.md", "utf8"),
+    prompt("craft-examples.md"),
+  ]);
+
+  assert.deepEqual(writerTemplateIssues(template), []);
+  requireAll(
+    template,
+    [
+      "<document_content>",
+      "</document_content>",
+      "<folio_prose>",
+      "</folio_prose>",
+      "clear, absorbing narrative prose",
+      "concise orienting exposition",
+      "Return only",
+    ],
+    "write-folio.md",
+  );
+
+  const mutations = [
+    template.replace("{{WORLD_DOCUMENT}}", ""),
+    template.replace("{{WORLD_DOCUMENT}}", "{{WORLD_DOCUMENT}}{{WORLD_DOCUMENT}}"),
+    template.replace("<writing_request>", "story-bible.md\n<writing_request>"),
+    template.replace("{{TEMPORAL_RULES}}", "").concat("\n{{TEMPORAL_RULES}}"),
+    ...excludedSources.map((source) => template.concat("\n", source)),
+  ];
+  for (const mutation of mutations) {
+    assert.ok(writerTemplateIssues(mutation).length > 0, "writer-template mutation escaped");
+  }
+});
+
+test("a rendered baseline contains the actual approved sources once and rejects excluded inputs", async () => {
+  const [template, world, brief, rules, undertow, visual, examples] = await Promise.all([
+    prompt("write-folio.md"),
+    content("world.md", "utf8"),
+    content("pilot-brief.md", "utf8"),
+    prompt("temporal-rules.md"),
+    content("undertow.md", "utf8"),
+    content("visual-bible.md", "utf8"),
+    prompt("craft-examples.md"),
+  ]);
+  const inputs = {
+    WORLD_DOCUMENT: world,
+    CURRENT_BOOK_BRIEF: brief,
+    PARENT_APERTURE_OR_NONE: "No parent aperture: this is the root book.",
+    STORY_SO_FAR: "<folio ordinal=\"1\">Prior prose.</folio>\n[NARRATIVE_IMAGE_BLOCK ordinal=\"1\"]",
+    TEMPORAL_RULES: rules,
+    CURRENT_FOLIO_BRIEF: "Jay notices Tan waiting at the counter and chooses to help her.",
+  };
+  const expected = {
+    world,
+    brief,
+    rules,
+    parent: inputs.PARENT_APERTURE_OR_NONE,
+    history: inputs.STORY_SO_FAR,
+    current: inputs.CURRENT_FOLIO_BRIEF,
+    excluded: [undertow, visual, examples],
+  };
+  const render = (overrides = {}) => renderWriterTemplate(template, { ...inputs, ...overrides });
+
+  assert.deepEqual(renderedPromptIssues(render(), expected), []);
+
+  const mutations = [
+    render({ STORY_SO_FAR: inputs.STORY_SO_FAR + "\n" + world }),
+    render({ STORY_SO_FAR: inputs.STORY_SO_FAR + "\n" + undertow }),
+    render({ STORY_SO_FAR: inputs.STORY_SO_FAR + "\n" + visual }),
+    render({ STORY_SO_FAR: inputs.STORY_SO_FAR + "\n" + examples }),
+  ];
+  for (const mutation of mutations) {
+    assert.ok(renderedPromptIssues(mutation, expected).length > 0, "rendered-source mutation escaped");
+  }
+});
+
+test("the adapted craft examples are optional evidence, never baseline authority", async () => {
+  const examples = await prompt("craft-examples.md");
+  const baseline = await prompt("write-folio.md");
+
+  requireAll(
+    examples,
+    [
+      "not part of the baseline prompt",
+      "Create places, not abstractions",
+      "Stay in scene, not above it",
+      "Ritual and specificity over summary",
+      "GOOD",
+      "BAD",
+      "77e0c74",
+      "controlled A/B experiment",
+    ],
+    "craft-examples.md",
+  );
+  assert.ok(!baseline.includes("Create places, not abstractions"));
+  assert.ok(!baseline.includes("Stay in scene, not above it"));
+  assert.ok(!baseline.includes("Ritual and specificity over summary"));
+});
+
+test("Undertow, visual authority, and retired concepts cannot enter the prose baseline", async () => {
+  const template = await prompt("write-folio.md");
+  const pilot = await content("pilot-brief.md", "utf8");
+
+  assert.ok(!template.toLowerCase().includes("undertow"));
+  assert.ok(!template.toLowerCase().includes("visual bible"));
+  assert.deepEqual(retiredMaterialIssues(`${template}\n${pilot}`), []);
 
   const retiredMutations = [
     "A malevolent dark thing waits at the edge.",
@@ -142,7 +371,45 @@ test("A0 content gate rejects source-preamble and retired-concept mutations", as
   for (const mutation of retiredMutations) {
     assert.ok(retiredMaterialIssues(mutation).length > 0, `retired mutation escaped: ${mutation}`);
   }
+});
 
-  const mainNarrative = await Promise.all(["arc.md", "visual-bible.md"].map((name) => content(name, "utf8")));
-  assert.deepEqual(retiredMaterialIssues(mainNarrative.join("\n")), []);
+test("project authority documents describe the world-first prompt architecture", async () => {
+  const [spec, evals, plan, handoff, readme] = await Promise.all(
+    ["SPEC.md", "EVALS.md", "PLAN.md", "HANDOFF.md", "README.md"].map(rootDocument),
+  );
+  const stableAuthority = [spec, evals, plan, readme].join("\n");
+
+  for (const rejectedPath of ["story-bible.md", "arc.md", "authority.json"]) {
+    assert.ok(!stableAuthority.includes(rejectedPath), "current authority still requires " + rejectedPath);
+  }
+
+  requireAll(
+    spec,
+    [
+      "sole comprehensive factual and plot authority",
+      "strong temporal-rules block",
+      "optional craft examples",
+      "controlled A/B experiment",
+    ],
+    "SPEC.md",
+  );
+  requireAll(
+    plan,
+    [
+      "content/shape-of-time/pilot-brief.md",
+      "prompts/fable/temporal-rules.md",
+      "prompts/fable/write-folio.md",
+      "prompts/fable/craft-examples.md",
+    ],
+    "PLAN.md",
+  );
+  requireAll(
+    handoff,
+    [
+      "world.md is the sole comprehensive factual and plot authority",
+      "The rejected story-bible, duplicated arc, and typed authority manifest were deleted",
+      "No application code",
+    ],
+    "HANDOFF.md",
+  );
 });

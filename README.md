@@ -15,7 +15,15 @@ Start here, in order:
 3. [`PLAN.md`](PLAN.md) — the dependency-ordered build queue.
 4. [`HANDOFF.md`](HANDOFF.md) — the live state and next action.
 
-The expanded world source is in [`content/shape-of-time/world.md`](content/shape-of-time/world.md), with byte-level provenance in [`content/shape-of-time/SOURCE.md`](content/shape-of-time/SOURCE.md).
+The expanded world source is in
+[`content/shape-of-time/world.md`](content/shape-of-time/world.md), with byte-level provenance in
+[`content/shape-of-time/SOURCE.md`](content/shape-of-time/SOURCE.md). It is the sole comprehensive
+factual and plot authority. The finite first-book scope is in
+[`content/shape-of-time/pilot-brief.md`](content/shape-of-time/pilot-brief.md).
+
+The Fable prompt contract lives under [`prompts/fable/`](prompts/fable/): the baseline XML
+template, the explicit temporal guardrail, and a separately excluded set of optional craft examples
+for a controlled experiment. Visual development remains separate from the prose prompt.
 
 ## Ancestry
 

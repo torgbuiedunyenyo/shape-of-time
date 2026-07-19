@@ -83,11 +83,18 @@ The following retired ideas must not return through improvisation:
 - Jay as a quasi-mystical temporal sensor;
 - an immutable fixed-2150 chronology.
 
-World source, story bible, finite arc, folio beats, aperture plans, visual bible, and approved visual
-anchors are human-reviewed authority. Open questions—especially Jay and Tan's appearance, Clef's
-form, and recurring locations—must be resolved there. The first generated sentence or image does not
-silently become canon. Undertow remains a possible sequel seed, not a seventh act appended to this
-story.
+The byte-exact world.md is the sole comprehensive factual and plot authority. No derived story
+bible, normalized fact catalog, or second retelling of the six-part arc may compete with it. A
+current-book brief and later folio beats may add only the finite production decisions the world does
+not contain; they must not compress or recode the source. A strong temporal-rules block may restate
+the physics and reject familiar time-travel tropes because that is prompt protection, not a second
+canon.
+
+Visual decisions and approved anchors are separate human-reviewed authority for image production.
+They never enter the prose request wholesale. Open questions—especially Jay and Tan's appearance,
+Clef's form, and recurring locations—must be resolved through explicit visual review. The first
+generated sentence or image does not silently become canon. Undertow remains a possible sequel seed,
+not a seventh act appended to this story.
 
 ## Text and image
 
@@ -115,7 +122,15 @@ concise orienting exposition when it helps; keep events, motives, and consequenc
 There is no rigid “show, don't tell” rule. Characters may discuss the world when they have a reason
 to, but they must not explain familiar facts to one another solely because a reader needs a lecture.
 Legibility outranks withholding. The product must not impose a house style through generated
-exemplars, recursive prose conditioning, pseudo-literary vocabulary, or an elaborate ban list.
+exemplars, recursive prose conditioning, pseudo-literary vocabulary, or an accumulating stylistic
+ban list. The baseline does include the strong temporal-rules block because generic time-travel
+conventions would change the world itself.
+
+Three short, human-selected contrastive examples adapted from the earlier prompt remain available
+as optional craft examples. They are excluded from the baseline. If consecutive prose repeatedly
+becomes placeless, reports scenes from above, or collapses action into explanatory summary, one
+controlled A/B experiment may add that complete example block while every other input stays fixed.
+Human readers decide whether it improves concreteness without imposing an ornate house voice.
 
 One uninterrupted consecutive run establishes the baseline. Human readers—not a model's self-score—
 decide whether they can state what happened, understand motives and causal changes, remain oriented,
@@ -168,11 +183,12 @@ Writing uses Claude Fable 5 with `xhigh` effort through a direct, verified Messa
 - no provider compaction, provider memory, or manual thinking-budget history;
 - every request reproducible from application data.
 
-The writer receives the corrected world, current book's finite arc, parent aperture where relevant,
-all prior exposed current-book folios and narrative images while they fit, explicit current state and
-unresolved threads with source IDs, and the current folio beat and intended change. The exact ordered
-request manifest, prompt version, source and asset digests, token count, provider identity, usage,
-latency, cost, and result are retained.
+The writer receives the complete corrected world verbatim, the short current-book brief, the parent
+aperture where relevant, all prior exposed current-book folios and narrative images while they fit,
+the strong temporal rules, and the current folio's situation and intended change. Long source
+documents come first and the writing request comes last. The exact ordered request manifest, prompt
+version, source and asset digests, token count, provider identity, usage, latency, cost, and result
+are retained.
 
 ### Images
 
