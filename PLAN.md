@@ -1,9 +1,8 @@
 # Shape of Time — Compaction-Safe Execution Plan
 
-> **Status:** A0 authority, A1 architecture, and A2 application/Railway spine are complete. B0's
-> movement documents and structural proof are implemented.
-> **CURRENT GATE: B0 — owner consecutive read.**
-> Do not begin B1 or the reader until that read makes B0 human-green.
+> **Status:** A0 authority, A1 architecture, A2 application/Railway spine, and B0 movement topology
+> are complete.
+> **CURRENT ITEM: B1 — GPT Image 2 adapter and replay contract.**
 
 This is the dependency-ordered work queue for a small illustrated hyperbook. It intentionally does
 not inherit code, data, schemas, corpus, or compatibility obligations from `auto-biblio`. Git in the
@@ -137,7 +136,7 @@ local state holds bookmarks, discoveries, and current place during the prototype
 ```text
 A0 canon/story/visual lock [DONE]
   -> A1 one-app stack decision [DONE] -> A2 app + Postgres/Railway spine [DONE]
-A0 -> B0 movement beats and continuation topology [CURRENT: OWNER READ]
+A0 -> B0 movement beats and continuation topology [DONE]
 A0 + A2 -> B1 image adapter -> B2 continuity proof
 B0 + B2 -> C0 static garden -> C1 reader -> C2 navigation -> C3 delight gate
 C3 + A2 -> D0 Fable/count adapter -> D1 full-history compiler -> D2 prose baseline
@@ -245,7 +244,7 @@ digest and Postgres 18.4 server version match, backups are enabled, the database
 and the bucket round trip passes. `/healthz` and the post-health generated-domain reader smoke test
 are green.
 
-### B0 — Author movement beats and continuation topology **[CURRENT / OWNER REVIEW]**
+### B0 — Author movement beats and continuation topology **[DONE]**
 
 **Depends on:** A0.
 
@@ -276,7 +275,7 @@ filler, lore-only beat, arbitrary cutoff, hidden CYOA action, child root replay,
 or image that merely restates the text. The prepared successor demonstrates continuation through a
 changed state rather than indefinite tension.
 
-### B1 — Build the GPT Image 2 adapter and replay contract
+### B1 — Build the GPT Image 2 adapter and replay contract **[CURRENT]**
 
 **Depends on:** A0, A2.
 

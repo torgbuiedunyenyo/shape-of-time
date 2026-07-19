@@ -301,11 +301,10 @@ export async function auditArchitectureDecision(rootUrl) {
   const authority = Object.fromEntries(authorityEntries);
   if (
     !authority["PLAN.md"].includes("A2 — Scaffold the application and durable state spine **[DONE]**") ||
-    !authority["PLAN.md"].includes(
-      "B0 — Author movement beats and continuation topology **[CURRENT / OWNER REVIEW]**",
-    )
+    !authority["PLAN.md"].includes("B0 — Author movement beats and continuation topology **[DONE]**") ||
+    !authority["PLAN.md"].includes("B1 — Build the GPT Image 2 adapter and replay contract **[CURRENT]**")
   ) {
-    issues.push("PLAN.md must record deployed A2 and identify B0 owner review as the current gate");
+    issues.push("PLAN.md must record completed A2/B0 and identify B1 as the current item");
   }
   issues.push(
     ...railwaySequenceIssues(

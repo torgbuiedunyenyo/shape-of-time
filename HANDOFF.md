@@ -240,8 +240,12 @@ The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. Imag
   content/architecture tests, 12 unit tests, 20 real-Postgres integration tests, one built-reader
   Chromium regression, lint, typecheck, and production build. Detailed evidence and the
   consecutive-read checklist are in `docs/qa/2026-07-18-b0-movement-review.md`.
-- B0 is structurally eligible, not complete. The owner must reread the revised titles and coordinate
-  language in context before recording a human PASS.
+- The owner then delegated subsequent decisions and instructed work to continue. Three independent
+  Claude 5.6 Sol xhigh rereads returned PASS: one for the root, one for all children, and one for
+  cross-document consistency. They found the requested title and Primas corrections complete and no
+  new blocker. The owner's own consecutive read remains the human evidence; the delegated audits do
+  not masquerade as additional human readers.
+- B0 is complete.
 
 ## Spend and deployment
 
@@ -256,7 +260,6 @@ The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. Imag
 
 ## Next action
 
-The owner rereads the revised titles and coordinate language in `content/prototype-movements.md` and
-`content/prepared-children.md` using the final checklist in
-`docs/qa/2026-07-18-b0-movement-review.md`. Record PASS or concrete revisions. Do not begin B1 until
-that gate is green.
+Begin B1. Build the GPT Image 2 adapter and replay contract red-first, including a restore-tested
+content-addressed export path before retaining any paid result in the Railway bucket. Recheck the
+official current API contract and record the spend ceiling before the minimal live call.

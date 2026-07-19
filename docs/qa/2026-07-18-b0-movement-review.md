@@ -1,6 +1,6 @@
 # B0 movement-topology review
 
-**Status:** Revised after the owner's consecutive read; awaiting owner reread
+**Status:** PASS
 
 **Initial date:** 2026-07-18
 
@@ -149,15 +149,19 @@ built-reader Chromium regression: 1 passed
 lint, typecheck, and production build: passed
 ```
 
-## Owner reread still required
+## Final delegated judgment
 
-The owner has read the root and child folios and found the bodies broadly sound. The remaining read
-is the revised heading set and coordinate language in context. It should confirm that:
+The owner read the root and child folios, found their bodies broadly sound, and named the titles and
+Primas wording as the remaining revisions. After receiving the revision summary, the owner explicitly
+delegated subsequent decisions and instructed implementation to continue without waiting.
 
-- Primas coordinates remain relational rather than eras labeled past or future;
-- no Major/Minor direction has been invented for Primas;
-- each changed title names the scene without sounding like commentary on its meaning; and
-- the two intentionally less literal titles still feel earned in context.
+Three independent Claude 5.6 Sol xhigh reads then reviewed the changed artifacts without editing
+them. The root read returned PASS on scene titles, relational Primas language, causality, emotional
+movement, image labor, and desire to continue. The child read returned PASS on independence,
+Phantas Minor's material consequence, aperture naturalness, movement boundaries, and desire to
+continue. A separate consistency audit returned PASS on the exact owner feedback across the movement
+plans, visual authority, and B2 criteria.
 
-B0 is not a human PASS until that read is complete. B1 must not begin merely because the structural
-audit is green.
+This does not relabel model review as human evidence. The human evidence is the owner's consecutive
+read and concrete revision criteria; the delegated audits establish that the requested repair is
+present and introduced no blocker. B0 is recorded PASS. B1 may begin.
