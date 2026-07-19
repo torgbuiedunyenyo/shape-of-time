@@ -335,6 +335,12 @@ export class LibraryRepository {
 
   async markFolioReady(input: {
     apertures: ApertureCandidate[];
+    evidence?: {
+      latencyMs: number;
+      providerRequestId: string;
+      result?: { [key: string]: JsonValue };
+      usage: { [key: string]: JsonValue };
+    };
     folioId: string;
     layout: { [key: string]: JsonValue };
     leaseToken: string;
@@ -402,6 +408,14 @@ export class LibraryRepository {
           lease_token: null,
           state: "ready",
           updated_at: now,
+          ...(input.evidence === undefined
+            ? {}
+            : {
+                latency_ms: String(Math.round(input.evidence.latencyMs)),
+                provider_request_id: input.evidence.providerRequestId,
+                result: input.evidence.result === undefined ? null : JSON.stringify(input.evidence.result),
+                usage: JSON.stringify(input.evidence.usage),
+              }),
         })
         .where("id", "=", folio.generation_attempt_id)
         .executeTakeFirstOrThrow();
@@ -556,6 +570,45 @@ export class LibraryRepository {
   async getFolio(folioId: string): Promise<FolioRecord> {
     const folio = await this.#database.selectFrom("folios").selectAll().where("id", "=", folioId).executeTakeFirstOrThrow();
     return mapFolio(folio);
+  }
+
+  async getBook(bookId: string): Promise<BookRecord> {
+    const book = await this.#database.selectFrom("books").selectAll().where("id", "=", bookId).executeTakeFirstOrThrow();
+    return mapBook(book);
+  }
+
+  /** This book's exposed folios only, in exposure order — the lineage-local reading history. */
+  async listExposedFolios(bookId: string): Promise<FolioRecord[]> {
+    const rows = await this.#database
+      .selectFrom("folios")
+      .selectAll()
+      .where("book_id", "=", bookId)
+      .where("state", "=", "exposed")
+      .orderBy("ordinal", "asc")
+      .execute();
+    return rows.map(mapFolio);
+  }
+
+  async getAttemptEvidence(folioId: string): Promise<{
+    latencyMs: string | null;
+    providerRequestId: string | null;
+    usage: { [key: string]: JsonValue } | null;
+  }> {
+    const folio = await this.#database
+      .selectFrom("folios")
+      .select("generation_attempt_id")
+      .where("id", "=", folioId)
+      .executeTakeFirstOrThrow();
+    const attempt = await this.#database
+      .selectFrom("generation_attempts")
+      .select(["latency_ms", "provider_request_id", "usage"])
+      .where("id", "=", folio.generation_attempt_id)
+      .executeTakeFirstOrThrow();
+    return {
+      latencyMs: attempt.latency_ms,
+      providerRequestId: attempt.provider_request_id,
+      usage: attempt.usage,
+    };
   }
 }
 
