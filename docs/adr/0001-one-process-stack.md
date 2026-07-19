@@ -71,6 +71,12 @@ LTS line and satisfies React Router 8, Vite 8, pnpm 11, Kysely, and ESLint 10.
 All package entries and the lockfile use exact versions. Dependabot or a deliberate maintenance
 slice may advance them after gates pass; install-time floating versions are not part of the contract.
 
+pnpm 11 stores lifecycle-script policy in a root `pnpm-workspace.yaml` even for a single package; it
+no longer reads these settings from `package.json`. This file is security configuration, not a
+workspace graph: it has no `packages`, catalog, or workspace-linking key. It approves only esbuild's
+required install hook, explicitly denies the optional `cpu-features`, `protobufjs`, and `ssh2` hooks,
+and records the reviewed Hono patch as the sole release-age exception.
+
 ## Why a client SPA
 
 The prepared garden needs no server rendering. Initial HTML discoverability is not currently a
@@ -95,9 +101,17 @@ Production uses the pinned Railway SSL image
 `ghcr.io/railwayapp-templates/postgres-ssl:18.4`; local and CI integration tests use the matching
 `postgres:18.4-alpine` through Testcontainers. Tests apply every migration from an empty database and
 exercise locking, transactions, leases, idempotency, and immutable exposure. A2 records
-`SHOW server_version` so provider and test major/minor parity is evidence, not assumption. The
+`SHOW server_version` and rejects any server line other than 18.4, so provider and test major/minor
+parity is a promotion invariant rather than a manual assumption. The
 existing zero-dependency source/authority tests remain on `node:test`; Vitest owns new TypeScript
 application tests.
+
+In A2, each `generation_attempts` row is specifically one Folio-publication orchestration attempt.
+It is either the current Attempt named by that Folio or an immutable failed predecessor named by its
+linked retry. This scope makes the current deferred Folio/Attempt identity and state checks exact.
+Later prose, image, layout, and judge provider calls may each need separate paid-operation
+provenance; that work must add an explicit attempt kind or a separate operation table in a migration
+rather than weakening or silently reinterpreting the A2 orchestration invariant.
 
 Local development does not depend on Railway's intentionally disabled public database proxy. A2
 adds a root `compose.yaml` with one `postgres:18.4-alpine` service bound only to
@@ -106,6 +120,12 @@ defaults to `postgresql://shape_of_time:shape_of_time@127.0.0.1:55432/shape_of_t
 `ASSET_DRIVER=filesystem`, storing content-addressed objects under the
 ignored `.local/assets` directory. Production requires the private Railway database reference and
 S3 driver variables; it cannot silently fall back to local storage.
+
+The official PostgreSQL 18 image persists at `/var/lib/postgresql` (the versioned data directory is
+below it), so the local named volume mounts there rather than at the pre-18
+`/var/lib/postgresql/data` path. The repository also pins the npm registry to
+`https://registry.npmjs.org/`; this prevents a machine-level insecure registry override from making
+the documented frozen install fail.
 
 Playwright may supply repeatable browser regression tests for geometry, selection, history, and
 keyboard/touch behavior. It never substitutes for the required visible Codex in-app Browser reader
@@ -132,6 +152,10 @@ bucket is storage, not global visual canon and not a second application service.
 buckets do not provide versioning or native recovery, bucket contents remain disposable until B1
 adds and verifies an export/recovery path before retaining paid image output.
 
+New Railway buckets use virtual-hosted URLs. The S3 client therefore does not force legacy path-style
+addressing. Production requires HTTPS bucket endpoints and an exact 40-hex Git commit SHA; health
+cannot bless an unattributed local artifact as the deployed application.
+
 Railpack builds the root package. The committed Railway configuration names:
 
 ```text
@@ -146,6 +170,8 @@ health              GET /healthz
 listen              0.0.0.0:$PORT
 composition root    src/server/app.ts
 listen call         src/server/index.ts only
+restart             on failure, platform-default 10 retries
+drain               10 seconds
 ```
 
 The root `package.json` script surface is also fixed so the command matrix cannot name commands that
@@ -170,10 +196,13 @@ gates              pnpm run lint && pnpm run typecheck && pnpm run test && pnpm 
 ```
 
 The complete gate therefore requires Docker and the Chromium binary; CI installs both before
-`pnpm run gates`.
+`pnpm run gates`. CI uses the current `actions/checkout@v6`, `pnpm/action-setup@v6`, and
+`actions/setup-node@v6` actions. The browser regression starts the built Hono production spine with
+real local Postgres; Vite is not its HTTP substitute.
 
 `/healthz` validates startup configuration and performs a bounded `SELECT 1`; it never calls a model
-provider or writes an object. A failed migration or healthcheck blocks promotion. Background work
+provider or writes an object. It verifies the exact migration-content checksum and pinned PostgreSQL
+18.4 server line. A failed migration or healthcheck blocks promotion. Background work
 uses Postgres leases before paid generation begins so overlapping zero-downtime containers cannot
 duplicate spend.
 

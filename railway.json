@@ -1,0 +1,22 @@
+{
+  "$schema": "https://railway.com/railway.schema.json",
+  "build": {
+    "buildCommand": "pnpm run build",
+    "builder": "RAILPACK"
+  },
+  "deploy": {
+    "drainingSeconds": 10,
+    "healthcheckPath": "/healthz",
+    "healthcheckTimeout": 120,
+    "multiRegionConfig": {
+      "us-west2": {
+        "numReplicas": 1
+      }
+    },
+    "preDeployCommand": "pnpm run db:migrate",
+    "restartPolicyMaxRetries": 10,
+    "restartPolicyType": "ON_FAILURE",
+    "sleepApplication": false,
+    "startCommand": "pnpm run start"
+  }
+}

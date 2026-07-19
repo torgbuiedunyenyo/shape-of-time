@@ -9,11 +9,11 @@ rest; every book can continue.
 
 ## Current state
 
-This repository is the clean successor to the retired `auto-biblio` experiment. It currently contains
-the governing product contract, proof model, implementation plan, verified Shape of Time source, and
-the accepted one-process stack decision. It contains no product implementation, generated corpus, or
-paid generation output yet. The linked Railway prototype exists, but its documentation-only commit is
-not a runnable deployment; A2 builds and deploys the first application spine.
+This repository is the clean successor to the retired `auto-biblio` experiment. It contains the
+governing product contract, proof model, verified Shape of Time source, and the first runnable
+one-process application spine. The reader shell, Hono server, five-table Postgres model, immutable
+publication transitions, and content-addressed storage adapters are implemented. The prepared story
+garden and paid generation adapters do not exist yet.
 
 Start here, in order:
 
@@ -37,6 +37,24 @@ book/folio continuity without deciding Clef, future cultures, or scene details g
 
 The accepted application and Railway topology is recorded in
 [`docs/adr/0001-one-process-stack.md`](docs/adr/0001-one-process-stack.md).
+
+## Develop
+
+Use Node 24.18.0 and pnpm 11.15.0, then:
+
+```sh
+pnpm install --frozen-lockfile
+pnpm exec playwright install chromium
+pnpm run dev
+```
+
+`pnpm run dev` starts the pinned local PostgreSQL 18.4 container, applies migrations, and runs the
+Vite reader plus Hono API watchers. Local assets live under ignored `.local/assets`. Run the complete
+proof surface before pushing:
+
+```sh
+pnpm run gates
+```
 
 ## Ancestry
 

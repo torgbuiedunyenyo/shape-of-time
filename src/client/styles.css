@@ -1,0 +1,128 @@
+:root {
+  color: #28241f;
+  background: #ddd7cb;
+  font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  font-synthesis: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 72% 8%, rgb(255 252 238 / 70%), transparent 32rem),
+    #ddd7cb;
+}
+
+button,
+.reader-bar {
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+.reader-shell {
+  min-height: 100vh;
+  padding: clamp(1rem, 4vw, 3rem);
+}
+
+.reader-bar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  max-width: 74rem;
+  margin: 0 auto 1.25rem;
+  color: #5f574c;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.reader-bar p {
+  margin: 0;
+}
+
+.reader-bar button {
+  justify-self: end;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  font-size: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+}
+
+.library-mark {
+  width: 2.25rem;
+  height: 2.25rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid #999083;
+  border-radius: 50%;
+  letter-spacing: 0;
+}
+
+.folio {
+  width: min(100%, 74rem);
+  min-height: min(78vh, 54rem);
+  margin: 0 auto;
+  padding: clamp(2rem, 8vw, 8rem) clamp(1.5rem, 12vw, 12rem);
+  background: #f7f1e5;
+  box-shadow: 0 1.4rem 4rem rgb(50 41 31 / 12%);
+}
+
+.kicker,
+.folio-note {
+  color: #817668;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.folio h1 {
+  max-width: 12ch;
+  margin: 1rem 0 1.5rem;
+  font-size: clamp(2.8rem, 7vw, 6rem);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
+}
+
+.folio > p:not(.kicker, .folio-note) {
+  max-width: 34rem;
+  margin: 0;
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  line-height: 1.55;
+}
+
+.folio-rule {
+  width: 3.5rem;
+  margin: clamp(4rem, 10vw, 8rem) 0 1rem;
+  border-top: 1px solid #b8ad9d;
+}
+
+@media (max-width: 520px) {
+  .reader-bar {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .reader-bar p {
+    display: none;
+  }
+
+  .folio {
+    min-height: 82vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}

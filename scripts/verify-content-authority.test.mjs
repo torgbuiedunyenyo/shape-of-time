@@ -519,7 +519,8 @@ test("project authority documents describe the world-first prompt architecture",
     [
       "world.md is the sole comprehensive factual and plot authority",
       "The rejected story-bible, duplicated arc, and typed authority manifest were deleted",
-      "No application code",
+      "A2's runnable one-package application spine is complete and green locally",
+      "No generated corpus, model output, paid generation",
     ],
     "HANDOFF.md",
   );

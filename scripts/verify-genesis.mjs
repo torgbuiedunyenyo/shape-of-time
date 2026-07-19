@@ -62,7 +62,7 @@ export function forbiddenLayoutIssues(files) {
   if (files.some((file) => file === "packages" || file.startsWith("packages/"))) {
     issues.push("retired composition root is active: packages/");
   }
-  if (files.some((file) => file === "turbo.json" || file === "pnpm-workspace.yaml")) {
+  if (files.includes("turbo.json")) {
     issues.push("retired workspace graph is active");
   }
 

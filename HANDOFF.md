@@ -22,8 +22,10 @@ _Updated 2026-07-18._
 - A1 selects a Vite-built React SPA, React Router Data Mode, one Hono Node process, Kysely/`pg`, real
   Postgres tests, and a private Railway bucket. Exact versions and rejected alternatives are in
   `docs/adr/0001-one-process-stack.md`.
-- No application code, package manifest, generated corpus, database, model output, paid generation,
-  or successful runnable deployment exists yet.
+- A2's runnable one-package application spine is complete and green locally. It has not yet been
+  pushed or deployed: Railway resource staging remains the second half of A2.
+- No generated corpus, model output, paid generation, retained Railway image object, or successful
+  runnable Railway deployment exists yet.
 
 ## Reorganization record
 
@@ -120,6 +122,52 @@ The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. Imag
 - A1 is complete. No package or Railway resource was provisioned early to make the decision appear
   implemented.
 
+## A2 local application spine
+
+- Red was observed first: the application-spine audit reported 26 absent files; Vitest then failed
+  to resolve the missing state, configuration, storage, database, repository, and HTTP modules.
+- Adversarial follow-up reds caught failures that the initial happy path missed: failed-to-reserved
+  retry was illegal; a stale worker received no fencing identity; UTF-16 aperture text violated a
+  PostgreSQL character-count check; a direct ready Folio insert bypassed guards; the live schema had
+  no artifact checksum; static asset misses fell through to HTML; and production config accepted
+  unattributed or insecure storage settings. Final review added reds for stale apertures on rejected
+  ready-candidate retry, direct non-reserved Attempts, Folio/Attempt state drift, orphan
+  orchestration Attempts, opposing row-lock order, bigint lease-epoch concatenation, false storage
+  driver provenance, empty media type, and mutable Book/Folio identities.
+- The executable stack is one root package and one listener. `src/server/app.ts` constructs config,
+  Pino, one Kysely/pg pool, one AssetStore, and Hono; `src/server/index.ts` only listens and drains.
+- The migration creates exactly five product tables: `books`, `folios`, `apertures`, `assets`, and
+  `generation_attempts`. Kysely and the content-checksum ledger are infrastructure metadata.
+- Book and Folio reservations are idempotent and reject key reuse with changed intent. PostgreSQL
+  advisory locks serialize concurrent reservations; database-clock leases return unique fencing
+  tokens and atomically increment bigint epochs; a reclaimed lease rejects the previous worker.
+- Deferred database constraints require each current Folio and orchestration Attempt to agree on
+  state, Book, and ordinal at transaction commit. Attempt-before-Folio lifecycle locking prevents
+  recovery/publication deadlocks. Books and Folios cannot be deleted or have their durable founding
+  identities rewritten; the Folio's Attempt pointer changes only through a linked retry.
+- A complete unseen Folio may fail and receive one linked idempotent retry without changing Folio
+  identity. A retry deletes only the rejected unseen candidate's apertures inside the same
+  transaction. Ready surfaces validate prose, layout, digests, UTF-16 aperture spans, and every
+  required stored Asset; exposure is a separate atomic transition and database triggers reject
+  later mutation.
+- Asset rows can be inserted only after a real store put/get digest-and-length round trip. Both local
+  filesystem and virtual-hosted S3 adapters use `sha256/<prefix>/<digest>` keys. Read URLs are limited
+  to one hour. The AssetStore, not a caller, supplies durable driver identity; S3 collision recovery
+  verifies digest, length, and content type before database registration.
+- `/healthz` performs bounded database work and fails closed unless PostgreSQL, the exact Kysely
+  migration set, the running artifact's migration-content checksum, and the pinned PostgreSQL 18.4
+  server line agree. It reports the Git SHA, PostgreSQL version, migration, and schema digest without
+  touching storage or a model.
+- Local PostgreSQL uses `postgres:18.4-alpine`, loopback port 55432, and the PostgreSQL 18 persistence
+  root `/var/lib/postgresql`. The disposable pre-commit local volume was removed once when the initial
+  migration checksum changed; a fresh volume was created and verified.
+- Current exact-runtime gate under Node 24.18.0/pnpm 11.15.0: 21 content/architecture tests, 12 unit
+  tests, 20 real-Postgres integration tests, and one production-Hono Chromium regression all pass;
+  lint, typecheck, build, application audit, frozen install, and production dependency audit pass.
+- The visible in-app Browser smoke test of the local built reader deep link passed. It showed one calm
+  stable folio surface and one honestly disabled future Library control; there are intentionally no
+  reader mechanics to exercise before C1/C2.
+
 ## Spend and deployment
 
 - Text-generation spend: `$0`.
@@ -131,8 +179,9 @@ The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. Imag
 
 ## Next action
 
-Run A2 red tests, then scaffold and locally commit the single package and five-table durable spine.
-With app autodeploy disabled, provision only the designated Railway project's pinned Postgres and
-private bucket, stage app configuration without deployment, then re-enable autodeploy and push. Verify
-the Git-triggered app deployment, migration, `/healthz`, database, bucket, and reader shell before
-creating its domain or beginning B1 or C1.
+Commit the locally green A2 application without pushing. Disable app autodeploy, then provision only
+the designated Railway project's pinned Postgres and private SJC bucket, enable daily backups, remove
+the database's exact public proxy, and stage app references plus US-West runtime configuration without
+an app deployment. Re-enable autodeploy and push once. Verify the Git-triggered deployment SHA,
+migration checksum, PostgreSQL 18.4, bucket round trip, and `/healthz`; only then create the generated
+domain and repeat the visible in-app Browser smoke test.

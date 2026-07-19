@@ -240,6 +240,27 @@ export function packageContractIssues(manifest) {
   return issues;
 }
 
+export function pnpmWorkspaceConfigIssues(text) {
+  const issues = [];
+  for (const forbidden of [/^packages:/m, /^catalogs?:/m, /^linkWorkspacePackages:/m, /^sharedWorkspaceLockfile:/m]) {
+    if (forbidden.test(text)) issues.push(`pnpm security config enables workspace behavior: ${forbidden.source}`);
+  }
+  for (const line of [
+    "  cpu-features: false",
+    "  esbuild: true",
+    "  protobufjs: false",
+    "  ssh2: false",
+    "  - hono@4.12.31",
+  ]) {
+    if (!text.includes(line)) issues.push(`pnpm security config is missing: ${line.trim()}`);
+  }
+  const approvedBuilds = [...text.matchAll(/^\s{2}([^\s:]+): true$/gm)].map((match) => match[1]);
+  if (approvedBuilds.length !== 1 || approvedBuilds[0] !== "esbuild") {
+    issues.push("pnpm security config may approve only esbuild lifecycle scripts");
+  }
+  return issues;
+}
+
 export async function auditArchitectureDecision(rootUrl) {
   const root = fileURLToPath(rootUrl);
   const files = await listFiles(root);
@@ -262,8 +283,13 @@ export async function auditArchitectureDecision(rootUrl) {
   if (packageManifests.some((file) => file !== "package.json")) {
     issues.push(`nested package manifest violates one-package boundary: ${packageManifests.join(", ")}`);
   }
-  if (files.includes("pnpm-workspace.yaml") || files.includes("turbo.json")) {
+  if (files.includes("turbo.json")) {
     issues.push("workspace graph violates one-package boundary");
+  }
+  const pnpmConfig = await readIfPresent(root, "pnpm-workspace.yaml");
+  if (pnpmConfig !== undefined) issues.push(...pnpmWorkspaceConfigIssues(pnpmConfig));
+  if (packageManifests.length > 0 && pnpmConfig === undefined) {
+    issues.push("pnpm 11 package requires an explicit security-only pnpm-workspace.yaml");
   }
   const packageText = await readIfPresent(root, "package.json");
   if (packageText !== undefined) issues.push(...packageContractIssues(JSON.parse(packageText)));

@@ -11,6 +11,7 @@ import {
   architectureDecisionTextIssues,
   auditArchitectureDecision,
   packageContractIssues,
+  pnpmWorkspaceConfigIssues,
   railwaySequenceIssues,
 } from "./verify-architecture-decision.mjs";
 
@@ -58,8 +59,10 @@ test("the eventual package manifest must implement the accepted stack exactly", 
 
   assert.deepEqual(packageContractIssues(baseline), []);
 
-  const { ["test:integration"]: _removedIntegration, ...missingIntegrationScript } = baseline.scripts;
-  const { ["dev:infra"]: _removedDevInfra, ...missingDevInfraScript } = baseline.scripts;
+  const missingIntegrationScript = { ...baseline.scripts };
+  delete missingIntegrationScript["test:integration"];
+  const missingDevInfraScript = { ...baseline.scripts };
+  delete missingDevInfraScript["dev:infra"];
   const mutations = [
     { ...baseline, packageManager: "pnpm@latest" },
     { ...baseline, workspaces: ["packages/*"] },
@@ -83,4 +86,17 @@ test("Railway setup order cannot deploy the docs-only source or expose a prematu
     ...RAILWAY_A2_SEQUENCE.slice(0, 6),
   ].join("\n");
   assert.notDeepEqual(railwaySequenceIssues(unsafe), []);
+});
+
+test("pnpm 11 security policy cannot become a workspace graph or run unapproved builds", () => {
+  const safe = `allowBuilds:\n  cpu-features: false\n  esbuild: true\n  protobufjs: false\n  ssh2: false\nminimumReleaseAgeExclude:\n  - hono@4.12.31\n`;
+  assert.deepEqual(pnpmWorkspaceConfigIssues(safe), []);
+
+  for (const mutation of [
+    `${safe}packages:\n  - packages/*\n`,
+    safe.replace("esbuild: true", "esbuild: false"),
+    safe.replace("ssh2: false", "ssh2: true"),
+  ]) {
+    assert.notDeepEqual(pnpmWorkspaceConfigIssues(mutation), [], "unsafe pnpm policy escaped");
+  }
 });
