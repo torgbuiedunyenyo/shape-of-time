@@ -103,8 +103,9 @@ validation, span/title-scoped idempotency (no duplicate children), persisted anc
 bounded child_first planning call, selection aperture rows on immutable exposed folios, atomic
 entry (37/37 integration). UI halves (mounted reader, reload return, no spinner) bind the
 reader slice and are named in the D6 QA doc. D0–D6 SERVER TRACK IS COMPLETE except the
-key-gated live proofs — D0 probe PASSED 2026-07-19 (owner-supplied key); the D2 baseline run
-remains, gated on the merged prose-guidance template + owner-attended run.
+key-gated live proofs — D0 probe PASSED 2026-07-19 (owner-supplied key); the D2 baseline run 01 EXECUTED 2026-07-19
+(10/10 folios, zero failures, archive ~/shape-of-time-archives/d2-baseline-01) — awaiting the
+owner's blind read; run 02 A/B against the merged template remains available.
 LANE UPDATE 2026-07-19 ~16:00: the other agent pivoted to a READER-FIRST VERTICAL SLICE
 (branch codex/reader-first-slice, commit 8fafde0) — C-track is CLAIMED by them; do NOT build
 C0–C2 here. Build D5/D6 behind ports/contracts so they wire into that reader when it lands.

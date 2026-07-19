@@ -66,3 +66,24 @@ Then the blind read: hand the folios (prose only) to readers with
 `docs/qa/d2-blind-read-scorecard.md`. D2 is green only on the human verdict.
 
 Provider calls executed in this slice: 0. Spend: $0.
+
+## Live run 01 — EXECUTED 2026-07-19 (evidence recorded; verdict awaits the human blind read)
+
+Owner said "Proceed": the baseline ran against the **current main template** (main@`44dde30`,
+template digest in every archived request manifest) rather than waiting for the prose-guidance
+merge — recorded here as a fact of this run; the controlled A/B against the merged template
+remains available as run 02.
+
+- Command: the unblock command above, `--folios 10`, archive
+  `~/shape-of-time-archives/d2-baseline-01/` (outside the worktree). First launch died pre-spend
+  on the deliberately-unwritable missing archive root ($0); relaunch ran clean.
+- Outcome: **completed, 10/10 folios, zero failures, zero retries.** Totals: 136,731 input /
+  9,167 output tokens (per-folio usage archived; dollar cost is read from the provider bill —
+  no pinned price table, per the harness contract).
+- Word counts: 215–261; 7/10 inside 120–250 (folios 1, 3, 4 over by 1–11 words — observations,
+  not failures). Latency 14–28s per folio, rising with context as expected (11.6k → 15.7k input
+  tokens from folio 1 to 10).
+- Blind-read package: `d2-baseline-01-folios.md` in the archive (prose only, exposure order),
+  delivered to the owner with `docs/qa/d2-blind-read-scorecard.md`.
+
+**D2's green bar is unchanged: it is the human verdict on the scorecard, not this table.**
