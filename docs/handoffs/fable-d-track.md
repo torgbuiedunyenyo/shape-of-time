@@ -80,9 +80,10 @@ should run AFTER their template lands on main (coordinate/merge).
 
 ## D2–D6 continuation (after D1 QA)
 
-D2 (prose baseline): BLOCKED on ANTHROPIC_API_KEY (same as D0 live probe) + needs the merged
-template + B0 movement briefs as inputs; run one uninterrupted 8–14 folio root run via
-folio-context + fable-client, archive everything, then HUMAN blind read — surface to owner.
+D2 HARNESS LANDED 2026-07-19: d2-baseline.ts/-run.ts + scorecard, 31/31 text tests, dry-run
+verified on real sources (folio-1 digest ea8d48c2…). LIVE RUN BLOCKED: needs ANTHROPIC_API_KEY +
+merged <prose_guidance> template from b2 branch b5d7e35 (rerun after template change invalidates
+the steering variable — wait for merge). Unblock command in docs/qa/2026-07-19-d2-baseline-harness.md.
 D3 (movement planning + pagewise generation): real-DB integration (books/folios/apertures/assets/
 generation_attempts repos from A2), one prose + one image call per folio, atomic ready/expose —
 image side needs B2 anchors (coordinate with B2 agent; build behind ports with contract fixtures
