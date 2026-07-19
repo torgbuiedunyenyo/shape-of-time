@@ -63,8 +63,8 @@ function writerTemplateIssues(template) {
   const issues = [];
   const requiredOnce = [
     "{{WORLD_DOCUMENT}}",
-    "{{CURRENT_BOOK_BRIEF}}",
-    "{{PARENT_APERTURE_OR_NONE}}",
+    "{{BOOK_ORIGIN}}",
+    "{{CURRENT_MOVEMENT_BRIEF}}",
     "{{STORY_SO_FAR}}",
     "{{TEMPORAL_RULES}}",
     "{{CURRENT_FOLIO_BRIEF}}",
@@ -79,8 +79,8 @@ function writerTemplateIssues(template) {
   const orderedMarkers = [
     "<documents>",
     "{{WORLD_DOCUMENT}}",
-    "{{CURRENT_BOOK_BRIEF}}",
-    "{{PARENT_APERTURE_OR_NONE}}",
+    "{{BOOK_ORIGIN}}",
+    "{{CURRENT_MOVEMENT_BRIEF}}",
     "{{STORY_SO_FAR}}",
     "{{TEMPORAL_RULES}}",
     "<current_folio>",
@@ -138,8 +138,8 @@ function renderedPromptIssues(rendered, expected) {
 
   const orderedValues = [
     expected.world,
-    expected.brief,
     expected.parent,
+    expected.brief,
     expected.history,
     expected.rules,
     expected.current,
@@ -168,7 +168,7 @@ test("world.md is the sole comprehensive narrative authority", async () => {
   const visual = await content("visual-bible.md", "utf8");
 
   assert.ok(files.includes("world.md"));
-  assert.ok(files.includes("pilot-brief.md"));
+  assert.ok(files.includes("root-movement-01.md"));
   assert.ok(files.includes("visual-bible.md"));
   assert.ok(!files.includes("story-bible.md"), "lossy story-bible duplicate must be removed");
   assert.ok(!files.includes("arc.md"), "duplicated six-part arc must be removed");
@@ -185,8 +185,8 @@ test("world.md is the sole comprehensive narrative authority", async () => {
   );
 });
 
-test("the pilot brief adds only the finite local movement in natural prose", async () => {
-  const brief = await content("pilot-brief.md", "utf8");
+test("the first root movement is finite while the root book remains continuable", async () => {
+  const brief = await content("root-movement-01.md", "utf8");
 
   requireAll(
     brief,
@@ -199,11 +199,13 @@ test("the pilot brief adds only the finite local movement in natural prose", asy
       "temporal movement",
       "invitation",
       "Travel has not begun",
+      "first finite movement",
+      "root book continues",
       "world.md",
     ],
-    "pilot-brief.md",
+    "root-movement-01.md",
   );
-  assert.ok(brief.split(/\s+/).length < 700, "pilot brief has become a second story summary");
+  assert.ok(brief.split(/\s+/).length < 700, "movement brief has become a second story summary");
   assert.deepEqual(codeShapedCanonIssues(brief), []);
   assert.doesNotMatch(brief, /authoriz(?:e|es|ed|ing) sponsorship/i);
 });
@@ -292,7 +294,7 @@ test("a rendered baseline contains the actual approved sources once and rejects 
   const [template, world, brief, rules, undertow, visual, examples] = await Promise.all([
     prompt("write-folio.md"),
     content("world.md", "utf8"),
-    content("pilot-brief.md", "utf8"),
+    content("root-movement-01.md", "utf8"),
     prompt("temporal-rules.md"),
     content("undertow.md", "utf8"),
     content("visual-bible.md", "utf8"),
@@ -300,8 +302,8 @@ test("a rendered baseline contains the actual approved sources once and rejects 
   ]);
   const inputs = {
     WORLD_DOCUMENT: world,
-    CURRENT_BOOK_BRIEF: brief,
-    PARENT_APERTURE_OR_NONE: "No parent aperture: this is the root book.",
+    BOOK_ORIGIN: "This is the root Shape of Time book.",
+    CURRENT_MOVEMENT_BRIEF: brief,
     STORY_SO_FAR: "<folio ordinal=\"1\">Prior prose.</folio>\n[NARRATIVE_IMAGE_BLOCK ordinal=\"1\"]",
     TEMPORAL_RULES: rules,
     CURRENT_FOLIO_BRIEF: "Jay notices Tan waiting at the counter and chooses to help her.",
@@ -310,7 +312,7 @@ test("a rendered baseline contains the actual approved sources once and rejects 
     world,
     brief,
     rules,
-    parent: inputs.PARENT_APERTURE_OR_NONE,
+    parent: inputs.BOOK_ORIGIN,
     history: inputs.STORY_SO_FAR,
     current: inputs.CURRENT_FOLIO_BRIEF,
     excluded: [undertow, visual, examples],
@@ -355,7 +357,7 @@ test("the adapted craft examples are optional evidence, never baseline authority
 
 test("Undertow, visual authority, and retired concepts cannot enter the prose baseline", async () => {
   const template = await prompt("write-folio.md");
-  const pilot = await content("pilot-brief.md", "utf8");
+  const pilot = await content("root-movement-01.md", "utf8");
 
   assert.ok(!template.toLowerCase().includes("undertow"));
   assert.ok(!template.toLowerCase().includes("visual bible"));
@@ -371,6 +373,115 @@ test("Undertow, visual authority, and retired concepts cannot enter the prose ba
   for (const mutation of retiredMutations) {
     assert.ok(retiredMaterialIssues(mutation).length > 0, `retired mutation escaped: ${mutation}`);
   }
+});
+
+test("visual authority stays story-wide while Clef, places, and scenes stay book-local", async () => {
+  const visual = await content("visual-bible.md", "utf8");
+
+  requireAll(
+    visual,
+    [
+      "story-wide visual grammar",
+      "book-local visual profile",
+      "folio image brief",
+      "Clef remains visually indeterminate at world scope",
+      "Different books may realize it differently",
+      "There is no single visual shorthand for “the future.”",
+      "Oakland is an anchor, not a boundary",
+      "past and future are relational descriptions",
+      "many places and times",
+    ],
+    "visual-bible.md",
+  );
+
+  for (const overreach of [
+    "amber-red translucent pressed flake",
+    "glassine sleeve",
+    "approximately 5.5 metres wide",
+    "Lake Merritt",
+    "12th Street BART",
+    "cobalt rubber case",
+    "three off-axis crescent rails",
+    "Oakland Offset",
+  ]) {
+    assert.ok(!visual.includes(overreach), `visual bible still contains scene-level overreach: ${overreach}`);
+  }
+});
+
+test("finite movements support unbounded continuation and child books resist root-plot gravity", async () => {
+  const [spec, evals, plan, handoff, source, template] = await Promise.all([
+    rootDocument("SPEC.md"),
+    rootDocument("EVALS.md"),
+    rootDocument("PLAN.md"),
+    rootDocument("HANDOFF.md"),
+    content("SOURCE.md", "utf8"),
+    prompt("write-folio.md"),
+  ]);
+
+  requireAll(
+    spec,
+    [
+      "finite narrative movements",
+      "without a predetermined final folio",
+      "After the six-part arc resolves",
+      "must not undo or replay that ending",
+      "root plot is not a template",
+      "founding premise",
+      "Shared world physics and social facts remain available to every book",
+      "Oakland anchors the root but does not bound the library",
+      "past and future are relational shorthand",
+    ],
+    "SPEC.md",
+  );
+  assert.ok(!spec.includes("Every book ends; the library does not."));
+  assert.ok(!spec.includes("Each individual book is bounded."));
+  assert.ok(!plan.includes("bounded book plan"));
+
+  const b0 = plan.slice(plan.indexOf("### B0"), plan.indexOf("### B1"));
+  for (const codeShapedBeat of ["state before/after", "required world facts", "open/resolved threads"]) {
+    assert.ok(!b0.includes(codeShapedBeat), `B0 still requires code-shaped beat data: ${codeShapedBeat}`);
+  }
+
+  const currentAuthority = [spec, evals, plan, handoff, source].join("\n");
+  for (const stale of [
+    "small pilot boundary",
+    "The pilot never enters",
+    "pilot arc",
+    "review of the pilot",
+    "part of the pilot",
+  ]) {
+    assert.ok(!currentAuthority.includes(stale), `current authority still uses stale pilot wording: ${stale}`);
+  }
+
+  requireAll(
+    template,
+    [
+      "root trajectory is context, not a plot template",
+      "founding premise, not an instruction to continue the parent scene",
+      "current finite movement",
+    ],
+    "write-folio.md",
+  );
+  requireAll(
+    evals,
+    [
+      "cross a movement boundary",
+      "does not replay the Jay and Tan trajectory",
+      "outside Oakland or the Bay Area",
+      "Phantas or Mystas",
+    ],
+    "EVALS.md",
+  );
+  requireAll(
+    plan,
+    [
+      "CURRENT_MOVEMENT_BRIEF",
+      "post-arc movement",
+      "lineage-local",
+      "sibling isolation",
+    ],
+    "PLAN.md",
+  );
 });
 
 test("project authority documents describe the world-first prompt architecture", async () => {
@@ -396,7 +507,7 @@ test("project authority documents describe the world-first prompt architecture",
   requireAll(
     plan,
     [
-      "content/shape-of-time/pilot-brief.md",
+      "content/shape-of-time/root-movement-01.md",
       "prompts/fable/temporal-rules.md",
       "prompts/fable/write-folio.md",
       "prompts/fable/craft-examples.md",

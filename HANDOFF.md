@@ -11,12 +11,13 @@ _Updated 2026-07-18._
 - The initial authority, verified expanded world source, source provenance, and implementation queue
   are present.
 - A0's prose architecture has been corrected:
-  world.md is the sole comprehensive factual and plot authority; the finite pilot brief, explicit
-  temporal rules, XML baseline, and optional-example experiment are separate.
+  world.md is the sole comprehensive factual and plot authority; the first finite root movement,
+  explicit temporal rules, XML baseline, and optional-example experiment are separate.
 - The rejected story-bible, duplicated arc, and typed authority manifest were deleted instead of
   deprecated.
-- The visual bible remains a separate pending proposal and is explicitly excluded from the prose
-  baseline.
+- The visual bible is now a location-neutral pending proposal for shared grammar and scoped local
+  continuity; it is explicitly excluded from the prose baseline and contains no fixed Clef, scene,
+  shop, device, or universal future design.
 - No application code, package manifest, generated corpus, database, model output, paid generation,
   Railway project, or deployment exists yet.
 
@@ -32,7 +33,12 @@ _Updated 2026-07-18._
 
 ## Locked product direction
 
-The prototype is a finite illustrated Shape of Time anchor story in a stable e-reader. Page turns advance one 120–250-word folio; suggested phrases, arbitrary highlights, and explicit title creation open adjacent finite books; Back restores the exact source passage. Text and images share narrative work. A static prepared garden must be delightful before generation is connected.
+The prototype is an illustrated Shape of Time hyperbook in a stable e-reader. Page turns advance one
+120–250-word folio through finite narrative movements; the root and child books can continue through
+further movements without a predetermined terminal folio. Suggested phrases, arbitrary highlights,
+and explicit title creation open adjacent books with independent founding premises; Back restores
+the exact source passage. Text and images share narrative work. A static prepared garden must be
+delightful before generation is connected.
 
 The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. Images use the pinned GPT Image 2 contract with explicit reference packs. The complete Fable request has a hard 400,000-token ceiling. The initial architecture is one TypeScript application, Postgres, and image storage.
 
@@ -43,7 +49,8 @@ The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. Imag
 - Source commit: `1c3644b7d2e7c7b10a62cfa6c6f876ac53559836`.
 - Source path/range: `world_document.md`, line 19 through EOF (source line 373).
 - World SHA-256: `e47afa2fc5db4350008f65fcea9bf6b32569e79a6ee4aeb212e066ddd139576c`.
-- `content/shape-of-time/undertow.md` is a separate sequel seed and is excluded from the pilot arc.
+- `content/shape-of-time/undertow.md` is a separate sequel seed and is excluded from the current root
+  movement and from automatic post-arc continuation.
 
 ## A0 review state
 
@@ -52,20 +59,32 @@ The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. Imag
   and craft-examples.md did not.
 - A second red proved the durable project documents still required the rejected story-bible
   architecture.
-- Current local result: `node --test scripts/*.test.mjs` passes 12/12;
+- A later owner-review red recorded eight expected failures for the missing root-movement rename,
+  finite-movement continuation, child root-plot isolation, Clef openness, future plurality,
+  non-Oakland range, and separation of shared/book/folio visual scope.
+- Current local result: `node --test scripts/*.test.mjs` passes 14/14;
   `node scripts/verify-genesis.mjs` and `git diff --check` pass.
 - The checked-in world remains byte-exact. No compressed story summary, fact taxonomy, or
   machine-shaped narrative manifest competes with it.
-- The first-book brief ends after Jay knowingly accepts Tan's invitation, before travel. It removes
-  the invented sponsorship-authorization threshold and does not restate Parts Two through Six.
+- The first root movement ends after Jay knowingly accepts Tan's invitation, before travel. It
+  removes the invented sponsorship-authorization threshold, does not restate Parts Two through Six,
+  and explicitly hands its changed situation to the next root movement.
 - The temporal block retains the earlier prompt's useful false-versus-true guardrails while
   correcting overbroad language about repetition, atmosphere, branching, and temporal “glimpses.”
 - The three older teaching patterns are retained as explicitly adapted examples outside baseline for
   one controlled A/B only if consecutive reading reveals the specific failures they address.
-- The proposed visual direction remains **Oakland Offset**, with unapproved AI-authored character,
-  object, location, map, and PRMTT specifics. It is not prose context and it is not yet approved
-  visual authority.
-- A0 remains open for owner editorial review of the pilot, prompt materials, and visual proposal.
+- The old Oakland Offset catalogue was deleted. The revised visual proposal retains only an observed
+  material-illustration candidate, story-wide physical/medium rules, future plurality, and contracts
+  for book-local profiles, folio briefs, and ordered reference images.
+- Clef remains materially open. A book may realize it locally and preserve that occurrence through
+  image references; another book may decide differently.
+- Oakland anchors the root but does not bound the library. Static and generated coverage must include
+  non-root viewpoints, places beyond the Bay Area, distinct future cultures, and meaningful Phantas
+  or Mystas settings.
+- The legacy repository investigation recovered the useful post-arc new-engine and independent-child
+  principles while explicitly rejecting its endless seventh act, running summaries, fact taxonomy,
+  and global title identity.
+- A0 remains open for owner editorial review of the first root movement, prompt materials, and visual proposal.
   A1 must not begin until that review resolves the remaining visual decisions.
 
 ## Spend and deployment
@@ -77,7 +96,7 @@ The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. Imag
 
 ## Next action
 
-Project owner reviews content/shape-of-time/pilot-brief.md, prompts/fable/temporal-rules.md,
-prompts/fable/write-folio.md, prompts/fable/craft-examples.md, and the separate pending
-content/shape-of-time/visual-bible.md proposal. After any revisions, rerun the content gate, mark A0
-complete in this handoff, and only then begin A1 stack selection.
+Project owner reviews content/shape-of-time/root-movement-01.md, the finite-movement/infinite-book
+model in SPEC.md, the child-independence contract in prompts/fable/write-folio.md, and the rewritten
+content/shape-of-time/visual-bible.md. After approval or revisions, mark A0 complete in this handoff
+and only then begin A1 stack selection.

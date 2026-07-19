@@ -9,23 +9,24 @@ elsewhere.
 ## Product promise
 
 > Read a beautiful illustrated novel. Turn the page to move through its story. Open a phrase to
-> enter the finite illustrated book latent inside it. Return to the exact passage. Every book ends;
-> the library does not.
+> enter the illustrated book latent inside it. Return to the exact passage. Every direction can
+> continue, but each stretch of reading goes somewhere.
 
 Shape of Time is a calm, legible e-reader whose books form an explorable literary world. The reader
 moves on two independent axes:
 
-- **Page turn is narrative movement.** Each book follows a planned, finite arc one folio at a time.
+- **Page turn is narrative movement.** Each book advances one planned folio at a time through finite narrative movements.
 - **An aperture is semantic movement.** A phrase, deliberate highlight, or explicitly requested
-  title opens an adjacent finite book.
+  title opens an adjacent book with its own premise and trajectory.
 
 The reader does not choose a protagonist's action, converse with a bot, or wander through a
 generated application. The text is both story and map, while the e-reader around it remains stable,
 predictable, and quiet.
 
-The anchor story is authored enough to mean something. Total emergence is not a virtue. Generation
-elaborates a coherent world and finite narrative; it does not replace them with an ontology, a feed,
-or an endless continuation prompt.
+The anchor story is authored enough to mean something. Total emergence is not a virtue. A book may
+continue without a predetermined final folio, but it is not an endless continuation prompt: it is
+composed of finite movements, each with a concrete dramatic question, causal change, and satisfying
+resting point. The next movement begins from what the previous one changed.
 
 ## Medium and scope
 
@@ -37,26 +38,33 @@ generation.
 The initial garden contains:
 
 - one root movement of approximately 14 folios, with its own satisfying emotional and causal shape;
+- the opening one or two folios of the following root movement, so the static reader can cross a
+  movement boundary without encountering a dead Next action;
 - normally 10–12 root illustrations, with omissions or shared plates only when they improve rhythm;
-- three prepared aperture books of 2–4 folios and 1–3 images each;
-- a real ending for every book.
+- three prepared child-book opening movements of 2–4 folios and 1–3 images each; and
+- at least one prepared child continuation across a movement boundary.
 
 The first root movement draws from the beginning of Jay and Tan's story: their meeting, the
 phone/payment incident, courtship, the first intelligible account of temporal movement, and an
 honest decision or threshold. It must not compress the entire six-part novel merely to claim
-completion.
+completion. The root book follows the remaining source story through later movements.
 
-The prepared books explore distinct parts of the same world:
+The prepared children arise from actual source phrases but are stories, experiences, documents, or
+other literary forms in their own right—not encyclopedia entries and not displaced Jay and Tan
+chapters. Across the initial garden, at least one central perspective is not Jay or Tan, at least one
+primary setting lies outside Oakland or the Bay Area, and at least one movement makes Phantas or
+Mystas materially consequential rather than merely naming an axis.
 
-- the 1989 earthquake as consumed by future tourism;
-- Clef and the extraction/trade economy;
-- temporal maps, visas, or the machinery of cross-era dependency.
+Oakland anchors the root but does not bound the library; past and future are relational shorthand,
+not the only two kinds of temporal place. Root and child books may continue through further finite
+movements, and any folio may also open lateral books.
 
-They are small books, not encyclopedia entries. Their form may differ when that makes the subject
-clearer or more pleasurable.
-
-Each individual book is bounded. The library can grow without bound because any book may contain
-further apertures.
+The root book follows the complete six-part Jay and Tan arc in world.md without compressing it or
+circling indefinitely inside one phase. Until that arc is complete, each new root movement advances
+the next unresolved source movement. After the six-part arc resolves, a post-arc movement begins
+from the irreversible changed situation it leaves behind. It must not undo or replay that ending,
+reunite characters merely to restore old tension, or silently promote Undertow into canon. It needs
+a genuinely new desire, pressure, place, or relationship capable of carrying its own finite shape.
 
 ## Canon
 
@@ -85,16 +93,33 @@ The following retired ideas must not return through improvisation:
 
 The byte-exact world.md is the sole comprehensive factual and plot authority. No derived story
 bible, normalized fact catalog, or second retelling of the six-part arc may compete with it. A
-current-book brief and later folio beats may add only the finite production decisions the world does
-not contain; they must not compress or recode the source. A strong temporal-rules block may restate
-the physics and reject familiar time-travel tropes because that is prompt protection, not a second
-canon.
+current-movement brief and later folio beats may add only the finite production decisions the world
+does not contain; they must not compress or recode the source. A strong temporal-rules block may
+restate the physics and reject familiar time-travel tropes because that is prompt protection, not a
+second canon.
 
-Visual decisions and approved anchors are separate human-reviewed authority for image production.
-They never enter the prose request wholesale. Open questions—especially Jay and Tan's appearance,
-Clef's form, and recurring locations—must be resolved through explicit visual review. The first
-generated sentence or image does not silently become canon. Undertow remains a possible sequel seed,
-not a seventh act appended to this story.
+The world document contains both shared world authority and the canonical root trajectory. In a
+child book, the root plot is not a template. The exact parent phrase, selection, or title intent is
+the child's founding premise, not an instruction to continue the parent scene. Before its first
+folio, a child receives a short natural-prose movement brief with its own center, cast or viewpoint,
+place and temporal position, dramatic question, intended change, and movement boundary. It may
+connect to Jay and Tan when the founding source genuinely calls for them; it must not default to
+their plot, replay its phases, or turn a selected term into an encyclopedia entry.
+
+Shared world physics and social facts remain available to every book. The complete Jay and Tan plot
+remains canonical history, but it governs the root book's trajectory rather than every child's.
+Beyond that shared world, a child inherits the exact source passage and only the root-plot or
+lineage-local people, places, objects, and events explicitly carried into its origin/profile. Details
+created inside one lineage do not leak into siblings or become global canon because two books share
+a title. This permits different books and iterations to discover different answers to open questions
+while preserving the continuity a particular reading path actually established.
+
+Visual decisions and approved anchors are scoped production authority for image generation. They
+never enter the prose request wholesale. Shared medium and recurring identity references require
+human review; book-local places, objects, and open concepts are resolved only when a particular book
+needs them. Clef's form remains deliberately open at world scope and may differ between books. The
+first generated candidate does not silently become global canon. Undertow remains a possible sequel
+seed, not an automatically appended seventh act.
 
 ## Text and image
 
@@ -107,11 +132,19 @@ Text and image share narrative labor.
 - The form is an illustrated novel or artist's folio, not a conventional panel-by-panel graphic
   novel.
 
-Visual continuity is intentional. Each image request identifies which references govern character
-identity, appearance epoch, location, object, palette, medium, or composition; what must remain; what
-must change; and what narrative job the new image performs. A normal plate uses the relevant
-approved anchors plus the preceding or causal image. A repair between folios may use both neighbors.
-Generated incidental details remain nonbinding unless deliberately promoted to an approved anchor.
+Visual continuity is intentional and scoped. A shared direction governs medium and reproduction;
+each book has a short local visual profile for its particular places, eras, recurring subjects, and
+realizations of open concepts; each folio has a scene-specific image brief. Image requests identify
+the ordered references that actually govern identity, appearance period, place, object, parent
+inheritance, or neighboring continuity; what must remain; what must change; and what narrative job
+the new image performs. A repair between folios may use both neighbors. Generated incidental details
+remain nonbinding outside their exposed local context unless deliberately promoted at a named scope.
+
+There is no universal visual future. Each future place is designed as a lived culture with its own
+architecture, clothing, infrastructure, interfaces, maintenance, access, and relationship to other
+times. Generic chrome, neon, hologram, and tower-city shorthand is rejected unless the local book
+earns it. A continuity stress sequence must include materially different futures and a non-Oakland
+place before the shared direction is approved.
 
 ## Writing
 
@@ -151,13 +184,15 @@ A new reader can, without instructions or operator help:
 5. Choose **Back to passage** and return to the exact source book, folio, phrase, selection, and
    reading position.
 6. Highlight arbitrary text, choose **Open as a book**, remain in place during an honest quiet
-   creation state, and enter the finite child when it is ready.
+   creation state, and enter the child when its first folio is ready.
 7. Filter the shelf locally and instantly by title.
 8. Deliberately choose **Create a book called …** when a title does not exist, confirm generation,
-   and create a finite book. Merely typing in search never spends money.
+   and create a book with its own founding premise. Merely typing in search never spends money.
 9. Bookmark, leave, reload, and resume the exact book, folio, and position.
-10. Reach a real ending and choose among return, shelf, and available apertures—not “write another
-    chapter.”
+10. Reach a satisfying movement boundary and use the same Next action to cross into the following
+    movement without a title-page reset, terminal screen, or “write another chapter” prompt.
+11. Move laterally through an aperture and return exactly, or stop at any movement boundary and
+    return to the shelf without the book pretending nothing remains.
 
 Browser history, reload, keyboard, swipe, and responsive layouts must agree. Back is an exact return
 operation, not a best-effort route to a book's beginning. Navigation must not create duplicate
@@ -183,12 +218,19 @@ Writing uses Claude Fable 5 with `xhigh` effort through a direct, verified Messa
 - no provider compaction, provider memory, or manual thinking-budget history;
 - every request reproducible from application data.
 
-The writer receives the complete corrected world verbatim, the short current-book brief, the parent
-aperture where relevant, all prior exposed current-book folios and narrative images while they fit,
-the strong temporal rules, and the current folio's situation and intended change. Long source
-documents come first and the writing request comes last. The exact ordered request manifest, prompt
-version, source and asset digests, token count, provider identity, usage, latency, cost, and result
-are retained.
+The writer receives the complete corrected world verbatim, the book origin and lineage, the short
+current-movement brief, all prior exposed current-book folios and narrative images while they fit,
+the strong temporal rules, and the current folio's situation and intended change. The prompt states
+that the root trajectory is not a child-book plot template and that a parent aperture is a founding
+premise rather than a scene to continue. Long source documents come first and the writing request
+comes last. The exact ordered request manifest, prompt version, source and asset digests, token count,
+provider identity, usage, latency, cost, and result are retained.
+
+Movement planning happens only at a boundary, never as chapter-sized prose generation. The root
+planner advances the unresolved source arc and, after its true ending, establishes a new post-arc
+dramatic engine. A child planner begins from its exact founding source and creates an independent
+local trajectory. Subsequent movements begin from the book's own exposed history. No planner uses
+the retired fact taxonomy, rolling summaries, or sibling material.
 
 ### Images
 
@@ -230,9 +272,16 @@ recent irrelevant event.
 
 ## Exposure, identity, and spend
 
-Every book has a finite plan and an opaque stable ID. Every folio has a unique `(book_id, ordinal)`.
-Every aperture records the exact source folio and span and an opaque target book ID; titles are
-display metadata, not identity.
+Every book has an opaque stable ID and an append-only sequence of finite movement briefs without a
+predetermined final folio. Every folio has a unique `(book_id, ordinal)` and identifies the movement
+whose local change it advances. A movement brief is planned before its first folio and becomes
+immutable when that folio is exposed; the following movement is planned only from the book's actual
+changed state. Every aperture records the exact source folio and span and an opaque target book ID;
+titles are display metadata, not identity, so same-titled books may remain distinct.
+
+Movement is a planning boundary inside the existing Book and Folio records, not a new service or
+required sixth table. The Book owns the ordered movement briefs; Folios record which brief they
+advance.
 
 A folio becomes **ready** only when its required prose, image assets, layout, apertures, and digests
 exist and validate. Reader exposure is one atomic transition. After exposure, prose, layout, source
@@ -272,7 +321,7 @@ The first product does not include:
 - public generation billing and quota UX;
 - autonomous retcons or model-resolved canon conflicts;
 - long-form retrieval machinery before a measured book needs it;
-- an endless chapter frontier.
+- unstructured page continuation without a finite current movement and an intended change.
 
 ## Acceptance standard
 

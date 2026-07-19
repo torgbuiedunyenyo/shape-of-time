@@ -14,9 +14,9 @@ That repository remains evidence about failure modes and prior mechanics. It is 
 
 ## Earlier Shape of Time
 
-[`torgbuiedunyenyo/infinite-book`](https://github.com/torgbuiedunyenyo/infinite-book) is the earlier book and source-history repository. This project retains its expanded corrected world and the useful ideas of pagewise preparation, exact phrase travel, immutable exposed pages, finite story scaffolding, and generation ahead of reading pace.
+[`torgbuiedunyenyo/infinite-book`](https://github.com/torgbuiedunyenyo/infinite-book) is the earlier book and source-history repository. This project retains its expanded corrected world and the useful ideas of pagewise preparation, exact phrase travel, immutable exposed pages, finite-movement scaffolding, independent child premises, a new dramatic engine after a resolved arc, and generation ahead of reading pace.
 
-It does not inherit the earlier implementation, recursive momentum summaries, last-write-wins fact store, or post-ending continuation.
+It does not inherit the earlier implementation, recursive momentum summaries, last-write-wins fact store, title-as-identity, or an endless fixed seventh act.
 
 ## Deliberately retained
 

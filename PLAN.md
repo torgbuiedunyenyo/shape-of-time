@@ -1,7 +1,7 @@
 # Shape of Time — Compaction-Safe Execution Plan
 
 > **Status:** fresh repository; no product implementation exists.
-> **CURRENT / NEXT TASK: A0 — lock the canon, finite story, and visual authority.**
+> **CURRENT / NEXT TASK: A0 — lock the canon, movement model, and visual authority.**
 > A1 selects the one-app stack before any application scaffolding. Do not skip ahead.
 
 This is the dependency-ordered work queue for a small illustrated hyperbook. It intentionally does
@@ -11,17 +11,20 @@ old repository is sufficient evidence of that experiment.
 ## Product contract
 
 > Read a beautiful illustrated novel. Turn the page to move through its story. Open a phrase to enter
-> the finite illustrated book latent inside it. Return to the exact passage. Every book ends; the
-> library does not.
+> the illustrated book latent inside it. Return to the exact passage. Every direction can continue,
+> but each stretch of reading goes somewhere.
 
 - The containing product is a calm, dependable e-reader; generated text and images change inside it.
-- A page turn advances a planned finite story. It never blocks on chapter-sized generation.
-- A semantic aperture opens another finite illustrated book; it does not choose a protagonist's
-  action and is not a chatbot prompt.
+- A page turn advances one finite current movement inside a book that has no predetermined last
+  folio. It never blocks on chapter-sized generation.
+- A semantic aperture opens another illustrated book with its own founding premise and trajectory;
+  it does not choose a protagonist's action and is not a chatbot prompt.
 - The generation/publication unit is one **folio**, initially about 120–250 words plus an image when
   the beat calls for one. Parts and chapters are literary groupings only.
-- The initial garden is a 14-folio Shape of Time movement plus three prepared 2–4-folio aperture
-  books. The root movement must reach a real emotional and causal threshold.
+- The initial garden is a 14-folio Shape of Time movement plus the opening of its next movement,
+  three prepared 2–4-folio child opening movements, and at least one child continuation across a
+  movement boundary. Each movement reaches a real emotional and causal threshold without pretending
+  the book is over.
 - Prose owns action, motives, dialogue, causality, thought, and orientation. Images own material
   evidence, place, atmosphere, contradiction, relationship, or deliberate omission; they may not
   merely paraphrase the prose.
@@ -37,6 +40,9 @@ old repository is sufficient evidence of that experiment.
   a true cold path leaves the reader in place with an honest, book-native creation state.
 - Human consecutive reading and hands-on reader use are the primary literary and experience gates.
   A model judge may diagnose but cannot certify delight.
+- Oakland anchors the root but does not bound the library. The initial garden must include a
+  non-root viewpoint, a primary setting beyond Oakland or the Bay Area, and a materially meaningful
+  use of Phantas or Mystas.
 
 ## Fixed source and provider constraints
 
@@ -67,7 +73,8 @@ seventh act.
   A/B experiment only after consecutive human reading identifies placeless abstraction,
   above-the-scene reporting, or explanatory flattening as a repeated failure. Do not add generated
   exemplars, recursive voice conditioning, a literary ban list, or a model committee.
-- Every request is stateless and reproducible from immutable application records.
+- Every request is stateless and reproducible from immutable application records. Writer inputs use
+  `BOOK_ORIGIN` and `CURRENT_MOVEMENT_BRIEF`; the root plot is context rather than a child template.
 - The hard limit covers the exact complete multimodal request:
 
 ```text
@@ -91,8 +98,10 @@ cache-adjusted count, silent attachment removal, or request-time truncation is a
 - Each prompt separates `must remain`, `must change`, the image's narrative job, composition, and
   prohibitions. Persist the snapshot, exact prompt/version, ordered inputs, output digest, provider
   request ID, moderation/error, latency, and cost.
-- A rejected image is never a reference. A generated image becomes a canonical anchor only through
-  deliberate human approval.
+- A rejected image is never a reference. Shared direction and reusable recurring-identity anchors
+  require deliberate human approval. A validated exposed image may become a book-local continuity
+  reference without becoming world canon. Clef and other source-open forms are decided only within
+  the book that needs them and may differ in another book.
 
 ### Small-system boundary
 
@@ -127,11 +136,11 @@ local state holds bookmarks, discoveries, and current place during the prototype
 ```text
 A0 canon/story/visual lock [CURRENT]
   -> A1 one-app stack decision -> A2 app + Postgres spine
-A0 -> B0 finite beat maps
+A0 -> B0 movement beats and continuation topology
 A0 + A2 -> B1 image adapter -> B2 continuity proof
 B0 + B2 -> C0 static garden -> C1 reader -> C2 navigation -> C3 delight gate
 C3 + A2 -> D0 Fable/count adapter -> D1 full-history compiler -> D2 prose baseline
-D2 + B2 -> D3 pagewise generation -> D4 dormant provenance seam
+D2 + B2 -> D3 movement planning + pagewise generation -> D4 dormant provenance seam
 D4 + C2 -> D5 predictive preparation -> D6 dynamic highlight/title
 D6 -> F0 release gate -> F1 isolated Railway deploy -> F2 deployed Browser QA
 D4 + D6 --only if measured trigger fires--> E0 long-form reconstruction -> F0
@@ -144,36 +153,42 @@ D4 + D6 --only if measured trigger fires--> E0 long-form reconstruction -> F0
 **Depends on:** nothing.
 
 **Red:** Create an implementation-independent content and prompt contract first. It must preserve the
-checked-in source digest, then fail while lossy duplicate canon remains or the finite pilot brief,
-temporal guardrail, XML baseline, optional-example boundary, and rendered Undertow/visual exclusion
-do not exist. Break each source-count, ordering, and exclusion rule deliberately.
+checked-in source digest, then fail while lossy duplicate canon remains or the first root movement,
+temporal guardrail, XML baseline, child independence, scalable visual grammar, optional-example
+boundary, and rendered Undertow/visual exclusion do not exist. Break each source-count, ordering,
+scope, and exclusion rule deliberately.
 
 **Implement:**
 
 - preserve content/shape-of-time/world.md byte-exactly as the sole comprehensive factual and plot
   authority, with content/shape-of-time/SOURCE.md as provenance;
-- add content/shape-of-time/pilot-brief.md in natural prose with only the first finite movement's
-  beginning, dramatic question, and stopping boundary;
+- add content/shape-of-time/root-movement-01.md in natural prose with only the first finite
+  movement's beginning, dramatic question, and resting boundary, while stating that the root book
+  continues from its changed state;
 - add prompts/fable/temporal-rules.md, preserving the useful false-versus-true anti-trope function
   without IDs, citations, a fact taxonomy, or a compressed substitute for the world;
-- add prompts/fable/write-folio.md with whole-document XML boundaries, long sources first, the full
-  current-book history, and the current folio and light writing request last;
+- add prompts/fable/write-folio.md with whole-document XML boundaries, `BOOK_ORIGIN`,
+  `CURRENT_MOVEMENT_BRIEF`, full current-book history, and the current folio and light writing
+  request last; make the child founding premise explicit and reject root-plot replay;
 - preserve the teaching function of the three older micro-demonstrations as clearly labeled
   adaptations in prompts/fable/craft-examples.md, explicitly excluded from baseline and available
   only for one controlled experiment;
-- keep content/shape-of-time/visual-bible.md separate and pending visual review; it is never a prose
-  prompt input;
+- rewrite content/shape-of-time/visual-bible.md as location-neutral story-wide grammar plus the
+  contracts for book-local profiles, folio briefs, and ordered reference images; it is never a prose
+  prompt input and it leaves Clef, casts, places, devices, and scenes open until their actual scope
+  needs them;
 - keep content/shape-of-time/undertow.md byte-exact and excluded from the current narrative; and
 - delete the derived story bible, duplicated six-part arc, and typed narrative-authority manifest.
 
-Resolve visible character, place, and object decisions through visual review before image
-generation; a first image cannot silently decide canon. Human review remains part of this task.
+Human review approves the shared direction and reusable recurring-identity references. Book-local
+places, objects, and open concepts may be decided by the current movement's local generation and
+exposed prose or imagery, but they cannot leak into siblings or global canon.
 
 **Green:** The exact source digests pass; prompt mutations reject missing/duplicated/reordered world
 input, code-shaped canon, Undertow, visual production material, and accidental activation of the
-optional examples. A reviewer can read the complete original world, understand the small pilot
-boundary, inspect the exact baseline prompt shape, and distinguish unresolved visual proposals from
-approved anchors.
+optional examples. A reviewer can read the complete original world, understand the first root
+movement boundary and continued root book, inspect the exact baseline prompt shape, distinguish world,
+lineage-local, and folio visual scope, and see how a child avoids root-plot gravity.
 
 ### A1 — Deliberately select the one-app stack
 
@@ -200,30 +215,44 @@ rather than inheriting a familiar stack by reflex.
 boundary, five-table schema, state machines, and object-storage interface are absent.
 
 **Implement:** Build the minimal reader/server shell, strict environment schema, migrations,
-repositories, structured logging, CI, and content-addressed asset adapter. Use unique folio ordinal
-and generation idempotency keys. Implement `reserved -> generating -> ready -> exposed|failed`; an
-atomic exposure freezes prose, layout, aperture spans, and required assets. Use real test Postgres,
-not repository mocks.
+repositories, structured logging, CI, and content-addressed asset adapter. The Book record owns an
+append-only ordered set of movement briefs; Folios identify the brief they advance, without adding a
+sixth entity or service. Use unique folio ordinal and generation idempotency keys. Implement
+`reserved -> generating -> ready -> exposed|failed`; an atomic exposure freezes prose, layout,
+aperture spans, and required assets. Use real test Postgres, not repository mocks.
 
 **Green:** A fresh clone installs, migrates, builds, lints, typechecks, and passes unit plus DB
 integration tests. Duplicate reservations spend once; exposed-record mutation is rejected.
 
-### B0 — Author and validate finite beat maps
+### B0 — Author movement beats and continuation topology
 
 **Depends on:** A0.
 
-**Red:** A beat-map validator rejects the missing/incomplete 14-folio root and three 2–4-folio
-satellite arcs.
+**Red:** A movement-map validator rejects the missing/incomplete 14-folio root movement, its prepared
+successor opening, three 2–4-folio child opening movements, and one child movement-boundary crossing.
+Portfolio mutations also fail when every story remains in Oakland, every viewpoint is Jay/Tan, or
+Phantas and Mystas are only vocabulary.
 
-**Implement:** Add `prototype-beats.json` and `aperture-books.json`. Every beat names concrete action
-and motivation, causal predecessor, state before/after, required world facts, open/resolved thread
-IDs, exact ending contribution, image job, and one or two possible semantic apertures. Root scope
-covers the meeting, phone/payment incident, courtship, intelligible temporal orientation, and an
-honest decision/threshold. Satellites cover the 1989 earthquake tourism, Clef/extraction economy,
-and maps/visas/cross-era dependency in forms suited to each subject.
+**Implement:** Write `content/prototype-movements.md` and `content/prepared-children.md` in natural
+prose. Each finite movement names its dramatic question, the situation it begins from, the concrete
+change it reaches, and its resting point. Each folio gets only the few sentences production needs:
+what occurs and changes, why the person acts, what narrative job an image has, and which phrase might
+open laterally. Do not create fact IDs, thread ledgers, state-before/state-after records, or a
+literary schema. The first root movement covers the meeting, phone/payment incident, courtship,
+intelligible temporal orientation, and honest decision/threshold; its successor begins from that
+choice instead of replaying courtship.
 
-**Green:** Schema and mutation tests pass; a human table read finds no filler, lore-only beat,
-arbitrary cutoff, hidden CYOA action, or image that merely restates the text.
+Each child records the exact founding source, its own viewpoint or experiential center, primary
+place and temporal position, inherited givens, lineage-local decisions, causal movement, and local
+boundary. A child must not default to Jay, Tan, Oakland, or their six-part sequence merely because
+world.md contains them. The garden as a whole includes a non-root viewpoint, a primary setting beyond
+Oakland or the Bay Area, and a materially consequential use of Phantas or Mystas. Clef may appear,
+but no portfolio rule determines what it is.
+
+**Green:** Structure, mutation, sibling isolation, and coverage tests pass; a human read finds no
+filler, lore-only beat, arbitrary cutoff, hidden CYOA action, child root replay, encyclopedia entry,
+or image that merely restates the text. The prepared successor demonstrates continuation through a
+changed state rather than indefinite tension.
 
 ### B1 — Build the GPT Image 2 adapter and replay contract
 
@@ -246,28 +275,35 @@ the manifest; invalid/rejected outputs cannot become assets or anchors.
 
 **Red:** The human scorecard and 8–12-image stress sequence are absent.
 
-**Implement:** Compare two or three genuinely distinct treatments, select one, create approved
-identity/location/object anchors, then stress Jay alone, Jay/Tan together, close-up, wide shop,
-wardrobe/lighting change, Oakland exterior, temporal transit/map, return to shop, and optionally a
-neighbor repair and aperture child. Iterate prompt/reference roles, not reader architecture.
+**Implement:** Compare two or three genuinely distinct treatments of the location-neutral shared
+medium, then select one. Create only the reusable identity anchors the actual sequence needs; create
+place, object, and open-concept references at book scope. Stress a recurring root figure in close and
+wide views, a purposeful appearance change, return to a changed place, two materially distinct
+future eras, one non-Oakland place, a non-root central figure, meaningful Phantas or Mystas
+geography, parent-to-child inheritance, a book-local realization of an open object, and a neighbor
+repair. Iterate prompt/reference roles, not reader architecture.
 
 **Green:** Side-by-side human review approves identity, place, purposeful change, coherent medium,
-and meaningful text/image division of labor. Only approved outputs enter `anchors.json`.
+future plurality, geographic/temporal range, and meaningful text/image division of labor.
+`anchors.json` records scope: shared, recurring identity, or book-local. No Clef form, shop plan,
+device silhouette, or future style is promoted globally by accident.
 
 ### C0 — Build the complete static garden fixture
 
 **Depends on:** B0, B2.
 
-**Red:** Fixture validation fails on missing root/child folios, images, alt text, aperture spans,
-return coordinates, layouts, or finite endings.
+**Red:** Fixture validation fails on missing root/child folios, successor openings, movement-boundary
+metadata, images, alt text, aperture spans, return coordinates, layouts, or portfolio range.
 
-**Implement:** Produce the full 14-folio root and three prepared books with approved prose/images.
-Human writing and heavy editing are allowed: this fixture tests the product, not the generator. Add
-cover, discovered-library metadata, image roles, exact apertures, and deterministic cold-path demo
-states. No placeholder title or legacy generated corpus is permitted.
+**Implement:** Produce the full 14-folio first root movement, one or two folios of its successor,
+three prepared child opening movements, and at least one child successor opening with approved
+prose/images. Human writing and heavy editing are allowed: this fixture tests the product, not the
+generator. Add cover, discovered-library metadata, image roles, exact apertures, and deterministic
+cold-path demo states. No placeholder title or legacy generated corpus is permitted.
 
-**Green:** Every visible aperture resolves, every book ends, every required image contributes new
-narrative information, and the entire journey can run without network or paid calls.
+**Green:** Every visible aperture resolves, ordinary Next crosses root and child movement boundaries,
+every required image contributes new narrative information, the portfolio proves temporal and
+geographic range, and the entire journey can run without network or paid calls.
 
 ### C1 — Build the instant reader shell
 
@@ -311,9 +347,9 @@ stranded state, and incorrect return before fixing anything.
 reader feels like one stable object that invites another page and another aperture. Commit the
 walkthrough, screenshots, and findings under `docs/qa/`.
 
-**Green:** A reader can enter deliberately, read, turn, open a prepared phrase, return exactly,
-highlight later text, distinguish filter from creation, reload/resume, and reach a real ending—and
-wants to continue exploring.
+**Green:** A reader can enter deliberately, read, turn, cross a movement boundary, open a prepared
+phrase, return exactly, highlight later text, distinguish filter from creation, reload/resume, and
+wants to continue both forward and laterally.
 
 **Stop:** If the static garden is not pleasurable after focused iteration, revisit concept/content.
 Do not connect text generation to compensate for a dull reader.
@@ -338,9 +374,9 @@ over the hard equation fail before publication or additional spend.
 **Depends on:** D0, B0.
 
 **Red:** A randomized-insertion test fails until folio N receives, exactly once and in order: the
-full world source, short current-book brief, parent aperture/source when applicable, every prior
-exposed current-book folio and narrative image, the approved temporal-rules block, current folio
-brief, then the light writing request and output contract.
+full world source, `BOOK_ORIGIN`, `CURRENT_MOVEMENT_BRIEF`, every prior exposed current-book folio
+and narrative image, the approved temporal-rules block, current folio brief, then the light writing
+request and output contract.
 
 **Implement:** Build a stateless compiler with stable document boundaries, IDs/digests/order,
 exclusions, prompt-cache hints, exact rendered-request archive, context manifest, and official token
@@ -349,7 +385,7 @@ count. Full history remains active while admitted.
 **Green:** Identical sources produce identical context digests; any source/image/plan change changes
 the digest. The rendered baseline contains the complete world exactly once and contains no Undertow,
 visual-production authority, or optional craft examples. No rolling summary, recent-N window,
-provider memory/compaction, `chars/4`, or silent truncation path exists. The pilot never enters
+provider memory/compaction, `chars/4`, or silent truncation path exists. The initial garden never enters
 long-form mode.
 
 ### D2 — Establish the lightly steered prose baseline
@@ -372,22 +408,32 @@ paraphrasable, and worth continuing. A model score cannot override human failure
 **Stop:** If a small number of targeted experiments cannot make the baseline readable, reconsider
 the story plan or writing contract; do not build a multi-model tribunal.
 
-### D3 — Add finite planning and pagewise generation
+### D3 — Add movement planning and pagewise generation
 
 **Depends on:** D2, B2.
 
-**Red:** A real-DB integration test fails until one idempotent book plan reserves exactly one folio,
+**Red:** Real-DB integration tests fail until one idempotent movement plan reserves exactly one folio,
 obtains one Fable result and the required reference-bound image, validates both, and exposes them in
-one atomic ready transition.
+one atomic ready transition. Separate mutations catch root-phase replay, a post-arc movement that
+undoes the true ending, child continuation of the parent scene, root-plot recasting, and sibling
+contamination.
 
-**Implement:** Keep anchor/prepared plans human-authored. A new dynamic book may use one bounded
-planning call, then one prose call and normally one image call per folio. Persist attempts and exact
-founding context; use Postgres leases; retry only a named failure. Never generate a chapter as one
-blocking unit and never stream prose into normal reading.
+**Implement:** Keep anchor/prepared plans human-authored. At a movement boundary, use one bounded
+planning call to produce a short natural-prose brief before generating the next folio. Before the
+root arc resolves, the brief advances the next unresolved source movement. A post-arc movement starts
+from the true ending's changed situation and creates a new dramatic engine without importing
+Undertow by default. A new child starts from its exact founding passage or title intent and defines
+its own viewpoint, place/time, question, intended change, and boundary; the root plot is reference,
+not its template. Later child movements grow only from that book's exposed history and lineage-local
+decisions. Enforce sibling isolation in the normal path.
+
+After planning, use one prose call and normally one image call per folio. Persist attempts, exact
+origin, movement brief, and scoped visual profile; use Postgres leases; retry only a named failure.
+Never generate a movement as one blocking prose unit and never stream prose into normal reading.
 
 **Green:** Duplicate requests spend once; a process crash resumes safely; required text and image
-appear together; unseen work can be replaced; exposed work cannot mutate; every generated book has
-a finite plan and ending.
+appear together; unseen work can be replaced; exposed work cannot mutate; root and child books cross
+movement boundaries without replay, terminal screens, or scope leakage.
 
 ### D4 — Prove the dormant long-form provenance seam
 
@@ -426,12 +472,15 @@ leaves navigation honest; measured hit/waste data justifies the horizon.
 explicit action, duplicates a child, loses its source, replaces the reader with a generic loader, or
 cannot return exactly after reload.
 
-**Implement:** Persist exact founding span/title intent and navigation ancestry, create a finite
-plan, keep the source reader mounted with a book-native creation state, and enter only when the first
-folio is atomically ready. Search filtering and title creation remain distinct paths.
+**Implement:** Persist exact founding span/title intent and navigation ancestry, create the child's
+independent first-movement brief and book-local visual profile, keep the source reader mounted with a
+book-native creation state, and enter only when the first folio is atomically ready. Search filtering
+and title creation remain distinct paths.
 
-**Green:** Dynamic children are finite, idempotent, and returnable through nested books and reload;
-selection and explicit confirmation survive the cold path; no auth wall or global spinner appears.
+**Green:** Dynamic children have independent premises, are idempotent, continue through finite
+movements, and remain returnable through nested books and reload; selection and explicit
+confirmation survive the cold path; no auth wall, global spinner, root replay, or sibling leakage
+appears.
 
 ### E0 — Add long-form reconstruction only when measured **[CONDITIONAL / DEFERRED]**
 
@@ -468,7 +517,10 @@ may cross 363,136 input tokens while waiting.
 - ten expected prepared page turns under 250 ms P95 and prepared apertures under 500 ms P95;
 - a true cold creation state visible within one second without replacing the reader;
 - eight consecutive generated folios passing human clarity and desire review;
-- approved visual identity/place continuity and meaningful images;
+- root and child movement-boundary crossings that begin from changed state rather than replay;
+- a child with an independent premise plus normal-path sibling isolation;
+- approved visual identity/place continuity, two distinct futures, a non-Oakland setting, and
+  meaningful images;
 - keyboard, touch, focus, contrast, alt text, reduced motion, responsive layout, reload, bookmark,
   exact Back, and nested-return coverage;
 - hard proof every text attempt is Fable + `xhigh`, exactly counted, below 400k, and has no fallback;
@@ -500,8 +552,8 @@ reader smoke checks pass, provenance is inspectable, and no unrelated environmen
 
 **Red:** From a clean deployed session, use the in-app Browser at desktop and mobile sizes to run:
 library → explicit cover → ten page turns → prepared aperture → exact return → arbitrary highlight
-creation → nested return → shelf filter → confirmed title creation → bookmark/reload/resume → real
-ending. Record failures before fixes.
+creation → nested return → shelf filter → confirmed title creation → bookmark/reload/resume → root
+and child movement-boundary crossings. Record failures before fixes.
 
 **Implement:** Fix only observed release issues, rerun all gates, and redeploy through Git.
 

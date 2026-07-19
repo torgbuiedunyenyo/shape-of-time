@@ -1,8 +1,11 @@
 # Shape of Time
 
-An illustrated generative hyperbook: a calm e-reader containing finite books whose phrases can open into other finite books.
+An illustrated generative hyperbook: a calm e-reader where books continue through finite narrative
+movements and phrases can open into other books.
 
-Turn a folio to move through the current story. Open a phrase, a deliberate highlight, or a requested title to move sideways into a nearby story. Back returns to the exact passage. Every book can end; the library can keep opening.
+Turn a folio to move through the current story. Open a phrase, a deliberate highlight, or a requested
+title to move sideways into a nearby story. Back returns to the exact passage. Every movement can
+rest; every book can continue.
 
 ## Current state
 
@@ -18,12 +21,15 @@ Start here, in order:
 The expanded world source is in
 [`content/shape-of-time/world.md`](content/shape-of-time/world.md), with byte-level provenance in
 [`content/shape-of-time/SOURCE.md`](content/shape-of-time/SOURCE.md). It is the sole comprehensive
-factual and plot authority. The finite first-book scope is in
-[`content/shape-of-time/pilot-brief.md`](content/shape-of-time/pilot-brief.md).
+factual and plot authority. The first finite root movement is in
+[`content/shape-of-time/root-movement-01.md`](content/shape-of-time/root-movement-01.md); the root book
+continues from its changed state rather than ending there.
 
 The Fable prompt contract lives under [`prompts/fable/`](prompts/fable/): the baseline XML
 template, the explicit temporal guardrail, and a separately excluded set of optional craft examples
-for a controlled experiment. Visual development remains separate from the prose prompt.
+for a controlled experiment. The separate
+[`visual-bible.md`](content/shape-of-time/visual-bible.md) defines shared visual grammar and scoped
+book/folio continuity without deciding Clef, future cultures, or scene details globally.
 
 ## Ancestry
 

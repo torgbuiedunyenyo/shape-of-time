@@ -41,15 +41,20 @@ Generation and provider credentials remain disconnected for this gate.
 
 Required proof:
 
-- The root Shape of Time movement is finite, complete for its intended prototype arc, and contains
-  the approved illustrated folios.
-- Each prepared aperture book is finite, has a real ending, and can be read without placeholder
-  prose, titles, images, or loading states.
+- The first root Shape of Time movement has a complete local change and contains the approved
+  illustrated folios; the following prepared folio proves that Next can cross a movement boundary
+  without replay, reset, or a terminal interstitial.
+- Each prepared child has its own founding premise and complete opening movement. At least one child
+  also crosses into a following movement, and none merely continues the parent scene or replays the
+  root plot.
+- The prepared garden collectively includes a central perspective other than Jay or Tan, a primary
+  setting outside Oakland or the Bay Area, and a story in which Phantas or Mystas materially changes
+  the place, movement, causation, or stakes.
 - Every visible suggested phrase opens a real prepared destination.
 - Prose and image share narrative work. An image adds place, evidence, relationship, contradiction,
   atmosphere, or deliberately unspoken information; it does not merely paraphrase nearby text.
-- A fresh reader can open the cover, read, turn pages, explore laterally, return, and reach an
-  ending without instructions from the builder.
+- A fresh reader can open the cover, read, turn pages, cross a movement boundary, explore laterally,
+  and return without instructions from the builder.
 - There is no title-page auto-advance, global generation banner, dead Next action, stranded child
   book, generic loading takeover, or unexplained control.
 
@@ -71,7 +76,9 @@ A clean session must complete this sequence:
 7. Filter the shelf by an existing title.
 8. Explicitly choose Create a book called … for a missing title; typing alone must never spend.
 9. Bookmark, reload, and resume the exact book, folio, and place.
-10. Reach a real ending and return to the shelf or an available aperture.
+10. Finish a movement, use ordinary Next to enter the following movement, and verify that it begins
+    from the changed situation rather than restarting the prior tension.
+11. Stop at a later movement boundary or open an available aperture, then return to the shelf.
 
 The journey fails if a mechanic exists only as an isolated demo, if navigation state is duplicated,
 or if an auth wall or generic spinner replaces the reading surface.
@@ -93,6 +100,11 @@ At least two fresh readers independently record:
 - any repeated pseudo-literary, meta-referential, abstract, or allusive mannerism;
 - whether they wanted to turn the next page, and why.
 
+For every prepared child, readers must also be able to state its local premise, how it grew from the
+founding phrase, what changed during its movement, and why it does not replay the Jay and Tan trajectory
+or collapse into an encyclopedia entry. Across the garden, readers judge whether the
+world feels larger than one couple, Oakland, and a binary past/future corridor.
+
 PASS requires that readers can accurately paraphrase events, motives, and consequences; no reader
 finds the run broadly unintelligible; and the project owner judges it worth continuing. A repeated
 failure may motivate one targeted prompt change followed by a blinded rerun. Do not add a tribunal,
@@ -108,9 +120,13 @@ summary as a repeated failure; the beat, history, and every other prompt input r
 
 Before production plates are approved, review an 8–12-image continuity sequence containing:
 
-- Jay and Tan across changes of pose, scale, clothing, lighting, and time;
+- a recurring root character across changes of pose, scale, clothing, lighting, and time;
+- a non-root central figure and a primary place beyond Oakland;
+- two materially distinct future cultures rather than one generic future style;
+- a place where Phantas or Mystas has visible material consequences;
 - at least one recurring location seen from materially different views;
-- a recurring object or visual fact whose continuity matters;
+- a book-local object or open visual fact whose continuity matters within that book without becoming
+  global canon;
 - one purposeful change that must not be mistaken for drift;
 - a parent or neighboring image used as a reference for a new scene.
 
@@ -131,7 +147,7 @@ Real-browser tests and the manual journey must prove:
 - Back to passage restores source book, folio, exact span, and practical reading position;
 - return still works after reload, responsive reflow, and a later-page or cross-paragraph selection;
 - Next and Previous neither skip nor duplicate folios;
-- cover, first folio, and ending are stable states rather than transient flashes;
+- cover, first folio, and movement boundary are stable states rather than transient flashes;
 - bookmark/resume and discovered shelf entries survive reload;
 - book-scoped creation status never leaks onto another book.
 
