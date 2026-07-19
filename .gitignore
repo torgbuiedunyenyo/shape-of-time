@@ -3,6 +3,7 @@ dist/
 coverage/
 .turbo/
 .cache/
+.local/
 test-results/
 playwright-report/
 .DS_Store

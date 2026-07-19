@@ -52,7 +52,9 @@ Once a package manifest exists, `pnpm run gates` is the required pre-push gate. 
 - Narrative images use the pinned GPT Image 2 contract in `SPEC.md` and `PLAN.md`.
 - The complete Fable request must remain below 400,000 total context tokens.
 - No paid call occurs without the plan item, a recorded ceiling, and provenance capture already in place.
-- Deployment eventually uses a separate Railway prototype project/environment and Git-triggered deploys only. Never use `railway up` for this Git-integrated project.
+- Deployment begins with A2 in Railway project `8b20e07d-c256-44c9-85be-d1c7e50ac83d`. Every
+  `shape-of-time` application source deployment comes from a passing `main` push. Never use
+  `railway up`, manual redeploy, or Deploy Latest Commit for this Git-integrated service.
 
 ## Session close
 

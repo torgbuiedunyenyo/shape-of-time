@@ -12,11 +12,16 @@ An unrun gate is not a pass. A blocked gate blocks the release.
 
 The order matters:
 
-1. Prove the complete static garden is pleasurable with generation disconnected.
-2. Prove the reader journey and exact navigation in the in-app Browser.
-3. Prove the text and image provider contracts under an explicit spend ceiling.
-4. Connect pagewise generation, prefetch, and cold apertures.
-5. Repeat the complete journey against the deployed prototype.
+1. Establish the application, real Postgres, private bucket, and health route on the designated
+   Railway prototype from the first executable commit.
+2. Prove the complete static garden is pleasurable with generation disconnected.
+3. Prove the reader journey and exact navigation in the in-app Browser.
+4. Prove the text and image provider contracts under an explicit spend ceiling.
+5. Connect pagewise generation, prefetch, and cold apertures.
+6. Repeat the complete journey against the deployed prototype.
+
+An early healthy deployment proves only the runtime and infrastructure boundary. It is not a static
+garden pass, provider pass, literary pass, or release.
 
 If the static garden is not worth reading and exploring, stop. Generation is not a remedy for an
 unpleasant reader.

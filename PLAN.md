@@ -1,8 +1,8 @@
 # Shape of Time — Compaction-Safe Execution Plan
 
-> **Status:** fresh repository; no product implementation exists.
-> **CURRENT / NEXT TASK: A0 — lock the canon, movement model, and visual authority.**
-> A1 selects the one-app stack before any application scaffolding. Do not skip ahead.
+> **Status:** A0 authority and A1 architecture are accepted; no application implementation exists.
+> **CURRENT / NEXT TASK: A2 — scaffold the application, durable state, and first Railway runtime.**
+> Do not begin B1 or the reader before the A2 spine is green locally and on Railway.
 
 This is the dependency-ordered work queue for a small illustrated hyperbook. It intentionally does
 not inherit code, data, schemas, corpus, or compatibility obligations from `auto-biblio`. Git in the
@@ -134,21 +134,21 @@ local state holds bookmarks, discoveries, and current place during the prototype
 ## Dependency map
 
 ```text
-A0 canon/story/visual lock [CURRENT]
-  -> A1 one-app stack decision -> A2 app + Postgres spine
+A0 canon/story/visual lock [DONE]
+  -> A1 one-app stack decision [DONE] -> A2 app + Postgres/Railway spine [CURRENT]
 A0 -> B0 movement beats and continuation topology
 A0 + A2 -> B1 image adapter -> B2 continuity proof
 B0 + B2 -> C0 static garden -> C1 reader -> C2 navigation -> C3 delight gate
 C3 + A2 -> D0 Fable/count adapter -> D1 full-history compiler -> D2 prose baseline
 D2 + B2 -> D3 movement planning + pagewise generation -> D4 dormant provenance seam
 D4 + C2 -> D5 predictive preparation -> D6 dynamic highlight/title
-D6 -> F0 release gate -> F1 isolated Railway deploy -> F2 deployed Browser QA
+D6 -> F0 release gate -> F1 Railway release hardening -> F2 deployed Browser QA
 D4 + D6 --only if measured trigger fires--> E0 long-form reconstruction -> F0
 ```
 
 ## Queue
 
-### A0 — Lock canon, story, and visual authority **[CURRENT / NEXT]**
+### A0 — Lock canon, story, and visual authority **[DONE]**
 
 **Depends on:** nothing.
 
@@ -190,7 +190,7 @@ optional examples. A reviewer can read the complete original world, understand t
 movement boundary and continued root book, inspect the exact baseline prompt shape, distinguish world,
 lineage-local, and folio visual scope, and see how a child avoids root-plot gravity.
 
-### A1 — Deliberately select the one-app stack
+### A1 — Deliberately select the one-app stack **[DONE]**
 
 **Depends on:** A0.
 
@@ -201,28 +201,48 @@ stack, test runner, database/migration path, browser-test path, or object-storag
 options. Select exact versions for one TypeScript package and one Node process serving the React
 reader, HTTP endpoints, static assets, and the in-process queue. Specify local/CI Postgres, migration
 tooling, tests, lint/typecheck/build, image storage, and Railway execution. Reject any option that
-requires a second runtime service or framework-induced deployment graph.
+requires a second runtime service or framework-induced deployment graph. Use the owner-designated
+Railway project `8b20e07d-c256-44c9-85be-d1c7e50ac83d` from the first executable commit.
 
 **Green:** A fresh-clone command matrix is explicit; the architecture audit proves one package, one
 process, one composition root, and no Redis/worker/workspace graph. The decision explains tradeoffs
 rather than inheriting a familiar stack by reflex.
 
-### A2 — Scaffold the application and durable state spine
+### A2 — Scaffold the application and durable state spine **[CURRENT / NEXT]**
 
 **Depends on:** A1.
 
 **Red:** Unit and real-Postgres integration tests fail because the app, health route, transaction
-boundary, five-table schema, state machines, and object-storage interface are absent.
+boundary, five-table schema, state machines, and object-storage interface are absent. The linked
+Railway service also has no successful executable deployment, Postgres, bucket, domain, migration
+command, or healthcheck.
 
-**Implement:** Build the minimal reader/server shell, strict environment schema, migrations,
-repositories, structured logging, CI, and content-addressed asset adapter. The Book record owns an
-append-only ordered set of movement briefs; Folios identify the brief they advance, without adding a
-sixth entity or service. Use unique folio ordinal and generation idempotency keys. Implement
+**Implement:** Build the ADR-selected Hono/Vite/React shell, strict environment schema, migrations,
+repositories, structured logging, CI, and content-addressed Railway-bucket adapter. The Book record
+owns an append-only ordered set of movement briefs; Folios identify the brief they advance, without
+adding a sixth entity or service. Use unique folio ordinal and generation idempotency keys. Implement
 `reserved -> generating -> ready -> exposed|failed`; an atomic exposure freezes prose, layout,
 aperture spans, and required assets. Use real test Postgres, not repository mocks.
 
+Finish and commit the runnable application locally before changing Railway. Keep app autodeploy
+disabled while provisioning Postgres pinned to
+`ghcr.io/railwayapp-templates/postgres-ssl:18.4`, its volume, and one private SJC bucket. Enable daily
+volume backups before nondisposable data and disable Postgres's external TCP proxy. Stage the app's
+US-West region, private references, Railpack/start/pre-deploy/`/healthz` configuration, and Wait for
+CI without deploying. Then enable app autodeploy and push `main`; that passing push alone creates the
+first app source deployment. After migration, schema digest, server version, health, and active commit
+are verified, generate the public domain and run the reader smoke test. Never run `railway up`, manual
+redeploy, or Deploy Latest Commit. Resource provisioning deployments are allowed and recorded.
+
+Railway bucket contents are disposable during A2. B1 must establish and verify an export/recovery
+path before any paid image output is retained there.
+
 **Green:** A fresh clone installs, migrates, builds, lints, typechecks, and passes unit plus DB
-integration tests. Duplicate reservations spend once; exposed-record mutation is rejected.
+integration tests. Duplicate reservations spend once; exposed-record mutation is rejected. The
+Git-triggered Railway app deployment matches the pushed commit; its pre-deploy succeeded, schema
+digest and Postgres 18.4 server version match, backups are enabled, the database has no public proxy,
+and the bucket round trip passes. `/healthz` and the post-health generated-domain reader smoke test
+are green.
 
 ### B0 — Author movement beats and continuation topology
 
@@ -264,10 +284,13 @@ cost/latency capture are enforced.
 
 **Implement:** Add typed generation/edit requests, reference-pack compilation, content-addressed
 storage, exact request archival, transient retry with one idempotency key, and a sanitized metadata
-record/replay fixture. Reject served-model mismatch, missing required anchors, or failed moderation.
+record/replay fixture. Before retaining a paid result in the Railway bucket, implement and restore-test
+an export/recovery path for content-addressed image objects. Reject served-model mismatch, missing
+required anchors, failed moderation, or an unprotected sole copy.
 
 **Green:** Replay is deterministic without secrets or generated binary leakage; input order changes
-the manifest; invalid/rejected outputs cannot become assets or anchors.
+the manifest; invalid/rejected outputs cannot become assets or anchors; every retained paid image has
+a verified recoverable copy outside the live Railway bucket.
 
 ### B2 — Select visual direction and prove continuity
 
@@ -530,20 +553,22 @@ may cross 363,136 input tokens while waiting.
 
 Fix evidenced failures and rerun; do not waive them.
 
-### F1 — Deploy to an isolated Railway prototype environment
+### F1 — Harden the existing Railway prototype for release
 
 **Depends on:** F0.
 
-**Red:** A read-only Railway preflight has not yet proven the exact project, isolated environment,
-GitHub source branch, one app service, Postgres service, bucket/CDN, migration command, health route,
-and required variable names. Never print secret values.
+**Red:** The already-running Railway prototype has not yet proven release configuration, backups,
+active commit equality, production migrations, bounded connections, health, asset delivery,
+generation provenance, and the complete reader smoke path for the F0 commit. Never print secret
+values.
 
-**Implement:** Use the Railway skill. The existing Shape of Time project
-`7ab4e3ad-05f8-4e64-8026-0f77800e814a` is a read-only reference and must not be repurposed by
-assumption. Create or select an explicitly separate prototype project, configure only that target,
-commit and push, and rely exclusively on the Git-triggered deployment. Never use `railway up`.
+**Implement:** Use the Railway skill against owner-designated project
+`8b20e07d-c256-44c9-85be-d1c7e50ac83d` only. Audit and harden its existing app, Postgres, bucket,
+domain, backup, migration, health, and variable-reference configuration; commit and push any required
+change and rely exclusively on the Git-triggered deployment. Never use `railway up`.
 
-**Green:** The running deployment matches the pushed commit, migrations ran exactly once, health and
+**Green:** The running deployment matches the pushed commit, that commit's pre-deploy succeeded, the
+schema digest is correct, every migration identifier appears once in the migration ledger, health and
 reader smoke checks pass, provenance is inspectable, and no unrelated environment changed.
 
 ### F2 — Pass deployed in-app Browser and human QA

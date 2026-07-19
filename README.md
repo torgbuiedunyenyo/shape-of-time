@@ -9,7 +9,11 @@ rest; every book can continue.
 
 ## Current state
 
-This repository is the clean successor to the retired `auto-biblio` experiment. It currently contains the governing product contract, proof model, implementation plan, and verified Shape of Time source. It contains no product implementation, generated corpus, deployment, or paid generation output yet.
+This repository is the clean successor to the retired `auto-biblio` experiment. It currently contains
+the governing product contract, proof model, implementation plan, verified Shape of Time source, and
+the accepted one-process stack decision. It contains no product implementation, generated corpus, or
+paid generation output yet. The linked Railway prototype exists, but its documentation-only commit is
+not a runnable deployment; A2 builds and deploys the first application spine.
 
 Start here, in order:
 
@@ -31,9 +35,14 @@ for a controlled experiment. The separate
 [`visual-bible.md`](content/shape-of-time/visual-bible.md) defines shared visual grammar and scoped
 book/folio continuity without deciding Clef, future cultures, or scene details globally.
 
+The accepted application and Railway topology is recorded in
+[`docs/adr/0001-one-process-stack.md`](docs/adr/0001-one-process-stack.md).
+
 ## Ancestry
 
 - [`torgbuiedunyenyo/infinite-book`](https://github.com/torgbuiedunyenyo/infinite-book) is the earlier Shape of Time implementation and the source-history repository.
 - [`torgbuiedunyenyo/auto-biblio`](https://github.com/torgbuiedunyenyo/auto-biblio) is the retired Infinite Library implementation.
 - [`LEGACY.md`](LEGACY.md) records what was retained and what was deliberately left behind.
-- [`shapeoftime.net`](https://shapeoftime.net) is the existing public Shape of Time experience and a reference point, not this repository's deployment target.
+- [`shapeoftime.net`](https://shapeoftime.net) is the existing public Shape of Time experience and a
+  reference point. This successor deploys first to its isolated Railway-generated domain; any later
+  custom-domain cutover is deliberate.

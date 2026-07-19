@@ -296,8 +296,8 @@ after the entire composed surface is ready.
 ## Architecture boundary
 
 The prototype is one TypeScript package, one deployable Node process, one composition root, one
-Postgres database, and one image bucket/CDN. The reader, HTTP server, domain, text and image adapters,
-small durable generation loop, schema, and repositories live in that application.
+Postgres database, and one private image bucket. The reader, HTTP server, same-origin domain, text and
+image adapters, small durable generation loop, schema, and repositories live in that application.
 
 The initial durable model needs only books, folios, apertures, assets, and generation attempts.
 Bookmarks, discoveries, reading place, and local navigation history remain browser-local. A small

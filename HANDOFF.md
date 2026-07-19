@@ -18,8 +18,12 @@ _Updated 2026-07-18._
 - The visual bible is now a location-neutral pending proposal for shared grammar and scoped local
   continuity; it is explicitly excluded from the prose baseline and contains no fixed Clef, scene,
   shop, device, or universal future design.
+- The owner approved A0 and directed the project to build on Railway from the beginning.
+- A1 selects a Vite-built React SPA, React Router Data Mode, one Hono Node process, Kysely/`pg`, real
+  Postgres tests, and a private Railway bucket. Exact versions and rejected alternatives are in
+  `docs/adr/0001-one-process-stack.md`.
 - No application code, package manifest, generated corpus, database, model output, paid generation,
-  Railway project, or deployment exists yet.
+  or successful runnable deployment exists yet.
 
 ## Reorganization record
 
@@ -52,7 +56,7 @@ The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. Imag
 - `content/shape-of-time/undertow.md` is a separate sequel seed and is excluded from the current root
   movement and from automatic post-arc continuation.
 
-## A0 review state
+## A0 completion
 
 - Red observed on the replacement contract: the world digest passed while six tests failed because
   the rejected duplicate files still existed and pilot-brief.md, temporal-rules.md, write-folio.md,
@@ -62,7 +66,7 @@ The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. Imag
 - A later owner-review red recorded eight expected failures for the missing root-movement rename,
   finite-movement continuation, child root-plot isolation, Clef openness, future plurality,
   non-Oakland range, and separation of shared/book/folio visual scope.
-- Current local result: `node --test scripts/*.test.mjs` passes 14/14;
+- Current local result: `node --test scripts/*.test.mjs` passes 18/18;
   `node scripts/verify-genesis.mjs` and `git diff --check` pass.
 - The checked-in world remains byte-exact. No compressed story summary, fact taxonomy, or
   machine-shaped narrative manifest competes with it.
@@ -84,19 +88,51 @@ The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. Imag
 - The legacy repository investigation recovered the useful post-arc new-engine and independent-child
   principles while explicitly rejecting its endless seventh act, running summaries, fact taxonomy,
   and global title identity.
-- A0 remains open for owner editorial review of the first root movement, prompt materials, and visual proposal.
-  A1 must not begin until that review resolves the remaining visual decisions.
+- The owner approved this authority layer on 2026-07-18. A0 is complete.
+
+## A1 architecture decision
+
+- Red observed: the new architecture test failed because
+  `docs/adr/0001-one-process-stack.md` did not exist.
+- Independent review then drove additional reds: the decision lacked an executable local
+  Postgres/filesystem-asset bootstrap, Docker/browser prerequisites, and safe ordered Railway staging;
+  the future package-manifest checker also initially allowed version, script, and topology mutations.
+  All now reject the recorded failures.
+- Current official documentation and live package metadata were checked before selection.
+- Runtime: Node 24.18.0 and pnpm 11.15.0.
+- Reader/server: React 19.2.7, React Router 8.2.0 Data Mode, Vite 8.1.5, Hono 4.12.31, and one
+  `@hono/node-server` process. There is no SSR or framework server graph.
+- Persistence: Kysely 0.29.4 over `pg` 8.22.0, Kysely file migrations, Postgres 18 integration
+  tests through Testcontainers, and no ORM/codegen daemon.
+- Railway target: project `8b20e07d-c256-44c9-85be-d1c7e50ac83d` (`lucky-magic`), existing service
+  `shape-of-time`, environment `production`, source `torgbuiedunyenyo/shape-of-time:main`.
+- Read-only Railway inspection found one failed/stopped docs-only Railpack deployment for `1b7fbf2`,
+  no active deployment, Postgres, bucket, domain, healthcheck, migration command, or start command.
+  The app is currently placed in Europe; A2 moves it to US West before persistent data exists.
+- Intended A2 topology is exactly one app process, one colocated Railway Postgres resource, one
+  private SJC image bucket, and one Railway-generated domain. Every `shape-of-time` application
+  source deployment remains Git-triggered; Postgres and bucket resource deployments are allowed.
+- A2 first commits the runnable application locally without pushing, then disables app autodeploy
+  before provisioning pinned Postgres 18.4 plus the bucket or changing app settings. It enables daily
+  database backups, disables the public database proxy, and stages app configuration without
+  deployment. Only then does it re-enable autodeploy and push; the domain is created after that source
+  deployment is healthy.
+- A1 is complete. No package or Railway resource was provisioned early to make the decision appear
+  implemented.
 
 ## Spend and deployment
 
 - Text-generation spend: `$0`.
 - Image-generation spend: `$0`.
-- Infrastructure mutation: none.
-- Deployment: none.
+- Infrastructure mutation: the local repository was linked to the owner-designated Railway project;
+  no remote service, variable, region, database, bucket, domain, or deployment setting changed.
+- Deployment: no active deployment. The existing documentation-only deployment
+  `dd843fec-b1bd-4305-b5a2-2c880d44ebfd` is failed/stopped as expected.
 
 ## Next action
 
-Project owner reviews content/shape-of-time/root-movement-01.md, the finite-movement/infinite-book
-model in SPEC.md, the child-independence contract in prompts/fable/write-folio.md, and the rewritten
-content/shape-of-time/visual-bible.md. After approval or revisions, mark A0 complete in this handoff
-and only then begin A1 stack selection.
+Run A2 red tests, then scaffold and locally commit the single package and five-table durable spine.
+With app autodeploy disabled, provision only the designated Railway project's pinned Postgres and
+private bucket, stage app configuration without deployment, then re-enable autodeploy and push. Verify
+the Git-triggered app deployment, migration, `/healthz`, database, bucket, and reader shell before
+creating its domain or beginning B1 or C1.
