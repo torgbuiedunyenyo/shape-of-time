@@ -9,6 +9,7 @@ _Updated 2026-07-18._
 - Genesis commit: `7f7b5b112140db7ecb0bc2a85f28a0f38adda441`.
 - The repository has been separated from the retired `auto-biblio` implementation.
 - The initial authority, verified expanded world source, source provenance, and implementation queue are present.
+- A0's cited story bible, complete six-part arc, pilot boundary, and visual bible are drafted and structurally green, but remain explicitly pending project-owner review.
 - No application code, package manifest, generated corpus, database, model output, paid generation, Railway project, or deployment exists yet.
 
 ## Reorganization record
@@ -36,6 +37,16 @@ The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. Imag
 - World SHA-256: `e47afa2fc5db4350008f65fcea9bf6b32569e79a6ee4aeb212e066ddd139576c`.
 - `content/shape-of-time/undertow.md` is a separate sequel seed and is excluded from the pilot arc.
 
+## A0 review state
+
+- Red observed: the source-digest test passed while five authority tests failed because `authority.json`, `story-bible.md`, `arc.md`, and `visual-bible.md` were absent.
+- Current local result: `node --test scripts/*.test.mjs` passes 9/9; `node scripts/verify-genesis.mjs` and `git diff --check` pass.
+- Proposed pilot boundary: Part One ends after Jay knowingly accepts Tan's invitation and authorizes sponsorship, before travel begins.
+- Proposed visual direction: **Oakland Offset**, a grounded gouache-and-graphite illustrated novel with restrained print texture and artifact/map folios.
+- Proposed binding additions include Jay and Tan's physical designs, Clef as a packaged amber-red pressed flake, fixed shop geometry, a cracked cobalt-cased payment phone, tri-axial map grammar, a three-rail PRMTT harness, and a material visa folio.
+- Deep unmapped time, Tan's exact future year, company identity and hidden motives, Clef chemistry/effect/consumption, and the exact Part Five reunion location remain intentionally unspecified rather than delegated to generation.
+- `content/shape-of-time/authority.json` records `pending-owner`; A0 is not complete and A1 must not begin until the owner approves or revises these decisions.
+
 ## Spend and deployment
 
 - Text-generation spend: `$0`.
@@ -45,4 +56,4 @@ The writer is Claude Fable 5 at `xhigh`, without Opus or provider fallback. Imag
 
 ## Next action
 
-Take the first unblocked item in `PLAN.md`: derive and human-review the concise story bible, finite arc, visual decisions, and pilot/aperture beat maps from the verified source before selecting or scaffolding the application stack.
+Project owner reviews `content/shape-of-time/story-bible.md`, `arc.md`, and `visual-bible.md`, especially the pilot boundary, cast, Clef, shop, phone/payment mechanic, map/PRMTT forms, and preserved unknowns. After explicit approval or revisions, record the review in `authority.json`, rerun the authority gate, mark A0 complete, and only then begin A1 stack selection.

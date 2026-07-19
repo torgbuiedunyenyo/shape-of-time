@@ -15,5 +15,5 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
-      - run: node --test scripts/verify-genesis.test.mjs
+      - run: node --test scripts/*.test.mjs
       - run: node scripts/verify-genesis.mjs
