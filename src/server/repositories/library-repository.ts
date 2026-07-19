@@ -577,6 +577,91 @@ export class LibraryRepository {
     return mapBook(book);
   }
 
+  async findBookByIdempotencyKey(idempotencyKey: string): Promise<BookRecord | null> {
+    const row = await this.#database
+      .selectFrom("books")
+      .selectAll()
+      .where("idempotency_key", "=", idempotencyKey)
+      .executeTakeFirst();
+    return row === undefined ? null : mapBook(row);
+  }
+
+  /**
+   * A reader's dynamic selection on an exposed folio. The folio row itself never mutates —
+   * exposed work is immutable; the aperture is a new fact about it, validated against the exact
+   * prose it names, and the same selection is recorded once.
+   */
+  async recordSelectionAperture(input: {
+    endOffset: number;
+    folioId: string;
+    sourceText: string;
+    startOffset: number;
+    targetBookId: string;
+  }): Promise<{ created: boolean; id: string }> {
+    return this.#database.transaction().execute(async (transaction) => {
+      await sql`select pg_advisory_xact_lock(hashtextextended(${`selection:${input.folioId}:${input.startOffset}:${input.endOffset}`}, 0))`.execute(transaction);
+      const folio = await transaction
+        .selectFrom("folios")
+        .selectAll()
+        .where("id", "=", input.folioId)
+        .executeTakeFirstOrThrow();
+      if (folio.state !== "exposed") {
+        throw new Error("a selection aperture can only be recorded on an exposed folio");
+      }
+      if ((folio.prose ?? "").slice(input.startOffset, input.endOffset) !== input.sourceText) {
+        throw new Error("selection offsets do not reproduce the source text");
+      }
+      const existing = await transaction
+        .selectFrom("apertures")
+        .selectAll()
+        .where("source_folio_id", "=", input.folioId)
+        .where("kind", "=", "selection")
+        .where("start_offset", "=", input.startOffset)
+        .where("end_offset", "=", input.endOffset)
+        .executeTakeFirst();
+      if (existing !== undefined) {
+        if (existing.target_book_id !== input.targetBookId) {
+          throw new Error("this selection already opens into a different book");
+        }
+        return { created: false, id: existing.id };
+      }
+      const id = randomUUID();
+      await transaction
+        .insertInto("apertures")
+        .values({
+          end_offset: input.endOffset,
+          id,
+          kind: "selection",
+          source_folio_id: input.folioId,
+          source_text: input.sourceText,
+          span_encoding: "utf16-code-unit-v1",
+          start_offset: input.startOffset,
+          target_book_id: input.targetBookId,
+        })
+        .execute();
+      return { created: true, id };
+    });
+  }
+
+  async listSelectionApertures(folioId: string): Promise<
+    { endOffset: number; id: string; sourceText: string; startOffset: number; targetBookId: string }[]
+  > {
+    const rows = await this.#database
+      .selectFrom("apertures")
+      .selectAll()
+      .where("source_folio_id", "=", folioId)
+      .where("kind", "=", "selection")
+      .orderBy("start_offset", "asc")
+      .execute();
+    return rows.map((row) => ({
+      endOffset: row.end_offset,
+      id: row.id,
+      sourceText: row.source_text,
+      startOffset: row.start_offset,
+      targetBookId: row.target_book_id,
+    }));
+  }
+
   /** Every folio of a book in ordinal order, whatever its state — the measurement view. */
   async listFolios(bookId: string): Promise<FolioRecord[]> {
     const rows = await this.#database
