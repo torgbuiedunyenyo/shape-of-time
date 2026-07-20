@@ -61,7 +61,7 @@ test("the active queue puts one complete reader experience before further machin
   requireAll(
     plan,
     [
-      "CURRENT ITEM: D0 — Fable xhigh and exact 400k admission",
+      "CURRENT ITEM: D6 — deploy and exercise the complete dynamic reader",
       "A0/A1/A2/B0/B1 [DONE, FROZEN]",
       "Treatment B medium [DONE]",
       "C0 — Build the reader-first vertical slice **[DONE]**",
@@ -98,11 +98,11 @@ test("the active queue puts one complete reader experience before further machin
   requireAll(
     handoff,
     [
-      "codex/reader-first-slice",
-      "CURRENT ITEM: D0",
+      "codex/dynamic-reader",
+      "CURRENT ITEM: D6",
       "B2 is frozen",
       "must not dispatch",
-      "C0 and C1 are complete",
+      "C0/C1 reader-first slice complete",
     ],
     "HANDOFF.md",
   );

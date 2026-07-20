@@ -26,6 +26,6 @@ test("B1 names the external recovery and sanitized replay boundary", () => {
   assert.match(files["PLAN.md"], /replay[^.]*does not regenerate pixels/i);
   assert.match(files["HANDOFF.md"], /B1 is complete/i);
   assert.doesNotMatch(files["HANDOFF.md"], /B1 has not begun/i);
-  assert.match(files["PLAN.md"], /CURRENT ITEM: D0/i);
+  assert.match(files["PLAN.md"], /CURRENT ITEM: D6/i);
   assert.match(files["PLAN.md"], /B2[^\n]*\[DONE, FROZEN\]/i);
 });

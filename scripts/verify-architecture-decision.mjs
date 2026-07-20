@@ -308,9 +308,9 @@ export async function auditArchitectureDecision(rootUrl) {
     !authority["PLAN.md"].includes("B2 — Select the shared visual medium **[DONE, FROZEN]**") ||
     !authority["PLAN.md"].includes("C0 — Build the reader-first vertical slice **[DONE]**") ||
     !authority["PLAN.md"].includes("C1 — Pass the reader-first delight gate **[DONE]**") ||
-    !authority["PLAN.md"].includes("CURRENT ITEM: D0 — Fable xhigh and exact 400k admission")
+    !authority["PLAN.md"].includes("CURRENT ITEM: D6 — deploy and exercise the complete dynamic reader")
   ) {
-    issues.push("PLAN.md must freeze completed A2/B0/B1/B2/C0/C1 and identify D0 as the current item");
+    issues.push("PLAN.md must freeze completed foundations and identify the live D6 reader gate as current");
   }
   issues.push(
     ...railwaySequenceIssues(
