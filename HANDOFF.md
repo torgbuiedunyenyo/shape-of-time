@@ -11,7 +11,7 @@ _Updated 2026-07-19._
   worktree must not modify.
 - **CURRENT ITEM: C0 — Build the reader-first vertical slice.** Reader mechanics and a deliberately unaccepted
   working content fixture are in flight in this worktree. They are not C0 completion evidence.
-- The current C0 checkpoint passes 58 non-acceptance content/architecture tests, 116 unit tests, 20
+- The current C0 checkpoint passes 62 non-acceptance content/architecture tests, 116 unit tests, 20
   real-Postgres integration tests, 11 built-reader browser regressions, lint, typecheck, and
   production build under Node 24.18.0. The two production-content tests remain deliberately red.
 - Genesis commit: `7f7b5b112140db7ecb0bc2a85f28a0f38adda441`.
@@ -38,12 +38,11 @@ _Updated 2026-07-19._
 - B1 is complete. The exact GPT Image 2 request adapter, required-anchor/reference compiler, strict
   opaque-PNG response validator, replay v2, durable one-dispatch journal, and external recovery path
   pass the complete repository gate and three final independent adversarial reviews.
-- No generated narrative corpus or approved narrative plate exists yet. Fable has produced the first
-  Payment candidate, but it has not entered editorial progress. The working 8+2 prose in
-  `content/reader-first/slice.json` remains an editorial draft, not a Fable-authored accepted run.
-  Treatment B is approved only as the shared medium. Paid generic endpoint-contract and visual-study outputs
-  remain protected in the owner-controlled external archive; no narrative slice asset has been published to
-  the Railway bucket.
+- The first Fable-authored folio and narrative plate, Payment, are accepted into private editorial
+  progress. Current C0 progress is 1/10 folios and 1/4 plates. The remaining working 8+2 prose in
+  `content/reader-first/slice.json` is still an editorial draft, not accepted production content.
+  Treatment B remains the shared medium rather than a source of characters, place, palette, or
+  composition. No narrative slice asset has been published to the Railway bucket.
 
 ## C0 reader-first slice in flight
 
@@ -65,7 +64,7 @@ _Updated 2026-07-19._
   not change hook order; selection state clears on folio change.
 - Six browser regressions were observed red before those repairs: stable-block resume, journey leak,
   Previous-then-Next duplication, modal focus/background navigation, cancelled swipe, and 320px
-  bookmark/dialog behavior. The current non-acceptance checkpoint passes 39 authority/architecture
+  bookmark/dialog behavior. That reader-shell checkpoint passed 39 authority/architecture
   tests, 110 unit tests, 20 real-Postgres integration tests, and 11 built-reader browser tests plus
   lint, typecheck, and production build. Two historical B2 filesystem orchestration tests received
   15-second per-test ceilings after the complete unit run proved their former 5-second limit flaky;
@@ -98,7 +97,7 @@ _Updated 2026-07-19._
   and the fixed folio claim are flushed before dispatch; the claim prevents a second paid operation
   even if a manifest changes. Accepted history now resolves and verifies the complete fixed-path
   request, count, admission, response, and candidate chain before sending any prose or image onward.
-  Nineteen focused tests and all 58 non-acceptance content/architecture tests pass, along with lint
+  Nineteen focused authoring tests and all 62 non-acceptance content/architecture tests pass, along with lint
   and typecheck.
 - The written C0 ceiling is ten direct Fable operations at a `$2.00` worst-case projected maximum
   each and `$20.00` aggregate, plus six GPT Image 2 operations at a `$0.10` request-scope estimate
@@ -111,7 +110,8 @@ _Updated 2026-07-19._
   material, or child trajectory. Fable returned 242 words plus one image direction using exact
   `claude-fable-5`, `xhigh`, and `end_turn`; usage-derived estimate `$0.370920`. Candidate SHA-256 is
   `ed52dd2d072314454500515d20350561bf964fa212d3dc69f8ec50e702177986`. Three earlier prepared
-  operations remain obsolete and undispatched. C0 Fable provider calls executed: one.
+  operations remain obsolete and undispatched. Payment is the first exact entry in verified
+  `progress.json`. C0 Fable provider calls executed: one.
 - The exact GPT Image 2 route is the existing direct Image API adapter and journal. It proves the
   requested `gpt-image-2-2026-04-21` snapshot, request ID, usage, latency, and output digest; the API
   exposes no served-model field. The Codex image-generation tool cannot prove that contract and must
@@ -124,19 +124,24 @@ _Updated 2026-07-19._
   and a `$0.056578` usage estimate, but visual review rejected visible amber Clef contents, a misplaced
   six-pack, near-derelict shop treatment, and navy/beige medium leakage. It remains unaccepted.
   Review paths are now operation-specific so a preserved rejection cannot block a replacement.
-  Visual-repair v3 retains Fable's direction and references, adding only those observed corrections.
+  Visual-repair v3 retained Fable's direction and references, adding only those observed corrections.
   Its manifest digest is `f1a41f196087feabc46251058b3b7dcae8c9db574dea81c29b90a8e89adb2245`;
   reviewed operation digest is `193a510ed79ec4b7c583d2924107e6fa28b04f4742bbac861076f52eba04429e`.
-  Generation stops at
-  `PENDING_REVIEW`; a separate no-provider command validates and accepts an output before atomically
-  appending progress. The acceptance verifier now rejects fabricated receipts, header-only PNGs,
+  It completed once under provider request `req_ff1f68e1a3a64490969ff900202a95a8`, output digest
+  `d9c7efe3f5f7efcbb5cda61b309bc1aa909bffbfe2ff05623c46d1f1546f181c`, and a `$0.057068`
+  usage-derived estimate. Human visual review passed the functional worn shop, face-down phone,
+  visibly held six-pack, obscured Clef, four coherent people, and scene-local green/brown palette.
+  The separate no-provider command then validated and accepted it before atomically appending
+  progress. The acceptance verifier rejects fabricated receipts, header-only PNGs,
   substituted Treatment B or exposed-plate references, candidates built from the wrong accepted
   history, and replay/receipt field drift. Concurrent replay of the exact same progress entry appends
   once, and acceptance preflights the next global folio before writing its fixed immutable path.
   Neither provider key is exported into the current process. A read-only Railway variable-name audit
   confirmed both names on the designated production service, but the OpenAI value is invalid and must
-  not be used for C0. C0 image dispatch attempts: one pre-generation credential rejection and one
-  completed-but-editorially rejected output; accepted C0 narrative images: zero.
+  not be used for C0. C0 image dispatch attempts: one pre-generation credential rejection, one
+  completed editorial rejection, and one completed acceptance. Accepted C0 narrative images: one.
+  The six-operation image ceiling therefore has exactly three undispatched slots left, one for each
+  remaining required plate; there is no repair headroom under the current ceiling.
 
 ## Reorganization record
 
@@ -416,8 +421,9 @@ Postgres, and image storage.
 
 - C0 text-generation spend: one Fable call, usage-derived estimate `$0.370920`; the provider bill was
   not separately queried.
-- C0 narrative-image spend: one completed rejected Payment output, usage-derived estimate `$0.056578`;
-  the credential-rejected attempt returned no usage or reported cost.
+- C0 narrative-image spend: the rejected Payment v2 estimate is `$0.056578` and accepted Payment v3
+  is `$0.057068`, for `$0.113646` across two completed outputs; the credential-rejected attempt
+  returned no usage or reported cost. Known C0 text-plus-image estimate is `$0.484566`.
 - Image-generation provider bill: not reported by the Image API. B1 authorized exactly two calls
   within a `$0.10` request-scope bound. Captured usage and the 2026-07-19 standard rates yield an
   estimated total of `$0.028649` (`$0.011760` image output, `$0.016384` image input, and `$0.000505`
@@ -474,10 +480,12 @@ Postgres, and image storage.
 
 ## Next action
 
-Commit and push the operation-scoped review repair and reviewed Payment visual-repair v3, then execute
-it exactly once using operation digest `193a510ed79ec4b7c583d2924107e6fa28b04f4742bbac861076f52eba04429e`
-and the validated owner-managed local OpenAI credential without printing it. Inspect the PNG at reading size;
-only then run the separate acceptance command and continue the sequential 8+2 chain. Never dispatch
-the frozen Stage 1 operation or substitute the Codex image-generation tool. Replace the draft
-fixture, add production provenance and digest-named WebPs, pass the content verifier, then perform
-the complete C1 consecutive read and every-feature in-app Browser walkthrough before D0.
+Commit and push the text-led acceptance-argument repair and Payment acceptance record. Then dispatch
+the already prepared `root-folio-02` (`The gift`) Fable operation exactly once after reviewing
+request-manifest digest `84a92169124e65c9080fc8c192fb04c96bd2a9359547ba2cee31429b72f0d899`.
+Its request contains the accepted Payment prose followed immediately by the actual accepted Payment
+PNG and is pinned to Fable 5, xhigh, and `max_tokens: 32768`. Review and accept the text-only result
+without an image-operation digest, then continue the sequential 8+2 chain. Never dispatch the frozen
+Stage 1 operation or substitute the Codex image-generation tool. Replace the draft fixture, add
+production provenance and digest-named WebPs, pass the content verifier, then perform the complete
+C1 consecutive read and every-feature in-app Browser walkthrough before D0.

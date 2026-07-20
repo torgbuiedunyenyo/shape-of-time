@@ -1,12 +1,12 @@
-# C0 Payment plate pre-dispatch evidence
+# C0 Payment plate generation and acceptance evidence
 
 Date: 2026-07-19 (America/Los_Angeles)
 
-Judgment: **PASS for one reviewed Payment visual-repair v3 dispatch.** The first v1 dispatch was
+Judgment: **PASS for the accepted Payment plate.** The first v1 dispatch was
 rejected by OpenAI before generation because Railway held an invalid credential; its durable record
 is immutable and will not be retried. The completed v2 image was visually rejected and remains
-unaccepted. The next output must still receive a separate visual review and explicit
-no-provider acceptance before it may enter editorial progress.
+unaccepted. Visual-repair v3 completed once, passed visual review, and entered editorial progress
+through the separate no-provider acceptance command.
 
 ## Bound Fable candidate
 
@@ -117,6 +117,28 @@ reviewed identities are:
 - operation digest:
   `193a510ed79ec4b7c583d2924107e6fa28b04f4742bbac861076f52eba04429e`.
 
+## Visual-repair v3 result and acceptance
+
+Visual-repair v3 completed in one dispatch under provider request
+`req_ff1f68e1a3a64490969ff900202a95a8`. The requested snapshot was
+`gpt-image-2-2026-04-21`; the Image API supplied no served-model field. The 1024×1536 opaque PNG has
+output digest `d9c7efe3f5f7efcbb5cda61b309bc1aa909bffbfe2ff05623c46d1f1546f181c`,
+used 3,632 total tokens, took 51.262 seconds end to end, and has a usage-derived estimate of
+`$0.057068`.
+
+Reading-size visual review passed. The shop is functional and worn rather than abandoned; the phone
+is face-down; one customer visibly holds the six-pack; Clef remains bagged and visually unresolved;
+four people are coherent and non-duplicated; and the scene uses restrained local green and brown
+rather than importing Treatment B's incidental navy/beige palette. The plate carries the physical
+queue, shop refit/wear, and unequal attention withheld from the prose.
+
+The no-provider acceptance command wrote acceptance v2 with digest
+`098fba99a775daf8df0eefc5f7fd66a91f098990317fd01a7d2dad5b0ed3a9e9` and appended Payment exactly
+once as the first entry in private `progress.json`. Reloading progress verifies the complete Fable,
+image, receipt, replay, recovery, and PNG chain. C0 is now 1/10 folios and 1/4 plates. Three of the
+six authorized image dispatch slots have been consumed, leaving exactly one slot for each remaining
+required plate and no repair headroom under the existing ceiling.
+
 ## Red-to-green and exact-runtime evidence
 
 Named red failures were observed before implementation:
@@ -139,7 +161,7 @@ before it can occupy a fixed immutable acceptance path.
 
 The final checkpoint under Node 24.18.0 and pnpm 11.15.0 passed:
 
-- 58 non-acceptance content/architecture tests;
+- 62 non-acceptance content/architecture tests;
 - 116 unit tests;
 - 20 real-Postgres integration tests;
 - 11 built-reader browser regressions;

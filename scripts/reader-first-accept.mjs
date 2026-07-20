@@ -4,6 +4,10 @@ import { fileURLToPath } from "node:url";
 
 import { acceptReaderFirstPlate } from "../src/server/images/reader-first-plate.ts";
 import {
+  parseAcceptanceArguments,
+  requireReviewOperationForFolio,
+} from "./reader-first-accept-arguments.mjs";
+import {
   appendAcceptedProgress,
   loadAcceptedProgress,
   loadVerifiedFableCandidate,
@@ -12,31 +16,6 @@ import {
 const REPOSITORY_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const AUTHORING_ROOT = path.resolve(REPOSITORY_ROOT, "../shape-of-time-c0-authoring");
 const PROGRESS_PATH = path.join(AUTHORING_ROOT, "progress.json");
-
-function argument(name) {
-  const index = process.argv.indexOf(name);
-  return index < 0 ? undefined : process.argv[index + 1];
-}
-
-function requireArguments() {
-  const candidatePath = argument("--candidate");
-  const candidateSha256 = argument("--candidate-sha");
-  const reviewOperationDigest = argument("--review-operation-digest");
-  const confirmation = argument("--confirm-accept");
-  if (typeof candidatePath !== "string" || !path.isAbsolute(candidatePath)) {
-    throw new Error("--candidate must be an absolute path");
-  }
-  if (!/^[a-f0-9]{64}$/u.test(candidateSha256 ?? "")) {
-    throw new Error("--candidate-sha must be an exact SHA-256 digest");
-  }
-  if (!/^[a-f0-9]{64}$/u.test(reviewOperationDigest ?? "")) {
-    throw new Error("--review-operation-digest must be an exact SHA-256 digest");
-  }
-  if (confirmation !== candidateSha256) {
-    throw new Error("--confirm-accept must repeat the exact reviewed candidate SHA-256");
-  }
-  return { candidatePath, candidateSha256, reviewOperationDigest };
-}
 
 function locateFolio(fixture, folioId) {
   for (const book of fixture.books) {
@@ -47,7 +26,7 @@ function locateFolio(fixture, folioId) {
 }
 
 async function main() {
-  const arguments_ = requireArguments();
+  const arguments_ = parseAcceptanceArguments();
   const fixture = JSON.parse(
     await readFile(path.join(REPOSITORY_ROOT, "content/reader-first/slice.json"), "utf8"),
   );
@@ -57,6 +36,10 @@ async function main() {
     candidateSha256: arguments_.candidateSha256,
   });
   const { folio } = locateFolio(fixture, loaded.candidate.folioId);
+  const reviewOperationDigest = requireReviewOperationForFolio(
+    folio,
+    arguments_.reviewOperationDigest,
+  );
   const alreadyAccepted = await loadAcceptedProgress({
     archiveRoot: AUTHORING_ROOT,
     fixture,
@@ -84,7 +67,7 @@ async function main() {
       "images",
       "review",
       folio.plate.id,
-      arguments_.reviewOperationDigest,
+      reviewOperationDigest,
     );
     plateAcceptance = await acceptReaderFirstPlate({
       authoringRoot: AUTHORING_ROOT,
@@ -116,7 +99,9 @@ async function main() {
   );
 }
 
-main().catch((error) => {
-  process.stderr.write((error instanceof Error ? error.message : String(error)) + "\n");
-  process.exitCode = 1;
-});
+if (process.argv[1] !== undefined && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  main().catch((error) => {
+    process.stderr.write((error instanceof Error ? error.message : String(error)) + "\n");
+    process.exitCode = 1;
+  });
+}
