@@ -15,6 +15,7 @@ import {
   extractSuccessfulMessage,
   loadAcceptedProgress,
   persistCompletedFableCandidate,
+  requireRejectedStructuredOutput,
   schemaForFolioLayout,
   validateCandidateForFolio,
   validateContextAdmission,
@@ -143,8 +144,13 @@ test("the structured output schema makes text-led null and illustrated direction
   });
 
   assert.deepEqual(textLed.properties.imageDirection, { type: "null" });
+  assert.match(textLed.properties.proseParagraphs.description, /one to three non-empty prose paragraphs/u);
+  assert.match(textLed.properties.proseParagraphs.items.description, /non-empty ordinary prose paragraph/u);
   assert.equal(illustrated.properties.imageDirection.type, "object");
   assert.equal(illustrated.properties.imageDirection.anyOf, undefined);
+  for (const key of ["narrativeJob", "concreteScene", "factLeftToImage"]) {
+    assert.match(illustrated.properties.imageDirection.properties[key].description, /non-empty/u);
+  }
   assert.equal(base.properties.imageDirection.anyOf.length, 2);
 });
 
@@ -584,12 +590,14 @@ test("the provider sequence persists official admission before claiming one infe
   assert.equal(claimFailureCalls, 1);
 });
 
-test("one fixed archive claim prevents a second paid operation for the same folio", async () => {
+test("one fixed claim allows only one explicit replacement of a rejected folio operation", async () => {
   const archiveRoot = await mkdtemp(path.join(os.tmpdir(), "shape-of-time-claim-"));
   const firstOperation = path.join(archiveRoot, "fable", "first");
   const secondOperation = path.join(archiveRoot, "fable", "second");
+  const thirdOperation = path.join(archiveRoot, "fable", "third");
   await mkdir(firstOperation, { recursive: true });
   await mkdir(secondOperation, { recursive: true });
+  await mkdir(thirdOperation, { recursive: true });
   const admission = { admissionSha256: "a".repeat(64) };
   await claimFolioDispatch({
     admission,
@@ -609,6 +617,62 @@ test("one fixed archive claim prevents a second paid operation for the same foli
     sequence: 1,
     startedAt: "2026-07-19T12:01:00.000Z",
   }), /EEXIST|exist/iu);
+
+  await claimFolioDispatch({
+    admission,
+    archiveRoot,
+    folioId: "root-folio-01",
+    operationDirectory: secondOperation,
+    operationManifestSha256: "c".repeat(64),
+    replacesOperationManifestSha256: "b".repeat(64),
+    sequence: 1,
+    startedAt: "2026-07-19T12:02:00.000Z",
+  });
+  const replacementClaim = JSON.parse(await readFile(
+    path.join(archiveRoot, "fable", "claims", "01-root-folio-01-replacement.json"),
+    "utf8",
+  ));
+  assert.equal(replacementClaim.replacesOperationManifestSha256, "b".repeat(64));
+  await assert.rejects(() => claimFolioDispatch({
+    admission,
+    archiveRoot,
+    folioId: "root-folio-01",
+    operationDirectory: thirdOperation,
+    operationManifestSha256: "d".repeat(64),
+    replacesOperationManifestSha256: "b".repeat(64),
+    sequence: 1,
+    startedAt: "2026-07-19T12:03:00.000Z",
+  }), /EEXIST|exist/iu);
+});
+
+test("only a completed structurally unusable provider result qualifies for explicit replacement", () => {
+  const response = {
+    content: [{
+      type: "text",
+      text: JSON.stringify({
+        imageDirection: payment.imageDirection,
+        proseParagraphs: [],
+      }),
+    }],
+    id: "msg_rejected",
+    model: "claude-fable-5",
+    role: "assistant",
+    stop_reason: "end_turn",
+    type: "message",
+    usage: { input_tokens: 1_000, output_tokens: 100 },
+  };
+  assert.match(
+    requireRejectedStructuredOutput({ providerRequestId: "req_rejected", response }),
+    /invalid proseParagraphs/u,
+  );
+  response.content[0].text = JSON.stringify({
+    imageDirection: payment.imageDirection,
+    proseParagraphs: ["Complete prose."],
+  });
+  assert.throws(
+    () => requireRejectedStructuredOutput({ providerRequestId: "req_usable", response }),
+    /produced usable structured output/u,
+  );
 });
 
 test("pre-dispatch evidence is flushed before a paid request can begin", async () => {

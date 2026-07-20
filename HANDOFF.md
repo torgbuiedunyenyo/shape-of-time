@@ -11,7 +11,7 @@ _Updated 2026-07-19._
   worktree must not modify.
 - **CURRENT ITEM: C0 — Build the reader-first vertical slice.** Reader mechanics and a deliberately unaccepted
   working content fixture are in flight in this worktree. They are not C0 completion evidence.
-- The current C0 checkpoint passes 67 non-acceptance content/architecture tests, 116 unit tests, 20
+- The current C0 checkpoint passes 68 non-acceptance content/architecture tests, 116 unit tests, 20
   real-Postgres integration tests, 11 built-reader browser regressions, lint, typecheck, and
   production build under Node 24.18.0. The two production-content tests remain deliberately red.
 - Genesis commit: `7f7b5b112140db7ecb0bc2a85f28a0f38adda441`.
@@ -99,11 +99,11 @@ _Updated 2026-07-19._
   and the fixed folio claim are flushed before dispatch; the claim prevents a second paid operation
   even if a manifest changes. Accepted history now resolves and verifies the complete fixed-path
   request, count, admission, response, and candidate chain before sending any prose or image onward.
-  Twenty-three focused Fable-authoring tests and all 67 non-acceptance content/architecture tests pass,
+  Twenty-four focused Fable-authoring tests and all 68 non-acceptance content/architecture tests pass,
   along with lint
   and typecheck.
-- The written C0 ceiling is ten direct Fable operations at a `$2.00` worst-case projected maximum
-  each and `$20.00` aggregate, plus six GPT Image 2 operations at a `$0.10` request-scope estimate
+- The written C0 ceiling is eleven direct Fable operations at a `$2.00` worst-case projected maximum
+  each and `$22.00` aggregate, plus six GPT Image 2 operations at a `$0.10` request-scope estimate
   each and `$0.60` aggregate. Four operations are for the required plates; the two bounded repair
   slots exist only after a preserved visual rejection and a newly inspected dry run.
   The first Fable operation was dispatched exactly once at private path
@@ -156,8 +156,20 @@ _Updated 2026-07-19._
   The repeated mismatch exposed a schema contradiction: every request had allowed either null or an
   object while prose asked for null on text-led folios. A red-first fix now resolves the exact schema
   by layout before hashing or dispatch, making null mandatory for text-led folios and the complete
-  direction object mandatory for illustrated folios. C0 Fable provider calls executed: six; accepted
-  prose folios: six.
+  direction object mandatory for illustrated folios.
+  The first Map operation then completed once under manifest
+  `2643558816187ff44b52e350469d4854010dc51dae167d2ae12d638ff72ee32e`, 20,215 officially counted
+  input tokens, provider message `msg_011CdCUdprCqKzcihNV1nxct`, and request
+  `req_011CdCUdQVji89zcBA555SVk`. Despite `end_turn`, the structured result contained an empty prose
+  array and empty image-direction strings, so no candidate exists; usage-derived estimate `$0.540050`.
+  It is retained and will never be automatically resent. Current official Anthropic documentation
+  confirms that unsupported constraints such as minimum lengths belong in descriptions plus local
+  postflight validation. The schema now does that without sending unsupported keywords.
+  A red-first replacement boundary verifies the original fixed claim, completed HTTP response,
+  absent candidate, exact manifest, and named structural failure, then permits one stable linked
+  replacement claim. No second replacement can be claimed. The revised eleven-operation/`$22.00`
+  editorial ceiling authorizes exactly that additional call. C0 Fable provider calls executed: seven;
+  accepted prose folios: six.
 - The exact GPT Image 2 route is the existing direct Image API adapter and journal. It proves the
   requested `gpt-image-2-2026-04-21` snapshot, request ID, usage, latency, and output digest; the API
   exposes no served-model field. The Codex image-generation tool cannot prove that contract and must
@@ -471,13 +483,14 @@ Postgres, and image storage.
 
 ## Spend and deployment
 
-- C0 text-generation spend: six Fable calls, usage-derived estimates `$0.370920`, `$0.278350`,
-  `$0.400230`, `$0.318130`, `$0.501970`, and `$0.504830`, aggregate `$2.374430`; the provider bill was not
+- C0 text-generation spend: seven Fable calls, usage-derived estimates `$0.370920`, `$0.278350`,
+  `$0.400230`, `$0.318130`, `$0.501970`, `$0.504830`, and rejected Map `$0.540050`, aggregate
+  `$2.914480`; the provider bill was not
   separately queried.
 - C0 narrative-image spend: the rejected Payment v2 estimate is `$0.056578` and accepted Payment v3
   is `$0.057068`, plus accepted Band `$0.056818`, for `$0.170464` across three completed outputs;
   the credential-rejected attempt returned no usage or reported cost. Known C0 text-plus-image
-  estimate is `$2.544894`.
+  estimate is `$3.084944`.
 - Image-generation provider bill: not reported by the Image API. B1 authorized exactly two calls
   within a `$0.10` request-scope bound. Captured usage and the 2026-07-19 standard rates yield an
   estimated total of `$0.028649` (`$0.011760` image output, `$0.016384` image input, and `$0.000505`
@@ -534,11 +547,12 @@ Postgres, and image storage.
 
 ## Next action
 
-Review and dispatch the already prepared `root-folio-07` (`The map`) Fable operation exactly once
-under request-manifest digest `2643558816187ff44b52e350469d4854010dc51dae167d2ae12d638ff72ee32e`.
-Its request contains the six accepted prose folios and both actual accepted plates interleaved in
-exact story order; both discarded text-led directions are absent. The layout-specific schema requires
-a complete image direction. It is pinned to Fable 5, xhigh, and `max_tokens: 32768`. Continue the sequential
+Review and dispatch the one prepared `root-folio-07` replacement exactly once under request-manifest
+digest `2614136ef68b29404108250956f6f012a5f21ec782b8b28829f8040b88eaba3f`, explicitly linked to
+rejected manifest `2643558816187ff44b52e350469d4854010dc51dae167d2ae12d638ff72ee32e`.
+Its content manifest is unchanged: six accepted prose folios and both actual accepted plates in exact
+story order, with discarded directions absent. It is pinned to Fable 5, xhigh, and
+`max_tokens: 32768`. Continue the sequential
 8+2 chain. Never dispatch
 the frozen Stage 1 operation or substitute the Codex image-generation tool. Replace the draft fixture,
 add production provenance and digest-named WebPs, pass the content verifier, then perform the complete

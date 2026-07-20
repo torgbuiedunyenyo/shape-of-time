@@ -4,8 +4,10 @@
   "properties": {
     "proseParagraphs": {
       "type": "array",
+      "description": "Required: return one to three non-empty prose paragraphs totaling about 120 to 250 words. Never return an empty array or an empty paragraph.",
       "items": {
-        "type": "string"
+        "type": "string",
+        "description": "A non-empty ordinary prose paragraph."
       }
     },
     "imageDirection": {
@@ -18,30 +20,36 @@
           "additionalProperties": false,
           "properties": {
             "narrativeJob": {
-              "type": "string"
+              "type": "string",
+              "description": "A non-empty account of the narrative work performed by the image."
             },
             "concreteScene": {
-              "type": "string"
+              "type": "string",
+              "description": "A non-empty concrete scene description."
             },
             "factLeftToImage": {
-              "type": "string"
+              "type": "string",
+              "description": "A non-empty statement of information deliberately left to the image."
             },
             "mustRemain": {
               "type": "array",
               "items": {
-                "type": "string"
+                "type": "string",
+                "description": "A non-empty continuity requirement."
               }
             },
             "purposefulChanges": {
               "type": "array",
               "items": {
-                "type": "string"
+                "type": "string",
+                "description": "A non-empty purposeful change."
               }
             },
             "unresolvedFacts": {
               "type": "array",
               "items": {
-                "type": "string"
+                "type": "string",
+                "description": "A non-empty fact that must remain unresolved."
               }
             }
           },

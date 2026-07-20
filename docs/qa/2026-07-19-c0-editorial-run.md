@@ -13,7 +13,9 @@ authoring for the checked-in reader slice, not dynamic reader generation and not
   current folio brief, prose guidance, and structured prose-plus-optional-image-direction output.
 - Exact provider count precedes one inference dispatch; admitted input must remain at or below
   363,136 tokens with `max_tokens: 32768` and a 4,096-token margin.
-- Ceiling: ten Fable operations, `$2.00` projected maximum each, `$20.00` aggregate.
+- Ceiling: eleven Fable operations, `$2.00` projected maximum each, `$22.00` aggregate. The eleventh
+  operation is one explicit linked replacement for the retained, structurally empty Map result
+  described below; it is not an automatic retry or a general repair pool.
 
 ## Accepted folio 1 — Payment
 
@@ -165,15 +167,40 @@ the next operation: the provider schema now makes `imageDirection` structurally 
 folios and structurally an object for illustrated folios, rather than presenting both allowed branches
 and relying on a prose instruction.
 
+## Rejected folio 7 operation — The map
+
+- Fable operation manifest:
+  `2643558816187ff44b52e350469d4854010dc51dae167d2ae12d638ff72ee32e`
+- Official input count: 20,215 tokens
+- Provider message/request: `msg_011CdCUdprCqKzcihNV1nxct` /
+  `req_011CdCUdQVji89zcBA555SVk`
+- Result: `end_turn`, but `proseParagraphs: []` and every required image-direction string empty
+- Usage-derived text estimate: `$0.540050`
+
+This completed provider response is retained and must not be redispatched. It produced no usable
+prose or image direction, so no candidate could be accepted or recovered. The provider-supported
+schema subset does not enforce `minLength`, `minItems`, or related constraints;
+[Anthropic's current structured-output guidance](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
+instead recommends adding those requirements to field descriptions and validating the original
+constraints after receipt. The direct adapter already performed the latter.
+The raw supported schema now also tells Fable explicitly that prose paragraphs and direction fields
+must be non-empty.
+
+A red-first replacement path permits exactly one separate claim only after it verifies the original
+fixed claim, HTTP 200 provider response, exact rejected manifest, absent candidate, and the named
+structural failure. The normal claim still prevents a duplicate; a second replacement cannot be
+claimed. This evidence justifies increasing the editorial ceiling by one operation before spend.
+
 ## Running spend and next operation
 
-Six Fable calls have an aggregate usage-derived estimate of `$2.374430`. Known C0 text plus the
-three completed narrative-image outputs is `$2.544894`; provider billing was not separately queried.
+Seven Fable calls have an aggregate usage-derived estimate of `$2.914480`. Known C0 text plus the
+three completed narrative-image outputs is `$3.084944`; provider billing was not separately queried.
 Four of six image operations have been consumed: one credential rejection, one Payment visual
 rejection, and two accepted plates. The two remaining operations are reserved exactly for the root
 Map and Lagos terminal wall; no repair headroom remains.
 
-`root-folio-07` (`The map`) is prepared, not dispatched, under request-manifest digest
-`2643558816187ff44b52e350469d4854010dc51dae167d2ae12d638ff72ee32e`. Its exact request interleaves
-the six accepted prose folios and two accepted plates in story order. Both discarded text-led image
-directions are absent. Its illustrated output schema requires a complete image-direction object.
+The one explicit `root-folio-07` replacement is prepared, not dispatched, under request-manifest
+digest `2614136ef68b29404108250956f6f012a5f21ec782b8b28829f8040b88eaba3f`. It links rejected manifest
+`2643558816187ff44b52e350469d4854010dc51dae167d2ae12d638ff72ee32e`, keeps the exact same content
+manifest and six-folio/two-plate history, and changes only the supported schema descriptions that
+state the already-enforced non-empty postconditions.

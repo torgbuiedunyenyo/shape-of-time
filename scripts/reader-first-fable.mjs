@@ -1,5 +1,5 @@
 import { createHash, randomUUID } from "node:crypto";
-import { mkdir, open, readFile, realpath, rename, stat, unlink } from "node:fs/promises";
+import { mkdir, open, readFile, readdir, realpath, rename, stat, unlink } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -549,6 +549,17 @@ export function extractSuccessfulMessage({ providerRequestId, response }) {
       usage: response.usage,
     },
   };
+}
+
+export function requireRejectedStructuredOutput({ providerRequestId, response }) {
+  try {
+    extractSuccessfulMessage({ providerRequestId, response });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    if (message === "Fable returned invalid proseParagraphs") return message;
+    throw error;
+  }
+  throw new Error("rejected Fable operation produced usable structured output");
 }
 
 function providerRequestId(response) {
@@ -1435,24 +1446,120 @@ export async function claimFolioDispatch({
   folioId,
   operationDirectory,
   operationManifestSha256,
+  replacesOperationManifestSha256,
   sequence,
   startedAt,
 }) {
   requireDigest(admission.admissionSha256, "dispatch admission");
   requireDigest(operationManifestSha256, "dispatch operation manifest");
+  if (replacesOperationManifestSha256 !== undefined) {
+    requireDigest(replacesOperationManifestSha256, "replaced operation manifest");
+    if (replacesOperationManifestSha256 === operationManifestSha256) {
+      throw new Error("replacement operation must have a new manifest");
+    }
+  }
   if (!Number.isSafeInteger(sequence) || sequence <= 0) throw new Error("dispatch sequence is invalid");
   const claimsDirectory = path.join(archiveRoot, "fable", "claims");
   await createDurableDirectory(claimsDirectory);
-  const record = JSON.stringify({
+  const recordValue = {
     admissionSha256: admission.admissionSha256,
     folioId,
     operationManifestSha256,
     startedAt,
-  }, null, 2) + "\n";
-  const claimPath = path.join(claimsDirectory, String(sequence).padStart(2, "0") + "-" + folioId + ".json");
+  };
+  if (replacesOperationManifestSha256 !== undefined) {
+    recordValue.replacesOperationManifestSha256 = replacesOperationManifestSha256;
+  }
+  const record = JSON.stringify(recordValue, null, 2) + "\n";
+  const claimSuffix = replacesOperationManifestSha256 === undefined ? "" : "-replacement";
+  const claimPath = path.join(
+    claimsDirectory,
+    String(sequence).padStart(2, "0") + "-" + folioId + claimSuffix + ".json",
+  );
   await writePrivate(claimPath, record);
   await writePrivate(path.join(operationDirectory, "dispatch-started.json"), record);
   return { claimPath };
+}
+
+async function validateRejectedOperationForReplacement({
+  archiveRoot,
+  folioId,
+  replacesOperationManifestSha256,
+  sequence,
+}) {
+  requireDigest(replacesOperationManifestSha256, "replacement source manifest");
+  const prefix = String(sequence).padStart(2, "0") + "-" + folioId + "-";
+  const fableRoot = path.join(archiveRoot, "fable");
+  const entries = await readdir(fableRoot, { withFileTypes: true });
+  const matches = [];
+  for (const entry of entries) {
+    if (!entry.isDirectory() || !entry.name.startsWith(prefix)) continue;
+    const operationDirectory = path.join(fableRoot, entry.name);
+    let manifest;
+    try {
+      manifest = parsedJson(
+        await readFile(path.join(operationDirectory, "request-manifest.json")),
+        "replacement source manifest",
+      );
+    } catch (error) {
+      if (error?.code === "ENOENT") continue;
+      throw error;
+    }
+    if (manifest.operationManifestSha256 === replacesOperationManifestSha256) {
+      matches.push({ manifest, operationDirectory });
+    }
+  }
+  if (matches.length !== 1) {
+    throw new Error("replacement source manifest does not identify one retained operation");
+  }
+  const [{ manifest, operationDirectory }] = matches;
+  validateSelfDigest(manifest, "operationManifestSha256", "replacement source manifest digest");
+  if (manifest.folioId !== folioId) throw new Error("replacement source folio mismatch");
+
+  const originalClaimPath = path.join(
+    fableRoot,
+    "claims",
+    String(sequence).padStart(2, "0") + "-" + folioId + ".json",
+  );
+  const originalClaim = parsedJson(await readFile(originalClaimPath), "replacement source claim");
+  requireExactKeys(
+    originalClaim,
+    ["admissionSha256", "folioId", "operationManifestSha256", "startedAt"],
+    "replacement source claim",
+  );
+  if (originalClaim.folioId !== folioId
+    || originalClaim.operationManifestSha256 !== replacesOperationManifestSha256) {
+    throw new Error("replacement source claim mismatch");
+  }
+  try {
+    await readFile(path.join(operationDirectory, "candidate.json"));
+    throw new Error("replacement source already has a durable candidate");
+  } catch (error) {
+    if (error?.code !== "ENOENT") throw error;
+  }
+  const responseHeaders = parsedJson(
+    await readFile(path.join(operationDirectory, "response-headers.json")),
+    "replacement source response headers",
+  );
+  requireExactKeys(
+    responseHeaders,
+    ["contentType", "providerRequestId", "status"],
+    "replacement source response headers",
+  );
+  if (responseHeaders.status !== 200 || typeof responseHeaders.providerRequestId !== "string") {
+    throw new Error("replacement source did not retain one completed provider response");
+  }
+  const response = parsedJson(
+    await readFile(path.join(operationDirectory, "provider-response.json")),
+    "replacement source provider response",
+  );
+  return {
+    reason: requireRejectedStructuredOutput({
+      providerRequestId: responseHeaders.providerRequestId,
+      response,
+    }),
+    replacesOperationManifestSha256,
+  };
 }
 
 async function ensurePrivate(file, value) {
@@ -1559,17 +1666,34 @@ async function archiveResponse(operationDirectory, response) {
 async function runCli() {
   const command = process.argv[2];
   if (!new Set(["prepare", "run"]).has(command)) {
-    throw new Error("usage: reader-first-fable.mjs prepare|run --folio ID [--manifest SHA256]");
+    throw new Error(
+      "usage: reader-first-fable.mjs prepare|run --folio ID [--manifest SHA256] "
+      + "[--replace-rejected-manifest SHA256]",
+    );
   }
   const folioId = argument("--folio");
   if (folioId === undefined) throw new Error("--folio is required");
   if (command === "prepare") await mkdir(AUTHORING_ARCHIVE_ROOT, { recursive: true, mode: 0o700 });
   const bundle = await operationBundle(folioId);
+  const replacementManifest = argument("--replace-rejected-manifest");
+  const replacement = replacementManifest === undefined ? undefined
+    : await validateRejectedOperationForReplacement({
+      archiveRoot: AUTHORING_ARCHIVE_ROOT,
+      folioId,
+      replacesOperationManifestSha256: replacementManifest,
+      sequence: bundle.sequence,
+    });
+  if (replacement !== undefined
+    && replacement.replacesOperationManifestSha256
+      === bundle.requests.operationManifest.operationManifestSha256) {
+    throw new Error("replacement operation must have a new request manifest");
+  }
   if (command === "prepare") {
     await prepareOperation(bundle);
     process.stdout.write(JSON.stringify({
       folioId,
       operationDirectory: bundle.operationDirectory,
+      replacementOf: replacement?.replacesOperationManifestSha256 ?? null,
       requestManifestSha256: bundle.requests.operationManifest.operationManifestSha256,
     }) + "\n");
     return;
@@ -1589,6 +1713,7 @@ async function runCli() {
       folioId,
       operationDirectory: bundle.operationDirectory,
       operationManifestSha256: bundle.requests.operationManifest.operationManifestSha256,
+      replacesOperationManifestSha256: replacement?.replacesOperationManifestSha256,
       sequence: bundle.sequence,
       startedAt: new Date().toISOString(),
     }),
