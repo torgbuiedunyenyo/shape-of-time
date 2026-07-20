@@ -2,7 +2,7 @@
 
 Date: 2026-07-19 (America/Los_Angeles)
 
-Status: **IN PROGRESS — 5/10 folios and 2/4 plates accepted.** This is bounded editorial
+Status: **IN PROGRESS — 6/10 folios and 2/4 plates accepted.** This is bounded editorial
 authoring for the checked-in reader slice, not dynamic reader generation and not D0/D1 completion.
 
 ## Fixed contract and ceiling
@@ -139,15 +139,41 @@ required the exact discarded-direction digest
 the prose with no plate and no image direction. The normal postflight remains strict, so a future
 format mismatch cannot be silently accepted.
 
+## Accepted folio 6 — After closing
+
+- Fable operation manifest:
+  `acb26c64b3983173bee043ee99343e2cfe49f0f8aeec0897cd5ec0eba9d31008`
+- Official input count: 19,633 tokens
+- Provider message/request: `msg_011CdCU6ynMvV5vWthkCmLU4` /
+  `req_011CdCU6sx8A5z1QuHcvY2Dw`
+- Result: 254 words plus an unrequested image direction; `end_turn`
+- Candidate: `e1887b6f0d1986df1a520f1f8541698032fd6530400a2df17045c21227cbce5d`
+- Message latency: 84.439 seconds
+- Usage-derived text estimate: `$0.504830`
+
+Editorial judgment: accept the prose and explicitly discard the image direction. Tan apologizes
+without asking Jay to erase the Venue encounter; the leaking cold case gives them ordinary work in
+which disagreement, competence, and laughter repair the courtship. Her invitation is plain, and
+Jay's sponsorship, bodily-travel, and return questions turn it into a threshold that requires facts.
+The page is concrete, emotionally legible, and still leaves the next choice genuinely unresolved.
+
+Fable again returned an image direction even though the prose contract required `null`. The exact
+candidate remains unchanged; no retry or image call occurred. Acceptance required discarded-direction
+digest `45b1a6f669583787f1cc7281c513cfbe88acbec7357b04721cf5d5cc0f4c01c7` and exposes only the prose.
+Because this was the second consecutive mismatch, the mechanical cause was fixed before preparing
+the next operation: the provider schema now makes `imageDirection` structurally `null` for text-led
+folios and structurally an object for illustrated folios, rather than presenting both allowed branches
+and relying on a prose instruction.
+
 ## Running spend and next operation
 
-Five Fable calls have an aggregate usage-derived estimate of `$1.869600`. Known C0 text plus the
-three completed narrative-image outputs is `$2.040064`; provider billing was not separately queried.
+Six Fable calls have an aggregate usage-derived estimate of `$2.374430`. Known C0 text plus the
+three completed narrative-image outputs is `$2.544894`; provider billing was not separately queried.
 Four of six image operations have been consumed: one credential rejection, one Payment visual
 rejection, and two accepted plates. The two remaining operations are reserved exactly for the root
 Map and Lagos terminal wall; no repair headroom remains.
 
-`root-folio-06` (`After closing`) is prepared, not dispatched, under request-manifest digest
-`acb26c64b3983173bee043ee99343e2cfe49f0f8aeec0897cd5ec0eba9d31008`. Its exact request interleaves
-the five accepted prose folios and two accepted plates in story order. The discarded Venue image
-direction is not exposed as story history.
+`root-folio-07` (`The map`) is prepared, not dispatched, under request-manifest digest
+`2643558816187ff44b52e350469d4854010dc51dae167d2ae12d638ff72ee32e`. Its exact request interleaves
+the six accepted prose folios and two accepted plates in story order. Both discarded text-led image
+directions are absent. Its illustrated output schema requires a complete image-direction object.

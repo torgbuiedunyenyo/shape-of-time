@@ -15,6 +15,7 @@ import {
   extractSuccessfulMessage,
   loadAcceptedProgress,
   persistCompletedFableCandidate,
+  schemaForFolioLayout,
   validateCandidateForFolio,
   validateContextAdmission,
 } from "./reader-first-fable.mjs";
@@ -129,6 +130,23 @@ const band = {
     plateId: "plate-root-band",
   },
 };
+
+test("the structured output schema makes text-led null and illustrated direction mandatory", async () => {
+  const base = JSON.parse(await readFile(
+    new URL("../content/reader-first/fable-output.schema.json", import.meta.url),
+    "utf8",
+  ));
+  const textLed = schemaForFolioLayout(base, { id: "root-folio-06", plate: null });
+  const illustrated = schemaForFolioLayout(base, {
+    id: "root-folio-07",
+    plate: { id: "plate-root-map" },
+  });
+
+  assert.deepEqual(textLed.properties.imageDirection, { type: "null" });
+  assert.equal(illustrated.properties.imageDirection.type, "object");
+  assert.equal(illustrated.properties.imageDirection.anyOf, undefined);
+  assert.equal(base.properties.imageDirection.anyOf.length, 2);
+});
 
 async function writeCompleteCandidateEvidence({ archiveRoot, fixture: targetFixture, folioId, output }) {
   const operation = path.join(archiveRoot, "fable", `01-${folioId}-operation`);

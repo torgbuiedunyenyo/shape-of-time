@@ -130,6 +130,21 @@ function hasPlate(folio) {
   return folio.plate !== undefined && folio.plate !== null;
 }
 
+export function schemaForFolioLayout(baseSchema, folio) {
+  const variants = baseSchema?.properties?.imageDirection?.anyOf;
+  if (!Array.isArray(variants) || variants.length !== 2) {
+    throw new Error("base Fable schema must provide null and object image-direction variants");
+  }
+  const wantedType = hasPlate(folio) ? "object" : "null";
+  const matches = variants.filter((variant) => variant?.type === wantedType);
+  if (matches.length !== 1) {
+    throw new Error("base Fable schema does not provide one " + wantedType + " image-direction variant");
+  }
+  const schema = structuredClone(baseSchema);
+  schema.properties.imageDirection = structuredClone(matches[0]);
+  return schema;
+}
+
 function textBlock(text) {
   return { type: "text", text };
 }
@@ -1454,7 +1469,7 @@ async function ensurePrivate(file, value) {
 }
 
 async function operationBundle(folioId) {
-  const [fixture, schemaText, source] = await Promise.all([
+  const [fixture, baseSchemaText, source] = await Promise.all([
     readFile(path.join(REPOSITORY_ROOT, "content/reader-first/slice.json"), "utf8").then(JSON.parse),
     readFile(path.join(REPOSITORY_ROOT, "content/reader-first/fable-output.schema.json"), "utf8"),
     sourceFiles(),
@@ -1465,7 +1480,9 @@ async function operationBundle(folioId) {
     progressPath: PROGRESS_PATH,
   });
   const compiled = compileEditorialRequest({ accepted, fixture, folioId, source });
-  const schema = JSON.parse(schemaText);
+  const { folio } = locateFolio(fixture, folioId);
+  const schema = schemaForFolioLayout(JSON.parse(baseSchemaText), folio);
+  const schemaText = JSON.stringify(schema, null, 2) + "\n";
   const systemPrompt = "Write the requested Shape of Time folio. The user message contains the complete authority and output contract for this bounded editorial operation. Use no tools.";
   const requests = buildAnthropicRequests({ compiled, schema, systemPrompt });
   const allFolios = fixture.books.flatMap((book) => book.folios);
