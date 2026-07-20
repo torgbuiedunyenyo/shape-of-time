@@ -9,6 +9,7 @@ import {
 
 const candidateSha256 = "a".repeat(64);
 const operationDigest = "b".repeat(64);
+const discardedDirectionSha256 = "c".repeat(64);
 const candidatePath = path.resolve("/tmp/candidate.json");
 
 function argv(...extra) {
@@ -55,5 +56,17 @@ test("optional image review digest is still exact when supplied", () => {
   assert.throws(
     () => parseAcceptanceArguments(argv("--review-operation-digest", "not-a-digest")),
     /--review-operation-digest must be an exact SHA-256 digest/u,
+  );
+});
+
+test("discarding an unrequested text-led image direction is an explicit digest-bound decision", () => {
+  const parsed = parseAcceptanceArguments(argv(
+    "--discard-image-direction-sha",
+    discardedDirectionSha256,
+  ));
+  assert.equal(parsed.discardedImageDirectionSha256, discardedDirectionSha256);
+  assert.throws(
+    () => parseAcceptanceArguments(argv("--discard-image-direction-sha", "not-a-digest")),
+    /--discard-image-direction-sha must be an exact SHA-256 digest/u,
   );
 });

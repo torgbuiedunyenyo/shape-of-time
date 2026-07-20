@@ -9,6 +9,7 @@ export function parseAcceptanceArguments(argv = process.argv) {
   const candidatePath = argument(argv, "--candidate");
   const candidateSha256 = argument(argv, "--candidate-sha");
   const reviewOperationDigest = argument(argv, "--review-operation-digest");
+  const discardedImageDirectionSha256 = argument(argv, "--discard-image-direction-sha");
   const confirmation = argument(argv, "--confirm-accept");
   if (typeof candidatePath !== "string" || !path.isAbsolute(candidatePath)) {
     throw new Error("--candidate must be an absolute path");
@@ -22,10 +23,21 @@ export function parseAcceptanceArguments(argv = process.argv) {
   ) {
     throw new Error("--review-operation-digest must be an exact SHA-256 digest");
   }
+  if (
+    discardedImageDirectionSha256 !== undefined
+    && !/^[a-f0-9]{64}$/u.test(discardedImageDirectionSha256)
+  ) {
+    throw new Error("--discard-image-direction-sha must be an exact SHA-256 digest");
+  }
   if (confirmation !== candidateSha256) {
     throw new Error("--confirm-accept must repeat the exact reviewed candidate SHA-256");
   }
-  return { candidatePath, candidateSha256, reviewOperationDigest };
+  return {
+    candidatePath,
+    candidateSha256,
+    discardedImageDirectionSha256,
+    reviewOperationDigest,
+  };
 }
 
 export function requireReviewOperationForFolio(folio, reviewOperationDigest) {

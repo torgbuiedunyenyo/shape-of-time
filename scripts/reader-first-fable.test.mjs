@@ -772,6 +772,64 @@ test("concurrent replay of one complete text-led acceptance appends exactly once
   await assert.rejects(() => readFile(`${progressPath}.lock`), /ENOENT/u);
 });
 
+test("a text-led folio can explicitly discard an unrequested image direction without changing provider evidence", async () => {
+  const archiveRoot = await mkdtemp(path.join(os.tmpdir(), "shape-of-time-discarded-direction-"));
+  const textOnlyFixture = {
+    version: 1,
+    books: [{
+      id: "shape-of-time",
+      title: "Shape of Time",
+      folios: [{ id: "root-folio-02", ordinal: 2, title: "The gift", blocks: [] }],
+    }],
+  };
+  const paragraph = Array.from({ length: 60 }, (_, index) => `direct${index + 1}`).join(" ");
+  const output = { proseParagraphs: [paragraph, paragraph], imageDirection: payment.imageDirection };
+  const evidence = await writeCompleteCandidateEvidence({
+    archiveRoot,
+    fixture: textOnlyFixture,
+    folioId: "root-folio-02",
+    output,
+  });
+  const progressPath = path.join(archiveRoot, "progress.json");
+  const baseEntry = {
+    candidatePath: evidence.candidatePath,
+    candidateSha256: evidence.candidateSha256,
+  };
+
+  await assert.rejects(
+    () => appendAcceptedProgress({
+      archiveRoot,
+      entry: baseEntry,
+      fixture: textOnlyFixture,
+      progressPath,
+    }),
+    /image direction disagrees with the folio/u,
+  );
+
+  const discardedImageDirectionSha256 = sha256(canonicalJson(output.imageDirection));
+  await appendAcceptedProgress({
+    archiveRoot,
+    entry: { ...baseEntry, discardedImageDirectionSha256 },
+    fixture: textOnlyFixture,
+    progressPath,
+  });
+  const accepted = await loadAcceptedProgress({
+    archiveRoot,
+    fixture: textOnlyFixture,
+    progressPath,
+  });
+  assert.equal(accepted[0].imageDirection, null);
+  assert.equal(accepted[0].discardedImageDirectionSha256, discardedImageDirectionSha256);
+
+  const progress = JSON.parse(await readFile(progressPath, "utf8"));
+  progress.accepted[0].discardedImageDirectionSha256 = "f".repeat(64);
+  await writeFile(progressPath, JSON.stringify(progress));
+  await assert.rejects(
+    () => loadAcceptedProgress({ archiveRoot, fixture: textOnlyFixture, progressPath }),
+    /discarded image direction digest mismatch/u,
+  );
+});
+
 test("a self-consistent candidate generated from the wrong prior history cannot be appended", async () => {
   const archiveRoot = await mkdtemp(path.join(os.tmpdir(), "shape-of-time-history-binding-"));
   const firstFolio = { id: "root-folio-02", ordinal: 2, title: "The gift", blocks: [] };

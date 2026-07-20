@@ -938,7 +938,13 @@ export async function loadAcceptedProgress({ archiveRoot, fixture, progressPath 
   for (const [index, entry] of progress.accepted.entries()) {
     exactKeys(
       entry,
-      ["candidatePath", "candidateSha256", "plateAcceptancePath", "plateAcceptanceSha256"],
+      [
+        "candidatePath",
+        "candidateSha256",
+        "discardedImageDirectionSha256",
+        "plateAcceptancePath",
+        "plateAcceptanceSha256",
+      ],
       "progress entry fields",
     );
     const expected = sequence[index];
@@ -964,10 +970,11 @@ export async function loadAcceptedProgress({ archiveRoot, fixture, progressPath 
       throw new Error("candidate provider message id is missing");
     }
     const output = validateStructuredOutput(candidate.output);
-    validateCandidateForFolio({ output }, expected.folio);
-    if ((output.imageDirection !== null) !== hasPlate(expected.folio)) {
-      throw new Error("candidate image direction disagrees with the folio");
-    }
+    validateCandidateForFolio(
+      { output },
+      expected.folio,
+      { discardedImageDirectionSha256: entry.discardedImageDirectionSha256 },
+    );
     const sameBookHistory = accepted.filter((prior) => prior.bookId === candidate.bookId);
     const expectedPriorEvidence = sameBookHistory.map((prior) => ({
       candidateSha256: prior.candidateSha256,
@@ -1000,10 +1007,13 @@ export async function loadAcceptedProgress({ archiveRoot, fixture, progressPath 
       candidatePath: candidateFile.path,
       candidateSha256: entry.candidateSha256,
       folioId: candidate.folioId,
-      imageDirection: output.imageDirection,
+      imageDirection: hasPlate(expected.folio) ? output.imageDirection : null,
       operationManifestSha256: candidate.operationManifestSha256,
       proseParagraphs: output.proseParagraphs,
     };
+    if (entry.discardedImageDirectionSha256 !== undefined) {
+      loaded.discardedImageDirectionSha256 = entry.discardedImageDirectionSha256;
+    }
 
     if (hasPlate(expected.folio)) {
       if (typeof entry.plateAcceptancePath !== "string"
@@ -1094,6 +1104,7 @@ export async function appendAcceptedProgress({
   requireExactKeys(entry, [
     "candidatePath",
     "candidateSha256",
+    "discardedImageDirectionSha256",
     "plateAcceptancePath",
     "plateAcceptanceSha256",
   ].filter((key) => Object.hasOwn(entry, key)), "new progress entry");
@@ -1101,6 +1112,9 @@ export async function appendAcceptedProgress({
     throw new Error("new progress entry requires a candidate path");
   }
   requireDigest(entry.candidateSha256, "new progress candidate");
+  if (entry.discardedImageDirectionSha256 !== undefined) {
+    requireDigest(entry.discardedImageDirectionSha256, "discarded image direction");
+  }
   const hasPlatePath = Object.hasOwn(entry, "plateAcceptancePath");
   const hasPlateDigest = Object.hasOwn(entry, "plateAcceptanceSha256");
   if (hasPlatePath !== hasPlateDigest) {
@@ -1266,7 +1280,11 @@ function words(paragraphs) {
   return paragraphs.join(" ").trim().split(/\s+/u).filter(Boolean).length;
 }
 
-export function validateCandidateForFolio(candidate, folio) {
+export function validateCandidateForFolio(
+  candidate,
+  folio,
+  { discardedImageDirectionSha256 } = {},
+) {
   const wordCount = words(candidate.output.proseParagraphs);
   if (wordCount < TARGET_MIN_WORDS) {
     throw new Error(folio.id + " has " + wordCount + " words, expected at least 120");
@@ -1278,8 +1296,24 @@ export function validateCandidateForFolio(candidate, folio) {
       + ` (target ${TARGET_MIN_WORDS}–${TARGET_MAX_WORDS})`,
     );
   }
-  if ((candidate.output.imageDirection !== null) !== hasPlate(folio)) {
+  if (hasPlate(folio)) {
+    if (candidate.output.imageDirection === null || discardedImageDirectionSha256 !== undefined) {
+      throw new Error(folio.id + " image direction disagrees with the folio layout");
+    }
+    return;
+  }
+  if (candidate.output.imageDirection === null) {
+    if (discardedImageDirectionSha256 !== undefined) {
+      throw new Error(folio.id + " cannot discard an absent image direction");
+    }
+    return;
+  }
+  if (discardedImageDirectionSha256 === undefined) {
     throw new Error(folio.id + " image direction disagrees with the folio layout");
+  }
+  requireDigest(discardedImageDirectionSha256, "discarded image direction");
+  if (discardedImageDirectionSha256 !== sha256(canonicalJson(candidate.output.imageDirection))) {
+    throw new Error(folio.id + " discarded image direction digest mismatch");
   }
 }
 

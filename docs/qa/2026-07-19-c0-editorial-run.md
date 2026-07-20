@@ -2,7 +2,7 @@
 
 Date: 2026-07-19 (America/Los_Angeles)
 
-Status: **IN PROGRESS — 4/10 folios and 2/4 plates accepted.** This is bounded editorial
+Status: **IN PROGRESS — 5/10 folios and 2/4 plates accepted.** This is bounded editorial
 authoring for the checked-in reader slice, not dynamic reader generation and not D0/D1 completion.
 
 ## Fixed contract and ceiling
@@ -113,15 +113,41 @@ that source evidence unchanged; remove only that mechanical mark when assembling
 reader fixture, and record the copy edit in production provenance rather than silently altering the
 archived candidate.
 
+## Accepted folio 5 — The venue
+
+- Fable operation manifest:
+  `d4243a8020de1ba51b3b5b208595f263279e457ecf1cf2098ecc0bed262c0917`
+- Official input count: 19,142 tokens
+- Provider message/request: `msg_011CdCTPE6AEMHtDsJUhs4Qy` /
+  `req_011CdCTPBQRyHjhBb6uo1sct`
+- Result: 247 words plus an unrequested image direction; `end_turn`
+- Candidate: `92ac4f65ee2bb04f2a4bafdd91ff7299b7f5a7f0b32b48692acb46a1a61f4576`
+- Message latency: 86.903 seconds
+- Usage-derived text estimate: `$0.501970`
+
+Editorial judgment: accept the prose and explicitly discard the image direction. Tan returns tired
+on the promised date, brings Jay to a traveler venue, gains his entry with “He's with me,” and only
+afterward understands that her defense still left his access and status in her hands. Their quiet
+separation is concrete, specific, and causally earned. The prose is direct and legible, and it does
+not turn the encounter into a lecture or slogan.
+
+The structured provider result incorrectly supplied an image direction for this deliberately
+text-led folio. It was preserved before the strict postflight refused the layout mismatch, and no
+provider retry occurred. The prose and immutable provider record remain one unedited run. Acceptance
+required the exact discarded-direction digest
+`d6718038158319d2a4a881fccbbbd3acb45bf86d1d983df0af408becd2110cce`; accepted history exposes
+the prose with no plate and no image direction. The normal postflight remains strict, so a future
+format mismatch cannot be silently accepted.
+
 ## Running spend and next operation
 
-Four Fable calls have an aggregate usage-derived estimate of `$1.367630`. Known C0 text plus the
-three completed narrative-image outputs is `$1.538094`; provider billing was not separately queried.
+Five Fable calls have an aggregate usage-derived estimate of `$1.869600`. Known C0 text plus the
+three completed narrative-image outputs is `$2.040064`; provider billing was not separately queried.
 Four of six image operations have been consumed: one credential rejection, one Payment visual
 rejection, and two accepted plates. The two remaining operations are reserved exactly for the root
 Map and Lagos terminal wall; no repair headroom remains.
 
-`root-folio-05` (`The venue`) is prepared, not dispatched, under request-manifest digest
-`d4243a8020de1ba51b3b5b208595f263279e457ecf1cf2098ecc0bed262c0917`. Its exact request interleaves
-Payment prose and plate, The gift prose, Band prose and plate, and Your tomorrow or mine in story
-order.
+`root-folio-06` (`After closing`) is prepared, not dispatched, under request-manifest digest
+`acb26c64b3983173bee043ee99343e2cfe49f0f8aeec0897cd5ec0eba9d31008`. Its exact request interleaves
+the five accepted prose folios and two accepted plates in story order. The discarded Venue image
+direction is not exposed as story history.

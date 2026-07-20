@@ -40,6 +40,10 @@ async function main() {
     folio,
     arguments_.reviewOperationDigest,
   );
+  if (folio.plate !== null && folio.plate !== undefined
+    && arguments_.discardedImageDirectionSha256 !== undefined) {
+    throw new Error("illustrated folio cannot discard its required image direction");
+  }
   const alreadyAccepted = await loadAcceptedProgress({
     archiveRoot: AUTHORING_ROOT,
     fixture,
@@ -60,6 +64,9 @@ async function main() {
     candidatePath: loaded.candidatePath,
     candidateSha256: loaded.candidateSha256,
   };
+  if (arguments_.discardedImageDirectionSha256 !== undefined) {
+    entry.discardedImageDirectionSha256 = arguments_.discardedImageDirectionSha256;
+  }
   let plateAcceptance = null;
   if (folio.plate !== null && folio.plate !== undefined) {
     const reviewRoot = path.join(

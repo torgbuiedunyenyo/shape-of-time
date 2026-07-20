@@ -11,7 +11,7 @@ _Updated 2026-07-19._
   worktree must not modify.
 - **CURRENT ITEM: C0 — Build the reader-first vertical slice.** Reader mechanics and a deliberately unaccepted
   working content fixture are in flight in this worktree. They are not C0 completion evidence.
-- The current C0 checkpoint passes 64 non-acceptance content/architecture tests, 116 unit tests, 20
+- The current C0 checkpoint passes 66 non-acceptance content/architecture tests, 116 unit tests, 20
   real-Postgres integration tests, 11 built-reader browser regressions, lint, typecheck, and
   production build under Node 24.18.0. The two production-content tests remain deliberately red.
 - Genesis commit: `7f7b5b112140db7ecb0bc2a85f28a0f38adda441`.
@@ -38,9 +38,9 @@ _Updated 2026-07-19._
 - B1 is complete. The exact GPT Image 2 request adapter, required-anchor/reference compiler, strict
   opaque-PNG response validator, replay v2, durable one-dispatch journal, and external recovery path
   pass the complete repository gate and three final independent adversarial reviews.
-- The first four Fable-authored folios, Payment, The gift, The band, and Your tomorrow or mine, plus
-  the Payment and Band plates are accepted into private editorial progress. Current C0 progress is
-  4/10 folios and 2/4 plates. The remaining
+- The first five Fable-authored folios, Payment, The gift, The band, Your tomorrow or mine, and The
+  venue, plus the Payment and Band plates are accepted into private editorial progress. Current C0
+  progress is 5/10 folios and 2/4 plates. The remaining
   working 8+2 prose in `content/reader-first/slice.json` is still an editorial draft, not accepted
   production content.
   Treatment B remains the shared medium rather than a source of characters, place, palette, or
@@ -99,7 +99,8 @@ _Updated 2026-07-19._
   and the fixed folio claim are flushed before dispatch; the claim prevents a second paid operation
   even if a manifest changes. Accepted history now resolves and verifies the complete fixed-path
   request, count, admission, response, and candidate chain before sending any prose or image onward.
-  Twenty-one focused authoring tests and all 64 non-acceptance content/architecture tests pass, along with lint
+  Twenty-two focused Fable-authoring tests and all 66 non-acceptance content/architecture tests pass,
+  along with lint
   and typecheck.
 - The written C0 ceiling is ten direct Fable operations at a `$2.00` worst-case projected maximum
   each and `$20.00` aggregate, plus six GPT Image 2 operations at a `$0.10` request-scope estimate
@@ -135,8 +136,17 @@ _Updated 2026-07-19._
   and `end_turn`; candidate `8e1d7778cf20b440838ab19f2c01b6d7934b97be781796e577eae38dd61d9a99`,
   usage-derived estimate `$0.318130`. Its exact source result has one surplus terminal quotation
   mark; the archived candidate remains unchanged, and the reader fixture will record removal of only
-  that mechanical mark in production provenance. C0 Fable provider calls executed: four; accepted
-  prose folios: four.
+  that mechanical mark in production provenance.
+  The venue then completed once under operation manifest
+  `d4243a8020de1ba51b3b5b208595f263279e457ecf1cf2098ecc0bed262c0917` and 19,142 officially
+  counted input tokens. Fable returned 247 words plus an unrequested image direction with exact
+  model/effort and `end_turn`; candidate
+  `92ac4f65ee2bb04f2a4bafdd91ff7299b7f5a7f0b32b48692acb46a1a61f4576`, usage-derived estimate
+  `$0.501970`. Strict postflight preserved then refused the layout mismatch. No retry or image call
+  occurred. A red-first disposition path now requires the exact unwanted-direction digest before a
+  text-led acceptance can expose only the prose; ordinary postflight remains strict. The discarded
+  digest is `d6718038158319d2a4a881fccbbbd3acb45bf86d1d983df0af408becd2110cce`.
+  C0 Fable provider calls executed: five; accepted prose folios: five.
 - The exact GPT Image 2 route is the existing direct Image API adapter and journal. It proves the
   requested `gpt-image-2-2026-04-21` snapshot, request ID, usage, latency, and output digest; the API
   exposes no served-model field. The Codex image-generation tool cannot prove that contract and must
@@ -450,12 +460,13 @@ Postgres, and image storage.
 
 ## Spend and deployment
 
-- C0 text-generation spend: four Fable calls, usage-derived estimates `$0.370920`, `$0.278350`,
-  `$0.400230`, and `$0.318130`, aggregate `$1.367630`; the provider bill was not separately queried.
+- C0 text-generation spend: five Fable calls, usage-derived estimates `$0.370920`, `$0.278350`,
+  `$0.400230`, `$0.318130`, and `$0.501970`, aggregate `$1.869600`; the provider bill was not
+  separately queried.
 - C0 narrative-image spend: the rejected Payment v2 estimate is `$0.056578` and accepted Payment v3
   is `$0.057068`, plus accepted Band `$0.056818`, for `$0.170464` across three completed outputs;
   the credential-rejected attempt returned no usage or reported cost. Known C0 text-plus-image
-  estimate is `$1.538094`.
+  estimate is `$2.040064`.
 - Image-generation provider bill: not reported by the Image API. B1 authorized exactly two calls
   within a `$0.10` request-scope bound. Captured usage and the 2026-07-19 standard rates yield an
   estimated total of `$0.028649` (`$0.011760` image output, `$0.016384` image input, and `$0.000505`
@@ -512,10 +523,11 @@ Postgres, and image storage.
 
 ## Next action
 
-Review and dispatch the already prepared `root-folio-05` (`The venue`) Fable operation exactly once
-under request-manifest digest `d4243a8020de1ba51b3b5b208595f263279e457ecf1cf2098ecc0bed262c0917`.
-Its request contains the four accepted prose folios and both actual accepted plates interleaved in
-exact story order; it is pinned to Fable 5, xhigh, and `max_tokens: 32768`. Continue the sequential
+Review and dispatch the already prepared `root-folio-06` (`After closing`) Fable operation exactly
+once under request-manifest digest `acb26c64b3983173bee043ee99343e2cfe49f0f8aeec0897cd5ec0eba9d31008`.
+Its request contains the five accepted prose folios and both actual accepted plates interleaved in
+exact story order; the discarded Venue image direction is absent. It is pinned to Fable 5, xhigh,
+and `max_tokens: 32768`. Continue the sequential
 8+2 chain. Never dispatch
 the frozen Stage 1 operation or substitute the Codex image-generation tool. Replace the draft fixture,
 add production provenance and digest-named WebPs, pass the content verifier, then perform the complete
