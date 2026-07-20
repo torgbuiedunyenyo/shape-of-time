@@ -29,6 +29,7 @@ test("a fresh reader completes the file-backed reader-first journey without runt
   }
   const aperture = page.getByRole("button", { name: "Open The maps were always becoming wrong" });
   await expect(aperture).toBeVisible();
+  await expect(aperture).toHaveText("The maps were always becoming wrong.");
   await aperture.click();
 
   await expect(page.getByRole("heading", { name: "The licensed route" })).toBeVisible();

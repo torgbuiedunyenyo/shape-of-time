@@ -9,12 +9,20 @@ _Updated 2026-07-19._
 - Active isolated worktree: `/Users/ratpartyserver/git/shape-of-time-reader-first`.
 - Authority checkpoint: `8fafde0`; another agent may be working in the `main` checkout, which this
   worktree must not modify.
-- **CURRENT ITEM: C1 — Pass the reader-first delight gate.** C0 is complete; the final accepted 8+2
-  prose and four narrative plates are assembled in the file-backed reader. The complete hands-on
-  in-app Browser and consecutive-reading walkthrough is next.
+- **CURRENT ITEM: D0 — Pin Fable xhigh and exact 400k admission.** C0 and C1 are complete; the final
+  accepted 8+2 prose and four narrative plates are assembled and have passed the complete reader
+  walkthrough.
 - C0 passes 72 content/architecture tests, 117 unit tests, 20 real-Postgres integration tests, 11
   built-reader browser regressions, lint, typecheck, and production build under Node 24.18.0. The
   browser gate used isolated Postgres port 55434 because another agent's worktree owns 55432.
+- C1's final in-app Browser pass read all ten folios and exercised the Library, mixed page-turns,
+  exact aperture/Back, bookmark/reload/resume, filtering, missing-title creation, and honest modal.
+  It found and fixed an orphaned aperture period and one ambiguous credential pronoun. The agent
+  gate is PASS under the owner's instruction to make the remaining implementation judgments without
+  pausing for confirmation. Evidence is in `docs/qa/2026-07-19-c1-reader-first-delight.md`.
+- The post-repair C1 gate passes 72 content/architecture tests, 118 unit tests, 11 built-reader
+  browser regressions, lint, typecheck, and production build. C0's 20 real-Postgres integration
+  tests remain the current persistence evidence; C1 changed no persistence code.
 - Genesis commit: `7f7b5b112140db7ecb0bc2a85f28a0f38adda441`.
 - The repository has been separated from the retired `auto-biblio` implementation.
 - The initial authority, verified expanded world source, source provenance, and implementation queue
@@ -47,7 +55,7 @@ _Updated 2026-07-19._
   characters, place, palette, or composition. No narrative slice asset has been published to the
   Railway bucket.
 
-## C0 reader-first slice in flight
+## C0/C1 reader-first slice complete
 
 - The file-backed shell now has an explicit Library/cover, eight root and two child folios, varied
   layouts, Previous/Next, arrows, touch swipe, the exact prepared aperture, exact Back, arbitrary
@@ -531,16 +539,11 @@ Postgres, and image storage.
 
 ## Spend and deployment
 
-- C0 text-generation spend: ten Fable calls, usage-derived estimates `$0.370920`, `$0.278350`,
-  `$0.400230`, `$0.318130`, `$0.501970`, `$0.504830`, rejected Map `$0.540050`, and accepted Map
-  replacement `$0.777110`, Jay says yes `$0.491330`, and The licensed route `$0.229740`, aggregate
-  `$4.412660`; the provider bill was not
-  separately queried.
-- C0 narrative-image spend: the rejected Payment v2 estimate is `$0.056578` and accepted Payment v3
-  is `$0.057068`, plus accepted Band `$0.056818` and accepted Map `$0.069541`, for `$0.240005`
-  across four completed outputs;
-  the credential-rejected attempt returned no usage or reported cost. Known C0 text-plus-image
-  estimate is `$4.652665`.
+- C0 text-generation spend: eleven Fable calls, usage-derived aggregate `$4.883090`; the provider
+  bill was not separately queried.
+- C0 narrative-image spend: six completed GPT Image 2 outputs, including two preserved visual
+  rejections, total an estimated `$0.368464`. The credential-rejected attempt returned no usage or
+  reported cost. Known C0 text-plus-image estimate is `$5.251554`.
 - Image-generation provider bill: not reported by the Image API. B1 authorized exactly two calls
   within a `$0.10` request-scope bound. Captured usage and the 2026-07-19 standard rates yield an
   estimated total of `$0.028649` (`$0.011760` image output, `$0.016384` image input, and `$0.000505`
@@ -597,12 +600,7 @@ Postgres, and image storage.
 
 ## Next action
 
-Review and dispatch prepared image-led child folio `map-folio-02` exactly once under request-manifest
-digest `95940a4383305e0a34da53a4c612fb9f7921a9f6627c5a2e87a2814b876f5948`. Its verified request contains
-only the exact child origin, complete shared authority, The licensed route as current-book history,
-and the terminal-wall beat; no root prose or plates enter Fable history. It is pinned to Fable 5,
-xhigh, `max_tokens: 32768`, and a schema that requires a complete image direction. Continue the sequential 8+2
-chain. Never dispatch
-the frozen Stage 1 operation or substitute the Codex image-generation tool. Replace the draft fixture,
-add production provenance and digest-named WebPs, pass the content verifier, then perform the complete
-C1 consecutive read and every-feature in-app Browser walkthrough before D0.
+Integrate the other agent's smallest D0–D3 application path after reviewing its isolated commit:
+promote the proven Fable admission and interleaved-history code, compose one atomic next-folio
+request through real Postgres, and stop any queue/lease machinery, chapter generation, or second
+architecture from entering the product.

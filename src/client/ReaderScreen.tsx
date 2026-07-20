@@ -77,6 +77,9 @@ function ApertureBlock({
   block: ReaderBlock;
   onOpen: (aperture: ReaderAperture) => void;
 }) {
+  const trailingText = block.text.slice(aperture.endOffset);
+  const adjacentPunctuation = trailingText.match(/^[,.;:!?]+/u)?.[0] ?? "";
+
   return (
     <p data-block-id={block.id} tabIndex={-1}>
       {block.text.slice(0, aperture.startOffset)}
@@ -89,8 +92,9 @@ function ApertureBlock({
         type="button"
       >
         {aperture.quote}
+        {adjacentPunctuation === "" ? null : <span aria-hidden="true">{adjacentPunctuation}</span>}
       </button>
-      {block.text.slice(aperture.endOffset)}
+      {trailingText.slice(adjacentPunctuation.length)}
     </p>
   );
 }

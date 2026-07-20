@@ -1,8 +1,9 @@
 # Shape of Time — Compaction-Safe Execution Plan
 
 > **Status:** A0 authority, A1 architecture, A2 application/Railway spine, B0 movement topology,
-> B1 image/recovery contract, and Treatment B medium selection are complete and frozen.
-> **CURRENT ITEM: C1 — in-app Browser and consecutive-reading delight gate.**
+> B1 image/recovery contract, Treatment B medium selection, and the C0/C1 reader-first slice are
+> complete and frozen.
+> **CURRENT ITEM: D0 — Fable xhigh and exact 400k admission.**
 
 This is the dependency-ordered work queue for a small illustrated hyperbook. It intentionally does
 not inherit code, data, schemas, corpus, or compatibility obligations from `auto-biblio`. Git in the
@@ -373,7 +374,7 @@ the prose withholds; the Map child opens instantly and returns to the exact phra
 turn and reload; all reader mechanics work without network or paid calls. The slice reaches real
 resting points without pretending the books end.
 
-### C1 — Pass the reader-first delight gate **[CURRENT]**
+### C1 — Pass the reader-first delight gate **[DONE]**
 
 **Depends on:** C0.
 

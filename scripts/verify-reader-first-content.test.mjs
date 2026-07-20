@@ -80,6 +80,7 @@ test("the reader-first prose is one accepted sequential Fable xhigh run", async 
       "root-folio-07:replace-terminal-period-with-question-mark",
       "map-folio-01:delete-redundant-phrase",
       "map-folio-01:clarify-signature-placement",
+      "map-folio-02:clarify-credential-holder",
     ],
   );
   const recoveredDirection = manifest.folios.find((entry) => entry.folioId === "map-folio-02")

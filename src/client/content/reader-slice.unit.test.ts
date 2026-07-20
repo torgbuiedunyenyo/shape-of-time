@@ -96,6 +96,12 @@ describe("reader-first content slice", () => {
     expect(getFolio(aperture.targetBookId, aperture.targetFolioId).ordinal).toBe(1);
   });
 
+  it("names Eniola as the suspended credential holder after Mrs. Adeyemi leaves the ferry", () => {
+    const terminal = getFolio(MAP_BOOK_ID, "map-folio-02");
+    expect(terminal.blocks[0]?.text).toContain("Eniola's credential number");
+    expect(terminal.blocks[0]?.text).not.toContain("her credential number");
+  });
+
   it("turns only to contiguous folios and marks both movement rests as continuable", () => {
     expect(getPreviousFolio(ROOT_BOOK_ID, "root-folio-01")).toBeNull();
     expect(getNextFolio(ROOT_BOOK_ID, "root-folio-01")?.id).toBe("root-folio-02");

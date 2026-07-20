@@ -61,17 +61,17 @@ test("the active queue puts one complete reader experience before further machin
   requireAll(
     plan,
     [
-      "CURRENT ITEM: C0 — reader-first vertical slice",
+      "CURRENT ITEM: D0 — Fable xhigh and exact 400k admission",
       "A0/A1/A2/B0/B1 [DONE, FROZEN]",
       "Treatment B medium [DONE]",
-      "C0 — Build the reader-first vertical slice **[CURRENT]**",
+      "C0 — Build the reader-first vertical slice **[DONE]**",
       "eight finished root folios",
       "The Map on the Wall",
       "four actual narrative plates",
       "bounded editorial authoring run",
       "not as proof that the D0/D1 production adapters already exist",
       "file-backed fixture and reader in the same item",
-      "C1 — Pass the reader-first delight gate",
+      "C1 — Pass the reader-first delight gate **[DONE]**",
       "D4 — Connect live highlight and explicit title creation",
       "D5 — Prepare only the next likely folio",
       "D6 — Pass the complete dynamic-reader experience gate",
@@ -99,10 +99,10 @@ test("the active queue puts one complete reader experience before further machin
     handoff,
     [
       "codex/reader-first-slice",
-      "CURRENT ITEM: C0",
+      "CURRENT ITEM: D0",
       "B2 is frozen",
       "must not dispatch",
-      "Build the reader-first vertical slice",
+      "C0 and C1 are complete",
     ],
     "HANDOFF.md",
   );

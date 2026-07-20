@@ -323,8 +323,16 @@
       "contextWasInterleaved": true,
       "fallbackUsed": false,
       "providerProseSha256": "c0e21ba77246013b8d8096ec1bdda5a4281721a9dc50f0d3b1f28b037c1424a1",
-      "proseSha256": "c0e21ba77246013b8d8096ec1bdda5a4281721a9dc50f0d3b1f28b037c1424a1",
-      "copyedits": [],
+      "proseSha256": "1c6d39201cad71c0d2825e154722eebb85a30c5cec437608f334e2d4928467a9",
+      "copyedits": [
+        {
+          "kind": "clarify-credential-holder",
+          "blockId": "map-folio-02-block-01",
+          "before": "SUSPENDED PENDING REVIEW, her credential number",
+          "after": "SUSPENDED PENDING REVIEW, Eniola's credential number",
+          "reason": "Remove the nearest-referent ambiguity introduced by naming Mrs. Adeyemi in the preceding sentence."
+        }
+      ],
       "imageDirection": {
         "concreteScene": "Night at the Lagos lagoon ferry terminal, seen from within the small crowd of off-shift crews, close enough that the chalked lines are legible. On the terminal wall beside the fare notice and the departure board of outer lagoon stops: three hand-drawn current traces in different hands that visibly disagree at one crossing point, with witnessed names, observation times, and the return order chalked beneath the first. Eniola stands at the wall holding chalk and a folded timetable. Wale, a terminal officer, reads from a printed order. Balogun copies the wall into a paper sounding book; Chidi photographs it with a borrowed phone. Behind them at the berth, the ferry sits with its console dark and its mirror array folded, lagoon water and distant stop lamps beyond.",
         "factLeftToImage": "The scale of dissemination and dependence that the prose does not enumerate: how many crews are actually recording the wall into their own books, and the departure board tying the disputed crossing to the named outer stops whose morning runs will follow one trace or another.",
