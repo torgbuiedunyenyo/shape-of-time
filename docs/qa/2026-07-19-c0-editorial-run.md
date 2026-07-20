@@ -2,7 +2,7 @@
 
 Date: 2026-07-19 (America/Los_Angeles)
 
-Status: **IN PROGRESS — 3/10 folios and 2/4 plates accepted.** This is bounded editorial
+Status: **IN PROGRESS — 4/10 folios and 2/4 plates accepted.** This is bounded editorial
 authoring for the checked-in reader slice, not dynamic reader generation and not D0/D1 completion.
 
 ## Fixed contract and ceiling
@@ -91,14 +91,37 @@ alone reveals the extraction withheld from the prose. There are no glowing effec
 or generic science-fiction cues. Acceptance digest:
 `867bb9f056cf01fc30677d1d7f1ab0c772bb96de0cc1f9ec480ad12c4bf4ed92`.
 
+## Accepted folio 4 — Your tomorrow or mine
+
+- Fable operation manifest:
+  `418a98198e7381479dec488a674bb31319b7bcf33d617100323e05b9d5884a7a`
+- Official input count: 18,578 tokens
+- Provider message/request: `msg_011CdCSkZTxAhyH7EfeEyJvY` /
+  `req_011CdCSkWqCXwwu5hzGUs8Ss`
+- Result: 260 words, `imageDirection: null`, `end_turn`
+- Candidate: `8e1d7778cf20b440838ab19f2c01b6d7934b97be781796e577eae38dd61d9a99`
+- Message latency: 42.176 seconds
+- Usage-derived text estimate: `$0.318130`
+
+Editorial judgment: accept. Jay and Tan admit how deliberately they have arranged their meetings,
+kiss, and turn an ambiguous promise to return on Thursday into a specific Oakland date and two
+different experienced durations. Travel remains bodily work rather than teleportation; both places
+continue; the promise is practical and affectionate. The action, motives, referents, and causal
+change are legible, and the folio does not introduce an invented thematic label or generic
+time-travel paradox. The exact provider output ends with one surplus closing quotation mark. Preserve
+that source evidence unchanged; remove only that mechanical mark when assembling the checked-in
+reader fixture, and record the copy edit in production provenance rather than silently altering the
+archived candidate.
+
 ## Running spend and next operation
 
-Three Fable calls have an aggregate usage-derived estimate of `$1.049500`. Known C0 text plus the
-three completed narrative-image outputs is `$1.219964`; provider billing was not separately queried.
+Four Fable calls have an aggregate usage-derived estimate of `$1.367630`. Known C0 text plus the
+three completed narrative-image outputs is `$1.538094`; provider billing was not separately queried.
 Four of six image operations have been consumed: one credential rejection, one Payment visual
 rejection, and two accepted plates. The two remaining operations are reserved exactly for the root
 Map and Lagos terminal wall; no repair headroom remains.
 
-`root-folio-04` (`Your tomorrow or mine`) is prepared, not dispatched, under request-manifest digest
-`418a98198e7381479dec488a674bb31319b7bcf33d617100323e05b9d5884a7a`. Its exact request interleaves
-Payment prose and plate, The gift prose, and Band prose and plate in story order.
+`root-folio-05` (`The venue`) is prepared, not dispatched, under request-manifest digest
+`d4243a8020de1ba51b3b5b208595f263279e457ecf1cf2098ecc0bed262c0917`. Its exact request interleaves
+Payment prose and plate, The gift prose, Band prose and plate, and Your tomorrow or mine in story
+order.
