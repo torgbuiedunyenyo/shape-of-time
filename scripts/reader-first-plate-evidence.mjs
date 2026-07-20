@@ -31,7 +31,7 @@ const CONTRACTS = {
     ].join("\n"),
     bookId: "shape-of-time",
     folioId: "root-folio-01",
-    idempotencyKey: "c0-reader-first-plate-root-payment-v1",
+    idempotencyKey: "c0-reader-first-plate-root-payment-credential-repair-v2",
     referenceRules: [{
       assetId: "treatment-b-medium",
       digest: TREATMENT_B_DIGEST,

@@ -114,9 +114,13 @@ _Updated 2026-07-19._
   requested `gpt-image-2-2026-04-21` snapshot, request ID, usage, latency, and output digest; the API
   exposes no served-model field. The Codex image-generation tool cannot prove that contract and must
   not be used for accepted assets. The C0 Payment dry run binds Fable's direction unchanged plus one
-  verified Treatment B medium-only reference, one operation, and a `$0.10` cap. Its manifest digest is
-  `fb7a78450d102ece1297cf8c95ee066331a655d2dad02fadb39489cdd4956f5a`; reviewed operation digest is
-  `807e299c9b7ab2c4a966affd38d5226eec2e9a2e190d72924f6cbd958f27b39a`. Generation stops at
+  verified Treatment B medium-only reference, one operation, and a `$0.10` cap. The original v1
+  dispatch reached OpenAI once but was rejected before generation because Railway's stored key was
+  invalid; it returned no image, usage, or reported cost and remains immutable. A distinct local
+  owner-managed key passed an authenticated no-cost model lookup. The reviewed credential-repair v2
+  changes only its idempotency identity. Its manifest digest is
+  `1e8c75fc14a1ee07d455cb4b7b7fd315908ea9beef07d09c2ee67583815c640c`; operation digest is
+  `7b9d03b27a11958198320752963bbc82c68bd6ff4102bea29dcb73ddef6c5c1e`. Generation stops at
   `PENDING_REVIEW`; a separate no-provider command validates and accepts an output before atomically
   appending progress. The acceptance verifier now rejects fabricated receipts, header-only PNGs,
   substituted Treatment B or exposed-plate references, candidates built from the wrong accepted
@@ -124,8 +128,9 @@ _Updated 2026-07-19._
   once, and acceptance preflights the next global folio before writing its fixed immutable path.
   Neither provider key is exported into the current process, but a
   read-only Railway variable-name audit confirmed `ANTHROPIC_API_KEY` and `OPENAI_API_KEY` are already
-  stored on the designated production service. They can be injected into one local command without
-  printing or copying their values. No C0 image provider dispatch has occurred.
+  stored on the designated production service, but the OpenAI value is currently invalid and must
+  not be used for C0. C0 image dispatch attempts: one pre-generation credential rejection; generated
+  C0 narrative images: zero.
 
 ## Reorganization record
 
@@ -461,9 +466,9 @@ Postgres, and image storage.
 
 ## Next action
 
-Commit and push the reviewed C0 plate/acceptance route, then execute the exact Payment image operation
-once using operation digest `807e299c9b7ab2c4a966affd38d5226eec2e9a2e190d72924f6cbd958f27b39a`
-and the existing Railway OpenAI credential without printing it. Inspect the PNG at reading size;
+Commit and push the reviewed Payment credential-repair v2 identity, then execute it exactly once
+using operation digest `7b9d03b27a11958198320752963bbc82c68bd6ff4102bea29dcb73ddef6c5c1e`
+and the validated owner-managed local OpenAI credential without printing it. Inspect the PNG at reading size;
 only then run the separate acceptance command and continue the sequential 8+2 chain. Never dispatch
 the frozen Stage 1 operation or substitute the Codex image-generation tool. Replace the draft
 fixture, add production provenance and digest-named WebPs, pass the content verifier, then perform

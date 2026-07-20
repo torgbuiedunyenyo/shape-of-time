@@ -2,8 +2,9 @@
 
 Date: 2026-07-19 (America/Los_Angeles)
 
-Judgment: **PASS for one reviewed Payment dispatch; no image provider call had occurred when this
-record was written.** The output must still receive a separate visual review and explicit
+Judgment: **PASS for one reviewed Payment credential-repair v2 dispatch.** The first v1 dispatch was
+rejected by OpenAI before generation because Railway held an invalid credential; its durable record
+is immutable and will not be retried. The output must still receive a separate visual review and explicit
 no-provider acceptance before it may enter editorial progress.
 
 ## Bound Fable candidate
@@ -53,7 +54,7 @@ only technical/layout constraints and reference scope. It says that Treatment B 
 only and forbids transferring its people, ferry-terminal place, objects, blue palette, arrangement,
 or composition.
 
-Exact inspected dry run:
+Initial v1 inspected dry run:
 
 - image manifest SHA-256:
   `fb7a78450d102ece1297cf8c95ee066331a655d2dad02fadb39489cdd4956f5a`;
@@ -63,6 +64,28 @@ Exact inspected dry run:
   `bf83dd6a73923ea086ab9f5b2c9cfd2f7773c0a4ce272351b3860f4740978d7e`;
 - operation digest:
   `807e299c9b7ab2c4a966affd38d5226eec2e9a2e190d72924f6cbd958f27b39a`.
+
+## Credential rejection and reviewed replacement
+
+The v1 command reached OpenAI once and returned `401 invalid_api_key` before any image bytes, usage,
+or cost evidence existed. The journal records its prepared request, dispatch marker, and rejected
+resolution under idempotency key `c0-reader-first-plate-root-payment-v1`; no review image or receipt
+was written. The invalid Railway variable was not modified. A distinct owner-managed local `.env`
+key, stored with mode 0600, passed a no-cost authenticated model lookup without exposing its value.
+
+The fresh replacement changes only the application idempotency identity to
+`c0-reader-first-plate-root-payment-credential-repair-v2`. Fable direction, prompt, Treatment B
+bytes and provenance, quality, size, model snapshot, operation count, and spend cap are unchanged.
+Its reviewed identities are:
+
+- image manifest SHA-256:
+  `1e8c75fc14a1ee07d455cb4b7b7fd315908ea9beef07d09c2ee67583815c640c`;
+- exact prompt SHA-256:
+  `1f6995012c514af2968677433502f7a6c250d42e0793edc5b30eb65fa9fc781a`;
+- application-guidance SHA-256:
+  `bf83dd6a73923ea086ab9f5b2c9cfd2f7773c0a4ce272351b3860f4740978d7e`;
+- replacement operation digest:
+  `7b9d03b27a11958198320752963bbc82c68bd6ff4102bea29dcb73ddef6c5c1e`.
 
 ## Red-to-green and exact-runtime evidence
 
