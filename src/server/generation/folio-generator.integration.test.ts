@@ -277,6 +277,43 @@ describe("D3 pagewise generation on a real database", () => {
   );
 
   it(
+    "retries again after a failed retry instead of bricking the reservation",
+    async () => {
+      // Production 2026-07-20: root folio 9 failed twice (original + one retry); every later
+      // retry then threw kysely "no result" from reserveFolio, because the folio row points at
+      // the successor attempt while the base idempotency key still names the founding attempt.
+      const book = await createTestBook("Root retry twice", "This is the root book of the library.");
+      const prosePort = countingProsePort({ label: "twice" });
+      let sendCalls = 0;
+      const failingTwice = {
+        ...prosePort,
+        send: (body: FableRequestBody) => {
+          sendCalls += 1;
+          if (sendCalls <= 2) {
+            return Promise.resolve({
+              content: [{ text: "half a folio", type: "text" }],
+              id: `msg_twice_${sendCalls}`,
+              model: "claude-fable-5",
+              stop_reason: "max_tokens",
+              usage: { input_tokens: 2_000, output_tokens: 100 },
+            });
+          }
+          return prosePort.send(body);
+        },
+      };
+      const deps = dependencies(failingTwice, countingImagePort());
+      const request = { bookId: book.id, movementId: "movement-01", ordinal: 1, workerId: "worker-a" };
+
+      await expect(generateNextFolio(deps, request)).rejects.toThrow(/max_tokens|truncated/i);
+      await expect(generateNextFolio(deps, request)).rejects.toThrow(/max_tokens|truncated/i);
+      const third = await generateNextFolio(deps, request);
+      expect(third.spent).toBe(true);
+      expect(third.folio.state).toBe("ready");
+    },
+    60_000,
+  );
+
+  it(
     "records the provider's cause detail when the official count fails",
     async () => {
       const book = await createTestBook("Root count-fail", "This is the root book of the library.");

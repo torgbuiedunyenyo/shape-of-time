@@ -1,6 +1,8 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 
+import type { Logger } from "pino";
+
 import type { AssetStore } from "./assets/asset-store.js";
 import type { JsonValue } from "./db/types.js";
 import { digestJson, sha256 } from "./domain/digests.js";
@@ -167,6 +169,7 @@ export class ReaderLibraryService {
   readonly #creationInFlight = new Map<string, Promise<void>>();
   readonly #creationResults = new Map<string, ReaderApiBook>();
   readonly #planningFailures = new Map<string, Error>();
+  readonly #logger: Logger | undefined;
   readonly #repository: LibraryRepository;
   #fixture: ReaderFixture | null = null;
   #seedPromise: Promise<void> | null = null;
@@ -175,11 +178,13 @@ export class ReaderLibraryService {
     assetStore: AssetStore;
     clientRoot: string;
     generation: ReaderLibraryGeneration;
+    logger?: Logger;
     repository: LibraryRepository;
   }) {
     this.#assetStore = options.assetStore;
     this.#clientRoot = path.resolve(options.clientRoot);
     this.#generation = options.generation;
+    this.#logger = options.logger;
     this.#repository = options.repository;
     this.#dependencies = {
       assetStore: options.assetStore,
@@ -365,6 +370,7 @@ export class ReaderLibraryService {
     this.#creationFailures.delete(creationId);
     const task = work()
       .catch((error: unknown) => {
+        this.#logger?.error({ creationId, err: error }, "background book creation failed");
         this.#creationFailures.set(
           creationId,
           error instanceof Error ? error : new Error(String(error)),
@@ -541,6 +547,9 @@ export class ReaderLibraryService {
     if (this.#inFlight.has(bookId)) return;
     const task = this.#generateNext(bookId)
       .catch((error: unknown) => {
+        // While a recorded folio failure exists, this error is invisible to every API response
+        // (#nextStatus serves the ledger failure first) — the operator log is its only surface.
+        this.#logger?.error({ bookId, err: error }, "background folio generation failed");
         this.#planningFailures.set(bookId, error instanceof Error ? error : new Error(String(error)));
       })
       .finally(() => {

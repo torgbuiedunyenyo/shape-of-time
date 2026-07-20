@@ -1,4 +1,5 @@
 import type { Hono } from "hono";
+import type { Logger } from "pino";
 
 import type { AssetStore } from "./assets/asset-store.js";
 import {
@@ -15,6 +16,7 @@ export function registerNextPageRoutes(
     assetStore: AssetStore;
     clientRoot: string;
     generation: NextPageGeneration;
+    logger?: Logger;
     repository: LibraryRepository;
   },
 ): ReaderLibraryService {

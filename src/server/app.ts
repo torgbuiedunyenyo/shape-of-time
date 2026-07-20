@@ -127,6 +127,7 @@ export function createApp(dependencies: AppDependencies): Hono {
       assetStore: dependencies.assetStore,
       clientRoot,
       generation: dependencies.generation,
+      ...(dependencies.logger === undefined ? {} : { logger: dependencies.logger }),
       repository: new LibraryRepository(dependencies.database),
     });
   }

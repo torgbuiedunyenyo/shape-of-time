@@ -157,12 +157,30 @@ export class LibraryRepository {
         if (existingAttempt.intent_digest !== intentDigest) {
           throw new Error("generation idempotency key was reused with different intent");
         }
+        // The folio's identity is (book, ordinal), not the founding attempt: after a retry the
+        // folio points at a successor attempt, so looking it up by the founding attempt id finds
+        // nothing and every further retry is bricked (production root folio 9, 2026-07-20).
         const folio = await transaction
           .selectFrom("folios")
           .selectAll()
-          .where("generation_attempt_id", "=", existingAttempt.id)
+          .where("book_id", "=", input.bookId)
+          .where("ordinal", "=", input.ordinal)
           .executeTakeFirstOrThrow();
-        return { attempt: mapAttempt(existingAttempt), created: false, folio: mapFolio(folio) };
+        const currentAttempt =
+          folio.generation_attempt_id === existingAttempt.id
+            ? existingAttempt
+            : await transaction
+                .selectFrom("generation_attempts")
+                .selectAll()
+                .where("id", "=", folio.generation_attempt_id)
+                .executeTakeFirstOrThrow();
+        if (
+          currentAttempt.idempotency_key !== input.idempotencyKey &&
+          !currentAttempt.idempotency_key.startsWith(`${input.idempotencyKey}:retry-of:`)
+        ) {
+          throw new Error("folio reservation identity is inconsistent");
+        }
+        return { attempt: mapAttempt(currentAttempt), created: false, folio: mapFolio(folio) };
       }
 
       const existingFolio = await transaction
