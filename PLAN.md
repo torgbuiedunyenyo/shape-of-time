@@ -2,8 +2,9 @@
 
 > **Status:** A0 authority, A1 architecture, A2 application/Railway spine, B0 movement topology,
 > B1 image/recovery contract, Treatment B medium selection, and the C0/C1 reader-first slice are
-> complete and frozen.
-> **CURRENT ITEM: D0 — Fable xhigh and exact 400k admission.**
+> complete and frozen. D0/D1 and the D3–D5 application path are implemented and locally green;
+> the revised D2 prose baseline and complete live reader journey remain human proof obligations.
+> **CURRENT ITEM: D6 — deploy and exercise the complete dynamic reader.**
 
 This is the dependency-ordered work queue for a small illustrated hyperbook. It intentionally does
 not inherit code, data, schemas, corpus, or compatibility obligations from `auto-biblio`. Git in the
@@ -396,7 +397,7 @@ creation is accepted.
 **Stop:** If focused iteration cannot make the slice pleasurable, revisit content or concept. Do not
 connect generation or expand the garden to compensate for a dull reader.
 
-### D0 — Pin Fable xhigh and exact 400k admission
+### D0 — Pin Fable xhigh and exact 400k admission **[DONE]**
 
 **Depends on:** A2, A0, C1.
 
@@ -414,7 +415,7 @@ manifest or count. There is no fallback writer.
 **Green:** Fable mismatch, Opus alias, refusal, empty output, truncation, count error, and any request
 over the hard equation fail before publication or additional spend.
 
-### D1 — Compile complete current-book history deterministically
+### D1 — Compile complete current-book history deterministically **[DONE]**
 
 **Depends on:** D0, B0.
 
@@ -433,7 +434,7 @@ visual-production authority, or optional craft examples. No rolling summary, rec
 provider memory/compaction, `chars/4`, or silent truncation path exists. The reader-first slice and
 ordinary early books never enter long-form mode.
 
-### D2 — Establish the lightly steered prose baseline
+### D2 — Establish the lightly steered prose baseline **[REVISED BASELINE; LIVE READ PENDING]**
 
 **Depends on:** D1, B0.
 
@@ -455,7 +456,7 @@ paraphrasable, and worth continuing. A model score cannot override human failure
 **Stop:** If a small number of targeted experiments cannot make the baseline readable, reconsider
 the story plan or writing contract; do not build a multi-model tribunal.
 
-### D3 — Add simple pagewise prose-and-image generation
+### D3 — Add simple pagewise prose-and-image generation **[IMPLEMENTED; LIVE JOURNEY PENDING]**
 
 **Depends on:** D2, C1, B1.
 
@@ -490,7 +491,7 @@ operation honestly recoverable or indeterminate; required text and image appear 
 work can be replaced; exposed work cannot mutate; root and child books cross movement boundaries
 without replay, terminal screens, or scope leakage.
 
-### D4 — Connect live highlight and explicit title creation
+### D4 — Connect live highlight and explicit title creation **[IMPLEMENTED; LIVE JOURNEY PENDING]**
 
 **Depends on:** D3, C1.
 
@@ -512,7 +513,7 @@ as prepared apertures; nested books and reload may not weaken it.
 preserve their exact source, spend once, remain honest during latency, and return to the precise
 passage. No auth wall, global spinner, root replay, or sibling leakage appears.
 
-### D5 — Prepare only the next likely folio
+### D5 — Prepare only the next likely folio **[IMPLEMENTED; LIVE METRICS PENDING]**
 
 **Depends on:** D4.
 
@@ -527,7 +528,7 @@ insufficient. A GET route and browser-only lock may never purchase generation.
 **Green:** Normal prepared turns are cache hits; duplicate spend is impossible; failed preparation
 leaves navigation honest; recorded hit and waste data justifies retaining preparation.
 
-### D6 — Pass the complete dynamic-reader experience gate
+### D6 — Pass the complete dynamic-reader experience gate **[IN PROGRESS]**
 
 **Depends on:** D5.
 

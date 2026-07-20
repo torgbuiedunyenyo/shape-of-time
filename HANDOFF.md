@@ -5,13 +5,24 @@ _Updated 2026-07-19._
 ## Current state
 
 - Repository: `torgbuiedunyenyo/shape-of-time`.
-- Active implementation branch: `codex/reader-first-slice`.
+- Active implementation branch: `codex/dynamic-reader`.
 - Active isolated worktree: `/Users/ratpartyserver/git/shape-of-time-reader-first`.
-- Authority checkpoint: `8fafde0`; another agent may be working in the `main` checkout, which this
+- Integration checkpoint: `00580e9`; another agent may be working in the `main` checkout, which this
   worktree must not modify.
-- **CURRENT ITEM: D0 — Pin Fable xhigh and exact 400k admission.** C0 and C1 are complete; the final
-  accepted 8+2 prose and four narrative plates are assembled and have passed the complete reader
-  walkthrough.
+- **CURRENT ITEM: D6 — deploy and exercise the complete dynamic reader.** D0/D1 are complete in
+  application code. D3–D5 are implemented and locally green. D2's revised writing guidance is
+  installed, but its live consecutive human read remains part of D6 rather than a paper pass.
+- D0's bounded live proof remains preserved at git commit `44dde30`: the provider served exact
+  `claude-fable-5` with `xhigh`, official count matched usage, and no fallback occurred.
+- `00580e9` connects a reader-facing Library, Next Folio, atomic open, generated assets, arbitrary
+  selection child, explicit-title child, quiet creation state, dynamic Library/resume, and exact
+  return journey to the real Postgres generation core. It also fixes two false continuity claims in
+  the imported work: Fable now receives actual prior image bytes interleaved with prose, and GPT
+  Image receives Fable's structured image direction rather than the new prose.
+- The current gate is green: 72 content tests, 145 unit tests, 39 real-Postgres integration tests,
+  11 browser regressions, lint, typecheck, and production build. The in-app Browser locally verified
+  Library entry and the explicit title-creation confirmation; the deployed live-generation journey
+  is not yet claimed.
 - C0 passes 72 content/architecture tests, 117 unit tests, 20 real-Postgres integration tests, 11
   built-reader browser regressions, lint, typecheck, and production build under Node 24.18.0. The
   browser gate used isolated Postgres port 55434 because another agent's worktree owns 55432.
@@ -600,7 +611,8 @@ Postgres, and image storage.
 
 ## Next action
 
-Integrate the other agent's smallest D0–D3 application path after reviewing its isolated commit:
-promote the proven Fable admission and interleaved-history code, compose one atomic next-folio
-request through real Postgres, and stop any queue/lease machinery, chapter generation, or second
-architecture from entering the product.
+Fast-forward `main` to the green `codex/dynamic-reader` checkpoint, verify the Git-triggered Railway
+deployment with generation explicitly enabled, then use the in-app Browser for one live prepared
+Next Folio, one highlighted child, one explicit-title child, exact Back, reload/resume, and visual/
+literary review. Fix only blockers found in that journey; do not add infrastructure or speculative
+preparation.
