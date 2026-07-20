@@ -136,3 +136,13 @@ have a reader to wire into. The owner's actual want: a wired version they can pl
 Every slice: named red observed first, focused tests green, `pnpm run gates` green in THIS
 worktree before push (browser step may collide on port 55432 with another checkout's postgres —
 adopt `COMPOSE_PROJECT_NAME=shape-of-time` to reuse the running dev container, as pushcheck did).
+
+## Next Page live path — landed on this branch, 2026-07-19 (owner-directed slice)
+
+Owner rejected run 01's prose and directed: use the prose guidance; build the minimal live
+Next-Page path in this branch only; do not merge. Landed: next-page.ts routes (POST next-folio /
+GET status / POST open / GET image), interleaved prose+image history into Fable, and
+narrative-image-adapter.ts feeding GPT Image 2 Fable's direction + eligible priors through the
+unchanged B1 contract. Evidence: docs/qa/2026-07-19-next-page-live-path.md. 40/40 integration,
+105/105 unit. NOT merged to main; live boot wiring (composeApplication ports) intentionally
+unbuilt pending owner.

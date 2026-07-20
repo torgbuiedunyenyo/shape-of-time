@@ -16,11 +16,15 @@ import { parseConfig, type AppConfig } from "./config.js";
 import { createDatabase, destroyDatabase } from "./db/database.js";
 import { readDatabaseHealth } from "./db/health.js";
 import type { Database } from "./db/types.js";
+import { registerNextPageRoutes, type NextPageGeneration } from "./next-page.js";
+import { LibraryRepository } from "./repositories/library-repository.js";
 
 export interface AppDependencies {
   assetStore?: AssetStore;
   clientRoot: string;
   database: Kysely<Database>;
+  /** When present (with assetStore), the Next Page live path is served under /api. */
+  generation?: NextPageGeneration;
   gitCommitSha?: string;
   logger?: Logger;
 }
@@ -100,6 +104,17 @@ export function createApp(dependencies: AppDependencies): Hono {
       return context.json({ status: "unavailable" }, 503);
     }
   });
+
+  if (dependencies.generation !== undefined) {
+    if (dependencies.assetStore === undefined) {
+      throw new Error("the Next Page live path needs an asset store");
+    }
+    registerNextPageRoutes(app, {
+      assetStore: dependencies.assetStore,
+      generation: dependencies.generation,
+      repository: new LibraryRepository(dependencies.database),
+    });
+  }
 
   app.all("/api", (context) => context.json({ error: "not found" }, 404));
   app.all("/api/*", (context) => context.json({ error: "not found" }, 404));

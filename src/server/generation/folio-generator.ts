@@ -18,10 +18,19 @@ import {
  * history is loaded from THIS book's exposed folios only, which is what keeps siblings isolated
  * on the normal path.
  */
+export interface EligiblePriorImage {
+  altText: string;
+  assetId: string;
+  digest: string;
+  mediaType: string;
+  objectKey: string;
+}
+
 export interface NarrativeImagePort {
   generate(input: {
     contextDigest: string;
     folioOrdinal: number;
+    priorImages: readonly EligiblePriorImage[];
     prose: string;
   }): Promise<{ altText: string; bytes: Uint8Array; mediaType: string }>;
 }
@@ -97,11 +106,28 @@ export async function generateNextFolio(
       throw new Error(`movement ${input.movementId} does not exist in book ${input.bookId}`);
     }
     const exposed = await repository.listExposedFolios(input.bookId);
-    const priorFolios: PriorFolio[] = exposed.map((prior) => ({
-      images: [],
-      ordinal: prior.ordinal,
-      prose: prior.prose ?? "",
-    }));
+    // Prior prose and each folio's accepted narrative image travel together: the compiler
+    // interleaves the image marker inside its folio's section, and the same images become the
+    // eligible reference pack for this folio's own image.
+    const eligiblePriorImages: EligiblePriorImage[] = [];
+    const priorFolios: PriorFolio[] = [];
+    for (const prior of exposed) {
+      const images: { altText: string; digest: string }[] = [];
+      const assetId = prior.layout?.["imageAssetId"];
+      const altText = prior.layout?.["imageAltText"];
+      if (typeof assetId === "string" && typeof altText === "string") {
+        const asset = await repository.getAsset(assetId);
+        images.push({ altText, digest: asset.digest });
+        eligiblePriorImages.push({
+          altText,
+          assetId,
+          digest: asset.digest,
+          mediaType: asset.mediaType,
+          objectKey: asset.objectKey,
+        });
+      }
+      priorFolios.push({ images, ordinal: prior.ordinal, prose: prior.prose ?? "" });
+    }
 
     const compiled = compileFolioContext({
       bookOrigin: originStatement,
@@ -121,6 +147,7 @@ export async function generateNextFolio(
     const image = await imagePort.generate({
       contextDigest: compiled.contextDigest,
       folioOrdinal: input.ordinal,
+      priorImages: eligiblePriorImages,
       prose,
     });
     if (image.bytes.byteLength === 0) throw new Error("narrative image has no bytes");
