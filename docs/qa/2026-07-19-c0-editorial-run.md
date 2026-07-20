@@ -2,7 +2,7 @@
 
 Date: 2026-07-19 (America/Los_Angeles)
 
-Status: **IN PROGRESS — 6/10 folios and 2/4 plates accepted.** This is bounded editorial
+Status: **IN PROGRESS — 9/10 folios and 3/4 plates accepted.** This is bounded editorial
 authoring for the checked-in reader slice, not dynamic reader generation and not D0/D1 completion.
 
 ## Fixed contract and ceiling
@@ -46,13 +46,14 @@ space, queue geometry, wear/refit, and unequal attention.
 
 The provider result was complete and valid, but the original postflight rejected it at 253 words.
 No redispatch occurred. The exact archived response was finalized through a one-time no-provider
-recovery after the operational hard stop was corrected to 260 words while retaining 120–250 as the
+recovery after the operational hard stop was first corrected to 260 words while retaining 120–250 as the
 prompt and layout target. The permanent runner now writes the complete provider-bound candidate
 before applying the editorial length/layout check, so a valid paid result cannot disappear behind a
 postflight editorial refusal. This avoids burning a second call for a three-word
-overrun without admitting a materially long page. The provider output was not edited. The static
-reader uses the same 260-word hard maximum; whether the 253-word result actually composes well at
-desktop and mobile reading sizes remains a C0/C1 rendered-layout judgment, not a claim made here.
+overrun without admitting a materially long page. The provider output was not edited. The later
+262-word child result clarified that this is an immutable-provider preservation boundary, now 265,
+not the desired reader length. Final page copyedits still aim at the 120–250 target, and composition
+at desktop and mobile reading sizes remains a C0/C1 rendered-layout judgment.
 
 Editorial judgment: accept. Tan returns with a specific apology and cash; Jay preserves the first
 bottle as a gift; they exchange names and choose to keep talking. The relocated bus shelter and
@@ -191,16 +192,104 @@ fixed claim, HTTP 200 provider response, exact rejected manifest, absent candida
 structural failure. The normal claim still prevents a duplicate; a second replacement cannot be
 claimed. This evidence justifies increasing the editorial ceiling by one operation before spend.
 
+## Accepted folio 7 — The map
+
+- Replacement Fable operation manifest:
+  `2614136ef68b29404108250956f6f012a5f21ec782b8b28829f8040b88eaba3f`
+- Replaced rejected manifest:
+  `2643558816187ff44b52e350469d4854010dc51dae167d2ae12d638ff72ee32e`
+- Official input count: 20,421 tokens
+- Provider message/request: `msg_011CdCVdwLkQGyw3dzeeo2t4` /
+  `req_011CdCVdtkUVeinCMoSU1xeU`
+- Result: 258 words plus a complete image direction; `end_turn`
+- Candidate: `d836a8a326c6dc969a3ff3da5bb2508796def4b487a8cc5445bbff17904acb91`
+- Message latency: 129.611 seconds
+- Usage-derived text estimate: `$0.777110`
+
+The replacement preserved the exact content manifest, six-folio/two-plate history, current beat,
+model, effort, and output cap. Only eight supported schema descriptions changed. An independent
+predispatch audit verified both the retained structural failure and the single linked replacement
+boundary. The new prose is concrete and causally clear: Tan returns with a physical three-axis
+route; Jay asks about bodily duration, ownership, and failure; he keeps the chart to study rather
+than agreeing prematurely. The 258 words are within the 260-word hard ceiling. Production fixture
+provenance must record the single punctuation copyedit from “What does it feel like.” to “What does
+it feel like?”
+
+The exact Map plate dry run bound Payment and Band, in that order, as the only continuity references;
+Fable's direction was unchanged. It dispatched once under:
+
+- operation digest:
+  `6c52e6b547079ff63539b45f09afcfb7ced66f4c3aa29fb7c1d4a43a81bf469a`
+- requested snapshot: `gpt-image-2-2026-04-21`
+- provider request: `req_320682b846354a01be9014c9f3836739`
+- output digest: `f6bd9bbbb3fb66e4f6442e19f52c723135c0bd8bec5f07ed4f2b4b2a7aafa82a`
+- dimensions/format: 1024×1536 opaque PNG
+- usage-derived estimate: `$0.069541`
+- acceptance digest:
+  `61341b2b9ca235e823fb36a15ce13e22af7578fce7f13d411490100af94d0d50`
+
+Original-size and 520-pixel reading-size reviews both passed. The plate preserves Jay and Tan, uses a
+new over-shoulder back-room composition, and makes the physical chart's official print, traded pencil
+observations, revision marks, route, and uncertain regions readable as categories without readable
+invented text. No generic future interface, portal, new lore, or reference composition was copied.
+
+## Accepted folio 8 — Jay says yes
+
+- Fable operation manifest:
+  `b1d83860e4d6c5ef72d0ff5ab4b89b78424bded560ab67343767c1d0017484a1`
+- Official input count: 22,538 tokens
+- Provider message/request: `msg_011CdCWXMdfcp95mtVhSysJQ` /
+  `req_011CdCWXDfBxnwoJ1HwASS8k`
+- Result: 253 words; `imageDirection: null`; `end_turn`
+- Candidate: `54b8e91f050f5fc173192ed9352aa4f91c9e9ab2276e4fed8b57c307cb087087`
+- Message latency: 68.835 seconds
+- Usage-derived text estimate: `$0.491330`
+
+The exact request contained all seven prior accepted root folios and the actual Payment, Band, and
+Map plates in story order. Independent predispatch and editorial reads passed. The documents make
+Jay's dependence bounded and visible without pretending he can pilot the route; his owned return
+passage and entry conditions remain distinct from the company's sponsorship and Tan's father's help.
+He names love and the desire for mutual ground, says yes, and immediately turns to ordinary work.
+The 253 words are within the 260-word hard ceiling. The three-week absence is a plausible bounded
+choice under the current compressed brief; the older one-week/month-end detail is not current C0
+authority. The root movement now reaches its intended emotional and causal rest before travel.
+
+## Accepted folio 9 — The licensed route
+
+- Fable operation manifest:
+  `2617c6851f0a91b539704542e84fc84be5cc8e16892a3bd52d384b1764220359`
+- Official input count: 12,984 tokens
+- Provider message/request: `msg_011CdCWxixG7bq7R9WKm4AKx` /
+  `req_011CdCWxhWwZhd7hCYspuow2`
+- Result: 262 words; `imageDirection: null`; `end_turn`
+- Candidate: `10ba801a42c9d5b247c0240addbb594957d17f5d804a1e5a1821b7d97eeb6415`
+- Message latency: 30.920 seconds
+- Usage-derived text estimate: `$0.229740`
+
+The exact child request contained the founding phrase, full world and temporal rules, and the
+licensed-route beat, with no root prose, root plate, or terminal-wall ending. The completed result
+makes Eniola's probationary risk, passenger stakes, witnessed observations, physical labor, and
+arrival at the outer berth legible. It remains independent of Jay and Tan and uses Phantas Minor as
+a navigated axis rather than a magical destination effect.
+
+The provider returned 262 words, two above the original 260-word operational preservation cutoff.
+The exact candidate was already archived before postflight refused it, and no redispatch occurred.
+A red-first correction changed only the immutable-provider preservation ceiling to 265; 266 words
+still fail, while the authoring and reader target remains 120–250. Production provenance will record
+two copyedits: delete the repeated “the console demanded” and replace ambiguous “under all four
+names” with “beneath their names.” The resulting reader page is 258 words and retains the exact action
+and facts.
+
 ## Running spend and next operation
 
-Seven Fable calls have an aggregate usage-derived estimate of `$2.914480`. Known C0 text plus the
-three completed narrative-image outputs is `$3.084944`; provider billing was not separately queried.
-Four of six image operations have been consumed: one credential rejection, one Payment visual
-rejection, and two accepted plates. The two remaining operations are reserved exactly for the root
-Map and Lagos terminal wall; no repair headroom remains.
+Ten Fable calls have an aggregate usage-derived estimate of `$4.412660`. Known C0 text plus the
+four completed narrative-image outputs is `$4.652665`; provider billing was not separately queried.
+Five of six image operations have been consumed: one credential rejection, one Payment visual
+rejection, and three accepted plates. The only remaining image operation is reserved for the Lagos
+terminal wall; no repair headroom remains.
 
-The one explicit `root-folio-07` replacement is prepared, not dispatched, under request-manifest
-digest `2614136ef68b29404108250956f6f012a5f21ec782b8b28829f8040b88eaba3f`. It links rejected manifest
-`2643558816187ff44b52e350469d4854010dc51dae167d2ae12d638ff72ee32e`, keeps the exact same content
-manifest and six-folio/two-plate history, and changes only the supported schema descriptions that
-state the already-enforced non-empty postconditions.
+Image-led child folio `map-folio-02` is prepared, not dispatched, under request-manifest digest
+`95940a4383305e0a34da53a4c612fb9f7921a9f6627c5a2e87a2814b876f5948`. Its exact request contains the
+child origin, complete world and temporal rules, The licensed route as its only current-book history,
+and the terminal-wall beat. It contains no root prose or root plate as story history. Its schema
+requires one complete image direction.

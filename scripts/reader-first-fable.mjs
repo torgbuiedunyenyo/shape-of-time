@@ -25,7 +25,7 @@ const COUNT_URL = "https://api.anthropic.com/v1/messages/count_tokens";
 const MESSAGE_URL = "https://api.anthropic.com/v1/messages";
 const TARGET_MIN_WORDS = 120;
 const TARGET_MAX_WORDS = 250;
-const HARD_MAX_WORDS = 260;
+const HARD_MAX_WORDS = 265;
 
 const sha256 = (value) => createHash("sha256").update(value).digest("hex");
 

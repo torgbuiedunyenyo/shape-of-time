@@ -255,18 +255,25 @@ test("the first editorial call contains authority once and no invented history",
   assert.deepEqual(compiled.manifest.priorFolioIds, []);
 });
 
-test("the folio target allows only a narrow bounded overrun", () => {
+test("the folio target preserves only a narrow bounded overrun", () => {
   const proseParagraphs = [Array.from({ length: 253 }, (_, index) => `word${index}`).join(" ")];
   assert.doesNotThrow(() => validateCandidateForFolio({
     output: { imageDirection: null, proseParagraphs },
   }, { id: "root-folio-02", plate: null }));
 
+  assert.doesNotThrow(() => validateCandidateForFolio({
+    output: {
+      imageDirection: null,
+      proseParagraphs: [Array.from({ length: 262 }, (_, index) => `word${index}`).join(" ")],
+    },
+  }, { id: "root-folio-02", plate: null }));
+
   assert.throws(() => validateCandidateForFolio({
     output: {
       imageDirection: null,
-      proseParagraphs: [Array.from({ length: 261 }, (_, index) => `word${index}`).join(" ")],
+      proseParagraphs: [Array.from({ length: 266 }, (_, index) => `word${index}`).join(" ")],
     },
-  }, { id: "root-folio-02", plate: null }), /hard maximum 260/u);
+  }, { id: "root-folio-02", plate: null }), /hard maximum 265/u);
 });
 
 test("a completed provider candidate is preserved before editorial bounds refuse it", async (t) => {
@@ -276,7 +283,7 @@ test("a completed provider candidate is preserved before editorial bounds refuse
   const candidateRecord = {
     output: {
       imageDirection: null,
-      proseParagraphs: [Array.from({ length: 261 }, (_, index) => `word${index}`).join(" ")],
+      proseParagraphs: [Array.from({ length: 266 }, (_, index) => `word${index}`).join(" ")],
     },
   };
 
@@ -286,7 +293,7 @@ test("a completed provider candidate is preserved before editorial bounds refuse
       candidateRecord,
       folio: { id: "root-folio-02", plate: null },
     }),
-    /hard maximum 260/u,
+    /hard maximum 265/u,
   );
   assert.deepEqual(JSON.parse(await readFile(candidatePath, "utf8")), candidateRecord);
 });

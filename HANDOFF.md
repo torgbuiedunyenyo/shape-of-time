@@ -38,9 +38,9 @@ _Updated 2026-07-19._
 - B1 is complete. The exact GPT Image 2 request adapter, required-anchor/reference compiler, strict
   opaque-PNG response validator, replay v2, durable one-dispatch journal, and external recovery path
   pass the complete repository gate and three final independent adversarial reviews.
-- The first six Fable-authored folios, Payment, The gift, The band, Your tomorrow or mine, The venue,
-  and After closing, plus the Payment and Band plates are accepted into private editorial progress.
-  Current C0 progress is 6/10 folios and 2/4 plates. The remaining
+- All eight Fable-authored root folios, Payment through Jay says yes, and the first child folio, The
+  licensed route, plus the Payment, Band, and Map plates are accepted into private editorial
+  progress. Current C0 progress is 9/10 folios and 3/4 plates. The remaining
   working 8+2 prose in `content/reader-first/slice.json` is still an editorial draft, not accepted
   production content.
   Treatment B remains the shared medium rather than a source of characters, place, palette, or
@@ -121,8 +121,8 @@ _Updated 2026-07-19._
   `end_turn`; usage-derived estimate `$0.278350`. The old postflight refused the otherwise valid
   result for exceeding 250 words by three. It was not redispatched or edited. A one-time no-provider
   recovery reconstructed candidate `fd9c0ab6d3acedb9abc9b596fcd9a3509f38b1cd41d5da2f351db2f19dc91d46`
-  from the immutable response. The operational hard stop now remains narrow at 260 while the
-  prompt/layout target remains 120–250, and the runner permanently writes a provider-complete
+  from the immutable response. The operational provider-preservation stop is now a narrow 265 while
+  the prompt/layout target remains 120–250, and the runner permanently writes a provider-complete
   candidate before applying that editorial check. The text-only acceptance path appended it without
   an image digest.
   The band followed under exact operation manifest
@@ -168,8 +168,16 @@ _Updated 2026-07-19._
   A red-first replacement boundary verifies the original fixed claim, completed HTTP response,
   absent candidate, exact manifest, and named structural failure, then permits one stable linked
   replacement claim. No second replacement can be claimed. The revised eleven-operation/`$22.00`
-  editorial ceiling authorizes exactly that additional call. C0 Fable provider calls executed: seven;
-  accepted prose folios: six.
+  editorial ceiling authorized exactly that additional call. Its independently audited replacement
+  completed once under manifest `2614136ef68b29404108250956f6f012a5f21ec782b8b28829f8040b88eaba3f`,
+  20,421 officially counted input tokens, provider message `msg_011CdCVdwLkQGyw3dzeeo2t4`, and
+  request `req_011CdCVdtkUVeinCMoSU1xeU`. Fable returned 258 direct words plus a complete physical-map
+  direction with exact model/effort and `end_turn`; candidate
+  `d836a8a326c6dc969a3ff3da5bb2508796def4b487a8cc5445bbff17904acb91`, usage-derived estimate
+  `$0.777110`. The prose advances Jay from demanding facts to studying the route without prematurely
+  accepting it; its fixture copyedit will change only the terminal period in “What does it feel
+  like.” to a question mark and record that mutation. C0 Fable provider calls executed: eight;
+  accepted prose folios: seven.
 - The exact GPT Image 2 route is the existing direct Image API adapter and journal. It proves the
   requested `gpt-image-2-2026-04-21` snapshot, request ID, usage, latency, and output digest; the API
   exposes no served-model field. The Codex image-generation tool cannot prove that contract and must
@@ -204,8 +212,38 @@ _Updated 2026-07-19._
   usage-derived estimate. Reading-size review passed identity, medium, relationship change, coherent
   band, and the unnoticed ordinary recorder that performs the plate's narrative job. Acceptance
   digest `867bb9f056cf01fc30677d1d7f1ab0c772bb96de0cc1f9ec480ad12c4bf4ed92`.
-  C0 image dispatch attempts: four; accepted C0 narrative images: two. The two remaining slots are
-  exactly the root Map and Lagos terminal wall, with no repair headroom.
+  The Map plate then completed in one dispatch with Payment and Band as its exact ordered continuity
+  references: operation `6c52e6b547079ff63539b45f09afcfb7ced66f4c3aa29fb7c1d4a43a81bf469a`,
+  provider request `req_320682b846354a01be9014c9f3836739`, output
+  `f6bd9bbbb3fb66e4f6442e19f52c723135c0bd8bec5f07ed4f2b4b2a7aafa82a`, and `$0.069541`
+  usage-derived estimate. Original-size and 520-pixel reading-size reviews passed Jay/Tan identity,
+  the ordinary shop back room, the new over-shoulder composition, and the physical chart's licensed
+  print, traded pencil evidence, revisions, route, and uncertainty without readable labels or generic
+  science-fiction imagery. Acceptance digest
+  `61341b2b9ca235e823fb36a15ce13e22af7578fce7f13d411490100af94d0d50`.
+  C0 image dispatch attempts: five; accepted C0 narrative images: three. The one remaining slot is
+  exactly the Lagos terminal wall, with no repair headroom.
+  Jay says yes then completed once under operation manifest
+  `b1d83860e4d6c5ef72d0ff5ab4b89b78424bded560ab67343767c1d0017484a1`, 22,538 officially counted
+  input tokens, provider message `msg_011CdCWXMdfcp95mtVhSysJQ`, and request
+  `req_011CdCWXDfBxnwoJ1HwASS8k`. Fable returned 253 words and structurally null image direction with
+  exact model/effort and `end_turn`; candidate
+  `54b8e91f050f5fc173192ed9352aa4f91c9e9ab2276e4fed8b57c307cb087087`, usage-derived estimate
+  `$0.491330`. It gives Jay documents and an owned return passage, keeps his dependence on trained
+  crew and live maps visible, grounds his positive yes in mutual place, and returns immediately to
+  ordinary shop work. The eight-folio root movement is editorially complete.
+  The licensed route completed once under operation manifest
+  `2617c6851f0a91b539704542e84fc84be5cc8e16892a3bd52d384b1764220359`, 12,984 officially counted
+  input tokens, provider message `msg_011CdCWxixG7bq7R9WKm4AKx`, and request
+  `req_011CdCWxhWwZhd7hCYspuow2`. Fable returned 262 words and structurally null image direction with
+  exact model/effort and `end_turn`; candidate
+  `10ba801a42c9d5b247c0240addbb594957d17f5d804a1e5a1821b7d97eeb6415`, usage-derived estimate
+  `$0.229740`. It cleanly establishes Eniola's probationary risk, passenger needs, witnessed evidence,
+  physical work, and arrival at the outer berth without importing root history. The original
+  260-word operational cutoff preserved then refused the completed result. A red-first correction now
+  preserves up to 265 words while the reader target stays 120–250 and rejects 266. The fixture will
+  record deletion of redundant “the console demanded” and replacement of ambiguous “under all four
+  names” with “beneath their names,” producing a 258-word page without changing provider evidence.
 
 ## Reorganization record
 
@@ -216,6 +254,13 @@ _Updated 2026-07-19._
   conflicts with the reader-first queue. Do not merge or cherry-pick it wholesale. After C1, manually
   adapt only its narrow HTTP-test, deterministic-ordering, repository-query, and concurrency-test
   ideas onto the hardened C0 path.
+  A fresh read-only reconciliation confirmed that its 38 text tests and 17 focused real-Postgres
+  tests pass, but none of its generators is composed into the server and `/api/*` remains absent.
+  Its ten-folio prose-only run is retained as negative evidence after the owner's blind-read failure.
+  Preserve `f8a8d6d`/`79fd556`, `d530882`/`13efdce`, and selected tests from `67730f2`–`af0bcbd` as
+  implementation references only. Its transport retry, forced-image, image-description, concurrent
+  prefetch, global-title-deduplication, and unclaimed child-planning behavior must not cross into the
+  current implementation.
 
 - The private GitHub successor is published at `https://github.com/torgbuiedunyenyo/shape-of-time` with `main` as its default branch.
 - Genesis integrity CI passed for the genesis commit.
@@ -483,14 +528,16 @@ Postgres, and image storage.
 
 ## Spend and deployment
 
-- C0 text-generation spend: seven Fable calls, usage-derived estimates `$0.370920`, `$0.278350`,
-  `$0.400230`, `$0.318130`, `$0.501970`, `$0.504830`, and rejected Map `$0.540050`, aggregate
-  `$2.914480`; the provider bill was not
+- C0 text-generation spend: ten Fable calls, usage-derived estimates `$0.370920`, `$0.278350`,
+  `$0.400230`, `$0.318130`, `$0.501970`, `$0.504830`, rejected Map `$0.540050`, and accepted Map
+  replacement `$0.777110`, Jay says yes `$0.491330`, and The licensed route `$0.229740`, aggregate
+  `$4.412660`; the provider bill was not
   separately queried.
 - C0 narrative-image spend: the rejected Payment v2 estimate is `$0.056578` and accepted Payment v3
-  is `$0.057068`, plus accepted Band `$0.056818`, for `$0.170464` across three completed outputs;
+  is `$0.057068`, plus accepted Band `$0.056818` and accepted Map `$0.069541`, for `$0.240005`
+  across four completed outputs;
   the credential-rejected attempt returned no usage or reported cost. Known C0 text-plus-image
-  estimate is `$3.084944`.
+  estimate is `$4.652665`.
 - Image-generation provider bill: not reported by the Image API. B1 authorized exactly two calls
   within a `$0.10` request-scope bound. Captured usage and the 2026-07-19 standard rates yield an
   estimated total of `$0.028649` (`$0.011760` image output, `$0.016384` image input, and `$0.000505`
@@ -547,13 +594,12 @@ Postgres, and image storage.
 
 ## Next action
 
-Review and dispatch the one prepared `root-folio-07` replacement exactly once under request-manifest
-digest `2614136ef68b29404108250956f6f012a5f21ec782b8b28829f8040b88eaba3f`, explicitly linked to
-rejected manifest `2643558816187ff44b52e350469d4854010dc51dae167d2ae12d638ff72ee32e`.
-Its content manifest is unchanged: six accepted prose folios and both actual accepted plates in exact
-story order, with discarded directions absent. It is pinned to Fable 5, xhigh, and
-`max_tokens: 32768`. Continue the sequential
-8+2 chain. Never dispatch
+Review and dispatch prepared image-led child folio `map-folio-02` exactly once under request-manifest
+digest `95940a4383305e0a34da53a4c612fb9f7921a9f6627c5a2e87a2814b876f5948`. Its verified request contains
+only the exact child origin, complete shared authority, The licensed route as current-book history,
+and the terminal-wall beat; no root prose or plates enter Fable history. It is pinned to Fable 5,
+xhigh, `max_tokens: 32768`, and a schema that requires a complete image direction. Continue the sequential 8+2
+chain. Never dispatch
 the frozen Stage 1 operation or substitute the Codex image-generation tool. Replace the draft fixture,
 add production provenance and digest-named WebPs, pass the content verifier, then perform the complete
 C1 consecutive read and every-feature in-app Browser walkthrough before D0.
