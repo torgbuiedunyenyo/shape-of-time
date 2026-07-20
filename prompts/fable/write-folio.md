@@ -95,6 +95,9 @@ Return only one JSON object matching the supplied schema:
   "imageDirection": null
 }
 
+proseParagraphs carries the folio's whole prose in one to three paragraphs, never more; a folio
+that needs more paragraphs is a folio trying to be two folios.
+
 For a text-led folio, imageDirection must be null. When the folio brief calls for a narrative image,
 imageDirection must instead contain exactly these natural-language fields:
 

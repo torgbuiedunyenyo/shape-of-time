@@ -123,3 +123,17 @@ describe("D1 deterministic folio context", () => {
     expect(() => compileFolioContext(input({ currentFolioBrief: "" }))).toThrow(/folio brief/i);
   });
 });
+
+describe("the writer is told every bound the parser enforces", () => {
+  // The paragraph ceiling used to live only in the schema's maxItems, which the count endpoint
+  // refuses (HTTP 400) — so the schema cannot carry it and the prompt must. Production folio 9
+  // spent a full generation on 2026-07-20 and had it rejected by parseFolioOutput because the
+  // model was never told the bound.
+  it("states the one-to-three paragraph bound in the rendered request", () => {
+    const compiled = compileFolioContext(input());
+    const text = (compiled.request.body.messages[0]?.content ?? [])
+      .flatMap((block) => block.type === "text" ? [block.text] : [])
+      .join("");
+    expect(text).toMatch(/one to three paragraphs/i);
+  });
+});

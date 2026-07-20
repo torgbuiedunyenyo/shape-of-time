@@ -24,6 +24,20 @@ touched. Screenshots: `~/shape-of-time-archives/walkthrough-2026-07-19/` (01 lib
   project lucky-magic — verify the app's config actually reads/forwards it). All failures
   blocked at count = $0 spent; the money gate held, the presentation did not.
 
+  **RESOLVED 2026-07-20 — and the runtime hypothesis above was WRONG.** The keys were correct
+  all along (hash-verified against the known-good local values; the app cannot even boot
+  generation without them). The real roots, both fixed and verified in production:
+  1. `folioOutputSchema` carried `maxItems`, which `/v1/messages/count_tokens` refuses with
+     HTTP 400 — so EVERY structured folio count failed, everywhere, since the structured
+     writer landed; it had never been exercised live (`7f60207`).
+  2. After folio 9 failed twice, `reserveFolio` looked the folio up by its FOUNDING attempt id
+     (which the folio no longer points at after a retry), so every later retry threw kysely
+     "no result" pre-mint and was swallowed into an in-memory map no API or log surfaces
+     (`3565347`). Diagnosed by running the retry path inside the app container.
+  Reader halves also landed in `7f60207`: composure copy on the folio note and creation
+  dialog, machine text never rendered; failure rows now record the provider cause `detail`;
+  background generation failures now reach the operator log.
+
 ## Passed (all reproducible)
 
 1. Library + cover entry: shelf starts with only the root; Open lands on folio 1 "Payment".

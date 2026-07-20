@@ -17,7 +17,7 @@ import { folioOutputSchema } from "./folio-output.js";
  * recent-N window, character estimate, or truncation path in this module: an inadmissible request
  * is refused upstream by the D0 equation, never shrunk here.
  */
-export const FOLIO_PROMPT_VERSION = "write-folio/1";
+export const FOLIO_PROMPT_VERSION = "write-folio/2";
 
 const TEMPLATE_URL = new URL("../../../prompts/fable/write-folio.md", import.meta.url);
 const PLACEHOLDERS = [
