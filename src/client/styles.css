@@ -496,9 +496,11 @@ a {
   border: 0;
   border-bottom: 1px solid currentColor;
   border-radius: 0;
-  padding: 0;
+  padding: 0.4em 0;
   color: #713d31;
   background: linear-gradient(180deg, transparent 65%, rgb(153 92 65 / 13%) 65%);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
   font: inherit;
   text-align: inherit;
 }
