@@ -69,7 +69,7 @@ describe("GPT Image 2 request contract", () => {
     expect(compiled.manifestDigest).toMatch(/^[a-f0-9]{64}$/);
   });
 
-  it("preserves two-to-five edit references in order and makes reordering change the manifest", () => {
+  it("preserves one-to-five edit references in order and makes reordering change the manifest", () => {
     const identity = reference("asset-identity", "identity", "Jay's face and build");
     const place = reference("asset-place", "place", "The same market counter");
     const base = {
@@ -80,6 +80,21 @@ describe("GPT Image 2 request contract", () => {
       quality: "medium" as const,
       size: "1536x1024" as const,
     };
+
+    const mediumReference: ImageReference = {
+      ...place,
+      provenance: {
+        evidenceId: "owner-approved-treatment-b-2026-07-19",
+        kind: "human-approved-medium",
+        scope: "shared-medium-only",
+      },
+      role: "shared-medium",
+    };
+    const mediumOnly = compileImageRequest({
+      ...base,
+      references: [mediumReference],
+      requiredAnchors: [required(mediumReference)],
+    });
 
     const first = compileImageRequest({
       ...base,
@@ -99,6 +114,7 @@ describe("GPT Image 2 request contract", () => {
     expect(first.exactPrompt).toContain("Image 1 — identity: Jay's face and build");
     expect(first.exactPrompt).toContain("Image 2 — place: The same market counter");
     expect(first.manifestDigest).not.toBe(second.manifestDigest);
+    expect(mediumOnly.manifest.orderedReferences).toHaveLength(1);
   });
 
   it("rejects missing anchors, mutated reference bytes, and unsupported output geometry", () => {
@@ -109,11 +125,11 @@ describe("GPT Image 2 request contract", () => {
         prompt: "Continue the scene.",
         promptVersion: "v1",
         quality: "low",
-        references: [reference("only", "identity", "Only one anchor")],
+        references: [],
         requiredAnchors: [],
         size: "1024x1024",
       }),
-    ).toThrow(/two to five ordered references/);
+    ).toThrow(/one to five ordered references/);
 
     const changed = reference("changed", "place", "A place");
     changed.bytes[20] = 1;

@@ -20,6 +20,11 @@ export type ImageReferenceProvenance =
     }
   | {
       evidenceId: string;
+      kind: "human-approved-medium";
+      scope: "shared-medium-only";
+    }
+  | {
+      evidenceId: string;
       kind: "synthetic-contract-fixture";
       scope: "contract-only";
     };
@@ -118,8 +123,8 @@ export function compileImageRequest(input: ImageRequest): CompiledImageRequest {
 
   const purpose = input.purpose ?? "narrative";
   const sourceReferences = input.kind === "edit" ? input.references : [];
-  if (input.kind === "edit" && (sourceReferences.length < 2 || sourceReferences.length > 5)) {
-    throw new Error("image edits require two to five ordered references");
+  if (input.kind === "edit" && (sourceReferences.length < 1 || sourceReferences.length > 5)) {
+    throw new Error("image edits require one to five ordered references");
   }
 
   const references = sourceReferences.map((reference): ImageReference => ({
@@ -304,7 +309,7 @@ export function validateCompiledImageRequest(compiled: CompiledImageRequest): vo
     manifest.orderedReferences.length !== compiled.references.length ||
     (expectedEndpoint === "/v1/images/generations" && manifest.requiredAnchors.length !== 0) ||
     (expectedEndpoint === "/v1/images/edits" &&
-      (compiled.references.length < 2 || compiled.references.length > 5 || manifest.requiredAnchors.length === 0))
+      (compiled.references.length < 1 || compiled.references.length > 5 || manifest.requiredAnchors.length === 0))
   ) {
     throw new Error("compiled image request references do not match its endpoint or manifest");
   }
@@ -414,6 +419,7 @@ function validateReferenceProvenance(
   const valid =
     (provenance.kind === "human-approved-anchor" &&
       ["book-local", "recurring-identity", "shared"].includes(provenance.scope)) ||
+    (provenance.kind === "human-approved-medium" && provenance.scope === "shared-medium-only") ||
     (provenance.kind === "exposed-folio-image" && provenance.scope === "book-local") ||
     (purpose === "contract-test" &&
       provenance.kind === "synthetic-contract-fixture" &&

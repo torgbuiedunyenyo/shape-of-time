@@ -7,6 +7,7 @@ import { test } from "node:test";
 
 import {
   admitTokenCount,
+  appendAcceptedProgress,
   buildAnthropicRequests,
   claimFolioDispatch,
   compileEditorialRequest,
@@ -38,6 +39,8 @@ Payment current folio work.
 Gift current folio work.
 ### 3. The band — image-led
 Band current folio work.
+### 4. Late fee — text-led
+Late fee current folio work.
 ## Child book: The Map on the Wall
 Child movement founded from the exact phrase.
 ### 1. The licensed route — text-led
@@ -124,6 +127,95 @@ const band = {
     plateId: "plate-root-band",
   },
 };
+
+async function writeCompleteCandidateEvidence({ archiveRoot, fixture: targetFixture, folioId, output }) {
+  const operation = path.join(archiveRoot, "fable", `01-${folioId}-operation`);
+  await mkdir(operation, { recursive: true });
+  const compiled = compileEditorialRequest({
+    accepted: [],
+    fixture: targetFixture,
+    folioId,
+    source,
+  });
+  const schema = { additionalProperties: false, properties: {}, required: [], type: "object" };
+  const systemPrompt = "Write this folio. Use no tools.";
+  const requests = buildAnthropicRequests({ compiled, schema, systemPrompt });
+  const countResponseBytes = Buffer.from("{\"input_tokens\":1000}");
+  const admission = admitTokenCount({
+    completedAt: "2026-07-19T12:00:00.000Z",
+    countLatencyMs: 25,
+    countRequestId: `req_count_${folioId}`,
+    countResponse: { input_tokens: 1_000 },
+    countResponseSha256: sha256(countResponseBytes),
+    operationManifest: requests.operationManifest,
+  });
+  const response = {
+    content: [{ type: "text", text: JSON.stringify(output) }],
+    id: `msg_${folioId}`,
+    model: "claude-fable-5",
+    role: "assistant",
+    stop_reason: "end_turn",
+    type: "message",
+    usage: { input_tokens: 1_000, output_tokens: 250 },
+  };
+  const providerResponseBytes = Buffer.from(JSON.stringify(response));
+  const providerRequestId = `req_message_${folioId}`;
+  const extracted = extractSuccessfulMessage({ providerRequestId, response });
+  const candidate = {
+    version: 2,
+    bookId: targetFixture.books[0].id,
+    folioId,
+    operationManifestSha256: requests.operationManifest.operationManifestSha256,
+    contentManifestSha256: compiled.manifest.manifestSha256,
+    priorFolioIds: [],
+    priorPlateIds: [],
+    admissionSha256: admission.admissionSha256,
+    countedInputTokens: admission.inputTokens,
+    providerMessageId: extracted.evidence.providerMessageId,
+    providerRequestId: extracted.evidence.providerRequestId,
+    providerResponseSha256: sha256(providerResponseBytes),
+    usage: extracted.evidence.usage,
+    estimatedCostUsd: extracted.evidence.estimatedCostUsd,
+    output,
+    evidence: {
+      messageLatencyMs: 200,
+      model: extracted.evidence.model,
+      effort: extracted.evidence.effort,
+      pricingVersion: extracted.evidence.pricingVersion,
+      stopReason: extracted.evidence.stopReason,
+    },
+  };
+  const candidateBytes = Buffer.from(`${JSON.stringify(candidate, null, 2)}\n`);
+  const candidatePath = path.join(operation, "candidate.json");
+  await Promise.all([
+    writeFile(path.join(operation, "request-manifest.json"), `${JSON.stringify(requests.operationManifest, null, 2)}\n`),
+    writeFile(path.join(operation, "content-manifest.json"), `${JSON.stringify(compiled.manifest, null, 2)}\n`),
+    writeFile(path.join(operation, "count-request.json"), canonicalJson(requests.countRequest)),
+    writeFile(path.join(operation, "generation-request.json"), canonicalJson(requests.generationRequest)),
+    writeFile(path.join(operation, "schema.json"), `${JSON.stringify(schema, null, 2)}\n`),
+    writeFile(path.join(operation, "system.txt"), systemPrompt),
+    writeFile(path.join(operation, "count-response.json"), countResponseBytes),
+    writeFile(path.join(operation, "count-response-headers.json"), JSON.stringify({
+      contentType: "application/json",
+      providerRequestId: `req_count_${folioId}`,
+      status: 200,
+    })),
+    writeFile(path.join(operation, "admission.json"), `${JSON.stringify(admission, null, 2)}\n`),
+    writeFile(path.join(operation, "response-headers.json"), JSON.stringify({
+      contentType: "application/json",
+      providerRequestId,
+      status: 200,
+    })),
+    writeFile(path.join(operation, "provider-response.json"), providerResponseBytes),
+    writeFile(candidatePath, candidateBytes),
+  ]);
+  return {
+    candidate,
+    candidateBytes,
+    candidatePath,
+    candidateSha256: sha256(candidateBytes),
+  };
+}
 
 test("the first editorial call contains authority once and no invented history", () => {
   const compiled = compileEditorialRequest({ accepted: [], fixture, folioId: "root-folio-01", source });
@@ -539,127 +631,152 @@ test("incomplete candidate provenance cannot enter accepted history", async () =
   );
 });
 
-test("a complete provider-bound candidate and accepted plate can enter later Fable history", async () => {
-  const archiveRoot = await mkdtemp(path.join(os.tmpdir(), "shape-of-time-complete-progress-"));
-  const operation = path.join(archiveRoot, "fable", "01-root-folio-01-operation");
-  const acceptedAssets = path.join(archiveRoot, "accepted-assets");
-  await mkdir(operation, { recursive: true });
-  await mkdir(acceptedAssets, { recursive: true });
-
-  const compiled = compileEditorialRequest({ accepted: [], fixture, folioId: "root-folio-01", source });
-  const schema = { additionalProperties: false, properties: {}, required: [], type: "object" };
-  const systemPrompt = "Write this folio. Use no tools.";
-  const requests = buildAnthropicRequests({ compiled, schema, systemPrompt });
-  const countResponseBytes = Buffer.from("{\"input_tokens\":1000}");
-  const admission = admitTokenCount({
-    completedAt: "2026-07-19T12:00:00.000Z",
-    countLatencyMs: 25,
-    countRequestId: "req_count_complete",
-    countResponse: { input_tokens: 1_000 },
-    countResponseSha256: sha256(countResponseBytes),
-    operationManifest: requests.operationManifest,
-  });
+test("a fabricated image receipt and header-only PNG cannot enter Fable history", async () => {
+  const archiveRoot = await mkdtemp(path.join(os.tmpdir(), "shape-of-time-fabricated-plate-"));
   const paragraph = Array.from({ length: 60 }, (_, index) => `word${index + 1}`).join(" ");
   const output = {
     proseParagraphs: [paragraph, paragraph],
     imageDirection: payment.imageDirection,
   };
-  const response = {
-    content: [{ type: "text", text: JSON.stringify(output) }],
-    id: "msg_complete",
-    model: "claude-fable-5",
-    role: "assistant",
-    stop_reason: "end_turn",
-    type: "message",
-    usage: { input_tokens: 1_000, output_tokens: 250 },
-  };
-  const providerResponseBytes = Buffer.from(JSON.stringify(response));
-  const extracted = extractSuccessfulMessage({
-    providerRequestId: "req_message_complete",
-    response,
-  });
-  const candidate = {
-    version: 2,
-    bookId: "shape-of-time",
+  const evidence = await writeCompleteCandidateEvidence({
+    archiveRoot,
+    fixture,
     folioId: "root-folio-01",
-    operationManifestSha256: requests.operationManifest.operationManifestSha256,
-    contentManifestSha256: compiled.manifest.manifestSha256,
-    priorFolioIds: [],
-    priorPlateIds: [],
-    admissionSha256: admission.admissionSha256,
-    countedInputTokens: admission.inputTokens,
-    providerMessageId: extracted.evidence.providerMessageId,
-    providerRequestId: extracted.evidence.providerRequestId,
-    providerResponseSha256: sha256(providerResponseBytes),
-    usage: extracted.evidence.usage,
-    estimatedCostUsd: extracted.evidence.estimatedCostUsd,
     output,
-    evidence: {
-      messageLatencyMs: 200,
-      model: extracted.evidence.model,
-      effort: extracted.evidence.effort,
-      pricingVersion: extracted.evidence.pricingVersion,
-      stopReason: extracted.evidence.stopReason,
-    },
-  };
-  const candidateBytes = Buffer.from(`${JSON.stringify(candidate, null, 2)}\n`);
-  const candidatePath = path.join(operation, "candidate.json");
-  await Promise.all([
-    writeFile(path.join(operation, "request-manifest.json"), `${JSON.stringify(requests.operationManifest, null, 2)}\n`),
-    writeFile(path.join(operation, "content-manifest.json"), `${JSON.stringify(compiled.manifest, null, 2)}\n`),
-    writeFile(path.join(operation, "count-request.json"), canonicalJson(requests.countRequest)),
-    writeFile(path.join(operation, "generation-request.json"), canonicalJson(requests.generationRequest)),
-    writeFile(path.join(operation, "schema.json"), `${JSON.stringify(schema, null, 2)}\n`),
-    writeFile(path.join(operation, "system.txt"), systemPrompt),
-    writeFile(path.join(operation, "count-response.json"), countResponseBytes),
-    writeFile(path.join(operation, "count-response-headers.json"), JSON.stringify({
-      contentType: "application/json",
-      providerRequestId: "req_count_complete",
-      status: 200,
-    })),
-    writeFile(path.join(operation, "admission.json"), `${JSON.stringify(admission, null, 2)}\n`),
-    writeFile(path.join(operation, "response-headers.json"), JSON.stringify({
-      contentType: "application/json",
-      providerRequestId: "req_message_complete",
-      status: 200,
-    })),
-    writeFile(path.join(operation, "provider-response.json"), providerResponseBytes),
-    writeFile(candidatePath, candidateBytes),
-  ]);
+  });
 
   const png = Buffer.concat([Buffer.from("89504e470d0a1a0a", "hex"), Buffer.from("accepted-payment")]);
-  const assetPath = path.join(acceptedAssets, `${sha256(png)}.png`);
+  const reviewRoot = path.join(archiveRoot, "images", "review", "plate-root-payment");
+  const acceptedRoot = path.join(archiveRoot, "images", "accepted", "plate-root-payment");
+  await Promise.all([
+    mkdir(reviewRoot, { recursive: true }),
+    mkdir(acceptedRoot, { recursive: true }),
+  ]);
+  const assetPath = path.join(reviewRoot, "plate-root-payment.png");
   await writeFile(assetPath, png);
-  const receiptPath = path.join(operation, "image-provider-receipt.json");
+  const receiptPath = path.join(reviewRoot, "provider-receipt.json");
   const receiptBytes = Buffer.from("{\"requestId\":\"req_image\"}\n");
   await writeFile(receiptPath, receiptBytes);
   const plateAcceptance = {
     assetPath,
     assetSha256: sha256(png),
+    bookId: "shape-of-time",
+    candidateSha256: evidence.candidateSha256,
+    fableImageDirectionSha256: sha256(canonicalJson(output.imageDirection)),
     folioId: "root-folio-01",
     mediaType: "image/png",
     plateId: "plate-root-payment",
     providerOutputSha256: sha256(png),
     providerReceiptPath: receiptPath,
     providerReceiptSha256: sha256(receiptBytes),
-    version: 1,
+    version: 2,
   };
-  const plateAcceptanceBytes = Buffer.from(`${JSON.stringify(plateAcceptance, null, 2)}\n`);
-  const plateAcceptancePath = path.join(operation, "plate-acceptance.json");
+  const plateAcceptanceBytes = Buffer.from(`${canonicalJson(plateAcceptance)}\n`);
+  const plateAcceptancePath = path.join(acceptedRoot, "acceptance.json");
   await writeFile(plateAcceptancePath, plateAcceptanceBytes);
   const progressPath = path.join(archiveRoot, "progress.json");
-  await writeFile(progressPath, `${JSON.stringify({
-    accepted: [{
-      candidatePath,
-      candidateSha256: sha256(candidateBytes),
-      plateAcceptancePath,
-      plateAcceptanceSha256: sha256(plateAcceptanceBytes),
-    }],
-    version: 2,
-  }, null, 2)}\n`);
+  await assert.rejects(
+    () => appendAcceptedProgress({
+      archiveRoot,
+      entry: {
+        candidatePath: evidence.candidatePath,
+        candidateSha256: evidence.candidateSha256,
+        plateAcceptancePath,
+        plateAcceptanceSha256: sha256(plateAcceptanceBytes),
+      },
+      fixture,
+      progressPath,
+    }),
+    /provider receipt contains unexpected or missing fields/u,
+  );
+});
 
-  const accepted = await loadAcceptedProgress({ archiveRoot, fixture, progressPath });
+test("concurrent replay of one complete text-led acceptance appends exactly once", async () => {
+  const archiveRoot = await mkdtemp(path.join(os.tmpdir(), "shape-of-time-idempotent-progress-"));
+  const textOnlyFixture = {
+    version: 1,
+    books: [{
+      id: "shape-of-time",
+      title: "Shape of Time",
+      folios: [{ id: "root-folio-02", ordinal: 2, title: "The gift", blocks: [] }],
+    }],
+  };
+  const paragraph = Array.from({ length: 60 }, (_, index) => `plain${index + 1}`).join(" ");
+  const output = { proseParagraphs: [paragraph, paragraph], imageDirection: null };
+  const evidence = await writeCompleteCandidateEvidence({
+    archiveRoot,
+    fixture: textOnlyFixture,
+    folioId: "root-folio-02",
+    output,
+  });
+  const progressPath = path.join(archiveRoot, "progress.json");
+  const arguments_ = {
+    archiveRoot,
+    entry: {
+      candidatePath: evidence.candidatePath,
+      candidateSha256: evidence.candidateSha256,
+    },
+    fixture: textOnlyFixture,
+    progressPath,
+  };
+  const results = await Promise.all([
+    appendAcceptedProgress(arguments_),
+    appendAcceptedProgress(arguments_),
+  ]);
+  assert.deepEqual(results.map((result) => result.accepted.length), [1, 1]);
+  const accepted = await loadAcceptedProgress({
+    archiveRoot,
+    fixture: textOnlyFixture,
+    progressPath,
+  });
   assert.deepEqual(accepted[0].proseParagraphs, output.proseParagraphs);
-  assert.equal(accepted[0].plate.plateId, "plate-root-payment");
-  assert.ok(Buffer.from(accepted[0].plate.bytes).equals(png));
+  assert.equal(accepted.length, 1);
+  await assert.rejects(() => readFile(`${progressPath}.lock`), /ENOENT/u);
+});
+
+test("a self-consistent candidate generated from the wrong prior history cannot be appended", async () => {
+  const archiveRoot = await mkdtemp(path.join(os.tmpdir(), "shape-of-time-history-binding-"));
+  const firstFolio = { id: "root-folio-02", ordinal: 2, title: "The gift", blocks: [] };
+  const secondFolio = { id: "root-folio-04", ordinal: 4, title: "Late fee", blocks: [] };
+  const twoFolioFixture = {
+    version: 1,
+    books: [{ id: "shape-of-time", title: "Shape of Time", folios: [firstFolio, secondFolio] }],
+  };
+  const secondOnlyFixture = {
+    version: 1,
+    books: [{ id: "shape-of-time", title: "Shape of Time", folios: [secondFolio] }],
+  };
+  const paragraph = Array.from({ length: 60 }, (_, index) => `clear${index + 1}`).join(" ");
+  const output = { proseParagraphs: [paragraph, paragraph], imageDirection: null };
+  const first = await writeCompleteCandidateEvidence({
+    archiveRoot,
+    fixture: twoFolioFixture,
+    folioId: firstFolio.id,
+    output,
+  });
+  const progressPath = path.join(archiveRoot, "progress.json");
+  await appendAcceptedProgress({
+    archiveRoot,
+    entry: { candidatePath: first.candidatePath, candidateSha256: first.candidateSha256 },
+    fixture: twoFolioFixture,
+    progressPath,
+  });
+  const wrongSecond = await writeCompleteCandidateEvidence({
+    archiveRoot,
+    fixture: secondOnlyFixture,
+    folioId: secondFolio.id,
+    output,
+  });
+  await assert.rejects(
+    () => appendAcceptedProgress({
+      archiveRoot,
+      entry: {
+        candidatePath: wrongSecond.candidatePath,
+        candidateSha256: wrongSecond.candidateSha256,
+      },
+      fixture: twoFolioFixture,
+      progressPath,
+    }),
+    /candidate accepted-history evidence drifted/u,
+  );
 });

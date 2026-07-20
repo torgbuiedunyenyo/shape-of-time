@@ -1,7 +1,9 @@
-import { createHash } from "node:crypto";
-import { mkdir, open, readFile, realpath, rename } from "node:fs/promises";
+import { createHash, randomUUID } from "node:crypto";
+import { mkdir, open, readFile, realpath, rename, stat, unlink } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+
+import { verifyReaderFirstPlateEvidence } from "./reader-first-plate-evidence.mjs";
 
 const REPOSITORY_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const AUTHORING_ARCHIVE_ROOT = path.resolve(REPOSITORY_ROOT, "../shape-of-time-c0-authoring");
@@ -688,7 +690,7 @@ function sameCanonical(actual, expected, label) {
   }
 }
 
-async function validateCandidateEvidenceChain({ archiveRoot, candidate, candidateFile }) {
+export async function validateCandidateEvidenceChain({ archiveRoot, candidate, candidateFile }) {
   const candidateKeys = [
     "version", "bookId", "folioId", "operationManifestSha256", "contentManifestSha256",
     "priorFolioIds", "priorPlateIds", "admissionSha256", "countedInputTokens",
@@ -890,6 +892,27 @@ async function validateCandidateEvidenceChain({ archiveRoot, candidate, candidat
   return { contentManifest, operationManifest };
 }
 
+export async function loadVerifiedFableCandidate({
+  archiveRoot,
+  candidatePath,
+  candidateSha256,
+}) {
+  const candidateFile = await verifiedFile(
+    archiveRoot,
+    candidatePath,
+    candidateSha256,
+    "candidate",
+  );
+  const candidate = parsedJson(candidateFile.bytes, "candidate");
+  const manifests = await validateCandidateEvidenceChain({ archiveRoot, candidate, candidateFile });
+  return {
+    candidate,
+    candidatePath: candidateFile.path,
+    candidateSha256,
+    ...manifests,
+  };
+}
+
 export async function loadAcceptedProgress({ archiveRoot, fixture, progressPath }) {
   if (progressPath === undefined) return [];
   let progressFile;
@@ -923,7 +946,11 @@ export async function loadAcceptedProgress({ archiveRoot, fixture, progressPath 
       "candidate",
     );
     const candidate = JSON.parse(candidateFile.bytes.toString("utf8"));
-    await validateCandidateEvidenceChain({ archiveRoot, candidate, candidateFile });
+    const { contentManifest } = await validateCandidateEvidenceChain({
+      archiveRoot,
+      candidate,
+      candidateFile,
+    });
     if (candidate.version !== 2 || candidate.bookId !== expected.book.id
       || candidate.folioId !== expected.folio.id) {
       throw new Error("candidate does not match the exact editorial sequence");
@@ -938,6 +965,33 @@ export async function loadAcceptedProgress({ archiveRoot, fixture, progressPath 
     if ((output.imageDirection !== null) !== hasPlate(expected.folio)) {
       throw new Error("candidate image direction disagrees with the folio");
     }
+    const sameBookHistory = accepted.filter((prior) => prior.bookId === candidate.bookId);
+    const expectedPriorEvidence = sameBookHistory.map((prior) => ({
+      candidateSha256: prior.candidateSha256,
+      folioId: prior.folioId,
+      operationManifestSha256: prior.operationManifestSha256,
+      plate: prior.plate === undefined ? null : {
+        acceptanceSha256: prior.plate.acceptanceSha256,
+        plateId: prior.plate.plateId,
+        providerOutputSha256: prior.plate.providerOutputSha256,
+        providerReceiptSha256: prior.plate.providerReceiptSha256,
+      },
+    }));
+    sameCanonical(
+      contentManifest.priorEvidence,
+      expectedPriorEvidence,
+      "candidate accepted-history evidence",
+    );
+    sameCanonical(
+      contentManifest.priorFolioIds,
+      sameBookHistory.map((prior) => prior.folioId),
+      "candidate accepted-history folios",
+    );
+    sameCanonical(
+      contentManifest.priorPlateIds,
+      sameBookHistory.flatMap((prior) => prior.plate === undefined ? [] : [prior.plate.plateId]),
+      "candidate accepted-history plates",
+    );
     const loaded = {
       bookId: candidate.bookId,
       candidatePath: candidateFile.path,
@@ -961,12 +1015,25 @@ export async function loadAcceptedProgress({ archiveRoot, fixture, progressPath 
       );
       const acceptance = JSON.parse(acceptanceFile.bytes.toString("utf8"));
       exactKeys(acceptance, [
-        "assetPath", "assetSha256", "folioId", "mediaType", "plateId",
-        "providerOutputSha256", "providerReceiptPath", "providerReceiptSha256", "version",
+        "assetPath", "assetSha256", "bookId", "candidateSha256", "fableImageDirectionSha256",
+        "folioId", "mediaType", "plateId", "providerOutputSha256", "providerReceiptPath",
+        "providerReceiptSha256", "version",
       ], "plate acceptance");
-      if (acceptance.version !== 1 || acceptance.folioId !== expected.folio.id
-        || acceptance.plateId !== expected.folio.plate.id) {
+      if (acceptance.version !== 2 || acceptance.bookId !== expected.book.id
+        || acceptance.folioId !== expected.folio.id || acceptance.plateId !== expected.folio.plate.id
+        || acceptance.candidateSha256 !== entry.candidateSha256
+        || acceptance.fableImageDirectionSha256 !== sha256(canonicalJson(output.imageDirection))) {
         throw new Error("plate acceptance does not match the requested folio plate");
+      }
+      const expectedAcceptancePath = path.join(
+        await realpath(archiveRoot),
+        "images",
+        "accepted",
+        acceptance.plateId,
+        "acceptance.json",
+      );
+      if (acceptanceFile.path !== expectedAcceptancePath) {
+        throw new Error("plate acceptance is outside its fixed accepted namespace");
       }
       const [asset, receipt] = await Promise.all([
         verifiedFile(archiveRoot, acceptance.assetPath, acceptance.assetSha256, "accepted plate asset"),
@@ -980,7 +1047,21 @@ export async function loadAcceptedProgress({ archiveRoot, fixture, progressPath 
       if (acceptance.providerOutputSha256 !== acceptance.assetSha256) {
         throw new Error("accepted plate output digest does not match its asset");
       }
-      JSON.parse(receipt.bytes.toString("utf8"));
+      await verifyReaderFirstPlateEvidence({
+        authoringRoot: archiveRoot,
+        candidate,
+        candidateSha256: entry.candidateSha256,
+        imageBytes: asset.bytes,
+        imagePath: asset.path,
+        plateId: acceptance.plateId,
+        providerReceiptBytes: receipt.bytes,
+        providerReceiptPath: receipt.path,
+        trustedPlateEvidence: accepted.flatMap((prior) => prior.plate === undefined ? [] : [{
+          acceptanceSha256: prior.plate.acceptanceSha256,
+          plateId: prior.plate.plateId,
+          providerOutputSha256: prior.plate.providerOutputSha256,
+        }]),
+      });
       if (magicMediaType(asset.bytes) !== acceptance.mediaType) {
         throw new Error("accepted plate media type does not match its bytes");
       }
@@ -999,6 +1080,183 @@ export async function loadAcceptedProgress({ archiveRoot, fixture, progressPath 
     accepted.push(loaded);
   }
   return accepted;
+}
+
+export async function appendAcceptedProgress({
+  archiveRoot,
+  entry,
+  fixture,
+  progressPath,
+}) {
+  requireExactKeys(entry, [
+    "candidatePath",
+    "candidateSha256",
+    "plateAcceptancePath",
+    "plateAcceptanceSha256",
+  ].filter((key) => Object.hasOwn(entry, key)), "new progress entry");
+  if (typeof entry.candidatePath !== "string" || entry.candidatePath.trim() === "") {
+    throw new Error("new progress entry requires a candidate path");
+  }
+  requireDigest(entry.candidateSha256, "new progress candidate");
+  const hasPlatePath = Object.hasOwn(entry, "plateAcceptancePath");
+  const hasPlateDigest = Object.hasOwn(entry, "plateAcceptanceSha256");
+  if (hasPlatePath !== hasPlateDigest) {
+    throw new Error("new progress entry plate path and digest must be supplied together");
+  }
+  if (hasPlatePath) {
+    if (typeof entry.plateAcceptancePath !== "string" || entry.plateAcceptancePath.trim() === "") {
+      throw new Error("new progress entry plate acceptance path is invalid");
+    }
+    requireDigest(entry.plateAcceptanceSha256, "new progress plate acceptance");
+  }
+
+  const rootReal = await realpath(archiveRoot);
+  const target = path.join(await realpath(path.dirname(path.resolve(progressPath))), path.basename(progressPath));
+  const relative = path.relative(rootReal, target);
+  if (relative === "" || relative === ".." || relative.startsWith(".." + path.sep)
+    || path.isAbsolute(relative)) {
+    throw new Error("progress file escapes the editorial archive or names its root");
+  }
+  const release = await acquireProgressLock(target);
+  try {
+    let previousBytes = null;
+    let previous = { accepted: [], version: 2 };
+    try {
+      previousBytes = await readFile(target);
+      previous = parsedJson(previousBytes, "editorial progress");
+      requireExactKeys(previous, ["accepted", "version"], "editorial progress");
+      if (previous.version !== 2 || !Array.isArray(previous.accepted)) {
+        throw new Error("invalid editorial progress file");
+      }
+      await loadAcceptedProgress({ archiveRoot, fixture, progressPath: target });
+    } catch (error) {
+      if (error?.code !== "ENOENT") throw error;
+    }
+    const last = previous.accepted.at(-1);
+    if (last !== undefined && canonicalJson(last) === canonicalJson(entry)) {
+      return previous;
+    }
+    const sequenceLength = fixture.books.flatMap((book) => book.folios).length;
+    if (previous.accepted.length >= sequenceLength) {
+      throw new Error("editorial progress is already complete");
+    }
+    const next = { accepted: [...previous.accepted, structuredClone(entry)], version: 2 };
+    const nextBytes = Buffer.from(JSON.stringify(next, null, 2) + "\n");
+    const staging = path.join(path.dirname(target), `.progress.${randomUUID()}.tmp`);
+    await writePrivate(staging, nextBytes);
+    try {
+      await loadAcceptedProgress({ archiveRoot, fixture, progressPath: staging });
+      let currentBytes = null;
+      try {
+        currentBytes = await readFile(target);
+      } catch (error) {
+        if (error?.code !== "ENOENT") throw error;
+      }
+      const unchanged = previousBytes === null
+        ? currentBytes === null
+        : currentBytes !== null && previousBytes.equals(currentBytes);
+      if (!unchanged) throw new Error("editorial progress changed despite its exclusive lock");
+      await rename(staging, target);
+      await syncDirectory(path.dirname(target));
+    } catch (error) {
+      await unlink(staging).catch((unlinkError) => {
+        if (unlinkError?.code !== "ENOENT") throw unlinkError;
+      });
+      throw error;
+    }
+    return next;
+  } finally {
+    await release();
+  }
+}
+
+async function acquireProgressLock(progressPath) {
+  const lockPath = progressPath + ".lock";
+  for (let attempt = 0; attempt < 200; attempt += 1) {
+    const token = randomUUID();
+    const record = Buffer.from(JSON.stringify({
+      acquiredAt: new Date().toISOString(),
+      pid: process.pid,
+      token,
+    }, null, 2) + "\n");
+    try {
+      await writePrivate(lockPath, record);
+      return async () => {
+        const current = await readFile(lockPath);
+        if (!current.equals(record)) throw new Error("editorial progress lock ownership changed");
+        await unlink(lockPath);
+        await syncDirectory(path.dirname(lockPath));
+      };
+    } catch (error) {
+      if (error?.code !== "EEXIST") throw error;
+    }
+
+    let bytes;
+    let metadata;
+    try {
+      [bytes, metadata] = await Promise.all([readFile(lockPath), stat(lockPath)]);
+    } catch (error) {
+      if (error?.code === "ENOENT") continue;
+      throw error;
+    }
+    const ageMs = Date.now() - metadata.mtimeMs;
+    let owner;
+    try {
+      owner = JSON.parse(bytes.toString("utf8"));
+    } catch {
+      if (ageMs <= 60_000) {
+        await new Promise((resolve) => setTimeout(resolve, 25));
+        continue;
+      }
+    }
+    if (owner !== undefined) {
+      const complete = owner !== null && typeof owner === "object" && !Array.isArray(owner)
+        && Object.keys(owner).sort().join(",") === "acquiredAt,pid,token"
+        && typeof owner.acquiredAt === "string" && !Number.isNaN(Date.parse(owner.acquiredAt))
+        && Number.isSafeInteger(owner.pid) && owner.pid > 0
+        && typeof owner.token === "string" && owner.token.length > 0;
+      if (!complete && ageMs <= 60_000) {
+        await new Promise((resolve) => setTimeout(resolve, 25));
+        continue;
+      }
+      if (complete && processExists(owner.pid)) {
+        if (ageMs > 30 * 60 * 1_000) {
+          throw new Error("editorial progress lock is older than 30 minutes but its process is still alive");
+        }
+        await new Promise((resolve) => setTimeout(resolve, 25));
+        continue;
+      }
+    }
+
+    const stalePath = lockPath + ".stale." + randomUUID();
+    try {
+      await rename(lockPath, stalePath);
+      await unlink(stalePath);
+      await syncDirectory(path.dirname(lockPath));
+    } catch (error) {
+      if (error?.code !== "ENOENT") throw error;
+    }
+  }
+  throw new Error("could not acquire the editorial progress lock within five seconds");
+}
+
+function processExists(pid) {
+  if (!Number.isSafeInteger(pid) || pid <= 0) return false;
+  try {
+    process.kill(pid, 0);
+    return true;
+  } catch (error) {
+    return error?.code === "EPERM";
+  }
+}
+
+async function syncDirectory(directory) {
+  const handle = await open(directory, "r");
+  try {
+    await handle.sync();
+  } finally {
+    await handle.close();
+  }
 }
 
 function words(paragraphs) {

@@ -94,9 +94,9 @@ cache-adjusted count, silent attachment removal, or request-time truncation is a
 
 - Use direct GPT Image 2 APIs, initially pinned to `gpt-image-2-2026-04-21`; recheck the current
   official contract before implementation.
-- Text-only generation is for initial candidates. When continuity references exist, use the image
-  edit path with 2–5 explicitly ordered identity, appearance, place/object, causal-neighbor, or
-  parent/opposite-neighbor references.
+- Text-only generation is for initial candidates. When an approved medium or continuity reference
+  exists, use the image edit path with 1–5 explicitly ordered medium, identity, appearance,
+  place/object, causal-neighbor, or parent/opposite-neighbor references.
 - Each prompt separates `must remain`, `must change`, the image's narrative job, composition, and
   prohibitions. Persist the snapshot, exact prompt/version, ordered inputs, output digest, provider
   request ID, moderation/error, latency, pricing version, and usage-derived estimated total cost or

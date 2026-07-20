@@ -11,10 +11,9 @@ _Updated 2026-07-19._
   worktree must not modify.
 - **CURRENT ITEM: C0 — Build the reader-first vertical slice.** Reader mechanics and a deliberately unaccepted
   working content fixture are in flight in this worktree. They are not C0 completion evidence.
-- The reader-first authority checkpoint now passes its named verifier and the complete exact-runtime
-  repository gate: 39 content/architecture tests, 97 unit tests, 20 real-Postgres integration tests,
-  the built-reader browser regression, lint, typecheck, and production build. The gate used isolated
-  local Postgres port 55434 and made no provider call.
+- The current C0 checkpoint passes 58 non-acceptance content/architecture tests, 116 unit tests, 20
+  real-Postgres integration tests, 11 built-reader browser regressions, lint, typecheck, and
+  production build under Node 24.18.0. The two production-content tests remain deliberately red.
 - Genesis commit: `7f7b5b112140db7ecb0bc2a85f28a0f38adda441`.
 - The repository has been separated from the retired `auto-biblio` implementation.
 - The initial authority, verified expanded world source, source provenance, and implementation queue
@@ -39,8 +38,9 @@ _Updated 2026-07-19._
 - B1 is complete. The exact GPT Image 2 request adapter, required-anchor/reference compiler, strict
   opaque-PNG response validator, replay v2, durable one-dispatch journal, and external recovery path
   pass the complete repository gate and three final independent adversarial reviews.
-- No generated narrative corpus or approved narrative plate exists yet. The working 8+2 prose in
-  `content/reader-first/slice.json` is an editorial draft, not a Fable-authored accepted run.
+- No generated narrative corpus or approved narrative plate exists yet. Fable has produced the first
+  Payment candidate, but it has not entered editorial progress. The working 8+2 prose in
+  `content/reader-first/slice.json` remains an editorial draft, not a Fable-authored accepted run.
   Treatment B is approved only as the shared medium. Paid generic endpoint-contract and visual-study outputs
   remain protected in the owner-controlled external archive; no narrative slice asset has been published to
   the Railway bucket.
@@ -98,25 +98,44 @@ _Updated 2026-07-19._
   and the fixed folio claim are flushed before dispatch; the claim prevents a second paid operation
   even if a manifest changes. Accepted history now resolves and verifies the complete fixed-path
   request, count, admission, response, and candidate chain before sending any prose or image onward.
-  Seventeen focused tests and all 56 non-acceptance content/architecture tests pass, along with lint
+  Nineteen focused tests and all 58 non-acceptance content/architecture tests pass, along with lint
   and typecheck.
 - The written C0 ceiling is ten direct Fable operations at a `$2.00` worst-case projected maximum
   each and `$20.00` aggregate, plus four GPT Image 2 operations at `$0.10` request-scope estimate each.
-  The reviewed current first operation is prepared but not dispatched at private path
+  The first Fable operation was dispatched exactly once at private path
   `/Users/ratpartyserver/git/shape-of-time-c0-authoring/fable/01-root-folio-01-1630c5df2f00`;
   request-manifest digest `1630c5df2f00914bcea58076859c66257cfa41ce3ca6a578de841b8480c590ec`.
-  Its exact wire-body digests match the manifest, and its roughly 40 KB input contains no Undertow,
-  craft examples, visual-production material, or child trajectory. Three earlier prepared operations
-  are obsolete and remain undispatched; provider calls executed for C0 remain zero.
+  Its 13,112-token officially counted input contains no Undertow, craft examples, visual-production
+  material, or child trajectory. Fable returned 242 words plus one image direction using exact
+  `claude-fable-5`, `xhigh`, and `end_turn`; usage-derived estimate `$0.370920`. Candidate SHA-256 is
+  `ed52dd2d072314454500515d20350561bf964fa212d3dc69f8ec50e702177986`. Three earlier prepared
+  operations remain obsolete and undispatched. C0 Fable provider calls executed: one.
 - The exact GPT Image 2 route is the existing direct Image API adapter and journal. It proves the
   requested `gpt-image-2-2026-04-21` snapshot, request ID, usage, latency, and output digest; the API
   exposes no served-model field. The Codex image-generation tool cannot prove that contract and must
-  not be used for accepted assets. Neither provider key is exported into the current process, but a
+  not be used for accepted assets. The C0 Payment dry run binds Fable's direction unchanged plus one
+  verified Treatment B medium-only reference, one operation, and a `$0.10` cap. Its manifest digest is
+  `fb7a78450d102ece1297cf8c95ee066331a655d2dad02fadb39489cdd4956f5a`; reviewed operation digest is
+  `807e299c9b7ab2c4a966affd38d5226eec2e9a2e190d72924f6cbd958f27b39a`. Generation stops at
+  `PENDING_REVIEW`; a separate no-provider command validates and accepts an output before atomically
+  appending progress. The acceptance verifier now rejects fabricated receipts, header-only PNGs,
+  substituted Treatment B or exposed-plate references, candidates built from the wrong accepted
+  history, and replay/receipt field drift. Concurrent replay of the exact same progress entry appends
+  once, and acceptance preflights the next global folio before writing its fixed immutable path.
+  Neither provider key is exported into the current process, but a
   read-only Railway variable-name audit confirmed `ANTHROPIC_API_KEY` and `OPENAI_API_KEY` are already
   stored on the designated production service. They can be injected into one local command without
-  printing or copying their values. No C0 provider dispatch has occurred.
+  printing or copying their values. No C0 image provider dispatch has occurred.
 
 ## Reorganization record
+
+- A second agent advanced a divergent `fable/d0-fable-adapter` worktree through backend prototypes;
+  its latest local checkpoint is `7e5a861` and `origin/main` currently points to its earlier
+  `3e1493d`. It is preserved as an implementation bank, not current authority. It has no reader/API
+  composition, substitutes text descriptions for actual prior images, forces image generation, and
+  conflicts with the reader-first queue. Do not merge or cherry-pick it wholesale. After C1, manually
+  adapt only its narrow HTTP-test, deterministic-ordering, repository-query, and concurrency-test
+  ideas onto the hardened C0 path.
 
 - The private GitHub successor is published at `https://github.com/torgbuiedunyenyo/shape-of-time` with `main` as its default branch.
 - Genesis integrity CI passed for the genesis commit.
@@ -384,7 +403,8 @@ Postgres, and image storage.
 
 ## Spend and deployment
 
-- Text-generation spend: `$0`.
+- C0 text-generation spend: one Fable call, usage-derived estimate `$0.370920`; the provider bill was
+  not separately queried.
 - Image-generation provider bill: not reported by the Image API. B1 authorized exactly two calls
   within a `$0.10` request-scope bound. Captured usage and the 2026-07-19 standard rates yield an
   estimated total of `$0.028649` (`$0.011760` image output, `$0.016384` image input, and `$0.000505`
@@ -441,10 +461,10 @@ Postgres, and image storage.
 
 ## Next action
 
-Commit the reviewed direct authoring path, then run the prepared Payment operation once by injecting
-the existing Railway Anthropic credential without printing it. Review and accept its prose/image
-direction, generate and accept Payment only through a fresh C0 operation in the existing exact GPT
-Image 2 journal, and continue the sequential 8+2 chain. Never dispatch the frozen Stage 1 operation
-or substitute the Codex image-generation tool. Replace the draft fixture, add production provenance
-and digest-named WebPs, pass the content verifier, then perform the complete C1 consecutive read and
-every-feature in-app Browser walkthrough before beginning production D0 integration.
+Commit and push the reviewed C0 plate/acceptance route, then execute the exact Payment image operation
+once using operation digest `807e299c9b7ab2c4a966affd38d5226eec2e9a2e190d72924f6cbd958f27b39a`
+and the existing Railway OpenAI credential without printing it. Inspect the PNG at reading size;
+only then run the separate acceptance command and continue the sequential 8+2 chain. Never dispatch
+the frozen Stage 1 operation or substitute the Codex image-generation tool. Replace the draft
+fixture, add production provenance and digest-named WebPs, pass the content verifier, then perform
+the complete C1 consecutive read and every-feature in-app Browser walkthrough before D0.
