@@ -27,11 +27,15 @@ const CONTRACTS = {
     applicationGuidance: [
       MEDIUM_ONLY_GUIDANCE,
       "Keep every unresolved Fable fact unresolved; in particular, do not import the reference scene's ferry terminal or ticket.",
+      "Keep the shop plainly functional: ordinary years of working wear with a visible layer of modest visitor-facing refit, not abandonment or extreme dereliction.",
+      "The slim Clef bottle must remain fully obscured inside its bag so no liquid color, contents, or readable label becomes visible.",
+      "One of the two waiting customers must visibly hold the six-pack rather than place it on the floor.",
+      "Do not use navy and beige as the new plate's dominant palette; select colors from this shop scene itself.",
       COMMON_APPLICATION_GUIDANCE,
     ].join("\n"),
     bookId: "shape-of-time",
     folioId: "root-folio-01",
-    idempotencyKey: "c0-reader-first-plate-root-payment-credential-repair-v2",
+    idempotencyKey: "c0-reader-first-plate-root-payment-visual-repair-v3",
     referenceRules: [{
       assetId: "treatment-b-medium",
       digest: TREATMENT_B_DIGEST,
@@ -181,17 +185,6 @@ export async function verifyReaderFirstPlateEvidence(input) {
   validateDirection(direction);
   const prompt = readerFirstPlatePrompt(input.plateId, direction);
 
-  const authoringRoot = await realpath(input.authoringRoot);
-  const expectedReviewRoot = path.join(authoringRoot, "images", "review", input.plateId);
-  const [imagePath, providerReceiptPath] = await Promise.all([
-    realpath(input.imagePath),
-    realpath(input.providerReceiptPath),
-  ]);
-  if (imagePath !== path.join(expectedReviewRoot, `${input.plateId}.png`)
-    || providerReceiptPath !== path.join(expectedReviewRoot, "provider-receipt.json")) {
-    throw new Error("reader-first plate evidence is outside its fixed review namespace");
-  }
-
   const receiptText = Buffer.from(input.providerReceiptBytes).toString("utf8");
   let receipt;
   try {
@@ -202,6 +195,23 @@ export async function verifyReaderFirstPlateEvidence(input) {
   exactKeys(receipt, RECEIPT_KEYS, "reader-first plate provider receipt");
   if (receiptText !== canonicalJson(receipt) + "\n") {
     throw new Error("reader-first plate provider receipt is not canonically encoded");
+  }
+  requireDigest(receipt.operationDigest, "reader-first review operation");
+  const authoringRoot = await realpath(input.authoringRoot);
+  const expectedReviewRoot = path.join(
+    authoringRoot,
+    "images",
+    "review",
+    input.plateId,
+    receipt.operationDigest,
+  );
+  const [imagePath, providerReceiptPath] = await Promise.all([
+    realpath(input.imagePath),
+    realpath(input.providerReceiptPath),
+  ]);
+  if (imagePath !== path.join(expectedReviewRoot, `${input.plateId}.png`)
+    || providerReceiptPath !== path.join(expectedReviewRoot, "provider-receipt.json")) {
+    throw new Error("reader-first plate evidence is outside its fixed review operation namespace");
   }
   const receiptCore = { ...receipt };
   delete receiptCore.providerReceiptSha256;

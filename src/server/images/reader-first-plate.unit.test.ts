@@ -1,4 +1,4 @@
-import { mkdtemp, readFile } from "node:fs/promises";
+import { mkdtemp, readFile, realpath } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 
@@ -263,6 +263,13 @@ describe("reader-first narrative plate authoring", () => {
 
     expect(dispatches).toBe(1);
     expect(report.judgment).toBe("PENDING_REVIEW");
+    expect(path.dirname(report.reviewImagePath)).toBe(path.join(
+      await realpath(authoringRoot),
+      "images",
+      "review",
+      "plate-root-band",
+      report.operationDigest,
+    ));
     expect(report.providerReceipt.outputSha256).toBe(result.digest);
     expect(await readFile(report.reviewImagePath)).toEqual(Buffer.from(bytes));
     expect(JSON.parse(await readFile(report.providerReceiptPath, "utf8"))).toMatchObject({

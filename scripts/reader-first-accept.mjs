@@ -21,6 +21,7 @@ function argument(name) {
 function requireArguments() {
   const candidatePath = argument("--candidate");
   const candidateSha256 = argument("--candidate-sha");
+  const reviewOperationDigest = argument("--review-operation-digest");
   const confirmation = argument("--confirm-accept");
   if (typeof candidatePath !== "string" || !path.isAbsolute(candidatePath)) {
     throw new Error("--candidate must be an absolute path");
@@ -28,10 +29,13 @@ function requireArguments() {
   if (!/^[a-f0-9]{64}$/u.test(candidateSha256 ?? "")) {
     throw new Error("--candidate-sha must be an exact SHA-256 digest");
   }
+  if (!/^[a-f0-9]{64}$/u.test(reviewOperationDigest ?? "")) {
+    throw new Error("--review-operation-digest must be an exact SHA-256 digest");
+  }
   if (confirmation !== candidateSha256) {
     throw new Error("--confirm-accept must repeat the exact reviewed candidate SHA-256");
   }
-  return { candidatePath, candidateSha256 };
+  return { candidatePath, candidateSha256, reviewOperationDigest };
 }
 
 function locateFolio(fixture, folioId) {
@@ -75,7 +79,13 @@ async function main() {
   };
   let plateAcceptance = null;
   if (folio.plate !== null && folio.plate !== undefined) {
-    const reviewRoot = path.join(AUTHORING_ROOT, "images", "review", folio.plate.id);
+    const reviewRoot = path.join(
+      AUTHORING_ROOT,
+      "images",
+      "review",
+      folio.plate.id,
+      arguments_.reviewOperationDigest,
+    );
     plateAcceptance = await acceptReaderFirstPlate({
       authoringRoot: AUTHORING_ROOT,
       candidate: loaded.candidate,

@@ -215,7 +215,13 @@ export async function runReaderFirstPlate(arguments_: {
     terminal,
   );
   const authoringRoot = await realpath(path.resolve(arguments_.authoringRoot));
-  const reviewRoot = path.join(authoringRoot, "images", "review", arguments_.compiled.plateId);
+  const reviewRoot = path.join(
+    authoringRoot,
+    "images",
+    "review",
+    arguments_.compiled.plateId,
+    dryRun.operationDigest,
+  );
   const reviewImagePath = path.join(reviewRoot, `${arguments_.compiled.plateId}.png`);
   const providerReceiptPath = path.join(reviewRoot, "provider-receipt.json");
   await writeImmutable(reviewImagePath, execution.result.bytes, authoringRoot);

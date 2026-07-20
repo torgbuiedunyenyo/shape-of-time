@@ -101,7 +101,9 @@ _Updated 2026-07-19._
   Nineteen focused tests and all 58 non-acceptance content/architecture tests pass, along with lint
   and typecheck.
 - The written C0 ceiling is ten direct Fable operations at a `$2.00` worst-case projected maximum
-  each and `$20.00` aggregate, plus four GPT Image 2 operations at `$0.10` request-scope estimate each.
+  each and `$20.00` aggregate, plus six GPT Image 2 operations at a `$0.10` request-scope estimate
+  each and `$0.60` aggregate. Four operations are for the required plates; the two bounded repair
+  slots exist only after a preserved visual rejection and a newly inspected dry run.
   The first Fable operation was dispatched exactly once at private path
   `/Users/ratpartyserver/git/shape-of-time-c0-authoring/fable/01-root-folio-01-1630c5df2f00`;
   request-manifest digest `1630c5df2f00914bcea58076859c66257cfa41ce3ca6a578de841b8480c590ec`.
@@ -117,20 +119,24 @@ _Updated 2026-07-19._
   verified Treatment B medium-only reference, one operation, and a `$0.10` cap. The original v1
   dispatch reached OpenAI once but was rejected before generation because Railway's stored key was
   invalid; it returned no image, usage, or reported cost and remains immutable. A distinct local
-  owner-managed key passed an authenticated no-cost model lookup. The reviewed credential-repair v2
-  changes only its idempotency identity. Its manifest digest is
-  `1e8c75fc14a1ee07d455cb4b7b7fd315908ea9beef07d09c2ee67583815c640c`; operation digest is
-  `7b9d03b27a11958198320752963bbc82c68bd6ff4102bea29dcb73ddef6c5c1e`. Generation stops at
+  owner-managed key passed an authenticated no-cost model lookup. Credential-repair v2 then completed
+  once with output `44a44b4f26e00b61e1002636406fd6e5c1597cf3314072fef9c01cc0aee51ac8`
+  and a `$0.056578` usage estimate, but visual review rejected visible amber Clef contents, a misplaced
+  six-pack, near-derelict shop treatment, and navy/beige medium leakage. It remains unaccepted.
+  Review paths are now operation-specific so a preserved rejection cannot block a replacement.
+  Visual-repair v3 retains Fable's direction and references, adding only those observed corrections.
+  Its manifest digest is `f1a41f196087feabc46251058b3b7dcae8c9db574dea81c29b90a8e89adb2245`;
+  reviewed operation digest is `193a510ed79ec4b7c583d2924107e6fa28b04f4742bbac861076f52eba04429e`.
+  Generation stops at
   `PENDING_REVIEW`; a separate no-provider command validates and accepts an output before atomically
   appending progress. The acceptance verifier now rejects fabricated receipts, header-only PNGs,
   substituted Treatment B or exposed-plate references, candidates built from the wrong accepted
   history, and replay/receipt field drift. Concurrent replay of the exact same progress entry appends
   once, and acceptance preflights the next global folio before writing its fixed immutable path.
-  Neither provider key is exported into the current process, but a
-  read-only Railway variable-name audit confirmed `ANTHROPIC_API_KEY` and `OPENAI_API_KEY` are already
-  stored on the designated production service, but the OpenAI value is currently invalid and must
-  not be used for C0. C0 image dispatch attempts: one pre-generation credential rejection; generated
-  C0 narrative images: zero.
+  Neither provider key is exported into the current process. A read-only Railway variable-name audit
+  confirmed both names on the designated production service, but the OpenAI value is invalid and must
+  not be used for C0. C0 image dispatch attempts: one pre-generation credential rejection and one
+  completed-but-editorially rejected output; accepted C0 narrative images: zero.
 
 ## Reorganization record
 
@@ -410,6 +416,8 @@ Postgres, and image storage.
 
 - C0 text-generation spend: one Fable call, usage-derived estimate `$0.370920`; the provider bill was
   not separately queried.
+- C0 narrative-image spend: one completed rejected Payment output, usage-derived estimate `$0.056578`;
+  the credential-rejected attempt returned no usage or reported cost.
 - Image-generation provider bill: not reported by the Image API. B1 authorized exactly two calls
   within a `$0.10` request-scope bound. Captured usage and the 2026-07-19 standard rates yield an
   estimated total of `$0.028649` (`$0.011760` image output, `$0.016384` image input, and `$0.000505`
@@ -466,8 +474,8 @@ Postgres, and image storage.
 
 ## Next action
 
-Commit and push the reviewed Payment credential-repair v2 identity, then execute it exactly once
-using operation digest `7b9d03b27a11958198320752963bbc82c68bd6ff4102bea29dcb73ddef6c5c1e`
+Commit and push the operation-scoped review repair and reviewed Payment visual-repair v3, then execute
+it exactly once using operation digest `193a510ed79ec4b7c583d2924107e6fa28b04f4742bbac861076f52eba04429e`
 and the validated owner-managed local OpenAI credential without printing it. Inspect the PNG at reading size;
 only then run the separate acceptance command and continue the sequential 8+2 chain. Never dispatch
 the frozen Stage 1 operation or substitute the Codex image-generation tool. Replace the draft
