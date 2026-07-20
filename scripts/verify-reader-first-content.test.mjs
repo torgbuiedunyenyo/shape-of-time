@@ -37,6 +37,7 @@ test("the reader-first prose is one accepted sequential Fable xhigh run", async 
     assert.equal(entry.proseSha256, sha256(prose), `${entry.folioId} prose digest drifted`);
     assert.match(entry.requestManifestSha256, /^[a-f0-9]{64}$/u);
     assert.match(entry.responseSha256, /^[a-f0-9]{64}$/u);
+    assert.equal(entry.admissionEvidence, "anthropic-count-tokens");
     assert.ok(entry.countedInputTokens > 0 && entry.countedInputTokens <= 363_136);
     assert.equal(entry.contextWasInterleaved, true);
     assert.equal(entry.fallbackUsed, false);

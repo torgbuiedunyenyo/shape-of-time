@@ -88,7 +88,26 @@ Aim for 120–250 words unless the folio brief clearly requires a different rhyt
 </writing_request>
 
 <output_format>
-Return only a single XML element named folio_prose. Put ordinary prose paragraphs between its
-opening <folio_prose> and closing </folio_prose> tags. Do not add analysis, planning, headings, a
-continuity ledger, aperture metadata, or commentary outside that element.
+Return only one JSON object matching the supplied schema:
+
+{
+  "proseParagraphs": ["First ordinary prose paragraph.", "Second ordinary prose paragraph."],
+  "imageDirection": null
+}
+
+For a text-led folio, imageDirection must be null. When the folio brief calls for a narrative image,
+imageDirection must instead contain exactly these natural-language fields:
+
+{
+  "narrativeJob": "What narrative work the image performs.",
+  "concreteScene": "What is physically present, where, and from what useful view.",
+  "factLeftToImage": "The information the image supplies that the prose deliberately does not.",
+  "mustRemain": ["Continuity that must remain from accepted prior prose or images."],
+  "purposefulChanges": ["What is intentionally different in this moment."],
+  "unresolvedFacts": ["Details that must stay open rather than being invented by the image model."]
+}
+
+The direction is narrative and observational. Do not name an image model, endpoint, quality,
+resolution, reference asset, palette, or other application-controlled setting. Do not add analysis,
+planning, headings, a continuity ledger, aperture metadata, or commentary outside the JSON object.
 </output_format>

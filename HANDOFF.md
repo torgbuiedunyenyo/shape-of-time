@@ -9,7 +9,7 @@ _Updated 2026-07-19._
 - Active isolated worktree: `/Users/ratpartyserver/git/shape-of-time-reader-first`.
 - Authority checkpoint: `8fafde0`; another agent may be working in the `main` checkout, which this
   worktree must not modify.
-- **CURRENT ITEM: C0 — reader-first vertical slice.** Reader mechanics and a deliberately unaccepted
+- **CURRENT ITEM: C0 — Build the reader-first vertical slice.** Reader mechanics and a deliberately unaccepted
   working content fixture are in flight in this worktree. They are not C0 completion evidence.
 - The reader-first authority checkpoint now passes its named verifier and the complete exact-runtime
   repository gate: 39 content/architecture tests, 97 unit tests, 20 real-Postgres integration tests,
@@ -76,14 +76,45 @@ _Updated 2026-07-19._
 - `scripts/verify-reader-first-content.test.mjs` remains intentionally red because
   `content/reader-first/production-manifest.json` and all four final WebP plates are absent. The four
   current plate URLs 404 and their alt text is explicitly draft text. C0 cannot pass in this state.
-- Claude Code 2.1.207 can run Fable 5 xhigh with actual prior images supplied as ordered base64 image
-  blocks through stream-json. This is suitable bounded editorial provenance for C0 but does not
-  substitute for D0's official count/API contract.
+- The earlier Claude Code CLI proposal was rejected before dispatch. Although it could supply actual
+  prior images, it could not prove the provider-counted pre-spend boundary or exact 32,768-token
+  output maximum required by SPEC. C0 now uses a minimal direct Messages API request path shared
+  with later D0; C0 does not connect it to the reader runtime or claim D0 complete.
+- The baseline output contract now matches SPEC: one structured Fable result contains prose and an
+  optional natural-language image direction; text-led folios require `null`. This replaced the stale
+  prose-only XML result after a named red proved the contradiction. Input authority remains organized
+  with XML document boundaries.
+- `content/reader-first/authoring-brief.md` defines the readable 8+2 compression and four narrow
+  application reference decisions without becoming another world summary. Shared guidance no longer
+  leaks either book's trajectory into the other. The bounded harness compiles exact current-book
+  history with verified accepted images immediately after their prose, binds the immutable candidate
+  and image evidence behind every history block, and confines every referenced file to one fixed
+  private archive.
+- The direct request path pins Fable/xhigh/no tools/no fallback, binds exact canonical count and
+  generation bodies plus system/schema/source/image digests, calls the official count endpoint,
+  persists its request ID and response digest before one inference claim, sets `max_tokens: 32768`,
+  uses a 30-minute response boundary appropriate to xhigh, streams the raw response into durable
+  private evidence, and rejects model/stop/context/output drift. Admission, the first claim directory,
+  and the fixed folio claim are flushed before dispatch; the claim prevents a second paid operation
+  even if a manifest changes. Accepted history now resolves and verifies the complete fixed-path
+  request, count, admission, response, and candidate chain before sending any prose or image onward.
+  Seventeen focused tests and all 56 non-acceptance content/architecture tests pass, along with lint
+  and typecheck.
+- The written C0 ceiling is ten direct Fable operations at a `$2.00` worst-case projected maximum
+  each and `$20.00` aggregate, plus four GPT Image 2 operations at `$0.10` request-scope estimate each.
+  The reviewed current first operation is prepared but not dispatched at private path
+  `/Users/ratpartyserver/git/shape-of-time-c0-authoring/fable/01-root-folio-01-1630c5df2f00`;
+  request-manifest digest `1630c5df2f00914bcea58076859c66257cfa41ce3ca6a578de841b8480c590ec`.
+  Its exact wire-body digests match the manifest, and its roughly 40 KB input contains no Undertow,
+  craft examples, visual-production material, or child trajectory. Three earlier prepared operations
+  are obsolete and remain undispatched; provider calls executed for C0 remain zero.
 - The exact GPT Image 2 route is the existing direct Image API adapter and journal. It proves the
   requested `gpt-image-2-2026-04-21` snapshot, request ID, usage, latency, and output digest; the API
   exposes no served-model field. The Codex image-generation tool cannot prove that contract and must
-  not be used for accepted assets. `OPENAI_API_KEY` is absent from the current process and no approved
-  secret-manager reference is documented; no C0 provider dispatch has occurred.
+  not be used for accepted assets. Neither provider key is exported into the current process, but a
+  read-only Railway variable-name audit confirmed `ANTHROPIC_API_KEY` and `OPENAI_API_KEY` are already
+  stored on the designated production service. They can be injected into one local command without
+  printing or copying their values. No C0 provider dispatch has occurred.
 
 ## Reorganization record
 
@@ -410,11 +441,10 @@ Postgres, and image storage.
 
 ## Next action
 
-Checkpoint the tested C0 reader mechanics, then **Build the reader-first vertical slice** by adding
-the bounded C0 editorial authoring harness.
-Run Fable 5 xhigh sequentially and interleave each accepted narrative image before the following
-folio. Generate the four plates only through fresh C0 operations in the existing exact GPT Image 2
-adapter after an approved API credential is safely injected; never dispatch the frozen Stage 1
-operation or silently substitute the Codex image-generation tool. Replace the draft fixture, add
-production provenance and digest-named WebPs, pass the content verifier, then perform the complete C1
-consecutive read and every-feature in-app Browser walkthrough before beginning D0.
+Commit the reviewed direct authoring path, then run the prepared Payment operation once by injecting
+the existing Railway Anthropic credential without printing it. Review and accept its prose/image
+direction, generate and accept Payment only through a fresh C0 operation in the existing exact GPT
+Image 2 journal, and continue the sequential 8+2 chain. Never dispatch the frozen Stage 1 operation
+or substitute the Codex image-generation tool. Replace the draft fixture, add production provenance
+and digest-named WebPs, pass the content verifier, then perform the complete C1 consecutive read and
+every-feature in-app Browser walkthrough before beginning production D0 integration.

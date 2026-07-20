@@ -350,7 +350,12 @@ bounded editorial authoring run, Fable sees all earlier prose and narrative imag
 story order and returns new prose plus a natural-language image direction when a plate is required.
 The application chooses the eligible ordered references and fixed GPT Image settings; it does not
 rewrite Fable's narrative direction. Record those authoring requests and outputs as slice provenance,
-not as proof that the D0/D1 production adapters already exist.
+not as proof that the D0/D1 production adapters already exist. The hard admission rule still applies:
+use the smallest direct Messages API path shared with later D0, count the exact input envelope with
+Anthropic's token-count endpoint, persist admission, then make one inference dispatch with
+`max_tokens: 32768`. The prior Claude CLI route is not acceptable because it cannot prove that
+pre-spend boundary. D0 later promotes and contract-tests this request path inside the application;
+the bounded editorial use here does not connect generation to the reader runtime or claim D0 green.
 
 Build the file-backed fixture and reader in the same item. Include a restrained Library and explicit
 cover entry; varied folio layouts; Previous/Next, keyboard and swipe; one suggested aperture; exact
@@ -398,9 +403,10 @@ connect generation or expand the garden to compensate for a dull reader.
 `xhigh` is accepted, the exact multimodal request is officially counted, and empty/refusal/
 truncation/unsupported-stop/count failures are distinct. Record a spend ceiling first.
 
-**Implement:** Add the strict adapter, request archive, exact token preflight, usage/cost/latency
-postflight, and resilient async transport. A same-key retry is allowed only after a proven
-pre-dispatch failure or an explicit provider rejection that proves no result exists; an ambiguous
+**Implement:** Promote the bounded direct request path proven during C0 into the application adapter,
+then add its live contract evidence, request archive integration, exact token preflight,
+usage/cost/latency postflight, and resilient async transport. A same-key retry is allowed only after
+a proven pre-dispatch failure or an explicit provider rejection that proves no result exists; an ambiguous
 dispatch is terminal pending reconciliation. Caching may improve latency but may not alter the
 manifest or count. There is no fallback writer.
 

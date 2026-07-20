@@ -280,8 +280,11 @@ test("the baseline Fable template keeps long documents first and the request las
     [
       "<document_content>",
       "</document_content>",
-      "<folio_prose>",
-      "</folio_prose>",
+      '"proseParagraphs"',
+      '"imageDirection"',
+      '"narrativeJob"',
+      '"factLeftToImage"',
+      "For a text-led folio, imageDirection must be null.",
       "clear, absorbing narrative prose",
       "concise orienting exposition",
       "<prose_guidance>",

@@ -1,0 +1,64 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "proseParagraphs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "imageDirection": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "narrativeJob": {
+              "type": "string"
+            },
+            "concreteScene": {
+              "type": "string"
+            },
+            "factLeftToImage": {
+              "type": "string"
+            },
+            "mustRemain": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "purposefulChanges": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "unresolvedFacts": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "narrativeJob",
+            "concreteScene",
+            "factLeftToImage",
+            "mustRemain",
+            "purposefulChanges",
+            "unresolvedFacts"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "proseParagraphs",
+    "imageDirection"
+  ]
+}
