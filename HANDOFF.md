@@ -1,8 +1,37 @@
 # Handoff
 
-_Updated 2026-07-19._
+_Updated 2026-07-20._
 
-## Current state
+## 2026-07-20 — Production Defect 1 closed; first live folio generated in production
+
+The walkthrough's one release-blocking defect (raw `count_failed` on root folio 8,
+`docs/qa/2026-07-19-production-acceptance-walkthrough.md`) resolved as a three-bug chain, each
+hidden behind the one before it, all green in every gate until a real folio was followed
+end-to-end in production. All fixes on `main`, red-first, full gates each:
+
+1. `7f60207` — `folioOutputSchema` carried `maxItems`, which `/v1/messages/count_tokens` refuses
+   (HTTP 400), so EVERY structured folio count failed everywhere since the structured writer
+   landed; it had never been exercised live. The Railway keys were correct all along
+   (hash-verified). Same commit: reader failure surfaces now wear composure copy
+   (`src/client/content/composure.ts`) — machine text never reaches a page; ledger failure rows
+   record the provider cause `detail`.
+2. `3565347` — after folio 9 failed twice, `reserveFolio` bricked: it looked the folio up by the
+   FOUNDING attempt id, which a retried folio no longer points at → kysely "no result",
+   swallowed into `#planningFailures` with no surface. Folio identity is (book, ordinal);
+   background generation/creation failures now reach the operator log (verified live).
+3. `76af698` — the one-to-three paragraph bound lived only in the deleted `maxItems`; the model
+   was never told and one full attempt was spent to be rejected by the parser. The bound now
+   lives in `write-folio.md` (prompt `write-folio/2`), asserted by a unit test.
+
+Verified 2026-07-20 ~05:51 UTC on `76af698`: loading folio 8 fired preparation; **root folio 9
+generated live for the first time** — `ready`, 1,421 chars, text-led (writer's choice),
+`msg_011CdCncu7W9yMhF3peo1172`, 27.7s, 22,946 in / 1,441 out tokens, prose in-voice and landing
+on a true beat. Folio 9 is READY but UNEXPOSED — the next reader to press Next folio on
+root-folio-08 reveals it (and fires folio-10 preparation, which spends). Map book folio 3 has
+two stale pre-fix `count_failed` attempts; its next visit retries cleanly the same way.
+Screenshot: `~/shape-of-time-archives/walkthrough-2026-07-19/07-folio8-after-fix.png`.
+
+## Current state (2026-07-19, pre-fix — kept for history)
 
 - Repository: `torgbuiedunyenyo/shape-of-time`.
 - Active implementation branch: `codex/dynamic-reader`.
