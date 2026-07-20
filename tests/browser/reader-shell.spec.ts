@@ -89,10 +89,7 @@ test("a cross-paragraph selection stays in the reader and opens an honest confir
 }) => {
   const runtimeRequests: string[] = [];
   page.on("request", (request) => {
-    const url = new URL(request.url());
-    if (request.method() !== "GET" || url.origin !== "http://127.0.0.1:4173") {
-      runtimeRequests.push(url.href);
-    }
+    if (request.method() !== "GET") runtimeRequests.push(request.url());
   });
   await page.goto("/books/shape-of-time/folios/root-folio-01");
 
