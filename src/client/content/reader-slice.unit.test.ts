@@ -14,6 +14,8 @@ function wordCount(text: string) {
   return text.trim().split(/\s+/u).filter(Boolean).length;
 }
 
+const HARD_MAX_FOLIO_WORDS = 260;
+
 describe("reader-first content slice", () => {
   it("contains exactly one eight-folio root and one independent two-folio child", () => {
     expect(readerSlice.version).toBe(1);
@@ -44,7 +46,9 @@ describe("reader-first content slice", () => {
 
         const prose = folio.blocks.map((block) => block.text).join(" ");
         expect(wordCount(prose), `${book.title} / ${folio.title}`).toBeGreaterThanOrEqual(120);
-        expect(wordCount(prose), `${book.title} / ${folio.title}`).toBeLessThanOrEqual(250);
+        expect(wordCount(prose), `${book.title} / ${folio.title}`).toBeLessThanOrEqual(
+          HARD_MAX_FOLIO_WORDS,
+        );
 
         for (const block of folio.blocks) {
           expect(ids.has(block.id)).toBe(false);

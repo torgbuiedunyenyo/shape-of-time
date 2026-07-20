@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { mkdir, mkdtemp, readFile, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { test } from "node:test";
@@ -14,6 +14,8 @@ import {
   executeAnthropicOperation,
   extractSuccessfulMessage,
   loadAcceptedProgress,
+  persistCompletedFableCandidate,
+  validateCandidateForFolio,
   validateContextAdmission,
 } from "./reader-first-fable.mjs";
 
@@ -227,6 +229,42 @@ test("the first editorial call contains authority once and no invented history",
   assert.match(text, /No exposed folios yet/u);
   assert.doesNotMatch(text, /Gift current folio work/u);
   assert.deepEqual(compiled.manifest.priorFolioIds, []);
+});
+
+test("the folio target allows only a narrow bounded overrun", () => {
+  const proseParagraphs = [Array.from({ length: 253 }, (_, index) => `word${index}`).join(" ")];
+  assert.doesNotThrow(() => validateCandidateForFolio({
+    output: { imageDirection: null, proseParagraphs },
+  }, { id: "root-folio-02", plate: null }));
+
+  assert.throws(() => validateCandidateForFolio({
+    output: {
+      imageDirection: null,
+      proseParagraphs: [Array.from({ length: 261 }, (_, index) => `word${index}`).join(" ")],
+    },
+  }, { id: "root-folio-02", plate: null }), /hard maximum 260/u);
+});
+
+test("a completed provider candidate is preserved before editorial bounds refuse it", async (t) => {
+  const root = await mkdtemp(path.join(os.tmpdir(), "shape-of-time-fable-postflight-"));
+  t.after(() => rm(root, { force: true, recursive: true }));
+  const candidatePath = path.join(root, "candidate.json");
+  const candidateRecord = {
+    output: {
+      imageDirection: null,
+      proseParagraphs: [Array.from({ length: 261 }, (_, index) => `word${index}`).join(" ")],
+    },
+  };
+
+  await assert.rejects(
+    persistCompletedFableCandidate({
+      candidatePath,
+      candidateRecord,
+      folio: { id: "root-folio-02", plate: null },
+    }),
+    /hard maximum 260/u,
+  );
+  assert.deepEqual(JSON.parse(await readFile(candidatePath, "utf8")), candidateRecord);
 });
 
 test("actual accepted images are interleaved immediately after their folio prose", () => {

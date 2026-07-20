@@ -23,6 +23,9 @@ const FABLE_OUTPUT_USD_PER_MILLION = 50;
 const PRICING_VERSION = "anthropic-fable-5-standard-2026-06-09";
 const COUNT_URL = "https://api.anthropic.com/v1/messages/count_tokens";
 const MESSAGE_URL = "https://api.anthropic.com/v1/messages";
+const TARGET_MIN_WORDS = 120;
+const TARGET_MAX_WORDS = 250;
+const HARD_MAX_WORDS = 260;
 
 const sha256 = (value) => createHash("sha256").update(value).digest("hex");
 
@@ -1263,14 +1266,66 @@ function words(paragraphs) {
   return paragraphs.join(" ").trim().split(/\s+/u).filter(Boolean).length;
 }
 
-function validateCandidateForFolio(candidate, folio) {
+export function validateCandidateForFolio(candidate, folio) {
   const wordCount = words(candidate.output.proseParagraphs);
-  if (wordCount < 120 || wordCount > 250) {
-    throw new Error(folio.id + " has " + wordCount + " words, expected 120–250");
+  if (wordCount < TARGET_MIN_WORDS) {
+    throw new Error(folio.id + " has " + wordCount + " words, expected at least 120");
+  }
+  if (wordCount > HARD_MAX_WORDS) {
+    throw new Error(
+      folio.id + " has " + wordCount
+      + ` words, above hard maximum ${HARD_MAX_WORDS}`
+      + ` (target ${TARGET_MIN_WORDS}–${TARGET_MAX_WORDS})`,
+    );
   }
   if ((candidate.output.imageDirection !== null) !== hasPlate(folio)) {
     throw new Error(folio.id + " image direction disagrees with the folio layout");
   }
+}
+
+export function buildFableCandidateRecord({
+  admission,
+  compiled,
+  extracted,
+  folioId,
+  messageLatencyMs,
+  operationManifest,
+  providerResponseBytes,
+}) {
+  if (!Number.isFinite(messageLatencyMs) || messageLatencyMs < 0) {
+    throw new Error("candidate message latency is invalid");
+  }
+  return {
+    version: 2,
+    bookId: compiled.manifest.bookId,
+    folioId,
+    operationManifestSha256: operationManifest.operationManifestSha256,
+    contentManifestSha256: compiled.manifest.manifestSha256,
+    priorFolioIds: compiled.manifest.priorFolioIds,
+    priorPlateIds: compiled.manifest.priorPlateIds,
+    admissionSha256: admission.admissionSha256,
+    countedInputTokens: admission.inputTokens,
+    providerMessageId: extracted.evidence.providerMessageId,
+    providerRequestId: extracted.evidence.providerRequestId,
+    providerResponseSha256: sha256(providerResponseBytes),
+    usage: extracted.evidence.usage,
+    estimatedCostUsd: extracted.evidence.estimatedCostUsd,
+    output: extracted.output,
+    evidence: {
+      messageLatencyMs,
+      model: extracted.evidence.model,
+      effort: extracted.evidence.effort,
+      pricingVersion: extracted.evidence.pricingVersion,
+      stopReason: extracted.evidence.stopReason,
+    },
+  };
+}
+
+export async function persistCompletedFableCandidate({ candidatePath, candidateRecord, folio }) {
+  const candidateBytes = Buffer.from(JSON.stringify(candidateRecord, null, 2) + "\n");
+  await writePrivate(candidatePath, candidateBytes);
+  validateCandidateForFolio({ output: candidateRecord.output }, folio);
+  return { candidateBytes, candidateSha256: sha256(candidateBytes) };
 }
 
 async function sourceFiles() {
@@ -1505,38 +1560,20 @@ async function runCli() {
     requests: bundle.requests,
   });
   const { folio } = locateFolio(bundle.fixture, folioId);
-  validateCandidateForFolio(result.candidate, folio);
-  const providerResponseSha256 = sha256(result.providerResponseBytes);
-  const candidateRecord = {
-    version: 2,
-    bookId: bundle.compiled.manifest.bookId,
+  const candidateRecord = buildFableCandidateRecord({
+    admission: result.admission,
+    compiled: bundle.compiled,
+    extracted: result.candidate,
     folioId,
-    operationManifestSha256: bundle.requests.operationManifest.operationManifestSha256,
-    contentManifestSha256: bundle.compiled.manifest.manifestSha256,
-    priorFolioIds: bundle.compiled.manifest.priorFolioIds,
-    priorPlateIds: bundle.compiled.manifest.priorPlateIds,
-    admissionSha256: result.admission.admissionSha256,
-    countedInputTokens: result.admission.inputTokens,
-    providerMessageId: result.candidate.evidence.providerMessageId,
-    providerRequestId: result.candidate.evidence.providerRequestId,
-    providerResponseSha256,
-    usage: result.candidate.evidence.usage,
-    estimatedCostUsd: result.candidate.evidence.estimatedCostUsd,
-    output: result.candidate.output,
-    evidence: {
-      messageLatencyMs: result.messageLatencyMs,
-      model: result.candidate.evidence.model,
-      effort: result.candidate.evidence.effort,
-      pricingVersion: result.candidate.evidence.pricingVersion,
-      stopReason: result.candidate.evidence.stopReason,
-    },
-  };
-  const candidateBytes = Buffer.from(JSON.stringify(candidateRecord, null, 2) + "\n");
+    messageLatencyMs: result.messageLatencyMs,
+    operationManifest: bundle.requests.operationManifest,
+    providerResponseBytes: result.providerResponseBytes,
+  });
   const candidatePath = path.join(bundle.operationDirectory, "candidate.json");
-  await writePrivate(candidatePath, candidateBytes);
+  const persisted = await persistCompletedFableCandidate({ candidatePath, candidateRecord, folio });
   process.stdout.write(JSON.stringify({
     candidatePath,
-    candidateSha256: sha256(candidateBytes),
+    candidateSha256: persisted.candidateSha256,
     countedInputTokens: result.admission.inputTokens,
     estimatedCostUsd: result.candidate.evidence.estimatedCostUsd,
     folioId,

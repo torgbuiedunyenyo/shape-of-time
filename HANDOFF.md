@@ -11,7 +11,7 @@ _Updated 2026-07-19._
   worktree must not modify.
 - **CURRENT ITEM: C0 — Build the reader-first vertical slice.** Reader mechanics and a deliberately unaccepted
   working content fixture are in flight in this worktree. They are not C0 completion evidence.
-- The current C0 checkpoint passes 62 non-acceptance content/architecture tests, 116 unit tests, 20
+- The current C0 checkpoint passes 64 non-acceptance content/architecture tests, 116 unit tests, 20
   real-Postgres integration tests, 11 built-reader browser regressions, lint, typecheck, and
   production build under Node 24.18.0. The two production-content tests remain deliberately red.
 - Genesis commit: `7f7b5b112140db7ecb0bc2a85f28a0f38adda441`.
@@ -38,9 +38,10 @@ _Updated 2026-07-19._
 - B1 is complete. The exact GPT Image 2 request adapter, required-anchor/reference compiler, strict
   opaque-PNG response validator, replay v2, durable one-dispatch journal, and external recovery path
   pass the complete repository gate and three final independent adversarial reviews.
-- The first Fable-authored folio and narrative plate, Payment, are accepted into private editorial
-  progress. Current C0 progress is 1/10 folios and 1/4 plates. The remaining working 8+2 prose in
-  `content/reader-first/slice.json` is still an editorial draft, not accepted production content.
+- The first two Fable-authored folios, Payment and The gift, plus the Payment plate are accepted into
+  private editorial progress. Current C0 progress is 2/10 folios and 1/4 plates. The remaining
+  working 8+2 prose in `content/reader-first/slice.json` is still an editorial draft, not accepted
+  production content.
   Treatment B remains the shared medium rather than a source of characters, place, palette, or
   composition. No narrative slice asset has been published to the Railway bucket.
 
@@ -97,7 +98,7 @@ _Updated 2026-07-19._
   and the fixed folio claim are flushed before dispatch; the claim prevents a second paid operation
   even if a manifest changes. Accepted history now resolves and verifies the complete fixed-path
   request, count, admission, response, and candidate chain before sending any prose or image onward.
-  Nineteen focused authoring tests and all 62 non-acceptance content/architecture tests pass, along with lint
+  Twenty-one focused authoring tests and all 64 non-acceptance content/architecture tests pass, along with lint
   and typecheck.
 - The written C0 ceiling is ten direct Fable operations at a `$2.00` worst-case projected maximum
   each and `$20.00` aggregate, plus six GPT Image 2 operations at a `$0.10` request-scope estimate
@@ -111,7 +112,17 @@ _Updated 2026-07-19._
   `claude-fable-5`, `xhigh`, and `end_turn`; usage-derived estimate `$0.370920`. Candidate SHA-256 is
   `ed52dd2d072314454500515d20350561bf964fa212d3dc69f8ec50e702177986`. Three earlier prepared
   operations remain obsolete and undispatched. Payment is the first exact entry in verified
-  `progress.json`. C0 Fable provider calls executed: one.
+  `progress.json`.
+  The gift was then officially counted at 15,545 input tokens and completed once under operation
+  manifest `84a92169124e65c9080fc8c192fb04c96bd2a9359547ba2cee31429b72f0d899`.
+  Fable returned 253 direct, legible words with `imageDirection: null`, exact model/effort, and
+  `end_turn`; usage-derived estimate `$0.278350`. The old postflight refused the otherwise valid
+  result for exceeding 250 words by three. It was not redispatched or edited. A one-time no-provider
+  recovery reconstructed candidate `fd9c0ab6d3acedb9abc9b596fcd9a3509f38b1cd41d5da2f351db2f19dc91d46`
+  from the immutable response. The operational hard stop now remains narrow at 260 while the
+  prompt/layout target remains 120–250, and the runner permanently writes a provider-complete
+  candidate before applying that editorial check. The text-only acceptance path appended it without
+  an image digest. C0 Fable provider calls executed: two; accepted prose folios: two.
 - The exact GPT Image 2 route is the existing direct Image API adapter and journal. It proves the
   requested `gpt-image-2-2026-04-21` snapshot, request ID, usage, latency, and output digest; the API
   exposes no served-model field. The Codex image-generation tool cannot prove that contract and must
@@ -129,7 +140,7 @@ _Updated 2026-07-19._
   reviewed operation digest is `193a510ed79ec4b7c583d2924107e6fa28b04f4742bbac861076f52eba04429e`.
   It completed once under provider request `req_ff1f68e1a3a64490969ff900202a95a8`, output digest
   `d9c7efe3f5f7efcbb5cda61b309bc1aa909bffbfe2ff05623c46d1f1546f181c`, and a `$0.057068`
-  usage-derived estimate. Human visual review passed the functional worn shop, face-down phone,
+  usage-derived estimate. Reading-size visual review passed the functional worn shop, face-down phone,
   visibly held six-pack, obscured Clef, four coherent people, and scene-local green/brown palette.
   The separate no-provider command then validated and accepted it before atomically appending
   progress. The acceptance verifier rejects fabricated receipts, header-only PNGs,
@@ -419,11 +430,11 @@ Postgres, and image storage.
 
 ## Spend and deployment
 
-- C0 text-generation spend: one Fable call, usage-derived estimate `$0.370920`; the provider bill was
-  not separately queried.
+- C0 text-generation spend: two Fable calls, usage-derived estimates `$0.370920` and `$0.278350`,
+  aggregate `$0.649270`; the provider bill was not separately queried.
 - C0 narrative-image spend: the rejected Payment v2 estimate is `$0.056578` and accepted Payment v3
   is `$0.057068`, for `$0.113646` across two completed outputs; the credential-rejected attempt
-  returned no usage or reported cost. Known C0 text-plus-image estimate is `$0.484566`.
+  returned no usage or reported cost. Known C0 text-plus-image estimate is `$0.762916`.
 - Image-generation provider bill: not reported by the Image API. B1 authorized exactly two calls
   within a `$0.10` request-scope bound. Captured usage and the 2026-07-19 standard rates yield an
   estimated total of `$0.028649` (`$0.011760` image output, `$0.016384` image input, and `$0.000505`
@@ -480,12 +491,13 @@ Postgres, and image storage.
 
 ## Next action
 
-Commit and push the text-led acceptance-argument repair and Payment acceptance record. Then dispatch
-the already prepared `root-folio-02` (`The gift`) Fable operation exactly once after reviewing
-request-manifest digest `84a92169124e65c9080fc8c192fb04c96bd2a9359547ba2cee31429b72f0d899`.
-Its request contains the accepted Payment prose followed immediately by the actual accepted Payment
-PNG and is pinned to Fable 5, xhigh, and `max_tokens: 32768`. Review and accept the text-only result
-without an image-operation digest, then continue the sequential 8+2 chain. Never dispatch the frozen
-Stage 1 operation or substitute the Codex image-generation tool. Replace the draft fixture, add
-production provenance and digest-named WebPs, pass the content verifier, then perform the complete
-C1 consecutive read and every-feature in-app Browser walkthrough before D0.
+Commit and push The gift's provider-result preservation repair and accepted evidence. Then dispatch
+the already prepared `root-folio-03` (`The band`) Fable operation exactly once after reviewing
+request-manifest digest `32465d99ec4aadacd9d22139aaf8308c55ba539364c67f60bd32fff572c98d48`.
+Its request contains Payment prose, the actual accepted Payment PNG, and The gift prose in exact
+order; it is pinned to Fable 5, xhigh, and `max_tokens: 32768`. Review the prose and Fable image
+direction before preparing The band's one remaining image call with Payment as its sole narrative
+continuity reference. Never dispatch the frozen Stage 1 operation or substitute the Codex
+image-generation tool. Replace the draft fixture, add production provenance and digest-named WebPs,
+pass the content verifier, then perform the complete C1 consecutive read and every-feature in-app
+Browser walkthrough before D0.
