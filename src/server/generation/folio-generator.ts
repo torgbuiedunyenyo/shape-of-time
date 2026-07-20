@@ -232,6 +232,10 @@ export async function generateNextFolio(
   } catch (error) {
     const failure: { [key: string]: JsonValue } = {
       code: error instanceof FableContractError ? error.code : "generation_failed",
+      // Contract error messages are deliberately generic; without the cause the ledger cannot
+      // say WHY a count or dispatch failed, and a production failure becomes undiagnosable.
+      detail:
+        error instanceof Error && error.cause instanceof Error ? error.cause.message : null,
       disposition:
         typeof error === "object" && error !== null && "disposition" in error
           ? String((error as { disposition?: unknown }).disposition)

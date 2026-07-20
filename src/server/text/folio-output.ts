@@ -41,8 +41,10 @@ export const FOLIO_OUTPUT_SCHEMA = {
       ],
     },
     proseParagraphs: {
+      // No maxItems: /v1/messages/count_tokens refuses schemas that carry it (HTTP 400, measured
+      // 2026-07-19), which blocked every folio count before spend. The one-to-three paragraph
+      // ceiling is enforced by parseFolioOutput instead. minItems and minLength are accepted.
       items: { minLength: 1, type: "string" },
-      maxItems: 3,
       minItems: 1,
       type: "array",
     },

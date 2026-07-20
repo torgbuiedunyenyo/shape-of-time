@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
+import { creationFailureCopy } from "./content/composure.js";
+
 interface CreationDialogProps {
   kind: "selection" | "title";
   source: string;
@@ -77,7 +79,7 @@ export function CreationDialog({ kind, source, onClose, onConfirm }: CreationDia
             ? "This will compose the first folio of a new book. Nothing is generated until you confirm."
             : state.phase === "preparing"
               ? "Composing the new book’s first folio. Your current page remains open behind this window."
-              : state.message}
+              : creationFailureCopy()}
         </p>
         <div className="dialog-actions">
           {state.phase === "preparing" ? null : (

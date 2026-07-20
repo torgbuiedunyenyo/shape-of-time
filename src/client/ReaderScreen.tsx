@@ -10,6 +10,7 @@ import {
 import { Link, Navigate, useLocation, useNavigate, useParams } from "react-router";
 
 import { CreationDialog } from "./CreationDialog.js";
+import { folioCompositionFailureCopy } from "./content/composure.js";
 import { SelectionToolbar } from "./SelectionToolbar.js";
 import {
   getFolio,
@@ -478,7 +479,7 @@ function ReaderFolioScreen({
         </p>
       ) : generation.phase === "error" ? (
         <p aria-live="polite" className="generation-note generation-note-error">
-          {generation.message}
+          {folioCompositionFailureCopy(generation.ordinal, generation.retryable)}
         </p>
       ) : null}
 

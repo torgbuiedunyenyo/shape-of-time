@@ -277,6 +277,34 @@ describe("D3 pagewise generation on a real database", () => {
   );
 
   it(
+    "records the provider's cause detail when the official count fails",
+    async () => {
+      const book = await createTestBook("Root count-fail", "This is the root book of the library.");
+      const prosePort = countingProsePort({ label: "count-fail" });
+      const failingCount = {
+        ...prosePort,
+        count: () =>
+          Promise.reject(
+            new Error("Anthropic /v1/messages/count_tokens answered 400: maxItems is not supported"),
+          ),
+      };
+      const deps = dependencies(failingCount, countingImagePort());
+      const request = { bookId: book.id, movementId: "movement-01", ordinal: 1, workerId: "worker-a" };
+
+      await expect(generateNextFolio(deps, request)).rejects.toMatchObject({ code: "count_failed" });
+      const folio = (
+        await repository.reserveFolio({ ...request, idempotencyKey: folioGenerationKey(request) })
+      ).folio;
+      const failure = await repository.getAttemptFailure(folio.id);
+      expect(failure?.["code"]).toBe("count_failed");
+      // The contract error's message is deliberately generic; the ledger must keep the cause,
+      // or a production count failure is undiagnosable from the database.
+      expect(String(failure?.["detail"])).toContain("answered 400");
+    },
+    60_000,
+  );
+
+  it(
     "never resends an indeterminate Fable dispatch",
     async () => {
       const book = await createTestBook("Root ambiguous", "This is the root book of the library.");

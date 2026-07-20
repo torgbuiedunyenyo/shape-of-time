@@ -269,3 +269,48 @@ test("a client-side valid-to-invalid route transition returns safely to the Libr
   await expect(page.getByRole("heading", { name: "Your library" })).toBeVisible();
   expect(pageErrors).toEqual([]);
 });
+
+const MACHINE_FAILURE = "official token count failed; counting failure blocks generation";
+
+test("a failed preparation wears calm front matter, never machine text", async ({ page }) => {
+  await page.route("**/api/reader/books/shape-of-time/next", (route) =>
+    route.fulfill({
+      json: {
+        error: { code: "count_failed", message: MACHINE_FAILURE, retryable: true },
+        ordinal: 9,
+        state: "error",
+      },
+      status: 409,
+    }),
+  );
+  await page.goto("/books/shape-of-time/folios/root-folio-08");
+  await expect(page.getByRole("heading", { name: "Jay says yes" })).toBeVisible();
+
+  await expect(page.getByText(/Folio 9 could not be composed just now/u)).toBeVisible();
+  await expect(page.locator("body")).not.toContainText(MACHINE_FAILURE);
+  await expect(page.locator("body")).not.toContainText("count_failed");
+});
+
+test("a failed creation keeps the dialog calm and machine-free", async ({ page }) => {
+  await page.route("**/api/reader/books", (route) =>
+    route.request().method() === "POST"
+      ? route.fulfill({
+          json: {
+            creationId: "creation-under-test",
+            error: { message: MACHINE_FAILURE },
+            state: "error",
+          },
+          status: 409,
+        })
+      : route.fallback(),
+  );
+  await page.goto("/library");
+  await page.getByRole("searchbox", { name: "Filter books" }).fill("A Book That Is Not Here");
+  await page.getByRole("button", { name: "Create a book called A Book That Is Not Here" }).click();
+  const dialog = page.getByRole("dialog");
+  await dialog.getByRole("button", { name: "Open the new book" }).click();
+
+  await expect(dialog).toContainText(/could not be composed just now/u);
+  await expect(dialog).not.toContainText(MACHINE_FAILURE);
+  await expect(dialog.getByRole("button", { name: "Close" })).toBeVisible();
+});
