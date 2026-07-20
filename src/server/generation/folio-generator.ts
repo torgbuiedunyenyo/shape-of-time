@@ -45,6 +45,7 @@ export interface FolioGenerationDependencies {
 
 export interface GenerateFolioInput {
   bookId: string;
+  imagePolicy?: "text-led" | "writer-decides";
   leaseMilliseconds?: number;
   movementId: string;
   ordinal: number;
@@ -77,6 +78,10 @@ export async function generateNextFolio(
     return { folio, spent: false };
   }
   if (folio.state === "failed") {
+    const previousFailure = await repository.getAttemptFailure(folio.id);
+    if (previousFailure?.["retryable"] === false) {
+      return { folio, spent: false };
+    }
     // Retry is only reachable from a recorded named failure, and it mints a successor attempt.
     const retried = await repository.retryFailedFolio({
       folioId: folio.id,
@@ -147,7 +152,11 @@ export async function generateNextFolio(
       currentFolioBrief:
         `This is folio ${input.ordinal} of movement ${movement.id}. Continue directly from the ` +
         "story so far and advance the current movement brief by one clear change in situation, " +
-        "want, or understanding.",
+        "want, or understanding." +
+        (input.imagePolicy === "text-led"
+          ? " This opening is text-led; return imageDirection as null."
+          : ""),
+      imagePolicy: input.imagePolicy ?? "writer-decides",
       movementBrief: movement.brief,
       priorFolios,
       temporalRules: sources.temporalRules,
@@ -223,7 +232,19 @@ export async function generateNextFolio(
   } catch (error) {
     const failure: { [key: string]: JsonValue } = {
       code: error instanceof FableContractError ? error.code : "generation_failed",
+      disposition:
+        typeof error === "object" && error !== null && "disposition" in error
+          ? String((error as { disposition?: unknown }).disposition)
+          : null,
       message: error instanceof Error ? error.message : String(error),
+      retryable:
+        !(error instanceof FableContractError && error.code === "dispatch_indeterminate") &&
+        !(
+          typeof error === "object" &&
+          error !== null &&
+          "disposition" in error &&
+          (error as { disposition?: unknown }).disposition === "indeterminate"
+        ),
     };
     try {
       await repository.failFolio({ failure, folioId: folio.id, leaseToken });

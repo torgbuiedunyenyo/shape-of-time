@@ -1,4 +1,4 @@
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { randomUUID } from "node:crypto";
 import path from "node:path";
@@ -16,8 +16,10 @@ import { parseConfig, type AppConfig } from "./config.js";
 import { createDatabase, destroyDatabase } from "./db/database.js";
 import { readDatabaseHealth } from "./db/health.js";
 import type { Database } from "./db/types.js";
+import { OpenAiImageClient } from "./images/openai-image-client.js";
 import { registerNextPageRoutes, type NextPageGeneration } from "./next-page.js";
 import { LibraryRepository } from "./repositories/library-repository.js";
+import { AnthropicFableClient } from "./text/fable-client.js";
 
 export interface AppDependencies {
   assetStore?: AssetStore;
@@ -55,6 +57,18 @@ export function composeApplication(environment: NodeJS.ProcessEnv): ApplicationR
     assetStore,
     clientRoot,
     database,
+    ...(config.generation === undefined
+      ? {}
+      : {
+          generation: {
+            imageExecutor: new OpenAiImageClient({ apiKey: config.generation.openAiApiKey }),
+            prosePort: new AnthropicFableClient({ apiKey: config.generation.anthropicApiKey }),
+            sources: {
+              temporalRules: readFileSync("prompts/fable/temporal-rules.md", "utf8"),
+              world: readFileSync("content/shape-of-time/world.md", "utf8"),
+            },
+          },
+        }),
     ...(config.gitCommitSha === undefined ? {} : { gitCommitSha: config.gitCommitSha }),
     logger,
   });
@@ -111,6 +125,7 @@ export function createApp(dependencies: AppDependencies): Hono {
     }
     registerNextPageRoutes(app, {
       assetStore: dependencies.assetStore,
+      clientRoot,
       generation: dependencies.generation,
       repository: new LibraryRepository(dependencies.database),
     });

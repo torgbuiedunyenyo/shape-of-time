@@ -8,7 +8,7 @@ import {
   type FableContentBlock,
   type FableImageMediaType,
 } from "./fable-contract.js";
-import { FOLIO_OUTPUT_SCHEMA } from "./folio-output.js";
+import { folioOutputSchema } from "./folio-output.js";
 
 /**
  * D1: the deterministic full-history compiler (PLAN §D1; SPEC "Hard context boundary"). One pure
@@ -44,6 +44,7 @@ export interface PriorFolio {
 export interface FolioContextInput {
   readonly bookOrigin: string;
   readonly currentFolioBrief: string;
+  readonly imagePolicy?: "text-led" | "writer-decides";
   readonly movementBrief: string;
   readonly priorFolios: readonly PriorFolio[];
   readonly temporalRules: string;
@@ -204,7 +205,7 @@ export function compileFolioContext(input: FolioContextInput): CompiledFolioCont
   userBlocks.push(...historyBlocks);
 
   const request = compileFableRequest({
-    outputSchema: FOLIO_OUTPUT_SCHEMA,
+    outputSchema: folioOutputSchema(input.imagePolicy ?? "writer-decides"),
     promptVersion: FOLIO_PROMPT_VERSION,
     system:
       "You are the writer behind the Shape of Time library. Read the complete document set and " +

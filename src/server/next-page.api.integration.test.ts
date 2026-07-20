@@ -1,4 +1,3 @@
-import { randomUUID } from "node:crypto";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
@@ -15,57 +14,65 @@ import type { Database } from "./db/types.js";
 import { canonicalJson, sha256 } from "./domain/digests.js";
 import type { CompiledImageRequest } from "./images/image-contract.js";
 import type { ImageProviderResult } from "./images/openai-image-client.js";
-import { LibraryRepository } from "./repositories/library-repository.js";
 import type { FableRequestBody } from "./text/fable-contract.js";
 
 let container: StartedPostgreSqlContainer;
 let database: Kysely<Database>;
-let repository: LibraryRepository;
 let assetRoot: string;
 let assetStore: FilesystemAssetStore;
 let app: ReturnType<typeof createApp>;
-let bookId: string;
 
 const WORLD = "Shape of Time world. One person exists once; every time keeps living.";
 const RULES = "Temporal movement is physical travel along mapped currents.";
 const PROSE_BODY = Array.from({ length: 140 }, (_, index) => `pageword${index}`).join(" ");
+const proseRequests: FableRequestBody[] = [];
+const plannerRequests: FableRequestBody[] = [];
+const imageRequests: CompiledImageRequest[] = [];
 
 function direction(call: number) {
   return {
-    concreteScene: `Direction ${call}: the exact concrete scene for this new plate.`,
-    factLeftToImage: `Direction ${call}: the material fact deliberately left to the image.`,
-    mustRemain: [`Direction ${call}: preserve established people and place.`],
-    narrativeJob: `Direction ${call}: reveal the new physical evidence.`,
-    purposefulChanges: [`Direction ${call}: show the situation after the page's change.`],
-    unresolvedFacts: [`Direction ${call}: leave the unresolved question open.`],
+    concreteScene: `Direction ${call}: Jay and Tan handle the concrete work of the crossing.`,
+    factLeftToImage: `Direction ${call}: the material arrangement and unequal controls.`,
+    mustRemain: [`Direction ${call}: preserve Jay, Tan, and their established visual world.`],
+    narrativeJob: `Direction ${call}: reveal how the institution structures the journey.`,
+    purposefulChanges: [`Direction ${call}: show the decision becoming physical work.`],
+    unresolvedFacts: [`Direction ${call}: do not invent a universal future style.`],
   };
 }
 
-const proseRequests: FableRequestBody[] = [];
-const imageRequests: CompiledImageRequest[] = [];
-
 const prosePort = {
-  count: (body: FableRequestBody) => {
-    void body;
-    return Promise.resolve({ input_tokens: 2_000 });
-  },
+  count: () => Promise.resolve({ input_tokens: 20_000 }),
   send: (body: FableRequestBody) => {
+    if (body.output_config.format === undefined) {
+      plannerRequests.push(body);
+      return Promise.resolve({
+        content: [{
+          text: "<movement_brief>A working route is tested by people whose needs conflict, and the movement rests when one public decision changes who can travel.</movement_brief>",
+          type: "text",
+        }],
+        id: `msg_plan_${plannerRequests.length}`,
+        model: "claude-fable-5",
+        stop_reason: "end_turn",
+        usage: { input_tokens: 20_000, output_tokens: 80 },
+      });
+    }
     proseRequests.push(body);
     const call = proseRequests.length;
+    const textLed = JSON.stringify(body.output_config.format.schema).includes(
+      '"imageDirection":{"type":"null"',
+    );
     return Promise.resolve({
-      content: [
-        {
-          text: JSON.stringify({
-            imageDirection: direction(call),
-            proseParagraphs: [`Page-${call} opens. ${PROSE_BODY}`],
-          }),
-          type: "text",
-        },
-      ],
+      content: [{
+        text: JSON.stringify({
+          imageDirection: textLed ? null : direction(call),
+          proseParagraphs: [`Page-${call} opens. ${PROSE_BODY}`],
+        }),
+        type: "text",
+      }],
       id: `msg_page_${call}`,
       model: "claude-fable-5",
       stop_reason: "end_turn",
-      usage: { input_tokens: 2_000, output_tokens: 310 },
+      usage: { input_tokens: 20_000, output_tokens: 310 },
     });
   },
 };
@@ -74,7 +81,7 @@ const imageExecutor = {
   execute: (compiled: CompiledImageRequest, options: { clientRequestId: string }) => {
     imageRequests.push(compiled);
     const bytes = new TextEncoder().encode(`png-${compiled.manifestDigest}`);
-    const result = {
+    return Promise.resolve({
       byteLength: bytes.byteLength,
       bytes,
       clientRequestId: options.clientRequestId,
@@ -91,8 +98,7 @@ const imageExecutor = {
       servedModelEvidence: "unavailable-from-image-api",
       totalCostEstimateUnavailableReason: "usage-unavailable",
       width: 1024,
-    } as unknown as ImageProviderResult;
-    return Promise.resolve(result);
+    } as unknown as ImageProviderResult);
   },
 };
 
@@ -104,7 +110,6 @@ beforeAll(async () => {
     .start();
   database = createDatabase(container.getConnectionUri());
   await migrateToLatest(database);
-  repository = new LibraryRepository(database);
   assetRoot = await mkdtemp(path.join(tmpdir(), "shape-of-time-next-page-"));
   assetStore = new FilesystemAssetStore(assetRoot);
   app = createApp({
@@ -117,12 +122,6 @@ beforeAll(async () => {
       sources: { temporalRules: RULES, world: WORLD },
     },
   });
-  const book = await repository.createBook({
-    firstMovement: { brief: "From the failed payment to Jay's calm yes.", id: "movement-01" },
-    origin: { statement: "This is the root book of the library." },
-    title: "Next Page root",
-  });
-  bookId = book.id;
 }, 120_000);
 
 afterAll(async () => {
@@ -131,97 +130,144 @@ afterAll(async () => {
   await rm(assetRoot, { force: true, recursive: true });
 });
 
-async function requestNextFolio(): Promise<{ body: { folio: { id: string; ordinal: number; state: string }; spent: boolean }; status: number }> {
-  const response = await app.request(`/api/books/${bookId}/next-folio`, { method: "POST" });
-  return { body: (await response.json()) as never, status: response.status };
+async function nextStatus(): Promise<{ ordinal: number; state: string }> {
+  const response = await app.request("/api/reader/books/shape-of-time/next");
+  return response.json() as Promise<{ ordinal: number; state: string }>;
 }
 
-async function openFolio(ordinal: number): Promise<{ body: { image?: { altText: string; assetId: string }; prose?: string; state: string }; status: number }> {
-  const response = await app.request(`/api/books/${bookId}/folios/${ordinal}/open`, { method: "POST" });
-  return { body: (await response.json()) as never, status: response.status };
+async function waitUntilReady(expectedOrdinal: number): Promise<void> {
+  const deadline = Date.now() + 10_000;
+  while (Date.now() < deadline) {
+    const status = await nextStatus();
+    if (status.state === "ready" && status.ordinal === expectedOrdinal) return;
+    await new Promise((resolve) => setTimeout(resolve, 20));
+  }
+  throw new Error(`folio ${expectedOrdinal} did not become ready`);
 }
 
-describe("Next Page API on a real database", () => {
+describe("reader-facing Next Folio API on a real database", () => {
   it(
-    "requests the next folio exactly once, retrieves it when ready, and publishes atomically",
+    "seeds the accepted history, prepares once, publishes atomically, then prepares only one next folio",
     async () => {
-      // Folio 1: request twice — one spend.
-      const first = await requestNextFolio();
-      const duplicate = await requestNextFolio();
-      expect(first.status).toBe(201);
-      expect(first.body.folio.ordinal).toBe(1);
-      expect(first.body.spent).toBe(true);
-      expect(duplicate.body.folio.id).toBe(first.body.folio.id);
-      expect(duplicate.body.spent).toBe(false);
+      const first = await app.request("/api/reader/books/shape-of-time/next", { method: "POST" });
+      const duplicate = await app.request("/api/reader/books/shape-of-time/next", { method: "POST" });
+      expect(first.status).toBe(202);
+      expect(duplicate.status).toBe(202);
+      await waitUntilReady(9);
       expect(proseRequests).toHaveLength(1);
       expect(imageRequests).toHaveLength(1);
 
-      // Retrieval when ready: GET reports state and never purchases.
-      const status = await app.request(`/api/books/${bookId}/folios/1`);
-      expect(status.status).toBe(200);
-      const statusBody = (await status.json()) as { prose?: string; state: string };
-      expect(statusBody.state).toBe("ready");
-      expect(statusBody.prose).toBeUndefined();
-      expect(proseRequests).toHaveLength(1);
+      // Fable sees all eight accepted pages and the three actual prior images in story order.
+      const blocks = proseRequests[0]?.messages[0]?.content ?? [];
+      expect(blocks.filter(({ type }) => type === "image")).toHaveLength(3);
+      const text = blocks.flatMap((block) => block.type === "text" ? [block.text] : []).join("");
+      expect(text).toContain("The answers came on paper, one envelope at a time");
+      expect(text).toContain("The maps were always becoming wrong");
 
-      // Publish is one atomic transition: open exposes and returns prose + image together.
-      const opened = await openFolio(1);
+      // GPT Image receives Fable's exact direction and the three eligible root plates.
+      const image = imageRequests[0]!;
+      expect(image.manifest.endpoint).toBe("/v1/images/edits");
+      expect(image.manifest.orderedReferences).toHaveLength(3);
+      expect(image.exactPrompt).toContain(canonicalJson(direction(1)));
+      expect(image.exactPrompt).not.toContain("Page-1 opens.");
+
+      const opened = await app.request("/api/reader/books/shape-of-time/folios/9/open", {
+        method: "POST",
+      });
       expect(opened.status).toBe(200);
-      expect(opened.body.state).toBe("exposed");
-      expect(opened.body.prose).toContain("Page-1 opens.");
-      expect(opened.body.image?.assetId).toBeTruthy();
+      const openedBody = (await opened.json()) as {
+        book: { folios: { id: string; ordinal: number; plate?: { src: string } }[] };
+        currentFolioId: string;
+      };
+      expect(openedBody.currentFolioId).toBe("generated-9");
+      expect(openedBody.book.folios).toHaveLength(9);
+      const ninth = openedBody.book.folios.at(-1)!;
+      expect(ninth.ordinal).toBe(9);
+      expect(ninth.plate?.src).toMatch(/^\/api\/reader\/assets\//u);
+      const asset = await app.request(ninth.plate!.src);
+      expect(asset.status).toBe(200);
+      expect((await asset.arrayBuffer()).byteLength).toBeGreaterThan(0);
 
-      // The image bytes are retrievable read-only.
-      const image = await app.request(`/api/books/${bookId}/folios/1/image`);
-      expect(image.status).toBe(200);
-      expect(image.headers.get("content-type")).toBe("image/png");
-      expect((await image.arrayBuffer()).byteLength).toBeGreaterThan(0);
+      // Opening folio 9 starts exactly one likely preparation: folio 10, no second-next.
+      await waitUntilReady(10);
+      expect(proseRequests).toHaveLength(2);
+      expect(imageRequests).toHaveLength(2);
     },
     60_000,
   );
+
+  it("keeps unknown books and GET-only reads spend-free", async () => {
+    const calls = proseRequests.length;
+    expect((await app.request("/api/reader/books/not-a-book")).status).toBe(404);
+    expect((await app.request("/api/reader/books/not-a-book/next")).status).toBe(404);
+    expect(proseRequests).toHaveLength(calls);
+  });
 
   it(
-    "interleaves prior prose and accepted images for Fable, and hands GPT Image 2 the direction plus eligible priors",
+    "creates title and highlighted books only through explicit POSTs and exposes their first folios",
     async () => {
-      // Folio 2, then expose it so folio 3 sees two exposed folios with images.
-      await requestNextFolio();
-      await openFolio(2);
-      await requestNextFolio();
+      const libraryBefore = await app.request("/api/reader/library");
+      expect(libraryBefore.status).toBe(200);
 
-      // Fable's folio-3 request carries folio 1 and 2 prose with the actual accepted image bytes
-      // immediately after each page, not captions standing in for images.
-      const blocks = proseRequests[2]?.messages[0]?.content ?? [];
-      expect(blocks.map(({ type }) => type)).toEqual(["text", "image", "text", "image", "text"]);
-      expect(blocks[0]?.type === "text" ? blocks[0].text : "").toContain("Page-1 opens.");
-      expect(blocks[2]?.type === "text" ? blocks[2].text : "").toContain("Page-2 opens.");
-      for (const index of [1, 3]) {
-        const block = blocks[index];
-        expect(block?.type).toBe("image");
-        if (block?.type === "image") {
-          expect(Buffer.from(block.source.data, "base64").byteLength).toBeGreaterThan(0);
-        }
+      const title = await app.request("/api/reader/books", {
+        body: JSON.stringify({ title: "Yesterday's safe route" }),
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+      });
+      expect(title.status).toBe(202);
+      const titleStarted = await title.json() as { creationId: string };
+      let titleReady: { book?: { folios: { plate?: unknown }[]; title: string }; state: string } = {
+        state: "preparing",
+      };
+      const titleDeadline = Date.now() + 10_000;
+      while (Date.now() < titleDeadline && titleReady.state === "preparing") {
+        await new Promise((resolve) => setTimeout(resolve, 20));
+        titleReady = await (await app.request(
+          `/api/reader/creations/${encodeURIComponent(titleStarted.creationId)}`,
+        )).json() as typeof titleReady;
       }
+      expect(titleReady.state).toBe("ready");
+      expect(titleReady.book?.title).toBe("Yesterday's safe route");
+      expect(titleReady.book?.folios).toHaveLength(1);
+      expect(titleReady.book?.folios[0]?.plate).toBeUndefined();
 
-      // GPT Image 2's folio-3 request: edit endpoint, both prior images as book-local
-      // references, and the exact prompt carries Fable's explicit image direction unchanged.
-      const compiled = imageRequests[2]!;
-      expect(compiled.manifest.endpoint).toBe("/v1/images/edits");
-      expect(compiled.manifest.orderedReferences).toHaveLength(2);
-      expect(
-        compiled.manifest.orderedReferences.every(
-          (reference) => reference.provenance.kind === "exposed-folio-image",
-        ),
-      ).toBe(true);
-      expect(compiled.exactPrompt).toContain(canonicalJson(direction(3)));
-      expect(compiled.exactPrompt).not.toContain("Page-3 opens.");
+      const root = await (await app.request("/api/reader/books/shape-of-time")).json() as {
+        book: { folios: { blocks: { id: string; text: string }[]; id: string }[] };
+      };
+      const source = root.book.folios[0]!;
+      const block = source.blocks[0]!;
+      const quote = block.text.slice(0, 28);
+      const selection = await app.request(
+        `/api/reader/books/shape-of-time/folios/${encodeURIComponent(source.id)}/children`,
+        {
+          body: JSON.stringify({
+            endBlockId: block.id,
+            endOffset: 28,
+            quote,
+            startBlockId: block.id,
+            startOffset: 0,
+          }),
+          headers: { "Content-Type": "application/json" },
+          method: "POST",
+        },
+      );
+      expect(selection.status).toBe(202);
+      const selectionStarted = await selection.json() as { creationId: string };
+      let selectionReady: { book?: { folios: unknown[]; title: string }; state: string } = {
+        state: "preparing",
+      };
+      const selectionDeadline = Date.now() + 10_000;
+      while (Date.now() < selectionDeadline && selectionReady.state === "preparing") {
+        await new Promise((resolve) => setTimeout(resolve, 20));
+        selectionReady = await (await app.request(
+          `/api/reader/creations/${encodeURIComponent(selectionStarted.creationId)}`,
+        )).json() as typeof selectionReady;
+      }
+      expect(selectionReady.state).toBe("ready");
+      expect(selectionReady.book?.title).toContain(quote);
+      expect(selectionReady.book?.folios).toHaveLength(1);
+      expect(plannerRequests.length).toBeGreaterThanOrEqual(2);
     },
     60_000,
   );
-
-  it("returns 404 for an unknown folio and refuses to open an unready one", async () => {
-    const missing = await app.request(`/api/books/${bookId}/folios/99`);
-    expect(missing.status).toBe(404);
-    const unknownBook = await app.request(`/api/books/${randomUUID()}/folios/1`);
-    expect(unknownBook.status).toBe(404);
-  });
 });

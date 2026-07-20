@@ -2,10 +2,8 @@ import { useCallback, useEffect, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router";
 
 import {
-  getNextFolio,
-  getPreviousFolio,
-  readerSlice,
   type ReaderAperture,
+  type ReaderFixture,
 } from "../content/reader-slice.js";
 import {
   enterAperture,
@@ -29,7 +27,7 @@ function historyState(value: unknown): ReaderHistoryState {
   return typeof value === "object" && value !== null ? (value as ReaderHistoryState) : {};
 }
 
-export function useReaderNavigation(current: ReaderPlace) {
+export function useReaderNavigation(current: ReaderPlace, catalog: ReaderFixture) {
   const navigate = useNavigate();
   const location = useLocation();
   const { discoverBook, record, setActiveReturn } = useReaderStore();
@@ -52,22 +50,30 @@ export function useReaderNavigation(current: ReaderPlace) {
   }, [current.bookId, record.activeReturn, setActiveReturn, state.journey]);
 
   const nextPlace = useMemo(() => {
-    const folio = getNextFolio(current.bookId, current.folioId);
+    const book = catalog.books.find((candidate) => candidate.id === current.bookId);
+    const index = book?.folios.findIndex((folio) => folio.id === current.folioId) ?? -1;
+    const folio = index < 0 ? undefined : book?.folios[index + 1];
     return folio === null
       ? null
-      : ({ bookId: current.bookId, folioId: folio.id, anchorBlockId: null } satisfies ReaderPlace);
-  }, [current.bookId, current.folioId]);
+      : folio === undefined
+        ? null
+        : ({ bookId: current.bookId, folioId: folio.id, anchorBlockId: null } satisfies ReaderPlace);
+  }, [catalog.books, current.bookId, current.folioId]);
 
   const previousPlace = useMemo(() => {
-    const folio = getPreviousFolio(current.bookId, current.folioId);
+    const book = catalog.books.find((candidate) => candidate.id === current.bookId);
+    const index = book?.folios.findIndex((folio) => folio.id === current.folioId) ?? -1;
+    const folio = index <= 0 ? undefined : book?.folios[index - 1];
     return folio === null
       ? null
-      : ({ bookId: current.bookId, folioId: folio.id, anchorBlockId: null } satisfies ReaderPlace);
-  }, [current.bookId, current.folioId]);
+      : folio === undefined
+        ? null
+        : ({ bookId: current.bookId, folioId: folio.id, anchorBlockId: null } satisfies ReaderPlace);
+  }, [catalog.books, current.bookId, current.folioId]);
 
   const goNext = useCallback(() => {
     if (nextPlace === null) return;
-    const decision = planPageTurn(readerSlice, current, "next", activeJourney, state);
+    const decision = planPageTurn(catalog, current, "next", activeJourney, state);
     if (decision === null) return;
     if (decision.kind === "history") {
       void navigate(decision.delta);
@@ -75,11 +81,11 @@ export function useReaderNavigation(current: ReaderPlace) {
     }
     if (decision.journey !== null) setActiveReturn(decision.journey);
     void navigate(readerPath(decision.place), { state: decision.history satisfies ReaderHistoryState });
-  }, [activeJourney, current, navigate, nextPlace, setActiveReturn, state]);
+  }, [activeJourney, catalog, current, navigate, nextPlace, setActiveReturn, state]);
 
   const goPrevious = useCallback(() => {
     if (previousPlace === null) return;
-    const decision = planPageTurn(readerSlice, current, "previous", activeJourney, state);
+    const decision = planPageTurn(catalog, current, "previous", activeJourney, state);
     if (decision === null) return;
     if (decision.kind === "history") {
       void navigate(decision.delta);
@@ -87,7 +93,7 @@ export function useReaderNavigation(current: ReaderPlace) {
     }
     if (decision.journey !== null) setActiveReturn(decision.journey);
     void navigate(readerPath(decision.place), { state: decision.history satisfies ReaderHistoryState });
-  }, [activeJourney, current, navigate, previousPlace, setActiveReturn, state]);
+  }, [activeJourney, catalog, current, navigate, previousPlace, setActiveReturn, state]);
 
   const openAperture = useCallback(
     async (aperture: ReaderAperture) => {

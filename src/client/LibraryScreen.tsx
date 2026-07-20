@@ -1,9 +1,10 @@
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 
-import { DisconnectedCreationDialog } from "./DisconnectedCreationDialog.js";
-import { ROOT_BOOK_ID, getFolio, readerSlice } from "./content/reader-slice.js";
-import { isKnownPlace, type ReaderPlace } from "./reader/reader-state.js";
+import { CreationDialog } from "./CreationDialog.js";
+import { createTitleBook, fetchReaderLibrary, mergeReaderBook } from "./content/reader-api.js";
+import { ROOT_BOOK_ID, readerSlice, type ReaderFixture } from "./content/reader-slice.js";
+import type { ReaderPlace } from "./reader/reader-state.js";
 import { useReaderStore } from "./reader/reader-store.js";
 
 function readerPath(place: ReaderPlace) {
@@ -13,17 +14,18 @@ function readerPath(place: ReaderPlace) {
 
 export function LibraryScreen() {
   const navigate = useNavigate();
-  const { record } = useReaderStore();
+  const { discoverBook, record } = useReaderStore();
+  const [catalog, setCatalog] = useState<ReaderFixture>(readerSlice);
   const [query, setQuery] = useState("");
   const [dialogTitle, setDialogTitle] = useState<string | null>(null);
   const createButtonRef = useRef<HTMLButtonElement>(null);
   const normalizedQuery = query.trim().toLocaleLowerCase();
   const availableBooks = useMemo(
     () =>
-      readerSlice.books.filter(
+      catalog.books.filter(
         (book) => book.id === ROOT_BOOK_ID || record.discoveredBookIds.includes(book.id),
       ),
-    [record.discoveredBookIds],
+    [catalog.books, record.discoveredBookIds],
   );
   const visibleBooks = availableBooks.filter((book) =>
     book.title.toLocaleLowerCase().includes(normalizedQuery),
@@ -31,8 +33,17 @@ export function LibraryScreen() {
   const hasExactTitle = availableBooks.some(
     (book) => book.title.toLocaleLowerCase() === normalizedQuery,
   );
-  const resume = record.resume !== null && isKnownPlace(record.resume) ? record.resume : null;
-  const resumeFolio = resume === null ? null : getFolio(resume.bookId, resume.folioId);
+  const resumeBook = catalog.books.find((book) => book.id === record.resume?.bookId);
+  const resumeFolio = resumeBook?.folios.find((folio) => folio.id === record.resume?.folioId) ?? null;
+  const resume = resumeFolio === null ? null : record.resume;
+
+  useEffect(() => {
+    void fetchReaderLibrary()
+      .then((books) => {
+        setCatalog((current) => books.reduce(mergeReaderBook, current));
+      })
+      .catch(() => undefined);
+  }, []);
 
   const closeDialog = () => {
     setDialogTitle(null);
@@ -131,7 +142,23 @@ export function LibraryScreen() {
       </footer>
 
       {dialogTitle === null ? null : (
-        <DisconnectedCreationDialog kind="title" onClose={closeDialog} source={dialogTitle} />
+        <CreationDialog
+          kind="title"
+          onClose={closeDialog}
+          onConfirm={async () => {
+            const book = await createTitleBook(dialogTitle);
+            const first = book.folios[0];
+            if (first === undefined) throw new Error("The new book has no opening folio.");
+            setCatalog((current) => mergeReaderBook(current, book));
+            discoverBook(book.id);
+            await Promise.resolve(navigate(readerPath({
+              anchorBlockId: null,
+              bookId: book.id,
+              folioId: first.id,
+            })));
+          }}
+          source={dialogTitle}
+        />
       )}
     </main>
   );

@@ -4,10 +4,13 @@ const environmentSchema = z
   .object({
     ASSET_DRIVER: z.enum(["filesystem", "s3"]).optional(),
     ASSET_FILESYSTEM_ROOT: z.string().min(1).optional(),
+    ANTHROPIC_API_KEY: z.string().min(1).optional(),
     DATABASE_URL: z.string().min(1).optional(),
+    GENERATION_ENABLED: z.enum(["true", "false"]).optional(),
     HOST: z.string().min(1).optional(),
     LOG_LEVEL: z.enum(["fatal", "error", "warn", "info", "debug", "trace", "silent"]).optional(),
     NODE_ENV: z.enum(["development", "test", "production"]).optional(),
+    OPENAI_API_KEY: z.string().min(1).optional(),
     PORT: z.coerce.number().int().min(1).max(65_535).optional(),
     RAILWAY_GIT_COMMIT_SHA: z.string().regex(/^[a-f0-9]{40}$/).optional(),
     RAILWAY_DEPLOYMENT_ID: z.string().min(1).optional(),
@@ -59,6 +62,18 @@ const environmentSchema = z
         context.addIssue({ code: "custom", message: "S3_ENDPOINT must use HTTPS", path: ["S3_ENDPOINT"] });
       }
     }
+    const generationEnabled = environment.GENERATION_ENABLED === "true";
+    if (generationEnabled) {
+      for (const key of ["ANTHROPIC_API_KEY", "OPENAI_API_KEY"] as const) {
+        if (environment[key] === undefined) {
+          context.addIssue({
+            code: "custom",
+            message: `${key} is required when GENERATION_ENABLED=true`,
+            path: [key],
+          });
+        }
+      }
+    }
   });
 
 export interface AppConfig {
@@ -66,6 +81,10 @@ export interface AppConfig {
   assetFilesystemRoot: string;
   databaseUrl: string;
   gitCommitSha?: string;
+  generation?: {
+    anthropicApiKey: string;
+    openAiApiKey: string;
+  };
   host: string;
   logLevel: "fatal" | "error" | "warn" | "info" | "debug" | "trace" | "silent";
   nodeEnvironment: "development" | "test" | "production";
@@ -97,6 +116,12 @@ export function parseConfig(environment: NodeJS.ProcessEnv): AppConfig {
     nodeEnvironment: onRailway ? "production" : (parsed.NODE_ENV ?? "development"),
     port: parsed.PORT ?? 3000,
   };
+  if (parsed.GENERATION_ENABLED === "true") {
+    base.generation = {
+      anthropicApiKey: parsed.ANTHROPIC_API_KEY!,
+      openAiApiKey: parsed.OPENAI_API_KEY!,
+    };
+  }
   if (parsed.RAILWAY_GIT_COMMIT_SHA !== undefined) base.gitCommitSha = parsed.RAILWAY_GIT_COMMIT_SHA;
   if (assetDriver === "s3") {
     base.s3 = {

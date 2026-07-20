@@ -65,4 +65,20 @@ describe("runtime configuration", () => {
       parseConfig({ ...production, RAILWAY_GIT_COMMIT_SHA: "a".repeat(40) }),
     ).toThrow(/S3_ENDPOINT must use HTTPS/);
   });
+
+  it("enables live generation only with both provider credentials", () => {
+    expect(() =>
+      parseConfig({
+        ANTHROPIC_API_KEY: "anthropic-test",
+        GENERATION_ENABLED: "true",
+      }),
+    ).toThrow(/OPENAI_API_KEY/);
+    expect(
+      parseConfig({
+        ANTHROPIC_API_KEY: "anthropic-test",
+        GENERATION_ENABLED: "true",
+        OPENAI_API_KEY: "openai-test",
+      }).generation,
+    ).toEqual({ anthropicApiKey: "anthropic-test", openAiApiKey: "openai-test" });
+  });
 });

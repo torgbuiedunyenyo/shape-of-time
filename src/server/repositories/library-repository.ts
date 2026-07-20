@@ -577,6 +577,15 @@ export class LibraryRepository {
     return mapBook(book);
   }
 
+  async listBooks(): Promise<BookRecord[]> {
+    const books = await this.#database
+      .selectFrom("books")
+      .selectAll()
+      .orderBy("created_at", "asc")
+      .execute();
+    return books.map(mapBook);
+  }
+
   async findBookByIdempotencyKey(idempotencyKey: string): Promise<BookRecord | null> {
     const row = await this.#database
       .selectFrom("books")
@@ -709,6 +718,20 @@ export class LibraryRepository {
       result: attempt.result,
       usage: attempt.usage,
     };
+  }
+
+  async getAttemptFailure(folioId: string): Promise<{ [key: string]: JsonValue } | null> {
+    const folio = await this.#database
+      .selectFrom("folios")
+      .select("generation_attempt_id")
+      .where("id", "=", folioId)
+      .executeTakeFirstOrThrow();
+    const attempt = await this.#database
+      .selectFrom("generation_attempts")
+      .select("failure")
+      .where("id", "=", folio.generation_attempt_id)
+      .executeTakeFirstOrThrow();
+    return attempt.failure;
   }
 
   async getAsset(assetId: string): Promise<{

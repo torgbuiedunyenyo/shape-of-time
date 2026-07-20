@@ -89,6 +89,20 @@ describe("D0 Fable contract", () => {
     expect(port.send).not.toHaveBeenCalled();
   });
 
+  it("distinguishes an explicit provider rejection from an indeterminate dispatch", async () => {
+    const rejected = fakePort();
+    rejected.send.mockRejectedValueOnce(Object.assign(new Error("rate limited"), { httpStatus: 429 }));
+    await expect(executeFableAttempt(compiled(), rejected)).rejects.toMatchObject({
+      code: "provider_rejected",
+    });
+
+    const ambiguous = fakePort();
+    ambiguous.send.mockRejectedValueOnce(new Error("connection ended after dispatch"));
+    await expect(executeFableAttempt(compiled(), ambiguous)).rejects.toMatchObject({
+      code: "dispatch_indeterminate",
+    });
+  });
+
   it("rejects a served model that is not exactly Fable, including an Opus alias", async () => {
     const port = fakePort({
       response: {

@@ -19,6 +19,7 @@ export interface ReturnPoint {
   source: ReaderPlace;
   apertureId: string;
   blockId: string;
+  endBlockId?: string;
   startOffset: number;
   endOffset: number;
   quote: string;
@@ -100,6 +101,7 @@ function isJourney(value: unknown): value is ApertureJourney {
     isPlace(point.source) &&
     typeof point.apertureId === "string" &&
     typeof point.blockId === "string" &&
+    (point.endBlockId === undefined || typeof point.endBlockId === "string") &&
     Number.isInteger(point.startOffset) &&
     Number.isInteger(point.endOffset) &&
     typeof point.quote === "string"
@@ -133,6 +135,7 @@ export function enterAperture(source: ReaderPlace, aperture: ReaderAperture) {
     source,
     apertureId: aperture.id,
     blockId: aperture.blockId,
+    endBlockId: aperture.blockId,
     startOffset: aperture.startOffset,
     endOffset: aperture.endOffset,
     quote: aperture.quote,

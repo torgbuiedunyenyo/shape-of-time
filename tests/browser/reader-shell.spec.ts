@@ -1,16 +1,8 @@
 import { expect, test } from "@playwright/test";
 
-test("a fresh reader completes the file-backed reader-first journey without runtime generation", async ({
+test("a fresh reader completes the accepted reader-first journey", async ({
   page,
 }) => {
-  const runtimeRequests: string[] = [];
-  page.on("request", (request) => {
-    const url = new URL(request.url());
-    if (url.pathname === "/api" || url.pathname.startsWith("/api/") || url.origin !== "http://127.0.0.1:4173") {
-      runtimeRequests.push(url.href);
-    }
-  });
-
   await page.goto("/library");
   await expect(page).toHaveTitle("Shape of Time");
   await expect(page.getByRole("heading", { name: "Your library" })).toBeVisible();
@@ -54,7 +46,7 @@ test("a fresh reader completes the file-backed reader-first journey without runt
 
   await page.getByRole("searchbox", { name: "Filter books" }).fill("A Book That Is Not Here");
   await page.getByRole("button", { name: "Create a book called A Book That Is Not Here" }).click();
-  await expect(page.getByRole("dialog")).toContainText("No book was created and no request was sent");
+  await expect(page.getByRole("dialog")).toContainText("Nothing is generated until you confirm");
   await page.getByRole("button", { name: "Close" }).click();
 
   await page.reload();
@@ -62,7 +54,6 @@ test("a fresh reader completes the file-backed reader-first journey without runt
   await expect(page).toHaveURL(
     /\/books\/shape-of-time\/folios\/root-folio-08#root-folio-08-block-01$/u,
   );
-  expect(runtimeRequests).toEqual([]);
 });
 
 test("buttons, arrows, and a touch swipe agree on one folio sequence", async ({ page }) => {
@@ -99,7 +90,7 @@ test("a cross-paragraph selection stays in the reader and opens an honest confir
   const runtimeRequests: string[] = [];
   page.on("request", (request) => {
     const url = new URL(request.url());
-    if (url.pathname === "/api" || url.pathname.startsWith("/api/") || url.origin !== "http://127.0.0.1:4173") {
+    if (request.method() !== "GET" || url.origin !== "http://127.0.0.1:4173") {
       runtimeRequests.push(url.href);
     }
   });
@@ -127,7 +118,7 @@ test("a cross-paragraph selection stays in the reader and opens an honest confir
   await toolbar.getByRole("button", { name: "Open as a book" }).click();
   const dialog = page.getByRole("dialog");
   await expect(dialog).toContainText(selectedText.slice(0, 36));
-  await expect(dialog).toContainText("No book was created and no request was sent");
+  await expect(dialog).toContainText("Nothing is generated until you confirm");
   await expect(page.getByRole("heading", { name: "Payment" })).toBeVisible();
   await page.keyboard.press("Escape");
   await expect(dialog).toBeHidden();
@@ -212,17 +203,18 @@ test("Previous then Next reuses browser history instead of pushing a duplicate",
   await expect(page).toHaveURL(/root-folio-02$/u);
 });
 
-test("the disconnected creation state is modal and page-turn keys cannot act behind it", async ({ page }) => {
+test("creation confirmation is modal and page-turn keys cannot act behind it", async ({ page }) => {
   await page.goto("/library");
   await page.getByRole("searchbox", { name: "Filter books" }).fill("Unwritten Weather");
   await page.getByRole("button", { name: "Create a book called Unwritten Weather" }).click();
 
   const close = page.getByRole("button", { name: "Close" });
-  await expect(close).toBeFocused();
+  const confirm = page.getByRole("button", { name: "Open the new book" });
+  await expect(confirm).toBeFocused();
   await page.keyboard.press("Tab");
   await expect(close).toBeFocused();
   await page.keyboard.press("Shift+Tab");
-  await expect(close).toBeFocused();
+  await expect(confirm).toBeFocused();
 
   const url = page.url();
   await page.keyboard.press("ArrowRight");

@@ -16,9 +16,11 @@ export const FABLE_CONTRACT_VERSION = "shape-of-time.fable-writer.v2" as const;
 
 export type FableContractFailureCode =
   | "count_failed"
+  | "dispatch_indeterminate"
   | "empty_output"
   | "over_context_ceiling"
   | "refused"
+  | "provider_rejected"
   | "served_model_mismatch"
   | "truncated"
   | "unsupported_stop";
@@ -180,7 +182,24 @@ export async function executeFableAttempt(
     });
   }
 
-  const raw = (await port.send(compiledRequest.body)) as {
+  let response: unknown;
+  try {
+    response = await port.send(compiledRequest.body);
+  } catch (cause) {
+    const status =
+      typeof cause === "object" && cause !== null && "httpStatus" in cause
+        ? (cause as { httpStatus?: unknown }).httpStatus
+        : null;
+    const rejected = typeof status === "number" && status >= 400 && status < 500;
+    throw new FableContractError({
+      cause,
+      code: rejected ? "provider_rejected" : "dispatch_indeterminate",
+      message: rejected
+        ? `the provider explicitly rejected the request with HTTP ${status}`
+        : "the Fable dispatch has no conclusive provider result; automatic resend is forbidden",
+    });
+  }
+  const raw = response as {
     content?: readonly { text?: string; type?: string }[];
     id?: string;
     model?: string;

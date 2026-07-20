@@ -51,6 +51,16 @@ export const FOLIO_OUTPUT_SCHEMA = {
   type: "object",
 } as const;
 
+export function folioOutputSchema(imagePolicy: "text-led" | "writer-decides"):
+Readonly<Record<string, unknown>> {
+  if (imagePolicy === "writer-decides") return structuredClone(FOLIO_OUTPUT_SCHEMA);
+  const schema = structuredClone(FOLIO_OUTPUT_SCHEMA) as unknown as {
+    properties: { imageDirection: unknown };
+  };
+  schema.properties.imageDirection = { type: "null" };
+  return schema as unknown as Readonly<Record<string, unknown>>;
+}
+
 function requireExactKeys(value: Record<string, unknown>, keys: readonly string[], label: string): void {
   const actual = Object.keys(value).sort();
   const expected = [...keys].sort();

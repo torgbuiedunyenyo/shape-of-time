@@ -103,8 +103,9 @@ export async function foundChildFromSelection(
     sourceFolioId: input.sourceFolioId,
     startOffset: input.startOffset,
     statement,
-    visualProfile: null,
-    visualProfileReason: "book-local visual profile awaits the approved visual bible (B2)",
+    visualProfile:
+      "Establish this book's own place, people, material culture, and palette when it first needs " +
+      "an image; preserve those decisions only within this lineage.",
   };
   const truncated =
     input.selectedText.length > 60 ? `${input.selectedText.slice(0, 57)}...` : input.selectedText;
@@ -148,8 +149,9 @@ export async function foundChildFromTitle(
       kind: "title",
       statement,
       titleIntent,
-      visualProfile: null,
-      visualProfileReason: "book-local visual profile awaits the approved visual bible (B2)",
+      visualProfile:
+        "Establish this book's own place, people, material culture, and palette when it first needs " +
+        "an image; preserve those decisions only within this lineage.",
     },
     title: titleIntent,
   });
@@ -170,6 +172,7 @@ export async function enterChildBook(
   }
   const { folio } = await generateNextFolio(dependencies, {
     bookId: book.id,
+    imagePolicy: "text-led",
     movementId: firstMovement.id,
     ordinal: 1,
     workerId: input.workerId,

@@ -65,7 +65,12 @@ afterAll(async () => {
   await rm(assetRoot, { force: true, recursive: true });
 });
 
-function countingProsePort(options: { failOnCall?: number; label: string; textLed?: boolean }) {
+function countingProsePort(options: {
+  failIndeterminateOnCall?: number;
+  failOnCall?: number;
+  label: string;
+  textLed?: boolean;
+}) {
   const requests: FableRequestBody[] = [];
   return {
     requests,
@@ -76,6 +81,9 @@ function countingProsePort(options: { failOnCall?: number; label: string; textLe
     send: (body: FableRequestBody) => {
       requests.push(body);
       const call = requests.length;
+      if (options.failIndeterminateOnCall === call) {
+        return Promise.reject(new Error("connection ended after dispatch"));
+      }
       if (options.failOnCall === call) {
         return Promise.resolve({
           content: [{ text: "half a folio", type: "text" }],
@@ -264,6 +272,30 @@ describe("D3 pagewise generation on a real database", () => {
       expect(retried.folio.prose).toContain("retry call 2.");
       // A new attempt was minted for the retry; the folio still occupies the same ordinal once.
       expect(retried.folio.generationAttemptId).not.toBe(failed.generationAttemptId);
+    },
+    60_000,
+  );
+
+  it(
+    "never resends an indeterminate Fable dispatch",
+    async () => {
+      const book = await createTestBook("Root ambiguous", "This is the root book of the library.");
+      const prosePort = countingProsePort({ failIndeterminateOnCall: 1, label: "ambiguous" });
+      const deps = dependencies(prosePort, countingImagePort());
+      const request = {
+        bookId: book.id,
+        movementId: "movement-01",
+        ordinal: 1,
+        workerId: "worker-a",
+      };
+
+      await expect(generateNextFolio(deps, request)).rejects.toMatchObject({
+        code: "dispatch_indeterminate",
+      });
+      const second = await generateNextFolio(deps, request);
+      expect(second.spent).toBe(false);
+      expect(second.folio.state).toBe("failed");
+      expect(prosePort.requests).toHaveLength(1);
     },
     60_000,
   );
