@@ -1,4 +1,4 @@
-import type { FolioRecord, LibraryRepository } from "../repositories/library-repository.js";
+import type { LibraryRepository } from "../repositories/library-repository.js";
 import { FableContractError } from "../text/fable-contract.js";
 import {
   generateNextFolio,
@@ -13,9 +13,8 @@ import {
  * never reach it (the route layer enforces POST-only, and nothing here creates a route).
  */
 export interface PreparationBudget {
-  /** How many folios past the exposed one to prepare (next, second-next → 2). */
-  horizon: number;
-  maxConcurrentPreparations: number;
+  /** D5 deliberately permits only the immediately next folio. */
+  horizon: 1;
 }
 
 export interface PreparationOutcome {
@@ -34,65 +33,30 @@ export async function prepareOnExposure(
   },
 ): Promise<PreparationOutcome> {
   const { budget } = input;
-  if (!Number.isInteger(budget.horizon) || budget.horizon < 0) {
-    throw new Error("preparation horizon must be a non-negative integer");
-  }
-  if (!Number.isInteger(budget.maxConcurrentPreparations) || budget.maxConcurrentPreparations < 1) {
-    throw new Error("preparation concurrency budget must be a positive integer");
-  }
-  const candidates: number[] = [];
-  for (let step = 1; step <= budget.horizon; step += 1) {
-    candidates.push(input.exposedOrdinal + step);
+  if (budget.horizon !== 1) {
+    throw new Error("preparation horizon is fixed at exactly one next folio");
   }
 
   const outcome: PreparationOutcome = { failed: [], prepared: [] };
-  for (let index = 0; index < candidates.length; index += budget.maxConcurrentPreparations) {
-    const batch = candidates.slice(index, index + budget.maxConcurrentPreparations);
-    await Promise.all(
-      batch.map(async (ordinal) => {
-        try {
-          const { spent } = await generateNextFolio(dependencies, {
-            bookId: input.bookId,
-            movementId: input.movementId,
-            ordinal,
-            workerId: input.workerId,
-          });
-          outcome.prepared.push({ ordinal, spent });
-        } catch (error) {
-          outcome.failed.push({
-            code: error instanceof FableContractError ? error.code : "generation_failed",
-            message: error instanceof Error ? error.message : String(error),
-            ordinal,
-          });
-        }
-      }),
-    );
+  const ordinal = input.exposedOrdinal + 1;
+  try {
+    const { spent } = await generateNextFolio(dependencies, {
+      bookId: input.bookId,
+      movementId: input.movementId,
+      ordinal,
+      workerId: input.workerId,
+    });
+    outcome.prepared.push({ ordinal, spent });
+  } catch (error) {
+    outcome.failed.push({
+      code: error instanceof FableContractError ? error.code : "generation_failed",
+      message: error instanceof Error ? error.message : String(error),
+      ordinal,
+    });
   }
   outcome.failed.sort((left, right) => left.ordinal - right.ordinal);
   outcome.prepared.sort((left, right) => left.ordinal - right.ordinal);
   return outcome;
-}
-
-/**
- * A suggested aperture became visible (visibility/hover/touch reprioritization): prepare the
- * target book's first folio so opening the door is a cache hit. Idempotent through the same
- * generation namespace.
- */
-export async function prepareSuggestedAperture(
-  dependencies: FolioGenerationDependencies,
-  input: { targetBookId: string; workerId: string },
-): Promise<{ folio: FolioRecord; spent: boolean }> {
-  const book = await dependencies.repository.getBook(input.targetBookId);
-  const firstMovement = book.movementBriefs[0];
-  if (firstMovement === undefined) {
-    throw new Error(`aperture target book ${input.targetBookId} has no first movement to prepare`);
-  }
-  return generateNextFolio(dependencies, {
-    bookId: book.id,
-    movementId: firstMovement.id,
-    ordinal: 1,
-    workerId: input.workerId,
-  });
 }
 
 export interface PreparationEconomy {

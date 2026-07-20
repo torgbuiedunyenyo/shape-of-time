@@ -12,7 +12,7 @@ export const ABSOLUTE_CONTEXT_CEILING = 400_000;
 export const MAX_OUTPUT_TOKENS = 32_768;
 export const SAFETY_MARGIN = 4_096;
 export const MAX_COUNTED_INPUT = ABSOLUTE_CONTEXT_CEILING - MAX_OUTPUT_TOKENS - SAFETY_MARGIN;
-export const FABLE_CONTRACT_VERSION = "shape-of-time.fable-writer.v1" as const;
+export const FABLE_CONTRACT_VERSION = "shape-of-time.fable-writer.v2" as const;
 
 export type FableContractFailureCode =
   | "count_failed"
@@ -38,18 +38,38 @@ export interface FableTextBlock {
   readonly type: "text";
 }
 
+export type FableImageMediaType = "image/gif" | "image/jpeg" | "image/png" | "image/webp";
+
+export interface FableImageBlock {
+  readonly source: {
+    readonly data: string;
+    readonly media_type: FableImageMediaType;
+    readonly type: "base64";
+  };
+  readonly type: "image";
+}
+
+export type FableContentBlock = FableImageBlock | FableTextBlock;
+
 export interface FableRequestInput {
+  readonly outputSchema?: Readonly<Record<string, unknown>>;
   readonly promptVersion: string;
   readonly system: string;
-  readonly userBlocks: readonly FableTextBlock[];
+  readonly userBlocks: readonly FableContentBlock[];
 }
 
 /** The exact wire body. Stateless by construction: no memory, container, or thinking budget. */
 export interface FableRequestBody {
   readonly max_tokens: typeof MAX_OUTPUT_TOKENS;
-  readonly messages: readonly { readonly content: readonly FableTextBlock[]; readonly role: "user" }[];
+  readonly messages: readonly { readonly content: readonly FableContentBlock[]; readonly role: "user" }[];
   readonly model: typeof FABLE_MODEL;
-  readonly output_config: { readonly effort: typeof FABLE_EFFORT };
+  readonly output_config: {
+    readonly effort: typeof FABLE_EFFORT;
+    readonly format?: {
+      readonly schema: Readonly<Record<string, unknown>>;
+      readonly type: "json_schema";
+    };
+  };
   readonly system: string;
 }
 
@@ -83,11 +103,41 @@ export function compileFableRequest(input: FableRequestInput): CompiledFableRequ
   if (input.promptVersion.trim().length === 0) throw new Error("Fable prompt version is required");
   if (input.system.trim().length === 0) throw new Error("Fable system text is required");
   if (input.userBlocks.length === 0) throw new Error("Fable request requires at least one block");
+  for (const [index, block] of input.userBlocks.entries()) {
+    if (block.type === "text") {
+      if (block.text.length === 0) throw new Error(`Fable text block ${index} is empty`);
+      continue;
+    }
+    if (
+      block.source.type !== "base64" ||
+      block.source.data.length === 0 ||
+      !/^image\/(?:gif|jpeg|png|webp)$/u.test(block.source.media_type)
+    ) {
+      throw new Error(`Fable image block ${index} is invalid`);
+    }
+    const bytes = Buffer.from(block.source.data, "base64");
+    if (bytes.byteLength === 0 || bytes.toString("base64") !== block.source.data) {
+      throw new Error(`Fable image block ${index} is not canonical base64`);
+    }
+  }
+  if (
+    input.outputSchema !== undefined &&
+    (input.outputSchema === null || Array.isArray(input.outputSchema))
+  ) {
+    throw new Error("Fable output schema must be an object");
+  }
+  const outputConfig =
+    input.outputSchema === undefined
+      ? { effort: FABLE_EFFORT }
+      : {
+          effort: FABLE_EFFORT,
+          format: { schema: structuredClone(input.outputSchema), type: "json_schema" as const },
+        };
   const body: FableRequestBody = {
     max_tokens: MAX_OUTPUT_TOKENS,
     messages: [{ content: input.userBlocks, role: "user" }],
     model: FABLE_MODEL,
-    output_config: { effort: FABLE_EFFORT },
+    output_config: outputConfig,
     system: input.system,
   };
   const manifest = {

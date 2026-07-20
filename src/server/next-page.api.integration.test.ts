@@ -12,7 +12,7 @@ import { FilesystemAssetStore } from "./assets/filesystem-asset-store.js";
 import { createDatabase, destroyDatabase } from "./db/database.js";
 import { migrateToLatest } from "./db/migrate.js";
 import type { Database } from "./db/types.js";
-import { sha256 } from "./domain/digests.js";
+import { canonicalJson, sha256 } from "./domain/digests.js";
 import type { CompiledImageRequest } from "./images/image-contract.js";
 import type { ImageProviderResult } from "./images/openai-image-client.js";
 import { LibraryRepository } from "./repositories/library-repository.js";
@@ -30,6 +30,17 @@ const WORLD = "Shape of Time world. One person exists once; every time keeps liv
 const RULES = "Temporal movement is physical travel along mapped currents.";
 const PROSE_BODY = Array.from({ length: 140 }, (_, index) => `pageword${index}`).join(" ");
 
+function direction(call: number) {
+  return {
+    concreteScene: `Direction ${call}: the exact concrete scene for this new plate.`,
+    factLeftToImage: `Direction ${call}: the material fact deliberately left to the image.`,
+    mustRemain: [`Direction ${call}: preserve established people and place.`],
+    narrativeJob: `Direction ${call}: reveal the new physical evidence.`,
+    purposefulChanges: [`Direction ${call}: show the situation after the page's change.`],
+    unresolvedFacts: [`Direction ${call}: leave the unresolved question open.`],
+  };
+}
+
 const proseRequests: FableRequestBody[] = [];
 const imageRequests: CompiledImageRequest[] = [];
 
@@ -43,7 +54,13 @@ const prosePort = {
     const call = proseRequests.length;
     return Promise.resolve({
       content: [
-        { text: `<folio_prose>Page-${call} opens. ${PROSE_BODY}</folio_prose>`, type: "text" },
+        {
+          text: JSON.stringify({
+            imageDirection: direction(call),
+            proseParagraphs: [`Page-${call} opens. ${PROSE_BODY}`],
+          }),
+          type: "text",
+        },
       ],
       id: `msg_page_${call}`,
       model: "claude-fable-5",
@@ -171,20 +188,22 @@ describe("Next Page API on a real database", () => {
       await openFolio(2);
       await requestNextFolio();
 
-      // Fable's folio-3 request carries folio 1 and 2 prose with their image markers interleaved.
-      const request = proseRequests[2]?.messages[0]?.content[0]?.text ?? "";
-      const p1 = request.indexOf("Page-1 opens.");
-      const p2 = request.indexOf("Page-2 opens.");
-      const markers = [...request.matchAll(/\[Narrative image: /g)].map((m) => m.index ?? -1);
-      expect(p1).toBeGreaterThanOrEqual(0);
-      expect(p2).toBeGreaterThan(p1);
-      expect(markers).toHaveLength(2);
-      expect(markers[0]).toBeGreaterThan(p1);
-      expect(markers[0]).toBeLessThan(p2);
-      expect(markers[1]).toBeGreaterThan(p2);
+      // Fable's folio-3 request carries folio 1 and 2 prose with the actual accepted image bytes
+      // immediately after each page, not captions standing in for images.
+      const blocks = proseRequests[2]?.messages[0]?.content ?? [];
+      expect(blocks.map(({ type }) => type)).toEqual(["text", "image", "text", "image", "text"]);
+      expect(blocks[0]?.type === "text" ? blocks[0].text : "").toContain("Page-1 opens.");
+      expect(blocks[2]?.type === "text" ? blocks[2].text : "").toContain("Page-2 opens.");
+      for (const index of [1, 3]) {
+        const block = blocks[index];
+        expect(block?.type).toBe("image");
+        if (block?.type === "image") {
+          expect(Buffer.from(block.source.data, "base64").byteLength).toBeGreaterThan(0);
+        }
+      }
 
       // GPT Image 2's folio-3 request: edit endpoint, both prior images as book-local
-      // references, and the exact prompt carries Fable's written scene.
+      // references, and the exact prompt carries Fable's explicit image direction unchanged.
       const compiled = imageRequests[2]!;
       expect(compiled.manifest.endpoint).toBe("/v1/images/edits");
       expect(compiled.manifest.orderedReferences).toHaveLength(2);
@@ -193,7 +212,8 @@ describe("Next Page API on a real database", () => {
           (reference) => reference.provenance.kind === "exposed-folio-image",
         ),
       ).toBe(true);
-      expect(compiled.exactPrompt).toContain("Page-3 opens.");
+      expect(compiled.exactPrompt).toContain(canonicalJson(direction(3)));
+      expect(compiled.exactPrompt).not.toContain("Page-3 opens.");
     },
     60_000,
   );

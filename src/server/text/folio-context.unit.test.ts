@@ -1,8 +1,10 @@
 import { describe, expect, it } from "vitest";
 
+import { sha256 } from "../domain/digests.js";
 import { compileFolioContext, type FolioContextInput } from "./folio-context.js";
 
 const WORLD_SENTINEL = "The city had already moved when the survey team arrived.";
+const IMAGE_BYTES = new TextEncoder().encode("accepted narrative image bytes");
 
 function input(overrides: Partial<FolioContextInput> = {}): FolioContextInput {
   return {
@@ -11,7 +13,13 @@ function input(overrides: Partial<FolioContextInput> = {}): FolioContextInput {
     movementBrief: "Root movement one: from the failed payment to Jay's calm yes.",
     priorFolios: [
       {
-        images: [{ altText: "A worn counter at evening rush.", digest: "a".repeat(64) }],
+        images: [{
+          altText: "A worn counter at evening rush.",
+          assetId: "plate-payment",
+          bytes: IMAGE_BYTES,
+          digest: sha256(IMAGE_BYTES),
+          mediaType: "image/webp",
+        }],
         ordinal: 1,
         prose: "Jay served the regulars first because they knew to have their money ready.",
       },
@@ -30,7 +38,8 @@ function input(overrides: Partial<FolioContextInput> = {}): FolioContextInput {
 describe("D1 deterministic folio context", () => {
   it("renders every source exactly once, in template order, with the request last", () => {
     const compiled = compileFolioContext(input());
-    const text = compiled.request.body.messages[0]?.content[0]?.text ?? "";
+    const blocks = compiled.request.body.messages[0]?.content ?? [];
+    const text = blocks.flatMap((block) => block.type === "text" ? [block.text] : []).join("");
 
     // Exactly once: the world sentinel appears a single time in the rendered request.
     expect(text.split(WORLD_SENTINEL).length - 1).toBe(1);
@@ -54,6 +63,13 @@ describe("D1 deterministic folio context", () => {
       text.indexOf("Tan waited for the screen"),
     );
     expect(text).toContain("A worn counter at evening rush.");
+    expect(blocks.map(({ type }) => type)).toEqual(["text", "image", "text"]);
+    const image = blocks[1];
+    expect(image?.type).toBe("image");
+    if (image?.type === "image") {
+      expect(Buffer.from(image.source.data, "base64")).toEqual(Buffer.from(IMAGE_BYTES));
+    }
+    expect(compiled.request.body.output_config.format?.type).toBe("json_schema");
   });
 
   it("is deterministic: identical inputs give identical context digests", () => {
@@ -69,6 +85,15 @@ describe("D1 deterministic folio context", () => {
     const folios = input().priorFolios;
     expect(
       compileFolioContext(input({ priorFolios: [folios[0]!] })).contextDigest,
+    ).not.toBe(base);
+    const changedBytes = new TextEncoder().encode("different accepted image bytes");
+    expect(
+      compileFolioContext(input({
+        priorFolios: [{
+          ...folios[0]!,
+          images: [{ ...folios[0]!.images[0]!, bytes: changedBytes, digest: sha256(changedBytes) }],
+        }, folios[1]!],
+      })).contextDigest,
     ).not.toBe(base);
   });
 

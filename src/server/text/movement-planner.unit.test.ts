@@ -21,15 +21,21 @@ function input(overrides: Partial<MovementPlanningInput> = {}): MovementPlanning
   };
 }
 
+function requestText(request: ReturnType<typeof compileMovementPlanningRequest>): string {
+  return request.request.body.messages[0]?.content
+    .flatMap((block) => block.type === "text" ? [block.text] : [])
+    .join("") ?? "";
+}
+
 describe("D3 movement planning request", () => {
   it("compiles one bounded request whose phase instruction matches the book phase", () => {
     const preArc = compileMovementPlanningRequest(input());
-    const preArcText = preArc.request.body.messages[0]?.content[0]?.text ?? "";
+    const preArcText = requestText(preArc);
     expect(preArcText).toContain("next unresolved movement of the source story");
     expect(preArcText).toContain("<movement_brief>");
 
     const postArc = compileMovementPlanningRequest(input({ phase: "root_post_arc" }));
-    const postArcText = postArc.request.body.messages[0]?.content[0]?.text ?? "";
+    const postArcText = requestText(postArc);
     expect(postArcText).toMatch(/changed situation|true ending/i);
     expect(postArcText).toMatch(/new dramatic engine/i);
     expect(postArcText).not.toMatch(/next unresolved movement/i);
@@ -41,14 +47,14 @@ describe("D3 movement planning request", () => {
         phase: "child_first",
       }),
     );
-    const childText = childFirst.request.body.messages[0]?.content[0]?.text ?? "";
+    const childText = requestText(childFirst);
     expect(childText).toMatch(/reference, not (a |its )?(plot )?template/i);
     expect(childText).toMatch(/viewpoint/i);
   });
 
   it("keeps completed movements in order and refuses Undertow in any planning source", () => {
     const compiled = compileMovementPlanningRequest(input());
-    const text = compiled.request.body.messages[0]?.content[0]?.text ?? "";
+    const text = requestText(compiled);
     expect(text).toContain("root-movement-01");
     expect(() =>
       compileMovementPlanningRequest(input({ world: "world with Undertow seed inside" })),

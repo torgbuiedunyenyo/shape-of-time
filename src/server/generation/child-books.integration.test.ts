@@ -62,7 +62,10 @@ function prosePort(label: string) {
       return Promise.resolve({
         content: [
           {
-            text: `<folio_prose>${label} call ${requests.length}. ${PROSE_BODY}</folio_prose>`,
+            text: JSON.stringify({
+              imageDirection: null,
+              proseParagraphs: [`${label} call ${requests.length}. ${PROSE_BODY}`],
+            }),
             type: "text",
           },
         ],
@@ -73,6 +76,12 @@ function prosePort(label: string) {
       });
     },
   };
+}
+
+function requestText(body: FableRequestBody | undefined): string {
+  return (body?.messages[0]?.content ?? [])
+    .flatMap((block) => block.type === "text" ? [block.text] : [])
+    .join("");
 }
 
 function plannerPort(brief: string) {
@@ -157,9 +166,7 @@ describe("D6 dynamic highlight and explicit title creation", () => {
       // The planner ran exactly once, in the child_first phase, and its brief is the book's first
       // movement — an independent premise, not the root brief.
       expect(planner.requests).toHaveLength(1);
-      expect(planner.requests[0]?.messages[0]?.content[0]?.text ?? "").toContain(
-        "founding premise",
-      );
+      expect(requestText(planner.requests[0])).toContain("founding premise");
       expect(child.movementBriefs[0]?.brief).toContain("coin's journey backward");
       expect(child.movementBriefs[0]?.brief).not.toBe(ROOT_BRIEF);
       // A selection aperture row binds the child to its exact source text.
@@ -177,7 +184,7 @@ describe("D6 dynamic highlight and explicit title creation", () => {
       });
       expect(entered.folio.state).toBe("exposed");
       expect(entered.folio.ordinal).toBe(1);
-      const request = childPort.requests[0]?.messages[0]?.content[0]?.text ?? "";
+      const request = requestText(childPort.requests[0]);
       expect(request).toContain(selectedText);
       expect(request).toContain("coin's journey backward");
       expect(request).not.toContain(ROOT_BRIEF);

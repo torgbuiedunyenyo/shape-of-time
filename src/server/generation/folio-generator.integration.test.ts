@@ -29,6 +29,23 @@ const WORLD = "Shape of Time world. One person exists once; every time keeps liv
 const RULES = "Temporal movement is physical travel along mapped currents.";
 const PROSE_BODY = Array.from({ length: 140 }, (_, index) => `word${index}`).join(" ");
 
+function imageDirection(label: string) {
+  return {
+    concreteScene: `${label}: a concrete scene with the people and material evidence in view.`,
+    factLeftToImage: `${label}: the physical relationship the prose deliberately leaves visible.`,
+    mustRemain: [`${label}: preserve established people and place.`],
+    narrativeJob: `${label}: establish a new fact through the plate.`,
+    purposefulChanges: [`${label}: show the situation after this folio's change.`],
+    unresolvedFacts: [`${label}: do not invent anything the story leaves open.`],
+  };
+}
+
+function requestText(body: FableRequestBody | undefined): string {
+  return (body?.messages[0]?.content ?? [])
+    .flatMap((block) => block.type === "text" ? [block.text] : [])
+    .join("");
+}
+
 beforeAll(async () => {
   container = await new PostgreSqlContainer("postgres:18.4-alpine")
     .withDatabase("shape_of_time")
@@ -48,7 +65,7 @@ afterAll(async () => {
   await rm(assetRoot, { force: true, recursive: true });
 });
 
-function countingProsePort(options: { failOnCall?: number; label: string }) {
+function countingProsePort(options: { failOnCall?: number; label: string; textLed?: boolean }) {
   const requests: FableRequestBody[] = [];
   return {
     requests,
@@ -71,7 +88,10 @@ function countingProsePort(options: { failOnCall?: number; label: string }) {
       return Promise.resolve({
         content: [
           {
-            text: `<folio_prose>${options.label} call ${call}. ${PROSE_BODY}</folio_prose>`,
+            text: JSON.stringify({
+              imageDirection: options.textLed ? null : imageDirection(`${options.label}-${call}`),
+              proseParagraphs: [`${options.label} call ${call}. ${PROSE_BODY}`],
+            }),
             type: "text",
           },
         ],
@@ -142,6 +162,27 @@ describe("D3 pagewise generation on a real database", () => {
       const exposed = await repository.exposeFolio(folio.id);
       expect(exposed.state).toBe("exposed");
       expect(exposed.prose).toBe(folio.prose);
+    },
+    60_000,
+  );
+
+  it(
+    "treats a Fable text-led result as a complete folio without buying a decorative image",
+    async () => {
+      const book = await createTestBook("Text-led D3", "This is the root book of the library.");
+      const prosePort = countingProsePort({ label: "text-led", textLed: true });
+      const imagePort = countingImagePort();
+      const { folio } = await generateNextFolio(dependencies(prosePort, imagePort), {
+        bookId: book.id,
+        movementId: "movement-01",
+        ordinal: 1,
+        workerId: "worker-a",
+      });
+
+      expect(folio.state).toBe("ready");
+      expect(folio.requiredAssetIds).toEqual([]);
+      expect(folio.layout?.["kind"]).toBe("text-led");
+      expect(imagePort.calls).toEqual([]);
     },
     60_000,
   );
@@ -259,10 +300,10 @@ describe("D3 pagewise generation on a real database", () => {
         workerId: "worker-a",
       });
       expect(generatedA.folio.state).toBe("ready");
-      const requestText = portA.requests[0]?.messages[0]?.content[0]?.text ?? "";
-      expect(requestText).toContain("the till drawer full of unfamiliar coin");
-      expect(requestText).not.toContain("SIBLING-B-SENTINEL");
-      expect(requestText).not.toContain("the ferry lights crossing the estuary");
+      const childRequest = requestText(portA.requests[0]);
+      expect(childRequest).toContain("the till drawer full of unfamiliar coin");
+      expect(childRequest).not.toContain("SIBLING-B-SENTINEL");
+      expect(childRequest).not.toContain("the ferry lights crossing the estuary");
     },
     60_000,
   );
@@ -292,7 +333,7 @@ describe("D3 pagewise generation on a real database", () => {
         workerId: "worker-a",
       });
       expect(second.folio.state).toBe("ready");
-      const secondRequest = prosePort.requests[1]?.messages[0]?.content[0]?.text ?? "";
+      const secondRequest = requestText(prosePort.requests[1]);
       // The new movement's request sees the exposed folio once as history and the new brief once.
       expect(secondRequest.split("boundary call 1.").length - 1).toBe(1);
       expect(secondRequest).toContain("The journey to Tan's time");

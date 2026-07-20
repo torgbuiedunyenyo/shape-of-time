@@ -1,8 +1,9 @@
 import { randomUUID } from "node:crypto";
 
 import type { AssetStore } from "../assets/asset-store.js";
-import { sha256 } from "../domain/digests.js";
+import { canonicalJson, sha256 } from "../domain/digests.js";
 import type { NarrativeImagePort } from "../generation/folio-generator.js";
+import type { FableImageDirection } from "../text/folio-output.js";
 import {
   compileImageRequest,
   type ImageReference,
@@ -32,6 +33,7 @@ export class NarrativeImageAdapter implements NarrativeImagePort {
   async generate(input: {
     contextDigest: string;
     folioOrdinal: number;
+    imageDirection: FableImageDirection;
     priorImages: readonly {
       altText: string;
       assetId: string;
@@ -39,15 +41,12 @@ export class NarrativeImageAdapter implements NarrativeImagePort {
       mediaType: string;
       objectKey: string;
     }[];
-    prose: string;
   }): Promise<{ altText: string; bytes: Uint8Array; mediaType: string }> {
-    // The pinned contract admits edits only with two to five ordered references and explicit
-    // required anchors. With fewer than two eligible priors the honest request is a generation:
-    // the contract is not widened to fake continuity it cannot bind. The most recent five
-    // eligible priors are the reference pack, and each doubles as its own required anchor.
+    // The most recent five eligible book-local images are the ordered reference pack. One prior
+    // image is already useful continuity evidence and the pinned B1 contract supports one to five.
     const eligible = input.priorImages.slice(-5);
     const references: ImageReference[] = [];
-    for (const [index, prior] of (eligible.length >= 2 ? eligible : []).entries()) {
+    for (const [index, prior] of eligible.entries()) {
       const bytes = await this.#assetStore.get(prior.objectKey);
       if (sha256(bytes) !== prior.digest) {
         throw new Error(`prior narrative image ${prior.assetId} failed digest verification`);
@@ -75,14 +74,20 @@ export class NarrativeImageAdapter implements NarrativeImagePort {
       });
     }
 
-    const prompt =
-      `Narrative illustration for folio ${input.folioOrdinal} of a Shape of Time volume. ` +
-      "Depict the scene the writer set down, faithful to its concrete details, cast, light, " +
-      "and mood. No text, lettering, panels, or borders in the image.\n\n" +
-      `${input.prose}\n\n` +
-      (references.length === 0
-        ? "This is the book's first narrative image; establish its visual world."
-        : "Maintain strict visual continuity with the prior narrative images supplied as references: the same medium, palette discipline, recurring people, and places.");
+    const prompt = [
+      "FABLE IMAGE DIRECTION — CANONICAL JSON, UNCHANGED",
+      canonicalJson(input.imageDirection),
+      "",
+      "APPLICATION SCOPE AND TECHNICAL GUIDANCE",
+      "Produce one opaque portrait plate for an adult illustrated novel or artist's folio.",
+      "The Fable direction above is narrative authority. Do not rewrite, summarize, or add story facts to it.",
+      "Use one composed observational scene, varied ink, restrained transparent color, tactile paper, natural perspective, and concrete faces and hands.",
+      "Include no caption, logo, speech balloon, panel border, or readable text.",
+      "Avoid portals, glowing time effects, cosmic effects, generic science-fiction shorthand, and duplicate people.",
+      references.length === 0
+        ? "Establish this book's visual world without borrowing people, place, objects, palette, or composition from another book."
+        : "Use the ordered prior images only for book-local continuity. Preserve recurring identities and material world while following Fable's purposeful changes; do not recreate an earlier composition.",
+    ].join("\n");
 
     const request: ImageRequest =
       references.length === 0
@@ -115,9 +120,8 @@ export class NarrativeImageAdapter implements NarrativeImagePort {
     if (sha256(result.bytes) !== result.digest || result.bytes.byteLength === 0) {
       throw new Error("narrative image result failed digest verification");
     }
-    const firstSentence = input.prose.split(/(?<=[.!?])\s/)[0] ?? input.prose;
     return {
-      altText: `Narrative image, folio ${input.folioOrdinal}: ${firstSentence.slice(0, 140)}`,
+      altText: input.imageDirection.concreteScene.slice(0, 280),
       bytes: result.bytes,
       mediaType: result.mediaType,
     };

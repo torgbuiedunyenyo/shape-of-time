@@ -16,7 +16,6 @@ import { generateNextFolio, type NarrativeImagePort } from "./folio-generator.js
 import {
   measurePreparationEconomy,
   prepareOnExposure,
-  prepareSuggestedAperture,
 } from "./preparation.js";
 
 let container: StartedPostgreSqlContainer;
@@ -60,7 +59,9 @@ function countingProsePort(options: { failOrdinals?: number[] } = {}) {
     send: (body: FableRequestBody) => {
       requests.push(body);
       calls += 1;
-      const text = body.messages[0]?.content[0]?.text ?? "";
+      const text = body.messages[0]?.content
+        .flatMap((block) => block.type === "text" ? [block.text] : [])
+        .join("") ?? "";
       const wanted = /This is folio (\d+)/.exec(text);
       const ordinal = wanted === null ? 0 : Number(wanted[1]);
       if ((options.failOrdinals ?? []).includes(ordinal)) {
@@ -74,7 +75,13 @@ function countingProsePort(options: { failOrdinals?: number[] } = {}) {
       }
       return Promise.resolve({
         content: [
-          { text: `<folio_prose>Prepared ordinal ${ordinal}. ${PROSE_BODY}</folio_prose>`, type: "text" },
+          {
+            text: JSON.stringify({
+              imageDirection: null,
+              proseParagraphs: [`Prepared ordinal ${ordinal}. ${PROSE_BODY}`],
+            }),
+            type: "text",
+          },
         ],
         id: `msg_prep_${calls}`,
         model: "claude-fable-5",
@@ -108,7 +115,7 @@ function deps(prosePort: ReturnType<typeof countingProsePort>) {
 
 describe("D5 preparation during reading time", () => {
   it(
-    "on exposure durably prepares next and second-next, and the reader's turn is a cache hit",
+    "on exposure durably prepares only the next folio, and the reader's turn is a cache hit",
     async () => {
       const book = await makeBook("Prep root");
       const port = countingProsePort();
@@ -122,12 +129,12 @@ describe("D5 preparation during reading time", () => {
 
       const prepared = await prepareOnExposure(deps(port), {
         bookId: book.id,
-        budget: { horizon: 2, maxConcurrentPreparations: 2 },
+        budget: { horizon: 1 },
         exposedOrdinal: 1,
         movementId: "movement-01",
         workerId: "prep-worker",
       });
-      expect(prepared.prepared.map((entry) => entry.ordinal).sort()).toEqual([2, 3]);
+      expect(prepared.prepared.map((entry) => entry.ordinal)).toEqual([2]);
 
       // The reader turns the page: same idempotency namespace, so the turn buys nothing.
       const callsBeforeTurn = port.requests.length;
@@ -160,7 +167,7 @@ describe("D5 preparation during reading time", () => {
 
       const input = {
         bookId: book.id,
-        budget: { horizon: 2, maxConcurrentPreparations: 2 },
+        budget: { horizon: 1 as const },
         exposedOrdinal: 1,
         movementId: "movement-01",
       };
@@ -168,13 +175,13 @@ describe("D5 preparation during reading time", () => {
         prepareOnExposure(deps(port), { ...input, workerId: "prep-a" }),
         prepareOnExposure(deps(port), { ...input, workerId: "prep-b" }),
       ]);
-      // Two ordinals were needed; exactly two generations happened across both preparers.
-      expect(port.requests.length - callsBefore).toBe(2);
+      // Only the immediately next ordinal is eligible; concurrent exposure events spend once.
+      expect(port.requests.length - callsBefore).toBe(1);
       const spentOrdinals = [...a.prepared, ...b.prepared]
         .filter((entry) => entry.spent)
         .map((entry) => entry.ordinal)
         .sort();
-      expect(spentOrdinals).toEqual([2, 3]);
+      expect(spentOrdinals).toEqual([2]);
     },
     60_000,
   );
@@ -194,7 +201,7 @@ describe("D5 preparation during reading time", () => {
 
       const prepared = await prepareOnExposure(deps(port), {
         bookId: book.id,
-        budget: { horizon: 2, maxConcurrentPreparations: 2 },
+        budget: { horizon: 1 },
         exposedOrdinal: 1,
         movementId: "movement-01",
         workerId: "prep-worker",
@@ -223,38 +230,6 @@ describe("D5 preparation during reading time", () => {
   );
 
   it(
-    "prepares a visible suggested aperture's target book to its first ready folio, idempotently",
-    async () => {
-      const child = await repository.createBook({
-        firstMovement: { brief: "A book about the till drawer's travels.", id: "movement-01" },
-        origin: { statement: "Founded from the passage: 'the till drawer full of unfamiliar coin'." },
-        title: "The Till Drawer",
-      });
-      const port = countingProsePort();
-
-      const result = await prepareSuggestedAperture(deps(port), {
-        targetBookId: child.id,
-        workerId: "prep-worker",
-      });
-      expect(result.folio.state).toBe("ready");
-      expect(result.folio.bookId).toBe(child.id);
-      // The child's request grew from its own founding premise, not any parent page.
-      const childRequest = port.requests.at(-1)?.messages[0]?.content[0]?.text ?? "";
-      expect(childRequest).toContain("till drawer full of unfamiliar coin");
-
-      // A second visibility event buys nothing.
-      const callsBefore = port.requests.length;
-      const again = await prepareSuggestedAperture(deps(port), {
-        targetBookId: child.id,
-        workerId: "prep-worker",
-      });
-      expect(again.spent).toBe(false);
-      expect(port.requests.length).toBe(callsBefore);
-    },
-    60_000,
-  );
-
-  it(
     "measures prepared-hit rate and waste from the ledger alone",
     async () => {
       const book = await makeBook("Prep economy");
@@ -268,7 +243,7 @@ describe("D5 preparation during reading time", () => {
       await repository.exposeFolio(first.folio.id);
       await prepareOnExposure(deps(port), {
         bookId: book.id,
-        budget: { horizon: 2, maxConcurrentPreparations: 2 },
+        budget: { horizon: 1 },
         exposedOrdinal: 1,
         movementId: "movement-01",
         workerId: "prep-worker",
@@ -281,6 +256,13 @@ describe("D5 preparation during reading time", () => {
         workerId: "reader",
       });
       await repository.exposeFolio(turn.folio.id);
+      await prepareOnExposure(deps(port), {
+        bookId: book.id,
+        budget: { horizon: 1 },
+        exposedOrdinal: 2,
+        movementId: "movement-01",
+        workerId: "prep-worker",
+      });
 
       const economy = await measurePreparationEconomy(repository, book.id);
       expect(economy.readyOrExposed).toBeGreaterThanOrEqual(3);
