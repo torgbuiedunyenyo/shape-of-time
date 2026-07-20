@@ -38,8 +38,9 @@ _Updated 2026-07-19._
 - B1 is complete. The exact GPT Image 2 request adapter, required-anchor/reference compiler, strict
   opaque-PNG response validator, replay v2, durable one-dispatch journal, and external recovery path
   pass the complete repository gate and three final independent adversarial reviews.
-- The first two Fable-authored folios, Payment and The gift, plus the Payment plate are accepted into
-  private editorial progress. Current C0 progress is 2/10 folios and 1/4 plates. The remaining
+- The first three Fable-authored folios, Payment, The gift, and The band, plus the Payment and Band
+  plates are accepted into private editorial progress. Current C0 progress is 3/10 folios and 2/4
+  plates. The remaining
   working 8+2 prose in `content/reader-first/slice.json` is still an editorial draft, not accepted
   production content.
   Treatment B remains the shared medium rather than a source of characters, place, palette, or
@@ -122,7 +123,13 @@ _Updated 2026-07-19._
   from the immutable response. The operational hard stop now remains narrow at 260 while the
   prompt/layout target remains 120–250, and the runner permanently writes a provider-complete
   candidate before applying that editorial check. The text-only acceptance path appended it without
-  an image digest. C0 Fable provider calls executed: two; accepted prose folios: two.
+  an image digest.
+  The band followed under exact operation manifest
+  `32465d99ec4aadacd9d22139aaf8308c55ba539364c67f60bd32fff572c98d48` and 16,108 officially
+  counted input tokens. Fable returned 234 words plus one image direction with exact model/effort and
+  `end_turn`; candidate `07cf1a49a80a945d2c6e97ad1ed4ff255de214e68e67bad312da5bf96634d613`,
+  usage-derived estimate `$0.400230`. C0 Fable provider calls executed: three; accepted prose
+  folios: three.
 - The exact GPT Image 2 route is the existing direct Image API adapter and journal. It proves the
   requested `gpt-image-2-2026-04-21` snapshot, request ID, usage, latency, and output digest; the API
   exposes no served-model field. The Codex image-generation tool cannot prove that contract and must
@@ -149,10 +156,16 @@ _Updated 2026-07-19._
   once, and acceptance preflights the next global folio before writing its fixed immutable path.
   Neither provider key is exported into the current process. A read-only Railway variable-name audit
   confirmed both names on the designated production service, but the OpenAI value is invalid and must
-  not be used for C0. C0 image dispatch attempts: one pre-generation credential rejection, one
-  completed editorial rejection, and one completed acceptance. Accepted C0 narrative images: one.
-  The six-operation image ceiling therefore has exactly three undispatched slots left, one for each
-  remaining required plate; there is no repair headroom under the current ceiling.
+  not be used for C0.
+  The Band plate then completed in one dispatch with Payment as its sole narrative continuity
+  reference: operation `cf492bb5edff409266b3d82c7ff94854d14230705bf2f5d6332a81b3e49640f1`,
+  provider request `req_72ab756044b34ffd94310b3b51bec1ad`, output
+  `93b388838c3dd73c94ce61658e4df8fc00eb1e166e8a425a5b3b65bdd7d2f2c4`, and `$0.056818`
+  usage-derived estimate. Reading-size review passed identity, medium, relationship change, coherent
+  band, and the unnoticed ordinary recorder that performs the plate's narrative job. Acceptance
+  digest `867bb9f056cf01fc30677d1d7f1ab0c772bb96de0cc1f9ec480ad12c4bf4ed92`.
+  C0 image dispatch attempts: four; accepted C0 narrative images: two. The two remaining slots are
+  exactly the root Map and Lagos terminal wall, with no repair headroom.
 
 ## Reorganization record
 
@@ -430,11 +443,12 @@ Postgres, and image storage.
 
 ## Spend and deployment
 
-- C0 text-generation spend: two Fable calls, usage-derived estimates `$0.370920` and `$0.278350`,
-  aggregate `$0.649270`; the provider bill was not separately queried.
+- C0 text-generation spend: three Fable calls, usage-derived estimates `$0.370920`, `$0.278350`,
+  and `$0.400230`, aggregate `$1.049500`; the provider bill was not separately queried.
 - C0 narrative-image spend: the rejected Payment v2 estimate is `$0.056578` and accepted Payment v3
-  is `$0.057068`, for `$0.113646` across two completed outputs; the credential-rejected attempt
-  returned no usage or reported cost. Known C0 text-plus-image estimate is `$0.762916`.
+  is `$0.057068`, plus accepted Band `$0.056818`, for `$0.170464` across three completed outputs;
+  the credential-rejected attempt returned no usage or reported cost. Known C0 text-plus-image
+  estimate is `$1.219964`.
 - Image-generation provider bill: not reported by the Image API. B1 authorized exactly two calls
   within a `$0.10` request-scope bound. Captured usage and the 2026-07-19 standard rates yield an
   estimated total of `$0.028649` (`$0.011760` image output, `$0.016384` image input, and `$0.000505`
@@ -491,13 +505,11 @@ Postgres, and image storage.
 
 ## Next action
 
-Commit and push The gift's provider-result preservation repair and accepted evidence. Then dispatch
-the already prepared `root-folio-03` (`The band`) Fable operation exactly once after reviewing
-request-manifest digest `32465d99ec4aadacd9d22139aaf8308c55ba539364c67f60bd32fff572c98d48`.
-Its request contains Payment prose, the actual accepted Payment PNG, and The gift prose in exact
-order; it is pinned to Fable 5, xhigh, and `max_tokens: 32768`. Review the prose and Fable image
-direction before preparing The band's one remaining image call with Payment as its sole narrative
-continuity reference. Never dispatch the frozen Stage 1 operation or substitute the Codex
-image-generation tool. Replace the draft fixture, add production provenance and digest-named WebPs,
-pass the content verifier, then perform the complete C1 consecutive read and every-feature in-app
-Browser walkthrough before D0.
+Commit and push The band prose/plate acceptance evidence. Then dispatch the already prepared
+`root-folio-04` (`Your tomorrow or mine`) Fable operation exactly once after reviewing request-manifest
+digest `418a98198e7381479dec488a674bb31319b7bcf33d617100323e05b9d5884a7a`. Its request contains the
+three accepted prose folios and both actual accepted plates interleaved in exact story order; it is
+pinned to Fable 5, xhigh, and `max_tokens: 32768`. Continue the sequential 8+2 chain. Never dispatch
+the frozen Stage 1 operation or substitute the Codex image-generation tool. Replace the draft fixture,
+add production provenance and digest-named WebPs, pass the content verifier, then perform the complete
+C1 consecutive read and every-feature in-app Browser walkthrough before D0.

@@ -2,7 +2,7 @@
 
 Date: 2026-07-19 (America/Los_Angeles)
 
-Status: **IN PROGRESS — 2/10 folios and 1/4 plates accepted.** This is bounded editorial
+Status: **IN PROGRESS — 3/10 folios and 2/4 plates accepted.** This is bounded editorial
 authoring for the checked-in reader slice, not dynamic reader generation and not D0/D1 completion.
 
 ## Fixed contract and ceiling
@@ -58,13 +58,47 @@ tour-coach bay make Oakland's visitor economy concrete without a lecture. The fi
 forward motion. The title is direct, the referents are clear, and the page contains no temporal
 cliché, invented thematic label, narrator self-grading, or pseudo-literary close.
 
+## Accepted folio 3 — The band
+
+- Fable operation manifest:
+  `32465d99ec4aadacd9d22139aaf8308c55ba539364c67f60bd32fff572c98d48`
+- Official input count: 16,108 tokens
+- Provider message/request: `msg_011CdCSFkCp6QoR9TkmRubGQ` /
+  `req_011CdCSFi3aiy9h2xS3JMknQ`
+- Result: 234 words plus one image direction; `end_turn`
+- Candidate: `07cf1a49a80a945d2c6e97ad1ed4ff255de214e68e67bad312da5bf96634d613`
+- Message latency: 62.217 seconds
+- Usage-derived text estimate: `$0.400230`
+
+Editorial judgment: accept. Tan recognizes the next phrase of an uncredited Oakland recording; Jay
+asks whether the musicians in front of them receive any of its revenue; Tan admits she never asked.
+Their growing physical ease and pleasure in the set remain present, so the question does not flatten
+the page into a lesson. The title is direct and the prose is concrete and causally legible.
+
+The Band image used one exact Payment reference for Jay/Tan identity and the exposed root-book visual
+world. Dry-run operation digest:
+`cf492bb5edff409266b3d82c7ff94854d14230705bf2f5d6332a81b3e49640f1`;
+manifest `8f4f045e5a6a7468455ab259127f757b7f077868deba92105cee5fab4585b34d`.
+One GPT Image 2 dispatch completed under provider request
+`req_72ab756044b34ffd94310b3b51bec1ad`, output
+`93b388838c3dd73c94ce61658e4df8fc00eb1e166e8a425a5b3b65bdd7d2f2c4`, and a
+`$0.056818` usage-derived estimate.
+
+Reading-size review passed the single result. Jay and Tan remain recognizable in the same restrained
+ink-and-transparent-color medium; their relationship has moved physically from counter separation
+to ease in a crowd; the four-piece band is coherent; and an ordinary recorder at the room's edge
+alone reveals the extraction withheld from the prose. There are no glowing effects, panels, captions,
+or generic science-fiction cues. Acceptance digest:
+`867bb9f056cf01fc30677d1d7f1ab0c772bb96de0cc1f9ec480ad12c4bf4ed92`.
+
 ## Running spend and next operation
 
-Two Fable calls have an aggregate usage-derived estimate of `$0.649270`. Known C0 text plus the two
-completed Payment image outputs is `$0.762916`; provider billing was not separately queried.
+Three Fable calls have an aggregate usage-derived estimate of `$1.049500`. Known C0 text plus the
+three completed narrative-image outputs is `$1.219964`; provider billing was not separately queried.
+Four of six image operations have been consumed: one credential rejection, one Payment visual
+rejection, and two accepted plates. The two remaining operations are reserved exactly for the root
+Map and Lagos terminal wall; no repair headroom remains.
 
-`root-folio-03` (`The band`) is prepared, not dispatched, under request-manifest digest
-`32465d99ec4aadacd9d22139aaf8308c55ba539364c67f60bd32fff572c98d48`. Its exact request contains
-Payment prose, the actual accepted Payment PNG immediately after that prose, and The gift prose in
-order. It calls for a new image direction and will use Payment as the sole narrative continuity
-reference if the prose candidate passes editorial review.
+`root-folio-04` (`Your tomorrow or mine`) is prepared, not dispatched, under request-manifest digest
+`418a98198e7381479dec488a674bb31319b7bcf33d617100323e05b9d5884a7a`. Its exact request interleaves
+Payment prose and plate, The gift prose, and Band prose and plate in story order.
