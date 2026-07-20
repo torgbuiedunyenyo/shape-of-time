@@ -2,7 +2,7 @@
 
 > **Status:** A0 authority, A1 architecture, A2 application/Railway spine, B0 movement topology,
 > B1 image/recovery contract, and Treatment B medium selection are complete and frozen.
-> **CURRENT ITEM: C0 — reader-first vertical slice.**
+> **CURRENT ITEM: C1 — in-app Browser and consecutive-reading delight gate.**
 
 This is the dependency-ordered work queue for a small illustrated hyperbook. It intentionally does
 not inherit code, data, schemas, corpus, or compatibility obligations from `auto-biblio`. Git in the
@@ -331,7 +331,7 @@ plan remains historical dry-run evidence and must not dispatch. A targeted conti
 permitted only when the actual plates show an identity, place, object, or purposeful-change problem.
 There is no `anchors.json` prerequisite.
 
-### C0 — Build the reader-first vertical slice **[CURRENT]**
+### C0 — Build the reader-first vertical slice **[DONE]**
 
 **Depends on:** B0, B1, Treatment B medium.
 
@@ -373,7 +373,7 @@ the prose withholds; the Map child opens instantly and returns to the exact phra
 turn and reload; all reader mechanics work without network or paid calls. The slice reaches real
 resting points without pretending the books end.
 
-### C1 — Pass the reader-first delight gate
+### C1 — Pass the reader-first delight gate **[CURRENT]**
 
 **Depends on:** C0.
 

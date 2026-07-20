@@ -9,11 +9,12 @@ _Updated 2026-07-19._
 - Active isolated worktree: `/Users/ratpartyserver/git/shape-of-time-reader-first`.
 - Authority checkpoint: `8fafde0`; another agent may be working in the `main` checkout, which this
   worktree must not modify.
-- **CURRENT ITEM: C0 — Build the reader-first vertical slice.** Reader mechanics and a deliberately unaccepted
-  working content fixture are in flight in this worktree. They are not C0 completion evidence.
-- The current C0 checkpoint passes 68 non-acceptance content/architecture tests, 116 unit tests, 20
-  real-Postgres integration tests, 11 built-reader browser regressions, lint, typecheck, and
-  production build under Node 24.18.0. The two production-content tests remain deliberately red.
+- **CURRENT ITEM: C1 — Pass the reader-first delight gate.** C0 is complete; the final accepted 8+2
+  prose and four narrative plates are assembled in the file-backed reader. The complete hands-on
+  in-app Browser and consecutive-reading walkthrough is next.
+- C0 passes 72 content/architecture tests, 117 unit tests, 20 real-Postgres integration tests, 11
+  built-reader browser regressions, lint, typecheck, and production build under Node 24.18.0. The
+  browser gate used isolated Postgres port 55434 because another agent's worktree owns 55432.
 - Genesis commit: `7f7b5b112140db7ecb0bc2a85f28a0f38adda441`.
 - The repository has been separated from the retired `auto-biblio` implementation.
 - The initial authority, verified expanded world source, source provenance, and implementation queue
@@ -38,13 +39,13 @@ _Updated 2026-07-19._
 - B1 is complete. The exact GPT Image 2 request adapter, required-anchor/reference compiler, strict
   opaque-PNG response validator, replay v2, durable one-dispatch journal, and external recovery path
   pass the complete repository gate and three final independent adversarial reviews.
-- All eight Fable-authored root folios, Payment through Jay says yes, and the first child folio, The
-  licensed route, plus the Payment, Band, and Map plates are accepted into private editorial
-  progress. Current C0 progress is 9/10 folios and 3/4 plates. The remaining
-  working 8+2 prose in `content/reader-first/slice.json` is still an editorial draft, not accepted
-  production content.
-  Treatment B remains the shared medium rather than a source of characters, place, palette, or
-  composition. No narrative slice asset has been published to the Railway bucket.
+- All eight Fable-authored root folios, both Map child folios, and all four required plates are
+  accepted into private editorial progress. The exact accepted prose, four named mechanical
+  copyedits, one narrowly recovered image-direction field, and four lossless digest-named WebPs are
+  assembled in `content/reader-first/slice.json`; `production-manifest.json` binds them to the
+  immutable private evidence. Treatment B remains the shared medium rather than a source of
+  characters, place, palette, or composition. No narrative slice asset has been published to the
+  Railway bucket.
 
 ## C0 reader-first slice in flight
 
@@ -70,13 +71,13 @@ _Updated 2026-07-19._
   tests, 110 unit tests, 20 real-Postgres integration tests, and 11 built-reader browser tests plus
   lint, typecheck, and production build. Two historical B2 filesystem orchestration tests received
   15-second per-test ceilings after the complete unit run proved their former 5-second limit flaky;
-  their assertions are unchanged. The two C0 production-content tests remain deliberately red.
+  their assertions are unchanged.
 - Early in-app Browser inspection found the Library, desktop reader, and mobile reader visually
   coherent; it directly verified exact block resume and modal key containment after repair. This is
   development evidence only, not the complete C1 or D6 walkthrough.
-- `scripts/verify-reader-first-content.test.mjs` remains intentionally red because
-  `content/reader-first/production-manifest.json` and all four final WebP plates are absent. The four
-  current plate URLs 404 and their alt text is explicitly draft text. C0 cannot pass in this state.
+- `scripts/verify-reader-first-content.test.mjs` now validates the ten final prose digests, exact
+  copyedits, direction recovery, accepted provider-output evidence, ordered visual references, and
+  four lossless digest-named WebP derivatives. The reader source resolves those exact asset URLs.
 - The earlier Claude Code CLI proposal was rejected before dispatch. Although it could supply actual
   prior images, it could not prove the provider-counted pre-spend boundary or exact 32,768-token
   output maximum required by SPEC. C0 now uses a minimal direct Messages API request path shared
@@ -103,9 +104,11 @@ _Updated 2026-07-19._
   along with lint
   and typecheck.
 - The written C0 ceiling is eleven direct Fable operations at a `$2.00` worst-case projected maximum
-  each and `$22.00` aggregate, plus six GPT Image 2 operations at a `$0.10` request-scope estimate
-  each and `$0.60` aggregate. Four operations are for the required plates; the two bounded repair
-  slots exist only after a preserved visual rejection and a newly inspected dry run.
+  each and `$22.00` aggregate, plus seven GPT Image 2 operations at a `$0.10` request-scope estimate
+  each and `$0.70` aggregate. The seventh image operation was authorized only after preserving a
+  concrete terminal-wall rejection: an “idea-only” root Map reference still transferred Tan's face,
+  hair, jacket, and silhouette into Eniola. Its one repair removes that abstract parent reference and
+  uses only the approved medium reference; no further repair operation exists.
   The first Fable operation was dispatched exactly once at private path
   `/Users/ratpartyserver/git/shape-of-time-c0-authoring/fable/01-root-folio-01-1630c5df2f00`;
   request-manifest digest `1630c5df2f00914bcea58076859c66257cfa41ce3ca6a578de841b8480c590ec`.

@@ -88,29 +88,21 @@ const CONTRACTS = {
   "plate-map-terminal-wall": {
     applicationGuidance: [
       MEDIUM_ONLY_GUIDANCE,
-      "Image 2 governs only the narrow parent-inheritance idea of mapped evidence crossing from private control into public use.",
-      "Do not transfer Jay, Tan, Oakland, the root palette, or either reference composition into Lagos. Center Eniola and the local terminal described by Fable.",
+      "Center Eniola and the local Lagos terminal described by Fable; do not transfer Jay, Tan, Oakland, or the reference scene's people, place, objects, palette, or composition.",
+      "Make Eniola visually distinct from every root-book person, with her own face, hair, clothes, and local working presence.",
+      "Make the three traces, their disagreement at the crossing, and the evidence attached to each trace visually clear, but render every name, time, order, notice, departure-board entry, and stop label only as non-decipherable marks, with no literal words or numerals.",
       COMMON_APPLICATION_GUIDANCE,
     ].join("\n"),
     bookId: "map-on-the-wall",
     folioId: "map-folio-02",
-    idempotencyKey: "c0-reader-first-plate-map-terminal-wall-v1",
-    referenceRules: [
-      {
-        assetId: "treatment-b-medium",
-        digest: TREATMENT_B_DIGEST,
-        kind: "human-approved-medium",
-        role: "shared-medium-only",
-        scope: "shared-medium-only",
-      },
-      {
-        assetId: "plate-root-map",
-        kind: "exposed-folio-image",
-        role: "parent-map-evidence-idea-only",
-        scope: "book-local",
-        sourcePlateId: "plate-root-map",
-      },
-    ],
+    idempotencyKey: "c0-reader-first-plate-map-terminal-wall-identity-repair-v2",
+    referenceRules: [{
+      assetId: "treatment-b-medium",
+      digest: TREATMENT_B_DIGEST,
+      kind: "human-approved-medium",
+      role: "shared-medium-only",
+      scope: "shared-medium-only",
+    }],
   },
 };
 

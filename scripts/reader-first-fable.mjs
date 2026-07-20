@@ -483,6 +483,40 @@ function validateStructuredOutput(value) {
   return value;
 }
 
+function validateStructuredOutputWithRecovery(value, directionRecovery) {
+  if (directionRecovery === undefined) return validateStructuredOutput(value);
+  exactKeys(
+    directionRecovery,
+    ["version", "kind", "targetField", "sourceField", "sourceIndex", "sourceSha256"],
+    "Fable direction recovery",
+  );
+  if (
+    directionRecovery.version !== 1
+    || directionRecovery.kind !== "copy-purposeful-change-to-empty-narrative-job-v1"
+    || directionRecovery.targetField !== "narrativeJob"
+    || directionRecovery.sourceField !== "purposefulChanges"
+    || directionRecovery.sourceIndex !== 0
+  ) {
+    throw new Error("unsupported Fable direction recovery");
+  }
+  requireDigest(directionRecovery.sourceSha256, "Fable direction recovery source");
+  const direction = value?.imageDirection;
+  if (direction === null || typeof direction !== "object" || Array.isArray(direction)) {
+    throw new Error("Fable direction recovery requires one image direction");
+  }
+  if (direction.narrativeJob !== "") {
+    throw new Error("Fable direction recovery requires an empty narrativeJob");
+  }
+  const source = direction.purposefulChanges?.[0];
+  if (typeof source !== "string" || source.trim() === ""
+    || sha256(source) !== directionRecovery.sourceSha256) {
+    throw new Error("Fable direction recovery source mismatch");
+  }
+  const recovered = structuredClone(value);
+  recovered.imageDirection.narrativeJob = source;
+  return validateStructuredOutput(recovered);
+}
+
 function usageInteger(usage, key, { positive = false } = {}) {
   const value = usage?.[key] ?? 0;
   if (!Number.isSafeInteger(value) || value < 0 || (positive && value === 0)) {
@@ -491,7 +525,7 @@ function usageInteger(usage, key, { positive = false } = {}) {
   return value;
 }
 
-export function extractSuccessfulMessage({ providerRequestId, response }) {
+export function extractSuccessfulMessage({ providerRequestId, response, directionRecovery }) {
   if (typeof providerRequestId !== "string" || providerRequestId.trim() === "") {
     throw new Error("provider message request id is required");
   }
@@ -519,7 +553,7 @@ export function extractSuccessfulMessage({ providerRequestId, response }) {
   } catch {
     throw new Error("Fable text block is not valid JSON");
   }
-  const output = validateStructuredOutput(parsed);
+  const output = validateStructuredOutputWithRecovery(parsed, directionRecovery);
   const inputTokens = usageInteger(response.usage, "input_tokens", { positive: true });
   const cacheCreationInputTokens = usageInteger(response.usage, "cache_creation_input_tokens");
   const cacheReadInputTokens = usageInteger(response.usage, "cache_read_input_tokens");
@@ -726,6 +760,7 @@ export async function validateCandidateEvidenceChain({ archiveRoot, candidate, c
     "providerMessageId", "providerRequestId", "providerResponseSha256", "usage",
     "estimatedCostUsd", "output", "evidence",
   ];
+  if (Object.hasOwn(candidate, "directionRecovery")) candidateKeys.push("directionRecovery");
   requireExactKeys(candidate, candidateKeys, "candidate evidence chain");
   if (path.basename(candidateFile.path) !== "candidate.json") {
     throw new Error("candidate evidence chain must use candidate.json");
@@ -899,6 +934,7 @@ export async function validateCandidateEvidenceChain({ archiveRoot, candidate, c
   }
   const providerResponse = parsedJson(providerResponseFile.bytes, "provider response");
   const extracted = extractSuccessfulMessage({
+    directionRecovery: candidate.directionRecovery,
     providerRequestId: candidate.providerRequestId,
     response: providerResponse,
   });
@@ -1346,6 +1382,7 @@ export function validateCandidateForFolio(
 export function buildFableCandidateRecord({
   admission,
   compiled,
+  directionRecovery,
   extracted,
   folioId,
   messageLatencyMs,
@@ -1355,7 +1392,7 @@ export function buildFableCandidateRecord({
   if (!Number.isFinite(messageLatencyMs) || messageLatencyMs < 0) {
     throw new Error("candidate message latency is invalid");
   }
-  return {
+  const record = {
     version: 2,
     bookId: compiled.manifest.bookId,
     folioId,
@@ -1379,6 +1416,10 @@ export function buildFableCandidateRecord({
       stopReason: extracted.evidence.stopReason,
     },
   };
+  if (directionRecovery !== undefined) {
+    record.directionRecovery = structuredClone(directionRecovery);
+  }
+  return record;
 }
 
 export async function persistCompletedFableCandidate({ candidatePath, candidateRecord, folio }) {
@@ -1634,6 +1675,125 @@ async function verifyPreparedOperation(bundle) {
   }
 }
 
+export async function recoverCompletedFableOperation({
+  archiveRoot,
+  bundle,
+  directionRecoverySourceSha256,
+  expectedManifestSha256,
+  expectedProviderResponseSha256,
+  folioId,
+}) {
+  requireDigest(expectedManifestSha256, "reviewed recovery operation manifest");
+  requireDigest(expectedProviderResponseSha256, "reviewed recovery provider response");
+  requireDigest(directionRecoverySourceSha256, "reviewed recovery source");
+  if (bundle.requests.operationManifest.operationManifestSha256 !== expectedManifestSha256) {
+    throw new Error("reviewed recovery manifest does not match the current prepared operation");
+  }
+  if (bundle.requests.operationManifest.folioId !== folioId) {
+    throw new Error("reviewed recovery folio does not match the prepared operation");
+  }
+  await verifyPreparedOperation(bundle);
+
+  const claimPath = path.join(
+    archiveRoot,
+    "fable",
+    "claims",
+    String(bundle.sequence).padStart(2, "0") + "-" + folioId + ".json",
+  );
+  const [claim, localClaim, admission, responseHeaders, providerResponseBytes] = await Promise.all([
+    readFile(claimPath).then((bytes) => parsedJson(bytes, "recovery dispatch claim")),
+    readFile(path.join(bundle.operationDirectory, "dispatch-started.json"))
+      .then((bytes) => parsedJson(bytes, "recovery local dispatch claim")),
+    readFile(path.join(bundle.operationDirectory, "admission.json"))
+      .then((bytes) => parsedJson(bytes, "recovery admission")),
+    readFile(path.join(bundle.operationDirectory, "response-headers.json"))
+      .then((bytes) => parsedJson(bytes, "recovery response headers")),
+    readFile(path.join(bundle.operationDirectory, "provider-response.json")),
+  ]);
+  requireExactKeys(
+    claim,
+    ["admissionSha256", "folioId", "operationManifestSha256", "startedAt"],
+    "recovery dispatch claim",
+  );
+  sameCanonical(localClaim, claim, "recovery local dispatch claim");
+  requireExactKeys(admission, [
+    "version", "admitted", "completedAt", "countLatencyMs", "countRequestId",
+    "countResponseSha256", "inputTokens", "maxOutputTokens", "safetyMargin", "contextCeiling",
+    "equationTotal", "projectedMaximumCostUsd", "operationManifestSha256", "countRequestSha256",
+    "generationRequestSha256", "model", "effort", "admissionSha256",
+  ], "recovery admission");
+  validateSelfDigest(admission, "admissionSha256", "recovery admission digest");
+  if (claim.folioId !== folioId
+    || claim.operationManifestSha256 !== expectedManifestSha256
+    || claim.admissionSha256 !== admission.admissionSha256
+    || admission.admitted !== true
+    || admission.operationManifestSha256 !== expectedManifestSha256) {
+    throw new Error("recovery claim and admission do not match the reviewed operation");
+  }
+  const dispatchStartedAt = Date.parse(claim.startedAt);
+  if (!Number.isFinite(dispatchStartedAt)) {
+    throw new Error("recovery dispatch claim has an invalid start time");
+  }
+  requireExactKeys(
+    responseHeaders,
+    ["contentType", "providerRequestId", "status"],
+    "recovery response headers",
+  );
+  if (responseHeaders.status !== 200
+    || typeof responseHeaders.providerRequestId !== "string"
+    || responseHeaders.providerRequestId.trim() === ""
+    || typeof responseHeaders.contentType !== "string"
+    || !responseHeaders.contentType.includes("application/json")) {
+    throw new Error("recovery requires one retained successful JSON provider response");
+  }
+  if (sha256(providerResponseBytes) !== expectedProviderResponseSha256) {
+    throw new Error("reviewed recovery provider response digest does not match retained bytes");
+  }
+
+  const directionRecovery = {
+    version: 1,
+    kind: "copy-purposeful-change-to-empty-narrative-job-v1",
+    targetField: "narrativeJob",
+    sourceField: "purposefulChanges",
+    sourceIndex: 0,
+    sourceSha256: directionRecoverySourceSha256,
+  };
+  const response = parsedJson(providerResponseBytes, "recovery provider response");
+  const extracted = extractSuccessfulMessage({
+    directionRecovery,
+    providerRequestId: responseHeaders.providerRequestId,
+    response,
+  });
+  const responseStat = await stat(path.join(bundle.operationDirectory, "provider-response.json"));
+  const messageLatencyMs = Math.max(0, Math.round(responseStat.mtimeMs - dispatchStartedAt));
+  const candidateRecord = buildFableCandidateRecord({
+    admission,
+    compiled: bundle.compiled,
+    directionRecovery,
+    extracted,
+    folioId,
+    messageLatencyMs,
+    operationManifest: bundle.requests.operationManifest,
+    providerResponseBytes,
+  });
+  const { folio } = locateFolio(bundle.fixture, folioId);
+  validateCandidateForFolio({ output: candidateRecord.output }, folio);
+  const candidatePath = path.join(bundle.operationDirectory, "candidate.json");
+  const candidateBytes = Buffer.from(JSON.stringify(candidateRecord, null, 2) + "\n");
+  await validateCandidateEvidenceChain({
+    archiveRoot,
+    candidate: candidateRecord,
+    candidateFile: { bytes: candidateBytes, path: candidatePath },
+  });
+  await ensurePrivate(candidatePath, candidateBytes);
+  return {
+    candidatePath,
+    candidateRecord,
+    candidateSha256: sha256(candidateBytes),
+    providerResponseSha256: expectedProviderResponseSha256,
+  };
+}
+
 async function archiveResponse(operationDirectory, response) {
   const headers = {
     contentType: response.headers.get("content-type"),
@@ -1665,9 +1825,10 @@ async function archiveResponse(operationDirectory, response) {
 
 async function runCli() {
   const command = process.argv[2];
-  if (!new Set(["prepare", "run"]).has(command)) {
+  if (!new Set(["prepare", "recover", "run"]).has(command)) {
     throw new Error(
-      "usage: reader-first-fable.mjs prepare|run --folio ID [--manifest SHA256] "
+      "usage: reader-first-fable.mjs prepare|recover|run --folio ID [--manifest SHA256] "
+      + "[--provider-response-sha SHA256] [--copy-purposeful-change-to-narrative-job-sha SHA256] "
       + "[--replace-rejected-manifest SHA256]",
     );
   }
@@ -1702,6 +1863,33 @@ async function runCli() {
   const expectedManifest = argument("--manifest");
   if (expectedManifest !== bundle.requests.operationManifest.operationManifestSha256) {
     throw new Error("--manifest must match the reviewed prepared operation");
+  }
+  if (command === "recover") {
+    if (replacementManifest !== undefined) {
+      throw new Error("recovery cannot replace or dispatch a provider operation");
+    }
+    const recovered = await recoverCompletedFableOperation({
+      archiveRoot: AUTHORING_ARCHIVE_ROOT,
+      bundle,
+      directionRecoverySourceSha256: argument(
+        "--copy-purposeful-change-to-narrative-job-sha",
+      ),
+      expectedManifestSha256: expectedManifest,
+      expectedProviderResponseSha256: argument("--provider-response-sha"),
+      folioId,
+    });
+    process.stdout.write(JSON.stringify({
+      candidatePath: recovered.candidatePath,
+      candidateSha256: recovered.candidateSha256,
+      estimatedCostUsd: recovered.candidateRecord.estimatedCostUsd,
+      folioId,
+      model: recovered.candidateRecord.evidence.model,
+      operationDirectory: bundle.operationDirectory,
+      providerResponseSha256: recovered.providerResponseSha256,
+      requestManifestSha256: bundle.requests.operationManifest.operationManifestSha256,
+      recoveryKind: recovered.candidateRecord.directionRecovery.kind,
+    }) + "\n");
+    return;
   }
   await verifyPreparedOperation(bundle);
   const apiKey = process.env.ANTHROPIC_API_KEY;

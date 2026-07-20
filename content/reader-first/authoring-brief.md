@@ -149,8 +149,11 @@ and composition.
 - Payment: Treatment B medium only; no prior narrative plate exists.
 - The band: Payment, for Jay and Tan identity and the already established book-local visual world.
 - The map: Payment followed by The band, for identity across two views and book-local continuity.
-- The terminal wall: Treatment B medium followed by The map, where The map governs only the narrow
-  parent-inheritance idea described above. Jay, Tan, Oakland, and the root palette must not transfer.
+- The terminal wall: Treatment B governs the medium. The parent phrase and Fable direction carry the
+  inherited idea of mapped evidence crossing from private control into public use. Do not pass the
+  parent Map plate as an image reference: the rejected first attempt showed that an abstract
+  “idea-only” reference can still leak Jay, Tan, Oakland, palette, clothing, or composition into
+  Lagos.
 
 An illustrated folio's plate must be generated, reviewed, and accepted before Fable writes the next
 folio in that same book. Rejected images never enter the interleaved history.

@@ -146,7 +146,7 @@ function acceptedPlateReference(accepted, folioId, role, description) {
 }
 
 async function referencesFor(plateId) {
-  if (plateId === "plate-root-payment") {
+  if (plateId === "plate-root-payment" || plateId === "plate-map-terminal-wall") {
     return { references: [await treatmentBReference()], trustedPlateEvidence: [] };
   }
   const accepted = await loadedProgress();
@@ -182,15 +182,7 @@ async function referencesFor(plateId) {
       ),
     ], trustedPlateEvidence };
   }
-  return { references: [
-    await treatmentBReference(),
-    acceptedPlateReference(
-      accepted,
-      "root-folio-07",
-      "parent-map-evidence-idea-only",
-      "Accepted root Map plate, governing only the inherited idea of mapped evidence crossing from private control into public use; transfer no identity, place, palette, or composition.",
-    ),
-  ], trustedPlateEvidence };
+  throw new Error("unknown reader-first plate reference route");
 }
 
 async function compile(arguments_) {

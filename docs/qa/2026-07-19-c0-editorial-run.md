@@ -2,7 +2,7 @@
 
 Date: 2026-07-19 (America/Los_Angeles)
 
-Status: **IN PROGRESS — 9/10 folios and 3/4 plates accepted.** This is bounded editorial
+Status: **COMPLETE — 10/10 folios and 4/4 plates accepted.** This is bounded editorial
 authoring for the checked-in reader slice, not dynamic reader generation and not D0/D1 completion.
 
 ## Fixed contract and ceiling
@@ -280,16 +280,35 @@ two copyedits: delete the repeated “the console demanded” and replace ambigu
 names” with “beneath their names.” The resulting reader page is 258 words and retains the exact action
 and facts.
 
-## Running spend and next operation
+## Final spend and terminal-wall disposition
 
-Ten Fable calls have an aggregate usage-derived estimate of `$4.412660`. Known C0 text plus the
-four completed narrative-image outputs is `$4.652665`; provider billing was not separately queried.
-Five of six image operations have been consumed: one credential rejection, one Payment visual
-rejection, and three accepted plates. The only remaining image operation is reserved for the Lagos
-terminal wall; no repair headroom remains.
+Eleven Fable calls have an aggregate usage-derived estimate of `$4.883090`. The final response was
+complete except for an exactly empty `narrativeJob`; a no-provider recovery copied the exact
+Fable-authored `purposefulChanges[0]` sentence into that field and bound the transform in candidate
+`cf99f8bfd1a67d4ab4bc43e64f60d3dc826a4061b2bece8f9f8aa592d4a4fca4`. The prose and every other
+direction field remain byte-for-byte provider output. The response cost estimate is `$0.470430`.
 
-Image-led child folio `map-folio-02` is prepared, not dispatched, under request-manifest digest
-`95940a4383305e0a34da53a4c612fb9f7921a9f6627c5a2e87a2814b876f5948`. Its exact request contains the
-child origin, complete world and temporal rules, The licensed route as its only current-book history,
-and the terminal-wall beat. It contains no root prose or root plate as story history. Its schema
-requires one complete image direction.
+The first terminal-wall plate completed as operation
+`63986654a45a3445f529f86cf3158bdbc0382f5e3e216c572a7eac1564b3e9be`, output
+`3c5bb19892c8e026cd6f0a3ce67ecf786bc15ce5743c3fc37b2808819c634995`, estimate `$0.070461`.
+Its public traces, copying crews, order, ferry, and unreadable evidence all worked, but visual review
+rejected it because the “idea-only” root Map reference still transferred Tan's face, hair, grey
+jacket, and silhouette into Eniola. The rejection is preserved beside the review evidence.
+
+That observed failure changed the reference rule, not Fable's direction: the parent phrase and text
+already carry the semantic inheritance, while GPT Image references are treated as visual authority
+that cannot reliably be limited to an abstract idea. The final seventh image operation therefore
+used only Treatment B as a medium reference and explicitly required Eniola to be visually distinct
+from all root-book people.
+
+The repair completed once as operation
+`f5cf02e920a4429721bd77a7eb8f33e767207def661d86231522afa6444c0a27`, output
+`a4014446c019b97bba5fe443806ad150f807d0f104464af08f644c1445771634`, provider request
+`req_d9a8a4a5936f4117af2bcef70fd38cc6`, and estimate `$0.057998`. Visual review at original and
+520-pixel reading sizes accepted the distinct Eniola, conflicting public traces, copying crews,
+spoken order, ferry context, and nonliteral text. The accepted four plates are checked in as
+deterministic lossless WebP derivatives and bound by `content/reader-first/production-manifest.json`.
+
+Final usage-derived estimates are `$4.883090` for eleven Fable calls and `$0.368464` for all six
+completed GPT Image 2 outputs, including both preserved visual rejections. One credential-rejected
+image attempt incurred no recorded provider cost. Total known C0 provider spend is `$5.251554`.

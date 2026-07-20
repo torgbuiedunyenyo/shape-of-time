@@ -22,7 +22,10 @@ import {
   runReaderFirstPlate,
   type ReaderFirstFableCandidate,
 } from "./reader-first-plate.js";
-import type { TrustedReaderFirstPlateEvidence } from "../../../scripts/reader-first-plate-evidence.mjs";
+import {
+  readerFirstPlateContract,
+  type TrustedReaderFirstPlateEvidence,
+} from "../../../scripts/reader-first-plate-evidence.mjs";
 
 function mediumReference(): ImageReference {
   const bytes = validPng(8, 8, [42, 87, 101]);
@@ -129,6 +132,24 @@ function usageForExactTotal(totalMicrousd: number) {
 }
 
 describe("reader-first narrative plate authoring", () => {
+  it("keeps the child plate distinct while making evidence legible without image-model text", () => {
+    const contract = readerFirstPlateContract("plate-map-terminal-wall");
+
+    expect(contract.applicationGuidance).toContain(
+      "Make Eniola visually distinct from every root-book person, with her own face, hair, clothes, and local working presence.",
+    );
+    expect(contract.applicationGuidance).toContain(
+      "Make the three traces, their disagreement at the crossing, and the evidence attached to each trace visually clear, but render every name, time, order, notice, departure-board entry, and stop label only as non-decipherable marks, with no literal words or numerals.",
+    );
+    expect(contract.referenceRules.map(({ assetId, role }) => ({ assetId, role }))).toEqual([
+      { assetId: "treatment-b-medium", role: "shared-medium-only" },
+    ]);
+    expect(contract.idempotencyKey).toBe("c0-reader-first-plate-map-terminal-wall-identity-repair-v2");
+    expect(contract.referenceRules.map(({ assetId }) => assetId)).not.toContain("plate-root-payment");
+    expect(contract.referenceRules.map(({ assetId }) => assetId)).not.toContain("plate-root-band");
+    expect(contract.referenceRules.map(({ assetId }) => assetId)).not.toContain("plate-root-map");
+  });
+
   it("passes Fable's direction unchanged beside one verified prior narrative plate", () => {
     const fable = bandCandidate();
     const reference = exposedPaymentReference();

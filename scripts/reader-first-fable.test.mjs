@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rm, unlink, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { test } from "node:test";
@@ -15,6 +15,7 @@ import {
   extractSuccessfulMessage,
   loadAcceptedProgress,
   persistCompletedFableCandidate,
+  recoverCompletedFableOperation,
   requireRejectedStructuredOutput,
   schemaForFolioLayout,
   validateCandidateForFolio,
@@ -236,10 +237,22 @@ async function writeCompleteCandidateEvidence({ archiveRoot, fixture: targetFixt
     writeFile(candidatePath, candidateBytes),
   ]);
   return {
+    admission,
+    bundle: {
+      compiled,
+      fixture: targetFixture,
+      operationDirectory: operation,
+      requests,
+      schemaText: `${JSON.stringify(schema, null, 2)}\n`,
+      sequence: 1,
+      systemPrompt,
+    },
     candidate,
     candidateBytes,
     candidatePath,
     candidateSha256: sha256(candidateBytes),
+    providerRequestId,
+    providerResponseBytes,
   };
 }
 
@@ -505,6 +518,200 @@ test("postflight accepts one Fable message and rejects model, stop, or output dr
     () => extractSuccessfulMessage({ providerRequestId: "req_message_123", response: { ...response, content: [...response.content, ...response.content] } }),
     /one text/u,
   );
+});
+
+test("one explicit no-provider recovery copies exact Fable text into an empty narrative job", () => {
+  const sourceText = "The map has moved from one licensed console onto a contested public wall.";
+  const rawOutput = {
+    imageDirection: {
+      concreteScene: "Crews copy three incompatible chalk traces at the Lagos terminal.",
+      factLeftToImage: "How many working crews depend on the disputed traces.",
+      mustRemain: ["The ferry console is locked and dark."],
+      narrativeJob: "",
+      purposefulChanges: [sourceText],
+      unresolvedFacts: ["Which trace is correct."],
+    },
+    proseParagraphs: ["One complete terminal-wall paragraph."],
+  };
+  const response = {
+    content: [{ type: "text", text: JSON.stringify(rawOutput) }],
+    id: "msg_recovery",
+    model: "claude-fable-5",
+    role: "assistant",
+    stop_reason: "end_turn",
+    type: "message",
+    usage: { input_tokens: 150, output_tokens: 80 },
+  };
+  assert.throws(
+    () => extractSuccessfulMessage({ providerRequestId: "req_recovery", response }),
+    /narrativeJob must be nonempty/u,
+  );
+  const directionRecovery = {
+    version: 1,
+    kind: "copy-purposeful-change-to-empty-narrative-job-v1",
+    targetField: "narrativeJob",
+    sourceField: "purposefulChanges",
+    sourceIndex: 0,
+    sourceSha256: sha256(sourceText),
+  };
+  const recovered = extractSuccessfulMessage({
+    directionRecovery,
+    providerRequestId: "req_recovery",
+    response,
+  });
+  assert.equal(recovered.output.imageDirection.narrativeJob, sourceText);
+  assert.equal(JSON.parse(response.content[0].text).imageDirection.narrativeJob, "");
+  assert.throws(
+    () => extractSuccessfulMessage({
+      directionRecovery: { ...directionRecovery, sourceSha256: "0".repeat(64) },
+      providerRequestId: "req_recovery",
+      response,
+    }),
+    /source mismatch/u,
+  );
+  const alreadyComplete = {
+    ...response,
+    content: [{
+      type: "text",
+      text: JSON.stringify({
+        ...rawOutput,
+        imageDirection: { ...rawOutput.imageDirection, narrativeJob: "Already complete." },
+      }),
+    }],
+  };
+  assert.throws(
+    () => extractSuccessfulMessage({
+      directionRecovery,
+      providerRequestId: "req_recovery",
+      response: alreadyComplete,
+    }),
+    /requires an empty narrativeJob/u,
+  );
+  const whitespaceTarget = {
+    ...response,
+    content: [{
+      type: "text",
+      text: JSON.stringify({
+        ...rawOutput,
+        imageDirection: { ...rawOutput.imageDirection, narrativeJob: " " },
+      }),
+    }],
+  };
+  assert.throws(
+    () => extractSuccessfulMessage({
+      directionRecovery,
+      providerRequestId: "req_recovery",
+      response: whitespaceTarget,
+    }),
+    /requires an empty narrativeJob/u,
+  );
+});
+
+test("the reviewed recovery path verifies retained evidence, writes once, and never dispatches", async (t) => {
+  const archiveRoot = await mkdtemp(path.join(os.tmpdir(), "shape-of-time-fable-recovery-"));
+  t.after(() => rm(archiveRoot, { force: true, recursive: true }));
+  const sourceText = "The trace has moved from one licensed console onto a contested public wall.";
+  const proseParagraphs = [
+    Array.from({ length: 130 }, (_, index) => `terminal${index}`).join(" "),
+  ];
+  const validOutput = {
+    imageDirection: {
+      concreteScene: "Crews copy three incompatible chalk traces at the Lagos terminal.",
+      factLeftToImage: "How many working crews depend on the disputed traces.",
+      mustRemain: ["The ferry console is locked and dark."],
+      narrativeJob: sourceText,
+      purposefulChanges: [sourceText],
+      unresolvedFacts: ["Which trace is correct."],
+    },
+    proseParagraphs,
+  };
+  const evidence = await writeCompleteCandidateEvidence({
+    archiveRoot,
+    fixture,
+    folioId: "root-folio-01",
+    output: validOutput,
+  });
+  await unlink(evidence.candidatePath);
+  const response = JSON.parse(evidence.providerResponseBytes.toString("utf8"));
+  const rawOutput = JSON.parse(response.content[0].text);
+  rawOutput.imageDirection.narrativeJob = "";
+  response.content[0].text = JSON.stringify(rawOutput);
+  const retainedResponseBytes = Buffer.from(JSON.stringify(response));
+  await writeFile(
+    path.join(evidence.bundle.operationDirectory, "provider-response.json"),
+    retainedResponseBytes,
+  );
+  const dispatch = {
+    admissionSha256: evidence.admission.admissionSha256,
+    folioId: "root-folio-01",
+    operationManifestSha256:
+      evidence.bundle.requests.operationManifest.operationManifestSha256,
+    startedAt: "2026-07-19T12:00:01.000Z",
+  };
+  const claimsDirectory = path.join(archiveRoot, "fable", "claims");
+  const claimPath = path.join(claimsDirectory, "01-root-folio-01.json");
+  await mkdir(claimsDirectory, { recursive: true });
+  await Promise.all([
+    writeFile(claimPath, `${JSON.stringify(dispatch, null, 2)}\n`),
+    writeFile(
+      path.join(evidence.bundle.operationDirectory, "dispatch-started.json"),
+      `${JSON.stringify(dispatch, null, 2)}\n`,
+    ),
+  ]);
+
+  let fetchCalls = 0;
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async () => {
+    fetchCalls += 1;
+    throw new Error("recovery must not fetch");
+  };
+  t.after(() => { globalThis.fetch = originalFetch; });
+  const options = {
+    archiveRoot,
+    bundle: evidence.bundle,
+    directionRecoverySourceSha256: sha256(sourceText),
+    expectedManifestSha256:
+      evidence.bundle.requests.operationManifest.operationManifestSha256,
+    expectedProviderResponseSha256: sha256(retainedResponseBytes),
+    folioId: "root-folio-01",
+  };
+  await assert.rejects(
+    recoverCompletedFableOperation({
+      ...options,
+      expectedProviderResponseSha256: "0".repeat(64),
+    }),
+    /provider response digest does not match/u,
+  );
+  const recovered = await recoverCompletedFableOperation(options);
+  assert.equal(fetchCalls, 0);
+  assert.equal(recovered.candidateRecord.output.imageDirection.narrativeJob, sourceText);
+  assert.deepEqual(recovered.candidateRecord.output.proseParagraphs, proseParagraphs);
+  assert.equal(
+    recovered.candidateRecord.directionRecovery.sourceSha256,
+    sha256(sourceText),
+  );
+  assert.deepEqual(
+    await recoverCompletedFableOperation(options),
+    recovered,
+    "an exact replay is idempotent",
+  );
+
+  const wrongClaim = { ...dispatch, admissionSha256: "f".repeat(64) };
+  await writeFile(claimPath, `${JSON.stringify(wrongClaim, null, 2)}\n`);
+  await assert.rejects(
+    recoverCompletedFableOperation(options),
+    /local dispatch claim drifted/u,
+  );
+  await writeFile(claimPath, `${JSON.stringify(dispatch, null, 2)}\n`);
+
+  const mutatedCandidate = JSON.parse(await readFile(recovered.candidatePath, "utf8"));
+  mutatedCandidate.output.proseParagraphs[0] = "Mutated after recovery.";
+  await writeFile(recovered.candidatePath, `${JSON.stringify(mutatedCandidate, null, 2)}\n`);
+  await assert.rejects(
+    recoverCompletedFableOperation(options),
+    /prepared operation drifted/u,
+  );
+  assert.equal(fetchCalls, 0);
 });
 
 test("the provider sequence persists official admission before claiming one inference dispatch", async () => {

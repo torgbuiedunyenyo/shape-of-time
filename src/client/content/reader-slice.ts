@@ -80,10 +80,14 @@ interface SourceFixture {
 }
 
 const plateSources: Record<string, string> = {
-  "root-payment": "/assets/reader-first/root-payment.webp",
-  "root-band": "/assets/reader-first/root-band.webp",
-  "root-map": "/assets/reader-first/root-map.webp",
-  "map-terminal-wall": "/assets/reader-first/map-terminal-wall.webp",
+  "root-payment":
+    "/assets/reader-first/6f56ea3feafa7b2fca6b8c1266aebb9cccd700530f364f2aae7034d996c0d34f.webp",
+  "root-band":
+    "/assets/reader-first/44a0ae4b9184ce76b41d1962e34db11cbab193d2f9b5ce6ad1297eb51461c9db.webp",
+  "root-map":
+    "/assets/reader-first/09cffab12053f5fc91e2d4e8b61f216e7751e59465c90b1a1a6942f06c2cdf73.webp",
+  "map-terminal-wall":
+    "/assets/reader-first/8c5e8e19bf3a1786ed7b5cce480cb0744c6dc01496d9692d16282d7cb6611b79.webp",
 };
 
 function hydrateFixture(source: SourceFixture): ReaderFixture {
