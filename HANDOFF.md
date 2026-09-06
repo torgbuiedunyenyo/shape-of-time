@@ -10,10 +10,10 @@ nesting. The agent owns creative sequencing; software preserves its work and the
 
 ## Current position
 
-P0 is complete: implementation plan, original-source correction and user-requested repository
-cleanup. **P1–P6 are not implemented.** The active tree has current instructions, specifications and
-creative inputs; no runnable application, package manifest, old migrations, generation scripts,
-prepared corpus, test suite, CI application gate or deployment configuration remains.
+P0 is complete. **P1 is in progress; P2–P6 remain unimplemented.** The user requested implementation
+and then explicitly directed development and testing on the existing Railway production project.
+There are no users or data requiring preservation. Use Railway Postgres directly; do not introduce
+Docker or a separate staging environment. The fresh application is being built in the active worktree.
 
 - Implementation worktree: /Users/ratpartyserver/git/shape-of-time-agentic, codex/agentic-world.
 - Normal checkout: /Users/ratpartyserver/git/shape-of-time, local main at the same clean starting point.
@@ -52,15 +52,32 @@ Text, creative agent and initial contextual critic: GPT-6 Astra at xhigh. Images
 
 ## Spending and deployment
 
-This housekeeping request authorizes repository cleanup, not provider generation or infrastructure
-changes. Replacement allowance authorized/spent: $0/$0. PLAN.md proposes $150 for the first combined
-live experiment; it is not yet authorized. Do not reuse historical Fable budgets.
+The user accepted implementation after the detailed plan, then explicitly authorized direct Railway
+production work with no old-data preservation requirement. Execute the plan's initial combined live
+allowance of $150 (at most $20 for provider contracts); spent $0, reserved $0. This records the
+implementation go-ahead against that proposed ceiling, not an unlimited generation budget. All text,
+images, criticism and renewal count together. Do not reuse historical Fable budgets.
 
 Existing Railway project: 8b20e07d-c256-44c9-85be-d1c7e50ac83d. Last read-only production investigation
 found e1a3dec and a failed old continuation; that is historical evidence, not current runtime QA.
 The cleanup made no Railway calls. A later authorized release uses a passing Git-triggered deploy.
 
 ## Validation
+
+P1a implementation: fresh pinned TypeScript/React/Hono/Kysely application; Railway-backed `world`
+schema; versioned documents, immutable Markdown compositions with stable block IDs; real reader
+and visit history. Four real Railway Postgres integration tests pass for unrestricted draft length,
+atomic missing-image rejection, revision/idempotency and request deduplication. Typecheck, lint and
+production build pass. No generated content or live provider request yet. The reader interaction
+code is preliminary and still needs the actual browser journey and fixes; do not call P2 complete.
+
+Railway connection: production environment `82e1c3e8-e2c1-4023-afa2-b17dc6dc6ec3`, app service
+`39bf3c12-b426-40ce-836a-2839ea1bc213`, Postgres `294c4570-91e2-4bb2-8639-4a802a475ab8`, assets
+bucket `545eb437-32e7-4100-a154-3cffd145fac1`. Added Postgres TCP proxy
+`b696fdf7-96a9-43ce-b588-a0ff901e0295` for direct development/tests. Selected Railway credentials
+are in ignored `.env`, generation disabled. Runtime uses the existing private DATABASE_URL.
+User reiterated: trash and replace the old Railway implementation; no compatibility or data
+preservation needed. Old code remains only in the Git/archive record. No Docker dependency.
 
 Archive contents and all 167 file hashes match the retired Git tree. Selected world/source bytes
 and predecessor manifests match their preserved origins. Active document links and instructions
@@ -74,8 +91,8 @@ manufacture a green result.
 
 ## Single next action
 
-When implementation is requested, begin P1a in codex/agentic-world: create the fresh minimal
-application configuration, new persistence and a thin reader, then continue directly to the actual
+Continue P1a in codex/agentic-world: create the fresh minimal
+application configuration, Railway persistence and a thin reader, then continue directly to the actual
 Astra/image/critic loop within P1. Read PLAN.md first. The detailed historical reassessment remains
 at /Users/ratpartyserver/git/claude/infinite-library-reassessment-2026-09-05 as supporting evidence;
 the repository's current documents are self-contained and are the implementation authority.

@@ -48,9 +48,9 @@ The planning request authorizes no provider spend or infrastructure changes. PLA
 
 Never automatically repeat an ambiguous generation request. Preserve returned output before parsing, keep provider IDs, reconcile pending operations and record uncertain cost.
 
-Deployment uses the existing Railway project identified in HANDOFF.md, with isolated staging data and explicit scope. Production source deploys come from passing main pushes. Never use railway up, a manual redeploy or Deploy Latest Commit to bypass Git integration.
+The user explicitly authorized direct implementation and testing on the existing Railway production project identified in HANDOFF.md. Use its database directly; no Docker or separate staging is needed. Production source deploys come from passing main pushes. Never use railway up, a manual redeploy or Deploy Latest Commit to bypass Git integration.
 
-Preserve historical refs, source material and existing production data. Do not reset others' work. Stage explicit paths. Do not commit secrets or raw environment values.
+Preserve historical refs and source material. The user states existing production data need not be preserved; replacement is authorized. Do not reset others' work. Stage explicit paths. Do not commit secrets or raw environment values.
 
 Never delete, prune, truncate or overwrite transcripts under ~/.codex/sessions or ~/.codex/archived_sessions. This applies regardless of available storage or cleanup suggestions.
 

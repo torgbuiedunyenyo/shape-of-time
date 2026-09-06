@@ -1,6 +1,13 @@
 # Shape of Time implementation plan
 
-Written September 6, 2026. Status: planning, original-source preparation and repository cleanup complete; replacement implementation has not started.
+Written September 6, 2026. Status: P0 complete; P1 implementation in progress.
+
+Execution update: the user explicitly authorized implementing and testing directly on the existing
+Railway production project, with no users or old data requiring preservation. This supersedes the
+local-Docker, isolated-staging and old-production-data preservation steps below. P4 now verifies
+recovery on that production application; P6 completes and verifies the release there. Continue to
+use passing Git-integrated deployments. The implementation go-ahead activates the proposed initial
+$150 combined provider allowance; HANDOFF.md tracks actual spend and reservations.
 
 This is the single implementation queue for the agentic replacement. Read SPEC.md for the intended experience, EVALS.md for what counts as evidence, and HANDOFF.md for the actual worktree, progress, costs and next action. The July plan is historical; its completed checkboxes do not describe this implementation.
 
