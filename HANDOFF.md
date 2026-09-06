@@ -1,6 +1,6 @@
 # Handoff
 
-Updated September 6, 2026, 21:24 UTC. After compaction, read this active handoff and PLAN.md
+Updated September 6, 2026, 21:40 UTC. After compaction, read this active handoff and PLAN.md
 section 11. PLAN.md is the sole queue; do not create STATUS.md.
 
 ## Active follow-up
@@ -50,12 +50,25 @@ The durable driver is **session 7881 / PID 58361**. Do not start a duplicate. It
 mise exec node@24.18.0 -- node --import tsx .local/review-second/run.ts
 ```
 
-Requests 1 and 2 are complete. Request 3 is running: an actual root-image exploration,
-**739762df-9e1b-480e-8364-cea1d567d430**, created 21:04:33 UTC. At 21:22 it had published its first
-section and was still generating imagery. The driver continues sequentially through root, child and
-grandchild requests, without operator plot instructions. It saves each body, source, dedupe key and ID
-before submitting. A failed/paused intent or network error stops the driver for inspection; no
-ambiguous provider operation is automatically purchased again.
+Requests 1–3 are complete. Request 4 continues **The Gentle Route**, work
+`work-d99e2e813bc1d7104ac8527f7f340386`: **00767a96-f75e-421d-9b8c-84dabf1bda1c**, created
+21:36:15 UTC, now running. Request 3 was the actual root-image exploration
+`739762df-9e1b-480e-8364-cea1d567d430`; it completed with two sections and four images. The
+interim `after-three.json` records 3 works, 7 publications, 14,867 words including headings/alt and
+16 published images. All operations matched the pin.
+
+The first natural context renewal completed successfully before request 4. Operation
+**302fa39a-5b68-495d-8424-0211ce18a912** ran 21:36:34–21:38:45; actual usage was 290,059 input
+and 5,785 output tokens, settled cost **6.235055** against a 16.851025 reservation. Request 4 then
+started normally. Full originals remain saved. The threshold uses the provider's input-token count,
+not an estimate from image base64 length. Do not confuse this book-context renewal with Codex
+conversation compaction.
+
+The driver continues sequentially through root, child and grandchild requests, without operator
+plot instructions. It saves each body, source, dedupe key and ID before submitting. A failed/paused
+intent or network error stops it for inspection; no ambiguous provider operation is automatically
+purchased again. Once request 5's grandchild exists, the live nested-return walkthrough can be done
+while the remaining requests run, using already published links and avoiding extra paid QA.
 
 Files under ignored `.local/review-second/`:
 
@@ -99,8 +112,8 @@ Retired `art-thing` remains read-only.
 - Pin receipt: `tests/receipts/second-edition-pin.json`; verified before any generation/publication.
 - Live application/main: **1ed691ab831a658eb93f395b1329fb2d8836370c**.
 - Git deployment **169d3c85-efdd-4725-b935-1c18b7f5fad3** succeeded; exact `/healthz` matched.
-- Local branch **9b776f6** adds verification documentation and is not pushed; later handoff/report
-  edits are uncommitted. These documentation changes do not alter the creative mechanism.
+- Local branch includes documentation commits **9b776f6** and **e339e61**, not yet pushed;
+  subsequent handoff/report updates may be uncommitted. These documentation changes do not alter the creative mechanism.
 - Hosted generation and preparation are enabled. Local `.env` points at the active schema with
   generation disabled. No local API or Vite server remains running.
 
@@ -112,7 +125,8 @@ operations to settle and use `.local/hold-release.ts` if needed. Always release 
 The author explicitly authorized exceeding $150 if needed. Current edition allowance is $150;
 prior development cost is **94.697304** and the archived first reader attempt cost **22.053726**,
 so prior combined spending is **116.751030** and combined operational allowance **266.751030**.
-Settled active-edition spending after request 2 was **15.559749**, before request 3. Current monitoring
+Settled active-edition spending after request 3 was **25.966703**; its subsequent context renewal
+cost **6.235055**. Current request 4 spending is additional. Current monitoring
 includes active reservations; do not mistake those for final charges. Unknown outcomes remain zero.
 Increase the allowance deliberately if needed for the authorized run, preserve the spending guard,
 and never silently reduce Astra/xhigh or the image model. Allocation receipt:

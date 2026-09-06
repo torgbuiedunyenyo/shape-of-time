@@ -119,3 +119,12 @@ remained at30.566px and scrollY1168.75, exactly matching the earlier return obse
 was visible. Thus newly saved continuation arrived through the ordinary reading refresh without
 moving the existing reading place. This continuation was created by explicit request2, not by
 preparation; that distinction is preserved in the ledger.
+
+## Natural context renewal
+
+Before reader request 4, the provider counted 290,059 input tokens in the accumulated context,
+passing the pinned 250,000-token renewal threshold. Renewal operation
+302fa39a-5b68-495d-8424-0211ce18a912 completed at21:38:45UTC after starting21:36:34. Actual usage
+was290,059input/5,785output tokens; cost6.235055 against a16.851025 reservation. The full original
+input remains preserved. Request4 then started normally from the renewed context. This establishes
+an actual funded context transition in the review corpus, not a verdict about its literary quality.
