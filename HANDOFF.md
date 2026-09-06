@@ -1,92 +1,152 @@
 # Handoff
 
-Updated September 6, 2026, 20:38 UTC. Second attempt active; first request complete.
-After compaction read this and PLAN.md section11. PLAN.md is the sole queue; do not create STATUS.md.
+Updated September 6, 2026, 21:24 UTC. After compaction, read this active handoff and PLAN.md
+section 11. PLAN.md is the sole queue; do not create STATUS.md.
 
-## Active follow-up — latest instructions control
+## Active follow-up
 
-The author approved the initial book and requested: gentle image/text consistency guidance, more
-frequent imagery, less abrupt/stilted prose and dialogue, ethnically ambiguous Jay/Tan, the deferred
-preparation mechanism, **20 reader requests**, and a first-entry controls tour. They then said to
-commit a compaction-safe plan and do all of it while they are away. PLAN.md section11 is the active
-queue: F2 creative guidance → F1 preparation → F3 new pinned edition/20 requests → F4 tour → F5 release.
-Earlier statements below to stop generation describe the previous completed handoff and are superseded
-for this work. The restriction on extended unsolicited literary study still applies.
+Build **The Shape of Time**, a book that lets readers explore sustained, nested text-and-image
+narratives. The human user is the author. Preserve the creative agent's freedom and persistent
+context; do not impose literary metrics, image quotas, fixed scene lengths, or a compulsory critic
+pipeline. The author will assess the writing and imagery personally. Do not start another operator
+literary study or inject editorial feedback between reader requests.
 
-F2/F1 **deployed** at02d6115bb6e143563ba4db9305a6e5f0531c7bf6. Git deployment
-710979c4-060c-4fc6-81d0-4f8ef8964933 SUCCESS and exact /healthz verified.33tests, typecheck,
-lint/build passed. Source additions are small artistic preferences, original world/essence unchanged.
-Screenshots3.36.11/3.36.24 show unlabeled bottle versus prose about its oak label; inspected, recorded.
-Preparation works from any encountered publication, gives actual source/images, existing openings and
-unread continuation, coalesces concurrent readers, yields between completed tool batches to explicit
-requests or stale reading. It is not a mandatory creative pipeline. Original infinite-book preparation
-and tour source inspected. Context7 Kysely/React and official Astra documentation consulted.
+The author asked us to complete gentle artistic guidance, preparation while reading, a first-entry
+controls tour, and **20 completed reader requests** for review. Each new attempt starts empty under
+one pinned mechanism. Previous fiction, images and notes belong only in a private referenced archive.
+The current attempt obeys that requirement. Do not reset it for interface or documentation changes.
 
-**Fresh active schema world_reader_20260906_b**, edition reading key
-shape-of-time:2026-09-06T19:54:14.409Z. Mechanism
-**aefcf65a848bbecda3b37c0a26d71e6230712f795c4e268e678bc671408acd4e** pinned before generation;
-matched local source/config. Empty-publication/operation checks and actual clean in-app shelf passed.
-Receipt tests/receipts/second-edition-pin.json committed in1ed691a. Begin clicked through UI:
-**ed8a8cf1-5940-4255-886f-af988132b759**. This is request1 of20, not an additional test request.
+### Completed implementation and live checks
 
-**First request complete; driver5982/PID40847 exited0.** `.local/review-second/ledger.json`
-records request1 done, root work895cb2c0b80c9b201cc2535181c2a612 (full ID has `work-` prefix).
-2 publications / 4,061 words including headings and alt / 5 published images;4.110384 actual committed,
-combined120.861414,unknown0; every operation matches pin. Opening-scope.json in that directory.
-`.local/reader-second-scope.ts` now includes both previous allocations correctly.
-`run.ts` resumes the ledger up to20; `--through N` can stop between requests at a specific count;
---first-only already completed. A nonempty hold file stops BETWEEN requests; none currently exists.
-Do not start duplicate drivers or duplicate Begin. Provider ambiguity is never automatically retried.
-Actual source explorations (root image, child passage) and root/child/grandchild continuations supply
-no operator plot. Preparation is separate from20. `observe.ts` records compact live DB snapshots in
-.local/review-second/observations.jsonl; it does not generate or alter fiction.
+- Small labeled additions to the prose and visual guides invite descriptive breathing room, natural
+  conversation, richer/more frequent imagery, closer agreement between pictured and written details,
+  and ethnically ambiguous Jay and Tan. Original world and world-essence text are unchanged.
+- The author's 3:36 PM screenshots were inspected: the image has an unlabeled bottle, while the prose
+  refers to its oak label. This example is development evidence, not a new scene prescription.
+- Preparation now works from any encountered publication. It gives the agent the actual source and
+  images, existing openings and unread continuation; concurrent readers coalesce. It yields between
+  settled tool batches to explicit requests or stale reading. It remains an opportunity to choose
+  useful work, not a mandatory creative sequence.
+- The guide highlights real controls, supports Next/Back/Skip/Escape and keyboard arrows, remembers
+  dismissal, and reopens with ?. It restores reading position and suppresses reading signals while
+  touring. Desktop, 390px-wide, and production checks passed. All **34 mechanical tests**, typecheck,
+  lint and build passed. Do not repeat them absent a new change, failure or concern.
+- The live first-section preparation created **The Back Label**, with three images. Its link appeared
+  without a reload after about 16 minutes of background work. Actual warm entry and exact source
+  return passed. The next observation, 5.5 seconds after entry including tool latency, had all prose
+  and images loaded. This does not promise every opening will beat every reader's pace.
+- After request 2, the open root reader received its two additional sections and all nine root images
+  without a reload. The source passage and scroll position were unchanged. No alert appeared.
 
-Release helper1227/PID39425 was released and exited0. No hold remains. Hosted generation/preparation
-true. Local .env follows new schema with generationfalse. Saved .local/reader-first.env references
-old edition and must remain generationfalse/read-only. New allowance150; prior development94.697304
-plus first reader22.053726 =116.751030 already spent. Combined authorized operational allowance now
-266.751030. Receipt tests/receipts/second-edition-allocation.json. Increase further only as needed;
-never reset combined accounting. `.local/progress.ts` works on current schema; old scope helper's
-combined-total constant only includes development; use the new second-scope helper instead.
+Evidence: [follow-up report](evals/author-feedback-and-preparation-2026-09-06.md). Original infinite-book
+preparation/tour source, Context7 Kysely/React docs and official Astra documentation were consulted.
+No provider API or model change was introduced by this follow-up.
 
-First reader export complete at .local/reader-first-preserved-2026-09-06:92objects/70ops/20docs/
-8publications/10savedimages/4sessions. References in archive/reader-attempts/README.md and receipt.
-Old allowance frozen22.053726, never copy old corpus into new. Each new attempt starts from scratch,
-as the author reiterated. Current work: **F4 tour deployed and verified; F3 request1 complete; live preparation running**. ReadingGuide.tsx,
-tour-state.ts, main.tsx and CSS implement native modal/actual spotlights, six short steps, skip/Escape,
-back/next, remembered dismissal, ? replay and position restoration. Tour movements suppress reading
-heartbeats and saved-position updates. No generation was submitted in tour QA. Actual in-app1280×720
-journey passed; narrow390×844 real-browser keyboard tour passed, allcardswithinviewport/zerooverflow,
-completion/reload/replay/Escape worked. **34tests/typecheck/lint/build passed**, gates30738complete.
-No further test rerun is needed unless new changes/failures justify it. Report:
-evals/author-feedback-and-preparation-2026-09-06.md. Original world SHA still matches.
-Local API57556/PID41760 and Vite39193/PID41802 stopped and exits verified; qa tab23 and agent-browser
-book-guide-qa closed. Only productiontab21 remains, reading the first section.
+### Active generation — continue until all 20 complete
 
-**Tour live at1ed691ab831a658eb93f395b1329fb2d8836370c**, Git deployment
-169d3c85-efdd-4725-b935-1c18b7f5fad3 SUCCESS; exact /healthz matched. Release helper51105/PID43609
-released with SIGINT and exited0. No hold remains. In-app production first-entry spotlight appeared;
-Next/Skip/reload-persistence/?replay/Escape passed. All5images loaded, scroll restored0. Current
-viewport651x1027, root visit94116ec2-0b0d-4da9-b9c7-4d6c33b789f5. Actual reading is now active on
-firstsection; secondsection already published. Observe preparation and follow a ready opening/return,
-then run ledger to20. Do not begin a separate literary study.
-**Live warm-entry/return PASSED.** Preparationa41a6042-d9f6-457b-9052-6bb13184c802 began20:20:53
-from firstsection with unread secondsection. Published The Back Label/Returns at20:36:24, source link
-20:36:46. Actual link appeared withoutreload. Entered c8b4065e-4088-4d5d-a165-0f9e8877cd6a;
-all101paragraphs/3images loaded at nextobservation5.5sec later (includes tool latency, not benchmark).
-Return restored root visit94116ec2 and sourceblockb-d9d899cdb3efaae5736d quoteoffset164–195.
-No explicitrequest was created by warmnavigation. Root remains visiblefirstsection; completed samepub
-preparation cannot repeat. Full evidence in evals/author-feedback-and-preparation-2026-09-06.md.
+The durable driver is **session 7881 / PID 58361**. Do not start a duplicate. It runs:
 
-**Full20 driver running: session7881**, started20:37:55, PID58361. Request2 rootcontinuation
-**decc7f9a-b434-42ab-98a4-1734fbd23ffe** queued whilepreparation finishing. Do not startduplicate.
-No releasehold or localAPI. Lastactual committed8.28912 before request2;unknown0. Record lateststate
-with .local/progress.ts or observe.ts. `verify-assets.ts` checks allpublishedimages atfinalscope.
-Continue driver through20 (it stops onfailed/paused/networkerrorsforinspection), then complete F5
-assets/pin/cost/corpusreceipt and finalnestedgrandchild/source-return journey. No more broadtests or
-literarystudy unlessactualdefect warrants. Finaldocscommit/push must be safe forprovideroperations.
+```sh
+mise exec node@24.18.0 -- node --import tsx .local/review-second/run.ts
+```
 
+Requests 1 and 2 are complete. Request 3 is running: an actual root-image exploration,
+**739762df-9e1b-480e-8364-cea1d567d430**, created 21:04:33 UTC. At 21:22 it had published its first
+section and was still generating imagery. The driver continues sequentially through root, child and
+grandchild requests, without operator plot instructions. It saves each body, source, dedupe key and ID
+before submitting. A failed/paused intent or network error stops the driver for inspection; no
+ambiguous provider operation is automatically purchased again.
 
+Files under ignored `.local/review-second/`:
+
+- `ledger.json`: authoritative count and IDs. Begin is already request 1; never create another Begin.
+- `run.ts`: resumes incomplete entries; `--through N` stops between requests at a chosen count.
+  A nonempty `hold` file stops between requests. **No hold file currently exists.**
+- `run-status.jsonl`: compact status written every minute by read-only **monitor session 48585**
+  (`watch.ts`). The monitor exits when the ledger reaches 20. Monitor errors never retry generation.
+- `observations.jsonl`: more detailed, read-only snapshots from `observe.ts`.
+- `after-two.json`: interim scope: 2 works, 5 publications, 10,551 words including headings/alt,
+  12 published images; every operation matched the pin. It includes request 3's active reservation.
+
+The first request was **ed8a8cf1-5940-4255-886f-af988132b759**; request 2 was
+**decc7f9a-b434-42ab-98a4-1734fbd23ffe**. Initial driver session 5982 exited normally after request 1.
+Preparation is recorded separately and is not one of the 20 explicit requests.
+
+Useful local helpers (read-only, no provider purchases):
+
+```sh
+mise exec node@24.18.0 -- node --env-file=.env --import tsx .local/progress.ts <since-UTC>
+mise exec node@24.18.0 -- node --env-file=.env --import tsx .local/review-second/observe.ts
+mise exec node@24.18.0 -- node --env-file=.env --import tsx .local/reader-second-scope.ts <receipt-path>
+mise exec node@24.18.0 -- node --import tsx .local/review-second/verify-assets.ts <receipt-path>
+```
+
+The second-scope helper includes both earlier allocations, session/renewal metadata, openings,
+mechanism, publication scope and the request ledger. Do not use the old first-scope helper for totals;
+it omits the first reader attempt from prior spending.
+
+### Edition, deployment and accounting
+
+Active worktree: `/Users/ratpartyserver/git/shape-of-time-agentic`, branch `codex/agentic-world`.
+Normal checkout: `/Users/ratpartyserver/git/shape-of-time`, branch `main`.
+Retired `art-thing` remains read-only.
+
+- Site: https://shape-of-time-production.up.railway.app
+- Railway project: `8b20e07d-c256-44c9-85be-d1c7e50ac83d`; service `shape-of-time`.
+- Active schema: **world_reader_20260906_b**.
+- Reading key: **shape-of-time:2026-09-06T19:54:14.409Z**.
+- Pinned mechanism: **aefcf65a848bbecda3b37c0a26d71e6230712f795c4e268e678bc671408acd4e**.
+- Pin receipt: `tests/receipts/second-edition-pin.json`; verified before any generation/publication.
+- Live application/main: **1ed691ab831a658eb93f395b1329fb2d8836370c**.
+- Git deployment **169d3c85-efdd-4725-b935-1c18b7f5fad3** succeeded; exact `/healthz` matched.
+- Local branch **9b776f6** adds verification documentation and is not pushed; later handoff/report
+  edits are uncommitted. These documentation changes do not alter the creative mechanism.
+- Hosted generation and preparation are enabled. Local `.env` points at the active schema with
+  generation disabled. No local API or Vite server remains running.
+
+**No release lock is held.** Helper session 51105 / PID 43609 was released with SIGINT and exited 0
+following the tour deployment. The earlier helper was also released. Deploy only through a passing
+main push; never `railway up` or manual redeploy. Before any final documentation push, allow paid
+operations to settle and use `.local/hold-release.ts` if needed. Always release and verify its exit.
+
+The author explicitly authorized exceeding $150 if needed. Current edition allowance is $150;
+prior development cost is **94.697304** and the archived first reader attempt cost **22.053726**,
+so prior combined spending is **116.751030** and combined operational allowance **266.751030**.
+Settled active-edition spending after request 2 was **15.559749**, before request 3. Current monitoring
+includes active reservations; do not mistake those for final charges. Unknown outcomes remain zero.
+Increase the allowance deliberately if needed for the authorized run, preserve the spending guard,
+and never silently reduce Astra/xhigh or the image model. Allocation receipt:
+`tests/receipts/second-edition-allocation.json`.
+
+First-attempt archive: `.local/reader-first-preserved-2026-09-06`, referenced by
+`archive/reader-attempts/README.md` and `tests/receipts/reader-first-preserved.json`. It contains 92
+objects, 70 operations, 20 documents, 8 publications, 10 saved images and 4 sessions. The old schema's
+allowance was frozen at its actual cost. `.local/reader-first.env` remains read-only/generation-disabled.
+Never copy this archived corpus into the fresh creative context.
+
+### Remaining work
+
+1. Continue the existing driver through all 20 completed explicit requests. Resolve actual failures
+   or budget limits without changing the pinned mechanism or duplicating provider work.
+2. Verify the final published images, request count, model/mechanism receipts, costs and scope.
+   Complete an actual grandchild/source-return journey using existing openings; avoid extra paid QA.
+3. Finish PLAN.md section 11, the follow-up report and a small final receipt. Commit, safely push,
+   verify deployment and leave no temporary holds or processes that should have stopped.
+4. Leave the opening ready for the author. The QA browser has seen the guide; ? can reopen it for
+   handoff. New readers still receive the first-entry guide automatically. Leave artistic judgment
+   to the author rather than commissioning further criticism.
+
+CUA tab **21**, browser **1**, remains on root visit **94116ec2-0b0d-4da9-b9c7-4d6c33b789f5**.
+Current root work: **work-895cb2c0b80c9b201cc2535181c2a612**. The Back Label work:
+**work-37e6ef40518cb332d5b65c8c9c3d32cb**; warm visit **c8b4065e-4088-4d5d-a165-0f9e8877cd6a**.
+Preparation **a41a6042-d9f6-457b-9052-6bb13184c802** is complete. Its source is first-publication
+`3d81106c-9af8-467f-b533-a51863cf42f7`, block `b-d9d899cdb3efaae5736d`, quote offset 164–195.
+Root remains on that first section, whose completed preparation cannot repeat.
+
+---
+
+The material below preserves the earlier first-attempt handoff. Its completed sample, old process
+IDs and stop instructions are historical evidence. The active follow-up above controls current work.
 
 ## Purpose and terminology
 

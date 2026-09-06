@@ -112,3 +112,10 @@ an ordinary root continuation. Preparation is tracked separately. It remains the
 whether any opportunity develops a nested opening, linear continuation, or neither. The observed
 case demonstrates preparation of a nested illustrated opening while saved linear reading exists;
 mechanical tests separately establish reuse of a continuation published ahead of a waiting request.
+
+At21:11UTC the still-open root reader contained all4rootpublications and9loadedimages after
+request2 completed. No manualreload or readernavigation occurred. The saved source paragraph
+remained at30.566px and scrollY1168.75, exactly matching the earlier return observation. No alert
+was visible. Thus newly saved continuation arrived through the ordinary reading refresh without
+moving the existing reading place. This continuation was created by explicit request2, not by
+preparation; that distinction is preserved in the ledger.
