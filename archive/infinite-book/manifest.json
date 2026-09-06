@@ -1,0 +1,42 @@
+[
+  {
+    "file": "templates-main-7280937.ts.txt",
+    "repository": "https://github.com/torgbuiedunyenyo/infinite-book",
+    "commit": "72809379571e00f6115eab95dfc32efef8f54bc0",
+    "path": "backend/src/prompts/templates.ts",
+    "blob": "c982d684438ed7b63ab4e5c52b26d90f2cb40c3d",
+    "bytes": 35835,
+    "words": 5269,
+    "sha256": "e57e54479e2c425a6fb4b2238d8b2782f653235c4a5b3b32f4baf145cfb6e736"
+  },
+  {
+    "file": "world-document-c4f3d25.md.txt",
+    "repository": "https://github.com/torgbuiedunyenyo/infinite-book",
+    "commit": "c4f3d25c7d911834e72c782a4b79da24cd833849",
+    "path": "world_document.md",
+    "blob": "f983923eaf312cca651f5f67aac582f05e415762",
+    "bytes": 30134,
+    "words": 4713,
+    "sha256": "d4d9e4bf4b2a569a692ec2c2044a720f7367467780aaa47778265e32ff002f75"
+  },
+  {
+    "file": "world-document-af5ba8d.md.txt",
+    "repository": "https://github.com/torgbuiedunyenyo/infinite-book",
+    "commit": "af5ba8d01f47766a7726f5420b7f2e4b4f43c111",
+    "path": "world_document.md",
+    "blob": "ea1032d83d4c8ad2756677a646b2e3e939e910d9",
+    "bytes": 28822,
+    "words": 4501,
+    "sha256": "ade029aa4b7371544ca0aebf3c8367f91d89ee74456cbd415689c0b3367d8659"
+  },
+  {
+    "file": "world-document-1c3644b.md.txt",
+    "repository": "https://github.com/torgbuiedunyenyo/infinite-book",
+    "commit": "1c3644b7d2e7c7b10a62cfa6c6f876ac53559836",
+    "path": "world_document.md",
+    "blob": "a78e83f9a13e81ad598b7c5cf3c4c8bfaef7993e",
+    "bytes": 30268,
+    "words": 4639,
+    "sha256": "0b8babed247377221e1963e7ca8e7f432335eaeec9ccaa14e3f2bef55cc5ecd4"
+  }
+]

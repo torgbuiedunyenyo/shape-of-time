@@ -1,67 +1,68 @@
 # Shape of Time
 
-An illustrated generative hyperbook: a calm e-reader where books continue through finite narrative
-movements and phrases can open into other books.
+A world exploration harness for sustained, nested illustrated narratives. Read a book, follow a
+passage or image into another life, and return to the exact place with a deeper understanding.
 
-Turn a folio to move through the current story. Open a phrase, a deliberate highlight, or a requested
-title to move sideways into a nearby story. Back returns to the exact passage. Every movement can
-rest; every book can continue.
+The successful text-only infinite-book is the experiential baseline. The creative agent uses GPT-6
+Astra at xhigh, with persistent context, memory and tools it can choose among. Imagery uses GPT Image
+2. The agent decides how to investigate, create, inspect, revisit and develop the work.
 
-## Current state
+## Current state: ready to begin implementation
 
-This repository is the clean successor to the retired `auto-biblio` experiment. It contains the
-governing product contract, proof model, verified Shape of Time source, and the first runnable
-one-process application spine. The reader shell, Hono server, five-table Postgres model, immutable
-publication transitions, and content-addressed storage adapters are implemented. The B1 GPT Image 2
-request/replay/durable-dispatch/recovery contract is complete but is not connected to the reader. B2
-visual direction is current; the prepared story garden and narrative generation loop do not exist yet.
+The plan, original creative sources and repository cleanup are complete. **The replacement
+application is not implemented.** There is deliberately no active package manifest, application
+code, old corpus, test suite, build/start command, migration or deployment configuration. Nothing in
+this checkout silently runs the retired illustrated prototype.
 
-Start here, in order:
+Start here:
 
-1. [`SPEC.md`](SPEC.md) — what the experience is and is not.
-2. [`EVALS.md`](EVALS.md) — what evidence makes it good enough.
-3. [`PLAN.md`](PLAN.md) — the dependency-ordered build queue.
-4. [`HANDOFF.md`](HANDOFF.md) — the live state and next action.
+1. [SPEC.md](SPEC.md) — the intended experience and current artistic direction.
+2. [EVALS.md](EVALS.md) — meaningful literary, visual, operational and reader evidence.
+3. [PLAN.md](PLAN.md) — the single implementation queue; begin with P1a.
+4. [HANDOFF.md](HANDOFF.md) — actual progress, local/deployed state and next action.
 
-The expanded world source is in
-[`content/shape-of-time/world.md`](content/shape-of-time/world.md), with byte-level provenance in
-[`content/shape-of-time/SOURCE.md`](content/shape-of-time/SOURCE.md). It is the sole comprehensive
-factual and plot authority. The first finite root movement is in
-[`content/shape-of-time/root-movement-01.md`](content/shape-of-time/root-movement-01.md); the root book
-continues from its changed state rather than ending there.
+[AGENTS.md](AGENTS.md) governs development. CLAUDE.md points to it and adds no competing rules.
 
-The Fable prompt contract lives under [`prompts/fable/`](prompts/fable/): the baseline XML
-template, the explicit temporal guardrail, and a separately excluded set of optional craft examples
-for a controlled experiment. The separate
-[`visual-bible.md`](content/shape-of-time/visual-bible.md) defines shared visual grammar and scoped
-book/folio continuity without deciding Clef, future cultures, or scene details globally.
+## What is here
 
-The accepted application and Railway topology is recorded in
-[`docs/adr/0001-one-process-stack.md`](docs/adr/0001-one-process-stack.md).
+- [content/shape-of-time/SOURCE.md](content/shape-of-time/SOURCE.md) identifies the full original world,
+  verbatim main-template world description, adapted original writing guidance and approved visual
+  medium. Preserve their wording. Some natural explanation of world mechanics is welcome; constant
+  didactic monologues are not.
+- [archive/README.md](archive/README.md) explains the complete retired-source snapshot, exact
+  predecessor sources and how to inspect them without restoring the old application. Archive text is
+  historical evidence, excluded from ordinary searches and from active creative context.
+- .nvmrc and .npmrc retain the selected Node version and package registry. P1 creates a fresh minimal
+  application manifest and configuration for the chosen TypeScript/React/Hono/Postgres stack.
 
-## Develop
+P1 builds saved work, a thin reader and the real Astra/image/critic loop together. P2 adds generated
+nesting and exact return. Subsequent milestones develop sustained reading, recovery and long-form
+coherence. Do not substitute another static showcase or reassemble the archived runtime first.
 
-Use Node 24.18.0 and pnpm 11.15.0, then:
+## Checkouts and release state
 
-```sh
-pnpm install --frozen-lockfile
-pnpm exec playwright install chromium
-pnpm run dev
-```
+On the original machine, work continues in /Users/ratpartyserver/git/shape-of-time-agentic on
+codex/agentic-world. The normal /Users/ratpartyserver/git/shape-of-time checkout's local main also
+contains this clean starting point. A new clone of this revision has the same instructions and
+source material; the old local folders and conversation are not required to understand the plan.
 
-`pnpm run dev` starts the pinned local PostgreSQL 18.4 container, applies migrations, and runs the
-Vite reader plus Hono API watchers. Local assets live under ignored `.local/assets`. Run the complete
-proof surface before pushing:
+The local checkpoint is tagged checkpoint/agentic-clean-start-2026-09-06. The complete retired source
+is tagged archive/folio-prototype-2026-09-06 at e1a3decb29b33710f26a89f5cf2a415ca6f3ae09. The source
+archive also travels with this checkout, independent of tag availability.
 
-```sh
-pnpm run gates
-```
+**Remote main and the Railway deployment have not been changed.** Do not push the pre-implementation
+checkpoint to production. A future release requires the implemented, tested application and the
+Git-integrated deployment process in PLAN.md. The current local state is not a deployable product.
+
+Previous ignored credentials, dependencies and build/test artifacts from the normal checkout are
+preserved privately under its ignored .local/retired-folio-e1a3dec directory. They are not inputs to
+the new application. No database, remote asset store or running deployment was changed.
 
 ## Ancestry
 
-- [`torgbuiedunyenyo/infinite-book`](https://github.com/torgbuiedunyenyo/infinite-book) is the earlier Shape of Time implementation and the source-history repository.
-- [`torgbuiedunyenyo/auto-biblio`](https://github.com/torgbuiedunyenyo/auto-biblio) is the retired Infinite Library implementation.
-- [`LEGACY.md`](LEGACY.md) records what was retained and what was deliberately left behind.
-- [`shapeoftime.net`](https://shapeoftime.net) is the existing public Shape of Time experience and a
-  reference point. This successor deploys first to its isolated Railway-generated domain; any later
-  custom-domain cutover is deliberate.
+- [infinite-book](https://github.com/torgbuiedunyenyo/infinite-book): successful text-only predecessor
+  and source of the selected world and writing guidance.
+- [auto-biblio](https://github.com/torgbuiedunyenyo/auto-biblio): retired theoretical experiment,
+  available for historical investigation.
+- The archived July shape-of-time: failed illustrated folio successor. Its old instructions and
+  completed milestones do not govern this replacement.

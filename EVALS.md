@@ -1,282 +1,96 @@
-# Shape of Time — Prototype Proof Model
-
-This document defines what must be demonstrated before the illustrated hyperbook prototype can be
-called good, connected to paid generation, or released. It is intentionally small: evidence comes
-from readers, a real browser, real persistence boundaries, and recorded provider contracts—not
-from a committee of model judges.
-
-## Release rule
-
-The prototype passes only when every applicable gate below has current evidence for the same commit.
-An unrun gate is not a pass. A blocked gate blocks the release.
-
-The order matters:
-
-1. Establish the application, real Postgres, private bucket, and health route on the designated
-   Railway prototype from the first executable commit. **Complete.**
-2. Build the **Reader-first vertical slice** and prove it as one coherent reading object.
-3. Pass the **In-app Browser and consecutive-reading delight gate** before connecting generation.
-4. Prove the Fable and image provider contracts under explicit spend ceilings.
-5. Connect **Simple pagewise generation and real cold paths** before speculative preparation.
-6. Perform **Incremental garden expansion and deployed release QA** only after the core experience
-   works.
-
-An early healthy deployment proves only the runtime and infrastructure boundary. It is not a
-reader-first-slice pass, provider pass, literary pass, or release.
-
-If the slice is not worth reading and exploring, stop. Generation and a larger garden are not
-remedies for an unpleasant reader.
-
-## Evidence standard
-
-Each gate report records:
-
-- commit SHA, environment, viewport, browser, and fixture/content digest;
-- the exact journey or command run and its result;
-- screenshots or recordings where appearance or interaction is the claim;
-- timings, model IDs, token counts, usage, and cost where applicable;
-- every observed failure, including failures fixed during the run;
-- the final PASS, FAIL, or BLOCKED judgment and the person making it.
-
-Store feel-gate and release evidence under docs/qa/ by date. Tests introduced for a behavior must be
-observed failing for the intended reason before the implementation makes them pass.
-
-## 1. Reader-first vertical slice gate
-
-Generation and provider credentials remain disconnected from the reader runtime for this gate.
-Bounded editorial calls may author the checked-in prose and images, but reading the slice performs no
-network request or paid operation.
-
-Required proof:
-
-- Eight finished root folios complete one compressed but intelligible movement from Payment through
-  Jay's informed yes. They do not compress the later six-part arc or pretend the root book ends.
-- The exact phrase “The maps were always becoming wrong” opens the independent two-folio child
-  *The Map on the Wall*. Eniola's Lagos ferry movement makes Phantas Minor materially consequential
-  and reaches a public, contested trace without replaying Jay and Tan.
-- Four actual reader plates use the approved Treatment B medium and perform distinct narrative jobs.
-- The file-backed fixture, Library, cover, reader, navigation, and cold-path demonstrations ship in
-  the same slice. There is no database seed, provider call, or fake generated child in this gate.
-- The sole visible suggested phrase opens its real prepared destination. Unprepared phrases remain
-  ordinary prose.
-- Prose and image share narrative work. An image adds place, evidence, relationship, contradiction,
-  atmosphere, or deliberately unspoken information; it does not merely paraphrase nearby text.
-- A fresh reader can open the cover, read all ten folios, explore laterally, and return to the exact
-  root phrase without instructions from the builder.
-- There is no title-page auto-advance, global generation banner, dead Next action, stranded child
-  book, generic loading takeover, or unexplained control.
-
-PASS requires an in-app Browser walkthrough on desktop and a mobile-sized viewport plus a
-consecutive human read. Any comprehension or interaction break is a failure to repair before paid
-generation is connected to the reader runtime.
-
-## 2. Complete reader-first journey
-
-A clean session must complete this sequence:
-
-1. Open the library and deliberately open the Shape of Time cover.
-2. Read multiple folios and use Next, Previous, keyboard arrows, and swipe.
-3. Open a suggested phrase into a prepared book.
-4. Use Back to passage and return to the exact source phrase and reading position.
-5. Select arbitrary text on a later folio and invoke Open as a book.
-6. Remain in the source reader while an honest confirmation explains that dynamic creation is not
-   connected in this slice. Do not invent a child, start a timer, or make a network request.
-7. Filter the shelf by an existing title.
-8. Explicitly choose Create a book called … for a missing title and see the same honest disconnected
-   confirmation; typing alone must never spend.
-9. Bookmark, reload, and resume the exact book, folio, and place.
-10. Finish the available root or child movement without a terminal fiction that the book is over.
-11. Return to the shelf from either book.
-
-The journey fails if a mechanic exists only as an isolated demo, if navigation state is duplicated,
-or if an auth wall or generic spinner replaces the reading surface.
-
-## 3. Literary reading gate
-
-Literary quality is judged by consecutive human reading, not isolated excerpts or automated style
-scores.
-
-For the reader-first slice, read every root folio and prepared child in order. For generated prose, use
-one uninterrupted run of at least eight consecutive folios from the same prompt version; do not
-cherry-pick or splice candidates.
-
-At least two fresh readers independently record:
-
-- what physically happened and why;
-- what the central characters wanted and what changed;
-- any passage they could not interpret;
-- any repeated pseudo-literary, meta-referential, abstract, or allusive mannerism;
-- any coined thematic label, unclear referent, narrator self-grading, or aphorism-shaped claim that
-  substitutes performance for a concrete event, thought, or consequence;
-- whether they wanted to turn the next page, and why.
-
-For the prepared child, readers must also be able to state its local premise, how it grew from the
-founding phrase, what changed during its movement, and why it does not replay the Jay and Tan trajectory
-or collapse into an encyclopedia entry. Across the slice and later generated reading, readers judge whether the
-world feels larger than one couple, Oakland, and a binary past/future corridor.
-
-PASS requires that readers can accurately paraphrase events, motives, and consequences; no reader
-finds the run broadly unintelligible; and the project owner judges it worth continuing. A repeated
-failure may motivate one targeted prompt change followed by a blinded rerun. Automated checks may
-prove that the compact prose-guidance block is present, singular, and correctly placed; they may not
-certify prose quality with vocabulary regexes or a style score. Do not add a tribunal, ban-list
-accretion, generated style exemplar, or fallback writer.
-
-The compact human-authored prose-guidance block and explicit temporal-rules block are present from
-the first baseline. The first protects directness and legibility without supplying a voice to copy;
-the second protects world physics. The three adapted, human-selected craft examples remain absent
-from that baseline. They may be tested only as one complete, versioned A/B after consecutive reading
-identifies placeless abstraction, above-the-scene reporting, or explanatory summary as a repeated
-failure; the beat, history, and every other prompt input remain fixed.
-
-## 4. Actual reader plates gate
-
-Review all four actual reader plates together in their folio layouts and side by side at reading
-size, not only as individual full-resolution images. They must cover recurring Jay/Tan identity,
-Oakland material life, the root map, a non-root Lagos center outside Oakland or the Bay Area, and
-visible Phantas Minor consequences.
-For editorially authored slice plates, Fable's image direction and the application's ordered
-prior-image references remain separately inspectable as checked-in provenance. The production
-adapter proves the same separation again when dynamic generation is connected.
-
-PASS requires stable character and location identity, legible intentional changes, consistent
-medium, useful composition beside the prose, and meaningful narrative contribution. Every approved
-image has accurate alt text. Rejected images cannot become reference anchors merely because they
-were generated first. An 8–12-image matrix is a conditional diagnostic after an observed identity,
-place, or purposeful-change failure; it is not a prerequisite for this gate.
-
-## 5. Exact navigation and reader state
-
-One navigation state machine owns page turns, apertures, browser history, bookmarks, and reload.
-
-Real-browser tests and the manual journey must prove:
-
-- browser Back never pushes a new history entry;
-- Back to passage restores source book, folio, exact span, and practical reading position;
-- return still works after reload, responsive reflow, and a later-page or cross-paragraph selection;
-- Next and Previous neither skip nor duplicate folios;
-- cover, first folio, and movement boundary are stable states rather than transient flashes;
-- bookmark/resume and discovered shelf entries survive reload;
-- book-scoped creation status never leaks onto another book.
-
-An approximate return to the right chapter or the top of the right folio is a failure when an exact
-source span was recorded.
-
-## 6. Latency and calm-loading gate
-
-Measure at least ten expected turns and ten prepared-aperture openings in the release environment.
-
-- Prepared page turn: under 250 ms P95.
-- Prepared aperture: under 500 ms P95.
-- Cold action acknowledgment: visible within one second.
-- Normal reading: no token streaming and no full-reader loading replacement.
-
-Record text/image generation latency, prefetch hit rate, and unused prefetched work. A cold
-generation may take longer, but its state must be quiet, honest, book-scoped, recoverable after
-reload, and must not imply that content is ready before it is.
-
-## 7. Accessibility gate
-
-Automated checks supplement, but do not replace, manual keyboard and screen-reader-oriented review.
-
-PASS requires:
-
-- all controls have accessible names and visible focus;
-- the complete prepared journey works without a pointer;
-- selection actions are reachable by keyboard and touch;
-- focus remains stable across page turns, dialogs, Back, and Escape;
-- reduced-motion preference is honored;
-- contrast, text sizing, zoom, reflow, and mobile composition remain readable;
-- narrative images have useful alt text and decorative elements are hidden appropriately;
-- live creation messages are announced without repeatedly interrupting reading.
-
-## 8. Dynamic atomic exposure, idempotency, and spend
-
-This gate becomes applicable only when dynamic generation is connected. The static slice neither
-claims nor needs it. These claims then require integration tests against a real test Postgres
-instance.
-
-Tests must prove:
-
-- repeated duplicate actions reserve one book/folio task and purchase at most one attempt;
-- one process claims a paid operation atomically before dispatch;
-- a folio becomes ready only when its required prose and image assets are valid;
-- exposure is one atomic transition;
-- exposed prose, layout, aperture source spans, and required asset IDs cannot be mutated;
-- a failed unseen folio may be retried without changing an exposed folio;
-- repeated highlight, title, refresh, and prefetch actions preserve the same idempotency identity.
-- root and child books cross a movement boundary from the changed state without chapter-sized
-  generation, replay, or a terminal interstitial.
-
-Leases, fencing, and overlapping-worker recovery are required only if the deployed topology or an
-observed recovery failure introduces overlapping workers. They are not prerequisites for the
-reader-first slice or the first one-process generator.
-
-Mocks may test pure decision logic. They cannot prove database locking, transactionality,
-uniqueness, provider behavior, browser geometry, or object-storage durability.
-
-## 9. Provider and 400k contract
-
-Every accepted prose attempt must record and verify:
-
-- served writer is Claude Fable 5;
-- effort is xhigh;
-- no Opus, alternate writer, repair model, or provider fallback was used;
-- result is nonempty and not refused or truncated;
-- prompt version, ordered context blocks, source digests, model response ID, usage, latency, and
-  cost.
-
-The total Fable context ceiling is 400,000 tokens. With a 32,768-token output reserve and a
-4,096-token safety margin, counted input must not exceed 363,136 tokens. Count the complete
-multimodal request using the provider-supported token counter before spending. Character estimates,
-recent-page windows, summaries, cache discounts, or provider compaction cannot make an over-limit
-request pass.
-
-A live contract test, run only after an explicit spend ceiling is recorded, proves the current
-provider accepts Fable with xhigh and reports count/usage as expected. Recorded fixtures cover
-ordinary CI afterward, but a replay fixture does not prove the live provider contract.
-
-Every accepted narrative image attempt records the exact requested GPT Image 2 snapshot, reference
-assets, prompt version, provider request ID, usage when returned, latency, pricing version, a
-usage-derived total-cost estimate when every component is priced (or explicit unavailable
-components), and output digest. Estimated cost is not provider-billed cost. The served model is not
-exposed by the Image API, so requested-model provenance must never be presented as provider-reported
-evidence. Missing required references, malformed output, moderation failure, or an unprotected sole
-copy is a failed attempt. An ambiguous dispatch remains indeterminate and is not automatically
-retried.
-
-## 10. Integration and in-app Browser release gate
-
-The release suite includes:
-
-- real Postgres migration and repository tests from an empty database;
-- atomic-claim, duplicate-idempotency, indeterminate-dispatch, and immutable-exposure tests;
-- overlapping-worker concurrency recovery only when its measured topology trigger fires;
-- real HTTP tests through the application composition root;
-- real-browser automated tests for geometry, selection, history, keyboard, touch, and reflow;
-- explicit live provider contract tests under a recorded spend cap;
-- a clean-session walkthrough in the Codex in-app Browser on desktop and mobile-sized layouts.
-
-Playwright or another test runner may support repeatable browser tests, but it does not replace the
-final in-app Browser feel gate. The final walkthrough repeats the complete reader journey against
-the exact deployed commit and records screenshots, timings, content/model evidence, and human
-reading notes.
-
-## Result semantics
-
-Use exactly these judgments:
-
-- PASS — the named evidence exists and satisfies every criterion.
-- FAIL — the behavior or evidence violates a criterion, including flaky or non-reproducible
-  results.
-- BLOCKED — a named external prerequisite is unavailable and no safe in-scope alternative can
-  produce the evidence.
-
-BLOCKED is not a waiver, and it does not permit later gates or release. Record the blocking
-condition, attempts made, owner, and concrete unblock condition. Missing credentials, missing test
-binaries, skipped tests, unavailable humans, absent screenshots, or a command that never ran cannot
-be reported as PASS.
-
-Never make a gate green by weakening its assertion, widening an allowlist, changing the fixture to
-avoid the defect, silently excluding an environment, or replacing a real boundary with a mock. Fix
-the product or report the failure honestly.
+# Evaluating the illustrated world
+
+This is the evaluation practice for the agentic replacement. Assess what the reader experiences and what the agent actually produced. Mechanical checks, provider contracts, artistic judgment and browser observations establish different things.
+
+## Literary and visual judgment
+
+Use GPT-6 Astra at xhigh as the initial LLM critic, in a context separate from the creative author's running conversation. Supply the intended experience, the original infinite-book material and adapted prose-guide.md identified by content/shape-of-time/SOURCE.md, the actual material under review and read-only access to relevant original prose/images. The later illustrated-successor prose guide is superseded. Do not give the critic only summaries, intended image prompts or the author's claims about why the draft succeeds.
+
+The critic can investigate. It should explain its conclusions with specific passages, images and source references, distinguish a real contradiction from viewpoint or uncertainty, and say when the available evidence is inadequate. It may request broader context before judging a long-range relationship. Do not impose a maximum source window that prevents the judgment being asked for.
+
+Ask questions appropriate to the reading:
+
+- What makes this stretch absorbing or uninteresting? Where did attention weaken, and what in the work explains that?
+- Can the reader follow enough of the world's mechanics to understand the experience while retaining discovery? Distinguish intriguing uncertainty from preventable confusion, and useful explanation from repetitive didactic monologues. Naming or briefly explaining a mechanic is not inherently a flaw.
+- Do characters retain particular wants, habits and incomplete understanding while developing through experience?
+- Do scenes accumulate consequences and create worthwhile continuation, including after a resolution?
+- Does a child grow meaningfully from its origin and sustain a life of its own?
+- Do prose and images agree where they concern the same thing? Are changes motivated, ambiguous, or erroneous?
+- Does looking contribute something worthwhile, including place, intimacy or atmosphere as well as information?
+- Does a return to earlier work deepen the reading without rewriting its established material?
+
+These are questions for judgment, not fields every scene must satisfy. A quiet scene, a character's lie, an unfulfilled possibility or an illustration without a new plot clue can be successful. Do not require exposition at a fixed interval or reward explanations merely for existing; assess their contribution in the sustained reading.
+
+A useful review contains a concise assessment, grounded examples of strengths and failures, the additional sources consulted, uncertainty and a few consequential suggestions. It may recommend continuing, revising, or collecting more evidence. Do not replace this with an average score, a mandatory checklist, a numerical threshold or a committee vote.
+
+## Critic calibration and comparisons
+
+Use a small set of preserved predecessor cases to check whether the critic can distinguish quality and inconsistency:
+
+1. The long-gap return of Jay's private amber, with the establishing and returning passages.
+2. The first Clef giver reversal, including the original giving scene and the later contradictory statement.
+3. Mrs. Chen's repeated first departure, with the earlier departure available.
+4. Distinct Clef realizations in different predecessor editions, labeled as different editions rather than presented as a within-book contradiction.
+5. The different post-resolution behavior in main and experiment-past-ending, with enough surrounding prose to assess development rather than isolated language.
+
+Preserve exact source provenance. Do not tell the critic the expected diagnosis before its initial reading; compare its explanation afterward. A miss prompts investigation of context and judgment, not a regex that manufactures a pass. This is a modest calibration exercise that can accompany the first live work, not a new project blocking it.
+
+Keep complete experimental runs, including rejected drafts and images. Report revisions made before publication and any manual intervention. Do not splice the best paragraphs from several runs and present them as one autonomous result.
+
+The predecessor is an experiential comparison, not a controlled test of architecture: its writer and other conditions differ. For comparisons among new variants, keep Astra/xhigh, GPT Image 2 and authored source/guide fixed where possible. Conceal variant/model labels from reviewers when useful. The owner's reading and preferences remain part of artistic direction.
+
+## Progressive reading evidence
+
+**First illustrated sequence:** read consecutive actual output in the reader and inspect the paired images. Confirm the agent could see its own returned images, act on tool results and use criticism. This establishes the live creative loop, not long-form quality.
+
+**Nested journey:** follow an actual generated source into a child, then a source in that child into a grandchild; return and continue. Read the source and child together, then read enough of the child to assess independent development. Do not pre-author the nested premises.
+
+**Substantial connected corpus:** extend the same root and nested works across many scenes. The plan suggests 30,000–50,000 words as an initial study scale, followed by a novel-length root and continuation. Corpus size is context for the claim, not a pass threshold.
+
+**Context renewal:** resume after an explicit checkpoint/compaction using persistent notes and archive access. Assess what was remembered, retrieved, misunderstood or lost. Include actual prose/images across the boundary.
+
+**After resolution:** assess whether a new situation grows from what has happened, rather than continued repetition of closure or arbitrary undoing of the ending.
+
+For long-form judgment, supply the complete available reading sequence when practical and allow source retrieval. Long-range claims need distant source evidence; reviewing isolated short windows cannot establish them. Record what the owner, critic and builder actually read, separately.
+
+## Mechanical checks
+
+The minimum useful regression suite covers:
+
+- saving and reading a composition without fixed word/paragraph limits;
+- stable publication and asset addresses, including duplicate submissions;
+- prevention of partial publication when an image is unavailable;
+- preservation of provider outputs before parsing and recovery after restart;
+- resumption from saved tool results without repeating completed effects;
+- no automatic replay of a provider request with an uncertain outcome;
+- enforcement of the shared spending allowance, including critique;
+- exact text and image anchors after reflow;
+- root → child → grandchild → child → root after reload and mixed page turns;
+- a shared work entered from two origins returning correctly in both cases;
+- warm/cold opening behavior, no focus stealing, and no generation from read-only search;
+- correct selected model/effort and actual image-bearing tool results on live contracts.
+
+Use real Postgres and storage for stateful tests. A small known fixture may test a reader control. Recorded real provider receipts may test protocol replay. Neither is described as a fresh generation or literary pass.
+
+Ordinary CI is free of paid inference. Run funded live-provider/evaluation commands explicitly with the run configuration, allowance and artifact destination. Tests may deterministically validate literal addresses and resource arithmetic; they must not certify meaning through phrase presence, word counts, plot counters or similarity scores.
+
+## Reader walkthrough
+
+Use the in-app Browser for the actual experience, with desktop and narrow layouts. Read, change text size, inspect images, turn pages, enter a prepared work, create a cold opening, explore image/text sources, return through multiple levels, visit the shelf, reload and resume.
+
+Record usable screenshots or a short recording where they support an appearance/navigation claim. Exercise visible controls; DOM presence alone is not enough. Automated browser regressions supplement this walkthrough.
+
+Measure warm navigation, cold opening time, frontier wait, wasted preparation and actual cost. Report the observed distribution/sample size instead of a universal latency promise.
+
+## Evaluation record and completion
+
+Each report identifies the code revision, prompt/source versions, edition/publications, selected and returned model evidence, evaluation scope, actual readers, source material inspected, provider usage, estimated/uncertain costs, failures and conclusions. Keep machine receipts/corpus exports outside Git when large; commit a small report and manifest with retrievable locations.
+
+Report these separately:
+
+1. Mechanical behavior: passed/failed/not run, with concrete checks.
+2. Provider behavior: verified/failed/uncertain, with real receipts.
+3. Literary and visual assessment: grounded judgment and unresolved questions.
+4. Reader experience: observed journey and usability failures.
+
+A milestone may be mechanically functional but artistically unpromising. Fix the cause before increasing spend; do not relabel a short demonstration as long-form success. Publication is the creative agent's decision within the harness. Development evaluation is how we judge and improve the harness, not an obligatory permission gate on every page.

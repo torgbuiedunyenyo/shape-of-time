@@ -1,0 +1,3 @@
+# Historical evidence is available deliberately, not mixed into ordinary source searches.
+# To search it explicitly: rg --no-ignore <pattern> archive/
+archive/

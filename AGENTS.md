@@ -1,63 +1,59 @@
 # Agent instructions
 
-## Authority
+## Purpose and authority
 
-Read these files before product work, in this order:
+Build a world exploration harness that produces sustained, nested image-and-text narratives coherent with themselves as they unfold. The successful infinite-book is the experiential baseline. Give the creative agent context, persistent memory, useful tools and room to decide how to develop its work.
 
-1. `SPEC.md` — stable product authority.
-2. `EVALS.md` — release evidence and proof boundaries.
-3. `PLAN.md` — dependency-ordered work queue; take the next unblocked item.
-4. `HANDOFF.md` — live branch, state, spend, deployment, and next action.
+Read SPEC.md, EVALS.md, PLAN.md and HANDOFF.md in that order before product work. The user's current instructions control over these documents. PLAN.md is the sole implementation queue; HANDOFF.md records actual status. Do not create competing plans or a second repository status file.
 
-`README.md` is orientation. `LEGACY.md` and source-history documents are lookup-only. `CLAUDE.md` is a compatibility pointer and adds no rules. Do not create a second status file, invariants file, or competing plan.
+This branch replaces the July folio design. Everything under archive/, earlier checkouts and the retired art-thing is historical evidence, not current product instructions. Their gates and completed checkboxes do not carry over.
 
-## Scope
+## Clean starting point
 
-This is a greenfield successor. The old `auto-biblio` code, schema, corpus, prompts, eval machinery, package boundaries, and deployment topology are evidence, not compatibility targets. Do not copy an old package wholesale or restore a retired mechanism because it already exists.
+The previous application is preserved at Git tag archive/folio-prototype-2026-09-06 and in archive/folio-prototype-e1a3dec.tar.gz, with a complete checksum manifest. It has been removed from active source paths. Read archive/README.md for deliberate historical inspection. Do not restore its package scripts, database migrations, prompts, prepared corpus or agent instructions as the new scaffold. Recover a small component only after checking it against the current purpose and plan.
 
-The intended prototype remains one TypeScript application, one Postgres database, and image storage. Add complexity only when a measured failure requires it.
+The active creative inputs are identified by content/shape-of-time/SOURCE.md. Archive text is excluded from ordinary searches by .ignore and is never loaded into the creative agent. CLAUDE.md is only a pointer to this file. No build, start, generation, migration or deployment command exists yet. Do not push this pre-implementation checkpoint to production's main branch.
 
-## Method
+## Models and creative freedom
 
-For every implementation step:
+- Text, the creative agent and the initial contextual critic use GPT-6 Astra at xhigh through the Responses API.
+- Generated imagery uses GPT Image 2; the verified initial snapshot is recorded in PLAN.md.
+- No silent model substitution or reduction of reasoning effort.
+- Use the original infinite-book/main world and writing material identified in content/shape-of-time/SOURCE.md, including the full recovered world. Preserve source wording. The illustrated successor's later prose guide is superseded.
+- Allow some natural explanation of world mechanics while trusting the reader; avoid constant didactic monologues. Preserve the approved visual medium.
+- The agent may investigate, plan, draft, create and inspect images, ask for criticism, revise and publish. These are available actions, not required stages.
+- No fixed movement lengths, paragraph quotas, deterministic literary verdicts or compulsory fact/obligation ledger.
+- Published work, drafts, character beliefs and agent plans have different meanings. Do not turn plans into already-established events.
+- The creative runtime must not load this engineering file or archived development prompts as artistic instructions.
 
-1. Write the named red test.
-2. Run it and record the expected failure reason.
-3. Make the smallest coherent change that passes.
-4. Refactor with the test green.
-5. Run the relevant focused tests and the complete repository gate before pushing.
+## Implementation and evidence
 
-Never make a gate pass by weakening it, widening an allowlist, adding a skip, or exempting the artifact it caught. Tests that touch persistence use a real test database. Provider contract tests use real APIs only when the plan explicitly authorizes a small spend ceiling.
+Use a single development agent unless the user explicitly requests delegation. Use the active codex/agentic-world worktree and preserve unrelated changes. Local main also contains the clean checkpoint so the normal checkout gives the same orientation. Earlier B2/D0/reader-first checkouts remain historical. Keep the initial application small: one TypeScript application, Postgres and image storage.
 
-Use current official documentation before implementing against external frameworks or model APIs.
-Pin provider contracts and record the served model when the provider returns it; otherwise retain the
-exact requested snapshot and explicitly record that served-model evidence is unavailable.
+Use tests that establish required behavior. Stateful tests use real persistence; provider-contract and creative evidence use real APIs when funded. Recorded real provider receipts can test replay. A synthetic paragraph can test a database write, not literary quality.
+
+Write meaningful failure-reproducing tests before fixing defects. Run focused checks during development and the complete applicable pnpm run gates before pushing application work. No package manifest or runnable application exists at the clean starting point; P1 creates the new manifest and appropriate gates. For the completed cleanup, source/archive verification and git diff --check are the applicable checks. Ordinary gates must not make paid calls. Do not spend time testing reversible documentation edits or exact file/table counts.
+
+Requirements intentionally superseded by the user's new direction may be retired with an explanation. Never conceal a remaining requirement's failure by weakening its assertion or relabeling synthetic evidence.
+
+Use Context7 and current official documentation before implementing against changing APIs/libraries. Use the OpenAI Docs skill for OpenAI interfaces and the Railway skill for infrastructure work. Preserve exact source/model/usage evidence where available; do not invent provider guarantees.
 
 ## Reader QA
 
-Use the in-app Browser for the actual reader journey. Drive visible controls as a reader would: cover entry, page turns, keyboard, touch-sized layout, phrase aperture, arbitrary highlight, title creation, exact Back, reload, and resume. DOM presence alone is not evidence of reachability. Do not substitute Playwright for the required in-app Browser walkthrough.
+Use the in-app Browser for the actual reader journey: sustained reading, prepared and cold entry, text/image exploration, nested return, keyboard/touch-sized controls, reload, reflow and resume. Automated browser tests supplement this walkthrough. DOM presence is not proof that an interaction works.
 
-## Git and shared-workspace safety
+## Spend, deployment and preservation
 
-- Preserve unrelated user changes.
-- Stage explicit paths; never default to `git add -A` in a mixed worktree.
-- Do not use destructive reset or checkout commands on work you did not create.
-- Keep commits small and aligned to one plan item.
-- Update `HANDOFF.md` before the final commit of a work slice.
-- No secret, token, generated credential, or raw `.env` value enters Git or logs.
+The planning request authorizes no provider spend or infrastructure changes. PLAN.md proposes an initial live allowance; record the owner's actual authorization and current remainder in HANDOFF.md before live use. Keep creation, imagery, criticism and paid renewal inside the same allowance. Do not ask again for actions already covered by a recorded authorization.
 
-Once a package manifest exists, `pnpm run gates` is the required pre-push gate. Before then, run the document/source checks named in `PLAN.md` and `git diff --check`.
+Never automatically repeat an ambiguous generation request. Preserve returned output before parsing, keep provider IDs, reconcile pending operations and record uncertain cost.
 
-## Models, spend, and deployment
+Deployment uses the existing Railway project identified in HANDOFF.md, with isolated staging data and explicit scope. Production source deploys come from passing main pushes. Never use railway up, a manual redeploy or Deploy Latest Commit to bypass Git integration.
 
-- Prose generation uses Claude Fable 5 at `xhigh`; no Opus or silent fallback.
-- Narrative images use the pinned GPT Image 2 contract in `SPEC.md` and `PLAN.md`.
-- The complete Fable request must remain below 400,000 total context tokens.
-- No paid call occurs without the plan item, a recorded ceiling, and provenance capture already in place.
-- Deployment begins with A2 in Railway project `8b20e07d-c256-44c9-85be-d1c7e50ac83d`. Every
-  `shape-of-time` application source deployment comes from a passing `main` push. Never use
-  `railway up`, manual redeploy, or Deploy Latest Commit for this Git-integrated service.
+Preserve historical refs, source material and existing production data. Do not reset others' work. Stage explicit paths. Do not commit secrets or raw environment values.
 
-## Session close
+Never delete, prune, truncate or overwrite transcripts under ~/.codex/sessions or ~/.codex/archived_sessions. This applies regardless of available storage or cleanup suggestions.
 
-Before stopping, make `HANDOFF.md` accurately state what landed, what is in flight, what was tested, what was spent, what is deployed, and the single next action. Do not leave future agents to infer state from chat history.
+## Continuity after compaction and at handoff
+
+Immediately read HANDOFF.md and its current PLAN.md section after compaction. Restate the product's purpose before proceeding. Update HANDOFF.md before a foreseeable compaction and at the end of each coherent slice with actual changes, evidence, costs, unresolved operations, deployment and the single next action.
