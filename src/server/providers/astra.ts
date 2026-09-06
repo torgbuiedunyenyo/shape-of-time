@@ -73,7 +73,8 @@ export async function astra(
       tools,
       tool_choice: "auto" as const,
       service_tier: "default" as const,
-      parallel_tool_calls: false,
+      // Let the agent request related tools together. The runner records and executes each in order.
+      parallel_tool_calls: true,
       background: true,
       store: true,
       max_output_tokens: maxOutput,

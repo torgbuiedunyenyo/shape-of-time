@@ -45,6 +45,7 @@ afterAll(async () => {
     .where("session_id", "=", session)
     .execute();
   for (const table of [
+    "intents",
     "assets",
     "documents",
     "operations",
@@ -53,6 +54,36 @@ afterAll(async () => {
     await db.deleteFrom(table).where("edition_id", "=", edition).execute();
   await db.deleteFrom("editions").where("id", "=", edition).execute();
   await pool.end();
+});
+it("resumes a batch interrupted after its first write, preserves both tool results and performs the next edit once", async () => {
+  const { runIntent } = await import("../src/server/agent/runner.js");
+  const { enqueue } = await import("../src/server/library/store.js");
+  const calls = [
+    { type: "function_call" as const, call_id: randomUUID(), name: "write_document", arguments: json({ path: "batch.md", body: "First saved state.", expected_revision: 0 }) },
+    { type: "function_call" as const, call_id: randomUUID(), name: "write_document", arguments: json({ path: "batch.md", body: "Second saved state.", expected_revision: 1 }) },
+  ];
+  await db.updateTable("sessions").set({ input: json(calls), step: 1000 }).where("id", "=", session).execute();
+  // Simulate interruption after the first durable effect, before recording its tool output.
+  await executeTool(calls[0].name, calls[0].arguments, calls[0].call_id, ctx);
+  const intent = await enqueue(edition, "prepare", null, {}, randomUUID());
+  await db.updateTable("intents").set({ session_id: session, status: "running" }).where("id", "=", intent.id).execute();
+  // Protocol fixture only: no provider call or literary claim belongs in this recovery check.
+  await db.insertInto("operations").values({
+    id: randomUUID(), edition_id: edition, session_id: session,
+    key: `${session}:response:1000`, kind: "astra", status: "complete",
+    request: json({}), provider_id: null, raw_key: null, reserved_usd: 0, actual_usd: 0,
+    error: null, completed_at: new Date().toISOString(),
+    response: json({ output: [{ type: "message", id: "msg_fixture", status: "completed", role: "assistant", content: [{ type: "output_text", text: "Mechanical recovery fixture complete.", annotations: [] }] }] }),
+  }).execute();
+  await runIntent(intent.id);
+  await runIntent(intent.id);
+  expect(await db.selectFrom("documents").select(["revision", "body"]).where("edition_id", "=", edition).where("path", "=", "batch.md").orderBy("revision").execute()).toEqual([
+    { revision: 1, body: "First saved state." }, { revision: 2, body: "Second saved state." },
+  ]);
+  const saved = await db.selectFrom("sessions").select("input").where("id", "=", session).executeTakeFirstOrThrow();
+  expect(saved.input.filter(i => i.type === "function_call_output").map(i => i.call_id)).toEqual(calls.map(c => c.call_id));
+  expect((await db.selectFrom("intents").select("status").where("id", "=", intent.id).executeTakeFirstOrThrow()).status).toBe("done");
+  expect(config.generationEnabled).toBe(false);
 });
 it("recovers a tool interrupted after its document write without creating another revision", async () => {
   const callId = randomUUID(),
