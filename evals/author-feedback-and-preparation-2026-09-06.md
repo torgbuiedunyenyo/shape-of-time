@@ -128,3 +128,19 @@ passing the pinned 250,000-token renewal threshold. Renewal operation
 was290,059input/5,785output tokens; cost6.235055 against a16.851025 reservation. The full original
 input remains preserved. Request4 then started normally from the renewed context. This establishes
 an actual funded context transition in the review corpus, not a verdict about its literary quality.
+
+## Two-level nested reader journey
+
+At22:25UTC, while request5 was still developing its work, the actual root reader's existing
+“The Gentle Route — Tan before the shop” link opened child visit6b4b70b4-1101-45e5-9ec4-8a757456d278.
+All4childsections and7images were loaded. Its existing “The Second Handle — the work of carrying”
+link opened grandchild visit7dc4a0c7-46cd-432a-81d3-0d68113adab2, work-c1281da55e3c8136afd25dc2de814198.
+The first grandchild section had98proseparagraphs and2loadedimages. No new exploration or
+continuation request was submitted by this journey.
+
+Return restored the exact child source blockb-6e246df7f629e95bb2ba at97.38px, beginning “She went
+back, left her case open on the table and pulled the plum-colored suit from the drawer”. A second
+Return restored the root image blockb-3c867dcc12b08fa95ab6 at99.97px. Both were below the reader bar,
+visible at their intended source; no alert appeared. Root visit94116ec2 is again active. Grandchild
+opening: opening-f0590077e96078b4f073ca55ac5bb939. This establishes the actual two-level navigation
+and loaded media, not a literary verdict. No additional journey is needed absent a new defect.

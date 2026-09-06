@@ -1,6 +1,6 @@
 # Handoff
 
-Updated September 6, 2026, 21:40 UTC. After compaction, read this active handoff and PLAN.md
+Updated September 6, 2026, 22:26 UTC. After compaction, read this active handoff and PLAN.md
 section 11. PLAN.md is the sole queue; do not create STATUS.md.
 
 ## Active follow-up
@@ -50,12 +50,24 @@ The durable driver is **session 7881 / PID 58361**. Do not start a duplicate. It
 mise exec node@24.18.0 -- node --import tsx .local/review-second/run.ts
 ```
 
-Requests 1–3 are complete. Request 4 continues **The Gentle Route**, work
-`work-d99e2e813bc1d7104ac8527f7f340386`: **00767a96-f75e-421d-9b8c-84dabf1bda1c**, created
-21:36:15 UTC, now running. Request 3 was the actual root-image exploration
-`739762df-9e1b-480e-8364-cea1d567d430`; it completed with two sections and four images. The
-interim `after-three.json` records 3 works, 7 publications, 14,867 words including headings/alt and
-16 published images. All operations matched the pin.
+Requests 1–4 are complete. Request 5 explores an actual passage inside **The Gentle Route**,
+work `work-d99e2e813bc1d7104ac8527f7f340386`, to create the grandchild:
+**610d461f-9234-4107-bbd4-ae68d87c9180**, created 22:03:38 UTC, running. Request 4 completed
+normally after context renewal, adding two sections to that work. The `after-four.json` interim
+receipt records 3 works, 9 publications, 18,814 words including headings/alt and **19 published
+images** (21 saved images, including unused variants). All operations matched the pin. At 22:06,
+active-edition committed spending including the current reservation was 43.432747, unknown 0.
+
+Request 3 was root-image exploration `739762df-9e1b-480e-8364-cea1d567d430`; request 4 was
+continuation `00767a96-f75e-421d-9b8c-84dabf1bda1c`. The root link to The Gentle Route exists:
+`opening-0e5568a8566386678de3bc29c6076142`, label “The Gentle Route — Tan before the shop”.
+**The full two-level navigation check passed at22:25UTC**, while request5 was still active.
+Root image → The Gentle Route (visit6b4b70b4-1101-45e5-9ec4-8a757456d278,4sections/7loadedimages)
+→ The Second Handle (work-c1281da55e3c8136afd25dc2de814198,
+visit7dc4a0c7-46cd-432a-81d3-0d68113adab2,1section/2loadedimages). Both Return buttons restored
+exact source blocks: child b-6e246df7f629e95bb2ba at97.38px; root image b-3c867dcc12b08fa95ab6
+at99.97px. No new paid/request intent was submitted by QA. Evidence is in the follow-up report.
+No more navigation QA is needed absent a defect. Root remains on the first-section image.
 
 The first natural context renewal completed successfully before request 4. Operation
 **302fa39a-5b68-495d-8424-0211ce18a912** ran 21:36:34–21:38:45; actual usage was 290,059 input
@@ -112,7 +124,7 @@ Retired `art-thing` remains read-only.
 - Pin receipt: `tests/receipts/second-edition-pin.json`; verified before any generation/publication.
 - Live application/main: **1ed691ab831a658eb93f395b1329fb2d8836370c**.
 - Git deployment **169d3c85-efdd-4725-b935-1c18b7f5fad3** succeeded; exact `/healthz` matched.
-- Local branch includes documentation commits **9b776f6** and **e339e61**, not yet pushed;
+- Local branch includes documentation commits **9b776f6**, **e339e61** and **44bff98**, not yet pushed;
   subsequent handoff/report updates may be uncommitted. These documentation changes do not alter the creative mechanism.
 - Hosted generation and preparation are enabled. Local `.env` points at the active schema with
   generation disabled. No local API or Vite server remains running.
@@ -143,7 +155,7 @@ Never copy this archived corpus into the fresh creative context.
 1. Continue the existing driver through all 20 completed explicit requests. Resolve actual failures
    or budget limits without changing the pinned mechanism or duplicating provider work.
 2. Verify the final published images, request count, model/mechanism receipts, costs and scope.
-   Complete an actual grandchild/source-return journey using existing openings; avoid extra paid QA.
+   The actual grandchild/source-return journey has passed; avoid extra paid QA.
 3. Finish PLAN.md section 11, the follow-up report and a small final receipt. Commit, safely push,
    verify deployment and leave no temporary holds or processes that should have stopped.
 4. Leave the opening ready for the author. The QA browser has seen the guide; ? can reopen it for
