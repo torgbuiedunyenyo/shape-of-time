@@ -7,7 +7,7 @@ the experiential baseline. No predecessor chapter was used as this run's generat
 
 Runtime: 242c071753bb77d2118344c1ece51e3b11c39762 on Railway production. Reader/routing refinement
 bf23b57 follows the run. Artistic sources are the four unchanged files identified by
-content/shape-of-time/SOURCE.md, including the exact corrected historical world. Author and critic
+content/shape-of-time/SOURCE.md, including the exact corrected historical world. Creative agent and critic
 used gpt-6-astra, xhigh; actual receipts confirm all_turns reasoning context. Images used
 gpt-image-2-2026-04-21. No model substitution or manual creative editing.
 
@@ -27,12 +27,12 @@ criticism/critic-e0849b016f902c8ed559170c23719787.md. It found the attraction an
 setting persuasive, but noted repeated repair motifs, several small action/prop slips, a missing
 unobtrusive temporal anchor, and a probable wrist-band error in the departure image.
 
-The author revised the prose, reduced repeated repair business, naturally identified Tan as coming
+The creative agent revised the prose, reduced repeated repair business, naturally identified Tan as coming
 from the future, established the arrival of the noodles, clarified a cable interaction, moved the
 counter image to its matching moment, corrected the departure image, and added a dinner illustration.
 It published that saved revision and wrote its own detailed, source-linked free-form continuity
 notes (42999fd2-236a-4f58-9dbd-f4c79e225352, notes/root-continuity.md). The notes explicitly distinguish
-published events from plans and abandoned draft details. Their structure was the author's choice.
+published events from plans and abandoned draft details. Their structure was the creative agent's choice.
 
 All four generated images remain. Three were published: img-2e65d7c4-9eb6-4495-a8e7-ae9386e6efa5,
 img-6dbbc75c-8ebf-48b3-ae1f-7fa940229810 and img-40cce6d2-9c38-4ef3-bf1d-c41ee078aa65.
@@ -41,8 +41,8 @@ and subsequently chose visual inspection. An intended prompt was not substituted
 
 ## Reading judgment and limits
 
-The builder read both draft versions, the contextual review and author notes, and visually inspected
-all published illustrations. The owner has not yet given a judgment on this new reading.
+The builder read both draft versions, the contextual review and creative agent notes, and visually inspected
+all published illustrations. The author has not yet given a judgment on this new reading.
 
 The opening has ordinary friction and particular social behavior: the old phone's payment interface,
 Jay's wage-deducted gift, Tan's defensive embarrassment, the cooler repair, and the uncomfortable
@@ -67,7 +67,7 @@ parameter failed; the same stored provider response was retrieved, saved and res
 fix. No replacement inference was bought. Plain retrieval works; persisted responses do not provide
 the assumed self-contained encrypted reasoning. Native context renewal needs separate validation.
 
-The full first run cost $4.582698 including author, critic, four images and revision. Remaining initial
+The full first run cost $4.582698 including creative agent, critic, four images and revision. Remaining initial
 allowance: $145.417302; unknown cost: zero; no outstanding operation at request completion.
 Full records and original media were exported to .local/corpus-first-reading-2026-09-06 with a
 checksum manifest: 10 tables, 29 operations, 4 assets, 33 stored objects. The snapshot was restored into world_restore_first_reading with generation disabled; every table
@@ -82,7 +82,7 @@ side-work routing, and long-selection request identity. They do not establish ar
 ## Reader observations and next experiment
 
 The actual publication opened and displayed all three saved images in the in-app Browser. The
-first deployed reader duplicated the title; bf23b57 fixes heading handling and adds semantic
+first deployed reading interface duplicated the title; bf23b57 fixes heading handling and adds semantic
 character positions, image regions, bookmarks, page controls and explicit title creation. Actual
 nested return/reload/reflow checks remain next. Warm/cold timings need measurement from subsequent
 uninterrupted requests; the first root's recovery pause makes it unsuitable as a normal latency

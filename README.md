@@ -1,8 +1,13 @@
 # The Shape of Time
 
-An agent-led world exploration harness: read a sustained illustrated narrative, follow a passage or
-image into another book, and return to your place. The successful text-only infinite-book is the
+The book is a world exploration harness: read a sustained illustrated narrative, follow a passage or
+image into a nested narrative, and return to your place. The successful text-only infinite-book is the
 experiential baseline. The retired folio prototype is preserved only in `archive/` and Git history.
+
+The human creator is the author; people exploring the book are readers. A creative agent develops
+the nested narratives and imagery, and a critic agent can provide contextual feedback. The UI is
+the reading interface. See SPEC.md for these terms and the distinction between reader requests,
+creative-agent turns and reading screens.
 
 Read AGENTS.md, SPEC.md, EVALS.md, PLAN.md and HANDOFF.md for the current intent and actual evidence.
 The new application is being implemented directly on the existing Railway production project.
@@ -14,7 +19,7 @@ Railway Postgres service and S3-compatible assets bucket; Docker is not required
 
 For development, link the Railway project and run `python3 scripts/configure-local.py`. This copies
 selected credentials to ignored `.env` without printing them and leaves generation disabled.
-`pnpm server` starts the API; `pnpm dev` starts the reader. `pnpm build` builds both, and `pnpm start`
+`pnpm server` starts the API; `pnpm dev` starts the reading interface. `pnpm build` builds both, and `pnpm start`
 runs the production application. In Railway, `DATABASE_URL` uses private networking. The local
 configuration uses its Postgres TCP proxy.
 
@@ -34,23 +39,23 @@ Tests use the `world_checks` schema, never purchase generation, and do not claim
 `pnpm inspect` reports requests, provider operations and shared spending without credentials.
 Operator scripts run with `tsx --env-file=.env scripts/NAME.ts`. `resume.ts REQUEST_ID` resumes only a
 reconciled paused/failed request. `critique.ts REVIEW_KEY [WORK_IDS...]` commissions an explicitly
-funded contextual review. Before a new reader request, the author automatically renews an active
+funded contextual review. Before a new reader request, the creative agent automatically renews an active
 context above250,000 tokens. This timing follows the first live renewal and observed longer-context
 costs; it is an operational boundary, not a story-length constraint. It preserves the full archive
 and complete canonical returned window. It shares the edition allowance, reuses a saved receipt on
-restart, and pauses an uncertain outcome. A single unusually long author turn still pauses before
+restart, and pauses an uncertain outcome. A single unusually long creative agent turn still pauses before
 the880,000-token dispatch guard; inspect it before manual renewal/resume.
-`renew.ts RENEWAL_KEY` also preserves and renews the idle author's context;
-its standalone compaction interface does not expose a reasoning-effort setting. Author/critic
+`renew.ts RENEWAL_KEY` also preserves and renews the idle creative agent's context;
+its standalone compaction interface does not expose a reasoning-effort setting. Creative agent/critic
 responses continue to use Astra xhigh. Both paid utilities require generation deliberately enabled.
 `corpus.ts export .local/SNAPSHOT` saves all records and original media with checksums while the
-author is idle. `corpus.ts restore .local/SNAPSHOT` verifies and restores to a fresh
+creative agent is idle. `corpus.ts restore .local/SNAPSHOT` verifies and restores to a fresh
 `DATABASE_SCHEMA=world_restore_NAME`, with generation disabled, and checks every restored row/object.
 Snapshot tables use incremental JSONL (format jsonl-v2) so the growing archive need not fit in one
 JavaScript string. Use the corresponding historical script revision to restore an older format.
 The active edition is never overwritten by that recovery check.
 `pnpm eval:live` explicitly purchases a live reading only when generation is enabled. The hosted
-reader uses the same persistence and provider path. Full prompts, requests, returned protocol
+book uses the same persistence and provider path. Full prompts, requests, returned protocol
 items, drafts, images and criticism remain available for investigation.
 
 Production deploys come from passing pushes to main through Railway's GitHub integration. Never use

@@ -11,7 +11,12 @@ $150 combined provider allowance; HANDOFF.md tracks actual spend and reservation
 
 This is the single implementation queue for the agentic replacement. Read SPEC.md for the intended experience, EVALS.md for what counts as evidence, and HANDOFF.md for the actual worktree, progress, costs and next action. The July plan is historical; its completed checkboxes do not describe this implementation.
 
-The purpose is a world exploration harness producing sustained, nested image-and-text narratives that remain coherent as they unfold. Preserve the successful infinite-book's pleasure of reading and discovery. Give an agent rich context, persistent memory and useful capabilities, with freedom to decide what to investigate, create, revisit and develop.
+The purpose is the book: a world exploration harness producing sustained, nested image-and-text narratives that remain coherent as they unfold. Preserve the successful infinite-book's pleasure of reading and discovery. Give an agent rich context, persistent memory and useful capabilities, with freedom to decide what to investigate, create, revisit and develop.
+
+Terminology follows SPEC.md: the user is the author, the overall system is the book, its users are
+readers, and its generating model is the creative agent. Use reading interface for the UI and work
+or nested narrative for an individual narrative within the book. A reader continuation request may
+cause several creative-agent turns and yield several reading screens.
 
 ## 1. Decisions that guide the build
 
@@ -19,7 +24,7 @@ The purpose is a world exploration harness producing sustained, nested image-and
 2. Build a fresh creative runtime and publication model in this successor. Retain the existing one-application TypeScript stack and selectively reuse small mechanical components.
 3. Use the full recovered world, original root trajectory and writing guidance from the user-selected infinite-book/main template, preserving source wording. The illustrated successor's later prose guide is superseded. Allow some natural explanation of world mechanics while trusting the reader; avoid constant didactic monologues. Retain the approved visual medium. These are creative context, not a program assigning plot changes to numbered pages.
 4. Give the creative agent a persistent workspace and access to the actual text and images. It may develop its own notes, plans, references and unfinished material. No required fact ontology, debt ledger, movement scheduler or plan/write/illustrate/judge pipeline.
-5. Separate authored compositions from screen pagination. Neither a screen nor a provider response defines a literary unit. No paragraph count or page-word-count acceptance gate.
+5. Separate published compositions from screen pagination. Neither a screen nor a provider response defines a literary unit. No paragraph count or page-word-count acceptance gate.
 6. Preserve published work and exact source locations. Store a reader's visit trail separately from the relationships among works.
 7. Put both media, actual provider work and contextual criticism into the first usable experiment. A static fixture can test a control; it cannot establish generative success.
 8. Use LLM judgment and sustained reading to assess literary and visual meaning. Use ordinary tests for persistence, navigation, tool execution, resource limits and recoverability.
@@ -34,7 +39,7 @@ The user requested a clean repository before implementation. The old runtime, mi
 
 Retain the selected React, React Router, Vite, Hono and Kysely/pg stack initially. Node 24.18.0 remains pinned in .nvmrc; pnpm 11.15.0 and the previous dependency versions are available in the archived package/lock files. P1 creates a fresh minimal manifest and lockfile for the actual new implementation, consulting those pins instead of reintroducing its scripts or unused dependencies wholesale. Inspect small archived storage helpers individually if useful. Add the official OpenAI TypeScript SDK with a version verified to support the selected Responses interfaces. Consult Context7 and official documentation at implementation time. Do not turn package selection into a separate research project.
 
-Use one Node application with an internal durable-work pump, Postgres and image storage. Start with one active creative run per connected edition. This makes related publications visible to one continuing author while we learn what the agent needs. A read-only critic may have its own model context. No distributed agent framework, Redis queue, vector service or mandatory agent team is needed for the first experiment.
+Use one Node application with an internal durable-work pump, Postgres and image storage. Start with one active creative run per connected edition. This makes related publications visible to one continuing creative agent while we learn what the agent needs. A read-only critic may have its own model context. No distributed agent framework, Redis queue, vector service or mandatory agent team is needed for the first experiment.
 
 ## 3. Proposed code boundaries
 
@@ -48,9 +53,9 @@ Paths in this table are repository-relative implementation destinations; new fil
 | Publishing | src/server/library/works.ts, publications.ts, anchors.ts | Independent works, ordered immutable compositions, source addresses and reader intents. |
 | Persistence | src/server/db/migrations/001_agentic_library.ts and focused repositories | New records without repurposing the old folio lifecycle. Use a dedicated replacement database. |
 | Reader API | src/server/reader/routes.ts, intents.ts | Read saved content; request continuation, exploration or explicit title creation; report progress truthfully. |
-| Reading surface | src/client/reader/BookReader.tsx, Publication.tsx, pagination.ts | Flow/reflow authored material, display images, preserve location and support pagewise navigation. |
+| Reading surface | src/client/reader/BookReader.tsx, Publication.tsx, pagination.ts | Flow/reflow published material, display images, preserve location and support pagewise navigation. |
 | Visits and exploration | src/client/reader/visits.ts, Exploration.tsx, Shelf.tsx | Exact nested return, image/text selection, discovery, bookmarks and resume. |
-| Preparation | src/server/agent/preparation.ts | Supply reader interest, available unread work and remaining allowance to bounded background work. |
+| Preparation | src/server/agent/preparation.ts | Supply readers’ interests, available unread work and remaining allowance to bounded background work. |
 | Criticism and evaluation | src/server/agent/critic.ts, evals/run.ts, evals/cases/ | Astra criticism with archive access; complete-run reports and preserved comparison material. |
 | Authored context | prompts/creative-agent.md, prompts/critic.md; content/shape-of-time/{SOURCE,world,world-essence,prose-guide,visual-direction}.md | Small tool orientation plus the original full world, main-template world/prose guidance and approved visual direction. The source files are already prepared; runtime loading remains P1. |
 
@@ -72,7 +77,7 @@ A plain draft can use Markdown with image references such as asset IDs. Publish 
 
 The publish operation takes a work and a specific saved draft revision. It resolves assets and references and saves the composition atomically. Duplicate submission of that revision returns the existing publication. An unrelated revision cannot silently overwrite published prose. A new edition/revision may correct published work while preserving older addresses.
 
-The public reader reads these same publications; there is no separate hand-maintained demonstration corpus standing in for the runtime.
+The public reading interface displays these same publications; there is no separate hand-maintained demonstration corpus standing in for the runtime.
 
 ## 5. Agent environment and interfaces
 
@@ -107,7 +112,7 @@ Use background Responses for long calls, persist the response ID promptly and po
 
 **Images.** Expose an ordinary Astra-callable function backed by the direct Image API. This keeps the requested image model explicit: gpt-image-2-2026-04-21 is the documented snapshot at planning time. Use generation for a new image and edits when supplying references. Return the saved image itself in the function result so Astra can inspect it before choosing further action. The API supports image content in function outputs. [Image model](https://developers.openai.com/api/docs/models/gpt-image-2), [image API](https://developers.openai.com/api/docs/guides/image-generation), [multimodal function results](https://developers.openai.com/api/docs/guides/function-calling#formatting-results).
 
-Reference selection belongs to the agent. Enforce actual provider input limits, not an invented last-five rule. Let the agent explain what should persist or change in ordinary language; remove the required six-field image-direction object. Preserve the approved medium without requiring a portrait, forbidding readable documents, or excluding relevant references from another work. The writer can revise unpublished prose or images in light of what it sees.
+Reference selection belongs to the agent. Enforce actual provider input limits, not an invented last-five rule. Let the agent explain what should persist or change in ordinary language; remove the required six-field image-direction object. Preserve the approved medium without requiring a portrait, forbidding readable documents, or excluding relevant references from another work. The creative agent can revise unpublished prose or images in light of what it sees.
 
 **Context renewal.** Start with generous context plus archive tools and explicit notes. Count the exact request, including tools and actual images, with the Responses input-token endpoint. Use current model limits and reserve room for output and subsequent tool results; do not inherit the Fable 400k ceiling. A count/contract error is a recoverable operational failure, not evidence against the prose. Keep saved work while repairing it. [Input-token counting](https://developers.openai.com/api/reference/resources/responses/subresources/input_tokens/methods/count).
 
@@ -142,7 +147,7 @@ A later long-form allowance must be calculated from the first experiment's actua
 | Milestone | Dependency | Inspectable result |
 |---|---|---|
 | P0 — Align documents and clean the repository | Complete | One current plan, prepared original sources, archived old application and a clean local starting commit. |
-| P1 — First saved illustrated reading | P0 | Astra uses real tools and image results; saved prose and imagery appear in a thin real reader; contextual critic available. |
+| P1 — First saved illustrated reading | P0 | Astra uses real tools and image results; saved prose and imagery appear in a initial reading interface; contextual critic available. |
 | P2 — Nested exploration and exact return | P1 | Generated root → child → grandchild → parent → root, with durable source context and both media. |
 | P3 — Sustained reading and reader refinement | P2 | Consecutive material worth assessing, responsive reading, prepared/cold openings and early artistic revisions. |
 | P4 — Recovery on Railway | P3 | The same live path survives interruption and its corpus/media can be restored on the authorized Railway project. |
@@ -161,7 +166,7 @@ P1 and P2 are the first usable experiment. They must not wait for an elaborate s
 
 ### P1 — One real agent, workspace and illustrated reader path
 
-**Execution evidence:** The real root, child and grandchild are readable. The same author resumed
+**Execution evidence:** The real root, child and grandchild are readable. The same creative agent resumed
 through native context renewal and published root continuatione7eb59f4-58f8-4c3e-b090-859de5018800
 with a new referenced illustration after contextual criticism. The builder read both drafts/review
 and inspected the image. This completes the initial usable path, not long-form literary proof.
@@ -173,9 +178,9 @@ Build this as a short sequence of connected commits, not independent subsystems:
 
 **P1b: Continue Astra through tools.** Add the OpenAI SDK, selected configuration and runner. Implement archive access, document writes, work creation and publish. Use the prepared original-source context and a small tool orientation. Store complete Responses items and tool outcomes. Provide a local run-inspection command showing pending operations, drafts, publications and costs.
 
-**P1c: Let imagery participate.** Add direct GPT Image 2 calls with durable reference/output handling, actual-image function results and visual inspection. Integrate them into the same runner; the loop must allow writing before or after images and revision before publication. Add an Astra critic with read-only access and a free-form review request. Read the first real paired output in the reader and obtain a contextual critique.
+**P1c: Let imagery participate.** Add direct GPT Image 2 calls with durable reference/output handling, actual-image function results and visual inspection. Integrate them into the same runner; the loop must allow writing before or after images and revision before publication. Add an Astra critic with read-only access and a free-form review request. Read the first real paired output in the reading interface and obtain a contextual critique.
 
-**Files:** agent/, workspace/, providers/, library/, the new migration, the thin reader, creative/critic prompts, model configuration and relevant package scripts. Load the prepared infinite-book source material identified by SOURCE.md; do not extract the superseded prose guide from write-folio.md. Keep world.md byte-identical and preserve the documented main-template extraction. Ensure the writer and critic receive the current softer exposition preference.
+**Files:** agent/, workspace/, providers/, library/, the new migration, the initial reading interface, creative/critic prompts, model configuration and relevant package scripts. Load the prepared infinite-book source material identified by SOURCE.md; do not extract the superseded prose guide from write-folio.md. Keep world.md byte-identical and preserve the documented main-template extraction. Ensure the creative and critic agents receive the current softer exposition preference.
 
 **Meaningful checks:**
 
@@ -209,12 +214,12 @@ Use one quiet Open as a book action for text and whole-image exploration. Add re
 
 **Literary evidence:** An LLM critic reads the source and generated child together, with the relevant history/images available. Assess whether the connection is meaningful and consistent and the child has its own life. Continue into a grandchild chosen from the generated child, rather than preparing its premise in advance.
 
-**Completion:** The generated nesting journey works through the real reader and remains intact after reload. Mechanical fixture success alone is insufficient.
+**Completion:** The generated nesting journey works through the live reading interface and remains intact after reload. Mechanical fixture success alone is insufficient.
 
 ### P3 — Make sustained reading inviting
 
 **Execution note:** The root has three published chapters, the lounge child one, and the wedding
-grandchild two. The same author continued after native renewal, with actual retrieval, image
+grandchild two. The same creative agent continued after native renewal, with actual retrieval, image
 reference use and contextual criticism. Roughly16–17k connected words are available. Nested return,
 bookmarks and reflow have passed the actual production journey. Preparation and separate pending
 continuation/exploration status are released for live observation. Twenty-six mechanical tests
@@ -234,13 +239,13 @@ Warm openings enter immediately. Cold openings keep the source readable with tru
 
 **Artistic iteration:** Read uninterrupted stretches and use LLM-as-judge from EVALS.md. Compare with the successful predecessor as an experiential baseline. For iterations within the new system, keep Astra/xhigh, image model and authored context fixed where possible. Address specific failures without accumulating universal prose or plot rules.
 
-**Completion:** The owner has a meaningful connected sample to read and the criticism explains whether it merits further development. If it is dull or disconnected, revise here before increasing corpus size. An early sample cannot establish a whole novel.
+**Completion:** The author has a meaningful connected sample to read and the criticism explains whether it merits further development. If it is dull or disconnected, revise here before increasing corpus size. An early sample cannot establish a whole novel.
 
 ### P4 — Prove interruption recovery on Railway
 
 **Execution evidence:** Completed for the current path. A real app restart resumed the same stored
 Astra response and saved its draft once; see tests/receipts/astra-restart.json. The connected new
-corpus, full author context and all media restored into a fresh Railway schema/object namespace
+corpus, full creative agent context and all media restored into a fresh Railway schema/object namespace
 with every row/object checksum matching. A real full-export size failure was fixed with incremental
 records before that success. See evals/corpus-recovery-2026-09-06.md and its receipt. Mechanical gates
 use real DB/storage and preserve unknown outcomes; this does not certify long-form quality.
@@ -264,7 +269,13 @@ live walkthrough. The Railway skill governs these operations.
 
 ### P5 — Sustain the world through length and context renewal
 
-**Work:** Extend the same edition, initially toward roughly 30,000–50,000 connected words as an experimental scale, then toward a novel-length root and continuation beyond its first resolution. These are reading-study sizes, not output validation rules, authoring quotas or proof thresholds.
+**User scope update:** The author will conduct further narrative analysis. Existing connected reading,
+contextual reviews, continued child development and context renewal establish only the tested scale.
+Do not keep expanding the development corpus or commission more operator reviews to meet the study
+sizes below. Finish remaining mechanical checks and prepare the reader edition for the author.
+
+
+**Work:** Extend the same edition, initially toward roughly 30,000–50,000 connected words as an experimental scale, then toward a novel-length root and continuation beyond its first resolution. These are reading-study sizes, not output validation rules, generation quotas or proof thresholds.
 
 Include substantial consecutive root reading and genuinely developed nested works. Observe distant recurrence, a recurring visual identity across works, the consequences of earlier events and a new situation after a resolution. Do not command a particular callback merely to pass an evaluation. The agent may find a different meaningful development.
 
@@ -272,13 +283,26 @@ Deliberately renew the agent's active context and resume a previously visited bo
 
 If retrieval repeatedly misses relevant material, improve source navigation, note usability, search or context construction in response. Compare these changes on the same kinds of reading. A source-linked chronology or reference collection the agent finds useful is welcome; a compulsory global ledger is not the default remedy.
 
-**Files:** context renewal, archive search, agent-authored workspace support as required, long-form evaluation cases and reports. Add a retrieval dependency only for an observed need.
+**Files:** context renewal, archive search, agent-maintained workspace support as required, long-form evaluation cases and reports. Add a retrieval dependency only for an observed need.
 
-**Evidence:** Contextual LLM criticism, source-grounded continuity investigations, actual image comparison and owner reading of sustained sequences. Distinguish a character's lie, changed belief or viewpoint from a world contradiction. Record unresolved problems and how much was actually read.
+**Evidence:** Contextual LLM criticism, source-grounded continuity investigations, actual image comparison and author reading of sustained sequences. Distinguish a character's lie, changed belief or viewpoint from a world contradiction. Record unresolved problems and how much was actually read.
 
 **Completion:** Evidence demonstrates extended coherent development and worthwhile nesting at the tested scale, including after context renewal. If the narrative circles or the imagery drifts, retain the run and revise the relevant mechanism. Do not declare indefinite coherence proven.
 
 ### P6 — Release and leave a usable handoff
+
+**Current release work:** Record mechanism provenance and preserve the evolving development corpus
+privately with its actual interventions and version history. Because the generation mechanism changed
+during development, start a fresh reader edition under the settled process. No development story,
+review, note, reading history or image enters that edition or its creative agent context. Scope browser reading
+state to the edition as well. Ordinary reading-interface fixes do not require a new corpus.
+
+Keep all remaining preparation within the original combined $150 allowance, subtracting development
+spend and unresolved reservations before funding the fresh edition. The author requested about 50
+steps of initial material for personal exploration; clarification of screens versus continuation
+requests is pending. Stop extended operator literary analysis and automatic refinement. The creative agent
+retains its normal freedom to ask its own critic under the same process.
+
 
 **Work:** Verify that the obsolete Fable, finite-movement, static-reader and fixed-image-reference paths removed in P0 have not been reintroduced. Preserve their archive. Ensure the implemented configuration, prompts, docs and tests agree on Astra/xhigh and GPT Image 2.
 

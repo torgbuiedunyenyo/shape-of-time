@@ -2,13 +2,27 @@
 
 Current direction: September 6, 2026. This replaces the July fixed-folio prototype specification. Implementation details and milestones are in PLAN.md; actual progress is in HANDOFF.md.
 
+## Terms
+
+- **Author:** the human creator of the book: the user directing this project. The author supplies its world, artistic intent and guidance, and assesses its development.
+- **Book:** the overall system and generative work, The Shape of Time, encompassing the world, its narratives, images and exploration experience.
+- **Reader:** a person exploring the book. A reader can continue a narrative or open a nested narrative from encountered material.
+- **Creative agent:** the model operating inside the book to investigate, generate, revisit and develop text and imagery using persistent context and tools. It is not called the author.
+- **Critic agent:** the model providing contextual criticism. Its review is distinct from the author's judgment and readers' experiences.
+- **Reading interface:** the UI through which readers encounter the book. Use this term rather than calling the software itself a reader.
+- **Work or nested narrative:** an individual narrative within the book. A nested narrative may itself contain further narratives. The database name `work` does not denote a separate overall system.
+
+A **reader continuation request** asks for more of the current narrative. One request may involve
+many creative-agent turns and publish material spanning several reading screens. Requests, agent
+turns and screens are different units; do not use them interchangeably.
+
 ## Intended experience
 
 Read an absorbing illustrated narrative. Follow a passage or image into another narrative that has its own life. Return to the exact place with a deeper understanding. Continue in either direction through a coherent, expanding literary world.
 
-The containing reader is calm and dependable. Books can unfold at length and contain other books, records, images, places and people worth exploring. Nested works should reward sustained reading rather than merely explain selected nouns.
+The reading interface is calm and dependable. Its narratives can unfold at length and contain nested narratives, records, images, places and people worth exploring. Nested works should reward sustained reading rather than merely explain selected nouns.
 
-The source of new work is an agent that can decide what to investigate, create, revisit and develop, supported by persistent context and memory. Generative autopoiesis means that created works become fertile material for further works. It does not require a formal calculus of obligations or a fixed self-modification mechanism.
+The book is implemented as a world exploration harness. Its creative agent can decide what to investigate, create, revisit and develop, supported by persistent context and memory. Generative autopoiesis means that created works become fertile material for further works. It does not require a formal calculus of obligations or a fixed self-modification mechanism.
 
 ## What carries forward
 
@@ -52,7 +66,7 @@ Keep actual returned images and the references used to create them. A prompt's i
 
 ## Reader behavior
 
-The reader presents stable compositions with comfortable typography, image sizing and text-size controls. Pagination adapts to the display; it does not impose story length, paragraph limits or dramatic beats. Familiar forward/back navigation continues within the work without false ending screens.
+The reading interface presents stable compositions with comfortable typography, image sizing and text-size controls. Pagination adapts to the display; it does not impose story length, paragraph limits or dramatic beats. Familiar forward/back navigation continues within the work without false ending screens.
 
 A few prepared openings invite exploration. Arbitrary text selection, whole-image entry and then image-region entry use the same Open as a book grammar. An optional angle can guide the exploration, but readers need not write a synopsis. Explicit title creation remains available separately from read-only shelf search.
 
@@ -69,6 +83,18 @@ Preserve returned work before validating or publishing it. Published composition
 One small application, Postgres and image storage are sufficient initially. Reuse useful mechanical pieces, replace the old folio/movement orchestration and keep historical evidence separate. No backward compatibility with the failed successor is required.
 
 Bound provider spending, retain uncertainty about ambiguous calls and recover interrupted work. These are mechanical responsibilities. They do not justify deterministic judgments of narrative meaning.
+
+## Development evidence and the reader edition
+
+Development stories, rejected work, reviews and interventions are private engineering evidence.
+Preserve their relationship to the actual source, prompts, tools, memory behavior and deployed
+mechanism versions so later changes can be assessed through their story effects. They must never
+be copied into the final reader edition or its creative agent context.
+
+The final edition begins under one pinned creative process. All its text and images grow from that
+process. A materially changed generation mechanism warrants a fresh edition; ordinary reading-interface
+refinements do not. Preserve the development archive when replacing the corpus presented to readers. Pinning is
+provenance and release discipline, not a prescribed story or a constraint on the creative agent’s choices.
 
 ## How success is established
 

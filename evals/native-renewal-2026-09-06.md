@@ -1,6 +1,6 @@
 # First native context renewal
 
-The connected author finished the root, lounge child and wedding grandchild before this test.
+The connected creative agent finished the root, lounge child and wedding grandchild before this test.
 A real standalone Astra compaction was then requested with stable key
 first-nested-renewal-2026-09-06. No pending reader request or tool call was bypassed.
 
@@ -19,9 +19,9 @@ Re-running the same request key reused the same operation/window without buying 
 That replay exposed a timestamp-only defect in the implementation: it rewrote completion time on a
 completed receipt. A real database regression reproduced the defect; the fix preserves it.
 
-Root continuationf9d2a6d8-74a9-408b-ae77-1cb2dcb909bb was then submitted through the real reader.
+Root continuationf9d2a6d8-74a9-408b-ae77-1cb2dcb909bb was then submitted through the live reading interface.
 Subsequent Astra responses accepted the saved compaction item and confirmedxhigh/all_turns. The
-author reopened the root, read notes/root-continuity.md, then the complete original root draft, and
+creative agent reopened the root, read notes/root-continuity.md, then the complete original root draft, and
 viewed the existing dinner image. It created a new bus-stop illustration using the dinner/counter
 references, and wrote root/002-the-bus-home.md. The developer read that draft and viewed its image.
 Jay and Tan continue the same evening, discuss their ordinary lives and circumstances, exchange a
@@ -34,7 +34,7 @@ include opaque provider IDs; the current implementation must not promise replay 
 retention without a newer durable renewal or an explicit reconstruction from saved originals.
 
 The next implementation uses the measured token count to renew between new reader requests once
-active context exceeds250k, before the272k price boundary when possible. An individual long author
+active context exceeds250k, before the272k price boundary when possible. An individual long creative agent
 turn can cross that boundary; there is no per-page compaction schedule. The large-context safety
 pause remains880k. Application tests cover complete canonical-window preservation, replay without
 another operation, uncertainty and refusing to overwrite advanced work. Protocol-shaped fixtures
@@ -49,14 +49,14 @@ and the relevant real illustrations. Review7881cf68-db0d-48a5-ab45-71a6c228871f 
 relationship progression and no substantive mechanics error. It identified repeated corrective
 subtext (characters and narration repeatedly clarifying what a remark meant), and carefully labeled
 a sister's-message callback as ambiguous rather than definitely contradictory. It noted relays
-were already established in the child. The author has the review; its revision/publication remains
+were already established in the child. The creative agent has the review; its revision/publication remains
 pending. No developer supplied a required callback or overrode its creative decision.
 
 ## Completed continuation and orientation maintenance
 
 The root request subsequently published root002 revision2 and root003 revision2, about5k additional
 words, with three new referenced images. Builder read all drafts/revisions, both contextual reviews,
-all actual illustrations and updated root/library notes. The author reduced interpretive gloss,
+all actual illustrations and updated root/library notes. The creative agent reduced interpretive gloss,
 clarified pool lane use and developed Dee independently while advancing Jay/Tan's relationship.
 This is worthwhile post-renewal development at the observed scale, not indefinite coherence proof.
 
@@ -64,7 +64,7 @@ Inspection found the five canonical native items already contained the full orig
 orientation. The application had appended an unnecessary sixth copy. The fix compares normalized
 developer content and skips adding it when already retained; it never removes canonical items.
 A regression first reproduced the duplication and then passed. Free maintenance operation
-df40fb26-feff-4d3f-9922-ccbd295ea230, under the idle author lock, removed only the app-added index5
+df40fb26-feff-4d3f-9922-ccbd295ea230, under the idle creative agent lock, removed only the app-added index5
 from the active window. Canonical five and all subsequent messages were preserved exactly; previous
 full input remains in that operation. See tests/receipts/native-orientation-maintenance.json.
 No provider request, source rewrite or summarization was involved. Current gate:26tests plus

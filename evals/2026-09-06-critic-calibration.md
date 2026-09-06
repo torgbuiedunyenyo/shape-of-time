@@ -34,9 +34,9 @@ salon. It acknowledged missing middle pages before judging the complete arcs.
 
 The additional Mrs. Delgado scheduling observation has not been independently investigated by the
 builder; retain it as the critic's finding, not an independently confirmed new defect. The builder
-read the whole review and compared its primary claims with the preserved forensic record. The owner
+read the whole review and compared its primary claims with the preserved forensic record. The author
 has not yet assessed this review or the newly generated work.
 
 This supports using the critic for contextual investigations. It does not establish infallibility,
 visual judgment on this text-only packet, long-form success in the new edition, or a mandatory review
-gate on publication. The author remains free to seek and use criticism as useful.
+gate on publication. The creative agent remains free to seek and use criticism as useful.

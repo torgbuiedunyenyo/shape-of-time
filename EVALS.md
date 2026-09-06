@@ -1,10 +1,14 @@
 # Evaluating the illustrated world
 
+Terms follow SPEC.md: the human creator is the author, the overall system is the book, people
+exploring it are readers, and the generating model is the creative agent. Critic-agent assessments
+and development-agent observations are evidence distinct from the author’s own reading.
+
 This is the evaluation practice for the agentic replacement. Assess what the reader experiences and what the agent actually produced. Mechanical checks, provider contracts, artistic judgment and browser observations establish different things.
 
 ## Literary and visual judgment
 
-Use GPT-6 Astra at xhigh as the initial LLM critic, in a context separate from the creative author's running conversation. Supply the intended experience, the original infinite-book material and adapted prose-guide.md identified by content/shape-of-time/SOURCE.md, the actual material under review and read-only access to relevant original prose/images. The later illustrated-successor prose guide is superseded. Do not give the critic only summaries, intended image prompts or the author's claims about why the draft succeeds.
+Use GPT-6 Astra at xhigh as the initial LLM critic, in a context separate from the creative agent's running conversation. Supply the intended experience, the original infinite-book material and adapted prose-guide.md identified by content/shape-of-time/SOURCE.md, the actual material under review and read-only access to relevant original prose/images. The later illustrated-successor prose guide is superseded. Do not give the critic only summaries, intended image prompts or the creative agent's claims about why the draft succeeds.
 
 The critic can investigate. It should explain its conclusions with specific passages, images and source references, distinguish a real contradiction from viewpoint or uncertainty, and say when the available evidence is inadequate. It may request broader context before judging a long-range relationship. Do not impose a maximum source window that prevents the judgment being asked for.
 
@@ -37,13 +41,13 @@ Preserve exact source provenance. Do not tell the critic the expected diagnosis 
 
 Keep complete experimental runs, including rejected drafts and images. Report revisions made before publication and any manual intervention. Do not splice the best paragraphs from several runs and present them as one autonomous result.
 
-The predecessor is an experiential comparison, not a controlled test of architecture: its writer and other conditions differ. For comparisons among new variants, keep Astra/xhigh, GPT Image 2 and authored source/guide fixed where possible. Conceal variant/model labels from reviewers when useful. The owner's reading and preferences remain part of artistic direction.
+The predecessor is an experiential comparison, not a controlled test of architecture: its generating model and other conditions differ. For comparisons among new variants, keep Astra/xhigh, GPT Image 2 and authored source/guide fixed where possible. Conceal variant/model labels from reviewers when useful. The author's reading and preferences remain part of artistic direction.
 
 ## Progressive reading evidence
 
-**First illustrated sequence:** read consecutive actual output in the reader and inspect the paired images. Confirm the agent could see its own returned images, act on tool results and use criticism. This establishes the live creative loop, not long-form quality.
+**First illustrated sequence:** read consecutive actual output in the reading interface and inspect the paired images. Confirm the agent could see its own returned images, act on tool results and use criticism. This establishes the live creative loop, not long-form quality.
 
-**Nested journey:** follow an actual generated source into a child, then a source in that child into a grandchild; return and continue. Read the source and child together, then read enough of the child to assess independent development. Do not pre-author the nested premises.
+**Nested journey:** follow an actual generated source into a child, then a source in that child into a grandchild; return and continue. Read the source and child together, then read enough of the child to assess independent development. Do not supply the nested premises in advance.
 
 **Substantial connected corpus:** extend the same root and nested works across many scenes. The plan suggests 30,000–50,000 words as an initial study scale, followed by a novel-length root and continuation. Corpus size is context for the claim, not a pass threshold.
 
@@ -51,7 +55,7 @@ The predecessor is an experiential comparison, not a controlled test of architec
 
 **After resolution:** assess whether a new situation grows from what has happened, rather than continued repetition of closure or arbitrary undoing of the ending.
 
-For long-form judgment, supply the complete available reading sequence when practical and allow source retrieval. Long-range claims need distant source evidence; reviewing isolated short windows cannot establish them. Record what the owner, critic and builder actually read, separately.
+For long-form judgment, supply the complete available reading sequence when practical and allow source retrieval. Long-range claims need distant source evidence; reviewing isolated short windows cannot establish them. Record what the author, critic and builder actually read, separately.
 
 ## Mechanical checks
 

@@ -1,16 +1,16 @@
 # Sustained illustrated reading — developing evidence
 
-Current application eec8fddb7b837fbb50e3f8bca024a39ff969d88e. Same edition, Astra xhigh author and critic, GPT Image 2, original artistic sources unchanged. This report extends the opening and nested-reader records; it is not a completed long-form verdict.
+Current application eec8fddb7b837fbb50e3f8bca024a39ff969d88e. Same edition, Astra xhigh creative agent and critic, GPT Image 2, original artistic sources unchanged. This report extends the opening and nested-reader records; it is not a completed long-form verdict.
 
 ## Builder reading through root chapter 4
 
-The builder read all four published root chapters, their revisions and contextual criticism, and viewed all eight published root illustrations. Together with the first WASH chapter and two wedding sections, the connected corpus is roughly20k words. No owner reading of this new corpus has yet been recorded. No developer wrote the story, dictated the nested premises or published on the author's behalf.
+The builder read all four published root chapters, their revisions and contextual criticism, and viewed all eight published root illustrations. Together with the first WASH chapter and two wedding sections, the connected corpus is roughly20k words. No reading of this new corpus by the author has yet been recorded. No developer wrote the story, dictated the nested premises or published on the creative agent's behalf.
 
-Root development is consequential at this scale. The clef gift becomes reciprocal awkwardness rather than a repeated first meeting. Swimming grows from the meal conversation into a shared activity where Tan is competent and Jay can be vain. Dee's driving handbook, borrowed goggles and money constraints develop into the permit and car inspection decision. Three weeks of visits and a spare key change what being together means. The car scene exposes Jay's embarrassment and his tendency to answer for both women; he apologizes to Tan without yet making the same repair to Dee. A future visit is proposed but has not happened. These distinctions are present in the prose and in the author's fallible notes.
+Root development is consequential at this scale. The clef gift becomes reciprocal awkwardness rather than a repeated first meeting. Swimming grows from the meal conversation into a shared activity where Tan is competent and Jay can be vain. Dee's driving handbook, borrowed goggles and money constraints develop into the permit and car inspection decision. Three weeks of visits and a spare key change what being together means. The car scene exposes Jay's embarrassment and his tendency to answer for both women; he apologizes to Tan without yet making the same repair to Dee. A future visit is proposed but has not happened. These distinctions are present in the prose and in the creative agent's fallible notes.
 
-The prose is readable and often particular: the three unwanted ear photographs, BLUE NOT BLUE BOTTLE, goggles returned in an old case, a driver's seat left adjusted for someone who cannot yet buy the car. The main artistic risk is recurrent explanatory commentary on consideration, restraint and embarrassment, together with similarly gentle exchanges across narrators. The chapter critics identified examples and the author removed some. This is an observation about the actual sample, not a reason to impose a universal forbidden-phrase list or force more conflict. The independent WASH and wedding developments need a broader sustained review to establish how different their voices actually feel.
+The prose is readable and often particular: the three unwanted ear photographs, BLUE NOT BLUE BOTTLE, goggles returned in an old case, a driver's seat left adjusted for someone who cannot yet buy the car. The main artistic risk is recurrent explanatory commentary on consideration, restraint and embarrassment, together with similarly gentle exchanges across narrators. The chapter critics identified examples and the creative agent removed some. This is an observation about the actual sample, not a reason to impose a universal forbidden-phrase list or force more conflict. The independent WASH and wedding developments need a broader sustained review to establish how different their voices actually feel.
 
-Images now include a wide apartment view and a whole-car composition, varying the earlier paired portraits. Actual inspection found a useful spatial disagreement: the car image places Tan and Ruben beyond the driver's side, while draft1 has Jay look out the passenger window. Critic5c88d4b1-9d32-45c5-a340-29b9c74acff9 inspected both illustrations and earlier source images; revision2 changes Jay's sightline across Dee and through the driver's window. Published document1c00b0e6-0ee3-4922-9fe4-7c003dea55f9. The author also corrected an awkward shirt/shoe movement and trimmed narrator verdicts. These are actual revisions, not automatic literary checks.
+Images now include a wide apartment view and a whole-car composition, varying the earlier paired portraits. Actual inspection found a useful spatial disagreement: the car image places Tan and Ruben beyond the driver's side, while draft1 has Jay look out the passenger window. Critic5c88d4b1-9d32-45c5-a340-29b9c74acff9 inspected both illustrations and earlier source images; revision2 changes Jay's sightline across Dee and through the driver's window. Published document1c00b0e6-0ee3-4922-9fe4-7c003dea55f9. The creative agent also corrected an awkward shirt/shoe movement and trimmed narrator verdicts. These are actual revisions, not automatic literary checks.
 
 Root chapter4 first publication arrived22m23s after its reader request, including2m16s queued behind preparation. Existing material stayed readable and publication did not move a reader who was inside WASH. This is a substantial cold frontier wait. The first preparation turn only wrote notes and yielded to queued requests; useful prepared reading remains to be observed.
 
@@ -35,13 +35,13 @@ Nico closing a toolbox. The setting is visually quite familiar despite its futur
 is an artistic observation, not a world-rule contradiction. Revision2 clarifies which dishes moved
 lower, distinguishes her booking mistake from the original route failure, names tamarind rather
 than withholding an ordinary detail, and has her say she closed the private work channel rather
-than letting Nico somehow see it. These were author revisions without an intervening critic call.
-The author published while still developing the continuation request.
+than letting Nico somehow see it. These were creative agent revisions without an intervening critic call.
+The creative agent published while still developing the continuation request.
 
 The second WASH publication in this request, e133e040-899c-4281-9356-bbd3dfad6d0f, publishes
 `wash-sign/003-the-account.md` revision2 (doc25a8af0b-bcdd-4c88-8843-637b4766b10f). The builder read
 both versions and its contextual review5c48bb78-64dd-4b3c-afa7-3941df27a0c6. Following that review,
-the author gave Ames responsibility for her own failed accommodation escalation, removed an
+the creative agent gave Ames responsibility for her own failed accommodation escalation, removed an
 unsolicited warning that made her an ethical supervisor, distinguished purchased updates from the
 physical reliability of observations, and developed Lena's resistance to abandoning her prepared
 route into an actual choice. The image's gray hatching appears only in its middle panel; prose no
@@ -99,7 +99,7 @@ this record. New reader viewport516x835; earlier tests include1000px and390px.
 Automatic renewal completed17:04:45UTC:249items became10canonical items, all retained exactly
 after image hydration, with the original guide once and feedback reference still directly present.
 Usage296352input/9089output; estimated$6.608715. Receiptastra-automatic-renewal.json. The first
-post-renewal author turn requested five tools together: reopen root, read two actual originals and
+post-renewal creative agent turn requested five tools together: reopen root, read two actual originals and
 view two actual images. All five results were preserved and accepted by the next Astraxhigh/all_turns
 call. Receiptastra-grouped-tools.json. This confirms grouping and normal continuation through the
 renewal, not yet the quality or latency of the next prepared publication.

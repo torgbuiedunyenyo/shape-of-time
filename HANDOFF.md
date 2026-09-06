@@ -5,12 +5,52 @@ After compaction read this and PLAN.md P3–P6. PLAN.md is the sole queue; do no
 
 ## Purpose
 
-Build a world exploration harness producing sustained, nested image-and-text narratives coherent
+Build the book as a world exploration harness producing sustained, nested image-and-text narratives coherent
 within and across works. Successful text-only infinite-book is the experiential baseline. Give the
-author original context, persistent memory, tools and freedom. No prescribed lengths/beats, mandatory
+creative agent original context, persistent memory, tools and freedom. No prescribed lengths/beats, mandatory
 fact graph, deterministic literary verdicts or compulsory write/image/critic sequence. User authorized
 implementation, full old-production replacement and direct Railway work. Single development agent;
 no subagents or goal tool. Preserve all session transcripts and historical source refs.
+
+## Terminology — explicit user correction
+
+The user is the author. The overall system is the book. Its users are readers. The generating
+model is the creative agent; a model providing criticism is the critic agent. The UI is the reading
+interface. Individual narratives inside the book are works or nested narratives. See SPEC.md.
+“Reader continuation request” means a request for more reading, not a human-author action or one
+model turn. Clarification remains pending whether the requested roughly 50 steps means reading
+screens or reader continuation requests; the user corrected terminology but has not chosen a unit.
+
+Active planning/docs and prompt role wording have been corrected locally. Historical original
+source text, verbatim reviews, stored sessions/receipts and literal code identifiers are preserved.
+Prompt wording changes are not yet deployed or applied to the running development session. This is
+an additional prompt revision to retain in the development/final mechanism provenance.
+
+## Latest user scope — controls over older milestone wording
+
+The user restored a missing message by screenshot: finish the frontend/backend mechanics, then stop
+extended narrative analysis and time-consuming operator auto-refinement. The author will read and
+assess the work personally. Existing evidence supports coherence only to the tested scale. Prepare
+about 50 “steps” of reader material; async clarification pending whether this means reader screens
+or reader continuation requests. Do not purchase extra development reviews or grow it to a quota.
+
+The final reader must never see development evidence. Preserve the development corpus, rejected
+work, reviews and interventions privately, linked to the mechanism versions that produced them.
+The final edition grows under one pinned generative process. This build changed that process, so a
+fresh reader edition is appropriate after mechanics settle. Reader-only fixes do not justify resets.
+Do not load development evidence into the final creative agent context. Pin/provenance and edition-specific
+browser state are NOT yet implemented. No final reset/export has occurred. The original $150 is a
+COMBINED allowance across development and final; a new schema must not silently restart it.
+
+Root preparation d87c40c7 is still running. root/005-the-journey.md rev1 fd9de82f-c59c-4ebd-9da6-abfb6512bd87
+was saved17:10:55; agent-requested critic66fc5fd2-eec8-4a18-8533-cf7a2751fd5a saved17:15:21. No operator
+reading/assessment of these yet. Latest commitment94.3263875, remaining55.6736125, unknown0. Query fresh.
+Production remains9aee4b0; local416397f was the previous documentation checkpoint. This slice updates
+the current planning/docs, editorial evaluation reports and prompt role labels, plus the latest
+scope changes. No runtime code or Railway state changed. Final provenance/isolation mechanics are
+still unimplemented. Terminology review and git diff --check passed; no paid review was requested.
+Single next action: complete minimum provenance/isolation mechanics, then archive development and
+prepare the fresh pinned edition for the author. Do not resume the old 30–50k development study.
 
 ## Immediate position and next action
 
@@ -34,11 +74,11 @@ returned FIVE tools together: open root, read WASH Off Shift and root bus-home o
 counter and Lena's home images. All5outputs saved; next Astra accepted them at98286inputtokens.
 Astraxhigh/all_turns confirmed. Receipt tests/receipts/astra-grouped-tools.json. First input88299count
 (88298providerusage), context after renewal substantially reduced. No speedup benchmark claimed.
-Author chose to prepare next root installment toward first journey with Tan. No new draft yet.
+Creative agent chose to prepare next root installment toward first journey with Tan. No new draft yet.
 Keep tab20 at root004 WITHOUT pressing Continue while this preparation develops.
 Latest commitment91.912919 includes active reserve, remaining58.087081, unknown0; query fresh.
 
-Author session **5fee6506-857a-48c1-af70-2f0336004de0** throughout.
+Creative agent session **5fee6506-857a-48c1-af70-2f0336004de0** throughout.
 - Root continuation432dad7f-d219-4cf2-ab94-3f46ed642ddd DONE, through root004.
 - WASH continuation8c015d8e-d085-4d70-ab8b-cc491d192e65 DONE, two further publications below.
 - Root preparation **d87c40c7-0acb-46cb-8b41-9be9929f7579 RUNNING** after automatic renewal.
@@ -58,7 +98,7 @@ main weakness similar hesitation/task/perceptive correction/reassurance rhythm a
 repeated stationary paired pictures/dense mottling. Future Tan arc must preserve established care.
 Qualified uncapped-bottle observation remains unverified; don't promote it into certain failure.
 
-While idle under the release lock, builder appended ONE user context message to author with the
+While idle under the release lock, builder appended ONE user context message to creative agent with the
 review's exact doc/path, scope and invitation to consult as fallible criticism. No prescribed plot,
 spliced prose or manual publication. Do not append again. This manual feedback reference is the only
 new creative intervention; record it in final evaluation. Future renewals must retain it normally.
@@ -67,9 +107,8 @@ Latest combined commitment **81.430723**, remaining **68.569277**, unknown0 of *
 writing, images, criticism, renewal and active reservations. Query fresh with .local/progress.ts.
 No extra provider probes/critic calibration/restart/restore needed. No silent allowance increase.
 
-After release: observe actual prepared reading through natural250k renewal (latest author requests
-already approached/exceeded threshold), review new root output, then continue wedding/root through
-reader as useful toward substantial connected30–50k study scale. Scale is not an author quota.
+Earlier next-action plan (superseded by the user scope above): extend development reading toward
+30–50k. Do not execute that extension or commission another operator review.
 Current connected corpus22,716 words including alt/Markdown, root10,608,9publications. Do not infer novel or indefinite coherence.
 
 ## Repositories and Railway
@@ -97,7 +136,7 @@ Avoid .local/state.ts or scripts/inspect.ts full response dumps unless needed.
 ## Current corpus and inspected evidence
 
 Builder read all published drafts/revisions, relevant notes, returned criticisms and final images
-listed here. All author work remains in DB/archive. All works use the same continuing author.
+listed here. All creative agent work remains in DB/archive. All works use the same continuing creative agent.
 
 **Root** work-5213e951303bfbdd2f555090ca38fa93, The Shape of Time:
 1. root/001-the-counter.md rev2 doc9094a77f-e863-49f9-8274-230b54d63c03,
@@ -190,7 +229,7 @@ no needrepeatrestorationjustfornewcontent. Receiptcorpus-nested-restore.json and
 
 Firstnative renewal op **c6f9662c-7255-453b-888a-c869f4de73fe**, keyfirst-nested-renewal-2026-09-06;
 235items→5canonical,316643input/5506output,$6.74581. Samekeyreplayfree. Root2–4continuedwithactual
-notes/original/image retrieval. Nativeutilitynoeffortparameter; author/criticxhigh/all_turnsverified.
+notes/original/image retrieval. Nativeutilitynoeffortparameter; creative agent/criticxhigh/all_turnsverified.
 Appduplicateorientationremovedfree viaopdf40fb26-feff-4d3f-9922-ccbd295ea230; allcanonicalitemsand
 latermessagespreserved. Do notrerunrepair. Receiptsastra-native-renewal/native-orientation-maintenance.
 Automatic250kbetweenrequestsreleased044a21c, exactcountincludingtools. Notwithin-turn;880kguardpauses.
@@ -208,10 +247,10 @@ separateeditions/postresolutionnuance. AdditionalDelgadoscheduleclaimunverified/
 
 ## Sources and remaining milestones
 
-Astraxhigh author/critic; gpt-image-2-2026-04-21 imagery. Original4512-wordworld SHA
+Astraxhigh creative agent/critic; gpt-image-2-2026-04-21 imagery. Original4512-wordworld SHA
  e47afa2fc5db4350008f65fcea9bf6b32569e79a6ee4aeb212e066ddd139576c, originalmain-templateessence/prose,
 softerexposition and approvedink/transparentcolormedium. Source bytes unchanged.
 P0/P1/P2completeinitialusablepath; P4complete currentrecoverypath. P3/P5 ongoingpreparation,
 longerconnecteddevelopment/distantconsequences/automaticrenewal. P6 finalexactrelease/readerwalkthrough/
-handoff. Owner askedprogress: estimated85% overall, remainingchieflyqualityandlatencyvalidation.
+handoff. Author askedprogress: estimated85% overall, remainingchieflyqualityandlatencyvalidation.
 No ownerreadingofnewcorpusyetrecorded. Finishingplanisproxyforabsorbing,coherentexploration.

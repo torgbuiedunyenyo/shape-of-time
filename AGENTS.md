@@ -2,11 +2,24 @@
 
 ## Purpose and authority
 
-Build a world exploration harness that produces sustained, nested image-and-text narratives coherent with themselves as they unfold. The successful infinite-book is the experiential baseline. Give the creative agent context, persistent memory, useful tools and room to decide how to develop its work.
+Build the book, The Shape of Time, as a world exploration harness that produces sustained, nested image-and-text narratives coherent with themselves as they unfold. The successful infinite-book is the experiential baseline. Give the creative agent context, persistent memory, useful tools and room to decide how to develop its work.
 
 Read SPEC.md, EVALS.md, PLAN.md and HANDOFF.md in that order before product work. The user's current instructions control over these documents. PLAN.md is the sole implementation queue; HANDOFF.md records actual status. Do not create competing plans or a second repository status file.
 
 This branch replaces the July folio design. Everything under archive/, earlier checkouts and the retired art-thing is historical evidence, not current product instructions. Their gates and completed checkboxes do not carry over.
+
+## Terminology
+
+The user is the **author**. The overall system is the **book**. Its users are **readers**. The
+model generating and developing the narratives is the **creative agent**; the model providing
+criticism is the **critic agent**. The UI is the **reading interface**, and individual narratives
+inside the book are **works** or **nested narratives**. Follow SPEC.md's definitions in plans,
+documentation, prompts and conversation. Say **reader continuation request** for a request to
+continue reading; distinguish it from a creative-agent turn or a reading screen.
+
+Preserve historical quotations, raw provider receipts and literal internal identifiers. An older
+identifier such as the stored session role `author` names the creative agent in that implementation;
+it does not redefine the author. Explain that distinction when citing historical evidence.
 
 ## Clean starting point
 
