@@ -1,0 +1,29 @@
+{
+  "at": "2026-09-06T04:42:30.367Z",
+  "revision": "31b3217596907b895245208626c1718c20f62fdd",
+  "operation": {
+    "id": "de5169c4-6d99-43dc-8b92-20301fb60863",
+    "kind": "astra",
+    "status": "received",
+    "provider_id": "resp_07d55e4c2e541ade006a9cef1d772487d0a12f60931d7884a4",
+    "created_at": "2026-09-06T04:42:00.376Z"
+  },
+  "cli_result": "Problem processing request (exit1), but service logs confirm process restarted",
+  "restart_logs": [
+    "2026-09-06T04:42:32.125294295Z [ELIFECYCLE] Command failed.",
+    "2026-09-06T04:42:33.234707809Z Reader listening on 8080; generation enabled."
+  ],
+  "observed_after": {
+    "at": "2026-09-06T04:52:04.353Z",
+    "status": "complete",
+    "provider_id": "resp_07d55e4c2e541ade006a9cef1d772487d0a12f60931d7884a4",
+    "completed_at": "2026-09-06T04:44:48.641Z"
+  },
+  "saved_document": {
+    "id": "caa13e11-4f56-48d8-86d3-866524751768",
+    "path": "tere-audrey/002-the-inside-pages.md",
+    "revision": 1,
+    "operation_key": "5fee6506-857a-48c1-af70-2f0336004de0:tool:call_9zbRuTdY3P5UK8fcte1pjRrP"
+  },
+  "saved_tool_receipts": 1
+}

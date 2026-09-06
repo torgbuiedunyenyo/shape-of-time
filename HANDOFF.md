@@ -1,6 +1,6 @@
 # Handoff
 
-Updated September 6, 2026, around 04:38 UTC. After compaction read this and PLAN.md P1–P3.
+Updated September 6, 2026, around 04:56 UTC. After compaction read this and PLAN.md P1–P3.
 
 ## Purpose
 
@@ -11,26 +11,35 @@ fixed lengths, mandatory fact graph or fixed prose/image/critic workflow.
 
 ## Immediate next action
 
-The live grandchild **Tere & Audrey** has published its first passage; the author is still working on
-further images/material. Do not submit another request for it. Inspect live status before deploying.
-Latest active image operation **87a5bee8-7243-47bd-b968-2bb789b018e2**, dispatched 04:37:07 UTC.
-Do not deploy or restart through a direct image purchase. Two attempted restart probes stopped at
-their eligibility guard; **no forced restart was performed** and .local/restart-proof.json does not
-exist. Retry a controlled restart only while a known background Astra response is still active.
+Grandchild Tere & Audrey request85cab9ea-5c51-4daf-a245-7c476180e16c is DONE. Second publication
+342b69a2-7997-404e-877c-9ba7d7a752f3 contains revision2, fully read with actual final images/critic.
+Agent notes b4ccaaaa-4929-40c0-9994-e222f504d8f2 and library-index67b6dcac-85ed-4e40-bc26-0bd5ff1c6018
+fully read. Prepared source link opening-6033a62b2f20362b9a950b7cbbc73bcb offsets199–307.
 
-Local reader/preparation work passes all gates (20 tests), ready to commit/deploy at a safe point.
-Then reload the actual production reader, complete grandchild → child → root with exact source
-return after reflow/reload, and inspect the remaining new prose/images. After the author becomes
-idle, perform the first native context renewal, then request genuine root continuation. Do not queue
-that continuation before renewal (the renewal script requires idle author/no queued requests).
-P1 continuation and P2 complete return are still outstanding. P3–P6 remain partly implemented.
+FIRST NATIVE RENEWAL NOW RUNNING, local exec90480; operationc6f9662c-7255-453b-888a-c869f4de73fe,
+stable key first-nested-renewal-2026-09-06. Do not submit another renewal or reader request until
+its result is inspected. It holds the author lock. Originals remain saved. No forced restart again.
+The earlier forced restart at04:42:32 succeeded despite CLI error; same background Astra operation
+de5169c4-6d99-43dc-8b92-20301fb60863 completed04:44:48.641 and wrotecaa13e11-4f56-48d8-86d3-
+866524751768 once. Evidence tests/receipts/astra-restart.json.
+
+3a10a6c176f72abc541d7c045c97bbf2aa4f1252 is live, Git deployment
+8008c018-7235-4269-af19-ec28b689af0b SUCCESS; health verified, normal main fast-forwarded.
+Reader grandchild→child exact program source→root image region completed in production390px after
+reflow/reload. Existing pre-release requests needed one entry to record openedVisitId; subsequent
+return correctly leaves the source panel closed. Library shows saved discoveries; more bookmark,
+resume and prepared-link checks remain. CUA tab2 is currently library; temporary image tabs closed.
+
+After renewal completes, request genuine root continuation. Do not queue before renewal. Preparation remains
+disabled until intentional live observation. P1 continuation, sustained P3/P5 corpus, full new restore
+and final release evidence remain. No claim of long-form success from these openings.
 
 ## Worktree, Git and deployment
 
 - Active /Users/ratpartyserver/git/shape-of-time-agentic, branch codex/agentic-world.
-- Normal /Users/ratpartyserver/git/shape-of-time, clean main fast-forwarded to 31b3217.
-- Remote/deployed main **31b3217596907b895245208626c1718c20f62fdd**; /healthz verified.
-- Git-integrated deployment **835c3f73-ade7-452d-9f5e-f58268a2979d**, SUCCESS.
+- Normal /Users/ratpartyserver/git/shape-of-time, clean main fast-forwarded to3a10a6c.
+- Remote/deployed main **3a10a6c176f72abc541d7c045c97bbf2aa4f1252**; /healthz verified.
+- Git-integrated deployment **8008c018-7235-4269-af19-ec28b689af0b**, SUCCESS.
 - Preceding bf386dd stores protocol image bytes once, paged archive lookup, calibration evidence,
   normalized image reading positions. 31b3217 adds actual reader wait/publication context to author
   tool outputs and a continuation preflight to load existing new material before buying more.
@@ -40,7 +49,17 @@ P1 continuation and P2 complete return are still outstanding. P3–P6 remain par
   archive/folio-prototype-2026-09-06; exact tar and 167-file checksum archive. Do not restore runtime.
 - Preserve other historical worktrees/refs and all Codex/Claude transcript files.
 
-## Current local changes (not yet deployed)
+## Current bookmark fix and reader evidence
+
+Production walkthrough reproduced a real defect: opening a bookmark kept the passage but created a
+fresh visit without its parent/entry route. Fix stores the visit ID with the bookmark and restores
+that same visit. Regression failed on the old transition, all21 tests/typecheck/lint/build now pass.
+Fix ready for Git deployment; actual bookmark-return QA still required afterward. Summary of reader,
+critic and forced-restart observations in evals/nested-reader-and-recovery-2026-09-06.md.
+CUA tab2 currently bookmark-created standalone weddingvisit78da84b6-fcb1-4eed-9f1d-09fd1698529f,
+1000px viewport; nested saved request usesvisitf7ce6c60-d964-49d9-95ec-029a80499ad1 (parentc92b…).
+
+## Reader/preparation changes deployed in3a10a6c
 
 - src/server/agent/preparation.ts: one prepare opportunity per actively read latest publication,
   recent reader place/unread characters; stale unstarted preparation waits; explicit queued requests
@@ -150,7 +169,7 @@ cap/jacket and particular family ease; gold paper decorations seed earlier detai
 ceremony, room for sustained continuation. Temporal delivery man appears ordinarily, no conflict
 with parent perspective. Image img-54a14f81-8ccc-499e-804a-2483d94cf869 viewed by builder, Tereblue/
 Audreyivory-orange foldingprograms, consistent with prose. Author continues after first publication;
-subsequent images/prose not yet inspected. This opening took about9minutes to become readable.
+second section revisions1/2 fully read; all3 final wedding images viewed. Critic5f7ea6c3-6b56-42e7-ac87-95852982facd read, found source/visual consistency and recommended specific reading and less explanatory narration. Agent revised with Rossetti poem/particular Tere desire, removed announcing sentence. Revision2 dd087022-89d1-439f-9e8f-dbb16806cc49; ceremonyimg-87a5bee8-7243-47bd-b968-2bb789b018e2 (corrected date/head), portraitimg-d6e24472-87e6-489e-a5f8-e2d5540d5826. No builder creative edits. This opening took about9minutes to become readable.
 
 ## Browser state and next QA
 
@@ -181,7 +200,7 @@ ac0e6cdd7187, response resp_07d55e4c2e541ade006a9ceaf0784087d0aedf3c056bcbe902,
 bytes; realS3roundtrip proves exact preservation. Existing historical requests remain unchanged.
 
 Native renewal implemented in agent/renewal.ts; scripts/renew.ts STABLE_KEY, generation must be
-explicitly true. Not yet used live. It preserves full original input/receipt, entire canonical
+explicitly true. First live operation now running, see immediate next action. It preserves full original input/receipt, entire canonical
 compaction output, and reattaches original orientation. No APIeffort option on native utility;
 never claim xhigh for compactor. Author/critic remainxhigh. StoredGET encrypted_content unsupported;
 opaque prior reasoningIDs depend on provider retention. Do not claim indefinite self-contained

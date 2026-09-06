@@ -1,6 +1,18 @@
 import { expect, it } from "vitest";
 import { explorationKey } from "../src/client/requests.js";
-import { sourceReturn } from "../src/client/visits.js";
+import { bookmarkedVisit, sourceReturn } from "../src/client/visits.js";
+
+it("reopens a bookmark through its own nested visit even after another route reaches the same work", () => {
+  const entry = { publicationId: "parent-publication", blockId: "program", offset: 91 };
+  const first = { id: "wedding-via-program", workId: "wedding", parentId: "lounge-visit", entry };
+  const second = { id: "wedding-via-photo", workId: "wedding", parentId: "photo-visit", entry: { ...entry, blockId: "portrait" } };
+  const place = { publicationId: "wedding-publication", blockId: "ceremony", offset: 144 };
+  const visits = { [first.id]: first, [second.id]: second };
+  const result = bookmarkedVisit("wedding", { ...place, visitId: first.id }, visits);
+  expect(result).toEqual({ ...first, place, pixelOffset: 0 });
+  expect(sourceReturn(result.entry)?.place).toEqual(entry);
+  expect(bookmarkedVisit("wedding", { ...place, visitId: second.id }, visits).parentId).toBe("photo-visit");
+});
 
 it("keeps long cross-paragraph selections inside the request-key limit without conflating distinct openings", async () => {
   const source = {

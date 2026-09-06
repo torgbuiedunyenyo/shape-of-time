@@ -7,11 +7,12 @@ export type Visit = {
   place?: Anchor;
   pixelOffset?: number;
 };
+export type Bookmark = Anchor & { visitId?: string };
 type Reading = {
   visits: Record<string, Visit>;
   current: string | null;
   fontSize: number;
-  bookmarks: Record<string, Anchor>;
+  bookmarks: Record<string, Bookmark>;
   requests: Record<
     string,
     {
@@ -64,6 +65,22 @@ export function sourceReturn(entry?: Anchor) {
   if (place.region)
     place.imageFraction = place.region.y + place.region.height / 2;
   return { place, pixelOffset: 0 };
+}
+
+export function bookmarkedVisit(
+  workId: string,
+  bookmark: Bookmark,
+  visits: Record<string, Visit>,
+): Visit {
+  const { visitId, ...place } = bookmark;
+  const previous = visitId ? visits[visitId] : undefined;
+  return {
+    ...(previous?.workId === workId
+      ? previous
+      : { id: crypto.randomUUID(), workId, parentId: null }),
+    place,
+    pixelOffset: 0,
+  };
 }
 
 export function enterRequested(

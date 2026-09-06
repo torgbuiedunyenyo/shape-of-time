@@ -17,6 +17,7 @@ import type {
 } from "../shared/types.js";
 import {
   enter,
+  bookmarkedVisit,
   enterRequested,
   loadReading,
   saveReading,
@@ -258,9 +259,12 @@ function Shelf() {
             <button
               key={workId}
               onClick={() => {
-                const visitId = enter(workId, null);
-                updateVisit(visitId, { place, pixelOffset: 0 });
-                navigate("/read/" + visitId);
+                const state = loadReading();
+                const saved = bookmarkedVisit(workId, place, state.visits);
+                state.visits[saved.id] = saved;
+                state.current = saved.id;
+                saveReading(state);
+                navigate("/read/" + saved.id);
               }}
             >
               {library?.works.find((w) => w.id === workId)?.title ??
@@ -776,7 +780,10 @@ function Reader() {
                 : undefined;
               if (position) {
                 const state = loadReading();
-                state.bookmarks[visit.workId] = position.place;
+                state.bookmarks[visit.workId] = {
+                  ...position.place,
+                  visitId: visit.id,
+                };
                 saveReading(state);
                 setBookmarked(true);
               }
