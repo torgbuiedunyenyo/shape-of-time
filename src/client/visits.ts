@@ -29,18 +29,26 @@ const empty = (): Reading => ({
   bookmarks: {},
   requests: {},
 });
+let readingKey: string | undefined;
+export function selectReadingEdition(editionKey: string) {
+  readingKey = `shape-of-time-reading-v2:${editionKey}`;
+}
+function storageKey() {
+  if (!readingKey) throw new Error("Choose the book’s edition before accessing reading history.");
+  return readingKey;
+}
 export function loadReading(): Reading {
   try {
     return {
       ...empty(),
-      ...JSON.parse(localStorage.getItem("shape-of-time-reading-v1") ?? "{}"),
+      ...JSON.parse(localStorage.getItem(storageKey()) ?? "{}"),
     };
   } catch {
     return empty();
   }
 }
 export function saveReading(state: Reading) {
-  localStorage.setItem("shape-of-time-reading-v1", JSON.stringify(state));
+  localStorage.setItem(storageKey(), JSON.stringify(state));
 }
 export function enter(workId: string, parentId: string | null, entry?: Anchor) {
   const state = loadReading(),

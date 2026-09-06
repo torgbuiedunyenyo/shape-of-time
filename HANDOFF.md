@@ -21,10 +21,27 @@ interface. Individual narratives inside the book are works or nested narratives.
 model turn. Clarification remains pending whether the requested roughly 50 steps means reading
 screens or reader continuation requests; the user corrected terminology but has not chosen a unit.
 
-Active planning/docs and prompt role wording have been corrected locally. Historical original
-source text, verbatim reviews, stored sessions/receipts and literal code identifiers are preserved.
-Prompt wording changes are not yet deployed or applied to the running development session. This is
-an additional prompt revision to retain in the development/final mechanism provenance.
+Terminology correction committed08b410d; normal main also fast-forwarded. Prompt changes not yet
+deployed. Runtime provenance/isolation work is now implemented locally, not yet deployed: a mechanism
+record at fresh reader-edition creation and on new provider reservations, mismatch pauses without
+reset, generation settings/runtime/source hashes, and edition-specific browser reading state.
+30 real persistence/storage and mechanical tests, typecheck, lint and build passed (exec28068).
+The storage check uses Node's real persistent Web Storage across three processes, not a fake store.
+Production still9aee4b0. No final edition exists yet.
+
+Release helper exec79048 is WAITING for the live creative run to finish and acquire its lock. Do not
+start another helper or lose this process. Latest root preparation stillrunning, secondimageb927ea9f
+complete, Astraop971c2e25 pending17:24:52. No additional operator literary review/reading commissioned.
+Last spend commitment95.810603, remaining54.189397, unknown0. Query fresh before allocation.
+Deployment history metadata saved .local/development-deployments-2026-09-06.json (27deployments);
+createdAt is deployment creation, not proof of an exact request's executing revision. Preserve that
+uncertainty for historical operations predating automatic provenance.
+
+For the requested ~50 steps, the working assumption is ~50 reading screens, stated to the author
+after clarification remained unanswered. This is initial reading volume, not a quota in the prompt.
+Next: finish the in-progress preparation, hold/freeze development spending, export the final
+development corpus, then allocate ONLY the combined allowance remainder to the fresh pinned reader
+edition on a new schema. Verify production startup/edition separation through the real reading UI.
 
 ## Latest user scope — controls over older milestone wording
 

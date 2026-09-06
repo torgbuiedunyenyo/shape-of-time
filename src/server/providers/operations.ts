@@ -2,6 +2,7 @@ import { randomUUID } from "node:crypto";
 import { db, json } from "../db/index.js";
 import { config } from "../config.js";
 import { putBytes } from "../library/assets.js";
+import { currentMechanism, mechanismMatches } from "../mechanism.js";
 export class Paused extends Error {
   constructor(message: string) {
     super(message);
@@ -53,6 +54,9 @@ export async function reserve(
     if (existing) return existing;
     if (!config.generationEnabled)
       throw new Paused("Generation is paused. Saved work is intact.");
+    const mechanism = await currentMechanism();
+    if (!mechanismMatches(edition.mechanism, mechanism))
+      throw new Paused("The creative mechanism differs from this edition’s pinned process. Saved work is intact; review the change before generating more.");
     const ops = await tx
       .selectFrom("operations")
       .select(["actual_usd", "reserved_usd"])
@@ -79,7 +83,7 @@ export async function reserve(
         key,
         kind,
         status: "reserved",
-        request: json(request),
+        request: json({ ...request, mechanism }),
         provider_id: null,
         response: null,
         raw_key: null,

@@ -67,7 +67,7 @@ app.get("/api/library", async (c) => {
   const query = c.req.query("q") ?? "";
   const edition = await db
     .selectFrom("editions")
-    .select(["id", "title", "root_work_id"])
+    .select(["id", "title", "root_work_id", "created_at"])
     .where("id", "=", "shape-of-time")
     .executeTakeFirstOrThrow();
   const works = await db
@@ -88,6 +88,7 @@ app.get("/api/library", async (c) => {
   return c.json({
     edition: {
       ...edition,
+      reading_key: `${edition.id}:${new Date(edition.created_at).toISOString()}`,
       root_work_id:
         works.some((w) => w.id === edition.root_work_id) || query
           ? edition.root_work_id

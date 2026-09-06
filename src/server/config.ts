@@ -1,6 +1,7 @@
 export const config = {
   databaseUrl: process.env.DATABASE_URL,
   schema: process.env.DATABASE_SCHEMA ?? "world",
+  readerEdition: process.env.READER_EDITION === "true",
   generationEnabled: process.env.GENERATION_ENABLED === "true",
   preparationEnabled: process.env.PREPARATION_ENABLED === "true",
   contextRenewalTokens: 250_000,

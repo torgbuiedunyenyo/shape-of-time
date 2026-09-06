@@ -58,6 +58,34 @@ The active edition is never overwritten by that recovery check.
 book uses the same persistence and provider path. Full prompts, requests, returned protocol
 items, drafts, images and criticism remain available for investigation.
 
+## Editions and mechanism provenance
+
+The development corpus is evidence, not seed material for the reader edition. Keep its database,
+media, complete generation receipts and version history outside the public book. The fresh reader
+edition uses a separate DATABASE_SCHEMA and matching private asset namespace, without copying
+stories, images, agent notes, reviews or reading history. Browser visits, bookmarks and discoveries
+are keyed to the edition's identity and creation time.
+
+Set READER_EDITION=true only when initializing a fresh reader edition. Its first startup stores a
+mechanism record with source/prompt/runtime checksums, the dependency lock, effective model and
+preparation/memory settings, and the deployment revision. New provider receipts retain the actual
+mechanism record too. This metadata is outside the creative agent's source context. Existing
+development data cannot be relabeled as a pinned edition by changing that flag.
+
+The build records the server, shared types, prompts and artistic inputs. Client-only layout and
+reading-control changes do not change that record. A different mechanism pauses new creative work
+for investigation; it never clears an edition automatically. Server/dependency fingerprints are
+conservative evidence of a change, not a semantic judgment that a new edition is necessary. Review
+the actual diff before deciding whether a fix changes the creative process. Preserve the previous
+record and corpus whenever deliberately establishing a new process. A named model can still change
+on the provider side; pinning records our process and the returned provider model, not a promise of
+identical future inference behavior.
+
+The initial $150 allowance covers development and the reader edition together. Before switching,
+wait for pending calls, freeze the development allowance at its committed spend, preserve the full
+corpus, and allocate only the remaining amount to the fresh edition. Keep an allocation receipt.
+Do not copy a $150 configuration into a fresh edition and thereby restart the allowance.
+
 Production deploys come from passing pushes to main through Railway's GitHub integration. Never use
 `railway up` as an alternate deployment path. See HANDOFF.md for the exact deployed revision and
 current limitations; a healthy server is not proof of a successful literary experience.

@@ -13,6 +13,7 @@ export async function migrate() {
       .raw(
         `
       create table if not exists editions (id text primary key, title text not null, root_work_id text, source jsonb not null, budget_usd double precision not null, created_at timestamptz not null default now());
+      alter table editions add column if not exists mechanism jsonb;
       create table if not exists works (id text primary key, edition_id text not null references editions(id), title text not null, founding jsonb not null, created_at timestamptz not null default now());
       create table if not exists documents (id text primary key, edition_id text not null references editions(id), path text not null, revision integer not null, body text not null, operation_key text not null unique, created_at timestamptz not null default now(), unique(edition_id,path,revision));
       create table if not exists publications (id text primary key, work_id text not null references works(id), ordinal integer not null, document_id text not null references documents(id), blocks jsonb not null, created_at timestamptz not null default now(), unique(work_id,ordinal), unique(work_id,document_id));

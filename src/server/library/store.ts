@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import { sql } from "kysely";
 import { db, json } from "../db/index.js";
 import { config } from "../config.js";
+import { currentMechanism } from "../mechanism.js";
 import { compose } from "./composition.js";
 import type { Anchor } from "../../shared/types.js";
 export async function initializeEdition() {
@@ -22,14 +23,18 @@ export async function initializeEdition() {
       root_work_id: null,
       source: json(source),
       budget_usd: config.budget,
+      mechanism: config.readerEdition ? json(await currentMechanism()) : null,
     })
     .onConflict((c) => c.column("id").doNothing())
     .execute();
-  return db
+  const edition = await db
     .selectFrom("editions")
     .selectAll()
     .where("id", "=", "shape-of-time")
     .executeTakeFirstOrThrow();
+  if (config.readerEdition && !edition.mechanism)
+    throw new Error("This development edition cannot be relabeled as a pinned reader edition. Use a fresh schema.");
+  return edition;
 }
 export async function createWork(
   editionId: string,

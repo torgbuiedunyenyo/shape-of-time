@@ -17,6 +17,7 @@ import type {
 } from "../shared/types.js";
 import {
   enter,
+  selectReadingEdition,
   bookmarkedVisit,
   latestVisitRequests,
   enterRequested,
@@ -1022,13 +1023,25 @@ function BookLink() {
   }, [workId, navigate]);
   return <main className="waiting">Opening the book…</main>;
 }
-const router = createBrowserRouter([
+function readingRouter() {
+  return createBrowserRouter([
   { path: "/", element: <Shelf /> },
   { path: "/read/:id", element: <Reader /> },
   { path: "/book/:workId", element: <BookLink /> },
   { path: "/waiting/:id", element: <Waiting /> },
   { path: "*", element: <Shelf /> },
 ]);
-createRoot(document.getElementById("root")!).render(
-  <RouterProvider router={router} />,
-);
+}
+const root = createRoot(document.getElementById("root")!);
+root.render(<main className="waiting">Opening the book…</main>);
+async function startReading() {
+  try {
+    const library = await api<{ edition: { reading_key: string } }>("library");
+    selectReadingEdition(library.edition.reading_key);
+    root.render(<RouterProvider router={readingRouter()} />);
+  } catch {
+    root.render(<main className="waiting"><p>The book could not be opened.</p>
+      <button onClick={() => void startReading()}>Try again</button></main>);
+  }
+}
+void startReading();

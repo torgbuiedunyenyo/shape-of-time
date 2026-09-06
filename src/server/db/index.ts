@@ -8,6 +8,7 @@ import pg from "pg";
 import { config } from "../config.js";
 import type { Block, Anchor } from "../../shared/types.js";
 import type { ResponseInputItem } from "openai/resources/responses/responses";
+import type { Mechanism } from "../mechanism.js";
 type Json<T extends object> = JSONColumnType<T, string, string>;
 type Row = { id: string; created_at: Generated<string> };
 export interface Database {
@@ -16,6 +17,7 @@ export interface Database {
     root_work_id: string | null;
     source: Json<Record<string, string>>;
     budget_usd: number;
+    mechanism: JSONColumnType<Mechanism | null, string | null | undefined, string | null>;
   };
   works: Row & {
     edition_id: string;

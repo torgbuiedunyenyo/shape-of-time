@@ -6,6 +6,7 @@ import type {
   ResponseInputContent,
 } from "openai/resources/responses/responses";
 import { db, json, pool } from "../db/index.js";
+import { currentMechanism, mechanismMatches } from "../mechanism.js";
 import { config } from "../config.js";
 import { renewBeforeRequest } from "./renewal.js";
 import { astra, appendItems } from "../providers/astra.js";
@@ -50,6 +51,10 @@ async function loop(ctx: ToolContext, readOnly = false): Promise<string> {
       .selectAll()
       .where("id", "=", ctx.sessionId)
       .executeTakeFirstOrThrow();
+    const edition = await db.selectFrom("editions").select("mechanism")
+      .where("id", "=", ctx.editionId).executeTakeFirstOrThrow();
+    if (!mechanismMatches(edition.mechanism, await currentMechanism()))
+      throw new Paused("The creative mechanism differs from this edition’s pinned process. Saved work is intact; review the change before continuing.");
     const inputs = session.input;
     const answered = new Set(
       inputs
@@ -319,7 +324,7 @@ export async function runIntent(intentId: string) {
       : null;
     if (!published && intent.kind !== "prepare")
       throw new Paused(
-        "The author saved its work but has not published the requested passage. Inspect the saved session before continuing.",
+        "The creative agent saved its work but has not published the requested passage. Inspect the saved session before continuing.",
       );
     await db
       .updateTable("intents")

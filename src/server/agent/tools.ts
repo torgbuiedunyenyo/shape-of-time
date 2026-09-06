@@ -129,7 +129,7 @@ const definitions = [
   ],
   [
     "ask_critic",
-    "Ask an independent Astra reader to investigate a draft, work, image relationship or literary question. It has read-only archive/image tools. This is optional; use when useful.",
+    "Ask an independent Astra critic agent to investigate a draft, work, image relationship or literary question. It has read-only archive/image tools. This is optional; use when useful.",
     criticArgs,
     false,
   ],

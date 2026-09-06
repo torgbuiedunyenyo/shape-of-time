@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "server": "tsx watch --env-file=.env src/server/index.ts",
-    "build": "vite build && tsc -p tsconfig.server.json",
+    "build": "vite build && tsc -p tsconfig.server.json && tsx scripts/record-mechanism.ts",
     "start": "node dist/server/server/index.js",
     "db:migrate": "tsx src/server/db/migrate.ts",
     "typecheck": "tsc --noEmit && tsc -p tsconfig.server.json --noEmit",

@@ -299,8 +299,8 @@ state to the edition as well. Ordinary reading-interface fixes do not require a 
 
 Keep all remaining preparation within the original combined $150 allowance, subtracting development
 spend and unresolved reservations before funding the fresh edition. The author requested about 50
-steps of initial material for personal exploration; clarification of screens versus continuation
-requests is pending. Stop extended operator literary analysis and automatic refinement. The creative agent
+steps of initial material for personal exploration. After asking about the unit and allowing time
+for a reply, the working assumption is roughly 50 reading screens, not 50 paid continuation requests. Stop extended operator literary analysis and automatic refinement. The creative agent
 retains its normal freedom to ask its own critic under the same process.
 
 
