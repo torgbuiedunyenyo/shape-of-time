@@ -394,6 +394,14 @@ function Reader() {
   const request = async (kind: "continue" | "explore") => {
     try {
       setError("");
+      if (kind === "continue") {
+        const current = await api<Book>("works/" + visit.workId);
+        if (current.publications.at(-1)?.id !== book?.publications.at(-1)?.id) {
+          setBook(current);
+          setIntent(undefined);
+          return;
+        }
+      }
       const source = kind === "explore" ? selected : undefined;
       const key =
         kind === "continue"

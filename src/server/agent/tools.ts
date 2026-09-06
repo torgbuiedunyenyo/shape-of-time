@@ -344,6 +344,38 @@ export async function recordedTool(
     if (e instanceof Paused) throw e;
     output = json({ error: e instanceof Error ? e.message : String(e) });
   }
+  if (ctx.intentId) {
+    const intent = await db
+      .selectFrom("intents")
+      .selectAll()
+      .where("id", "=", ctx.intentId)
+      .executeTakeFirstOrThrow();
+    const workId = intent.result_work_id ?? intent.work_id;
+    const publication = workId
+      ? await db
+          .selectFrom("publications")
+          .select("id")
+          .where("work_id", "=", workId)
+          .where("created_at", ">=", intent.created_at)
+          .executeTakeFirst()
+      : undefined;
+    const situation = {
+      request_kind: intent.kind,
+      elapsed_seconds: Math.round(
+        (Date.now() - new Date(intent.created_at).getTime()) / 1000,
+      ),
+      new_publication_available: Boolean(publication),
+    };
+    output = [
+      ...(typeof output === "string"
+        ? [{ type: "input_text" as const, text: output }]
+        : output),
+      {
+        type: "input_text",
+        text: "Reader situation (not fictional content): " + json(situation),
+      },
+    ];
+  }
   const item: ResponseInputItem = {
     type: "function_call_output",
     call_id: callId,

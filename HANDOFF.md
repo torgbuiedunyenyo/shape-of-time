@@ -23,8 +23,9 @@ Continue the root and verify the exact nested return. Do not buy duplicate reque
 The child is work-42dc798990ed66ca06ff6d776bf67acb, **Under the WASH Sign**. Its founding source is
 publication 617be2fc-17c4-479f-9ef9-541701cc70fb / block b-01c5a2ee18a86f74ed2a, a real rectangle
 around waiting travelers inside the corrected boarding lounge image. No angle was supplied.
-Image operation 0577f742-eb8e-4734-b864-c5ba4606f212 was active at the latest check; do not deploy
-through an active direct image call. Read current status instead of assuming it remains active.
+The child has three saved images. Latest author operation d9f474e5-492c-4c70-b28d-596ed7f0b171
+is processing its final revision. No child publication at the latest check. Do not deploy through
+an active direct image call; inspect live status before deployment.
 
 Root request 4c40ef0e-37b3-47f4-b4c8-6648667aaf2e DONE. Publication
 617be2fc-17c4-479f-9ef9-541701cc70fb uses revision 2, document
@@ -47,9 +48,9 @@ Restore finished; no process remains for that check.
   title creation, page controls, stable book URLs, long-selection request identifiers; image dimensions;
   independent-side-work routing fix; protocol item normalization; native context renewal and operator
   scripts. Tests added. No renewal has run live yet.
-- Uncommitted: imageFraction reading-anchor fix; paged archive search honoring source kinds and
-  published-revision identity; calibration script; updated plan/handoff and first-reading eval report.
-  Full gates passed 14 tests after archive fixes (failure reproduced first). Image checkpoint deduplication is now implemented in providers/protocol.ts and wired into author/
+- Local commit bf386dd, not yet pushed: imageFraction reading-anchor fix; paged archive search
+  honoring source kinds and published-revision identity; calibration source/review/assessment;
+  lossless protocol-image storage. Image checkpoint deduplication is implemented in providers/protocol.ts and wired into author/
   critic persistence, Astra dispatch, native renewal and corpus export. Exact bytes are stored once
   under protocol_images/SHA; all provider calls hydrate actual data URLs. Full items remain intact.
   Regression failed on the original duplicate-byte persistence, then passed with real S3 roundtrip
@@ -90,8 +91,8 @@ Do not print variable values or full environment config. The existing OpenAI key
 quotes; these were normalized on Railway. Both requested model IDs are available (read-only check).
 
 The implementation go-ahead activates the detailed plan's combined $150 allowance, including text,
-images, critique and renewal. $4.582698 completed, $145.417302 remaining, no active reservation or unknown
-spend after the first request. Use pnpm inspect for authoritative totals as the hosted author continues.
+images, critique and renewal. Latest commitment including active reservations: $15.200839,
+remaining $134.799161, unknown $0. This changes while the author runs. Use pnpm inspect for current totals.
 At most $20 of the combined allowance is for provider-contract investigation. Do not reuse historical
 Fable budgets or infer unlimited spend. Dated rates are encoded in provider wrappers; actual receipts
 and uncertainty are retained. No extra user approval is needed for this authorized scope.
@@ -230,3 +231,19 @@ fcd8432e-15e0-4a76-a8b0-74678b63d9fb, read fully by builder. It found sustained 
 professional culpability and useful procedural stakes, but suggested fewer interpretive afterthoughts
 and accounting for Dimas's food. Author is responding and plans two further child illustrations.
 No child publication existed at the latest check. Inspect live status before deploying.
+
+
+## Latest implementation slice
+
+Full gates passed 15 tests after adding elapsed reader wait / publication availability to author
+tool outputs and a reader continuation preflight that loads existing new material before buying
+another request. No quotas or mandatory creative sequence were introduced. The prompt explains
+that publication is readable before the turn finishes. Existing author context retains its original
+orientation; the actual tool-result context is available after deployment.
+
+Builder viewed child images img-bcab7eba-3d37-4494-8b22-1d91fa5e4b52 (workbench and equipment)
+and img-1b8e5f3d-e2db-4e0f-8af3-bb72eee72b4d (overnight chair/staff alcove), in addition to the
+first image. Characters/settings agree; the route instrument has three physical screens but they
+are not literally three perpendicular planes as requested. Let the author assess its actual result.
+Temporary in-app image tabs 7 and 8 show those two images; production tab 2 retains the pending
+opening after reload. No further creative requests were submitted during this slice.
