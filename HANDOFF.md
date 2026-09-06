@@ -1,249 +1,217 @@
 # Handoff
 
-Updated September 6, 2026. After compaction read this file and P1 in PLAN.md.
+Updated September 6, 2026, around 04:38 UTC. After compaction read this and PLAN.md P1–P3.
 
 ## Purpose
 
-Build an agent-led world exploration harness that develops sustained, nested image-and-text
-narratives with persistent context and memory. The successful text-only infinite-book is the
-experiential baseline. The agent owns creative sequencing; software preserves work and reading place.
-No deterministic literary verdicts, fixed folio lengths, mandatory fact graphs or prose/image pipeline.
+Build an agent-led world exploration harness: sustained, nested image-and-text narratives coherent
+within and across works. Successful text-only infinite-book is the experiential baseline. Give the
+agent full original context, memory, tools and creative freedom. No deterministic literary verdicts,
+fixed lengths, mandatory fact graph or fixed prose/image/critic workflow.
 
-## Current position and next action
+## Immediate next action
 
-P0 complete. The first real illustrated root is published and its request finished successfully.
-P1 still needs a genuine continuation; P2 is underway with a live image-region child. P3–P6 remain
-partly implemented/unvalidated. The author independently made/inspected images, wrote, sought a
-critic, revised, published and saved free-form continuity notes. Builder read both versions/review/
-notes and viewed all three published images. No manual creative edits or publication intervention.
+The live grandchild **Tere & Audrey** has published its first passage; the author is still working on
+further images/material. Do not submit another request for it. Inspect live status before deploying.
+Latest active image operation **87a5bee8-7243-47bd-b968-2bb789b018e2**, dispatched 04:37:07 UTC.
+Do not deploy or restart through a direct image purchase. Two attempted restart probes stopped at
+their eligibility guard; **no forced restart was performed** and .local/restart-proof.json does not
+exist. Retry a controlled restart only while a known background Astra response is still active.
 
-**Next action:** let child request 8e98c0e8-c437-4ebc-93bd-06b86ce2c37d finish, then enter it through
-its existing request in the production reader; read it and select a real source there for a grandchild.
-Continue the root and verify the exact nested return. Do not buy duplicate requests/criticism.
-The child is work-42dc798990ed66ca06ff6d776bf67acb, **Under the WASH Sign**. Its founding source is
-publication 617be2fc-17c4-479f-9ef9-541701cc70fb / block b-01c5a2ee18a86f74ed2a, a real rectangle
-around waiting travelers inside the corrected boarding lounge image. No angle was supplied.
-The child has three saved images. Latest author operation d9f474e5-492c-4c70-b28d-596ed7f0b171
-is processing its final revision. No child publication at the latest check. Do not deploy through
-an active direct image call; inspect live status before deployment.
+Local reader/preparation work passes all gates (20 tests), ready to commit/deploy at a safe point.
+Then reload the actual production reader, complete grandchild → child → root with exact source
+return after reflow/reload, and inspect the remaining new prose/images. After the author becomes
+idle, perform the first native context renewal, then request genuine root continuation. Do not queue
+that continuation before renewal (the renewal script requires idle author/no queued requests).
+P1 continuation and P2 complete return are still outstanding. P3–P6 remain partly implemented.
 
-Root request 4c40ef0e-37b3-47f4-b4c8-6648667aaf2e DONE. Publication
-617be2fc-17c4-479f-9ef9-541701cc70fb uses revision 2, document
-9094a77f-e863-49f9-8274-230b54d63c03. Root work
-work-5213e951303bfbdd2f555090ca38fa93. Author notes document
-42999fd2-236a-4f58-9dbd-f4c79e225352, notes/root-continuity.md.
+## Worktree, Git and deployment
 
-A complete first-root snapshot is at .local/corpus-first-reading-2026-09-06: 10 tables, 29 operations,
-4 assets, 33 stored objects. It was restored into world_restore_first_reading on the same Railway
-Postgres/bucket with generation disabled. Every restored table and object matched its checksum.
-Restore finished; no process remains for that check.
+- Active /Users/ratpartyserver/git/shape-of-time-agentic, branch codex/agentic-world.
+- Normal /Users/ratpartyserver/git/shape-of-time, clean main fast-forwarded to 31b3217.
+- Remote/deployed main **31b3217596907b895245208626c1718c20f62fdd**; /healthz verified.
+- Git-integrated deployment **835c3f73-ade7-452d-9f5e-f58268a2979d**, SUCCESS.
+- Preceding bf386dd stores protocol image bytes once, paged archive lookup, calibration evidence,
+  normalized image reading positions. 31b3217 adds actual reader wait/publication context to author
+  tool outputs and a continuation preflight to load existing new material before buying more.
+- Single development agent. No subagents. Retired art-thing is read-only history.
+- Sole queue PLAN.md; product SPEC.md; literary evidence EVALS.md. No second STATUS/queue file.
+- Cleanup checkpoint 2f0ae24, tag checkpoint/agentic-clean-start-2026-09-06. Retired e1a3dec tag
+  archive/folio-prototype-2026-09-06; exact tar and 167-file checksum archive. Do not restore runtime.
+- Preserve other historical worktrees/refs and all Codex/Claude transcript files.
 
-## Worktrees and authority
+## Current local changes (not yet deployed)
 
-- Active: /Users/ratpartyserver/git/shape-of-time-agentic, codex/agentic-world.
-- Normal checkout: /Users/ratpartyserver/git/shape-of-time, local main fast-forwarded to bf23b57.
-- Remote main and deployed code: bf23b5776c0bb8a3047fb353918337e1e1d019b4, verified /healthz;
-  deployment 4e2b2e05-cd59-4346-8861-6d1a7e50bc09 SUCCESS.
-- Reader implementation now deployed: semantic positions/reflow, image regions/native dialog, bookmarks,
-  title creation, page controls, stable book URLs, long-selection request identifiers; image dimensions;
-  independent-side-work routing fix; protocol item normalization; native context renewal and operator
-  scripts. Tests added. No renewal has run live yet.
-- Local commit bf386dd, not yet pushed: imageFraction reading-anchor fix; paged archive search
-  honoring source kinds and published-revision identity; calibration source/review/assessment;
-  lossless protocol-image storage. Image checkpoint deduplication is implemented in providers/protocol.ts and wired into author/
-  critic persistence, Astra dispatch, native renewal and corpus export. Exact bytes are stored once
-  under protocol_images/SHA; all provider calls hydrate actual data URLs. Full items remain intact.
-  Regression failed on the original duplicate-byte persistence, then passed with real S3 roundtrip
-  equality. Full gates now pass 15 tests. Paid live contract after this change is NOT yet verified;
-  deploy at a safe point and inspect the next actual image-bearing Astra response before claiming it.
-  Existing historical requests remain intact. This avoids new duplication; it is not context pruning.
-  The real browser reproduced image point drift: 46% of picture at desktop became 88% at narrow
-  width. Local preview of the same Railway publication now retains ~46% across resize and reload.
-  The apparent font-button drift was an automation artifact: locator.click scrolls the sticky header
-  before clicking. Direct coordinate clicks preserved the same paragraph on unchanged production.
-  Do not reinstate the rejected font/CSS changes; they were reverted.
-- Single development agent. Do not spawn agents. Retired art-thing is read-only history.
-- Current queue: PLAN.md; intended product: SPEC.md; literary evidence: EVALS.md.
-- Cleanup checkpoint: 2f0ae24, tag checkpoint/agentic-clean-start-2026-09-06.
-- Retired app: e1a3dec, tag archive/folio-prototype-2026-09-06 and exact tar/manifest under archive/.
-- Original histories, source bytes and other worktrees remain. Do not restore old architecture/scripts.
+- src/server/agent/preparation.ts: one prepare opportunity per actively read latest publication,
+  recent reader place/unread characters; stale unstarted preparation waits; explicit queued requests
+  precede preparation. Uses existing intents, no new table or model pipeline. Already prepared new
+  material satisfies a queued continue/prepare request without another purchase.
+- PREPARATION_ENABLED defaults false (including current Railway: flag absent). Generation also must
+  be enabled. Shared $150 budget still bounds every paid operation. Do not enable until testing this
+  slice and intentionally observing preparation. Actual reader signal begins after 20 seconds visible,
+  repeats at 30 seconds, refreshes queued/running context, never buys from search.
+- Runner now permits exploration to reopen an already-published work without requiring a new
+  publication. Regression reproduced the original erroneous pause. A prepare turn may finish without
+  publishing; the agent chooses what is useful. Continuation still requires genuinely new material.
+- offer_opening requires a readable target and supports exact substring/multi-block quote anchors.
+  Regression reproduced empty destination acceptance, then passed with readable exact quote.
+- Reader Return stays in sticky toolbar. Each child retains its own source for return rather than
+  using the parent's mutable current place; image-region return uses selected region center.
+- All requested openings are retained on the library shelf, including explicit title requests;
+  entered requests resume their own visit and stop reopening the source panel automatically.
+- New publications/links refresh without stealing focus or waiting for the author turn to end.
+  Older pending fetches cannot replace a newly visited book. Continuations carry their frontier ID.
+- Full gates most recently passed 20 tests, typecheck, lint, build. No paid calls in gates.
+- Local preview API session 10249 (port3000), Vite16038 (5173), both generation disabled. Still running.
+  Stop after UI verification. Local in-app QA tab was closed; production tab2 is the only tab.
+- Local QA used real saved root/child: warm link enters without generation; deep-child Return remains
+  visible at390px and returns to parent image. The later exact-source/discoveries changes still need
+  the full production journey, not merely DOM presence.
 
-## Railway and authorization
+## Production and authorization
 
-User explicitly directed implementation/testing on production: no Docker, no staging, no users or
-old data to preserve. They reiterated to trash and replace the old implementation. Production is
-https://shape-of-time-production.up.railway.app and deploys from passing Git pushes to main.
-Never use railway up/manual redeploy to bypass that integration.
+User explicitly authorized replacement/testing on existing Railway production, with no old users or
+data to preserve, no Docker/staging required. The old application was already trashed: eight old
+public tables and four old images deleted; ANTHROPIC_API_KEY and ASSET_DRIVER removed. The current
+world corpus is the NEW implementation; preserve it as evaluation evidence.
 
-Project 8b20e07d-c256-44c9-85be-d1c7e50ac83d (imagery-shape-of-time).
-Environment 82e1c3e8-e2c1-4023-afa2-b17dc6dc6ec3 (production).
-App service 39bf3c12-b426-40ce-836a-2839ea1bc213 (shape-of-time).
-Postgres 294c4570-91e2-4bb2-8639-4a802a475ab8. Assets bucket 545eb437-32e7-4100-a154-3cffd145fac1.
-Added Postgres TCP proxy b696fdf7-96a9-43ce-b588-a0ff901e0295 for direct development/tests.
+Site https://shape-of-time-production.up.railway.app
+Project 8b20e07d-c256-44c9-85be-d1c7e50ac83d (imagery-shape-of-time)
+Environment 82e1c3e8-e2c1-4023-afa2-b17dc6dc6ec3 (production)
+App 39bf3c12-b426-40ce-836a-2839ea1bc213 (shape-of-time)
+Postgres 294c4570-91e2-4bb2-8639-4a802a475ab8
+Bucket 545eb437-32e7-4100-a154-3cffd145fac1 (assets)
+Postgres proxy iriguchi.proxy.rlwy.net:41493 (b696fdf7-96a9-43ce-b588-a0ff901e0295).
 
-The eight obsolete public folio tables and four old stored images were deleted after replacement.
-ANTHROPIC_API_KEY and ASSET_DRIVER were removed. New data lives in world, checks in world_checks;
-new objects use matching prefixes. The same Railway resources host the fresh application.
+Use passing Git pushes to main; never railway up/manual redeploy/Deploy Latest to bypass Git.
+A controlled same-revision railway restart is allowed for recovery testing. Railway skill read.
+Ignored .env has selected DB/S3/OpenAI credentials; local generation false. Never print variable
+values/full environment configuration. scripts/configure-local.py refreshes selected credentials
+without printing them. Hosted GENERATION_ENABLED=true, schema world. Real tests use world_checks.
 
-Local ignored .env contains selected Railway credentials, generation disabled for local processes.
-The hosted application has GENERATION_ENABLED=true, DATABASE_SCHEMA=world, PROVIDER_BUDGET_USD=150.
-Do not print variable values or full environment config. The existing OpenAI key had surrounding
-quotes; these were normalized on Railway. Both requested model IDs are available (read-only check).
+Combined initial provider allowance $150 is authorized by implementation go-ahead. Includes all
+text, images, criticism and renewal; at most $20 for provider-contract investigations. Latest observed
+commitment INCLUDING active reserves $30.27615, remaining $119.72385, unknown0. Query fresh budget;
+this changes during work. Root total $4.582698; predecessor calibration $1.02882. No unlimited spend.
+Edition budget is stored in DB; environment changes do not silently raise an existing allowance.
 
-The implementation go-ahead activates the detailed plan's combined $150 allowance, including text,
-images, critique and renewal. Latest commitment including active reservations: $15.200839,
-remaining $134.799161, unknown $0. This changes while the author runs. Use pnpm inspect for current totals.
-At most $20 of the combined allowance is for provider-contract investigation. Do not reuse historical
-Fable budgets or infer unlimited spend. Dated rates are encoded in provider wrappers; actual receipts
-and uncertainty are retained. No extra user approval is needed for this authorized scope.
+## Actual corpus and requests
 
-## Actual deployment and live request
+### Root — done
 
-P1a 665d68f4f40f80888274283b43f8372e71b149a9 deployed successfully (485ed367-60aa-4d86-b30e-7151fda7e6d9).
-Agent a87ccfa45e6290b1b0b3f22b13eab6c285838b1e deployed successfully (83cd1b78-7a2e-4dda-875e-ea9b8e36e263).
-Fix 242c071753bb77d2118344c1ece51e3b11c39762 deployed successfully; the failed intent was resumed once.
+Work work-5213e951303bfbdd2f555090ca38fa93, **The Shape of Time**.
+Intent 4c40ef0e-37b3-47f4-b4c8-6648667aaf2e DONE; author session
+5fee6506-857a-48c1-af70-2f0336004de0 (same agent used for all connected works).
+Publication 617be2fc-17c4-479f-9ef9-541701cc70fb, doc9094a77f-e863-49f9-8274-230b54d63c03,
+root/001-the-counter.md rev2. Builder fully read draft/revision/critic/notes, viewed all images.
+Jay gives Tan $4.75 clef against his wage-deducted tab; they shim cooler; she waits for current to
+ease. She returns Thursday six days later and they go for noodles. Ends as their food arrives.
+Images: img-2e65d7c4-9eb6-4495-a8e7-ae9386e6efa5 counter;
+img-6dbbc75c-8ebf-48b3-ae1f-7fa940229810 corrected lounge exterior;
+img-40cce6d2-9c38-4ef3-bf1d-c41ee078aa65 dinner.
+Superseded wrong-wrist lounge image img-4bf6ae06-770a-4ecf-873d-c7c7696fc3e9 retained.
+Root critic doc3cdda498-75b6-4d7b-b3fd-1b9674502560; notes42999fd2-236a-4f58-9dbd-f4c79e225352.
+First publication wait27m14s included initial provider-retrieval repair. Root needs continuation.
 
-The in-app Browser started request 4c40ef0e-37b3-47f4-b4c8-6648667aaf2e using Begin the book.
-First operation 966a4fa7-35f4-4a80-8ec3-f0688c3fc2cd started successfully in background.
-Provider response resp_07d55e4c2e541ade006a9cdb1c2c2487d0981e9db038b7ee2c completed.
-GET with include=reasoning.encrypted_content failed 400: encrypted content cannot be requested for
-persisted responses. We retrieved that SAME response with plain GET, persisted it in DB/S3 and
-finished its cost receipt. Intent was resumed after the fix deployment; inspect current status instead of repeating resume.
+### Child — done
 
-Recovered result: model gpt-6-astra, effort xhigh, effective reasoning.context all_turns; first chosen
-tool resources. Usage input 10,070, output 13, reasoning 0; cost $0.10135. The full actual non-sensitive first response is tests/receipts/astra-first-resources.json.
+Work work-42dc798990ed66ca06ff6d776bf67acb, **Under the WASH Sign**.
+Intent 8e98c0e8-c437-4ebc-93bd-06b86ce2c37d DONE.
+Publication747ca3cf-7d62-432b-9fed-d856ea173a5a, doc2149a12f-0632-4e33-8735-a97b41bf26f9,
+wash-sign/001-offered-route.md rev2. First draft dcb7f8e4-5559-4119-8e22-869ce7fbbdb2 retained.
+Origin: actual image rectangle around attendant/travelers in corrected root lounge image,
+publication617be… blockb-01c5a2ee18a86f74ed2a; no angle/synopsis. Agent also offered prepared link
+opening-7f11eed9dd8cc410db8dba57ee484122 at this source.
+First-person Lena, future-born attendant who misclassified Dimas Serrano's inadmissible route as
+refused; hotel/rebooking denied. Bo helps find guided legal route viaReed toSouthBasin; Ames useful
+within constraints. Lena admits fault, stays overnight despite her dispatch ambitions. GuideSaye
+arrives morning; Dimas's departure/arrival still not established at ending. Tan a brief unnamed
+visitor from Lena's perspective. Dimas came for sisterTere's wedding toAudrey; program and missing
+photograph have actual source meaning. Builder fully read both versions, critic and all3images.
+Images img-0577f742-eb8e-4734-b864-c5ba4606f212 confrontation,
+img-bcab7eba-3d37-4494-8b22-1d91fa5e4b52 bench,
+img-1b8e5f3d-e2db-4e0f-8af3-bb72eee72b4d overnight.
+Criticfcd8432e-15e0-4a76-a8b0-74678b63d9fb found worthwhile distinct stakes, suggested fewer moral
+asides and Dimas's food. Author revised those plus logistics/voice. Notes9ac2765a-cfea-4d50-abd8-
+10023ce56848 (wash-sign-continuity), index1893519e-9409-4a24-99f6-a47b036a0772.
+First publication wait30m06s. No builder creative rewrite or manual publishing.
 
-Root work: work-5213e951303bfbdd2f555090ca38fa93, The Shape of Time.
-Draft revision 1: 24e83cdd-4e79-494a-923d-4df391c6b82b, root/001-the-counter.md.
-Critic: 3cdda498-75b6-4d7b-b3fd-1b9674502560,
-criticism/critic-e0849b016f902c8ed559170c23719787.md. Builder read the full draft and review.
-Review found absorbing development across the shop encounter/return visit, some overarranged repair
-motifs, a few action/prop slips, need for a small temporal anchor and possible wrist-band mismatch.
-The author received that critique through its own tool call; no manual creative edits were made.
+### Grandchild — first publication readable, author active
 
-Actual images viewed by builder and agent: img-2e65d7c4-9eb6-4495-a8e7-ae9386e6efa5 (counter),
-img-4bf6ae06-770a-4ecf-873d-c7c7696fc3e9 (boarding lounge; first image supplied as reference).
-The agent's next response received actual input_image content and chose view_image crops;
-xhigh/all_turns confirmed. The actual revised departure image img-6dbbc75c-8ebf-48b3-ae1f-7fa940229810 and dinner image
-img-40cce6d2-9c38-4ef3-bf1d-c41ee078aa65 are published alongside the counter image. The discarded
-wrist-band version is retained as a study. All operations completed; no live image call remains.
+Work work-e8aad2c5c7442b4d0df413d8cdc76eea, **Tere & Audrey**.
+Intent85cab9ea-5c51-4daf-a245-7c476180e16c, source text selected by real browser drag:
+'a folded program from the wedding. TERE & AUDREY, the cover said, inside a printed border of yellow flowers.'
+Source childpublication747ca… blockb-0efd732eb9f190ccb30c; no angle/synopsis.
+Publication0538d34d-a846-431c-a169-e99773153c80 at04:33:08 UTC; doc01f5e523-3d33-48f8-9dad-
+91d7fd7af85b, tere-audrey/001-the-cover.md rev1. Builder fully read it (~1900words, no quota).
+Audrey POV, pre-wedding Thursday hall kitchen, Tere folding yellow-rose programs, lived-together
+couple/newceremony nerves. Audrey's daughterNina officiates; Rafi photographer; Dimas brings drinks,
+cap/jacket and particular family ease; gold paper decorations seed earlier detail. Ends before
+ceremony, room for sustained continuation. Temporal delivery man appears ordinarily, no conflict
+with parent perspective. Image img-54a14f81-8ccc-499e-804a-2483d94cf869 viewed by builder, Tereblue/
+Audreyivory-orange foldingprograms, consistent with prose. Author continues after first publication;
+subsequent images/prose not yet inspected. This opening took about9minutes to become readable.
 
-Provider constraint supersedes the plan's assumption: stored/background responses must omit
-reasoning.encrypted_content inclusion. Every returned protocol item is retained, but future opaque
-reasoning IDs without encrypted_content depend on provider retention. Do not claim indefinite
-self-contained reasoning replay. Before long-lived reuse, implement explicit context renewal with
-full originals/agent notes available and retain the full returned canonical compaction window.
-No change to Astra/xhigh. Current runtime refuses overlarge context instead of truncating silently.
+## Browser state and next QA
 
-## Implemented paths and checks
+CUA tab2 currently production /read/131daf26-3a86-4858-ae13-5eae94da403d (grandchild).
+Parent child visit c92b10b6-71bc-46a9-a591-a4f6158cda14; root visit
+0f84838d-2093-4b02-a91a-87f2934fcefb. Entered all3through real source controls.
+Bindings tab, browser, viewport available. Others qa/childImage/childSecond/childThird/weddingImage
+point to closed temporary tabs. Only production2 remains. Viewport just changed1000x800→390x844
+and font reduced by toolbar; inspect/reload next, then return after new reader deployment.
+Grandchild currently within first long paragraph b-55fe45b3aafb76f82084 before image.
 
-Fresh pinned Node 24.18.0/pnpm 11.15.0 TypeScript app: React/Router/Vite reader, Hono API,
-Kysely/pg persistence, S3 storage, OpenAI SDK 7.10.0, Markdown structural compositions.
+CUA getAXState({emit:false}) returns a diff after first call; slice/filter repeated output rather
+than dumping novels. Evaluate only readonly DOM. Use screenshots + coordinate clicks for sticky
+header controls: locator.click scrolls first and previously produced a FALSE font-position bug.
+The actual image reflow bug was real and fixed with normalized imageFraction, local QA preserved46%
+across width/reload. Latest per-source Return changes need production verification separately.
+Viewport applies to selected tab; close other temporary tabs before resizing production. Reset
+viewport when finishing. API/Vite local preview sessions still running, generation false.
 
-Editions/works, revisioned documents, immutable publications with stable block IDs, image assets,
-intents, full sessions, operations, tool receipts and prepared openings. Missing images prevent
-publication atomically without deleting drafts. Duplicate document/publish/intent operations reuse
-saved effects. One DB lock serializes the author. Failed/paused work blocks later requests pending
-reconciliation, avoiding context mixing.
+## Provider, context and recovery evidence
 
-Tools: archive list/search/read, versioned notes/drafts, create/reopen work, publish, generate/edit
-GPT Image 2 with agent-selected references, actual-image viewing/crops, optional independent Astra
-critic with read-only archive access, prepared openings, shared resource budget. Both author/critic
-load all four prepared artistic sources. No fixed creative sequence or mandatory critic gate.
+Astra background/storetrue, xhigh/all_turns, no retries, durable response IDs/raw bytes/tool receipts.
+Direct GPT Image2 outputs stored before parsing, actual image content returned to author/critic.
+All17 image references in the first post-deployment request hydrated successfully from content-
+addressed bytes. Receipt tests/receipts/astra-hydrated-images.json: op2b5fc911-dd7f-4d02-8dee-
+ac0e6cdd7187, response resp_07d55e4c2e541ade006a9ceaf0784087d0aedf3c056bcbe902,
+217832inputtokens, xhigh/all_turns, first toolarchive. Saved request has references, no inlineimage
+bytes; realS3roundtrip proves exact preservation. Existing historical requests remain unchanged.
 
-Provider ops reserve before dispatch, save raw response text before parsing, keep background IDs,
-record actual/unknown cost, disable SDK generation retries and replay full output/tool protocol.
-Direct image results are stored before decoding/metadata acceptance and returned as actual image
-function output. Completed image replay tested against real S3 without another provider call.
+Native renewal implemented in agent/renewal.ts; scripts/renew.ts STABLE_KEY, generation must be
+explicitly true. Not yet used live. It preserves full original input/receipt, entire canonical
+compaction output, and reattaches original orientation. No APIeffort option on native utility;
+never claim xhigh for compactor. Author/critic remainxhigh. StoredGET encrypted_content unsupported;
+opaque prior reasoningIDs depend on provider retention. Do not claim indefinite self-contained
+replay. Use early renewal once idle, then investigate automatic durable renewal from that evidence.
+Current active context pauses above880k; no automatic renewal yet.
 
-Fifteen tests passed on real Railway Postgres/storage, plus typecheck, lint and production build:
-unrestricted >3-paragraph publication, atomic missing-image failure, stale revision checks,
-request/tool idempotency across interruption, shared uncertain-cost reserve, actual saved Astra
-response replay, S3 image fixture replay and actual usage arithmetic. Fixtures are mechanical;
-none are literary verdicts. Full gates pass including long-selection request identity. Native renewal is implemented but has not been bought or
-validated. It preserves the full returned canonical window and reattaches original artistic sources;
-the standalone compaction API exposes no reasoning-effort setting, so do not claim confirmed xhigh
-for that utility. Author and critic remain xhigh.
+First-root snapshot .local/corpus-first-reading-2026-09-06 (10tables,29ops,4assets,33objects)
+restored exactly to world_restore_first_reading / matchingS3prefix with generationdisabled.
+Every row/object checksum matched. Later corpus export includes protocol image blobs and forbids
+active author/provider work; repeat restore after new corpus/renewal. scripts/corpus.ts export|restore.
 
-Reader has flowing typography, text-size controls, image enlargement, text/whole-image exploration,
-full per-visit browser storage, return links, persisted cold request restoration and prepared links.
-This code is preliminary. Actual nested/reflow behavior remains to verify and fix; don't call P2
-complete. In-app Browser showed the calm new library and initiated the real root. CUA binding `tab` is production tab 2 at /read/0f84838d-2093-4b02-a91a-87f2934fcefb. Its child
-request is saved; reload restores the pending opening panel if it was dismissed. `qa` (local tab 5) was closed after successful image-position QA. `childImage` is temporary tab 6
-showing the first nested illustration, which builder inspected. Browser binding `browser`, viewport
-capability `viewport`; override was 390x844 on qa; selected image tab currently uses normal dimensions. Reset before finishing.
-Viewport applies to the selected tab, not every tab. Close qa before resizing production.
-Use direct coordinates for sticky header buttons (after screenshot), not locator.click, which scrolls
-first. `readPlace` and `imagePlace` are read-only DOM helpers in CUA. Published story/AX text already
-read; use emit:false and compact slices for repeated state to avoid printing the whole chapter. Temporary local API/reader preview processes are running (exec sessions 10249 and 16038), generation
-  disabled; they read the actual Railway corpus. Stop them after the pending reader fix is verified.
+Predecessor calibration completed once, no rerun needed:64verbatim pages, sourceSHA
+9c0a7452d6b81c1edae64d374b0303a5342170bd03f2b6aa4f4c5dc2861a6076. Independentcritic identified
+amberrecurrence, firstClefgiverreversal, MrsChenrepeatfirstdeparture, validseparateeditions, different
+post-resolution behavior with nuance. Fullsource/review/assessmentunder evals/; cost$1.02882.
+No deterministic literaryscores. A short successful opening is not proof of long-form coherence.
 
-## Artistic source and models
+## Sources, tooling and remaining work
 
-Text/creative agent/initial critic: GPT-6 Astra xhigh. Image snapshot: gpt-image-2-2026-04-21.
-No model/effort fallback. Use content/shape-of-time/SOURCE.md and all selected inputs in full:
-world.md, world-essence.md, prose-guide.md, visual-direction.md. Original infinite-book wording is
-preserved. World.md is the exact 4,512-word corrected historical body, SHA-256
-e47afa2fc5db4350008f65fcea9bf6b32569e79a6ee4aeb212e066ddd139576c. Later failed-successor prose guide
-is retired. Permit useful natural explanation without didactic monologues. Approved medium remains
-inked reportage with transparent color; no fixed image density or approval sequence.
+Astra xhigh author/critic, gpt-image-2-2026-04-21. Full four artistic sources from edition DB/
+content/shape-of-time: exact recovered4512wordworldSHAe47afa2fc5db4350008f65fcea9bf6b32569e79a6ee4aeb212e066ddd139576c,
+originalmain-templateessence/prose with softerexpositionpreference, approvedink/transparentcolor.
+No source/prose-guide changes during implementation slice. Original wording remains intact.
 
-## Remaining work after immediate recovery
+Node24.18.0/pnpm11.15.0 via mise exec node@24.18.0 -- npx --yes pnpm@11.15.0 COMMAND.
+React/Hono/Kysely/pg/S3/OpenAI/Sharp official docs and Context7 consulted earlier; use again for new
+external API questions. Railway/OpenAI skills already read. No new schema/framework needed.
 
-First genuine illustrated root, reload, continuation and contextual criticism. Actual image feedback
-contract evidence. Then generated child and grandchild from encountered material, prepared/cold
-entry and exact return after reload/font/viewport changes. Verify image-region UI, explicit title
-creation distinct from search, bookmarks, semantic reading anchors and paging controls.
-Read actual work before scaling. Implement explicit renewal and assess distant continuity/visual
-identity at substantial length; no long-form success claim from an opening. Record full runs,
-critic calibration and artistic revisions. Continue recovery and restored corpus/media checks on
-production, then leave a usable release/handoff with genuine limitations.
-
-Skills read: OpenAI Docs (search then fetch), Railway (deploy/config/request references), Context7
-for Kysely/Hono/React Router/Marked/S3/Sharp. No current tool cell or local server process is needed
-for the hosted worker. Inspect pending exec session/deployment status after compaction if relevant.
-
-
-## Current independent evaluation
-
-The funded readonly Astra xhigh calibration completed successfully; no local process remains and
-there is no reason to run it again. Script scripts/calibrate.ts uses the complete verbatim packet at
-.local/critic-calibration/source.json, SHA-256
-9c0a7452d6b81c1edae64d374b0303a5342170bd03f2b6aa4f4c5dc2861a6076.
-64 preserved predecessor pages: public root 1–8 and 80–100; public Mrs. Chen 1–20;
-main root 1–2 and 140–152, with separate edition/deployment provenance. The critic was not told
-our earlier diagnoses. Review output .local/critic-calibration/review.md, also preserved with the source packet and builder
-assessment under evals/. Cost $1.02882. Session
-critic-ebba9972344eaf95bc437ce6ec807a1d, completed operation a28ddbbe-ae65-4361-b823-a88a8011e9d6.
-The review independently identified the expected meaningful recurrence, two actual reversals,
-distinct-edition variation and late-arc differences, with useful uncertainty rather than blanket
-verdicts. Builder read it in full; see evals/2026-09-06-critic-calibration.md.
-
-Child draft dcb7f8e4-5559-4119-8e22-869ce7fbbdb2, wash-sign/001-offered-route.md revision 1,
-was read fully by builder. First person Lena, a terminal attendant whose mistaken declined-route
-record strands Dimas Serrano; colleague Bo helps find an admissible guided route. Saye is the guide.
-Dimas returned for sister Tere's wedding to Audrey; the folded wedding program and photograph
-conversation are actual generated material, potentially worth following once the child is published.
-Do not pre-author that grandchild. One child image img-0577f742-eb8e-4734-b864-c5ba4606f212 is saved.
-The author chose its own contextual critic, session critic-48027f3bbe8efc4d8e31163738078276;
-that review is separate from the predecessor calibration. Saved child review is
-fcd8432e-15e0-4a76-a8b0-74678b63d9fb, read fully by builder. It found sustained fiction, distinct
-professional culpability and useful procedural stakes, but suggested fewer interpretive afterthoughts
-and accounting for Dimas's food. Author is responding and plans two further child illustrations.
-No child publication existed at the latest check. Inspect live status before deploying.
-
-
-## Latest implementation slice
-
-Full gates passed 15 tests after adding elapsed reader wait / publication availability to author
-tool outputs and a reader continuation preflight that loads existing new material before buying
-another request. No quotas or mandatory creative sequence were introduced. The prompt explains
-that publication is readable before the turn finishes. Existing author context retains its original
-orientation; the actual tool-result context is available after deployment.
-
-Builder viewed child images img-bcab7eba-3d37-4494-8b22-1d91fa5e4b52 (workbench and equipment)
-and img-1b8e5f3d-e2db-4e0f-8af3-bb72eee72b4d (overnight chair/staff alcove), in addition to the
-first image. Characters/settings agree; the route instrument has three physical screens but they
-are not literally three perpendicular planes as requested. Let the author assess its actual result.
-Temporary in-app image tabs 7 and 8 show those two images; production tab 2 retains the pending
-opening after reload. No further creative requests were submitted during this slice.
+Remaining: P1sameagentcontinuation; P2exactcomplete productionnestedreturn; P3observepreparation,
+multipleconsecutive root/nestedscenes and contextualcriticism; P4realcontrolledrestart and new
+corpusrestore; P5native renewaland extendedcoherentcorpus (30–50kreadingstudy, notquota), distant
+recurrence/visualcontinuity and post-resolutiondevelopment; P6releaseexactrevisionand honesthandoff.
+Review the actual growing work, not just green tests. Stay within remaining fundedallowance.

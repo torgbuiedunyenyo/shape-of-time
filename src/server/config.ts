@@ -2,6 +2,7 @@ export const config = {
   databaseUrl: process.env.DATABASE_URL,
   schema: process.env.DATABASE_SCHEMA ?? "world",
   generationEnabled: process.env.GENERATION_ENABLED === "true",
+  preparationEnabled: process.env.PREPARATION_ENABLED === "true",
   budget: Number(process.env.PROVIDER_BUDGET_USD ?? "0"),
   textModel: "gpt-6-astra" as const,
   effort: "xhigh" as const,

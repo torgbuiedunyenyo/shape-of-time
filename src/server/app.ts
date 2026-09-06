@@ -5,6 +5,7 @@ import { db } from "./db/index.js";
 import { config } from "./config.js";
 import { getBook, enqueue, sourceContext } from "./library/store.js";
 import { getBytes } from "./library/assets.js";
+import { recordReading } from "./agent/preparation.js";
 const region = z
   .object({
     x: z.number().min(0).max(1),
@@ -29,11 +30,18 @@ async function readableIntent<T extends { result_work_id: string | null }>(
   const ready = intent.result_work_id
     ? await db
         .selectFrom("publications")
-        .select("id")
-        .where("work_id", "=", intent.result_work_id)
+        .innerJoin("works", "works.id", "publications.work_id")
+        .select(["publications.id", "works.title"])
+        .where("publications.work_id", "=", intent.result_work_id)
+        .orderBy("publications.ordinal", "desc")
         .executeTakeFirst()
     : null;
-  return { ...intent, result_work_id: ready ? intent.result_work_id : null };
+  return {
+    ...intent,
+    result_work_id: ready ? intent.result_work_id : null,
+    latest_publication_id: ready?.id ?? null,
+    result_title: ready?.title ?? null,
+  };
 }
 export const app = new Hono();
 app.onError((error, c) => {
@@ -92,6 +100,16 @@ app.get("/api/library", async (c) => {
 app.get("/api/works/:id", async (c) =>
   c.json(await getBook(c.req.param("id"))),
 );
+app.post("/api/works/:id/reading", async (c) => {
+  const place = anchor.parse(await c.req.json());
+  const book = await getBook(c.req.param("id"));
+  if (config.generationEnabled && config.preparationEnabled)
+    await recordReading(book.work.edition_id, book.work.id, place);
+  return c.json({
+    publications: book.publications.map((p) => p.id),
+    openings: book.openings.map((o) => o.id),
+  });
+});
 app.get("/api/assets/:id", async (c) => {
   const asset = await db
     .selectFrom("assets")
@@ -128,6 +146,7 @@ app.post("/api/intents", async (c) => {
       source: anchor.optional(),
       angle: z.string().max(4000).optional(),
       title: z.string().max(300).optional(),
+      afterPublicationId: z.string().optional(),
     })
     .parse(await c.req.json());
   let source;
@@ -147,6 +166,9 @@ app.post("/api/intents", async (c) => {
     ...(source ? { source } : {}),
     ...(body.angle ? { angle: body.angle } : {}),
     ...(body.title ? { title: body.title } : {}),
+    ...(body.kind === "continue" && body.afterPublicationId
+      ? { after_publication_id: body.afterPublicationId }
+      : {}),
   };
   const intent = await enqueue(
     "shape-of-time",

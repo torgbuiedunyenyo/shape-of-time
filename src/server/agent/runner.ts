@@ -12,6 +12,7 @@ import { storeImages } from "../providers/protocol.js";
 import { imageContent } from "../library/assets.js";
 import { getBook, writeDocument } from "../library/store.js";
 import { toolDefinitions, recordedTool, type ToolContext } from "./tools.js";
+import { nextIntent, useAvailableContinuation } from "./preparation.js";
 async function orientation(editionId: string, role: string) {
   const e = await db
     .selectFrom("editions")
@@ -186,6 +187,7 @@ export async function runIntent(intentId: string) {
     .where("id", "=", intentId)
     .executeTakeFirstOrThrow();
   if (intent.status === "done") return;
+  if (await useAvailableContinuation(intentId)) return;
   if (!intent.session_id) {
     let session = await db
       .selectFrom("sessions")
@@ -219,6 +221,11 @@ export async function runIntent(intentId: string) {
         text: `Reader request ${intent.id}: ${intent.kind}\n${json(intent.payload)}\n${intent.work_id ? "Current work: " + intent.work_id : "Establish an independent work and open it using open_work."}\n${intent.kind === "begin" ? "Begin the root narrative of Jay and Tan in The Shape of Time. Create the first absorbing illustrated stretch, using the source world and your own creative judgment." : ""}${intent.kind === "continue" ? "Continue the current work from its published frontier. Access earlier originals and your workspace as useful." : ""}${intent.kind === "explore" ? "Open a nested narrative rooted in this encountered material, with its own life and room for sustained reading." : ""}`,
       },
     ];
+    if (intent.kind === "prepare")
+      content.push({
+        type: "input_text",
+        text: "A reader is spending time in this work. This is an opportunity to prepare ahead, not a request for a particular new book or scene. The payload gives their recent place and what remains unread. You may continue this work, develop a promising nested opening from its actual material, investigate or save useful notes, or decide that nothing further is useful yet. Favor useful saved reading over unnecessary delay. Any publication is immediately readable; offer_opening connects a prepared book to its source. Actual queued reader requests take priority over further speculation. Keep this preparation bounded by what is useful ahead of this reader and the shared allowance. Finishing without a new publication is allowed.",
+      });
     const source = intent.payload.source as
       | {
           anchor?: {
@@ -288,10 +295,12 @@ export async function runIntent(intentId: string) {
           .selectFrom("publications")
           .select("id")
           .where("work_id", "=", workId)
-          .where("created_at", ">=", intent.created_at)
+          .$if(intent.kind === "continue", (q) =>
+            q.where("created_at", ">=", intent.created_at),
+          )
           .executeTakeFirst()
       : null;
-    if (!published)
+    if (!published && intent.kind !== "prepare")
       throw new Paused(
         "The author saved its work but has not published the requested passage. Inspect the saved session before continuing.",
       );
@@ -324,14 +333,9 @@ export async function pump() {
     );
     if (!rows[0].locked) return;
     try {
-      const intents = await db
-        .selectFrom("intents")
-        .selectAll()
-        .where("status", "in", ["running", "queued", "paused", "failed"])
-        .orderBy("created_at")
-        .execute();
-      for (const intent of intents) {
-        if (["paused", "failed"].includes(intent.status)) break;
+      for (;;) {
+        const intent = await nextIntent();
+        if (!intent || ["paused", "failed"].includes(intent.status)) break;
         try {
           await runIntent(intent.id);
         } catch (e) {

@@ -23,6 +23,11 @@ S3_REGION/S3_ACCESS_KEY_ID/S3_SECRET_ACCESS_KEY. Live generation additionally ne
 GENERATION_ENABLED=true and an explicitly funded PROVIDER_BUDGET_USD. The allowance is stored in the
 edition when first initialized; changing the environment alone does not silently increase it.
 The text model is GPT-6 Astra at xhigh; images use gpt-image-2-2026-04-21. There is no fallback.
+PREPARATION_ENABLED=true allows one preparation opportunity at an actively read publication frontier.
+Recent visible reading refreshes its context; explicit requests take priority, stale unstarted
+preparation waits, and an unread prepared continuation prevents another opportunity ahead of it.
+Preparation shares the same edition allowance and does not run unless generation is also enabled.
+The agent chooses what, if anything, is useful to develop.
 
 `pnpm gates` runs typecheck, lint, real Railway persistence/storage tests and the production build.
 Tests use the `world_checks` schema, never purchase generation, and do not claim literary quality.

@@ -84,6 +84,9 @@ const openingArgs = z.object({
   target_work_id: z.string(),
   label: z.string(),
   quote: z.string().optional(),
+  offset: z.number().int().nonnegative().optional(),
+  end_block_id: z.string().optional(),
+  end_offset: z.number().int().nonnegative().optional(),
   asset_id: z.string().optional(),
 });
 const definitions = [
@@ -294,7 +297,37 @@ export async function executeTool(
           blockId: a.block_id,
           ...(a.quote ? { quote: a.quote } : {}),
           ...(a.asset_id ? { assetId: a.asset_id } : {}),
+          ...(a.offset !== undefined ? { offset: a.offset } : {}),
+          ...(a.end_block_id ? { endBlockId: a.end_block_id } : {}),
+          ...(a.end_offset !== undefined ? { endOffset: a.end_offset } : {}),
         };
+      const target = await getBook(a.target_work_id);
+      if (
+        target.work.edition_id !== ctx.editionId ||
+        !target.publications.length
+      )
+        throw new Error(
+          "A prepared opening needs a published destination before readers can enter it.",
+        );
+      if (a.quote && !a.end_block_id) {
+        const original = await sourceContext({
+          publicationId: a.publication_id,
+          blockId: a.block_id,
+        });
+        const text = original.publication.blocks.find(
+          (b) => b.id === a.block_id,
+        )!.text;
+        const offset = a.offset ?? text.indexOf(a.quote);
+        if (
+          offset < 0 ||
+          (a.offset === undefined && text.indexOf(a.quote, offset + 1) >= 0)
+        )
+          throw new Error(
+            "Choose an exact quoted passage and give its offset if it occurs more than once.",
+          );
+        source.offset = offset;
+        source.endOffset = a.end_offset ?? offset + a.quote.length;
+      }
       const s = await sourceContext(source);
       await db
         .insertInto("openings")
@@ -365,6 +398,22 @@ export async function recordedTool(
         (Date.now() - new Date(intent.created_at).getTime()) / 1000,
       ),
       new_publication_available: Boolean(publication),
+      ...(intent.kind === "prepare"
+        ? {
+            reader_last_seen: intent.payload.last_seen,
+            reader_place: intent.payload.reader_place,
+            remaining_characters_in_saved_work:
+              intent.payload.remaining_characters_in_saved_work,
+            waiting_requests: await db
+              .selectFrom("intents")
+              .select(["kind", "work_id", "created_at"])
+              .where("edition_id", "=", ctx.editionId)
+              .where("status", "=", "queued")
+              .where("kind", "!=", "prepare")
+              .orderBy("created_at")
+              .execute(),
+          }
+        : {}),
     };
     output = [
       ...(typeof output === "string"

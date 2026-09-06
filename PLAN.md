@@ -203,6 +203,13 @@ Use one quiet Open as a book action for text and whole-image exploration. Add re
 
 ### P3 — Make sustained reading inviting
 
+**Execution note:** The first root and child are published, and a third-level book is readable.
+The next reader release implements bounded preparation (initially disabled), exact per-visit
+source return, persistent return controls, and a library list of all requested openings. It also
+loads new publications before the author finishes its turn and reuses work that satisfies a queued
+continuation. Twenty mechanical checks pass. Actual production testing and extended reading remain
+required; this is not yet completion of P3.
+
 **Work:** Extend the actual corpus through multiple scenes in the root and at least one nested work. Let the agent choose their shape. Improve typography, measure, text size, image sizing, chapter transitions and accessible controls while reading those outputs.
 
 Implement viewport pagination over stable published blocks, retaining a flowing mode if useful. A long publication spans screens without becoming several invented scenes. Page turns within saved work are immediate; the frontier requests continuation through the same intent system. Do not expose token streaming as narrative.

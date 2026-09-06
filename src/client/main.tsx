@@ -15,7 +15,14 @@ import type {
   Intent,
   Work,
 } from "../shared/types.js";
-import { enter, loadReading, saveReading, updateVisit } from "./visits.js";
+import {
+  enter,
+  enterRequested,
+  loadReading,
+  saveReading,
+  sourceReturn,
+  updateVisit,
+} from "./visits.js";
 import "./style.css";
 import { ImageDetail } from "./ImageDetail.js";
 import { capturePlace, restorePlace } from "./position.js";
@@ -58,6 +65,102 @@ function InlineText({ nodes }: { nodes: Inline[] }) {
     </>
   );
 }
+function Discoveries() {
+  const [records] = useState(() =>
+    Object.values(loadReading().requests)
+      .filter((r) => r.source || r.label)
+      .reverse(),
+  );
+  const [intents, setIntents] = useState<Record<string, Intent>>({});
+  const snapshots = useRef<Record<string, Intent>>({});
+  const navigate = useNavigate();
+  useEffect(() => {
+    let active = true;
+    const poll = async () => {
+      await Promise.allSettled(
+        records
+          .filter((r) => {
+            const current = snapshots.current[r.intentId];
+            return (
+              !current || !["done", "failed", "paused"].includes(current.status)
+            );
+          })
+          .map(async (r) => {
+            const intent = await api<Intent>("intents/" + r.intentId);
+            if (active) {
+              snapshots.current[r.intentId] = intent;
+              setIntents({ ...snapshots.current });
+            }
+          }),
+      );
+    };
+    void poll();
+    const timer = setInterval(() => void poll(), 5000);
+    return () => {
+      active = false;
+      clearInterval(timer);
+    };
+  }, [records]);
+  if (!records.length) return null;
+  return (
+    <section className="saved-openings">
+      <h2>Your openings</h2>
+      {records.map((record) => {
+        const intent = intents[record.intentId];
+        return (
+          <div className="saved-opening" key={record.intentId}>
+            {intent?.result_work_id ? (
+              <button
+                onClick={() =>
+                  navigate(
+                    "/read/" +
+                      enterRequested(
+                        intent.id,
+                        intent.result_work_id!,
+                        record.visitId,
+                        record.source,
+                      ),
+                  )
+                }
+              >
+                {intent.result_title ?? record.label ?? "Open the book"}{" "}
+                <span>{record.openedVisitId ? "Resume →" : "↗"}</span>
+              </button>
+            ) : (
+              <p>{record.label ?? "A book is taking shape."}</p>
+            )}
+            {record.source?.quote && (
+              <blockquote>{record.source.quote}</blockquote>
+            )}
+            {!intent?.result_work_id && (
+              <p className="small">
+                {["failed", "paused"].includes(intent?.status ?? "")
+                  ? "This opening is paused. Your request and saved writing are kept."
+                  : "You can keep reading while this opens."}
+              </p>
+            )}
+            <Link
+              className="small"
+              to={
+                record.visitId
+                  ? "/read/" + record.visitId
+                  : "/waiting/" + record.intentId
+              }
+              onClick={() => {
+                if (record.visitId && record.source) {
+                  const origin = sourceReturn(record.source);
+                  if (origin) updateVisit(record.visitId, origin);
+                }
+              }}
+            >
+              {record.visitId ? "Return to the source" : "View this opening"}
+            </Link>
+          </div>
+        );
+      })}
+    </section>
+  );
+}
 function Shelf() {
   const [library, setLibrary] = useState<{
     edition: { root_work_id: string | null };
@@ -83,6 +186,13 @@ function Shelf() {
         workId: null,
         key: "begin:shape-of-time",
       });
+      const reading = loadReading();
+      reading.requests[intent.id] = {
+        intentId: intent.id,
+        visitId: null,
+        label: "The Shape of Time",
+      };
+      saveReading(reading);
       navigate("/waiting/" + intent.id);
     } catch (e) {
       setError((e as Error).message);
@@ -160,6 +270,7 @@ function Shelf() {
           ))}
         </section>
       )}
+      <Discoveries />
       {library?.generationEnabled && (
         <details className="title-opening">
           <summary>Begin with a title</summary>
@@ -174,6 +285,13 @@ function Shelf() {
                   key: "title:" + titleKey.current,
                   title,
                 });
+                const reading = loadReading();
+                reading.requests[intent.id] = {
+                  intentId: intent.id,
+                  visitId: null,
+                  label: title,
+                };
+                saveReading(reading);
                 navigate("/waiting/" + intent.id);
               } catch (e) {
                 setError((e as Error).message);
@@ -221,7 +339,11 @@ function Waiting() {
   return (
     <main className="waiting">
       <Link to="/">← The library</Link>
-      <h1>A book is opening.</h1>
+      <h1>
+        {intent?.result_work_id
+          ? (intent.result_title ?? "Your book is ready.")
+          : "A book is opening."}
+      </h1>
       <p>
         {intent?.status === "failed" || intent?.status === "paused"
           ? intent.error
@@ -232,7 +354,10 @@ function Waiting() {
         <button
           className="primary"
           onClick={() =>
-            navigate("/read/" + enter(intent.result_work_id!, null))
+            navigate(
+              "/read/" +
+                enterRequested(intent.id, intent.result_work_id!, null),
+            )
           }
         >
           Open the book →
@@ -256,6 +381,8 @@ function Reader() {
   const restored = useRef(false);
   const resizing = useRef(false);
   const root = useRef<HTMLDivElement>(null);
+  const currentVisit = useRef(id);
+  currentVisit.current = id;
   useEffect(() => {
     restored.current = false;
     setBook(undefined);
@@ -264,6 +391,7 @@ function Reader() {
     setBookmarked(false);
     setError("");
     if (!visit) return;
+    let active = true;
     const state = loadReading();
     state.current = visit.id;
     saveReading(state);
@@ -271,14 +399,26 @@ function Reader() {
       .filter((r) => r.visitId === visit.id)
       .at(-1);
     if (savedRequest) {
-      if (savedRequest.source) setSelected(savedRequest.source);
+      if (savedRequest.source && !savedRequest.openedVisitId)
+        setSelected(savedRequest.source);
       api<Intent>("intents/" + savedRequest.intentId)
-        .then(setIntent)
-        .catch((e) => setError(e.message));
+        .then((next) => {
+          if (active) setIntent(next);
+        })
+        .catch((e) => {
+          if (active) setError(e.message);
+        });
     }
     api<Book>("works/" + visit.workId)
-      .then(setBook)
-      .catch((e) => setError(e.message));
+      .then((next) => {
+        if (active) setBook(next);
+      })
+      .catch((e) => {
+        if (active) setError(e.message);
+      });
+    return () => {
+      active = false;
+    };
   }, [id, visit?.workId]);
   useLayoutEffect(() => {
     if (!book || restored.current) return;
@@ -332,19 +472,71 @@ function Reader() {
   }, [visit?.id, book]);
   useEffect(() => {
     if (!intent || ["done", "failed", "paused"].includes(intent.status)) return;
+    let active = true;
     const t = setInterval(
       () =>
         api<Intent>("intents/" + intent.id)
-          .then((next) => {
+          .then(async (next) => {
+            if (!active) return;
+            let updated: Book | undefined;
+            if (
+              next.kind === "continue" &&
+              (next.status === "done" ||
+                (next.latest_publication_id &&
+                  next.latest_publication_id !== book?.publications.at(-1)?.id))
+            )
+              updated = await api<Book>("works/" + visit!.workId);
+            if (!active) return;
+            if (updated) setBook(updated);
             setIntent(next);
-            if (next.status === "done" && next.kind === "continue")
-              api<Book>("works/" + visit!.workId).then(setBook);
           })
-          .catch((e) => setError(e.message)),
+          .catch((e) => {
+            if (active) setError(e.message);
+          }),
       3000,
     );
-    return () => clearInterval(t);
-  }, [intent?.id, intent?.status, visit?.workId]);
+    return () => {
+      active = false;
+      clearInterval(t);
+    };
+  }, [
+    intent?.id,
+    intent?.status,
+    visit?.workId,
+    book?.publications.at(-1)?.id,
+  ]);
+  useEffect(() => {
+    if (!visit || !book) return;
+    let active = true;
+    const signal = async () => {
+      if (document.visibilityState !== "visible" || !root.current) return;
+      const position = capturePlace(root.current);
+      if (!position) return;
+      try {
+        const changes = await api<{
+          publications: string[];
+          openings: string[];
+        }>("works/" + visit.workId + "/reading", position.place);
+        if (
+          changes.publications.join() !==
+            book.publications.map((p) => p.id).join() ||
+          changes.openings.join() !== book.openings.map((o) => o.id).join()
+        ) {
+          const updated = await api<Book>("works/" + visit.workId);
+          if (active) setBook(updated);
+        }
+      } catch {
+        /* A background reading signal does not interrupt the saved book. */
+      }
+    };
+    const first = setTimeout(() => void signal(), 20000);
+    const timer = setInterval(() => void signal(), 30000);
+    return () => {
+      active = false;
+      clearTimeout(first);
+      clearInterval(timer);
+    };
+  }, [visit?.id, book]);
   const select = () => {
     const s = window.getSelection();
     if (!s?.rangeCount || s.isCollapsed) return;
@@ -397,8 +589,10 @@ function Reader() {
       if (kind === "continue") {
         const current = await api<Book>("works/" + visit.workId);
         if (current.publications.at(-1)?.id !== book?.publications.at(-1)?.id) {
-          setBook(current);
-          setIntent(undefined);
+          if (currentVisit.current === id) {
+            setBook(current);
+            setIntent(undefined);
+          }
           return;
         }
       }
@@ -413,13 +607,16 @@ function Reader() {
         key,
         source,
         angle,
+        ...(kind === "continue"
+          ? { afterPublicationId: book?.publications.at(-1)?.id }
+          : {}),
       });
-      setIntent(result);
+      if (currentVisit.current === id) setIntent(result);
       const state = loadReading();
       state.requests[key] = { intentId: result.id, visitId: visit.id, source };
       saveReading(state);
     } catch (e) {
-      setError((e as Error).message);
+      if (currentVisit.current === id) setError((e as Error).message);
     }
   };
   const changeFont = (next: number) => {
@@ -547,9 +744,28 @@ function Reader() {
   return (
     <>
       <header className="reader-bar">
-        <Link to="/" aria-label="The library">
-          ⌂ <span>The library</span>
-        </Link>
+        <div className="reader-navigation">
+          {visit.parentId && (
+            <button
+              className="return"
+              aria-label="Return to where you came from"
+              onClick={() => {
+                const position = root.current
+                  ? capturePlace(root.current)
+                  : undefined;
+                if (position) updateVisit(visit.id, position);
+                const origin = sourceReturn(visit.entry);
+                if (origin) updateVisit(visit.parentId!, origin);
+                navigate("/read/" + visit.parentId);
+              }}
+            >
+              ↶ <span>Return</span>
+            </button>
+          )}
+          <Link to="/" aria-label="The library">
+            ⌂ <span>The library</span>
+          </Link>
+        </div>
         <span className="running-title">{book?.work.title}</span>
         <div className="type-controls">
           <button
@@ -584,20 +800,6 @@ function Reader() {
           </button>
         </div>
       </header>
-      {visit.parentId && (
-        <button
-          className="return"
-          onClick={() => {
-            const position = root.current
-              ? capturePlace(root.current)
-              : undefined;
-            if (position) updateVisit(visit.id, position);
-            navigate("/read/" + visit.parentId);
-          }}
-        >
-          ↶ Return to where you came from
-        </button>
-      )}
       <main
         ref={root}
         className="book"
@@ -719,7 +921,13 @@ function Reader() {
               className="primary"
               onClick={() =>
                 navigate(
-                  "/read/" + enter(intent.result_work_id!, visit.id, selected),
+                  "/read/" +
+                    enterRequested(
+                      intent.id,
+                      intent.result_work_id!,
+                      visit.id,
+                      selected,
+                    ),
                 )
               }
             >
@@ -740,9 +948,11 @@ function Reader() {
           {intent?.kind === "explore" && (
             <p role="status" className="small">
               {intent.error ??
-                (["queued", "running"].includes(intent.status)
-                  ? "A book is taking shape. You can keep reading."
-                  : "Your opening is ready.")}
+                (intent.result_work_id
+                  ? "Your opening is ready."
+                  : ["queued", "running"].includes(intent.status)
+                    ? "A book is taking shape. You can keep reading."
+                    : "Your opening is ready.")}
             </p>
           )}
           {error && <p role="alert">{error}</p>}

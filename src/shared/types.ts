@@ -50,6 +50,8 @@ export type Intent = {
   status: string;
   work_id: string | null;
   result_work_id: string | null;
+  latest_publication_id?: string | null;
+  result_title?: string | null;
   payload: Record<string, unknown>;
   error: string | null;
 };

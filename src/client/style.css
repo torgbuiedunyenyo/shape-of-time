@@ -159,11 +159,61 @@ input {
   min-width: 44px;
 }
 .return {
-  display: block;
   border: 0;
-  margin: 16px auto 0;
+  padding: 8px;
+  min-width: 44px;
   font-size: 12px;
   color: #657767;
+}
+.reader-navigation {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap;
+}
+.saved-openings {
+  margin-top: 52px;
+  max-width: 560px;
+}
+.saved-openings h2 {
+  font:
+    400 28px "EB Garamond",
+    Georgia,
+    serif;
+}
+.saved-opening {
+  padding: 18px 0;
+  border-bottom: 1px solid #d4d0c4;
+}
+.saved-opening > button {
+  border: 0;
+  padding: 0;
+  display: flex;
+  width: 100%;
+  gap: 20px;
+  justify-content: space-between;
+  text-align: left;
+  font:
+    400 25px "EB Garamond",
+    Georgia,
+    serif;
+}
+.saved-opening > button span {
+  font: 12px sans-serif;
+  white-space: nowrap;
+  align-self: center;
+}
+.saved-opening blockquote {
+  margin: 12px 0;
+  font:
+    italic 18px/1.5 "EB Garamond",
+    Georgia,
+    serif;
+  color: #657767;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .book {
   max-width: 720px;

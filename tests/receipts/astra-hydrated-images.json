@@ -1,0 +1,31 @@
+{
+  "observed_revision": "31b3217596907b895245208626c1718c20f62fdd",
+  "operation_id": "2b5fc911-dd7f-4d02-8dee-ac0e6cdd7187",
+  "provider_id": "resp_07d55e4c2e541ade006a9ceaf0784087d0aedf3c056bcbe902",
+  "status": "complete",
+  "model": "gpt-6-astra",
+  "reasoning": {
+    "mode": "standard",
+    "effort": "xhigh",
+    "context": "all_turns",
+    "summary": null
+  },
+  "usage": {
+    "input_tokens": 217832,
+    "total_tokens": 217853,
+    "output_tokens": 21,
+    "input_tokens_details": {
+      "cached_tokens": 10106,
+      "cache_write_tokens": 0
+    },
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "stored_image_references": 17,
+  "inline_image_bytes_in_saved_request": false,
+  "first_action": [
+    "archive"
+  ],
+  "note": "The live provider accepted a hydrated image-bearing request; real storage roundtrip checks verify exact image bytes. This receipt does not alone prove visual judgment."
+}
