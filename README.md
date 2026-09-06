@@ -34,7 +34,13 @@ Tests use the `world_checks` schema, never purchase generation, and do not claim
 `pnpm inspect` reports requests, provider operations and shared spending without credentials.
 Operator scripts run with `tsx --env-file=.env scripts/NAME.ts`. `resume.ts REQUEST_ID` resumes only a
 reconciled paused/failed request. `critique.ts REVIEW_KEY [WORK_IDS...]` commissions an explicitly
-funded contextual review. `renew.ts RENEWAL_KEY` preserves and renews the idle author's context;
+funded contextual review. Before a new reader request, the author automatically renews an active
+context above250,000 tokens. This timing follows the first live renewal and observed longer-context
+costs; it is an operational boundary, not a story-length constraint. It preserves the full archive
+and complete canonical returned window. It shares the edition allowance, reuses a saved receipt on
+restart, and pauses an uncertain outcome. A single unusually long author turn still pauses before
+the880,000-token dispatch guard; inspect it before manual renewal/resume.
+`renew.ts RENEWAL_KEY` also preserves and renews the idle author's context;
 its standalone compaction interface does not expose a reasoning-effort setting. Author/critic
 responses continue to use Astra xhigh. Both paid utilities require generation deliberately enabled.
 `corpus.ts export .local/SNAPSHOT` saves all records and original media with checksums while the

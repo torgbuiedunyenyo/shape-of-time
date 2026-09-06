@@ -6,6 +6,8 @@ import type {
   ResponseInputContent,
 } from "openai/resources/responses/responses";
 import { db, json, pool } from "../db/index.js";
+import { config } from "../config.js";
+import { renewBeforeRequest } from "./renewal.js";
 import { astra, appendItems } from "../providers/astra.js";
 import { Paused } from "../providers/operations.js";
 import { storeImages } from "../providers/protocol.js";
@@ -196,6 +198,21 @@ export async function runIntent(intentId: string) {
       .where("role", "=", "author")
       .orderBy("created_at", "desc")
       .executeTakeFirst();
+    if (session && config.generationEnabled) {
+      try {
+        await renewBeforeRequest(session.id, intent.id, toolDefinitions(false));
+      } catch (e) {
+        await db
+          .updateTable("intents")
+          .set({
+            status: e instanceof Paused ? "paused" : "failed",
+            error: e instanceof Error ? e.message : String(e),
+          })
+          .where("id", "=", intentId)
+          .execute();
+        throw e;
+      }
+    }
     if (!session) {
       const input: ResponseInputItem[] = [
         {

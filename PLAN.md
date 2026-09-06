@@ -1,6 +1,6 @@
 # Shape of Time implementation plan
 
-Written September 6, 2026. Status: P0 complete; first illustrated root published; P1 continuation and P2 nested journey in progress.
+Written September 6, 2026. Status: P0–P2 first usable path complete; P3–P5 sustained reading, preparation and memory evidence in progress.
 
 Execution update: the user explicitly authorized implementing and testing directly on the existing
 Railway production project, with no users or old data requiring preservation. This supersedes the
@@ -161,6 +161,12 @@ P1 and P2 are the first usable experiment. They must not wait for an elaborate s
 
 ### P1 — One real agent, workspace and illustrated reader path
 
+**Execution evidence:** The real root, child and grandchild are readable. The same author resumed
+through native context renewal and published root continuatione7eb59f4-58f8-4c3e-b090-859de5018800
+with a new referenced illustration after contextual criticism. The builder read both drafts/review
+and inspected the image. This completes the initial usable path, not long-form literary proof.
+See HANDOFF.md and evals/native-renewal-2026-09-06.md.
+
 Build this as a short sequence of connected commits, not independent subsystems:
 
 **P1a: Save and display work.** Create the new application manifest, minimal tool configuration and fresh database migration, then add records for editions/works, draft revisions, publications, assets and run receipts. Inspect/recover small DB or storage helpers only where they fit the new responsibilities. Add reader endpoints for saved publications and a thin flowing reading surface. A small fixture may verify rendering and persistence only. It is not a literary milestone.
@@ -181,6 +187,10 @@ Build this as a short sequence of connected commits, not independent subsystems:
 **Completion:** At least one genuinely generated illustrated sequence can be read from stored publications, reloaded, continued by the same agent and inspected by the critic. Preserve the entire run, including mistakes. Do not claim long-form success at this point.
 
 ### P2 — Create nested works from what the reader encountered
+
+**Execution evidence:** Production root→child→grandchild→child→root worked through real image-region
+and text selections, after reflow/reload. Bookmarks now preserve that same nested visit. Prepared
+links and saved discoveries reopen available works. See evals/nested-reader-and-recovery-2026-09-06.md.
 
 **Work:** Implement a durable exploration intent carrying source publication/block/selection or image region and optional angle. Give the agent surrounding text and actual source images plus archive access. Create a work with its own title and development, or deliberately reopen a relevant existing work. Reserve requests before generation so repeated clicks/reloads do not duplicate the same intent.
 

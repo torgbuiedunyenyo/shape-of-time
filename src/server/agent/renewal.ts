@@ -2,6 +2,7 @@ import { toResponseInputItems } from "openai/lib/responses/ResponseInputItems";
 import type {
   CompactedResponse,
   ResponseInputItem,
+  Tool,
 } from "openai/resources/responses/responses";
 import { db, json } from "../db/index.js";
 import { config } from "../config.js";
@@ -25,6 +26,34 @@ export function pendingCalls(input: ResponseInputItem[]) {
   return input.some(
     (i) => i.type === "function_call" && !answered.has(i.call_id),
   );
+}
+/** Renew between reader requests, under the existing author lock. A saved receipt always wins. */
+export async function renewBeforeRequest(
+  sessionId: string,
+  intentId: string,
+  tools: Tool[],
+) {
+  const requestKey = `before-reader:${intentId}`;
+  const prior = await db
+    .selectFrom("operations")
+    .select("id")
+    .where("key", "=", `${sessionId}:renew:${requestKey}`)
+    .executeTakeFirst();
+  if (prior) return renewSession(sessionId, requestKey);
+  const session = await db
+    .selectFrom("sessions")
+    .select("input")
+    .where("id", "=", sessionId)
+    .executeTakeFirstOrThrow();
+  const count = await openai.responses.inputTokens.count({
+    model: config.textModel,
+    input: await hydrateImages(session.input),
+    tools,
+    reasoning: { effort: config.effort },
+    tool_choice: "auto",
+  });
+  if (count.input_tokens > config.contextRenewalTokens)
+    return renewSession(sessionId, requestKey);
 }
 export async function renewSession(sessionId: string, requestKey: string) {
   const session = await db
@@ -101,11 +130,12 @@ export async function renewSession(sessionId: string, requestKey: string) {
     throw new Paused(
       "The renewal receipt is saved but has no compaction item.",
     );
-  await finish(
-    op.id,
-    response as unknown as Record<string, unknown>,
-    response.usage ? textCost(response.usage) : null,
-  );
+  if (op.status !== "complete")
+    await finish(
+      op.id,
+      response as unknown as Record<string, unknown>,
+      response.usage ? textCost(response.usage) : null,
+    );
   const compactId = response.output.find((i) => i.type === "compaction")!.id;
   const canonical = toResponseInputItems(response.output);
   // Keep the whole canonical returned window. Reattach the original, unabridged artistic

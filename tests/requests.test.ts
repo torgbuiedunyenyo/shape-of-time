@@ -1,6 +1,15 @@
 import { expect, it } from "vitest";
 import { explorationKey } from "../src/client/requests.js";
-import { bookmarkedVisit, sourceReturn } from "../src/client/visits.js";
+import { bookmarkedVisit, latestVisitRequests, sourceReturn } from "../src/client/visits.js";
+
+it("retains a pending continuation while the reader selects or opens another source", () => {
+  const continuation = { intentId: "continue-root", visitId: "root-visit" };
+  const source = { publicationId: "root-publication", blockId: "image" };
+  const opening = { intentId: "explore-image", visitId: "root-visit", source };
+  expect(latestVisitRequests({ continuation, opening }, "root-visit")).toEqual({ continuation, opening });
+  expect(latestVisitRequests({ opening, continuation }, "root-visit")).toEqual({ continuation, opening });
+  expect(latestVisitRequests({ opening, continuation }, "another-visit")).toEqual({ continuation: undefined, opening: undefined });
+});
 
 it("reopens a bookmark through its own nested visit even after another route reaches the same work", () => {
   const entry = { publicationId: "parent-publication", blockId: "program", offset: 91 };

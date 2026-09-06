@@ -18,6 +18,7 @@ import type {
 import {
   enter,
   bookmarkedVisit,
+  latestVisitRequests,
   enterRequested,
   loadReading,
   saveReading,
@@ -379,6 +380,7 @@ function Reader() {
   const [angle, setAngle] = useState("");
   const [intent, setIntent] = useState<Intent>();
   const [font, setFont] = useState(loadReading().fontSize);
+  const [continuation, setContinuation] = useState<Intent>();
   const [enlarged, setEnlarged] = useState<string>();
   const [bookmarked, setBookmarked] = useState(false);
   const navigate = useNavigate();
@@ -392,6 +394,7 @@ function Reader() {
     setBook(undefined);
     setSelected(undefined);
     setIntent(undefined);
+    setContinuation(undefined);
     setBookmarked(false);
     setError("");
     if (!visit) return;
@@ -399,9 +402,8 @@ function Reader() {
     const state = loadReading();
     state.current = visit.id;
     saveReading(state);
-    const savedRequest = Object.values(state.requests)
-      .filter((r) => r.visitId === visit.id)
-      .at(-1);
+    const requests = latestVisitRequests(state.requests, visit.id);
+    const savedRequest = requests.opening;
     if (savedRequest) {
       if (savedRequest.source && !savedRequest.openedVisitId)
         setSelected(savedRequest.source);
@@ -413,6 +415,14 @@ function Reader() {
           if (active) setError(e.message);
         });
     }
+    if (requests.continuation)
+      api<Intent>("intents/" + requests.continuation.intentId)
+        .then((next) => {
+          if (active) setContinuation(next);
+        })
+        .catch((e) => {
+          if (active) setError(e.message);
+        });
     api<Book>("works/" + visit.workId)
       .then((next) => {
         if (active) setBook(next);
@@ -475,28 +485,35 @@ function Reader() {
     };
   }, [visit?.id, book]);
   useEffect(() => {
-    if (!intent || ["done", "failed", "paused"].includes(intent.status)) return;
+    const pending = [intent, continuation].filter(
+      (request): request is Intent =>
+        Boolean(request && !["done", "failed", "paused"].includes(request.status)),
+    );
+    if (!pending.length) return;
     let active = true;
     const t = setInterval(
-      () =>
-        api<Intent>("intents/" + intent.id)
-          .then(async (next) => {
-            if (!active) return;
-            let updated: Book | undefined;
-            if (
-              next.kind === "continue" &&
-              (next.status === "done" ||
-                (next.latest_publication_id &&
-                  next.latest_publication_id !== book?.publications.at(-1)?.id))
-            )
-              updated = await api<Book>("works/" + visit!.workId);
-            if (!active) return;
-            if (updated) setBook(updated);
-            setIntent(next);
-          })
-          .catch((e) => {
-            if (active) setError(e.message);
-          }),
+      () => {
+        for (const request of pending)
+          void api<Intent>("intents/" + request.id)
+            .then(async (next) => {
+              if (!active) return;
+              let updated: Book | undefined;
+              if (
+                next.kind === "continue" &&
+                (next.status === "done" ||
+                  (next.latest_publication_id &&
+                    next.latest_publication_id !== book?.publications.at(-1)?.id))
+              )
+                updated = await api<Book>("works/" + visit!.workId);
+              if (!active) return;
+              if (updated) setBook(updated);
+              if (next.kind === "continue") setContinuation(next);
+              else setIntent(next);
+            })
+            .catch((e) => {
+              if (active) setError(e.message);
+            });
+      },
       3000,
     );
     return () => {
@@ -506,6 +523,8 @@ function Reader() {
   }, [
     intent?.id,
     intent?.status,
+    continuation?.id,
+    continuation?.status,
     visit?.workId,
     book?.publications.at(-1)?.id,
   ]);
@@ -595,7 +614,7 @@ function Reader() {
         if (current.publications.at(-1)?.id !== book?.publications.at(-1)?.id) {
           if (currentVisit.current === id) {
             setBook(current);
-            setIntent(undefined);
+            setContinuation(undefined);
           }
           return;
         }
@@ -615,7 +634,10 @@ function Reader() {
           ? { afterPublicationId: book?.publications.at(-1)?.id }
           : {}),
       });
-      if (currentVisit.current === id) setIntent(result);
+      if (currentVisit.current === id) {
+        if (kind === "continue") setContinuation(result);
+        else setIntent(result);
+      }
       const state = loadReading();
       state.requests[key] = { intentId: result.id, visitId: visit.id, source };
       saveReading(state);
@@ -862,17 +884,17 @@ function Reader() {
               className="primary"
               onClick={() => request("continue")}
               disabled={
-                intent?.kind === "continue" &&
-                ["queued", "running"].includes(intent.status)
+                continuation &&
+                ["queued", "running"].includes(continuation.status)
               }
             >
               Continue reading →
             </button>
-            {intent?.kind === "continue" && (
+            {continuation && (
               <p className="small" role="status">
-                {["queued", "running"].includes(intent.status)
+                {["queued", "running"].includes(continuation.status)
                   ? "The next passage is taking shape. Your place is saved."
-                  : (intent.error ?? "The next passage is ready.")}
+                  : (continuation.error ?? "The next passage is ready.")}
               </p>
             )}
           </footer>

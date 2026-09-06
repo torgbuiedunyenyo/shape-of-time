@@ -67,3 +67,12 @@ At04:44:48.641UTC that operation completed and wrote second-section draftcaa13e1
 manual resume or publication was submitted. This proves that concrete background-response recovery
 path. It does not prove that every ambiguous direct image purchase can be recovered; those remain
 paused for reconciliation rather than being automatically repeated.
+
+Follow-up on revisionb920956: the bookmark initially lost ancestry, despite preserving its text
+position. The regression reproduced this and the fix retained the visit's original parent/source.
+In production, Save place → library saved passage reopened visitf7ce6c60-d964-49d9-95ec-
+029a80499ad1 with Return available; it returned through the program to the root image.
+Three adjacent paragraphs could also be selected as a single exact exploration quote, without
+submitting a generation request. While the root continuation was pending, opening another image's
+exploration panel hid the continuation status; that separate state defect was reproduced and is
+being corrected in the next release.

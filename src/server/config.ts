@@ -3,6 +3,7 @@ export const config = {
   schema: process.env.DATABASE_SCHEMA ?? "world",
   generationEnabled: process.env.GENERATION_ENABLED === "true",
   preparationEnabled: process.env.PREPARATION_ENABLED === "true",
+  contextRenewalTokens: 250_000,
   budget: Number(process.env.PROVIDER_BUDGET_USD ?? "0"),
   textModel: "gpt-6-astra" as const,
   effort: "xhigh" as const,

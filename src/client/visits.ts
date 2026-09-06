@@ -8,21 +8,19 @@ export type Visit = {
   pixelOffset?: number;
 };
 export type Bookmark = Anchor & { visitId?: string };
+export type ReadingRequest = {
+  intentId: string;
+  visitId: string | null;
+  source?: Anchor;
+  label?: string;
+  openedVisitId?: string;
+};
 type Reading = {
   visits: Record<string, Visit>;
   current: string | null;
   fontSize: number;
   bookmarks: Record<string, Bookmark>;
-  requests: Record<
-    string,
-    {
-      intentId: string;
-      visitId: string | null;
-      source?: Anchor;
-      label?: string;
-      openedVisitId?: string;
-    }
-  >;
+  requests: Record<string, ReadingRequest>;
 };
 const empty = (): Reading => ({
   visits: {},
@@ -80,6 +78,17 @@ export function bookmarkedVisit(
       : { id: crypto.randomUUID(), workId, parentId: null }),
     place,
     pixelOffset: 0,
+  };
+}
+
+export function latestVisitRequests(
+  requests: Record<string, ReadingRequest>,
+  visitId: string,
+) {
+  const saved = Object.values(requests).filter((r) => r.visitId === visitId);
+  return {
+    opening: saved.findLast((r) => Boolean(r.source)),
+    continuation: saved.findLast((r) => !r.source),
   };
 }
 
