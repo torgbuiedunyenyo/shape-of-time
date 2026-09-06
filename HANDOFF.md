@@ -12,6 +12,36 @@ fact graph, deterministic literary verdicts or compulsory write/image/critic seq
 implementation, full old-production replacement and direct Railway work. Single development agent;
 no subagents or goal tool. Preserve all session transcripts and historical source refs.
 
+## Live transition — latest position
+
+Code a1bef58 is committed and normal main fast-forwarded, not pushed yet.30 tests/typecheck/lint/build
+passed, including compiled mechanism-record load. Production remains9aee4b0.
+Development preparation d87c40c7 DONE; final Astraop327558aa complete, root005rev2published
+4927ae48-3edd-494c-bf04-908a7858a48e. Notes/root005doc166bb055 and libraryindexrev6doc51c1567d saved.
+No extra literary analysis of root005 performed. The author will assess the fresh reader edition.
+
+Release lock helper79048 STOPPED cleanly. Development spending was frozen at94.69730400000006
+under its idle lock; no active/unknown operations. Combined$150 remainder allocated55.302695 to
+world_reader_20260906. Receipt .local/edition-allowance-2026-09-06.json, copied to
+ tests/receipts/edition-allocation.json. DO NOT rerunfreeze or restore a150allowance on either edition.
+The development corpus remains inworld; no final schema/edition exists yet.
+
+**EXPORT49867 COMPLETE**, .local/development-complete-2026-09-06. No active export or release lock.
+228operations/43documentrevisions/22assets/10publications/286objects. Receipt
+tests/receipts/development-final-export.json records its manifest hash and matching restore revision.
+Allpendingproviderworkcompleted before export. Previousfullrestoreproof remains valid; do not repeat
+restoration merely because the corpus has more content. Use matching9aee4b0 schema/script to restore
+this development snapshot: world has not acquired the new mechanism column, reader schema will.
+Development metadata .local/development-index-2026-09-06.json and deploymenthistoryalready saved.
+
+Next: finish export, record manifest/allowance and commit report; set Railway DATABASE_SCHEMA to
+world_reader_20260906, READER_EDITION=true, PROVIDER_BUDGET_USD=55.302695 with --skip-deploys,
+retain GENERATION_ENABLED/PREPARATION_ENABLED=true, then passingmainGitpush and verifyexactSHA.
+A fresh startup pins the process before generation. In-app browser hasNOtabs (userclosedoldones).
+Createfreshsite tab foractualclean UIandBegin. Prepare roughly50readingscreens viaordinaryreader
+requests/root+nestedexperience; workingassumptionstatedafterunansweredclarification. No moreoperator
+narrativeanalysis/automaticrefinement. Do not loaddevelopmentmaterialinto thefreshcontext.
+
 ## Terminology — explicit user correction
 
 The user is the author. The overall system is the book. Its users are readers. The generating
