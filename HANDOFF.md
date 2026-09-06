@@ -51,6 +51,13 @@ images and desired experience. Mechanical release work and initial sample prepar
 Do not buy more generation, restart the literary study or change the process without new direction.
 If new work materially changes that process, preserve this edition before starting another.
 
+**Deferred request, September 6:** PLAN.md F1 records the author's request to prepare subsequent
+sections and the initial material of linked narratives while a reader is reading, following the
+original shapeoftime.net experience. This includes coherent text and imagery. Existing frontier
+preparation is a starting point; timely preparation for both paths still needs investigation and
+improvement. The author explicitly said to add it for later without interrupting current work.
+Only the TODO is recorded now; no runtime change, provider call, edition reset or deployment.
+
 CUA tab21/browser1 is the book, with no viewport override. The final handoff leaves its root opening
 usable. Use actual controls for any further UI inspection; browser evaluate is read-only DOM.
 

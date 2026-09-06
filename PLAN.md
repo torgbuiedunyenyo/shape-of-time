@@ -339,3 +339,31 @@ Decisions to make from evidence: precise preparation depth, preferred paging/flo
 The implementation go-ahead and subsequent Railway instructions authorize the initial combined $150 provider allowance and direct production replacement. On September 6 the author explicitly authorized exceeding $150 if needed. Actual costs, allocation adjustments and pending operations belong in HANDOFF.md. That authorization covers completing the current work; it does not restart deferred operator literary analysis or create a separate study.
 
 Current next action: the author reads and explores the prepared book, then supplies artistic direction. Implementation, initial generation and release verification are complete at the documented scope. Do not restart historical diagnosis, literary study or sample expansion without new direction.
+
+## 11. Deferred follow-ups requested by the author
+
+### F1 — Prepare upcoming reading while the reader is still reading
+
+**Requested September 6; record for later, do not start now.** The author recalls that the original
+text-only book at shapeoftime.net prepared both the next pages of the current narrative and initial
+pages of linked books while someone read the current page. Reproduce that benefit in this illustrated
+book: use reading time to prepare coherent text and imagery for linear continuation and linked
+narrative openings, reducing the wait when a reader reaches or chooses them.
+
+Existing support is a starting point, not proof that this experience is already achieved.
+`src/server/agent/preparation.ts` currently offers one preparation opportunity while the reader is
+in the latest published section; queued preparation requires recent reading activity and waits
+behind explicit requests. The creative agent may continue the current work or develop a nested
+opening. This does not yet establish timely preparation for links encountered in earlier sections,
+or that enough material is ready before the reader needs it.
+
+When taking up F1, inspect the original infinite-book implementation/history and compare actual
+reading and generation timing here. Improve when preparation begins and how it serves both paths,
+including their images, while preserving the creative agent's choices and shared context. Avoid
+turning preparation into fixed narrative lengths or generating every possible exploration.
+Retain request priority, spending accounting, duplicate prevention and stable source/return routes.
+
+Verify the actual experience: read a current section, then continue or enter an encountered linked
+narrative and observe whether its illustrated material is ready. Record waits, unnecessary generation
+and cost. Apply the existing mechanism-provenance/edition policy to any eventual runtime change;
+do not clear or change the current edition merely to record this TODO.
