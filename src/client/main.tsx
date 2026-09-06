@@ -27,6 +27,8 @@ import {
   updateVisit,
 } from "./visits.js";
 import "./style.css";
+import { ReadingGuide } from "./ReadingGuide.js";
+import { hasSeenReadingGuide } from "./tour-state.js";
 import { ImageDetail } from "./ImageDetail.js";
 import { capturePlace, restorePlace } from "./position.js";
 import { explorationKey } from "./requests.js";
@@ -384,6 +386,9 @@ function Reader() {
   const [continuation, setContinuation] = useState<Intent>();
   const [enlarged, setEnlarged] = useState<string>();
   const [bookmarked, setBookmarked] = useState(false);
+  const [guideOpen, setGuideOpen] = useState(false);
+  const guiding = useRef(false);
+  guiding.current = guideOpen;
   const navigate = useNavigate();
   const restored = useRef(false);
   const resizing = useRef(false);
@@ -448,14 +453,18 @@ function Reader() {
     restored.current = true;
   }, [book, visit]);
   useEffect(() => {
+    if (book?.publications.length && !hasSeenReadingGuide()) setGuideOpen(true);
+  }, [book?.work.id, book?.publications.length]);
+  useEffect(() => {
     if (!visit || !book) return;
     const save = () => {
+      if (guiding.current) return;
       const position = root.current ? capturePlace(root.current) : undefined;
       if (position) updateVisit(visit.id, position);
     };
     let timer: ReturnType<typeof setTimeout>;
     const onscroll = () => {
-      if (resizing.current) return;
+      if (resizing.current || guiding.current) return;
       clearTimeout(timer);
       timer = setTimeout(save, 100);
     };
@@ -463,6 +472,7 @@ function Reader() {
     window.addEventListener("pagehide", save);
     let frame: number;
     const onresize = () => {
+      if (guiding.current) return;
       clearTimeout(timer);
       resizing.current = true;
       cancelAnimationFrame(frame);
@@ -533,7 +543,7 @@ function Reader() {
     if (!visit || !book) return;
     let active = true;
     const signal = async () => {
-      if (document.visibilityState !== "visible" || !root.current) return;
+      if (document.visibilityState !== "visible" || !root.current || guiding.current) return;
       const position = capturePlace(root.current);
       if (!position) return;
       try {
@@ -658,7 +668,7 @@ function Reader() {
   };
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if ((e.target as HTMLElement).matches("input,textarea,button")) return;
+      if (guiding.current || (e.target as HTMLElement).matches("input,textarea,button")) return;
       if (e.key === "ArrowRight") {
         window.scrollBy({ top: window.innerHeight - 150, behavior: "smooth" });
       }
@@ -907,6 +917,7 @@ function Reader() {
         )}
       </main>
       <nav className="page-controls" aria-label="Reading pages">
+        <button aria-label="Show reading guide" onClick={() => setGuideOpen(true)}>?</button>
         <button
           aria-label="Previous page"
           onClick={() =>
@@ -930,6 +941,7 @@ function Reader() {
           →
         </button>
       </nav>
+      {guideOpen && book && <ReadingGuide key={visit.id} onClose={() => setGuideOpen(false)} />}
       {selected && (
         <aside className="exploration" aria-label="Open as a book">
           <button

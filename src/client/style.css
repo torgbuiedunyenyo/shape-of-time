@@ -535,3 +535,50 @@ input {
   font-size: 11px;
   padding: 8px 10px;
 }
+
+.reading-guide {
+  position: fixed;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  width: 100vw;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  overflow: hidden;
+  background: transparent;
+  color: #26332b;
+}
+.reading-guide::backdrop { background: transparent; }
+.guide-spotlight {
+  position: fixed;
+  border-radius: 7px;
+  outline: 2px solid #9cab8c;
+  box-shadow: 0 0 0 200vmax #15251dcc;
+  pointer-events: none;
+}
+.guide-card {
+  position: fixed;
+  left: max(16px, calc((100vw - 410px) / 2));
+  width: min(410px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  overflow: auto;
+  background: #f4f0e7;
+  border: 1px solid #b9c4ae;
+  border-radius: 10px;
+  padding: 24px;
+  box-shadow: 0 12px 48px #071b1840;
+  font: 16px/1.55 system-ui, sans-serif;
+}
+.guide-card .eyebrow { font-size: 10px; margin: 0 0 12px; }
+.guide-card h2 { font: 32px/1.05 "EB Garamond", Georgia, serif; margin: 0 0 15px; }
+.guide-card p { margin: 0 0 18px; }
+.guide-actions, .guide-actions > div { display: flex; align-items: center; gap: 8px; }
+.guide-actions { justify-content: space-between; }
+.guide-actions button { min-height: 44px; padding: 9px 12px; font-size: 12px; }
+.guide-actions .primary { gap: 0; }
+@media (max-width: 420px) {
+  .guide-card { padding: 18px; font-size: 14px; }
+  .guide-card h2 { font-size: 28px; }
+}

@@ -13,33 +13,64 @@ queue: F2 creative guidance → F1 preparation → F3 new pinned edition/20 requ
 Earlier statements below to stop generation describe the previous completed handoff and are superseded
 for this work. The restriction on extended unsolicited literary study still applies.
 
-F2/F1 implemented, not deployed: small additions in prose-guide.md and visual-direction.md; original
-world/essence unchanged. Actual screenshots3.36.11/3.36.24 show an unlabeled bottle versus prose about
-its oak label. SOURCE.md records feedback as development evidence; the particular bottle is not a
-new narrative prescription. Prior infinite-book frontend/src/app.ts preparation and tour.ts inspected.
-Preparation now starts in any encountered publication, supplies its actual prose/images, existing
-openings and unread continuation, coalesces concurrent readers, and yields at settled tool boundaries
-to explicit requests or stale reading. No story quota or deterministic literary checks.
-**33 tests, typecheck, lint and build passed** (gates3416 complete). Focused tests reproduced previous
-frontier-only and wrong-work behavior before changes. A local transaction deadlock during development
-was corrected by keeping all writes in the same transaction; concurrent12-reader test passed.
+F2/F1 **deployed** at02d6115bb6e143563ba4db9305a6e5f0531c7bf6. Git deployment
+710979c4-060c-4fc6-81d0-4f8ef8964933 SUCCESS and exact /healthz verified.33tests, typecheck,
+lint/build passed. Source additions are small artistic preferences, original world/essence unchanged.
+Screenshots3.36.11/3.36.24 show unlabeled bottle versus prose about its oak label; inspected, recorded.
+Preparation works from any encountered publication, gives actual source/images, existing openings and
+unread continuation, coalesces concurrent readers, yields between completed tool batches to explicit
+requests or stale reading. It is not a mandatory creative pipeline. Original infinite-book preparation
+and tour source inspected. Context7 Kysely/React and official Astra documentation consulted.
 
-First reader attempt export completed: .local/reader-first-preserved-2026-09-06,92objects,70operations,
-20documents,8publications,10savedimages,4sessions. Receipt tests/receipts/reader-first-preserved.json
-and archive/reader-attempts/README.md retain references. Export session11926 complete.
-The author reiterated that each attempt starts from scratch with one consistent mechanism. No previous
-fiction or images will enter the new edition. Next: freeze old allowance under temporary release hold,
-allocate the new reader attempt, set fresh schema, commit and deploy passing code, then start the20
-explicit requests. F4 tour remains to implement while generation runs. Local generation stays false.
-Temporary release hold **session1227/PID39425 is HELD**, with no active operations. Release with
-`kill -INT 39425` after the fresh-schema deployment/health/pin check and verify exit. Do not leave it held.
-Old first-reader allowance frozen at22.053726. New schema **world_reader_20260906_b** is configured
-for the next Git deployment with READER_EDITION=true and PROVIDER_BUDGET_USD=150. The new total
-combined allowance is266.751030 including116.751030 already spent in previous attempts. Receipt:
-tests/receipts/second-edition-allocation.json. This is a deliberate authorized increase, not an
-accounting reset. First-attempt complete snapshot remains referenced privately. No new provider
-request yet. Next: commit passing F2/F1 code, fast-forward main, push, verify new deployment and
-fresh edition pin; release hold; begin the20-request ledger. Then implement client-only F4 tour.
+**Fresh active schema world_reader_20260906_b**, edition reading key
+shape-of-time:2026-09-06T19:54:14.409Z. Mechanism
+**aefcf65a848bbecda3b37c0a26d71e6230712f795c4e268e678bc671408acd4e** pinned before generation;
+matched local source/config. Empty-publication/operation checks and actual clean in-app shelf passed.
+Receipt tests/receipts/second-edition-pin.json currently uncommitted. Begin clicked through UI:
+**ed8a8cf1-5940-4255-886f-af988132b759**. This is request1 of20, not an additional test request.
+
+**Run session5982** executes `.local/review-second/run.ts --first-only`: monitors the initial request
+then exits, allowing actual preparation QA. The durable `.local/review-second/ledger.json` records
+edition, mechanism, each body/dedupe key/intent ID/status/completion. Later run without --first-only to
+complete20 requests. A nonempty `.local/review-second/hold` stops it BETWEEN requests; remove that
+file deliberately to resume. Never start duplicate drivers. GET failures/paused requests stop it for
+inspection; application POST retry uses the SAME saved dedupe key, never a provider retry.
+The driver chooses actual sources (root image, child paragraph) and continues root/child/grandchild;
+it supplies no narrative premise. Inspect the selected source if one is unavailable. Count ordinary
+preparation separately, retain all outputs, and do not impose publication/word quotas.
+
+Release helper1227/PID39425 was released and exited0. No hold remains. Hosted generation/preparation
+true. Local .env follows new schema with generationfalse. Saved .local/reader-first.env references
+old edition and must remain generationfalse/read-only. New allowance150; prior development94.697304
+plus first reader22.053726 =116.751030 already spent. Combined authorized operational allowance now
+266.751030. Receipt tests/receipts/second-edition-allocation.json. Increase further only as needed;
+never reset combined accounting. `.local/progress.ts` works on current schema; old scope helper's
+combined-total constant only includes development, so update/create a second-scope helper before use.
+
+First reader export complete at .local/reader-first-preserved-2026-09-06:92objects/70ops/20docs/
+8publications/10savedimages/4sessions. References in archive/reader-attempts/README.md and receipt.
+Old allowance frozen22.053726, never copy old corpus into new. Each new attempt starts from scratch,
+as the author reiterated. Current work: **F4 tour ready for safe deployment; F3 request1 still running**. ReadingGuide.tsx,
+tour-state.ts, main.tsx and CSS implement native modal/actual spotlights, six short steps, skip/Escape,
+back/next, remembered dismissal, ? replay and position restoration. Tour movements suppress reading
+heartbeats and saved-position updates. No generation was submitted in tour QA. Actual in-app1280×720
+journey passed; narrow390×844 real-browser keyboard tour passed, allcardswithinviewport/zerooverflow,
+completion/reload/replay/Escape worked. **34tests/typecheck/lint/build passed**, gates30738complete.
+No further test rerun is needed unless new changes/failures justify it. Report:
+evals/author-feedback-and-preparation-2026-09-06.md. Original world SHA still matches.
+Local API57556/PID41760 and Vite39193/PID41802 stopped and exits verified; qa tab23 and agent-browser
+book-guide-qa closed. Only productiontab21 remains, waiting for first opening.
+
+**Release helper51105 is WAITING** for the entire available queue to drain, not delaying current
+work. Record its PID from the tool result. Once it reports HELD/no active providers, push the passing
+client-only tour through main, verify exact Git deployment/health, release with SIGINT and verify exit.
+Never leave it held. Driver5982/PID40847 remains --first-only and will exit after Begin. Latest root
+operation99fa058a-1032-4aad-9d03-c95420c5ad82 Astra received20:00:08; secondimage26430e79complete.
+Budget2.4926505 committed inclreservation,147.5073495remaining,unknown0. No publication yet. Current
+mechanism remains aefcf65a848bbecda3b37c0a26d71e6230712f795c4e268e678bc671408acd4e.
+After tour release, do concise actual preparation QA, then restart the ledger driver without
+--first-only to complete20 (do not duplicate Begin). Do not start any separate literary study.
+
 
 ## Purpose and terminology
 

@@ -1,0 +1,47 @@
+{
+  "editionKey": "shape-of-time:2026-09-06T19:54:14.409Z",
+  "mechanism": {
+    "hash": "aefcf65a848bbecda3b37c0a26d71e6230712f795c4e268e678bc671408acd4e",
+    "files": {
+      ".nvmrc": "55075b5ec4e8b31936cbbc282b8829116d1fd48f2f2f1856dee592a6650700ce",
+      "pnpm-lock.yaml": "2ee4cf138f2b20b21ebfa5b84d9a333bb9a9b45b9231b14c3d6fc5eec831a9b9",
+      "prompts/critic.md": "85e93d468ebeefe8851ec693249021c5f28ac06471ff1381754fe4f2b16a9748",
+      "src/server/app.ts": "4bfb2eceefb46f4666e81648c510742f5fb5d45d359947bbdca7e70ca32e76ce",
+      "src/server/index.ts": "dcc7c018b2e6fe77c13ff296294fbd1030308499a944280359b2d2a01d9747e7",
+      "src/shared/types.ts": "7ee0e17572c7d404837b8b9efde44030ce29bb01045c51d94322524ce70c4a3a",
+      "src/server/config.ts": "33209f22e2501efea7d45e43ae42478c4630cee14dca7e156d0c308dbc3b71a8",
+      "src/server/db/index.ts": "d6ed880a2e28d1354487097f069bc9541111cdb79aeff1de85323d0b2d9421ad",
+      "src/server/mechanism.ts": "e22563b9f5bcb7e62e6a45d63cad4af402297f0e9fa05242a36df6197ad8d182",
+      "src/server/db/migrate.ts": "6814f7c0bdaf5b6ddaf78e5cbe294de42fcf91768b0d86ddbe369bdcf7377fcb",
+      "prompts/creative-agent.md": "564327407e43ebb1fe70dea198312ec626e2085d7bb4685ff9165cd80a5ecb69",
+      "src/server/agent/tools.ts": "b02f6e152e7a062bc266a49aff46ec1aa59facba1b6fec9a613e31f4fd7c3e2d",
+      "src/server/agent/runner.ts": "43f7ff9f8c8b6169e3dded0b6c92333fcbfbe8c5765853993a0075c2a2c1028f",
+      "src/server/agent/renewal.ts": "98fe79e319797ced04e39886b74c491e9a34eed987b302ece7c065dabd4184fd",
+      "src/server/library/store.ts": "8625851a8d2304c50bf57fa92bc2c0c0fb3d4e436096a5667232959d1476278d",
+      "src/server/library/assets.ts": "c721db9245c015feffa2433f33ed0b746d09d2e821d78c97df3e6442ecf9ee31",
+      "src/server/library/archive.ts": "c5578829d044867e8f65a96618214b1f209a124422c4b61904030befdad09bc5",
+      "src/server/providers/astra.ts": "4d8a057a627102081b4bec98b7937a76404e31a58134de5e7784285e9be5ae5a",
+      "src/server/providers/image.ts": "9d3518e890ef5ed90e5ff320484a19b6d8c46e2f1f525f1b8169d48433c4df6c",
+      "content/shape-of-time/world.md": "e47afa2fc5db4350008f65fcea9bf6b32569e79a6ee4aeb212e066ddd139576c",
+      "src/server/library/snapshot.ts": "530a5f918f7a949750c678ba1bc7305067b1ea551ba86a733e60f5a4ea7b954f",
+      "src/server/agent/preparation.ts": "fbd9090720456902884f08ae0dca9232e8f5428690223a2f07e7aa535792753b",
+      "src/server/providers/protocol.ts": "20bb8a97950429abcde61b30307be7c87b4328d54710dcca90697b4014996fb3",
+      "src/server/library/composition.ts": "dfef698b9bf59e71764d9f37225f1086dc6945c4b812b5ed966832cba4948c8a",
+      "src/server/providers/operations.ts": "f23e5f720f0f8bdd93375e618a425bf6dff1c4608346ad816c202744590f6500",
+      "content/shape-of-time/prose-guide.md": "6270fb02c3705b7201c99f927de01a2c6908bbe5385251aaefb23d85af8cdec1",
+      "content/shape-of-time/world-essence.md": "d19f53259d8c49d1cb965570d68e48c37a8cc8ad8845aa5c7e629d67f8708693",
+      "content/shape-of-time/visual-direction.md": "0428a08bd5801e2e7be68c4bb4363f919c2411e2d6d7843fa320fdee9e07645c"
+    },
+    "revision": "02d6115bb6e143563ba4db9305a6e5f0531c7bf6",
+    "configuration": {
+      "effort": "xhigh",
+      "textModel": "gpt-6-astra",
+      "imageModel": "gpt-image-2-2026-04-21",
+      "preparationEnabled": true,
+      "contextRenewalTokens": 250000
+    }
+  },
+  "allowance": 150,
+  "publicationsBeforeGeneration": 0,
+  "operationsBeforeGeneration": 0
+}
