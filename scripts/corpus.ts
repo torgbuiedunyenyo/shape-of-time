@@ -5,6 +5,7 @@ import { pool } from "../src/server/db/index.js";
 import { migrate } from "../src/server/db/migrate.js";
 import { config } from "../src/server/config.js";
 import { getBytes, putBytes } from "../src/server/library/assets.js";
+import { databaseRecords, readRecords, recordDigest, verifyFile, writeRecords } from "../src/server/library/snapshot.js";
 import { protocolImageObjects } from "../src/server/providers/protocol.js";
 
 // Dependency order is also the restore order. Session parents precede children by creation time.
@@ -22,8 +23,8 @@ const tables = [
 ] as const;
 const digest = (bytes: Uint8Array | string) =>
   createHash("sha256").update(bytes).digest("hex");
-type Rows = Record<string, unknown>[];
 type Manifest = {
+  format: "jsonl-v2";
   schema: string;
   created: string;
   tables: { name: string; file: string; count: number; sha256: string }[];
@@ -50,6 +51,7 @@ try {
       await mkdir(directory, { recursive: true });
       // Never overwrite a previous snapshot.
       const manifest: Manifest = {
+        format: "jsonl-v2",
         schema: config.schema,
         created: new Date().toISOString(),
         tables: [],
@@ -66,30 +68,18 @@ try {
             "A provider operation is still active. Export after it finishes.",
           );
         for (const name of tables) {
-          const { rows }: { rows: Rows } = await connection.query(
-            `select * from "${name}" order by created_at, id`,
-          );
-          const bytes = JSON.stringify(rows);
-          for (const [key, mime] of protocolImageObjects(rows))
-            objects.set(key, mime);
-          const file = `${name}.json`;
-          await writeFile(resolve(directory, file), bytes, {
-            flag: "wx",
-            mode: 0o600,
-          });
-          manifest.tables.push({
-            name,
-            file,
-            count: rows.length,
-            sha256: digest(bytes),
-          });
-          if (name === "assets")
-            for (const row of rows)
-              objects.set(String(row.storage_key), String(row.mime));
-          if (name === "operations")
-            for (const row of rows)
-              if (row.raw_key)
-                objects.set(String(row.raw_key), "application/json");
+          const file = `${name}.jsonl`;
+          async function* records() {
+            for await (const row of databaseRecords(connection, name)) {
+              for (const [key, mime] of protocolImageObjects(row)) objects.set(key, mime);
+              if (name === "assets") objects.set(String(row.storage_key), String(row.mime));
+              if (name === "operations" && row.raw_key) objects.set(String(row.raw_key), "application/json");
+              yield row;
+            }
+          }
+          const saved = await writeRecords(resolve(directory, file), records());
+          manifest.tables.push({ name, file, ...saved });
+          console.log({ exportedTable: name, records: saved.count });
         }
         await connection.query("commit");
       } catch (error) {
@@ -136,22 +126,19 @@ try {
     const manifest: Manifest = JSON.parse(
       await readFile(resolve(directory, "manifest.json"), "utf8"),
     );
-    const verified = async (file: string, checksum: string) => {
-      if (file.includes("/") || file.includes("\\"))
-        throw new Error("Invalid snapshot filename");
-      const bytes = await readFile(resolve(directory, file));
-      if (digest(bytes) !== checksum)
-        throw new Error(`Snapshot checksum mismatch: ${file}`);
-      return bytes;
+    if (manifest.format !== "jsonl-v2") throw new Error("Unsupported snapshot format; use the matching archived exporter.");
+    const snapshotPath = (file: string) => {
+      if (file.includes("/") || file.includes("\\")) throw new Error("Invalid snapshot filename");
+      return resolve(directory, file);
     };
-    // Verify all bytes before creating anything on Railway.
+    // Verify every file incrementally before creating anything on Railway.
     for (const item of [...manifest.tables, ...manifest.objects])
-      await verified(item.file, item.sha256);
+      await verifyFile(snapshotPath(item.file), item.sha256);
     if (manifest.tables.map((t) => t.name).join() !== tables.join())
       throw new Error("Snapshot table order/schema is not supported.");
     await migrate();
     for (const item of manifest.objects) {
-      const bytes = await verified(item.file, item.sha256);
+      const bytes = await readFile(snapshotPath(item.file));
       await putBytes(item.key, bytes, item.mime);
       if (digest(await getBytes(item.key)) !== item.sha256)
         throw new Error(`Restored object differs: ${item.key}`);
@@ -159,11 +146,6 @@ try {
     await connection.query("begin");
     try {
       for (const item of manifest.tables) {
-        const rows: Rows = JSON.parse(
-          (await verified(item.file, item.sha256)).toString(),
-        );
-        if (rows.length !== item.count)
-          throw new Error(`Row count mismatch: ${item.name}`);
         const columns = await connection.query<{
           column_name: string;
           data_type: string;
@@ -172,7 +154,9 @@ try {
           [config.schema, item.name],
         );
         const names = columns.rows.map((c) => c.column_name);
-        for (const row of rows) {
+        let count = 0;
+        for await (const row of readRecords(snapshotPath(item.file))) {
+          count++;
           const values = columns.rows.map((c) =>
             c.data_type === "jsonb" && row[c.column_name] !== null
               ? JSON.stringify(row[c.column_name])
@@ -183,11 +167,11 @@ try {
             values,
           );
         }
-        const restored = await connection.query(
-          `select * from "${item.name}" order by created_at, id`,
-        );
-        if (digest(JSON.stringify(restored.rows)) !== item.sha256)
+        if (count !== item.count) throw new Error(`Row count mismatch: ${item.name}`);
+        const restored = await recordDigest(databaseRecords(connection, item.name));
+        if (restored.count !== item.count || restored.sha256 !== item.sha256)
           throw new Error(`Restored table differs: ${item.name}`);
+        console.log({ restoredTable: item.name, verifiedRecords: restored.count });
       }
       await connection.query("commit");
       console.log({

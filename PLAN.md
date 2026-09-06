@@ -213,12 +213,12 @@ Use one quiet Open as a book action for text and whole-image exploration. Add re
 
 ### P3 — Make sustained reading inviting
 
-**Execution note:** The first root and child are published, and a third-level book is readable.
-The next reader release implements bounded preparation (initially disabled), exact per-visit
-source return, persistent return controls, and a library list of all requested openings. It also
-loads new publications before the author finishes its turn and reuses work that satisfies a queued
-continuation. Twenty mechanical checks pass. Actual production testing and extended reading remain
-required; this is not yet completion of P3.
+**Execution note:** The root has three published chapters, the lounge child one, and the wedding
+grandchild two. The same author continued after native renewal, with actual retrieval, image
+reference use and contextual criticism. Roughly16–17k connected words are available. Nested return,
+bookmarks and reflow have passed the actual production journey. Preparation and separate pending
+continuation/exploration status are released for live observation. Twenty-six mechanical tests
+pass; they establish no literary verdict. P3 remains open for sustained root/nested development.
 
 **Work:** Extend the actual corpus through multiple scenes in the root and at least one nested work. Let the agent choose their shape. Improve typography, measure, text size, image sizing, chapter transitions and accessible controls while reading those outputs.
 

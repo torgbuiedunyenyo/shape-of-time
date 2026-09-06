@@ -46,6 +46,8 @@ responses continue to use Astra xhigh. Both paid utilities require generation de
 `corpus.ts export .local/SNAPSHOT` saves all records and original media with checksums while the
 author is idle. `corpus.ts restore .local/SNAPSHOT` verifies and restores to a fresh
 `DATABASE_SCHEMA=world_restore_NAME`, with generation disabled, and checks every restored row/object.
+Snapshot tables use incremental JSONL (format jsonl-v2) so the growing archive need not fit in one
+JavaScript string. Use the corresponding historical script revision to restore an older format.
 The active edition is never overwritten by that recovery check.
 `pnpm eval:live` explicitly purchases a live reading only when generation is enabled. The hosted
 reader uses the same persistence and provider path. Full prompts, requests, returned protocol

@@ -20,13 +20,20 @@ noodle evening/bus/home and establishes Tuesday swimming. Chapter3 develops Dee'
 Tuesday swimming, first kisses, and cooking at Jay's home before his4pm shift. Neither nested
 work advanced in that request. No developer creative edits or manual publication.
 
-**Release helper exec76546 HOLDS the global author lock**, with no active operations. Keep it held
-through the passing Git deployment, then Ctrl-C76546 before exporting the corpus or generating.
-Production stillb920956. Commit044a21c plus the pending orientation fix are ready to push.
-PREPARATION_ENABLED=true is already staged with --skip-deploys; next Git deployment activates it.
-No need to set it again. Browser tab2 is at the library, temporary image tabs14/15 closed.
+Release1778df9944ebcea6a9df6be95506ee35f83d350d is LIVE; exact healthz and Git deployment
+c236168d-ce07-4e7b-a14d-630ee2242b03 SUCCESS. PREPARATION_ENABLED=true is now active.
+Release helper76546 stopped and lock released. First full export12813 FAILED with RangeError: Invalid string length at JSON.stringify(rows)
+for operations (~850MB requests). Partial .local/corpus-nested-renewed-2026-09-06 preserved.
+Revised exporter streams PostgreSQL cursor rows to JSONL and verifies/restores incrementally.
+New export exec34827 writes .local/corpus-nested-renewed-v2-2026-09-06. Keep browser at library
+until it finishes. All27tests, typecheck/lint/build passed in exec1302. Export has saved all tables, including
+132operations/893MiB JSONL; media copying is underway. Source content unchanged.
+Exporter changes are being pushed as a passing checkpoint; verify the new deployment before
+resuming reader QA. See evals/corpus-recovery-2026-09-06.md.
+Then restore to fresh world_restore_nested_renewed while testing live preparation/root/child.
+Browser tab2 is at library, image tabs14/15 closed.
 
-Changes ready for release:
+Changes in this release:
 - Automatic native renewal between reader requests above250k measured input; complete canonical
   window/originals retained; same operation reused on resume; uncertainty pauses. Within-turn880k
   guard remains, no within-turn auto-renewal.
@@ -41,16 +48,15 @@ and subsequent root conversation, kept full previous input in operation. Step73â
 Receipt tests/receipts/native-orientation-maintenance.json. **Do not repeat this repair.**
 
 All **26 tests, typecheck, lint and build passed**, exec2376. No new gates needed until code changes.
-Next: push reviewed changes, verify exact Git deployment, release76546, export new full corpus,
-restore it to fresh world_restore_* schema, then observe preparation and continue root/child.
+Next: finish full export/restore, then observe preparation and continue root/child.
 Never deploy through a direct image purchase. No duplicate critique/renewal/restart request.
 
 ## Repositories and production
 
 Active: `/Users/ratpartyserver/git/shape-of-time-agentic`, branch `codex/agentic-world`.
-Normal: `/Users/ratpartyserver/git/shape-of-time`, clean main fast-forwarded to b920956.
-Remote/deployed SHA: `b92095633cd5a7e05fc239d27bfdcef3c2e1e2f2`, /healthz verified.
-Successful Git deployment: `3323a06b-1550-4aac-b1a3-76a2772ab5ca`.
+Normal: `/Users/ratpartyserver/git/shape-of-time`, clean main fast-forwarded to1778df9.
+Remote/deployed SHA: `1778df9944ebcea6a9df6be95506ee35f83d350d`, /healthz verified.
+Successful Git deployment: `c236168d-ce07-4e7b-a14d-630ee2242b03`.
 
 Preceding3a10a6c introduced preparation, saved discoveries, exact source return, quiet publication
 refresh and reuse of already-available continuations. b920956 fixes bookmarks losing their containing
