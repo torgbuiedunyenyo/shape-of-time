@@ -12,7 +12,7 @@ This branch replaces the July folio design. Everything under archive/, earlier c
 
 The previous application is preserved at Git tag archive/folio-prototype-2026-09-06 and in archive/folio-prototype-e1a3dec.tar.gz, with a complete checksum manifest. It has been removed from active source paths. Read archive/README.md for deliberate historical inspection. Do not restore its package scripts, database migrations, prompts, prepared corpus or agent instructions as the new scaffold. Recover a small component only after checking it against the current purpose and plan.
 
-The active creative inputs are identified by content/shape-of-time/SOURCE.md. Archive text is excluded from ordinary searches by .ignore and is never loaded into the creative agent. CLAUDE.md is only a pointer to this file. No build, start, generation, migration or deployment command exists yet. Do not push this pre-implementation checkpoint to production's main branch.
+The active creative inputs are identified by content/shape-of-time/SOURCE.md. Archive text is excluded from ordinary searches by .ignore and is never loaded into the creative agent. CLAUDE.md is only a pointer to this file. The new application supplies its own build, start, migration and test commands. Consult README.md and HANDOFF.md for current execution and deployment state.
 
 ## Models and creative freedom
 
@@ -44,7 +44,7 @@ Use the in-app Browser for the actual reader journey: sustained reading, prepare
 
 ## Spend, deployment and preservation
 
-The planning request authorizes no provider spend or infrastructure changes. PLAN.md proposes an initial live allowance; record the owner's actual authorization and current remainder in HANDOFF.md before live use. Keep creation, imagery, criticism and paid renewal inside the same allowance. Do not ask again for actions already covered by a recorded authorization.
+The user authorized implementation, the plan's initial $150 combined provider allowance, and direct Railway production replacement. HANDOFF.md records that authorization and current remainder. Keep creation, imagery, criticism and paid renewal inside the same allowance. Do not ask again for actions already covered by a recorded authorization.
 
 Never automatically repeat an ambiguous generation request. Preserve returned output before parsing, keep provider IDs, reconcile pending operations and record uncertain cost.
 

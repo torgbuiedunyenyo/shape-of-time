@@ -1,13 +1,17 @@
-import { pathToFileURL } from 'node:url';
-import { sql } from 'kysely';
-import { db, pool } from './index.js';
-import { config } from '../config.js';
+import { pathToFileURL } from "node:url";
+import { sql } from "kysely";
+import { db, pool } from "./index.js";
+import { config } from "../config.js";
 export async function migrate() {
   // A transaction-scoped lock also protects first boot of a completely fresh schema.
-  await db.transaction().execute(async tx => {
-    await sql`select pg_advisory_xact_lock(hashtext(${`shape-of-time:migrate:${config.schema}`}))`.execute(tx);
+  await db.transaction().execute(async (tx) => {
+    await sql`select pg_advisory_xact_lock(hashtext(${`shape-of-time:migrate:${config.schema}`}))`.execute(
+      tx,
+    );
     await sql.raw(`create schema if not exists "${config.schema}"`).execute(tx);
-    await sql.raw(`
+    await sql
+      .raw(
+        `
       create table if not exists editions (id text primary key, title text not null, root_work_id text, source jsonb not null, budget_usd double precision not null, created_at timestamptz not null default now());
       create table if not exists works (id text primary key, edition_id text not null references editions(id), title text not null, founding jsonb not null, created_at timestamptz not null default now());
       create table if not exists documents (id text primary key, edition_id text not null references editions(id), path text not null, revision integer not null, body text not null, operation_key text not null unique, created_at timestamptz not null default now(), unique(edition_id,path,revision));
@@ -21,10 +25,15 @@ export async function migrate() {
       create index if not exists intents_pending on intents(edition_id,status,created_at);
       create index if not exists documents_lookup on documents(edition_id,path,revision desc);
       create index if not exists operations_session on operations(session_id,created_at);
-    `).execute(tx);
+    `,
+      )
+      .execute(tx);
   });
 }
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (
+  process.argv[1] &&
+  import.meta.url === pathToFileURL(process.argv[1]).href
+) {
   await migrate();
   console.log(`Database schema ${config.schema} is ready.`);
   await pool.end();

@@ -10,7 +10,7 @@ nesting. The agent owns creative sequencing; software preserves its work and the
 
 ## Current position
 
-P0 is complete. **P1 is in progress; P2–P6 remain unimplemented.** The user requested implementation
+P0 is complete. **P1 is in progress; P2–P6 are not yet validated.** The user requested implementation
 and then explicitly directed development and testing on the existing Railway production project.
 There are no users or data requiring preservation. Use Railway Postgres directly; do not introduce
 Docker or a separate staging environment. The fresh application is being built in the active worktree.
@@ -61,6 +61,33 @@ images, criticism and renewal count together. Do not reuse historical Fable budg
 Existing Railway project: 8b20e07d-c256-44c9-85be-d1c7e50ac83d. Last read-only production investigation
 found e1a3dec and a failed old continuation; that is historical evidence, not current runtime QA.
 The cleanup made no Railway calls. A later authorized release uses a passing Git-triggered deploy.
+
+## Implementation checkpoint before first live generation
+
+The P1a foundation is deployed from main at 665d68f4f40f80888274283b43f8372e71b149a9, Railway
+successful deployment 485ed367-60aa-4d86-b30e-7151fda7e6d9; /healthz confirms that revision.
+The old eight public folio tables and four stored images were deleted after that replacement;
+ANTHROPIC_API_KEY and ASSET_DRIVER were removed. No old corpus or compatibility path remains.
+The requested models were verified available with read-only model lookups. No paid request yet.
+
+New agent/provider code is written and eight tests passed with typecheck/lint/build: explicit
+Responses Astra/xhigh, background IDs and full protocol replay, exact token counts, shared cost
+reservations, no opaque provider retries, raw responses saved before parsing, direct GPT Image 2,
+real image function outputs, archive/docs/work/publish/opening tools and optional contextual critic.
+Author and critic sources load all four prepared originals. A DB lock serializes the author. This
+code still needs its first deployment/live run. It is not provider-contract or literary evidence yet.
+
+Tests include process-boundary tool replay, unavailable-asset atomicity, real S3 fixture replay with
+generation disabled, duplicate reader requests and shared uncertain-cost reservations. Fixtures are
+labeled mechanical. All active code was formatted for readability after those passing checks.
+
+Known remaining work: first genuine illustrated root/continuation/critic; actual in-app reader QA;
+prepared openings and cold request recovery after reload; image-region selection; exact nested
+return and reflow; explicit context compaction; broader recovery/long-form evidence. Do not claim
+P2 or long-form coherence from the initial reader code. No model fallback or fixed narrative quotas.
+
+Next action: deploy the agent loop from passing main with the funded allowance and generation
+enabled, request the first real root through the hosted reader, and inspect actual receipts/output.
 
 ## Validation
 
