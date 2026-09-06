@@ -67,3 +67,14 @@ Snapshot: `.local/development-complete-2026-09-06`; index, deployment history an
 are retained alongside it. The exact development schema predates the mechanism column, so use
 9aee4b0 for restoration. Prior complete restoration evidence is retained; this larger export was
 not needlessly restored again. Small manifest receipt: tests/receipts/development-final-export.json.
+
+## Fresh edition live
+
+Railway Git deployment63d7e34a-3981-4ff4-8a48-60c2ef8b72b3 succeeded at exact revision
+ca6ef9d8d4ddf8b78dc8431973e7f15315e81fba. The fresh world_reader_20260906 edition recorded mechanism
+2a816eaad04ffb8f85cac75dcb7159af1b26f8070680fd11d9728edd3e1aa9c2 before generation. Local source
+and effective configuration matched it. The edition initially had no documents or publications; old
+development root and image routes were unavailable. The actual in-app shelf showed no inherited
+visits/bookmarks/discoveries. Begin was clicked through the reading interface, request
+685bfcad-6dae-48e5-a6f5-bac1fa9e8005. Its first completed response confirmed Astra xhigh/all_turns and
+the same mechanism. Receipt: tests/receipts/reader-edition-pin.json. Initial material is generating.
