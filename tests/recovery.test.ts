@@ -161,3 +161,45 @@ it("prices actual cache reads and writes separately and applies the long-context
   };
   expect(textCost(usage)).toBeCloseTo(5.2);
 });
+
+it("continues a recovered actual Astra response from the saved receipt without another provider dispatch", async () => {
+  const { readFile } = await import("node:fs/promises");
+  const { astra } = await import("../src/server/providers/astra.js");
+  const receipt = JSON.parse(
+    await readFile(
+      new URL("./receipts/astra-first-resources.json", import.meta.url),
+      "utf8",
+    ),
+  );
+  const key = randomUUID();
+  await db
+    .insertInto("operations")
+    .values({
+      id: randomUUID(),
+      edition_id: edition,
+      session_id: session,
+      key,
+      kind: "astra",
+      status: "complete",
+      request: json({}),
+      provider_id: receipt.provenance.provider_id,
+      response: json(receipt.response),
+      raw_key: null,
+      reserved_usd: 0,
+      actual_usd: 0,
+      error: null,
+      completed_at: new Date().toISOString(),
+    })
+    .execute();
+  const response = await astra(edition, session, key, [], []);
+  expect(response.model).toBe("gpt-6-astra");
+  expect(response.reasoning).toMatchObject({
+    effort: "xhigh",
+    context: "all_turns",
+  });
+  expect(response.output).toEqual(receipt.response.output);
+  expect(response.output[0]).toMatchObject({
+    type: "function_call",
+    name: "resources",
+  });
+});

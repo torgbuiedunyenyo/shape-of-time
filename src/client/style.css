@@ -354,3 +354,14 @@ input {
     bottom: 16px;
   }
 }
+.prepared-opening {
+  display: block;
+  border: 0;
+  border-bottom: 1px solid #a6b49b;
+  padding: 5px 0;
+  margin: 0 0 2em;
+  font:
+    13px "DM Sans",
+    sans-serif;
+  color: #4a6954;
+}

@@ -68,10 +68,10 @@ export async function astra(
       input,
       tools,
       tool_choice: "auto" as const,
+      service_tier: "default" as const,
       parallel_tool_calls: false,
       background: true,
       store: true,
-      include: ["reasoning.encrypted_content" as const],
       max_output_tokens: maxOutput,
       truncation: "disabled" as const,
     };
@@ -129,9 +129,7 @@ export async function astra(
     ["queued", "in_progress"].includes(response.status ?? "")
   ) {
     await new Promise((r) => setTimeout(r, 2500));
-    const raw = await openai.responses
-      .retrieve(providerId, { include: ["reasoning.encrypted_content"] })
-      .asResponse();
+    const raw = await openai.responses.retrieve(providerId).asResponse();
     response = (await preserveRaw(op.id, raw)) as unknown as AstraResponse;
   }
   await finish(

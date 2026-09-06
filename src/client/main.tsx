@@ -199,6 +199,15 @@ function Reader() {
     const state = loadReading();
     state.current = visit.id;
     saveReading(state);
+    const savedRequest = Object.values(state.requests)
+      .filter((r) => r.visitId === visit.id)
+      .at(-1);
+    if (savedRequest) {
+      if (savedRequest.source) setSelected(savedRequest.source);
+      api<Intent>("intents/" + savedRequest.intentId)
+        .then(setIntent)
+        .catch((e) => setError(e.message));
+    }
     api<Book>("works/" + visit.workId)
       .then(setBook)
       .catch((e) => setError(e.message));
@@ -474,7 +483,29 @@ function Reader() {
         <div className="eyebrow">The Shape of Time</div>
         <h1>{book?.work.title ?? "Opening…"}</h1>
         {book?.publications.map((p) => (
-          <section key={p.id}>{p.blocks.map((b) => render(b, p.id))}</section>
+          <section key={p.id}>
+            {p.blocks.map((b) => (
+              <React.Fragment key={b.id}>
+                {render(b, p.id)}
+                {book.openings
+                  .filter((o) => o.source.blockId === b.id)
+                  .map((o) => (
+                    <button
+                      className="prepared-opening"
+                      key={o.id}
+                      onClick={() =>
+                        navigate(
+                          "/read/" +
+                            enter(o.target_work_id, visit.id, o.source),
+                        )
+                      }
+                    >
+                      {o.label} ↗
+                    </button>
+                  ))}
+              </React.Fragment>
+            ))}
+          </section>
         ))}
         {error && (
           <p className="notice" role="alert">

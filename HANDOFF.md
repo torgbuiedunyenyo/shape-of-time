@@ -123,3 +123,27 @@ application configuration, Railway persistence and a thin reader, then continue 
 Astra/image/critic loop within P1. Read PLAN.md first. The detailed historical reassessment remains
 at /Users/ratpartyserver/git/claude/infinite-library-reassessment-2026-09-05 as supporting evidence;
 the repository's current documents are self-contained and are the implementation authority.
+
+## First live provider evidence and immediate repair
+
+The agent deployment a87ccfa45e6290b1b0b3f22b13eab6c285838b1e succeeded on Railway
+(deployment 83cd1b78-7a2e-4dda-875e-ea9b8e36e263), generation enabled. The in-app Browser
+started root request 4c40ef0e-37b3-47f4-b4c8-6648667aaf2e using Begin the book.
+First operation 966a4fa7-35f4-4a80-8ec3-f0688c3fc2cd started successfully in background;
+GET with include=reasoning.encrypted_content failed 400: encrypted content cannot be requested
+for persisted responses. This is a live API constraint despite the earlier planning assumption.
+The saved provider ID allowed retrieving that same response with plain GET, without a second
+purchase. Result confirms gpt-6-astra, xhigh, all_turns; first chosen tool is resources. Actual
+usage: input 10,070, output 13, reasoning 0; cost $0.10135. Result saved in DB/S3 and the exact
+non-sensitive response fixture tests/receipts/astra-first-resources.json.
+
+The request is currently failed pending a retrieval-parameter fix deployment. No work or image
+has been generated. Repair removes encrypted-content inclusion for stored/background responses;
+all returned protocol items remain preserved. Stored reasoning items, if returned without encrypted
+content, depend on the provider's retention. Do NOT claim self-contained indefinite reasoning replay.
+Before long-lived reuse, implement explicit context renewal retaining full local original sources,
+agent notes and returned canonical compaction window. No model or xhigh fallback.
+
+Immediate next step: run the focused recovery check and full gate, push this fix, then mark the
+existing failed intent running only AFTER verifying the fixed deployed revision. Resume the same
+session and already-completed operation. Do not enqueue a second root or buy the first call again.

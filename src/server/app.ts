@@ -55,10 +55,24 @@ app.get("/api/library", async (c) => {
     .selectAll()
     .where("edition_id", "=", edition.id)
     .where("title", "ilike", `%${query}%`)
+    .where((eb) =>
+      eb.exists(
+        eb
+          .selectFrom("publications")
+          .select("id")
+          .whereRef("publications.work_id", "=", "works.id"),
+      ),
+    )
     .orderBy("created_at")
     .execute();
   return c.json({
-    edition,
+    edition: {
+      ...edition,
+      root_work_id:
+        works.some((w) => w.id === edition.root_work_id) || query
+          ? edition.root_work_id
+          : null,
+    },
     works,
     generationEnabled: config.generationEnabled,
   });

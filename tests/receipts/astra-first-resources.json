@@ -1,0 +1,376 @@
+{
+  "provenance": {
+    "date": "2026-09-06",
+    "operation_id": "966a4fa7-35f4-4a80-8ec3-f0688c3fc2cd",
+    "provider_id": "resp_07d55e4c2e541ade006a9cdb1c2c2487d0981e9db038b7ee2c",
+    "note": "Actual first hosted response, recovered by GET without include after persisted encrypted-content inclusion was rejected."
+  },
+  "response": {
+    "id": "resp_07d55e4c2e541ade006a9cdb1c2c2487d0981e9db038b7ee2c",
+    "text": {
+      "format": {
+        "type": "text"
+      },
+      "verbosity": "medium"
+    },
+    "user": null,
+    "error": null,
+    "model": "gpt-6-astra",
+    "store": true,
+    "tools": [
+      {
+        "name": "archive",
+        "type": "function",
+        "strict": false,
+        "parameters": {
+          "type": "object",
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "required": [
+            "action",
+            "kind"
+          ],
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "kind": {
+              "enum": [
+                "all",
+                "source",
+                "work",
+                "publication",
+                "document",
+                "image"
+              ],
+              "type": "string"
+            },
+            "query": {
+              "type": "string"
+            },
+            "action": {
+              "enum": [
+                "list",
+                "search",
+                "read"
+              ],
+              "type": "string"
+            }
+          }
+        },
+        "description": "List, search or read the source world, actual works/publications, all document revisions and image provenance. For documents read by ID or path. Search returns source IDs and excerpts; read returns originals.",
+        "output_schema": null
+      },
+      {
+        "name": "view_image",
+        "type": "function",
+        "strict": false,
+        "parameters": {
+          "type": "object",
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "required": [
+            "asset_id"
+          ],
+          "properties": {
+            "region": {
+              "type": "object",
+              "required": [
+                "x",
+                "y",
+                "width",
+                "height"
+              ],
+              "properties": {
+                "x": {
+                  "type": "number"
+                },
+                "y": {
+                  "type": "number"
+                },
+                "width": {
+                  "type": "number"
+                },
+                "height": {
+                  "type": "number"
+                }
+              }
+            },
+            "asset_id": {
+              "type": "string"
+            }
+          }
+        },
+        "description": "Look at an actual saved image, optionally a normalized rectangular region. Returns image content.",
+        "output_schema": null
+      },
+      {
+        "name": "resources",
+        "type": "function",
+        "strict": false,
+        "parameters": {
+          "type": "object",
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "properties": {}
+        },
+        "description": "Inspect the shared generation allowance.",
+        "output_schema": null
+      },
+      {
+        "name": "write_document",
+        "type": "function",
+        "strict": false,
+        "parameters": {
+          "type": "object",
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "required": [
+            "path",
+            "body",
+            "expected_revision"
+          ],
+          "properties": {
+            "body": {
+              "type": "string"
+            },
+            "path": {
+              "type": "string",
+              "minLength": 1
+            },
+            "expected_revision": {
+              "type": "integer",
+              "maximum": 9007199254740991,
+              "minimum": 0
+            }
+          }
+        },
+        "description": "Save a new draft or note revision. Use expected_revision=0 for a new path, otherwise read its current revision first. Returns a document ID for publishing.",
+        "output_schema": null
+      },
+      {
+        "name": "open_work",
+        "type": "function",
+        "strict": false,
+        "parameters": {
+          "type": "object",
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "required": [
+            "title",
+            "purpose"
+          ],
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1
+            },
+            "purpose": {
+              "type": "string"
+            },
+            "existing_work_id": {
+              "type": "string"
+            }
+          }
+        },
+        "description": "Create a work with a title and purpose, or reopen an existing work by ID. Associates it with the current reader request. The current founding source is retained automatically.",
+        "output_schema": null
+      },
+      {
+        "name": "publish",
+        "type": "function",
+        "strict": false,
+        "parameters": {
+          "type": "object",
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "required": [
+            "work_id",
+            "document_id"
+          ],
+          "properties": {
+            "work_id": {
+              "type": "string"
+            },
+            "document_id": {
+              "type": "string"
+            }
+          }
+        },
+        "description": "Append an exact saved draft revision to a work. Returns stable publication and block addresses. This is idempotent for the same saved revision.",
+        "output_schema": null
+      },
+      {
+        "name": "make_image",
+        "type": "function",
+        "strict": false,
+        "parameters": {
+          "type": "object",
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "required": [
+            "prompt"
+          ],
+          "properties": {
+            "size": {
+              "type": "string",
+              "default": "1536x1024"
+            },
+            "prompt": {
+              "type": "string",
+              "minLength": 1
+            },
+            "quality": {
+              "enum": [
+                "low",
+                "medium",
+                "high"
+              ],
+              "type": "string",
+              "default": "high"
+            },
+            "references": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            }
+          }
+        },
+        "description": "Generate or edit an image using GPT Image 2. Supply chosen references to edit or preserve aspects. Returns actual image content for inspection and a saved asset ID.",
+        "output_schema": null
+      },
+      {
+        "name": "ask_critic",
+        "type": "function",
+        "strict": false,
+        "parameters": {
+          "type": "object",
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "required": [
+            "question",
+            "subjects"
+          ],
+          "properties": {
+            "question": {
+              "type": "string"
+            },
+            "subjects": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Document, publication or work IDs to inspect. The critic can investigate further."
+            }
+          }
+        },
+        "description": "Ask an independent Astra reader to investigate a draft, work, image relationship or literary question. It has read-only archive/image tools. This is optional; use when useful.",
+        "output_schema": null
+      },
+      {
+        "name": "offer_opening",
+        "type": "function",
+        "strict": false,
+        "parameters": {
+          "type": "object",
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "required": [
+            "publication_id",
+            "block_id",
+            "target_work_id",
+            "label"
+          ],
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "quote": {
+              "type": "string"
+            },
+            "asset_id": {
+              "type": "string"
+            },
+            "block_id": {
+              "type": "string"
+            },
+            "publication_id": {
+              "type": "string"
+            },
+            "target_work_id": {
+              "type": "string"
+            }
+          }
+        },
+        "description": "Offer a prepared work at an exact published passage or image. Readers can enter it immediately. Existing prose remains unchanged.",
+        "output_schema": null
+      }
+    ],
+    "top_p": 0.98,
+    "usage": {
+      "input_tokens": 10070,
+      "total_tokens": 10083,
+      "output_tokens": 13,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      }
+    },
+    "object": "response",
+    "output": [
+      {
+        "id": "fc_07d55e4c2e541ade006a9cdb1f5d0087d0beef8a41ce414c0c",
+        "name": "resources",
+        "type": "function_call",
+        "status": "completed",
+        "call_id": "call_AkfOAcTQhfTc16uuxjQ2UL6O",
+        "arguments": "{}"
+      }
+    ],
+    "status": "completed",
+    "billing": {
+      "payer": "developer"
+    },
+    "metadata": {},
+    "reasoning": {
+      "mode": "standard",
+      "effort": "xhigh",
+      "context": "all_turns",
+      "summary": null
+    },
+    "background": true,
+    "created_at": 1788664604,
+    "moderation": null,
+    "tool_usage": {
+      "image_gen": {
+        "input_tokens": 0,
+        "total_tokens": 0,
+        "output_tokens": 0,
+        "input_tokens_details": {
+          "text_tokens": 0,
+          "image_tokens": 0
+        },
+        "output_tokens_details": {
+          "text_tokens": 0,
+          "image_tokens": 0
+        }
+      },
+      "web_search": {
+        "num_requests": 0
+      }
+    },
+    "truncation": "disabled",
+    "temperature": 1,
+    "tool_choice": "auto",
+    "completed_at": 1788664607,
+    "instructions": null,
+    "service_tier": "default",
+    "top_logprobs": 0,
+    "max_tool_calls": null,
+    "presence_penalty": 0,
+    "prompt_cache_key": null,
+    "frequency_penalty": 0,
+    "max_output_tokens": 32768,
+    "safety_identifier": null,
+    "incomplete_details": null,
+    "parallel_tool_calls": false,
+    "previous_response_id": null,
+    "prompt_cache_retention": "24h"
+  }
+}
