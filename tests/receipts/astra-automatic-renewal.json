@@ -1,0 +1,30 @@
+{
+  "code_revision": "9aee4b0d93da04030e9ca30e2f2c4055bc56468e",
+  "operation_id": "c102d279-03ca-4905-a10d-9e99258e5945",
+  "key": "5fee6506-857a-48c1-af70-2f0336004de0:renew:before-reader:d87c40c7-0acb-46cb-8b41-9be9929f7579",
+  "created_at": "2026-09-06T17:01:25.899Z",
+  "completed_at": "2026-09-06T17:04:45.364Z",
+  "usage": {
+    "input_tokens": 296352,
+    "total_tokens": 305441,
+    "output_tokens": 9089,
+    "input_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "cost": 6.608715,
+  "input_items": 249,
+  "canonical_items": 10,
+  "retained_items": 10,
+  "compaction_id": "cmp_07d55e4c2e541ade016a9d9c75ff3087d09a02d37e0b7d2005",
+  "canonical_retained_exactly": true,
+  "retained_sha256": "5f4daf94d5794c5c6e9531ce4ece0729bb23a4a437311492cc255e23dfed19bf",
+  "original_guide_items": 1,
+  "feedback_reference_retained": true,
+  "raw_receipt": "operations/c102d279-03ca-4905-a10d-9e99258e5945/response.json",
+  "note": "Natural between-request renewal for queued root preparation. No manual compact request, new replay purchase or story edit. Canonical window compared after exact image hydration. Subsequent authoring is separate evidence."
+}

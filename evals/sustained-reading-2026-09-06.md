@@ -83,3 +83,23 @@ is claimed from the setting alone. [Official documentation](https://developers.o
 ## Remaining evidence
 
 Read the real WASH continuation, observe preparation without immediately requesting Continue, assess the complete connected sequence with a contextual critic, and examine continuation after a local resolution. Observe automatic context renewal at a naturally crossed request boundary; the earlier deliberate renewal and post-renewal root reading are already recorded. Do not infer novel-length or indefinite coherence from this sample.
+
+Whole reading review used20 Astra calls, estimated$7.125014 within the shared allowance. On the
+next idle boundary the builder appended one user context message linking its exact archive document
+and clarifying its scope/fallibility. This is an explicit feedback intervention; it does not alter
+published prose or instruct a plot. New WASH material was outside that review snapshot.
+
+The tool grouping and footer refinements deployed as9aee4b0d93da04030e9ca30e2f2c4055bc56468e,
+Git deploymentac5208da-0bd0-4174-91d6-75df1085d045, exact health verified. The actual root004 footer
+no longer shows the consumed continuation as new. After reader tabs closed during a user interruption,
+reopening the same visit recovered its paragraph. Preparation stayed stale while closed and resumed
+from actual reading when reopened. Natural context renewal began17:01:25UTC, not yet completed at
+this record. New reader viewport516x835; earlier tests include1000px and390px.
+
+Automatic renewal completed17:04:45UTC:249items became10canonical items, all retained exactly
+after image hydration, with the original guide once and feedback reference still directly present.
+Usage296352input/9089output; estimated$6.608715. Receiptastra-automatic-renewal.json. The first
+post-renewal author turn requested five tools together: reopen root, read two actual originals and
+view two actual images. All five results were preserved and accepted by the next Astraxhigh/all_turns
+call. Receiptastra-grouped-tools.json. This confirms grouping and normal continuation through the
+renewal, not yet the quality or latency of the next prepared publication.

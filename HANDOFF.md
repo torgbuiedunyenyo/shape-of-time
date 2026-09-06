@@ -14,27 +14,35 @@ no subagents or goal tool. Preserve all session transcripts and historical sourc
 
 ## Immediate position and next action
 
-Production **eec8fddb7b837fbb50e3f8bca024a39ff969d88e**, Git deployment
-**4c7d2c63-7c90-44f3-8123-56917776a08a**, was exact-healthz verified. New code is ready for Git release:
-- 43b2033 hides the old completed-continuation “next passage is ready” notice at a new frontier.
-- Uncommitted Astra change allows multiple tool requests in a model turn (`parallel_tool_calls:true`).
-  Effects still execute in order with saved receipts. Real DB recovery of two calls after first-write
-  interruption passed; this is capability support, not a literary test or proven speedup.
+Production **9aee4b0d93da04030e9ca30e2f2c4055bc56468e** is LIVE; Git deployment
+**ac5208da-0bd0-4174-91d6-75df1085d045 SUCCESS**, exact healthz verified. Normal main fast-forwarded.
+- Completed-continuation footer fix visually verified at actual root004 frontier on production.
+- Multiple tool requests are now allowed in one model turn. Effects still execute in order with
+  saved receipts. Real DB recovery of two calls after first-write interruption passed; no literary
+  test or claimed speedup. Live multi-call behavior still to observe.
 - **28 tests, typecheck, lint, build passed**, exec27870. Focused batch recovery passed exec51643.
-  No source/prompt/model changes. Real batched calls and deployed footer need observation.
+- Release helper exec13433 STOPPED cleanly after deployment. NO LOCK/EXPORT/LOCAL REVIEW RUNNING.
 
-**Release lock is HELD by local exec13433**, .local/hold-release.ts. It acquired the author lock
-with no active provider operations. Both author and independent review finished. Release this helper
-with Ctrl-C after Git deployment verification. Do not leave it held across handoff/compaction.
-Normal main checkout is clean at eec8fdd; active HEAD43b2033 includes unpushed eb02ad5 restoration docs.
-Commit explicit pending paths, push passing HEAD to main, verify exact Git-triggered deployment,
-fast-forward normal checkout. Never railway up/manual redeploy to bypass Git.
+**Automatic native renewal COMPLETE**, op **c102d279-03ca-4905-a10d-9e99258e5945**,17:01:25–17:04:45UTC,
+for root preparation d87c40c7-0acb-46cb-8b41-9be9929f7579. Natural250k boundary, no manual renewal.
+249inputitems→10canonical,296352input/9089output,$6.608715. All10canonicalitems retained exactly
+(after image hydration), original guide once, independent-review reference directly retained.
+Receipt tests/receipts/astra-automatic-renewal.json; no duplicate/replay purchase needed.
+
+**Root preparation is RUNNING.** First post-renewal op46b428b5-f7cc-44c9-8ef4-e0ed4602f2c8
+returned FIVE tools together: open root, read WASH Off Shift and root bus-home originals, view
+counter and Lena's home images. All5outputs saved; next Astra accepted them at98286inputtokens.
+Astraxhigh/all_turns confirmed. Receipt tests/receipts/astra-grouped-tools.json. First input88299count
+(88298providerusage), context after renewal substantially reduced. No speedup benchmark claimed.
+Author chose to prepare next root installment toward first journey with Tan. No new draft yet.
+Keep tab20 at root004 WITHOUT pressing Continue while this preparation develops.
+Latest commitment91.912919 includes active reserve, remaining58.087081, unknown0; query fresh.
 
 Author session **5fee6506-857a-48c1-af70-2f0336004de0** throughout.
 - Root continuation432dad7f-d219-4cf2-ab94-3f46ed642ddd DONE, through root004.
 - WASH continuation8c015d8e-d085-4d70-ab8b-cc491d192e65 DONE, two further publications below.
-- Root preparation **d87c40c7-0acb-46cb-8b41-9be9929f7579 QUEUED** but reading signal went stale.
-  Resume actual root004 reading in tab2 after release. Let preparation run WITHOUT pressing Continue.
+- Root preparation **d87c40c7-0acb-46cb-8b41-9be9929f7579 RUNNING** after automatic renewal.
+  Actual reopened root004 reading in tab20 refreshed the previously stale signal. Do not press Continue.
 - WASH preparation715f30a8-cb2f-4845-a999-5001b268dc35 queued/stale; will reuse existing continuation
   when revisited. Don't purchase a duplicate to clear it.
 - First preparation8a820cb7-c57e-40c5-94c5-ce712e7ad5dc DONE: saw real queued root/WASH requests,
@@ -62,7 +70,7 @@ No extra provider probes/critic calibration/restart/restore needed. No silent al
 After release: observe actual prepared reading through natural250k renewal (latest author requests
 already approached/exceeded threshold), review new root output, then continue wedding/root through
 reader as useful toward substantial connected30–50k study scale. Scale is not an author quota.
-Current connected corpus roughly23k, root10,608. Do not infer novel or indefinite coherence.
+Current connected corpus22,716 words including alt/Markdown, root10,608,9publications. Do not infer novel or indefinite coherence.
 
 ## Repositories and Railway
 
@@ -148,9 +156,9 @@ Read originals before judging details; all IDs can be recovered by path/edition 
 
 ## Reader state and evidence
 
-CUA bindings `tab`2 (browser1); temporaryimage tabs18/19closed. Rootvisit
-**0f84838d-2093-4b02-a91a-87f2934fcefb**, partwaythroughroot004. Viewport1000x800. Rootreading signal
-becamestale afteruserinterruptions; inspect actualscreen and resumereading toreactivatepreparation.
+CUA `tab` is now **20** (browser1). Old tab2 disappeared when reader tabs closed during user interruption; inventory had zero tabs. Reopened same saved visit successfully. Temporary images18/19closed. Rootvisit
+**0f84838d-2093-4b02-a91a-87f2934fcefb**, at heading4 after visually checking new footer. Current native viewport516x835, no active override.
+Preparation reading signal fresh17:00 onward; no loss of saved place across tab closure/reopening.
 `tab.click([x,y])` uses array; coordinateclickstickyReturn afterscreenshot avoids locatorautoscroll.
 getAXState emitfalse/slice to avoid dumpingwholebooks. Evaluate read-onlyDOM, nofetch/storagewrites.
 
@@ -163,7 +171,7 @@ readyrequest viachild09804255-b6db-4ad7-8074-6ec604635dd7; no compatibilityhack.
 
 RealQA: root→child→grandchild→exactreturns,390↔1000reflow/font/reload,bookmarkretainedancestry,
 three-paragraphselection, preparedentryimmediate, independentcontinuation/explorationpendingstatus,
-publicationwhileWASHreadingdidnotstealfocus. Newfooterfix stillneedsdeployedcheck. Localpreviewstopped.
+publicationwhileWASHreadingdidnotstealfocus. Newfooterfix deployed and visually verified. Localpreviewstopped.
 Reports evals/nested-reader-and-recovery-2026-09-06.md and sustained-reading-2026-09-06.md.
 Coldfirstpublications: root27m14s(includinginitialrepair), child30m06s, wedding~9m,
 root00422m23s(including2m16queue). WASH OffShift firstaftercontinuerequest~36m49s INCLUDINGrootqueue;
@@ -186,7 +194,7 @@ notes/original/image retrieval. Nativeutilitynoeffortparameter; author/criticxhi
 Appduplicateorientationremovedfree viaopdf40fb26-feff-4d3f-9922-ccbd295ea230; allcanonicalitemsand
 latermessagespreserved. Do notrerunrepair. Receiptsastra-native-renewal/native-orientation-maintenance.
 Automatic250kbetweenrequestsreleased044a21c, exactcountincludingtools. Notwithin-turn;880kguardpauses.
-Automaticnaturalboundary still to observe. Preserveopaqueencryptedcanonicalitemandalloriginals;
+Automaticnaturalboundary completed as above; actual post-renewal retrieval and grouped tools verified. New prose/images remain to assess. Preserveopaqueencryptedcanonicalitemandalloriginals;
 laterproviderIDsdependretention, noindefinitereplaypromisewithoutrenewal/reconstruction.
 
 ForcedrestartREALSUCCESS31b3217: stop04:42:32.125/start04:42:33.234. Sameop
