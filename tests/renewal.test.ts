@@ -3,7 +3,18 @@ import { randomUUID } from "node:crypto";
 import type { ResponseInputItem } from "openai/resources/responses/responses";
 import { db, json, pool } from "../src/server/db/index.js";
 import { migrate } from "../src/server/db/migrate.js";
-import { renewBeforeRequest, renewSession } from "../src/server/agent/renewal.js";
+import { renewBeforeRequest, renewSession, withOrientation } from "../src/server/agent/renewal.js";
+
+it("does not append a duplicate world guide when the native window already retains it", () => {
+  const orientation: ResponseInputItem = { role: "developer", content: "The complete original world.\nAnd writing guidance." };
+  const canonical: ResponseInputItem[] = [
+    { type: "message", role: "developer", content: [{ type: "input_text", text: "The complete original world.\nAnd writing guidance." }] },
+    { role: "user", content: "Retained reader source." },
+    { type: "compaction", id: "cmp_fixture", encrypted_content: "structural-fixture" },
+  ];
+  expect(withOrientation(canonical, orientation)).toEqual(canonical);
+  expect(withOrientation(canonical.slice(1), orientation)).toEqual([...canonical.slice(1), orientation]);
+});
 
 const edition = randomUUID();
 beforeAll(async () => {

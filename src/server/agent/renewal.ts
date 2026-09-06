@@ -27,6 +27,26 @@ export function pendingCalls(input: ResponseInputItem[]) {
     (i) => i.type === "function_call" && !answered.has(i.call_id),
   );
 }
+export function withOrientation(
+  canonical: ResponseInputItem[],
+  orientation?: ResponseInputItem,
+) {
+  const signature = (item: ResponseInputItem) => {
+    if (!("role" in item) || item.role !== "developer" || !("content" in item))
+      return undefined;
+    const content = typeof item.content === "string"
+      ? [{ type: "input_text", text: item.content }]
+      : item.content.map((part) => part.type === "input_text"
+        ? { type: part.type, text: part.text }
+        : part);
+    return JSON.stringify(content);
+  };
+  const original = orientation && signature(orientation);
+  // Never remove canonical items. Only avoid adding a second copy of a source it retained.
+  return orientation && !canonical.some((item) => original !== undefined && signature(item) === original)
+    ? [...canonical, orientation]
+    : canonical;
+}
 /** Renew between reader requests, under the existing author lock. A saved receipt always wins. */
 export async function renewBeforeRequest(
   sessionId: string,
@@ -138,14 +158,12 @@ export async function renewSession(sessionId: string, requestKey: string) {
     );
   const compactId = response.output.find((i) => i.type === "compaction")!.id;
   const canonical = toResponseInputItems(response.output);
-  // Keep the whole canonical returned window. Reattach the original, unabridged artistic
-  // orientation as a new developer message so it remains directly available after renewal.
+  // Keep the whole canonical returned window. Reattach the unabridged artistic orientation
+  // only when the provider has not already retained it as directly available source text.
   const orientation = (op.request.input as ResponseInputItem[]).find(
     (i) => "role" in i && i.role === "developer",
   );
-  const next = await storeImages(
-    orientation ? [...canonical, orientation] : canonical,
-  );
+  const next = await storeImages(withOrientation(canonical, orientation));
   await db.transaction().execute(async (tx) => {
     const current = await tx
       .selectFrom("sessions")

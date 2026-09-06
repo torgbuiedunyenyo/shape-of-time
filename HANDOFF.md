@@ -1,6 +1,6 @@
 # Handoff
 
-Updated September 6, 2026, around 05:09 UTC. After compaction read this and PLAN.md P1–P5.
+Updated September 6, 2026, after the first completed root continuation. After compaction read this and PLAN.md P1–P5.
 
 ## Purpose
 
@@ -13,47 +13,37 @@ agent; no subagents or goal tool. The user's implementation and production repla
 
 ## Immediate position
 
-The first root continuation after native context renewal is running:
+Root continuation `f9d2a6d8-74a9-408b-ae77-1cb2dcb909bb` is DONE. Root now has three
+published chapters, roughly8k words; total connected corpus roughly16–17k. Builder read the final
+prose/revisions, critics, all illustrations and latest root/library notes. Chapter2 completes the
+noodle evening/bus/home and establishes Tuesday swimming. Chapter3 develops Dee's driving goal,
+Tuesday swimming, first kisses, and cooking at Jay's home before his4pm shift. Neither nested
+work advanced in that request. No developer creative edits or manual publication.
 
-- Intent: `f9d2a6d8-74a9-408b-ae77-1cb2dcb909bb`.
-- Root work: `work-5213e951303bfbdd2f555090ca38fa93`.
-- Draft: `root/002-the-bus-home.md` revision1, document `5c9190d8-62eb-416d-919a-a5eab08cf8b7`.
-- New image: `img-2258c358-cbfd-4408-90ee-2eefe33c8077`.
-- Critic review: `7881cf68-db0d-48a5-ab45-71a6c228871f`.
+**Release helper exec76546 HOLDS the global author lock**, with no active operations. Keep it held
+through the passing Git deployment, then Ctrl-C76546 before exporting the corpus or generating.
+Production stillb920956. Commit044a21c plus the pending orientation fix are ready to push.
+PREPARATION_ENABLED=true is already staged with --skip-deploys; next Git deployment activates it.
+No need to set it again. Browser tab2 is at the library, temporary image tabs14/15 closed.
 
-Builder fully read the draft/review and viewed the image. The scene continues the noodle evening:
-Jay and Tan discuss their lives, leave for a bus stop, disclose family/class differences, exchange a
-visitor relay address, arrange Tuesday swimming and go home. The critic found real progression,
-source/image consistency, and too much corrective subtext; it labeled a sister-message callback as
-ambiguous, not a definite contradiction. The author has that review. Continuation publication `e7eb59f4-58f8-4c3e-b090-859de5018800` now contains revision2
-(document `601c5eb6-a115-455f-8fb0-8ed23811e8d4`), whose changes the builder read. The author continued after publication and is now creating a Sunday scene with Jay and his sister
-Dee (her driving practice). Active image operation `69ee9ed6-7087-4e51-832b-5e48752dc269` began05:14UTC.
-The release-lock helper76546 is still waiting; it must not be treated as held until it says so.
-**Inspect fresh status. Do not submit another request, duplicate review, renewal or restart.**
+Changes ready for release:
+- Automatic native renewal between reader requests above250k measured input; complete canonical
+  window/originals retained; same operation reused on resume; uncertainty pauses. Within-turn880k
+  guard remains, no within-turn auto-renewal.
+- Completed renewal replay preserves completion timestamp.
+- Exploration and continuation retain separate status/polling/reload. Production QA remains.
+- Native provider already retained full artistic orientation; avoid appending a duplicate when it
+  does. Regression reproduced and fixed. ALL canonical items remain unchanged.
 
-Local changes are ready for release after the author finishes. All **25 tests, typecheck, lint and
-build passed** in gate session19993. Changes are being committed as a checkpoint; they are not yet deployed:
+One-time free maintenance operation `df40fb26-feff-4d3f-9922-ccbd295ea230` already removed only the
+app-added duplicate at index5, while author idle/locked. Preserved all five canonical native items
+and subsequent root conversation, kept full previous input in operation. Step73→74, items74→73.
+Receipt tests/receipts/native-orientation-maintenance.json. **Do not repeat this repair.**
 
-- Native context renewal automatically runs **between new reader requests** above250k measured input
-  tokens. It preserves the complete canonical window and full originals, shares the existing allowance,
-  reuses a saved operation on resume, and pauses uncertain outcomes. A very large individual author
-  turn still pauses at the880k dispatch guard; no automatic renewal inside a turn yet.
-- Reusing a completed renewal no longer rewrites its completion timestamp. Real DB regression first
-  reproduced that defect, then passed.
-- A real browser defect was reproduced: selecting an image to explore hid a pending continuation's
-  status. Exploration and continuation now have separate state and reload/polling. Production QA of
-  this correction remains after deployment.
-- New receipts/report: tests/receipts/astra-native-renewal.json and evals/native-renewal-2026-09-06.md.
-  Reader/recovery report also updated.
-
-Release-lock helper `.local/hold-release.ts` is running in exec76546, waiting to acquire or
-holding the author lock. Check its output. Once held with no active operations, push passing work,
-verify deployment, then stop76546 to release author work. Never deploy through a
-direct image purchase. The PREPARATION_ENABLED variable has been set true with --skip-deploys; the running revision
-still has it disabled until the next deployment. When ready for its live
-observation, set `PREPARATION_ENABLED=true` with Railway `--skip-deploys`, then activate it with the
-passing Git push. No Docker, local generation worker or staging is needed. Continue the meaningful
-root/nested corpus after release; don't stop at mechanical success.
+All **26 tests, typecheck, lint and build passed**, exec2376. No new gates needed until code changes.
+Next: push reviewed changes, verify exact Git deployment, release76546, export new full corpus,
+restore it to fresh world_restore_* schema, then observe preparation and continue root/child.
+Never deploy through a direct image purchase. No duplicate critique/renewal/restart request.
 
 ## Repositories and production
 
@@ -90,7 +80,7 @@ Retired art-thing remains read-only. Preserve other historical worktrees/refs an
 
 Initial combined provider allowance is **$150**, including text, images, criticism and renewal; at
 most$20 for provider-contract investigations. Latest observed commitment including active reserves
-$50.754575, remaining$99.245425, unknown0. Query fresh. Renewal$6.74581; first root$4.582698;
+$53.981133, remaining$96.018867, unknown0. Query fresh. Renewal$6.74581; first root$4.582698;
 predecessor calibration$1.02882. No unlimited spending or silent allowance increase.
 
 ## Actual corpus
@@ -114,7 +104,7 @@ days later on Thursday, and they go for noodles. Opening ends as food arrives. I
 `img-2e65d7c4-9eb6-4495-a8e7-ae9386e6efa5`, corrected lounge
 `img-6dbbc75c-8ebf-48b3-ae1f-7fa940229810`, dinner
 `img-40cce6d2-9c38-4ef3-bf1d-c41ee078aa65`. Superseded wrong-wrist study retained.
-Agent notes: notes/root-continuity.md. Current continuation details above.
+Agent notes: notes/root-continuity.md. Root002 pub e7eb59f4-58f8-4c3e-b090-859de5018800 doc601c5eb6-a115-455f-8fb0-8ed23811e8d4 rev2; root003 pub53655d05-1d04-438f-8ebc-4d125d33e438 doc224d04b1-b37b-488b-926d-8c93ff893955 rev2. Latest root notes d1733089-a0b6-4a3c-8a06-986f26904539; library notes992da59d-6cdf-41cf-a738-01b1b2edecc7. All read.
 
 Child: actual reader rectangle selected the attendant/travelers in root block
 `b-01c5a2ee18a86f74ed2a` (x.6382,y.4021,w.2895,h.2928), with no angle. Lena's first-person account
@@ -136,7 +126,7 @@ criticism. Critic `5f7ea6c3-6b56-42e7-ac87-95852982facd` found consistency and r
 particular ceremony reading and less announcing narration; revision2 addressed both.
 Final images: kitchen `img-54a14f81-8ccc-499e-804a-2483d94cf869`, corrected ceremony
 `img-87a5bee8-7243-47bd-b968-2bb789b018e2`, portrait `img-d6e24472-87e6-489e-a5f8-e2d5540d5826`.
-Notes: notes/tere-audrey-continuity.md and notes/library-index.md rev2, both fully read by builder.
+Notes: notes/tere-audrey-continuity.md and notes/library-index.md rev3, both fully read by builder.
 Prepared child→wedding link: `opening-6033a62b2f20362b9a950b7cbbc73bcb`.
 
 ## Browser and reader evidence
@@ -152,13 +142,13 @@ still needs production QA. See evals/nested-reader-and-recovery-2026-09-06.md.
 Observed first-publication waits: root27m14s including initial retrieval repair, child30m06s,
 wedding about9min. N=3 different circumstances, not a benchmark. Preparation still needs live testing.
 
-CUA production tab2 is root visit `0f84838d-2093-4b02-a91a-87f2934fcefb`, near its frontier.
+CUA production tab2 is root visit `0f84838d-2093-4b02-a91a-87f2934fcefb`, currently at the library.
 Child visit `c92b10b6-71bc-46a9-a591-a4f6158cda14`; current nested wedding visit
 `f7ce6c60-d964-49d9-95ec-029a80499ad1`. Earlier wedding visit131daf… and bookmark-created standalone
 78da84… remain historical reading records. Pre3a10 visits lack the entered-request marker; their
 ready panel can appear once. Enter through the released control once to record it.
 
-Bindings tab/browser/viewport exist. Temporary busScene tab13 remains open; close when finished.
+Bindings tab/browser/viewport exist. Temporary sundayScene14, poolScene15 and busScene13 are closed.
 Other image bindings point to closed tabs. Viewport1000x800. Close image tabs before changing viewport;
 reset on completion. Evaluate DOM read-only; no fetch/storage mutation. Use coordinate clicks for
 sticky toolbar controls because locator.click scrolls first. AX returns diffs; avoid dumping novels.
@@ -185,9 +175,10 @@ First-root backup `.local/corpus-first-reading-2026-09-06` restored exactly to
 `world_restore_first_reading` and its S3 prefix, generationfalse (10tables,29ops,4assets,33objects).
 Need a NEW full snapshot/restore including current corpus, protocol image blobs and renewed window.
 Use scripts/corpus.ts export|restore DIRECTORY. Export requires idle author/no active operations;
-restore uses a fresh world_restore_* schema and matching ASSET_PREFIX with generation disabled.
+restore uses a fresh world_restore_* schema with generation disabled. Asset keys are automatically
+prefixed with that schema; there is no separate ASSET_PREFIX setting.
 
-All25 current gates pass against real DB/S3 and mechanical fixtures; no ordinary paid calls or
+All26 current gates pass against real DB/S3 and mechanical fixtures; no ordinary paid calls or
 literary scores. They cover persistence, arbitrary length, publication atomicity, replay, budget,
 raw bytes, exact image storage, archive originals, request dedupe/priority, preparation staleness,
 source/bookmark routes, independent pending requests and native-window preservation/uncertainty.
@@ -206,5 +197,5 @@ P1 first root continuation and P2 actual nested return are complete. P3 needs li
 preparation and several root/nested continuations with grounded criticism. P4 needs the new corpus
 restore. P5 needs substantial connected reading (30–50k study scale, not a quota), distant recurrence,
 post-resolution development and continued renewal evidence. P6 needs the final production walkthrough
-and honest handoff. Do not declare long-form success from the roughly12k opening corpus. Stay within
+and honest handoff. Do not declare long-form success from the roughly16–17k connected corpus. Stay within
 $150 and preserve everything already generated.

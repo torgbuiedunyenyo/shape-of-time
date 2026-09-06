@@ -51,3 +51,21 @@ subtext (characters and narration repeatedly clarifying what a remark meant), an
 a sister's-message callback as ambiguous rather than definitely contradictory. It noted relays
 were already established in the child. The author has the review; its revision/publication remains
 pending. No developer supplied a required callback or overrode its creative decision.
+
+## Completed continuation and orientation maintenance
+
+The root request subsequently published root002 revision2 and root003 revision2, about5k additional
+words, with three new referenced images. Builder read all drafts/revisions, both contextual reviews,
+all actual illustrations and updated root/library notes. The author reduced interpretive gloss,
+clarified pool lane use and developed Dee independently while advancing Jay/Tan's relationship.
+This is worthwhile post-renewal development at the observed scale, not indefinite coherence proof.
+
+Inspection found the five canonical native items already contained the full original developer
+orientation. The application had appended an unnecessary sixth copy. The fix compares normalized
+developer content and skips adding it when already retained; it never removes canonical items.
+A regression first reproduced the duplication and then passed. Free maintenance operation
+df40fb26-feff-4d3f-9922-ccbd295ea230, under the idle author lock, removed only the app-added index5
+from the active window. Canonical five and all subsequent messages were preserved exactly; previous
+full input remains in that operation. See tests/receipts/native-orientation-maintenance.json.
+No provider request, source rewrite or summarization was involved. Current gate:26tests plus
+typecheck/lint/build passed. Automatic between-request renewal still needs live observation.
