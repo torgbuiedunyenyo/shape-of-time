@@ -1,6 +1,6 @@
 # Handoff
 
-Updated September 6, 2026, 19:11 UTC. Initial reader edition and application release verified.
+Updated September 6, 2026, 20:38 UTC. Second attempt active; first request complete.
 After compaction read this and PLAN.md section11. PLAN.md is the sole queue; do not create STATUS.md.
 
 ## Active follow-up — latest instructions control
@@ -26,18 +26,20 @@ and tour source inspected. Context7 Kysely/React and official Astra documentatio
 shape-of-time:2026-09-06T19:54:14.409Z. Mechanism
 **aefcf65a848bbecda3b37c0a26d71e6230712f795c4e268e678bc671408acd4e** pinned before generation;
 matched local source/config. Empty-publication/operation checks and actual clean in-app shelf passed.
-Receipt tests/receipts/second-edition-pin.json currently uncommitted. Begin clicked through UI:
+Receipt tests/receipts/second-edition-pin.json committed in1ed691a. Begin clicked through UI:
 **ed8a8cf1-5940-4255-886f-af988132b759**. This is request1 of20, not an additional test request.
 
-**Run session5982** executes `.local/review-second/run.ts --first-only`: monitors the initial request
-then exits, allowing actual preparation QA. The durable `.local/review-second/ledger.json` records
-edition, mechanism, each body/dedupe key/intent ID/status/completion. Later run without --first-only to
-complete20 requests. A nonempty `.local/review-second/hold` stops it BETWEEN requests; remove that
-file deliberately to resume. Never start duplicate drivers. GET failures/paused requests stop it for
-inspection; application POST retry uses the SAME saved dedupe key, never a provider retry.
-The driver chooses actual sources (root image, child paragraph) and continues root/child/grandchild;
-it supplies no narrative premise. Inspect the selected source if one is unavailable. Count ordinary
-preparation separately, retain all outputs, and do not impose publication/word quotas.
+**First request complete; driver5982/PID40847 exited0.** `.local/review-second/ledger.json`
+records request1 done, root work895cb2c0b80c9b201cc2535181c2a612 (full ID has `work-` prefix).
+2 publications / 4,061 words including headings and alt / 5 published images;4.110384 actual committed,
+combined120.861414,unknown0; every operation matches pin. Opening-scope.json in that directory.
+`.local/reader-second-scope.ts` now includes both previous allocations correctly.
+`run.ts` resumes the ledger up to20; `--through N` can stop between requests at a specific count;
+--first-only already completed. A nonempty hold file stops BETWEEN requests; none currently exists.
+Do not start duplicate drivers or duplicate Begin. Provider ambiguity is never automatically retried.
+Actual source explorations (root image, child passage) and root/child/grandchild continuations supply
+no operator plot. Preparation is separate from20. `observe.ts` records compact live DB snapshots in
+.local/review-second/observations.jsonl; it does not generate or alter fiction.
 
 Release helper1227/PID39425 was released and exited0. No hold remains. Hosted generation/preparation
 true. Local .env follows new schema with generationfalse. Saved .local/reader-first.env references
@@ -45,12 +47,12 @@ old edition and must remain generationfalse/read-only. New allowance150; prior d
 plus first reader22.053726 =116.751030 already spent. Combined authorized operational allowance now
 266.751030. Receipt tests/receipts/second-edition-allocation.json. Increase further only as needed;
 never reset combined accounting. `.local/progress.ts` works on current schema; old scope helper's
-combined-total constant only includes development, so update/create a second-scope helper before use.
+combined-total constant only includes development; use the new second-scope helper instead.
 
 First reader export complete at .local/reader-first-preserved-2026-09-06:92objects/70ops/20docs/
 8publications/10savedimages/4sessions. References in archive/reader-attempts/README.md and receipt.
 Old allowance frozen22.053726, never copy old corpus into new. Each new attempt starts from scratch,
-as the author reiterated. Current work: **F4 tour ready for safe deployment; F3 request1 still running**. ReadingGuide.tsx,
+as the author reiterated. Current work: **F4 tour deployed and verified; F3 request1 complete; live preparation running**. ReadingGuide.tsx,
 tour-state.ts, main.tsx and CSS implement native modal/actual spotlights, six short steps, skip/Escape,
 back/next, remembered dismissal, ? replay and position restoration. Tour movements suppress reading
 heartbeats and saved-position updates. No generation was submitted in tour QA. Actual in-app1280×720
@@ -59,17 +61,31 @@ completion/reload/replay/Escape worked. **34tests/typecheck/lint/build passed**,
 No further test rerun is needed unless new changes/failures justify it. Report:
 evals/author-feedback-and-preparation-2026-09-06.md. Original world SHA still matches.
 Local API57556/PID41760 and Vite39193/PID41802 stopped and exits verified; qa tab23 and agent-browser
-book-guide-qa closed. Only productiontab21 remains, waiting for first opening.
+book-guide-qa closed. Only productiontab21 remains, reading the first section.
 
-**Release helper51105 is WAITING** for the entire available queue to drain, not delaying current
-work. Record its PID from the tool result. Once it reports HELD/no active providers, push the passing
-client-only tour through main, verify exact Git deployment/health, release with SIGINT and verify exit.
-Never leave it held. Driver5982/PID40847 remains --first-only and will exit after Begin. Latest root
-operation99fa058a-1032-4aad-9d03-c95420c5ad82 Astra received20:00:08; secondimage26430e79complete.
-Budget2.4926505 committed inclreservation,147.5073495remaining,unknown0. No publication yet. Current
-mechanism remains aefcf65a848bbecda3b37c0a26d71e6230712f795c4e268e678bc671408acd4e.
-After tour release, do concise actual preparation QA, then restart the ledger driver without
---first-only to complete20 (do not duplicate Begin). Do not start any separate literary study.
+**Tour live at1ed691ab831a658eb93f395b1329fb2d8836370c**, Git deployment
+169d3c85-efdd-4725-b935-1c18b7f5fad3 SUCCESS; exact /healthz matched. Release helper51105/PID43609
+released with SIGINT and exited0. No hold remains. In-app production first-entry spotlight appeared;
+Next/Skip/reload-persistence/?replay/Escape passed. All5images loaded, scroll restored0. Current
+viewport651x1027, root visit94116ec2-0b0d-4da9-b9c7-4d6c33b789f5. Actual reading is now active on
+firstsection; secondsection already published. Observe preparation and follow a ready opening/return,
+then run ledger to20. Do not begin a separate literary study.
+**Live warm-entry/return PASSED.** Preparationa41a6042-d9f6-457b-9052-6bb13184c802 began20:20:53
+from firstsection with unread secondsection. Published The Back Label/Returns at20:36:24, source link
+20:36:46. Actual link appeared withoutreload. Entered c8b4065e-4088-4d5d-a165-0f9e8877cd6a;
+all101paragraphs/3images loaded at nextobservation5.5sec later (includes tool latency, not benchmark).
+Return restored root visit94116ec2 and sourceblockb-d9d899cdb3efaae5736d quoteoffset164–195.
+No explicitrequest was created by warmnavigation. Root remains visiblefirstsection; completed samepub
+preparation cannot repeat. Full evidence in evals/author-feedback-and-preparation-2026-09-06.md.
+
+**Full20 driver running: session7881**, started20:37:55, PID58361. Request2 rootcontinuation
+**decc7f9a-b434-42ab-98a4-1734fbd23ffe** queued whilepreparation finishing. Do not startduplicate.
+No releasehold or localAPI. Lastactual committed8.28912 before request2;unknown0. Record lateststate
+with .local/progress.ts or observe.ts. `verify-assets.ts` checks allpublishedimages atfinalscope.
+Continue driver through20 (it stops onfailed/paused/networkerrorsforinspection), then complete F5
+assets/pin/cost/corpusreceipt and finalnestedgrandchild/source-return journey. No more broadtests or
+literarystudy unlessactualdefect warrants. Finaldocscommit/push must be safe forprovideroperations.
+
 
 
 ## Purpose and terminology

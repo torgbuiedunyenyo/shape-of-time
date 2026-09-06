@@ -414,4 +414,7 @@ compaction. Keep the existing original-world wording and agent-led approach.
    assets load, model/mechanism receipts agree, and no temporary release hold remains. Record final
    costs, publication scope, limitations and the active release. Leave the opening ready for reading.
 
-Current work: F2/F1 deployed under the fresh pin. F3 request1 is running with a durable20-request ledger. F4 tour implemented; actual desktop/narrow QA and all34mechanical tests passed. Deploy the client-only tour safely, verify preparation, finish the20requests and F5 handoff. The prior P0–P6 release remains preserved evidence, not unfinished work.
+Current work: F2/F1/F4 deployed under the fresh pin. F3 request1 completed; the durable ledger is
+running through20. Actual desktop/narrow and production tour checks passed, along with all34mechanical
+tests. Live preparation published The Back Label with3images; actual warm entry and exact source return
+passed. Finish20requests and F5 scope/cost/handoff. The prior P0–P6 release is preserved evidence.

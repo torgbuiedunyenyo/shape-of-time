@@ -77,3 +77,38 @@ The narrow screenshot is .local/guide-narrow-welcome.png. An initial screenshot 
 relative path for a selector; the absolute-path capture succeeded. This was a tool issue, not an app
 failure. The client-only tour does not change the mechanism. All34tests, typecheck, lint and build passed for the tour. Production tour/preparation
 verification is pending; final20-request scope and cost belong in the completed handoff.
+
+## Live release and controls
+
+Tour revision1ed691ab831a658eb93f395b1329fb2d8836370c deployed successfully through Git deployment
+169d3c85-efdd-4725-b935-1c18b7f5fad3; exact health matched. The temporary pump hold was released and
+its process exited0. Production first-entry welcome appeared at651x1027. Next/Skip/reload suppression,
+? replay and Escape worked; both dismissals restored scroll0. All5opening images were loaded.
+Root visit94116ec2-0b0d-4da9-b9c7-4d6c33b789f5 is the live preparation walkthrough.
+
+The first completed request produced2publications,4,061words including headings/alt,5publishedimages.
+Settled cost4.110384; combined with prior attempts120.861414;unknown0. Every operation matched the
+pinned mechanism. This is an interim volume/mechanical observation, not a literary evaluation.
+
+## Actual preparation and warm entry
+
+Ordinary reading in root visit94116ec2 queued preparationa41a6042-d9f6-457b-9052-6bb13184c802 at
+20:20:53UTC, from first publication3d81106c, while publication8350c795 was already available ahead.
+The browser continued paging normally and sent recent reading positions. The agent developed
+The Back Label, work37e6ef40518cb332d5b65c8c9c3d32cb (full ID prefixed work-), and published its
+Returns opening at20:36:24; the source link was saved at20:36:46. This took approximately16minutes
+of background work; it does not establish that every opening will beat every reader's pace.
+
+The actual source link appeared during reading without a manual reload. Clicking it entered
+visitc8b4065e-4088-4d5d-a165-0f9e8877cd6a. Within the next observation5.5seconds later, all101prose
+paragraphs and3images were present and loaded. This is an upper observation bound including tool
+latency, not a network benchmark. No reader generation request was submitted for this warm entry.
+Return restored root visit94116ec2 and the source blockb-d9d899cdb3efaae5736d, containing the exact
+anchor “the same bottler in San Leandro” (offset164–195). The quote was on screen; the paragraph
+started30.6px from the top. The prepared opening is opening-b3b9f3b434234b355853f9b0c0b2ae10.
+
+The20-request run resumed at20:37:55 with request2decc7f9a-b434-42ab-98a4-1734fbd23ffe,
+an ordinary root continuation. Preparation is tracked separately. It remains the agent's choice
+whether any opportunity develops a nested opening, linear continuation, or neither. The observed
+case demonstrates preparation of a nested illustrated opening while saved linear reading exists;
+mechanical tests separately establish reuse of a continuation published ahead of a waiting request.
