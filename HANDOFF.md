@@ -1,7 +1,24 @@
 # Handoff
 
 Updated September 6, 2026, 19:11 UTC. Initial reader edition and application release verified.
-After compaction read this and PLAN.md P6. PLAN.md is the sole queue; do not create STATUS.md.
+After compaction read this and PLAN.md section11. PLAN.md is the sole queue; do not create STATUS.md.
+
+## Active follow-up — latest instructions control
+
+The author approved the initial book and requested: gentle image/text consistency guidance, more
+frequent imagery, less abrupt/stilted prose and dialogue, ethnically ambiguous Jay/Tan, the deferred
+preparation mechanism, **20 reader requests**, and a first-entry controls tour. They then said to
+commit a compaction-safe plan and do all of it while they are away. PLAN.md section11 is the active
+queue: F2 creative guidance → F1 preparation → F3 new pinned edition/20 requests → F4 tour → F5 release.
+Earlier statements below to stop generation describe the previous completed handoff and are superseded
+for this work. The restriction on extended unsolicited literary study still applies.
+
+At entry: branch/main clean at68fe4a2 (the TODO commit is local); production e05c248 verified in the
+previous turn. No command was started by the two interrupted turns before this instruction.
+Next: inspect actual source and any relevant screenshots, record the bounded changes, implement F2/F1.
+No new provider request, deployment, edition reset or budget increase has happened yet.
+Screenshots were mentioned but not attached in the current messages; search only relevant dated
+screenshots locally, and do not claim a specific mismatch without seeing its evidence.
 
 ## Purpose and terminology
 

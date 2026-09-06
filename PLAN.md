@@ -338,13 +338,13 @@ Decisions to make from evidence: precise preparation depth, preferred paging/flo
 
 The implementation go-ahead and subsequent Railway instructions authorize the initial combined $150 provider allowance and direct production replacement. On September 6 the author explicitly authorized exceeding $150 if needed. Actual costs, allocation adjustments and pending operations belong in HANDOFF.md. That authorization covers completing the current work; it does not restart deferred operator literary analysis or create a separate study.
 
-Current next action: the author reads and explores the prepared book, then supplies artistic direction. Implementation, initial generation and release verification are complete at the documented scope. Do not restart historical diagnosis, literary study or sample expansion without new direction.
+Current next action: execute the authorized follow-up sequence in section 11. The initial P0–P6 release is complete; the latest author feedback now directs the next iteration.
 
-## 11. Deferred follow-ups requested by the author
+## 11. Follow-up implementation — authorized September 6
 
 ### F1 — Prepare upcoming reading while the reader is still reading
 
-**Requested September 6; record for later, do not start now.** The author recalls that the original
+**Requested September 6; now authorized for implementation after F2.** The author recalls that the original
 text-only book at shapeoftime.net prepared both the next pages of the current narrative and initial
 pages of linked books while someone read the current page. Reproduce that benefit in this illustrated
 book: use reading time to prepare coherent text and imagery for linear continuation and linked
@@ -367,3 +367,50 @@ Verify the actual experience: read a current section, then continue or enter an 
 narrative and observe whether its illustrated material is ready. Record waits, unnecessary generation
 and cost. Apply the existing mechanism-provenance/edition policy to any eventual runtime change;
 do not clear or change the current edition merely to record this TODO.
+
+
+### Execution order and completion contract
+
+The author's latest instruction is to commit this plan and complete all of the following while they
+are away. This supersedes the earlier instruction to only record F1 and stop at the initial sample.
+Use one development agent. Continue autonomously; preserve state here and in HANDOFF.md before
+compaction. Keep the existing original-world wording and agent-led approach.
+
+1. **F2 — Gentle creative direction.** Inspect the reported image/text inconsistency screenshots if
+   available, without inventing a diagnosis if they are absent. Read relevant existing prompts and
+   image tools. Add concise, permissive guidance for closer agreement between actual images and
+   prose; richer, more frequent visual encounters without a quota; natural conversational rhythm
+   and a little more descriptive breathing room without florid writing; Jay and Tan's ethnically
+   ambiguous appearance without assigning them stereotyped ancestry. Use the author's wording where
+   useful, preserve the original source world, and keep agent discretion over reference selection,
+   inspection, revision and publication. No deterministic meaning checks or mandatory review pipeline.
+2. **F1 — Preparation while reading.** Inspect the original infinite-book preparation implementation.
+   Improve preparation for both continuation and nested openings encountered before the latest
+   publication. Give the creative agent timely reading context and a bounded opportunity to choose
+   useful preparation. Keep actual reader requests first, prevent repeated/unused speculation, and
+   avoid branching fan-out. Verify with real persistence and an actual prepared reading journey.
+3. **F3 — Preserve and pin, then 20 reader requests.** Archive the current edition and its exact
+   mechanism/usage privately, settle pending operations, and allocate a documented allowance using
+   combined accounting. Both prompt and preparation changes alter the mechanism, so initialize a
+   fresh pinned reader edition. Generate **20 completed explicit reader requests total**, including
+   Begin, continuation and actual nested-source exploration. This now means requests, not screens,
+   model turns, publications or speculative preparation. Keep an idempotent durable ledger of all
+   20 request IDs and source choices; continue the root and encountered nested works, including a
+   grandchild, without prescribing plots or injecting feedback between requests. Count preparation
+   separately. Retain all normal outputs. Extend the already-authorized budget as needed, never
+   reset prior spending or silently lower model/effort. Verify basic mechanics and bounded coherence;
+   leave extended literary judgment to the author. No unrequested study or automatic style tuning.
+4. **F4 — First-visit controls tour.** After the generative work is started, implement a short,
+   skippable introduction highlighting actual reading controls, following the original shapeoftime.net
+   tour's helpful intent. Explain moving through text, exploring text/images, returning, saving a
+   place and the shelf without exposing internals. Only auto-show on the reader's first entry;
+   retain dismissal/completion, support keyboard/small screens, restore reading position, and allow
+   replay from a discreet help control. No forced generation or narrative examples. This client-only
+   work may proceed while the 20-request generation runs, without changing the pinned mechanism.
+5. **F5 — Release and handoff.** Run meaningful mechanical tests, typecheck, lint and build; verify
+   Git-triggered Railway releases and live controls, preparation, nested returns and tour persistence.
+   Do not interrupt unresolved image operations to deploy. Confirm all 20 explicit requests complete,
+   assets load, model/mechanism receipts agree, and no temporary release hold remains. Record final
+   costs, publication scope, limitations and the active release. Leave the opening ready for reading.
+
+Current work: F2, then F1. The prior P0–P6 release remains preserved evidence, not unfinished work.
