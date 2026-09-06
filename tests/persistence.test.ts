@@ -127,3 +127,69 @@ it("deduplicates a repeated reader request before any provider work is bought", 
   expect(a.id).toBe(b.id);
   expect(a.status).toBe("queued");
 });
+
+it("lets the author develop a side work without replacing the reader-requested root", async () => {
+  const { executeTool } = await import("../src/server/agent/tools.js");
+  const request = await enqueue(edition, "begin", null, {}, randomUUID());
+  const context = {
+    editionId: edition,
+    sessionId: randomUUID(),
+    intentId: request.id,
+    critic: async () => "",
+  };
+  const root = JSON.parse(
+    (await executeTool(
+      "open_work",
+      json({
+        title: "Requested root",
+        purpose: "Mechanical routing test",
+        for_request: true,
+      }),
+      randomUUID(),
+      context,
+    )) as string,
+  );
+  const side = JSON.parse(
+    (await executeTool(
+      "open_work",
+      json({
+        title: "An independent side work",
+        purpose: "A possible prepared opening",
+        for_request: false,
+      }),
+      randomUUID(),
+      context,
+    )) as string,
+  );
+  const draft = await writeDocument(
+    edition,
+    "side-work.md",
+    "A fixture for the independent side work.",
+    0,
+    randomUUID(),
+  );
+  await executeTool(
+    "publish",
+    json({ work_id: side.id, document_id: draft.id }),
+    randomUUID(),
+    context,
+  );
+  expect(
+    (
+      await db
+        .selectFrom("intents")
+        .select("result_work_id")
+        .where("id", "=", request.id)
+        .executeTakeFirstOrThrow()
+    ).result_work_id,
+  ).toBe(root.id);
+  expect(
+    (
+      await db
+        .selectFrom("editions")
+        .select("root_work_id")
+        .where("id", "=", edition)
+        .executeTakeFirstOrThrow()
+    ).root_work_id,
+  ).toBe(root.id);
+});

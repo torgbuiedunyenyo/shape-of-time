@@ -23,6 +23,18 @@ const anchor = z.object({
   assetId: z.string().optional(),
   region: region.optional(),
 });
+async function readableIntent<T extends { result_work_id: string | null }>(
+  intent: T,
+) {
+  const ready = intent.result_work_id
+    ? await db
+        .selectFrom("publications")
+        .select("id")
+        .where("work_id", "=", intent.result_work_id)
+        .executeTakeFirst()
+    : null;
+  return { ...intent, result_work_id: ready ? intent.result_work_id : null };
+}
 export const app = new Hono();
 app.onError((error, c) => {
   console.error(error.name, error.message);
@@ -100,17 +112,7 @@ app.get("/api/intents/:id", async (c) => {
     .select(["id", "kind", "status", "work_id", "result_work_id", "error"])
     .where("id", "=", c.req.param("id"))
     .executeTakeFirstOrThrow();
-  const ready = intent.result_work_id
-    ? await db
-        .selectFrom("publications")
-        .select("id")
-        .where("work_id", "=", intent.result_work_id)
-        .executeTakeFirst()
-    : null;
-  return c.json({
-    ...intent,
-    result_work_id: ready ? intent.result_work_id : null,
-  });
+  return c.json(await readableIntent(intent));
 });
 app.post("/api/intents", async (c) => {
   if (!config.generationEnabled)
@@ -153,7 +155,7 @@ app.post("/api/intents", async (c) => {
     payload,
     body.key,
   );
-  return c.json(intent, 202);
+  return c.json(await readableIntent(intent), 202);
 });
 app.use("/assets/*", serveStatic({ root: "./dist/client" }));
 app.get("*", serveStatic({ path: "./dist/client/index.html" }));

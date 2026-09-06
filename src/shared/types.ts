@@ -13,6 +13,8 @@ export type Block = {
   items?: Inline[][];
   ordered?: boolean;
   assetId?: string;
+  width?: number;
+  height?: number;
   caption?: string;
 };
 export type Anchor = {

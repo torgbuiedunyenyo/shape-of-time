@@ -17,6 +17,9 @@ import type {
 } from "../shared/types.js";
 import { enter, loadReading, saveReading, updateVisit } from "./visits.js";
 import "./style.css";
+import { ImageDetail } from "./ImageDetail.js";
+import { capturePlace, restorePlace } from "./position.js";
+import { explorationKey } from "./requests.js";
 async function api<T>(path: string, body?: unknown): Promise<T> {
   const r = await fetch(
     "/api/" + path,
@@ -44,7 +47,10 @@ function InlineText({ nodes }: { nodes: Inline[] }) {
         ) : n.kind === "code" ? (
           <code key={i}>{text}</code>
         ) : n.kind === "break" ? (
-          <br key={i} />
+          <React.Fragment key={i}>
+            <br />
+            {"\n"}
+          </React.Fragment>
         ) : (
           <React.Fragment key={i}>{text}</React.Fragment>
         );
@@ -59,6 +65,9 @@ function Shelf() {
     generationEnabled: boolean;
   }>();
   const [query, setQuery] = useState("");
+  const [title, setTitle] = useState("");
+  const [creating, setCreating] = useState(false);
+  const titleKey = useRef(crypto.randomUUID());
   const [error, setError] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
@@ -132,6 +141,61 @@ function Shelf() {
           ))}
         </section>
       )}
+      {!!Object.keys(loadReading().bookmarks).length && (
+        <section className="saved-places">
+          <h2>Your saved places</h2>
+          {Object.entries(loadReading().bookmarks).map(([workId, place]) => (
+            <button
+              key={workId}
+              onClick={() => {
+                const visitId = enter(workId, null);
+                updateVisit(visitId, { place, pixelOffset: 0 });
+                navigate("/read/" + visitId);
+              }}
+            >
+              {library?.works.find((w) => w.id === workId)?.title ??
+                "Return to a saved passage"}{" "}
+              →
+            </button>
+          ))}
+        </section>
+      )}
+      {library?.generationEnabled && (
+        <details className="title-opening">
+          <summary>Begin with a title</summary>
+          <form
+            onSubmit={async (e) => {
+              e.preventDefault();
+              setCreating(true);
+              try {
+                const intent = await api<Intent>("intents", {
+                  kind: "title",
+                  workId: null,
+                  key: "title:" + titleKey.current,
+                  title,
+                });
+                navigate("/waiting/" + intent.id);
+              } catch (e) {
+                setError((e as Error).message);
+                setCreating(false);
+              }
+            }}
+          >
+            <label htmlFor="new-title">A book you would like to find</label>
+            <input
+              id="new-title"
+              value={title}
+              onChange={(e) => {
+                setTitle(e.target.value);
+                titleKey.current = crypto.randomUUID();
+              }}
+            />
+            <button type="submit" disabled={creating || !title.trim()}>
+              Open as a book ↗
+            </button>
+          </form>
+        </details>
+      )}
       <p className="small">
         Follow a passage or an image into another book.
         <br />
@@ -187,14 +251,18 @@ function Reader() {
   const [intent, setIntent] = useState<Intent>();
   const [font, setFont] = useState(loadReading().fontSize);
   const [enlarged, setEnlarged] = useState<string>();
+  const [bookmarked, setBookmarked] = useState(false);
   const navigate = useNavigate();
   const restored = useRef(false);
+  const resizing = useRef(false);
   const root = useRef<HTMLDivElement>(null);
   useEffect(() => {
     restored.current = false;
     setBook(undefined);
     setSelected(undefined);
     setIntent(undefined);
+    setBookmarked(false);
+    setError("");
     if (!visit) return;
     const state = loadReading();
     state.current = visit.id;
@@ -216,33 +284,49 @@ function Reader() {
     if (!book || restored.current) return;
     const place = visit?.place;
     if (place) {
-      document.getElementById(place.blockId)?.scrollIntoView();
-      window.scrollBy(0, -80 + (visit.pixelOffset ?? 0));
+      if (root.current)
+        restorePlace(root.current, {
+          place,
+          pixelOffset: visit.pixelOffset ?? 0,
+        });
     } else window.scrollTo(0, 0);
     restored.current = true;
   }, [book, visit]);
   useEffect(() => {
     if (!visit || !book) return;
     const save = () => {
-      const blocks = Array.from(
-        document.querySelectorAll<HTMLElement>("[data-block]"),
-      );
-      const b = blocks.find((b) => b.getBoundingClientRect().bottom > 100);
-      if (b)
-        updateVisit(visit.id, {
-          place: { publicationId: b.dataset.publication!, blockId: b.id },
-          pixelOffset: 80 - b.getBoundingClientRect().top,
-        });
+      const position = root.current ? capturePlace(root.current) : undefined;
+      if (position) updateVisit(visit.id, position);
     };
     let timer: ReturnType<typeof setTimeout>;
     const onscroll = () => {
+      if (resizing.current) return;
       clearTimeout(timer);
       timer = setTimeout(save, 100);
     };
     window.addEventListener("scroll", onscroll);
+    window.addEventListener("pagehide", save);
+    let frame: number;
+    const onresize = () => {
+      clearTimeout(timer);
+      resizing.current = true;
+      cancelAnimationFrame(frame);
+      const saved = loadReading().visits[visit.id];
+      frame = requestAnimationFrame(() => {
+        if (root.current && saved?.place)
+          restorePlace(root.current, {
+            place: saved.place,
+            pixelOffset: saved.pixelOffset ?? 0,
+          });
+        resizing.current = false;
+      });
+    };
+    window.addEventListener("resize", onresize);
     return () => {
       clearTimeout(timer);
-      save();
+      cancelAnimationFrame(frame);
+      window.removeEventListener("resize", onresize);
+      window.removeEventListener("pagehide", save);
       window.removeEventListener("scroll", onscroll);
     };
   }, [visit?.id, book]);
@@ -277,6 +361,7 @@ function Reader() {
     )?.closest<HTMLElement>("[data-block]");
     if (!start || !end || start.dataset.publication !== end.dataset.publication)
       return;
+    if (start.tagName === "FIGURE" || end.tagName === "FIGURE") return;
     const offset = (element: HTMLElement, node: Node, n: number) => {
       const before = document.createRange();
       before.selectNodeContents(element);
@@ -313,7 +398,7 @@ function Reader() {
       const key =
         kind === "continue"
           ? `continue:${visit.workId}:${book?.publications.at(-1)?.id ?? "start"}`
-          : `explore:${visit.id}:${JSON.stringify(source)}:${angle}`;
+          : await explorationKey(visit.id, source!, angle);
       const result = await api<Intent>("intents", {
         kind,
         workId: visit.workId,
@@ -330,17 +415,13 @@ function Reader() {
     }
   };
   const changeFont = (next: number) => {
-    const top = Array.from(
-      document.querySelectorAll<HTMLElement>("[data-block]"),
-    ).find((b) => b.getBoundingClientRect().bottom > 100);
-    const y = top?.getBoundingClientRect().top;
+    const saved = root.current ? capturePlace(root.current) : undefined;
     setFont(next);
     const state = loadReading();
     state.fontSize = next;
     saveReading(state);
     requestAnimationFrame(() => {
-      if (top && y !== undefined)
-        window.scrollBy(0, top.getBoundingClientRect().top - y);
+      if (root.current && saved) restorePlace(root.current, saved);
     });
   };
   useEffect(() => {
@@ -377,7 +458,12 @@ function Reader() {
               aria-label={"Look closer: " + b.text}
               onClick={() => setEnlarged(b.assetId)}
             >
-              <img src={"/api/assets/" + b.assetId} alt={b.text} />
+              <img
+                src={"/api/assets/" + b.assetId}
+                alt={b.text}
+                width={b.width}
+                height={b.height}
+              />
             </button>
             {b.caption && <figcaption>{b.caption}</figcaption>}
             <button
@@ -395,12 +481,15 @@ function Reader() {
             </button>
           </figure>
         );
-      case "heading":
+      case "heading": {
+        const Heading = `h${b.level ?? 2}` as
+          "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
         return (
-          <h2 {...props} key={b.id}>
+          <Heading {...props} key={b.id}>
             {text}
-          </h2>
+          </Heading>
         );
+      }
       case "quote":
         return (
           <blockquote {...props} key={b.id}>
@@ -411,17 +500,23 @@ function Reader() {
         return b.ordered ? (
           <ol {...props} key={b.id}>
             {b.items?.map((n, i) => (
-              <li key={i}>
-                <InlineText nodes={n} />
-              </li>
+              <React.Fragment key={i}>
+                {i > 0 ? "\n" : null}
+                <li>
+                  <InlineText nodes={n} />
+                </li>
+              </React.Fragment>
             ))}
           </ol>
         ) : (
           <ul {...props} key={b.id}>
             {b.items?.map((n, i) => (
-              <li key={i}>
-                <InlineText nodes={n} />
-              </li>
+              <React.Fragment key={i}>
+                {i > 0 ? "\n" : null}
+                <li>
+                  <InlineText nodes={n} />
+                </li>
+              </React.Fragment>
             ))}
           </ul>
         );
@@ -450,6 +545,22 @@ function Reader() {
         <span className="running-title">{book?.work.title}</span>
         <div className="type-controls">
           <button
+            aria-label="Save this reading place"
+            onClick={() => {
+              const position = root.current
+                ? capturePlace(root.current)
+                : undefined;
+              if (position) {
+                const state = loadReading();
+                state.bookmarks[visit.workId] = position.place;
+                saveReading(state);
+                setBookmarked(true);
+              }
+            }}
+          >
+            {bookmarked ? "Saved" : "Save place"}
+          </button>
+          <button
             aria-label="Smaller text"
             disabled={font <= 17}
             onClick={() => changeFont(font - 2)}
@@ -468,7 +579,13 @@ function Reader() {
       {visit.parentId && (
         <button
           className="return"
-          onClick={() => navigate("/read/" + visit.parentId)}
+          onClick={() => {
+            const position = root.current
+              ? capturePlace(root.current)
+              : undefined;
+            if (position) updateVisit(visit.id, position);
+            navigate("/read/" + visit.parentId);
+          }}
         >
           ↶ Return to where you came from
         </button>
@@ -477,11 +594,20 @@ function Reader() {
         ref={root}
         className="book"
         style={{ fontSize: font }}
+        onPointerDown={() => {
+          const position = root.current
+            ? capturePlace(root.current)
+            : undefined;
+          if (position) updateVisit(visit.id, position);
+        }}
         onMouseUp={select}
         onTouchEnd={() => setTimeout(select, 100)}
       >
         <div className="eyebrow">The Shape of Time</div>
-        <h1>{book?.work.title ?? "Opening…"}</h1>
+        {book?.publications[0]?.blocks[0]?.kind !== "heading" ||
+        book.publications[0].blocks[0].text !== book.work.title ? (
+          <h1>{book?.work.title ?? "Opening…"}</h1>
+        ) : null}
         {book?.publications.map((p) => (
           <section key={p.id}>
             {p.blocks.map((b) => (
@@ -535,6 +661,30 @@ function Reader() {
           </footer>
         )}
       </main>
+      <nav className="page-controls" aria-label="Reading pages">
+        <button
+          aria-label="Previous page"
+          onClick={() =>
+            window.scrollBy({
+              top: -window.innerHeight + 150,
+              behavior: "smooth",
+            })
+          }
+        >
+          ←
+        </button>
+        <button
+          aria-label="Next page"
+          onClick={() =>
+            window.scrollBy({
+              top: window.innerHeight - 150,
+              behavior: "smooth",
+            })
+          }
+        >
+          →
+        </button>
+      </nav>
       {selected && (
         <aside className="exploration" aria-label="Open as a book">
           <button
@@ -591,25 +741,44 @@ function Reader() {
         </aside>
       )}
       {enlarged && (
-        <div
-          className="lightbox"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Image detail"
-          onClick={() => setEnlarged(undefined)}
-        >
-          <button className="close" aria-label="Close image">
-            ×
-          </button>
-          <img src={"/api/assets/" + enlarged} alt="Enlarged illustration" />
-        </div>
+        <ImageDetail
+          assetId={enlarged}
+          onClose={() => setEnlarged(undefined)}
+          onExplore={(region) => {
+            const publication = book?.publications.find((p) =>
+              p.blocks.some((b) => b.assetId === enlarged),
+            );
+            const block = publication?.blocks.find(
+              (b) => b.assetId === enlarged,
+            );
+            if (publication && block) {
+              setSelected({
+                publicationId: publication.id,
+                blockId: block.id,
+                assetId: enlarged,
+                ...(region ? { region } : {}),
+              });
+              setIntent(undefined);
+              setEnlarged(undefined);
+            }
+          }}
+        />
       )}
     </>
   );
 }
+function BookLink() {
+  const { workId } = useParams();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (workId) navigate("/read/" + enter(workId, null), { replace: true });
+  }, [workId, navigate]);
+  return <main className="waiting">Opening the book…</main>;
+}
 const router = createBrowserRouter([
   { path: "/", element: <Shelf /> },
   { path: "/read/:id", element: <Reader /> },
+  { path: "/book/:workId", element: <BookLink /> },
   { path: "/waiting/:id", element: <Waiting /> },
   { path: "*", element: <Shelf /> },
 ]);

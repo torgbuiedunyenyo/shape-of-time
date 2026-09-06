@@ -291,6 +291,12 @@ input {
   align-items: center;
   justify-content: center;
   padding: 60px 30px;
+  margin: 0;
+  border: 0;
+  width: 100vw;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
 }
 .lightbox img {
   max-width: 100%;
@@ -364,4 +370,118 @@ input {
     13px "DM Sans",
     sans-serif;
   color: #4a6954;
+}
+.lightbox-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+  max-height: 100%;
+  gap: 15px;
+}
+.detail-image {
+  position: relative;
+  max-width: 100%;
+  min-height: 0;
+}
+.detail-image img {
+  max-height: calc(100vh - 190px);
+  display: block;
+  user-select: none;
+}
+.detail-image.choosing {
+  cursor: crosshair;
+  touch-action: none;
+}
+.region-outline {
+  position: absolute;
+  border: 2px solid #e1f1c4;
+  background: #dceab833;
+  pointer-events: none;
+}
+.detail-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: #f4f0e7;
+}
+.detail-controls p {
+  width: 100%;
+  text-align: center;
+  margin: 0;
+}
+.detail-controls button {
+  border-color: #76917a;
+  font-size: 12px;
+}
+.detail-controls button:hover {
+  background: #34554d;
+}
+.saved-places {
+  margin-top: 45px;
+  max-width: 500px;
+}
+.saved-places h2 {
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.saved-places button {
+  display: block;
+  border: 0;
+  border-bottom: 1px solid #d4d0c4;
+  width: 100%;
+  text-align: left;
+  font:
+    22px "EB Garamond",
+    Georgia,
+    serif;
+}
+.title-opening {
+  margin-top: 45px;
+  max-width: 500px;
+  font-size: 13px;
+}
+.title-opening summary {
+  cursor: pointer;
+  min-height: 44px;
+  line-height: 44px;
+  color: #536952;
+}
+.title-opening form {
+  padding: 15px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.title-opening label {
+  width: 100%;
+  font-size: 12px;
+  color: #74816d;
+}
+.page-controls {
+  position: fixed;
+  bottom: 15px;
+  right: 18px;
+  display: flex;
+  gap: 5px;
+  z-index: 6;
+}
+.page-controls button {
+  background: #f4f0e7ef;
+  border-color: #cfdbc6;
+  width: 44px;
+  padding: 8px;
+  font-size: 18px;
+}
+.type-controls {
+  flex-shrink: 0;
+}
+.type-controls button:first-child {
+  font-size: 11px;
+  padding: 8px 10px;
 }

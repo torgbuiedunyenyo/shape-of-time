@@ -1,3 +1,4 @@
+import { toResponseInputItems } from "openai/lib/responses/ResponseInputItems";
 import { readFile } from "node:fs/promises";
 import { randomUUID, createHash } from "node:crypto";
 import type {
@@ -83,7 +84,7 @@ async function loop(ctx: ToolContext, readOnly = false): Promise<string> {
       inputs,
       toolDefinitions(readOnly),
     );
-    const items = response.output as ResponseInputItem[];
+    const items = toResponseInputItems(response.output);
     await appendItems(ctx.sessionId, items, true);
     if (!response.output.some((i) => i.type === "function_call"))
       return finalText(items);

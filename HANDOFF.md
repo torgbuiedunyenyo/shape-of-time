@@ -1,149 +1,173 @@
 # Handoff
 
-Updated September 6, 2026. After compaction, read this file and the current PLAN.md section.
+Updated September 6, 2026. After compaction read this file and P1 in PLAN.md.
 
 ## Purpose
 
-Build a world exploration harness whose agent develops sustained, nested image-and-text narratives
-with persistent context and memory. Preserve the successful infinite-book's reading pleasure and
-nesting. The agent owns creative sequencing; software preserves its work and the reader's place.
+Build an agent-led world exploration harness that develops sustained, nested image-and-text
+narratives with persistent context and memory. The successful text-only infinite-book is the
+experiential baseline. The agent owns creative sequencing; software preserves work and reading place.
+No deterministic literary verdicts, fixed folio lengths, mandatory fact graphs or prose/image pipeline.
 
-## Current position
+## Current position and next action
 
-P0 is complete. **P1 is in progress; P2–P6 are not yet validated.** The user requested implementation
-and then explicitly directed development and testing on the existing Railway production project.
-There are no users or data requiring preservation. Use Railway Postgres directly; do not introduce
-Docker or a separate staging environment. The fresh application is being built in the active worktree.
+P0 complete. The first real illustrated root is published and its request finished successfully.
+P1 still needs a genuine continuation; P2–P6 remain unvalidated. The author independently made images,
+inspected them, wrote a draft, sought a contextual critic, revised prose and imagery, published, and
+saved detailed free-form continuity notes. Builder read both draft versions, the review, the notes,
+and inspected all three published images. No manual creative edits or publication intervention.
 
-- Implementation worktree: /Users/ratpartyserver/git/shape-of-time-agentic, codex/agentic-world.
-- Normal checkout: /Users/ratpartyserver/git/shape-of-time, local main at the same clean starting point.
-- Starting checkpoint: checkpoint/agentic-clean-start-2026-09-06.
-- Retired baseline: e1a3decb29b33710f26a89f5cf2a415ca6f3ae09, tagged archive/folio-prototype-2026-09-06.
-- Changes are committed locally. Nothing was pushed or deployed. Local main is ahead of remote main;
-  this pre-implementation checkpoint must not trigger a production deployment.
+**Next action:** verify the passing reader/routing deployment, then use the actual in-app reader to
+open a child from encountered material, then a grandchild, returning through both exact sources.
+Continue the root as well. No more root-begin or resume requests. The first corpus backup was exported to .local/corpus-first-reading-2026-09-06: 10 tables,
+29 operations, 4 assets, 33 stored objects. Restore it to a fresh world_restore_first_reading schema
+using scripts/corpus.ts with generation disabled and verify every row/object. Continue work.
 
-Read archive/README.md before historical investigation. archive/folio-prototype-e1a3dec.tar.gz and its
-manifest preserve all 167 old tracked files exactly. Original Git history and earlier B2/D0/reader
-worktrees are intact. Do not restore the old app as a scaffold. Recover small mechanical components
-only after inspecting their fit with the new design. Old checks and milestones are historical.
+Root request 4c40ef0e-37b3-47f4-b4c8-6648667aaf2e DONE. Publication
+617be2fc-17c4-479f-9ef9-541701cc70fb uses revision 2, document
+9094a77f-e863-49f9-8274-230b54d63c03. Root work
+work-5213e951303bfbdd2f555090ca38fa93. Author notes document
+42999fd2-236a-4f58-9dbd-f4c79e225352, notes/root-continuity.md.
 
-The normal checkout's ignored .env, node_modules, dist and test-results were moved intact into its
-ignored .local/retired-folio-e1a3dec directory. No secret values were read or committed. Databases,
-remote assets and deployed services were not changed. The new runtime needs fresh configuration,
-database and asset namespace.
+## Worktrees and authority
 
-## Artistic inputs and models
+- Active: /Users/ratpartyserver/git/shape-of-time-agentic, codex/agentic-world.
+- Normal checkout: /Users/ratpartyserver/git/shape-of-time, local main fast-forwarded to a87ccfa.
+- Remote main: latest pushed 242c071, including provider retrieval fix and reader reload recovery.
+- Reader changes ready for deployment: semantic positions/reflow, image regions/native dialog, bookmarks,
+  title creation, page controls, stable book URLs, long-selection request identifiers; image dimensions;
+  independent-side-work routing fix; protocol item normalization; native context renewal and operator
+  scripts. Tests added. Inspect Git status. No renewal has run live yet.
+- Single development agent. Do not spawn agents. Retired art-thing is read-only history.
+- Current queue: PLAN.md; intended product: SPEC.md; literary evidence: EVALS.md.
+- Cleanup checkpoint: 2f0ae24, tag checkpoint/agentic-clean-start-2026-09-06.
+- Retired app: e1a3dec, tag archive/folio-prototype-2026-09-06 and exact tar/manifest under archive/.
+- Original histories, source bytes and other worktrees remain. Do not restore old architecture/scripts.
 
-Use content/shape-of-time/SOURCE.md and its selected inputs in full: world.md, world-essence.md,
-prose-guide.md and visual-direction.md. Preserve original wording. The 4,512-word corrected world
-is byte-identical to infinite-book's historical source. The world description and writing guidance
-come from the user-selected infinite-book/main template. The illustrated successor's later prose
-guide is superseded. Permit useful natural explanation of world mechanics while trusting the reader
-and avoiding constant didactic monologues. Writer and critic receive this same direction.
+## Railway and authorization
 
-The approved inked-reportage medium is retained without the old fixed image briefs, per-reference
-approval sequence or mandatory division of narrative work between text and images. Source history
-is under archive/infinite-book; earlier contradictory world versions and Undertow are not automatic
-creative input. No additional longer world document or the referred-to “Document 1” was found among
-60 reachable predecessor commits. The reason for historical condensation/deletion is unverified.
+User explicitly directed implementation/testing on production: no Docker, no staging, no users or
+old data to preserve. They reiterated to trash and replace the old implementation. Production is
+https://shape-of-time-production.up.railway.app and deploys from passing Git pushes to main.
+Never use railway up/manual redeploy to bypass that integration.
 
-Text, creative agent and initial contextual critic: GPT-6 Astra at xhigh. Images: GPT Image 2
-(initial documented snapshot gpt-image-2-2026-04-21). No silent fallback or effort reduction.
+Project 8b20e07d-c256-44c9-85be-d1c7e50ac83d (imagery-shape-of-time).
+Environment 82e1c3e8-e2c1-4023-afa2-b17dc6dc6ec3 (production).
+App service 39bf3c12-b426-40ce-836a-2839ea1bc213 (shape-of-time).
+Postgres 294c4570-91e2-4bb2-8639-4a802a475ab8. Assets bucket 545eb437-32e7-4100-a154-3cffd145fac1.
+Added Postgres TCP proxy b696fdf7-96a9-43ce-b588-a0ff901e0295 for direct development/tests.
 
-## Spending and deployment
+The eight obsolete public folio tables and four old stored images were deleted after replacement.
+ANTHROPIC_API_KEY and ASSET_DRIVER were removed. New data lives in world, checks in world_checks;
+new objects use matching prefixes. The same Railway resources host the fresh application.
 
-The user accepted implementation after the detailed plan, then explicitly authorized direct Railway
-production work with no old-data preservation requirement. Execute the plan's initial combined live
-allowance of $150 (at most $20 for provider contracts); spent $0, reserved $0. This records the
-implementation go-ahead against that proposed ceiling, not an unlimited generation budget. All text,
-images, criticism and renewal count together. Do not reuse historical Fable budgets.
+Local ignored .env contains selected Railway credentials, generation disabled for local processes.
+The hosted application has GENERATION_ENABLED=true, DATABASE_SCHEMA=world, PROVIDER_BUDGET_USD=150.
+Do not print variable values or full environment config. The existing OpenAI key had surrounding
+quotes; these were normalized on Railway. Both requested model IDs are available (read-only check).
 
-Existing Railway project: 8b20e07d-c256-44c9-85be-d1c7e50ac83d. Last read-only production investigation
-found e1a3dec and a failed old continuation; that is historical evidence, not current runtime QA.
-The cleanup made no Railway calls. A later authorized release uses a passing Git-triggered deploy.
+The implementation go-ahead activates the detailed plan's combined $150 allowance, including text,
+images, critique and renewal. $4.582698 completed, $145.417302 remaining, no active reservation or unknown
+spend after the first request. Use pnpm inspect for authoritative totals as the hosted author continues.
+At most $20 of the combined allowance is for provider-contract investigation. Do not reuse historical
+Fable budgets or infer unlimited spend. Dated rates are encoded in provider wrappers; actual receipts
+and uncertainty are retained. No extra user approval is needed for this authorized scope.
 
-## Implementation checkpoint before first live generation
+## Actual deployment and live request
 
-The P1a foundation is deployed from main at 665d68f4f40f80888274283b43f8372e71b149a9, Railway
-successful deployment 485ed367-60aa-4d86-b30e-7151fda7e6d9; /healthz confirms that revision.
-The old eight public folio tables and four stored images were deleted after that replacement;
-ANTHROPIC_API_KEY and ASSET_DRIVER were removed. No old corpus or compatibility path remains.
-The requested models were verified available with read-only model lookups. No paid request yet.
+P1a 665d68f4f40f80888274283b43f8372e71b149a9 deployed successfully (485ed367-60aa-4d86-b30e-7151fda7e6d9).
+Agent a87ccfa45e6290b1b0b3f22b13eab6c285838b1e deployed successfully (83cd1b78-7a2e-4dda-875e-ea9b8e36e263).
+Fix 242c071753bb77d2118344c1ece51e3b11c39762 deployed successfully; the failed intent was resumed once.
 
-New agent/provider code is written and eight tests passed with typecheck/lint/build: explicit
-Responses Astra/xhigh, background IDs and full protocol replay, exact token counts, shared cost
-reservations, no opaque provider retries, raw responses saved before parsing, direct GPT Image 2,
-real image function outputs, archive/docs/work/publish/opening tools and optional contextual critic.
-Author and critic sources load all four prepared originals. A DB lock serializes the author. This
-code still needs its first deployment/live run. It is not provider-contract or literary evidence yet.
+The in-app Browser started request 4c40ef0e-37b3-47f4-b4c8-6648667aaf2e using Begin the book.
+First operation 966a4fa7-35f4-4a80-8ec3-f0688c3fc2cd started successfully in background.
+Provider response resp_07d55e4c2e541ade006a9cdb1c2c2487d0981e9db038b7ee2c completed.
+GET with include=reasoning.encrypted_content failed 400: encrypted content cannot be requested for
+persisted responses. We retrieved that SAME response with plain GET, persisted it in DB/S3 and
+finished its cost receipt. Intent was resumed after the fix deployment; inspect current status instead of repeating resume.
 
-Tests include process-boundary tool replay, unavailable-asset atomicity, real S3 fixture replay with
-generation disabled, duplicate reader requests and shared uncertain-cost reservations. Fixtures are
-labeled mechanical. All active code was formatted for readability after those passing checks.
+Recovered result: model gpt-6-astra, effort xhigh, effective reasoning.context all_turns; first chosen
+tool resources. Usage input 10,070, output 13, reasoning 0; cost $0.10135. The full actual non-sensitive first response is tests/receipts/astra-first-resources.json.
 
-Known remaining work: first genuine illustrated root/continuation/critic; actual in-app reader QA;
-prepared openings and cold request recovery after reload; image-region selection; exact nested
-return and reflow; explicit context compaction; broader recovery/long-form evidence. Do not claim
-P2 or long-form coherence from the initial reader code. No model fallback or fixed narrative quotas.
+Root work: work-5213e951303bfbdd2f555090ca38fa93, The Shape of Time.
+Draft revision 1: 24e83cdd-4e79-494a-923d-4df391c6b82b, root/001-the-counter.md.
+Critic: 3cdda498-75b6-4d7b-b3fd-1b9674502560,
+criticism/critic-e0849b016f902c8ed559170c23719787.md. Builder read the full draft and review.
+Review found absorbing development across the shop encounter/return visit, some overarranged repair
+motifs, a few action/prop slips, need for a small temporal anchor and possible wrist-band mismatch.
+The author received that critique through its own tool call; no manual creative edits were made.
 
-Next action: deploy the agent loop from passing main with the funded allowance and generation
-enabled, request the first real root through the hosted reader, and inspect actual receipts/output.
+Actual images viewed by builder and agent: img-2e65d7c4-9eb6-4495-a8e7-ae9386e6efa5 (counter),
+img-4bf6ae06-770a-4ecf-873d-c7c7696fc3e9 (boarding lounge; first image supplied as reference).
+The agent's next response received actual input_image content and chose view_image crops;
+xhigh/all_turns confirmed. The actual revised departure image img-6dbbc75c-8ebf-48b3-ae1f-7fa940229810 and dinner image
+img-40cce6d2-9c38-4ef3-bf1d-c41ee078aa65 are published alongside the counter image. The discarded
+wrist-band version is retained as a study. All operations completed; no live image call remains.
 
-## Validation
+Provider constraint supersedes the plan's assumption: stored/background responses must omit
+reasoning.encrypted_content inclusion. Every returned protocol item is retained, but future opaque
+reasoning IDs without encrypted_content depend on provider retention. Do not claim indefinite
+self-contained reasoning replay. Before long-lived reuse, implement explicit context renewal with
+full originals/agent notes available and retain the full returned canonical compaction window.
+No change to Astra/xhigh. Current runtime refuses overlarge context instead of truncating silently.
 
-P1a implementation: fresh pinned TypeScript/React/Hono/Kysely application; Railway-backed `world`
-schema; versioned documents, immutable Markdown compositions with stable block IDs; real reader
-and visit history. Four real Railway Postgres integration tests pass for unrestricted draft length,
-atomic missing-image rejection, revision/idempotency and request deduplication. Typecheck, lint and
-production build pass. No generated content or live provider request yet. The reader interaction
-code is preliminary and still needs the actual browser journey and fixes; do not call P2 complete.
+## Implemented paths and checks
 
-Railway connection: production environment `82e1c3e8-e2c1-4023-afa2-b17dc6dc6ec3`, app service
-`39bf3c12-b426-40ce-836a-2839ea1bc213`, Postgres `294c4570-91e2-4bb2-8639-4a802a475ab8`, assets
-bucket `545eb437-32e7-4100-a154-3cffd145fac1`. Added Postgres TCP proxy
-`b696fdf7-96a9-43ce-b588-a0ff901e0295` for direct development/tests. Selected Railway credentials
-are in ignored `.env`, generation disabled. Runtime uses the existing private DATABASE_URL.
-User reiterated: trash and replace the old Railway implementation; no compatibility or data
-preservation needed. Old code remains only in the Git/archive record. No Docker dependency.
+Fresh pinned Node 24.18.0/pnpm 11.15.0 TypeScript app: React/Router/Vite reader, Hono API,
+Kysely/pg persistence, S3 storage, OpenAI SDK 7.10.0, Markdown structural compositions.
 
-Archive contents and all 167 file hashes match the retired Git tree. Selected world/source bytes
-and predecessor manifests match their preserved origins. Active document links and instructions
-were checked; obsolete executable entry points are absent. git diff --check passed. Both current
-checkouts have a clean Git status after the local commit/fast-forward, and the starting and retired
-tags resolve to their recorded checkpoints. No history was rewritten.
+Editions/works, revisioned documents, immutable publications with stable block IDs, image assets,
+intents, full sessions, operations, tool receipts and prepared openings. Missing images prevent
+publication atomically without deleting drafts. Duplicate document/publish/intent operations reuse
+saved effects. One DB lock serializes the author. Failed/paused work blocks later requests pending
+reconciliation, avoiding context mixing.
 
-No application build/test pass is claimed: the old suite is archived and the new code does not yet
-exist. P1 must create meaningful tests with the new implementation, not restore obsolete gates to
-manufacture a green result.
+Tools: archive list/search/read, versioned notes/drafts, create/reopen work, publish, generate/edit
+GPT Image 2 with agent-selected references, actual-image viewing/crops, optional independent Astra
+critic with read-only archive access, prepared openings, shared resource budget. Both author/critic
+load all four prepared artistic sources. No fixed creative sequence or mandatory critic gate.
 
-## Single next action
+Provider ops reserve before dispatch, save raw response text before parsing, keep background IDs,
+record actual/unknown cost, disable SDK generation retries and replay full output/tool protocol.
+Direct image results are stored before decoding/metadata acceptance and returned as actual image
+function output. Completed image replay tested against real S3 without another provider call.
 
-Continue P1a in codex/agentic-world: create the fresh minimal
-application configuration, Railway persistence and a thin reader, then continue directly to the actual
-Astra/image/critic loop within P1. Read PLAN.md first. The detailed historical reassessment remains
-at /Users/ratpartyserver/git/claude/infinite-library-reassessment-2026-09-05 as supporting evidence;
-the repository's current documents are self-contained and are the implementation authority.
+Twelve tests passed on real Railway Postgres/storage, plus typecheck, lint and production build:
+unrestricted >3-paragraph publication, atomic missing-image failure, stale revision checks,
+request/tool idempotency across interruption, shared uncertain-cost reserve, actual saved Astra
+response replay, S3 image fixture replay and actual usage arithmetic. Fixtures are mechanical;
+none are literary verdicts. Full gates pass including long-selection request identity. Native renewal is implemented but has not been bought or
+validated. It preserves the full returned canonical window and reattaches original artistic sources;
+the standalone compaction API exposes no reasoning-effort setting, so do not claim confirmed xhigh
+for that utility. Author and critic remain xhigh.
 
-## First live provider evidence and immediate repair
+Reader has flowing typography, text-size controls, image enlargement, text/whole-image exploration,
+full per-visit browser storage, return links, persisted cold request restoration and prepared links.
+This code is preliminary. Actual nested/reflow behavior remains to verify and fix; don't call P2
+complete. In-app Browser showed the calm new library and initiated the real root. CUA binding `tab`
+is browser tab 2 at the hosted waiting page; use it if still present. No local server is running.
 
-The agent deployment a87ccfa45e6290b1b0b3f22b13eab6c285838b1e succeeded on Railway
-(deployment 83cd1b78-7a2e-4dda-875e-ea9b8e36e263), generation enabled. The in-app Browser
-started root request 4c40ef0e-37b3-47f4-b4c8-6648667aaf2e using Begin the book.
-First operation 966a4fa7-35f4-4a80-8ec3-f0688c3fc2cd started successfully in background;
-GET with include=reasoning.encrypted_content failed 400: encrypted content cannot be requested
-for persisted responses. This is a live API constraint despite the earlier planning assumption.
-The saved provider ID allowed retrieving that same response with plain GET, without a second
-purchase. Result confirms gpt-6-astra, xhigh, all_turns; first chosen tool is resources. Actual
-usage: input 10,070, output 13, reasoning 0; cost $0.10135. Result saved in DB/S3 and the exact
-non-sensitive response fixture tests/receipts/astra-first-resources.json.
+## Artistic source and models
 
-The request is currently failed pending a retrieval-parameter fix deployment. No work or image
-has been generated. Repair removes encrypted-content inclusion for stored/background responses;
-all returned protocol items remain preserved. Stored reasoning items, if returned without encrypted
-content, depend on the provider's retention. Do NOT claim self-contained indefinite reasoning replay.
-Before long-lived reuse, implement explicit context renewal retaining full local original sources,
-agent notes and returned canonical compaction window. No model or xhigh fallback.
+Text/creative agent/initial critic: GPT-6 Astra xhigh. Image snapshot: gpt-image-2-2026-04-21.
+No model/effort fallback. Use content/shape-of-time/SOURCE.md and all selected inputs in full:
+world.md, world-essence.md, prose-guide.md, visual-direction.md. Original infinite-book wording is
+preserved. World.md is the exact 4,512-word corrected historical body, SHA-256
+e47afa2fc5db4350008f65fcea9bf6b32569e79a6ee4aeb212e066ddd139576c. Later failed-successor prose guide
+is retired. Permit useful natural explanation without didactic monologues. Approved medium remains
+inked reportage with transparent color; no fixed image density or approval sequence.
 
-Immediate next step: run the focused recovery check and full gate, push this fix, then mark the
-existing failed intent running only AFTER verifying the fixed deployed revision. Resume the same
-session and already-completed operation. Do not enqueue a second root or buy the first call again.
+## Remaining work after immediate recovery
+
+First genuine illustrated root, reload, continuation and contextual criticism. Actual image feedback
+contract evidence. Then generated child and grandchild from encountered material, prepared/cold
+entry and exact return after reload/font/viewport changes. Verify image-region UI, explicit title
+creation distinct from search, bookmarks, semantic reading anchors and paging controls.
+Read actual work before scaling. Implement explicit renewal and assess distant continuity/visual
+identity at substantial length; no long-form success claim from an opening. Record full runs,
+critic calibration and artistic revisions. Continue recovery and restored corpus/media checks on
+production, then leave a usable release/handoff with genuine limitations.
+
+Skills read: OpenAI Docs (search then fetch), Railway (deploy/config/request references), Context7
+for Kysely/Hono/React Router/Marked/S3/Sharp. No current tool cell or local server process is needed
+for the hosted worker. Inspect pending exec session/deployment status after compaction if relevant.

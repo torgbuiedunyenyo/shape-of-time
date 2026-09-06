@@ -116,7 +116,7 @@ export async function publish(workId: string, documentId: string) {
     for (const b of blocks.filter((b) => b.assetId)) {
       const asset = await tx
         .selectFrom("assets")
-        .select("id")
+        .select(["id", "width", "height"])
         .where("id", "=", b.assetId!)
         .where("edition_id", "=", work.edition_id)
         .executeTakeFirst();
@@ -124,6 +124,8 @@ export async function publish(workId: string, documentId: string) {
         throw new Error(
           `Image ${b.assetId} is not available. Your saved draft is intact.`,
         );
+      b.width = asset.width;
+      b.height = asset.height;
     }
     const last = await tx
       .selectFrom("publications")
@@ -166,6 +168,29 @@ export async function getBook(id: string) {
       .orderBy("created_at")
       .execute(),
   ]);
+  const ids = [
+    ...new Set(
+      publications.flatMap((p) =>
+        p.blocks.flatMap((b) => (b.assetId ? [b.assetId] : [])),
+      ),
+    ),
+  ];
+  if (ids.length) {
+    const assets = await db
+      .selectFrom("assets")
+      .select(["id", "width", "height"])
+      .where("id", "in", ids)
+      .execute();
+    const byId = new Map(assets.map((a) => [a.id, a]));
+    for (const publication of publications)
+      for (const block of publication.blocks) {
+        const asset = block.assetId ? byId.get(block.assetId) : undefined;
+        if (asset) {
+          block.width = asset.width;
+          block.height = asset.height;
+        }
+      }
+  }
   return { work, publications, openings, pending };
 }
 export async function sourceContext(anchor: Anchor) {

@@ -41,6 +41,12 @@ const workArgs = z.object({
   title: z.string().min(1),
   purpose: z.string(),
   existing_work_id: z.string().optional(),
+  for_request: z
+    .boolean()
+    .default(true)
+    .describe(
+      "Use false for a side work or prepared opening; true selects the book the current reader request will open.",
+    ),
 });
 const publishArgs = z.object({ work_id: z.string(), document_id: z.string() });
 const imageArgs = z.object({
@@ -98,7 +104,7 @@ const definitions = [
   ],
   [
     "open_work",
-    "Create a work with a title and purpose, or reopen an existing work by ID. Associates it with the current reader request. The current founding source is retained automatically.",
+    "Create or reopen a work. Use for_request=true to select it for the waiting reader; use false to investigate or develop another work without changing that destination. The founding source is retained automatically.",
     workArgs,
     false,
   ],
@@ -282,7 +288,11 @@ export async function executeTool(
             },
             `work-${stableId}`,
           );
-      if (intent) {
+      if (intent && a.for_request) {
+        if (intent.kind === "continue" && intent.work_id !== w.id)
+          throw new Error(
+            "A continuation belongs to the requested work. Use for_request=false to develop a side work.",
+          );
         await db
           .updateTable("intents")
           .set({ result_work_id: w.id })
@@ -300,12 +310,6 @@ export async function executeTool(
     case "publish": {
       const a = publishArgs.parse(args);
       const p = await publish(a.work_id, a.document_id);
-      if (ctx.intentId)
-        await db
-          .updateTable("intents")
-          .set({ result_work_id: a.work_id })
-          .where("id", "=", ctx.intentId)
-          .execute();
       return json(p);
     }
     case "make_image":

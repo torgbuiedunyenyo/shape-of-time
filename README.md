@@ -27,6 +27,15 @@ The text model is GPT-6 Astra at xhigh; images use gpt-image-2-2026-04-21. There
 `pnpm gates` runs typecheck, lint, real Railway persistence/storage tests and the production build.
 Tests use the `world_checks` schema, never purchase generation, and do not claim literary quality.
 `pnpm inspect` reports requests, provider operations and shared spending without credentials.
+Operator scripts run with `tsx --env-file=.env scripts/NAME.ts`. `resume.ts REQUEST_ID` resumes only a
+reconciled paused/failed request. `critique.ts REVIEW_KEY [WORK_IDS...]` commissions an explicitly
+funded contextual review. `renew.ts RENEWAL_KEY` preserves and renews the idle author's context;
+its standalone compaction interface does not expose a reasoning-effort setting. Author/critic
+responses continue to use Astra xhigh. Both paid utilities require generation deliberately enabled.
+`corpus.ts export .local/SNAPSHOT` saves all records and original media with checksums while the
+author is idle. `corpus.ts restore .local/SNAPSHOT` verifies and restores to a fresh
+`DATABASE_SCHEMA=world_restore_NAME`, with generation disabled, and checks every restored row/object.
+The active edition is never overwritten by that recovery check.
 `pnpm eval:live` explicitly purchases a live reading only when generation is enabled. The hosted
 reader uses the same persistence and provider path. Full prompts, requests, returned protocol
 items, drafts, images and criticism remain available for investigation.

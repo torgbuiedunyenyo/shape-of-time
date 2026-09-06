@@ -203,3 +203,46 @@ it("continues a recovered actual Astra response from the saved receipt without a
     name: "resources",
   });
 });
+
+it("retains the exact returned bytes when parsing a received provider result fails", async () => {
+  const { preserveRaw } = await import("../src/server/providers/operations.js");
+  const id = randomUUID(),
+    raw = '{"data":[{"b64_json":"preserve-this-returned-study"}]';
+  await db
+    .insertInto("operations")
+    .values({
+      id,
+      edition_id: edition,
+      session_id: session,
+      key: randomUUID(),
+      kind: "image",
+      status: "dispatched",
+      request: json({}),
+      provider_id: null,
+      response: null,
+      raw_key: null,
+      reserved_usd: 0,
+      actual_usd: null,
+      error: null,
+      completed_at: null,
+    })
+    .execute();
+  await expect(
+    preserveRaw(
+      id,
+      new Response(raw, { headers: { "x-request-id": "fixture-receipt" } }),
+    ),
+  ).rejects.toThrow();
+  const saved = await db
+    .selectFrom("operations")
+    .selectAll()
+    .where("id", "=", id)
+    .executeTakeFirstOrThrow();
+  expect(saved.response).toMatchObject({
+    rawText: raw,
+    requestId: "fixture-receipt",
+  });
+  expect(saved.status).toBe("received");
+  const { getBytes } = await import("../src/server/library/assets.js");
+  expect((await getBytes(saved.raw_key!)).toString()).toBe(raw);
+});
