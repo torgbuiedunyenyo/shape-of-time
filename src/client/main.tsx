@@ -890,11 +890,11 @@ function Reader() {
             >
               Continue reading →
             </button>
-            {continuation && (
+            {continuation && continuation.status !== "done" && (
               <p className="small" role="status">
                 {["queued", "running"].includes(continuation.status)
                   ? "The next passage is taking shape. Your place is saved."
-                  : (continuation.error ?? "The next passage is ready.")}
+                  : (continuation.error ?? "The continuation is unavailable. Your place is saved.")}
               </p>
             )}
           </footer>

@@ -1,6 +1,6 @@
 # Handoff
 
-Updated September 6, 2026, after the first completed root continuation. After compaction read this and PLAN.md P1–P5.
+Updated September 6, 2026, after root chapter 4 and complete corpus restoration. After compaction read this and PLAN.md P1–P5.
 
 ## Purpose
 
@@ -16,21 +16,41 @@ agent; no subagents or goal tool. The user's implementation and production repla
 Production **eec8fddb7b837fbb50e3f8bca024a39ff969d88e** is live and exact healthz verified;
 Git deployment4c7d2c63-7c90-44f3-8123-56917776a08a SUCCESS. Preparation is enabled.
 
-- Root continuation **432dad7f-d219-4cf2-ab94-3f46ed642ddd RUNNING**. Latest checked Astra
-  operationec501309-3ba0-43ab-b1e7-c02a01683467 began05:51:41UTC; query fresh.
-  New apartment image img-9bc9ca68-c9f7-429f-9b1b-3fdcacbda3a0 is complete and builder-viewed:
-  wide doorway view, Jay dressing for work, Tan reaching for shoe at bed, left wrist band,
-  gray pullover/plum trousers, familiar faces. References dinner/bus. No corresponding draft
-  read yet. Temporary image tab16 was closed.
-- WASH continuation **8c015d8e-d085-4d70-ab8b-cc491d192e65 QUEUED**.
+- Root continuation **432dad7f-d219-4cf2-ab94-3f46ed642ddd DONE**. New draft
+  `root/004-the-spare-key.md` revision1 doc1461b8d3-dbf4-468f-8e87-e3b9b5680a1a is fully read
+  by builder, also .local/reading/root004-rev1.md for later diff. Published root004 rev2 doc1c00b0e6-0ee3-4922-9fe4-7c003dea55f9 in publication
+  398633e7-171f-49b2-bc56-033376189047 at06:04:31UTC. Builder read all rev2 changes: direct
+  hand-pull in intimacy, plausible shirt/shoe movement, driver's-window sightline, fewer behavioral
+  verdicts. No repair-to-Dee scene added. .local/reading/root004-rev2.md saved for comparison.
+  First publication22m23s from root request (which spent2m16s queued behind preparation).
+  Tuesday intimacy, work alarm; Thursday Dee gets learner permit, more lessons; three weeks of
+  overnight visits, dates/messages, cooking, green-tag spare key given to Tan. Sunday San Leandro
+  car test: Dee drives silver hatchback, Jay licensed passenger, Tan/seller Ruben outside. Price
+  $5700; nonrefundable $300 hold refused, Tan offers to cover, Jay interrupts, Dee asserts own choice
+  and waits for independent inspection. Tan/Jay discuss his embarrassment; Ruben later permits
+  inspection next afternoon. Car NOT purchased, Dee still permit holder. Tan invites Jay to her
+  place; permission/time off not arranged yet. Father knows Jay's name, shop work, swimming; no
+  father meeting or future travel yet. Tan sends photo of her room/window/chair/blue cup (text,
+  no generated image of that room yet). Builder finds concrete progression; critic5c88d4b1-9d32-45c5-a340-29b9c74acff9 fully read, including actual tool-source verification:
+  read root001/002/WASH originals; viewed both new images, Sunday/pool and cropped car for detail.
+  Found substantial progression, no substantive world-rule contradiction; cut grading of considerate
+  behavior, leave Jay's not-yet-apologized-to-Dee asymmetry unfinished. Concrete visual mismatch:
+  Tan/Ruben stand beyond DRIVER side in image, text has Jay look through passenger window. Author
+  already intended to fix implausible shoe/shirt movement. Revision/publication completed as above.
+  Both draft illustrations builder-viewed: apartment img-9bc9ca68-c9f7-429f-9b1b-3fdcacbda3a0
+  and car img-27f60cfb-3421-4123-a7e5-bbe96bee2d4a. Consistent visible faces, clothing/wrist and
+  driving roles; compositions vary from close paired portraits. Temporary tabs16/17 closed.
+  Root notes e03f877f-0e3c-4b81-987f-2c85b81d6e40 and library rev4 adb9fa64-5e03-49cd-8c9d-afae6091c6de are now fully read, including comparison with library rev3.
+- WASH continuation **8c015d8e-d085-4d70-ab8b-cc491d192e65 RUNNING**.
 - WASH preparation715f30a8-cb2f-4845-a999-5001b268dc35 queued after that request; should reuse
   any available continuation rather than buy another. Don't manually duplicate requests.
 - First root preparation8a820cb7-c57e-40c5-94c5-ce712e7ad5dc DONE. It saw actual requests,
   saved notes/prepare-8a820cb7.md (doc85f87088-82cb-464a-8c0a-11b17449783e, fully read) and
   yielded without new fiction/images. A considered Dee branch remained explicitly noncanonical.
   This proves awareness/restraint, not reduced frontier latency or a successful warm continuation.
-- Browser tab2 at WASH visit8389d3f8-b207-4925-9cc5-4d54cf71e96e near wedding-program source.
-  Its Continue is visibly disabled/pending. Fresh prepared wedding visita77a4527-0834-46c8-9821-
+- Browser tab2 just Returned to root0f84838d-2093-4b02-a91a-87f2934fcefb from WASH8389d3f8.
+  New root004 publication did not interrupt WASH reading: same program block b-0efd732eb9f190ccb30c
+  remained at viewport top. Root preparation d87c40c7-0acb-46cb-8b41-9be9929f7579 is queued. Leave root004 visible and let it run after WASH without pressing Continue; previous root continuation is done. Fresh prepared wedding visita77a4527-0834-46c8-9821-
   8d9eb5f13f15 opened immediately and returned to the exact program while WASH request remained.
 - Root pending continuation survived image exploration and reload on production. The known defect
   is fixed. Only `tab` exists in the reset CUA session; clicks take [x,y], not objects. Viewport
@@ -46,17 +66,17 @@ partial folder .local/corpus-nested-renewed-2026-09-06 is NOT a backup. The fix 
 as JSONL and verifies/restores incrementally. Report evals/corpus-recovery-2026-09-06.md and receipt
 corpus-nested-restore.json. Old-format first-root backup uses the matching historical script.
 
-All **27 tests, typecheck, lint, build passed**, exec1302. Code is committed/deployed. Current
-uncommitted changes are evidence/HANDOFF/PLAN and new corpus receipt only. No gates needed for docs.
+All **27 tests, typecheck, lint, build passed**, exec1302. Application code is committed/deployed. Evidence checkpointeb02ad5 is committed but UNPUSHED;
+Subsequent HANDOFF/report edits and a small reader status fix are uncommitted: a completed old continuation no longer leaves “The next passage is ready” at the end of newly read material. Reproduced in actual root004 reader; no semantic test was invented for this copy change. All27 tests/typecheck/lint/build passed again, exec55738. Needs final deployed visual verification. Don't deploy while author is buying an image.
 Do not deploy/restart during a direct image purchase. Earlier forced restart/native renewal/repair
 are already proved; don't repeat them. Maintain the shared150 allowance; latest commitment with
-active reserve60.2803325, remaining89.7196675, unknown0. Query fresh via .local/progress.ts.
+active reserve67.9100295, remaining82.0899705, unknown0. Query fresh via .local/progress.ts.
 
 Next: read actual root/child drafts, images, revisions and criticism as they arrive; extend toward
 substantial connected30–50k study scale within allowance. Let an actual preparation opportunity
 produce useful saved reading without immediately submitting Continue, then observe reuse/latency.
-Automatic renewal threshold250k still needs a naturally crossed request boundary. Initial corpus
-is roughly16–17k; do not claim novel coherence. P1/P2/P4 complete for current path; P3/P5/P6 ongoing.
+Automatic renewal threshold250k still needs a naturally crossed request boundary. Current corpus
+is roughly20k; do not claim novel coherence. P1/P2/P4 complete for current path; P3/P5/P6 ongoing.
 
 ## Repositories and production
 
@@ -149,13 +169,12 @@ reflow. Return found the exact program passage and selected lounge-image region.
 visible. Discoveries retains source quotes and resumes its own visit. New publications appear before
 the author finishes. Three adjacent paragraphs could be selected as one exact quote without buying.
 Bookmark bug was reproduced/fixed: on b920, Save place→library bookmark preserved the nested visit,
-and its Return reached the parent/program then root/image. Current local continuation-state fix
-still needs production QA. See evals/nested-reader-and-recovery-2026-09-06.md.
+and its Return reached the parent/program then root/image. Production continuation-state fix passed real exploration, reload and prepared grandchild entry/return while a continuation remained pending. See evals/nested-reader-and-recovery-2026-09-06.md.
 
 Observed first-publication waits: root27m14s including initial retrieval repair, child30m06s,
 wedding about9min. N=3 different circumstances, not a benchmark. Preparation still needs live testing.
 
-CUA production tab2 is root visit `0f84838d-2093-4b02-a91a-87f2934fcefb`, currently at the library.
+CUA production tab2 is root visit `0f84838d-2093-4b02-a91a-87f2934fcefb`, currently near the start of root chapter4; keep visible for preparation.
 Child visit `c92b10b6-71bc-46a9-a591-a4f6158cda14`; current nested wedding visit
 `f7ce6c60-d964-49d9-95ec-029a80499ad1`. Earlier wedding visit131daf… and bookmark-created standalone
 78da84… remain historical reading records. Pre3a10 visits lack the entered-request marker; their
@@ -210,5 +229,5 @@ P1 first root continuation and P2 actual nested return are complete. P3 needs li
 preparation and several root/nested continuations with grounded criticism. P4 corpus
 restore is complete. P5 needs substantial connected reading (30–50k study scale, not a quota), distant recurrence,
 post-resolution development and continued renewal evidence. P6 needs the final production walkthrough
-and honest handoff. Do not declare long-form success from the roughly16–17k connected corpus. Stay within
+and honest handoff. Do not declare long-form success from the roughly20k connected corpus. Stay within
 $150 and preserve everything already generated.
