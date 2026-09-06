@@ -128,6 +128,48 @@ it("deduplicates a repeated reader request before any provider work is bought", 
   expect(a.status).toBe("queued");
 });
 
+it("finds the published original without presenting a later unpublished revision as reader history", async () => {
+  const { executeTool } = await import("../src/server/agent/tools.js");
+  const work = await createWork(edition, "Source lookup", {});
+  const first = await writeDocument(
+    edition,
+    "source-lookup.md",
+    "The reserved glass belongs to the traveler.",
+    0,
+    randomUUID(),
+  );
+  const publication = await publish(work.id, first.id);
+  await writeDocument(
+    edition,
+    "source-lookup.md",
+    "Unpublished alternative: the reserved glass is broken.",
+    1,
+    randomUUID(),
+  );
+  const result = JSON.parse(
+    (await executeTool(
+      "archive",
+      json({ action: "search", kind: "publication", query: "reserved glass" }),
+      randomUUID(),
+      {
+        editionId: edition,
+        sessionId: randomUUID(),
+        intentId: null,
+        critic: async () => "",
+      },
+    )) as string,
+  );
+  expect(result.publications).toEqual([
+    expect.objectContaining({
+      id: publication.id,
+      document_id: first.id,
+      excerpt: first.body,
+    }),
+  ]);
+  expect(result.documents).toBeUndefined();
+  expect(result.works).toBeUndefined();
+});
+
 it("lets the author develop a side work without replacing the reader-requested root", async () => {
   const { executeTool } = await import("../src/server/agent/tools.js");
   const request = await enqueue(edition, "begin", null, {}, randomUUID());
@@ -192,4 +234,40 @@ it("lets the author develop a side work without replacing the reader-requested r
         .executeTakeFirstOrThrow()
     ).root_work_id,
   ).toBe(root.id);
+});
+
+it("can follow an archive cursor to the next original instead of silently losing sources beyond the first result page", async () => {
+  const { listArchive } = await import("../src/server/library/archive.js");
+  const work = await createWork(edition, "Archive paging", {});
+  const ids: string[] = [];
+  for (const name of ["first", "second"]) {
+    const draft = await writeDocument(
+      edition,
+      `paging-${name}.md`,
+      `Archive paging fixture: ${name} original.`,
+      0,
+      randomUUID(),
+    );
+    ids.push((await publish(work.id, draft.id)).id);
+  }
+  const first = await listArchive(
+    edition,
+    "publication",
+    "Archive paging fixture",
+    0,
+    1,
+  );
+  expect(first.publications).toEqual([expect.objectContaining({ id: ids[0] })]);
+  expect(first.next_offset).toBe(1);
+  const second = await listArchive(
+    edition,
+    "publication",
+    "Archive paging fixture",
+    first.next_offset!,
+    1,
+  );
+  expect(second.publications).toEqual([
+    expect.objectContaining({ id: ids[1] }),
+  ]);
+  expect(second.next_offset).toBeNull();
 });

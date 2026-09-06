@@ -5,6 +5,7 @@ import { pool } from "../src/server/db/index.js";
 import { migrate } from "../src/server/db/migrate.js";
 import { config } from "../src/server/config.js";
 import { getBytes, putBytes } from "../src/server/library/assets.js";
+import { protocolImageObjects } from "../src/server/providers/protocol.js";
 
 // Dependency order is also the restore order. Session parents precede children by creation time.
 const tables = [
@@ -57,11 +58,20 @@ try {
       const objects = new Map<string, string>();
       await connection.query("begin isolation level repeatable read read only");
       try {
+        const active = await connection.query(
+          "select id from operations where status in ('reserved','dispatched','received','polling') limit 1",
+        );
+        if (active.rowCount)
+          throw new Error(
+            "A provider operation is still active. Export after it finishes.",
+          );
         for (const name of tables) {
           const { rows }: { rows: Rows } = await connection.query(
             `select * from "${name}" order by created_at, id`,
           );
           const bytes = JSON.stringify(rows);
+          for (const [key, mime] of protocolImageObjects(rows))
+            objects.set(key, mime);
           const file = `${name}.json`;
           await writeFile(resolve(directory, file), bytes, {
             flag: "wx",

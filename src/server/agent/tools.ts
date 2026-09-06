@@ -13,7 +13,9 @@ import {
   sourceContext,
 } from "../library/store.js";
 import { imageContent } from "../library/assets.js";
+import { listArchive } from "../library/archive.js";
 import { makeImage } from "../providers/image.js";
+import { storeImages } from "../providers/protocol.js";
 import { budget, Paused } from "../providers/operations.js";
 import type { Anchor } from "../../shared/types.js";
 export type ToolContext = {
@@ -31,6 +33,8 @@ const archiveArgs = z.object({
   kind: z.enum(["all", "source", "work", "publication", "document", "image"]),
   id: z.string().optional(),
   query: z.string().optional(),
+  offset: z.number().int().nonnegative().default(0),
+  limit: z.number().int().positive().max(200).default(40),
 });
 const writeArgs = z.object({
   path: z.string().min(1),
@@ -85,7 +89,7 @@ const openingArgs = z.object({
 const definitions = [
   [
     "archive",
-    "List, search or read the source world, actual works/publications, all document revisions and image provenance. For documents read by ID or path. Search returns source IDs and excerpts; read returns originals.",
+    "List, search or read the source world, works/publications, all document revisions and image provenance. Publication search returns only published originals; document search includes unpublished revisions and notes. Lists/searches have pages: use next_offset to retrieve more. Read by ID (or document path) returns the full original without an excerpt limit. Image briefs describe requests; use view_image for actual appearance.",
     archiveArgs,
     true,
   ],
@@ -204,53 +208,9 @@ export async function executeTool(
           "Choose source, work, publication, document or image for reading.",
         );
       }
-      const [works, documents, assets] = await Promise.all([
-        db
-          .selectFrom("works")
-          .selectAll()
-          .where("edition_id", "=", ctx.editionId)
-          .execute(),
-        db
-          .selectFrom("documents")
-          .selectAll()
-          .where("edition_id", "=", ctx.editionId)
-          .orderBy("path")
-          .orderBy("revision", "desc")
-          .execute(),
-        db
-          .selectFrom("assets")
-          .selectAll()
-          .where("edition_id", "=", ctx.editionId)
-          .execute(),
-      ]);
-      const q = a.query?.toLocaleLowerCase();
-      const matches = (s: string) => !q || s.toLocaleLowerCase().includes(q);
-      return json({
-        source: ["world", "world-essence", "prose-guide", "visual-direction"],
-        works: works.filter((w) => matches(w.title)),
-        documents: documents
-          .filter((d) => matches(d.path + "\n" + d.body))
-          .map((d) => {
-            const pos = q
-              ? Math.max(0, d.body.toLocaleLowerCase().indexOf(q) - 150)
-              : 0;
-            return {
-              id: d.id,
-              path: d.path,
-              revision: d.revision,
-              excerpt: d.body.slice(pos, pos + 700),
-            };
-          }),
-        images: assets
-          .filter((a) => matches(a.description))
-          .map((a) => ({
-            id: a.id,
-            description: a.description,
-            width: a.width,
-            height: a.height,
-            references: a.references,
-          })),
-      });
+      return json(
+        await listArchive(ctx.editionId, a.kind, a.query, a.offset, a.limit),
+      );
     }
     case "write_document": {
       const a = writeArgs.parse(args);
@@ -395,7 +355,7 @@ export async function recordedTool(
       id: randomUUID(),
       session_id: ctx.sessionId,
       call_id: callId,
-      output: json(item),
+      output: json(await storeImages(item)),
     })
     .onConflict((c) => c.columns(["session_id", "call_id"]).doNothing())
     .execute();

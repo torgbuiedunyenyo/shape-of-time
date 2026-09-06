@@ -6,6 +6,7 @@ import type {
 import { db, json } from "../db/index.js";
 import { config } from "../config.js";
 import { openai, textCost } from "../providers/astra.js";
+import { hydrateImages, storeImages } from "../providers/protocol.js";
 import {
   reserve,
   dispatched,
@@ -44,7 +45,7 @@ export async function renewSession(sessionId: string, requestKey: string) {
   if (!op) {
     const count = await openai.responses.inputTokens.count({
       model: config.textModel,
-      input: session.input,
+      input: await hydrateImages(session.input),
     });
     const long = count.input_tokens > 272000;
     // The standalone compactor exposes no output cap or reasoning-effort setting. Reserve the
@@ -59,7 +60,7 @@ export async function renewSession(sessionId: string, requestKey: string) {
       "compaction",
       {
         model: config.textModel,
-        input: session.input,
+        input: await storeImages(session.input),
         step: session.step,
         price_record: "2026-09-06-standard",
       },
@@ -74,6 +75,9 @@ export async function renewSession(sessionId: string, requestKey: string) {
     op.response,
   ) as unknown as CompactedResponse | null;
   if (op.status === "reserved") {
+    const liveInput = await hydrateImages(
+      op.request.input as ResponseInputItem[],
+    );
     await dispatched(op.id);
     try {
       response = (await preserveRaw(
@@ -81,7 +85,7 @@ export async function renewSession(sessionId: string, requestKey: string) {
         await openai.responses
           .compact({
             model: config.textModel,
-            input: op.request.input as ResponseInputItem[],
+            input: liveInput,
             service_tier: "default",
           })
           .asResponse(),
@@ -109,7 +113,9 @@ export async function renewSession(sessionId: string, requestKey: string) {
   const orientation = (op.request.input as ResponseInputItem[]).find(
     (i) => "role" in i && i.role === "developer",
   );
-  const next = orientation ? [...canonical, orientation] : canonical;
+  const next = await storeImages(
+    orientation ? [...canonical, orientation] : canonical,
+  );
   await db.transaction().execute(async (tx) => {
     const current = await tx
       .selectFrom("sessions")

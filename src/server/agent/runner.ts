@@ -8,6 +8,7 @@ import type {
 import { db, json, pool } from "../db/index.js";
 import { astra, appendItems } from "../providers/astra.js";
 import { Paused } from "../providers/operations.js";
+import { storeImages } from "../providers/protocol.js";
 import { imageContent } from "../library/assets.js";
 import { getBook, writeDocument } from "../library/store.js";
 import { toolDefinitions, recordedTool, type ToolContext } from "./tools.js";
@@ -248,7 +249,11 @@ export async function runIntent(intentId: string) {
         .executeTakeFirstOrThrow();
       await tx
         .updateTable("sessions")
-        .set({ input: json([...current.input, { role: "user", content }]) })
+        .set({
+          input: json(
+            await storeImages([...current.input, { role: "user", content }]),
+          ),
+        })
         .where("id", "=", session.id)
         .execute();
       await tx

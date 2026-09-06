@@ -162,6 +162,36 @@ it("prices actual cache reads and writes separately and applies the long-context
   expect(textCost(usage)).toBeCloseTo(5.2);
 });
 
+it("keeps image-bearing conversation checkpoints without copying image bytes into every later request", async () => {
+  const { appendItems } = await import("../src/server/providers/astra.js");
+  const original = {
+    role: "user" as const,
+    content: [
+      {
+        type: "input_image" as const,
+        image_url:
+          "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Wl6yS0AAAAASUVORK5CYII=",
+        detail: "original" as const,
+      },
+    ],
+  };
+  await appendItems(session, [original, original]);
+  const saved = await db
+    .selectFrom("sessions")
+    .select("input")
+    .where("id", "=", session)
+    .executeTakeFirstOrThrow();
+  expect(JSON.stringify(saved.input)).not.toContain("data:image/png;base64,");
+  expect(saved.input.at(-1)).toEqual(saved.input.at(-2));
+  const { hydrateImages, protocolImageObjects } =
+    await import("../src/server/providers/protocol.js");
+  expect((await hydrateImages(saved.input)).slice(-2)).toEqual([
+    original,
+    original,
+  ]);
+  expect(protocolImageObjects(saved.input).size).toBe(1);
+});
+
 it("continues a recovered actual Astra response from the saved receipt without another provider dispatch", async () => {
   const { readFile } = await import("node:fs/promises");
   const { astra } = await import("../src/server/providers/astra.js");

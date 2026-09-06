@@ -20,6 +20,8 @@ export type Block = {
 export type Anchor = {
   publicationId: string;
   blockId: string;
+  /** Reading position within a displayed image, independent of viewport size. */
+  imageFraction?: number;
   offset?: number;
   endBlockId?: string;
   endOffset?: number;

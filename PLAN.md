@@ -1,6 +1,6 @@
 # Shape of Time implementation plan
 
-Written September 6, 2026. Status: P0 complete; P1 implementation in progress.
+Written September 6, 2026. Status: P0 complete; first illustrated root published; P1 continuation and P2 nested journey in progress.
 
 Execution update: the user explicitly authorized implementing and testing directly on the existing
 Railway production project, with no users or old data requiring preservation. This supersedes the
@@ -30,7 +30,7 @@ The finite milestones below organize implementation work. They do not impose cor
 
 Implementation checkout: /Users/ratpartyserver/git/shape-of-time-agentic, branch codex/agentic-world. Local main in /Users/ratpartyserver/git/shape-of-time also contains the clean starting point. The cleanup checkpoint is tagged checkpoint/agentic-clean-start-2026-09-06. The retired baseline e1a3decb29b33710f26a89f5cf2a415ca6f3ae09 is preserved as archive/folio-prototype-2026-09-06 and in archive/folio-prototype-e1a3dec.tar.gz.
 
-The user requested a clean repository before implementation. The old runtime, migrations, tests, prompts, package/build/start scripts, prepared corpus and deployment configuration have therefore been archived and removed from the active tree. Local main was aligned with this starting point; remote main, predecessor deployments and retired art-thing remain unchanged. Start a new local database and asset namespace for this edition. No old corpus/schema migration is required. Do not restore the archived application as a scaffold.
+The user requested a clean repository before implementation. The old runtime, migrations, tests, prompts, package/build/start scripts, prepared corpus and deployment configuration have therefore been archived and removed from the active tree. Local main was aligned with this starting point. Subsequent implementation replaced the Railway deployment and removed its old data; retired art-thing remains read-only. The new edition uses the world database schema and matching asset namespace. No old corpus/schema migration is required. Do not restore the archived application as a scaffold.
 
 Retain the selected React, React Router, Vite, Hono and Kysely/pg stack initially. Node 24.18.0 remains pinned in .nvmrc; pnpm 11.15.0 and the previous dependency versions are available in the archived package/lock files. P1 creates a fresh minimal manifest and lockfile for the actual new implementation, consulting those pins instead of reintroducing its scripts or unused dependencies wholesale. Inspect small archived storage helpers individually if useful. Add the official OpenAI TypeScript SDK with a version verified to support the selected Responses interfaces. Consult Context7 and official documentation at implementation time. Do not turn package selection into a separate research project.
 
@@ -145,7 +145,7 @@ A later long-form allowance must be calculated from the first experiment's actua
 | P1 — First saved illustrated reading | P0 | Astra uses real tools and image results; saved prose and imagery appear in a thin real reader; contextual critic available. |
 | P2 — Nested exploration and exact return | P1 | Generated root → child → grandchild → parent → root, with durable source context and both media. |
 | P3 — Sustained reading and reader refinement | P2 | Consecutive material worth assessing, responsive reading, prepared/cold openings and early artistic revisions. |
-| P4 — Recovery and staging | P3 | The same live path survives interruption and works on isolated Railway staging. |
+| P4 — Recovery on Railway | P3 | The same live path survives interruption and its corpus/media can be restored on the authorized Railway project. |
 | P5 — Long-form development and memory | P3; P4 before hosted large spend | A connected substantial corpus, distant recurrences, cross-book continuity and demonstrated context renewal. |
 | P6 — Release the replacement | P4 and P5 | Exact deployed revision, restored data/asset proof, actual reader walkthrough and documented literary limitations. |
 
@@ -153,7 +153,7 @@ P1 and P2 are the first usable experiment. They must not wait for an elaborate s
 
 ### P0 — Current documents and execution context
 
-**Completed work:** Replaced the governing documents, prepared the original infinite-book sources and adapted writing guidance, extracted the approved visual medium, and archived the entire old tracked application before removing it from the active tree. The archive manifest accounts for all 167 source files byte-for-byte. No old package/start/migration/deployment scripts or competing instructions remain active. Local main and codex/agentic-world share the clean checkpoint; nothing has been pushed or deployed.
+**Completed work:** Replaced the governing documents, prepared the original infinite-book sources and adapted writing guidance, extracted the approved visual medium, and archived the entire old tracked application before removing it from the active tree. The archive manifest accounts for all 167 source files byte-for-byte. No old package/start/migration/deployment scripts or competing instructions remain active. Local main and codex/agentic-world share the clean checkpoint; nothing had been pushed or deployed at the cleanup checkpoint. Subsequent implementation is recorded in HANDOFF.md.
 
 **Evidence:** Verified archive completeness/checksums, retained source bytes, active links and instructions, removal of old entry points, and a clean diff. The old test suite is archived with its runtime; no application gate or new runtime success is claimed. No paid calls were required.
 
@@ -219,17 +219,22 @@ Warm openings enter immediately. Cold openings keep the source readable with tru
 
 **Completion:** The owner has a meaningful connected sample to read and the criticism explains whether it merits further development. If it is dull or disconnected, revise here before increasing corpus size. An early sample cannot establish a whole novel.
 
-### P4 — Prove interruption recovery and stage the same application
+### P4 — Prove interruption recovery on Railway
 
 **Work:** Exercise failure boundaries on the existing P1–P3 path: after provider dispatch, after returned bytes are saved, after a tool result, during publication, and while a child is opening. Verify restarting, resuming, reconciling unknown requests and stopping new spend. Remove any alternate production path that bypasses these mechanisms.
 
-Create an isolated staging environment in the existing Railway project only when deployment is authorized. Give it its own database and asset namespace; do not point it at production records or automatically copy provider keys into a running generator. Start with generation disabled, restore the saved experimental corpus, then enable the specifically budgeted live journey.
+The user authorized direct production replacement and testing, with no old data to preserve. Use
+that Railway Postgres/bucket directly. Verify restoration into a fresh test schema and matching
+object namespace on the same resources, with generation disabled; do not overwrite the active new
+edition. No Docker, separate staging project, or obsolete production-data migration is required.
 
-Use GitHub-integrated deployment from passing commits. Configure staging's branch deliberately. Production remains main-based. Never use railway up or a manual redeploy to mask a missing Git-triggered build. Verify the exact commit and environment before the live walkthrough. The Railway skill governs those future operations.
+Use GitHub-integrated deployment from passing main commits. Never use railway up or a manual
+redeploy to mask a missing Git-triggered build. Verify the exact commit and environment before the
+live walkthrough. The Railway skill governs these operations.
 
-**Files:** operation recovery, configuration/startup, migration tooling, Docker/CI/deployment configuration only where required, integration tests and deployment notes.
+**Files:** operation recovery, configuration/startup, migration tooling, CI/deployment configuration only where required, integration tests and deployment notes.
 
-**Evidence:** Real DB/storage recovery tests, a restorable corpus-plus-assets backup, and an in-app Browser run of continuation and nesting on staging. Record the deployed commit and live provider receipts, not only /healthz.
+**Evidence:** Real DB/storage recovery tests, a restorable corpus-plus-assets backup, and an in-app Browser run of continuation and nesting on production. Record the deployed commit and live provider receipts, not only /healthz.
 
 **Completion:** The same system that produced the promising reading survives interruption on the intended host, with no lost publication or hidden duplicate purchase. Unknown provider outcomes remain explicitly unknown until reconciled.
 
@@ -255,7 +260,7 @@ If retrieval repeatedly misses relevant material, improve source navigation, not
 
 Run the complete applicable mechanical gate, the current literary/multimodal evaluation and the deployed in-app reader journey. Confirm backup restoration, global spending controls, pending-operation visibility, source retention and correct cache/media behavior.
 
-When production release is authorized, integrate the passing branch into main and verify the Git-triggered Railway deployment. Keep the old production data/asset namespace recoverable. Rollback means selecting a known Git revision and its matching database/asset configuration through the integrated deployment path, not destructively reversing the new schema in place.
+Production replacement is authorized. Integrate passing changes into main and verify the Git-triggered Railway deployment. Old production data need not be preserved. Recovery of the new edition means selecting a matching code revision and restoring its saved corpus/media, preserving the active edition while that recovery is checked.
 
 **Completion:** The user can read, explore, return and continue the illustrated world on the intended deployment. HANDOFF.md records the actual corpus, quality limitations, deployed revision, cost and next development question. Remaining artistic uncertainty is reported plainly.
 
@@ -277,6 +282,6 @@ Implementation decisions already made: selected models, one application, real pe
 
 Decisions to make from evidence: precise preparation depth, preferred paging/flow behavior, a useful context-renewal threshold, image density/arrangement and whether semantic retrieval or overlapping agent work improves the result. These do not block P1.
 
-Decisions requiring scope before execution: the live spending allowance and staging/production infrastructure changes. The suggested allowance above makes the first experiment reviewable; writing this plan spends nothing and changes no deployment.
+The implementation go-ahead and subsequent Railway instructions authorize the initial combined $150 provider allowance and direct production replacement. Actual costs and pending operations are in HANDOFF.md. A larger allowance would require new scope.
 
-Current next action: P1a in the isolated checkout, after implementation is requested. Do not restart the historical diagnosis or finish another static showcase first.
+Current next action: complete the genuine continuation and nested reading journey identified in HANDOFF.md. Do not restart the historical diagnosis or replace the live experiment with a static showcase.

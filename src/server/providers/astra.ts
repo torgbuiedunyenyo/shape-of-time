@@ -7,6 +7,7 @@ import type {
 } from "openai/resources/responses/responses";
 import { config } from "../config.js";
 import { db, json } from "../db/index.js";
+import { hydrateImages, storeImages } from "./protocol.js";
 import {
   reserve,
   dispatched,
@@ -44,15 +45,18 @@ export async function astra(
   input: ResponseInputItem[],
   tools: Tool[],
 ) {
+  let dispatchBody: Parameters<typeof openai.responses.create>[0] | undefined;
   let op = await db
     .selectFrom("operations")
     .selectAll()
     .where("key", "=", key)
     .executeTakeFirst();
   if (!op) {
+    const storedInput = await storeImages(input);
+    const liveInput = await hydrateImages(storedInput);
     const count = await openai.responses.inputTokens.count({
       model: config.textModel,
-      input,
+      input: liveInput,
       tools,
       reasoning: { effort: config.effort },
       tool_choice: "auto",
@@ -65,7 +69,7 @@ export async function astra(
     const body = {
       model: config.textModel,
       reasoning: { effort: config.effort },
-      input,
+      input: storedInput,
       tools,
       tool_choice: "auto" as const,
       service_tier: "default" as const,
@@ -75,6 +79,7 @@ export async function astra(
       max_output_tokens: maxOutput,
       truncation: "disabled" as const,
     };
+    dispatchBody = { ...body, input: liveInput };
     const reserveUsd =
       (count.input_tokens * (count.input_tokens > 272000 ? 25 : 12.5) +
         maxOutput * (count.input_tokens > 272000 ? 75 : 50)) /
@@ -97,15 +102,16 @@ export async function astra(
   let response = parsedReceipt(op.response) as unknown as AstraResponse | null;
   if (op.status === "complete") return response!;
   if (op.status === "reserved") {
+    const body =
+      dispatchBody ??
+      (await hydrateImages(
+        op.request.body as Parameters<typeof openai.responses.create>[0],
+      ));
     await dispatched(op.id);
     try {
       response = (await preserveRaw(
         op.id,
-        await openai.responses
-          .create(
-            op.request.body as Parameters<typeof openai.responses.create>[0],
-          )
-          .asResponse(),
+        await openai.responses.create(body).asResponse(),
       )) as unknown as AstraResponse;
     } catch (e) {
       return uncertain(op.id, e);
@@ -163,7 +169,7 @@ export async function appendItems(
     return tx
       .updateTable("sessions")
       .set({
-        input: json([...session.input, ...items]),
+        input: json(await storeImages([...session.input, ...items])),
         step: session.step + (advance ? 1 : 0),
       })
       .where("id", "=", sessionId)

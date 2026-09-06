@@ -26,6 +26,22 @@ export function capturePlace(
   ).find((b) => b.getBoundingClientRect().bottom > viewportLine);
   if (!block) return;
   const base = { publicationId: block.dataset.publication!, blockId: block.id };
+  if (block.tagName === "FIGURE") {
+    const rect = block.querySelector("img")?.getBoundingClientRect();
+    if (
+      rect &&
+      rect.height &&
+      rect.top <= viewportLine &&
+      rect.bottom >= viewportLine
+    )
+      return {
+        place: {
+          ...base,
+          imageFraction: (viewportLine - rect.top) / rect.height,
+        },
+        pixelOffset: 0,
+      };
+  }
   if (block.tagName === "FIGURE" || block.tagName === "HR")
     return {
       place: base,
@@ -55,6 +71,15 @@ export function restorePlace(
     root.querySelectorAll<HTMLElement>("[data-block]"),
   ).find((b) => b.id === saved.place.blockId);
   if (!block) return;
+  if (saved.place.imageFraction !== undefined) {
+    const rect = block.querySelector("img")?.getBoundingClientRect();
+    if (rect)
+      window.scrollBy(
+        0,
+        rect.top + rect.height * saved.place.imageFraction - viewportLine,
+      );
+    return;
+  }
   const rect =
     saved.place.offset === undefined
       ? block.getBoundingClientRect()
