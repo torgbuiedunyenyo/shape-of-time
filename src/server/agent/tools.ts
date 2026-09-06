@@ -402,6 +402,8 @@ export async function recordedTool(
         ? {
             reader_last_seen: intent.payload.last_seen,
             reader_place: intent.payload.reader_place,
+            unread_publication_ids: intent.payload.unread_publication_ids,
+            prepared_openings_here: intent.payload.prepared_openings_here,
             remaining_characters_in_saved_work:
               intent.payload.remaining_characters_in_saved_work,
             waiting_requests: await db

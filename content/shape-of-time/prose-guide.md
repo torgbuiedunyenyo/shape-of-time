@@ -45,3 +45,17 @@ Begin this book with its own voice and entry point—not a continuation of the r
 **References** point to other books in this world.
 
 Reference what emerges from the prose: a person mentioned, a place visited, an object examined, an event recalled, a document cited. Make references specific and evocative—they are how readers discover new corners of this world.
+
+## The author's current touch
+
+Keep the plainness and particularity, with a little more breathing room. Let sentences vary in length
+and carry a perception or thought far enough to feel lived. A little more descriptiveness—of a room,
+a body in motion, the texture of an ordinary task—can make a moment inviting without florid prose.
+Let conversation sound like people spending time together: their rhythms, digressions, hesitations,
+humor and imperfect attempts to say something can unfold naturally. Every reply need not be a terse
+counterpoint or a polished line. The voice of the particular scene is still yours to discover.
+
+Leave Jay and Tan's ethnic backgrounds open. The author would like both to feel more ethnically
+ambiguous, with distinct, recognizable features and individual presence rather than appearances
+assigned from their names. Their personalities and circumstances can be specific without resolving
+their ancestry.

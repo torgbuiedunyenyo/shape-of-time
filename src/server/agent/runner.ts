@@ -15,7 +15,7 @@ import { storeImages } from "../providers/protocol.js";
 import { imageContent } from "../library/assets.js";
 import { getBook, writeDocument } from "../library/store.js";
 import { toolDefinitions, recordedTool, type ToolContext } from "./tools.js";
-import { nextIntent, useAvailableContinuation } from "./preparation.js";
+import { nextIntent, useAvailableContinuation, preparationYieldReason } from "./preparation.js";
 async function orientation(editionId: string, role: string) {
   const e = await db
     .selectFrom("editions")
@@ -86,6 +86,10 @@ async function loop(ctx: ToolContext, readOnly = false): Promise<string> {
       "content" in tail
     )
       return finalText([tail]);
+    if (ctx.intentId && !readOnly) {
+      const reason = await preparationYieldReason(ctx.intentId);
+      if (reason) return reason;
+    }
     const response = await astra(
       ctx.editionId,
       ctx.sessionId,
@@ -246,7 +250,7 @@ export async function runIntent(intentId: string) {
     if (intent.kind === "prepare")
       content.push({
         type: "input_text",
-        text: "A reader is spending time in this work. This is an opportunity to prepare ahead, not a request for a particular new book or scene. The payload gives their recent place and what remains unread. You may continue this work, develop a promising nested opening from its actual material, investigate or save useful notes, or decide that nothing further is useful yet. Favor useful saved reading over unnecessary delay. Any publication is immediately readable; offer_opening connects a prepared book to its source. Actual queued reader requests take priority over further speculation. Keep this preparation bounded by what is useful ahead of this reader and the shared allowance. Finishing without a new publication is allowed.",
+        text: "A reader is spending time in this work. This is an opportunity to prepare ahead, not a request for a particular new book or scene. The payload gives their actual current passage, its images, prepared openings there and what remains unread. Reading may be well before the published frontier: there can already be ample linear continuation while a promising doorway in this passage is still waiting to be developed. You may continue this work, develop a promising nested opening from its actual material, investigate or save useful notes, or decide that nothing further is useful yet. Favor useful saved reading over unnecessary delay. Any publication is immediately readable; offer_opening connects a prepared book to its source. Give useful visual reading time to be ready alongside its prose. Existing unread material and prepared openings are reasons to be selective about more preparation. Actual queued reader requests take priority over further speculation. Keep this preparation bounded by what is useful ahead of this reader and the shared allowance. Finishing without a new publication is allowed.",
       });
     const source = intent.payload.source as
       | {

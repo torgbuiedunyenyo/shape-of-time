@@ -13,12 +13,33 @@ queue: F2 creative guidance → F1 preparation → F3 new pinned edition/20 requ
 Earlier statements below to stop generation describe the previous completed handoff and are superseded
 for this work. The restriction on extended unsolicited literary study still applies.
 
-At entry: branch/main clean at68fe4a2 (the TODO commit is local); production e05c248 verified in the
-previous turn. No command was started by the two interrupted turns before this instruction.
-Next: inspect actual source and any relevant screenshots, record the bounded changes, implement F2/F1.
-No new provider request, deployment, edition reset or budget increase has happened yet.
-Screenshots were mentioned but not attached in the current messages; search only relevant dated
-screenshots locally, and do not claim a specific mismatch without seeing its evidence.
+F2/F1 implemented, not deployed: small additions in prose-guide.md and visual-direction.md; original
+world/essence unchanged. Actual screenshots3.36.11/3.36.24 show an unlabeled bottle versus prose about
+its oak label. SOURCE.md records feedback as development evidence; the particular bottle is not a
+new narrative prescription. Prior infinite-book frontend/src/app.ts preparation and tour.ts inspected.
+Preparation now starts in any encountered publication, supplies its actual prose/images, existing
+openings and unread continuation, coalesces concurrent readers, and yields at settled tool boundaries
+to explicit requests or stale reading. No story quota or deterministic literary checks.
+**33 tests, typecheck, lint and build passed** (gates3416 complete). Focused tests reproduced previous
+frontier-only and wrong-work behavior before changes. A local transaction deadlock during development
+was corrected by keeping all writes in the same transaction; concurrent12-reader test passed.
+
+First reader attempt export completed: .local/reader-first-preserved-2026-09-06,92objects,70operations,
+20documents,8publications,10savedimages,4sessions. Receipt tests/receipts/reader-first-preserved.json
+and archive/reader-attempts/README.md retain references. Export session11926 complete.
+The author reiterated that each attempt starts from scratch with one consistent mechanism. No previous
+fiction or images will enter the new edition. Next: freeze old allowance under temporary release hold,
+allocate the new reader attempt, set fresh schema, commit and deploy passing code, then start the20
+explicit requests. F4 tour remains to implement while generation runs. Local generation stays false.
+Temporary release hold **session1227/PID39425 is HELD**, with no active operations. Release with
+`kill -INT 39425` after the fresh-schema deployment/health/pin check and verify exit. Do not leave it held.
+Old first-reader allowance frozen at22.053726. New schema **world_reader_20260906_b** is configured
+for the next Git deployment with READER_EDITION=true and PROVIDER_BUDGET_USD=150. The new total
+combined allowance is266.751030 including116.751030 already spent in previous attempts. Receipt:
+tests/receipts/second-edition-allocation.json. This is a deliberate authorized increase, not an
+accounting reset. First-attempt complete snapshot remains referenced privately. No new provider
+request yet. Next: commit passing F2/F1 code, fast-forward main, push, verify new deployment and
+fresh edition pin; release hold; begin the20-request ledger. Then implement client-only F4 tour.
 
 ## Purpose and terminology
 

@@ -1,0 +1,59 @@
+{
+  "recordedAt": "2026-09-06T19:50:10.656Z",
+  "schema": "world_reader_20260906",
+  "path": "/Users/ratpartyserver/git/shape-of-time-agentic/.local/reader-first-preserved-2026-09-06",
+  "manifestSha256": "ee14286947fe1c9cc3851f0b54fa73fe6ace764f7b795d98f951a93b6cafa506",
+  "tables": [
+    {
+      "name": "editions",
+      "count": 1
+    },
+    {
+      "name": "works",
+      "count": 3
+    },
+    {
+      "name": "documents",
+      "count": 20
+    },
+    {
+      "name": "publications",
+      "count": 8
+    },
+    {
+      "name": "sessions",
+      "count": 4
+    },
+    {
+      "name": "intents",
+      "count": 8
+    },
+    {
+      "name": "operations",
+      "count": 70
+    },
+    {
+      "name": "assets",
+      "count": 10
+    },
+    {
+      "name": "tool_results",
+      "count": 82
+    },
+    {
+      "name": "openings",
+      "count": 2
+    }
+  ],
+  "objects": 92,
+  "applicationRevision": "e05c24864584aaa17aa60c09027508a1ef71f7b9",
+  "mechanism": "2a816eaad04ffb8f85cac75dcb7159af1b26f8070680fd11d9728edd3e1aa9c2",
+  "readerCommitted": 22.053726,
+  "publishedScope": {
+    "wordsIncludingHeadingsAndAlt": 15244,
+    "publications": 8,
+    "images": 8,
+    "works": 3
+  },
+  "feedback": "Author liked the start; requested more imagery, closer text/image agreement, smoother dialogue/prose and ethnically ambiguous Jay/Tan."
+}

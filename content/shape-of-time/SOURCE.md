@@ -60,6 +60,16 @@ The user's exposition adjustment, verbatim:
 
 > I personally really like sci-fi books where the background rules aren't explained at all, and you're just dropped in without explanation. However, I got some feedback on the text-only version that people wished they were told a bit more about what was going on. So we can soften that rule wrt the explainations of how time works in the world, world mechanics etc so long as it doesn't descend into constant "didactic monologues" and it trusts the reader to some extent to figure out what the rules are.
 
+## September 6 author feedback on the first illustrated edition
+
+The author approved the initial direction and asked for gentle nudges: more frequent imagery,
+closer agreement between images and text, a little more descriptiveness and less abrupt/stilted
+sentences and dialogue, and more ethnically ambiguous Jay and Tan. Small explicitly labeled additions
+in prose-guide.md and visual-direction.md carry those preferences. The full original world and
+world-essence remain unchanged. These are artistic context, not quotas or deterministic evaluations.
+The supplied screenshots show an unlabeled bottle beside prose describing its oak-drawing label;
+that example is development evidence, not a prescribed object or scene in the new edition.
+
 ## Other historical material
 
 archive/infinite-book/undertow-77e0c74.md.txt preserves the separate sequel seed from experimental templates.ts at 77e0c74d63c025f2567fcd1d374c284d5ae4e997, SHA-256 9dc8f105dac17a8a751a397026ff9b243d1de529633be1cc1431819e19c55dd3. It is not an automatic addition to the user-selected main source or a required continuation.

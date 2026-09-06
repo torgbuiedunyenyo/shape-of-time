@@ -1,0 +1,20 @@
+{
+  "recordedAt": "2026-09-06T19:52:31.159Z",
+  "previous": [
+    {
+      "schema": "world",
+      "committed": 94.697304
+    },
+    {
+      "schema": "world_reader_20260906",
+      "committed": 22.053725999999994,
+      "mechanism": "2a816eaad04ffb8f85cac75dcb7159af1b26f8070680fd11d9728edd3e1aa9c2"
+    }
+  ],
+  "newSchema": "world_reader_20260906_b",
+  "newAllowance": 150,
+  "combinedAllowance": 266.75103,
+  "authorization": "Author explicitly allowed exceeding $150 as needed and requested 20 reader requests plus preparation and more imagery.",
+  "reason": "The remaining $33.25 is insufficient for the requested 20-request run at the observed first-attempt cost; allocate $150 initially, review actual spend, retain the guard.",
+  "status": "committed"
+}

@@ -30,10 +30,13 @@ S3_REGION/S3_ACCESS_KEY_ID/S3_SECRET_ACCESS_KEY. Live generation additionally ne
 GENERATION_ENABLED=true and an explicitly funded PROVIDER_BUDGET_USD. The allowance is stored in the
 edition when first initialized; changing the environment alone does not silently increase it.
 The text model is GPT-6 Astra at xhigh; images use gpt-image-2-2026-04-21. There is no fallback.
-PREPARATION_ENABLED=true allows one preparation opportunity at an actively read publication frontier.
-Recent visible reading refreshes its context; explicit requests take priority, stale unstarted
-preparation waits, and an unread prepared continuation prevents another opportunity ahead of it.
-Preparation shares the same edition allowance and does not run unless generation is also enabled.
+PREPARATION_ENABLED=true offers preparation while readers spend time in any published section.
+The creative agent receives the actual current text/images, already prepared openings and unread
+continuation. It can prepare more linear reading or a nested opening, or decide enough is available.
+Repeated signals and concurrent readers share one opportunity per encountered section. Explicit
+requests take priority; preparation yields between completed tool batches when one arrives or the
+reader moves on. Saved work remains available. Preparation uses the shared allowance and requires
+generation enabled.
 The agent chooses what, if anything, is useful to develop.
 
 `pnpm gates` runs typecheck, lint, real Railway persistence/storage tests and the production build.

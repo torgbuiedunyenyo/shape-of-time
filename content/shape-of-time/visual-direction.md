@@ -21,3 +21,22 @@ relationship with the prose as described in SPEC.md. The old mandatory visual-pr
 per-image approval sequence and division of all narrative jobs between media are retired.
 
 Source wording and the limited extraction are recorded in SOURCE.md.
+
+## The author's current touch
+
+Lean toward a more richly illustrated reading: invite the eye back more often as a scene develops.
+A change of distance, a telling object, a gesture, a place or a quieter interval may deserve an image
+of its own. Images can be intimate and modest as well as expansive. Let their frequency and placement
+follow what is alive in the work; this is an invitation to more looking, not a count to satisfy.
+
+Let Jay and Tan remain ethnically ambiguous while giving each a distinct, consistent appearance.
+Keep their ancestry open rather than deciding it from their names or filling in a stereotyped cast.
+Choose references that preserve the individuals you have actually established.
+
+Treat prose and pictures as views into the same particular scene. When the prose asks the reader to
+notice something, give that detail special attention in the actual returned image and its references.
+Small material details—markings, clothing, the state of an object, who is holding it—can matter as much
+as overall atmosphere. A closer look can help. If a mismatch catches your attention, use your judgment
+to revise an unpublished image, its placement or the prose so the two belong together. Preserve
+already established details when making that choice. The tools support this attention without a
+required inspection ritual or a separate approval stage.

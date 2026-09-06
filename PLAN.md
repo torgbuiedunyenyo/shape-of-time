@@ -392,7 +392,8 @@ compaction. Keep the existing original-world wording and agent-led approach.
 3. **F3 — Preserve and pin, then 20 reader requests.** Archive the current edition and its exact
    mechanism/usage privately, settle pending operations, and allocate a documented allowance using
    combined accounting. Both prompt and preparation changes alter the mechanism, so initialize a
-   fresh pinned reader edition. Generate **20 completed explicit reader requests total**, including
+   fresh pinned reader edition. The author reiterated that every attempt starts from scratch;
+   previous content belongs only in a stored, referenced draft/archive folder. Generate **20 completed explicit reader requests total**, including
    Begin, continuation and actual nested-source exploration. This now means requests, not screens,
    model turns, publications or speculative preparation. Keep an idempotent durable ledger of all
    20 request IDs and source choices; continue the root and encountered nested works, including a
@@ -413,4 +414,4 @@ compaction. Keep the existing original-world wording and agent-led approach.
    assets load, model/mechanism receipts agree, and no temporary release hold remains. Record final
    costs, publication scope, limitations and the active release. Leave the opening ready for reading.
 
-Current work: F2, then F1. The prior P0–P6 release remains preserved evidence, not unfinished work.
+Current work: F2/F1 implementation and 33 mechanical tests are complete; F3 archive/allocation and deployment next. The prior P0–P6 release remains preserved evidence, not unfinished work.

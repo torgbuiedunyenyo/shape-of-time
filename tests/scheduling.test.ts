@@ -195,7 +195,7 @@ it("deduplicates reading heartbeats and gives an explicit request priority over 
     .where("id", "=", preparation!)
     .execute();
 });
-it("uses a publication prepared while a continuation waited, without buying another, and does not prepare two unread frontiers", async () => {
+it("uses a publication prepared while a continuation waited, without buying another, and gives the agent earlier reading context without treating an unread continuation as a reason to skip nested preparation", async () => {
   const { work, publication } = await fixture();
   const request = await enqueue(
     edition,
@@ -221,10 +221,54 @@ it("uses a publication prepared while a continuation waited, without buying anot
       .where("id", "=", request.id)
       .executeTakeFirst(),
   ).toEqual({ status: "done", result_work_id: work.id });
-  expect(
-    await recordReading(edition, work.id, {
-      publicationId: publication.id,
-      blockId: publication.blocks[0].id,
-    }),
-  ).toBeNull();
+  const preparation = await recordReading(edition, work.id, {
+    publicationId: publication.id,
+    blockId: publication.blocks[0].id,
+  });
+  expect(preparation).toBeTypeOf("string");
+  const record = await db.selectFrom("intents").selectAll()
+    .where("id", "=", preparation!).executeTakeFirstOrThrow();
+  expect(record.payload.reader_place).toMatchObject({publicationId: publication.id});
+  expect(record.payload.unread_publication_ids).toHaveLength(1);
+  expect(record.payload.source).toMatchObject({publication: {id: publication.id}});
+  expect(await useAvailableContinuation(preparation!)).toBe(false);
+  expect(await recordReading(edition, work.id, {
+    publicationId: publication.id, blockId: publication.blocks[0].id,
+  })).toBe(preparation);
+  await db.updateTable("intents").set({status: "done"}).where("id", "=", preparation!).execute();
+  expect(await recordReading(edition, work.id, {
+    publicationId: publication.id, blockId: publication.blocks[0].id,
+  })).toBe(preparation);
+});
+
+it("rejects a reading signal whose publication belongs to another work", async () => {
+  const first = await fixture();
+  const other = await fixture();
+  await expect(recordReading(edition, first.work.id, {
+    publicationId: other.publication.id, blockId: other.publication.blocks[0].id,
+  })).rejects.toThrow("reading place");
+});
+
+it("coalesces concurrent readers into one preparation opportunity", async () => {
+  const {work, publication} = await fixture();
+  const place = {publicationId: publication.id, blockId: publication.blocks[0].id};
+  const ids = await Promise.all(Array.from({length: 12}, () => recordReading(edition, work.id, place)));
+  expect(new Set(ids).size).toBe(1);
+  await db.updateTable("intents").set({status: "done"}).where("id", "=", ids[0]).execute();
+});
+
+it("yields an in-progress preparation at a settled boundary without buying a response or losing its saved context", async () => {
+  const {work, publication} = await fixture();
+  const prep = await recordReading(edition, work.id, {publicationId: publication.id, blockId: publication.blocks[0].id});
+  const session = randomUUID();
+  const input = [{role: "user" as const, content: "Preparation context already saved."}];
+  await db.insertInto("sessions").values({id: session, edition_id: edition, role: "author", input: json(input), parent_id: null}).execute();
+  await db.updateTable("intents").set({session_id: session, status: "running"}).where("id", "=", prep!).execute();
+  const request = await enqueue(edition, "continue", work.id, {after_publication_id: publication.id}, randomUUID());
+  await runIntent(prep!);
+  expect(await db.selectFrom("intents").select("status").where("id", "=", prep!).executeTakeFirst()).toEqual({status: "done"});
+  expect((await db.selectFrom("sessions").select("input").where("id", "=", session).executeTakeFirstOrThrow()).input).toEqual(input);
+  expect(await db.selectFrom("operations").select("id").where("session_id", "=", session).execute()).toEqual([]);
+  expect((await nextIntent(edition))?.id).toBe(request.id);
+  await db.updateTable("intents").set({status: "done"}).where("id", "=", request.id).execute();
 });
