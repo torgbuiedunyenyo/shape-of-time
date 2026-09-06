@@ -57,7 +57,7 @@ Use the in-app Browser for the actual reader journey: sustained reading, prepare
 
 ## Spend, deployment and preservation
 
-The user authorized implementation, the plan's initial $150 combined provider allowance, and direct Railway production replacement. HANDOFF.md records that authorization and current remainder. Keep creation, imagery, criticism and paid renewal inside the same allowance. Do not ask again for actions already covered by a recorded authorization.
+The user authorized implementation, the plan's initial $150 combined provider allowance, and direct Railway production replacement. On September 6 the user also explicitly authorized exceeding $150 if needed. HANDOFF.md records the actual allocation, spend and current remainder. Keep creation, imagery, criticism and paid renewal in the same accounting. Increase the operational allowance only as needed for the authorized work, record the increase, and preserve the spending guard. Do not ask again for actions already covered by a recorded authorization. The overrun authorization does not resume the deferred operator literary study.
 
 Never automatically repeat an ambiguous generation request. Preserve returned output before parsing, keep provider IDs, reconcile pending operations and record uncertain cost.
 

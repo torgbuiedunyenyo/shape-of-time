@@ -1,6 +1,6 @@
 # Shape of Time implementation plan
 
-Written September 6, 2026. Status: P0–P2 first usable path complete; P3–P5 sustained reading, preparation and memory evidence in progress.
+Written September 6, 2026. Status: P0–P5 complete at the recorded evidence scope; P6 initial reader edition complete, final UI release verification pending.
 
 Execution update: the user explicitly authorized implementing and testing directly on the existing
 Railway production project, with no users or old data requiring preservation. This supersedes the
@@ -35,7 +35,7 @@ The finite milestones below organize implementation work. They do not impose cor
 
 Implementation checkout: /Users/ratpartyserver/git/shape-of-time-agentic, branch codex/agentic-world. Local main in /Users/ratpartyserver/git/shape-of-time also contains the clean starting point. The cleanup checkpoint is tagged checkpoint/agentic-clean-start-2026-09-06. The retired baseline e1a3decb29b33710f26a89f5cf2a415ca6f3ae09 is preserved as archive/folio-prototype-2026-09-06 and in archive/folio-prototype-e1a3dec.tar.gz.
 
-The user requested a clean repository before implementation. The old runtime, migrations, tests, prompts, package/build/start scripts, prepared corpus and deployment configuration have therefore been archived and removed from the active tree. Local main was aligned with this starting point. Subsequent implementation replaced the Railway deployment and removed its old data; retired art-thing remains read-only. The new edition uses the world database schema and matching asset namespace. No old corpus/schema migration is required. Do not restore the archived application as a scaffold.
+The user requested a clean repository before implementation. The old runtime, migrations, tests, prompts, package/build/start scripts, prepared corpus and deployment configuration have therefore been archived and removed from the active tree. Local main was aligned with this starting point. Subsequent implementation replaced the Railway deployment and removed its old data; retired art-thing remains read-only. Development used the world database schema; the fresh pinned reader edition uses world_reader_20260906 and its matching asset namespace. No old corpus/schema migration is required. Do not restore the archived application as a scaffold.
 
 Retain the selected React, React Router, Vite, Hono and Kysely/pg stack initially. Node 24.18.0 remains pinned in .nvmrc; pnpm 11.15.0 and the previous dependency versions are available in the archived package/lock files. P1 creates a fresh minimal manifest and lockfile for the actual new implementation, consulting those pins instead of reintroducing its scripts or unused dependencies wholesale. Inspect small archived storage helpers individually if useful. Add the official OpenAI TypeScript SDK with a version verified to support the selected Responses interfaces. Consult Context7 and official documentation at implementation time. Do not turn package selection into a separate research project.
 
@@ -134,7 +134,7 @@ Application idempotency prevents duplicate tool effects and publications. It doe
 
 A database claim/lease prevents two restarted workers from publishing competing continuations for the same edition. Use one simple ownership mechanism and a revision check; do not recreate the old parallel Folio/Attempt state machines and their duplicated constraints.
 
-**Proposed initial live allowance: $150 total, including Astra creation, images, critic calls and any paid context renewal. This is a suggested ceiling, not spend already authorized by this planning request.** Use at most $20 of it to establish provider/continuation/image-return contracts; put the rest toward the real reading experiment and targeted revisions. Do not create separate hidden budgets for critique or repairs.
+**Initial live allowance: $150 total, including Astra creation, images, critic calls and any paid context renewal.** The implementation go-ahead activated this allowance; the author subsequently authorized exceeding it if needed on September 6. The original experiment allocated up to $20 for provider/continuation/image-return contracts and the rest to the actual reading. Continue tracking combined actual spend and reservations; do not create separate hidden budgets for critique or repairs. Raise the operational allocation only if needed for the currently authorized work, and record the adjustment in HANDOFF.md.
 
 At the checked standard rates, Astra short-context input is $10/M tokens and output $50/M; cache reads/writes differ, and inputs above 272k use higher rates for the full request. As an illustration, 50k uncached input tokens and 10k total output tokens cost about $1 before other charges. Reasoning contributes to output usage; reader-visible word count is not the bill. Recheck prices when enabling spend. [Current pricing](https://developers.openai.com/api/docs/pricing).
 
@@ -297,8 +297,9 @@ during development, start a fresh reader edition under the settled process. No d
 review, note, reading history or image enters that edition or its creative agent context. Scope browser reading
 state to the edition as well. Ordinary reading-interface fixes do not require a new corpus.
 
-Keep all remaining preparation within the original combined $150 allowance, subtracting development
-spend and unresolved reservations before funding the fresh edition. The author requested about 50
+Keep development spend and unresolved reservations in the combined accounting when funding the
+fresh edition. The author has authorized going over the initial $150 if needed; the original
+operational allocation still has room and has not yet been raised. The author requested about 50
 steps of initial material for personal exploration. After asking about the unit and allowing time
 for a reply, the working assumption is roughly 50 reading screens, not 50 paid continuation requests. Stop extended operator literary analysis and automatic refinement. The creative agent
 retains its normal freedom to ask its own critic under the same process.
@@ -330,6 +331,6 @@ Implementation decisions already made: selected models, one application, real pe
 
 Decisions to make from evidence: precise preparation depth, preferred paging/flow behavior, a useful context-renewal threshold, image density/arrangement and whether semantic retrieval or overlapping agent work improves the result. These do not block P1.
 
-The implementation go-ahead and subsequent Railway instructions authorize the initial combined $150 provider allowance and direct production replacement. Actual costs and pending operations are in HANDOFF.md. A larger allowance would require new scope.
+The implementation go-ahead and subsequent Railway instructions authorize the initial combined $150 provider allowance and direct production replacement. On September 6 the author explicitly authorized exceeding $150 if needed. Actual costs, allocation adjustments and pending operations belong in HANDOFF.md. That authorization covers completing the current work; it does not restart deferred operator literary analysis or create a separate study.
 
-Current next action: complete the genuine continuation and nested reading journey identified in HANDOFF.md. Do not restart the historical diagnosis or replace the live experiment with a static showcase.
+Current next action: complete the UI release verification in HANDOFF.md and hand the prepared book to the author. Generation and the fresh nested journey are complete. Do not restart historical diagnosis, literary study or sample expansion.

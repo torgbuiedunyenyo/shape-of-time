@@ -57,8 +57,11 @@ story effects. Prospective reader-edition records provide direct attribution fro
 The development run is complete. Its allowance was frozen at $94.697304 committed, leaving
 $55.302695 allocated to the fresh reader edition (a fraction of a cent remains unallocated). The
 allocation receipt is tests/receipts/edition-allocation.json. The complete export, reader-edition
-pin and live verification are finished; initial preparation is in progress. HANDOFF.md records the active operations. The shared
-$150 ceiling must carry across this transition; only its unused portion funds the reader edition.
+pin and live verification are finished. Initial preparation completed with eight publications and
+eight illustrations across three works; all four explicit requests finished. HANDOFF.md records release status. The shared
+$150 accounting must carry across this transition; the initial reader allocation uses only its
+unused portion. The author subsequently authorized exceeding $150 if needed. No operational
+increase was needed at that point; HANDOFF.md records any later adjustment without resetting spend.
 
 The complete development export finished with 228 operations, 43 document revisions, 22 saved
 image assets (18 published), 10 publications and 286 stored objects. Its 26,329 published words
@@ -77,4 +80,5 @@ and effective configuration matched it. The edition initially had no documents o
 development root and image routes were unavailable. The actual in-app shelf showed no inherited
 visits/bookmarks/discoveries. Begin was clicked through the reading interface, request
 685bfcad-6dae-48e5-a6f5-bac1fa9e8005. Its first completed response confirmed Astra xhigh/all_turns and
-the same mechanism. Receipt: tests/receipts/reader-edition-pin.json. Initial material is generating.
+the same mechanism. Receipt: tests/receipts/reader-edition-pin.json. The completed sample and final accounting are recorded in tests/receipts/reader-initial-edition.json
+and evals/reader-edition-walkthrough-2026-09-06.md.

@@ -10,7 +10,9 @@ the reading interface. See SPEC.md for these terms and the distinction between r
 creative-agent turns and reading screens.
 
 Read AGENTS.md, SPEC.md, EVALS.md, PLAN.md and HANDOFF.md for the current intent and actual evidence.
-The new application is being implemented directly on the existing Railway production project.
+The book is live at https://shape-of-time-production.up.railway.app. The initial reader edition contains
+eight illustrated sections across three nested narratives. HANDOFF.md records release verification,
+spending, provenance and the remaining cold-generation latency.
 
 ## Running and development
 
@@ -85,6 +87,8 @@ The initial $150 allowance covers development and the reader edition together. B
 wait for pending calls, freeze the development allowance at its committed spend, preserve the full
 corpus, and allocate only the remaining amount to the fresh edition. Keep an allocation receipt.
 Do not copy a $150 configuration into a fresh edition and thereby restart the allowance.
+The author subsequently authorized exceeding the initial $150 if needed. Record any deliberate
+increase in HANDOFF.md and retain the same combined accounting and operational spending guard.
 
 Production deploys come from passing pushes to main through Railway's GitHub integration. Never use
 `railway up` as an alternate deployment path. See HANDOFF.md for the exact deployed revision and
