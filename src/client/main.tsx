@@ -840,8 +840,13 @@ function Reader() {
             : undefined;
           if (position) updateVisit(visit.id, position);
         }}
-        onMouseUp={select}
-        onTouchEnd={() => setTimeout(select, 100)}
+        onMouseUp={(event) => {
+          if (!(event.target as Element).closest("button, a")) select();
+        }}
+        onTouchEnd={(event) => {
+          if (!(event.target as Element).closest("button, a"))
+            setTimeout(select, 100);
+        }}
       >
         <div className="eyebrow">The Shape of Time</div>
         {book?.publications[0]?.blocks[0]?.kind !== "heading" ||
@@ -930,7 +935,10 @@ function Reader() {
           <button
             className="close"
             aria-label="Close exploration"
-            onClick={() => setSelected(undefined)}
+            onClick={() => {
+              window.getSelection()?.removeAllRanges();
+              setSelected(undefined);
+            }}
           >
             ×
           </button>

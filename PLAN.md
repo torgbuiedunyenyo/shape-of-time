@@ -306,7 +306,7 @@ retains its normal freedom to ask its own critic under the same process.
 
 **Work:** Verify that the obsolete Fable, finite-movement, static-reader and fixed-image-reference paths removed in P0 have not been reintroduced. Preserve their archive. Ensure the implemented configuration, prompts, docs and tests agree on Astra/xhigh and GPT Image 2.
 
-Run the complete applicable mechanical gate, the current literary/multimodal evaluation and the deployed in-app reader journey. Confirm backup restoration, global spending controls, pending-operation visibility, source retention and correct cache/media behavior.
+Run the complete applicable mechanical gate and the deployed in-app reader journey. Confirm backup restoration, global spending controls, pending-operation visibility, source retention and correct cache/media behavior. The development literary/multimodal study is complete at its recorded scope. The author's later instruction supersedes further operator reviews or expansion toward the suggested 30,000–50,000 words: prepare the fresh reader edition for their personal assessment.
 
 Production replacement is authorized. Integrate passing changes into main and verify the Git-triggered Railway deployment. Old production data need not be preserved. Recovery of the new edition means selecting a matching code revision and restoring its saved corpus/media, preserving the active edition while that recovery is checked.
 

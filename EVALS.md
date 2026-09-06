@@ -6,6 +6,12 @@ and development-agent observations are evidence distinct from the author’s own
 
 This is the evaluation practice for the agentic replacement. Assess what the reader experiences and what the agent actually produced. Mechanical checks, provider contracts, artistic judgment and browser observations establish different things.
 
+**Current scope, September 6:** the author asked to stop extended operator literary analysis and
+automatic refinement after the mechanical work and initial coherence evidence. The development
+study is preserved at its actual scope. Prepare roughly 50 reading screens in the fresh edition
+for the author's own assessment; do not treat the longer study below as an outstanding release
+requirement. The creative agent retains its ordinary option to seek criticism as it develops work.
+
 ## Literary and visual judgment
 
 Use GPT-6 Astra at xhigh as the initial LLM critic, in a context separate from the creative agent's running conversation. Supply the intended experience, the original infinite-book material and adapted prose-guide.md identified by content/shape-of-time/SOURCE.md, the actual material under review and read-only access to relevant original prose/images. The later illustrated-successor prose guide is superseded. Do not give the critic only summaries, intended image prompts or the creative agent's claims about why the draft succeeds.

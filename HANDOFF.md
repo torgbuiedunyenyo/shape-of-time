@@ -26,41 +26,91 @@ unanswered after the terminology correction. Working assumption, stated to the a
 reading screens**, across the fresh root and nested narratives. This is preparation volume, not an
 output quota supplied to the creative agent. Do not purchase 50 continuation requests by assumption.
 
-## Exact live position and single next action
+## Latest reader progress
 
-Production **ca6ef9d8d4ddf8b78dc8431973e7f15315e81fba** is LIVE. Git-triggered Railway deployment
-**63d7e34a-3981-4ff4-8a48-60c2ef8b72b3 SUCCESS** and exact health revision verified.
-Normal main and active branch both at ca6ef9d. Local documentation/receipt commit follows the deployment: this handoff, transition report and
-reader-edition-pin.json record completed deployment, with no runtime changes. Not pushed yet.
+**Active UI fix, about 18:12 UTC:** a native text selection survived closing exploration and bubbled
+through a subsequent image-control mouseup, reopening the dismissed panel and hiding its pending
+status. Reproduced in actual UI before editing. Client-only fix clears native selection on close
+and ignores control mouse/touch events for text selection. No creative mechanism change or reset.
+Full gates session 81868 PASSED (30 tests, typecheck/lint/build), and the actual local browser
+regression passed without submitting any generation. QA tab22 closed; local API/Vite stopped.
+Release lock session **54083**, PID **97529**, is waiting for the current creative run
+to finish, then will hold the worker safely for Git deployment. It MUST be released with SIGINT
+after deployment verification (`kill -INT 97529`). Never leave that lock held at handoff.
 
-**Fresh reader edition exists**, schema **world_reader_20260906**, edition id shape-of-time.
-Its mechanism was pinned before generation, hash:
-**2a816eaad04ffb8f85cac75dcb7159af1b26f8070680fd11d9728edd3e1aa9c2**.
-Recorded revision ca6ef9d. Local source/effective config matched the deployed pin exactly. New provider
-receipts also contain the actual mechanism outside creative source context. Runtime/source/prompt/
-dependency hashes and effective settings are preserved; client-only UI edits do not affect that record.
-Mismatch pauses generation; never automatically clear an edition. Fingerprints are conservative change
+The Loaner first publication 8dc9b143-4da6-4e3d-b130-a61caa96dcc3 (loaner/001-seventeen.md,
+doc 67cae80a-7cf6-4f6d-91eb-42c72131f282) published 18:06:43. Work
+work-61c55b70bacbbb990880b81ef4c4b892, visit 1219b5c1-f55d-404b-b7ef-dcb6375dc9b3.
+10,461 px at 651×1026, one loaded image, about 10 screens. Actual child→root restored selected
+phone-region center to y=99.71 px (target100). Shelf Resume reused the same child visit.
+
+Selected two actual child paragraphs about the departing guest's unfinished photograph export,
+with no supplied angle. Grandchild request **2923d71a-d7c6-4b84-9d59-027b4dbf45e8** is queued
+behind root continuation. The Loaner creative run is still developing a second illustration;
+image operation 5cf4e23c-e0af-4553-a3fe-edc06279dfa2. Do not duplicate requests. Current root+child
+are about30screens. Existing queued work may take the final sample somewhat beyond50screens;
+do not impose a creative-agent quota or initiate more requests before measuring it.
+
+The fresh root now has two illustrated publications:
+
+- root/001-the-green-cap.md rev1: publication ae3d5045-de5e-495f-99e1-c1ef478a43e2,
+  document 0734bff7-94ac-4347-911f-42736746275d, published 17:46:04 UTC.
+- root/002-half-an-hour.md rev2: publication 87badac1-d107-4377-8d36-b9014d553399,
+  document 444b166d-5e90-4306-a2ee-74193041f400, published 17:58:05 UTC.
+
+Root work work-df04ec75476c0c4bf81baee07105206c. Actual UI Open entered root visit
+ a0f22e20-0f70-4d2e-a78b-cf54f206b65d in in-app tab 21, browser 1. At 651×1026/default
+text, root document height is 20,067 px (roughly 20 screens), with both illustrations loaded.
+First publication was about 10 screens. Save place→reload preserved the visible block positions;
+second publication appearing also retained the first source block at the same 777 px top.
+The builder checked presentation and navigation, without another literary assessment.
+
+Clicked Look closer→Choose a detail, selected the visitor phone in the first image, then Open as a
+book with NO supplied angle/premise. Exploration 2ee1da0a-90f1-4dda-beef-1b66d3f33648 was queued
+17:48:43 UTC and began after Begin completed at about 17:59. Source image block
+b-417bc2c01bed4dcc1d6c; region x=.3788646086252746, y=.7034339229968782,
+width=.15222238739408356, height=.11162975075566128. The source remains readable.
+The exploration dialog is now closed. Root preparation a3882510-1350-477e-8bd2-d0db4c44bcfd is
+queued and stale; no need to duplicate it. It can reuse existing second publication when serviced.
+
+Saved the source place and clicked Continue reading once after root2 publication:
+reader continuation ec290ce7-a716-4cd6-9725-947aab0e2a23 is queued behind the exploration.
+Do not repeat it. This should add root material while nested navigation is checked.
+Latest Astra operation f67be7f8-3a9b-415f-be16-53bc3b1e1d0c was polling at 18:00:30 UTC.
+Query fresh with .local/progress.ts since 17:40. No local generation/helper process is running.
+
+**Next:** enter the phone narrative through its saved opening when ready; verify exact source return.
+An actual source in that child can open a grandchild. Together with the pending root continuation,
+this should approach the roughly 50-screen initial sample. Stop initiating preparation once that
+scope is met. Do not commission operator literary reviews or alter the pinned creative mechanism.
+
+## Exact live position
+
+Production ca6ef9d8d4ddf8b78dc8431973e7f15315e81fba is LIVE. Git-triggered Railway deployment
+63d7e34a-3981-4ff4-8a48-60c2ef8b72b3 SUCCESS and exact health revision verified.
+Normal main and active branch are at d064c9a, a documentation/receipt commit following deployment;
+it is not pushed yet. Current additional edits are documentation only. Finish and commit the
+reading evidence, fast-forward normal main, then push/verify when generation is at a useful boundary.
+
+Fresh reader schema world_reader_20260906, edition id shape-of-time. Mechanism pinned before any
+generation: 2a816eaad04ffb8f85cac75dcb7159af1b26f8070680fd11d9728edd3e1aa9c2, revision ca6ef9d.
+Local source and effective configuration matched the deployed pin exactly. New provider receipts
+contain the actual mechanism outside creative source context. Runtime/source/prompt/dependency
+hashes and effective settings are preserved; client-only edits do not affect that record. A mismatch
+pauses generation; it never automatically clears an edition. Fingerprints are conservative change
 signals, not semantic judgments. Preserve previous records when deliberately changing a process.
 
-In-app browser verified a clean shelf: Begin, no previous visits/bookmarks/discoveries. Old development
-root/image API addresses both unavailable. Before Begin, reader edition had zero documents/publications.
-Clicked actual **Begin**. Current request **685bfcad-6dae-48e5-a6f5-bac1fa9e8005 RUNNING**.
-Creative-agent session **36bc9a8a-ece9-4b51-988d-0bbce2bbfb2e**.
-First completed op **dba7872c-baf3-4128-8ab9-00777374a2b1** verified GPT-6 Astra xhigh/all_turns and
-matching mechanism receipt. First illustration op8b2bf0e1-c8d6-4ca0-8aa5-d7fa40d2067b completed17:44. Latest Astra op
-**32e7bb12-ed42-4d99-936d-608f22094874**, created17:44:12UTC, received/in progress at last query. No fresh draft/publication yet. Query fresh; do not repeat Begin.
+The in-app browser verified a clean shelf, no previous visits/bookmarks/discoveries, and unavailable
+old development root/image routes. The fresh edition had zero documents/publications before Begin.
+Begin request 685bfcad-6dae-48e5-a6f5-bac1fa9e8005 is DONE. Creative-agent session
+36bc9a8a-ece9-4b51-988d-0bbce2bbfb2e. First completed operation
+dba7872c-baf3-4128-8ab9-00777374a2b1 confirmed Astra xhigh/all_turns and matching mechanism.
+Receipt: tests/receipts/reader-edition-pin.json.
 
-**Next:** let this fresh opening finish, verify its actual layout/controls, then use normal reader
-continuation/exploration to prepare roughly50 reading screens with useful nesting. No further literary
-analysis or auto-refinement by the development agent. Record measured scope, cost and final usable links.
-Finish the live UI journey and final handoff; do not resume the superseded 30–50k development study.
-
-CUA `tab` is **21**, browser1 (in-app), at
-https://shape-of-time-production.up.railway.app/waiting/685bfcad-6dae-48e5-a6f5-bac1fa9e8005
-Marked handoff this turn; mark again across turns, eventually deliverable. Old development tabs are gone.
-CUA initialized; `tab` binding available. Use getAXState({emit:false}) and slice to avoid dumping the whole
-book. Browser evaluate is read-only DOM; use actual UI controls for requests/navigation. AX click and
-coordinate arrays are supported. No viewport override active.
+CUA tab 21, browser 1: https://shape-of-time-production.up.railway.app/read/a0f22e20-0f70-4d2e-a78b-cf54f206b65d
+No viewport override. Get compact AX state instead of dumping the full narrative. Browser evaluate
+is read-only DOM; use actual controls for requests and navigation. At final handoff leave the book
+readable and mark the tab deliverable if the current browser API supports it.
 
 ## Budget — combined, do not reset
 
@@ -68,8 +118,8 @@ Original authorized provider allowance **$150 combined**, including text, imager
 Development completed at **$94.697304** (unknown0), and its allowance was frozen at that committed spend.
 Only **$55.302695** was allocated to the fresh reader edition; fraction of a cent left unallocated.
 Receipt tests/receipts/edition-allocation.json and ignored .local/edition-allowance-2026-09-06.json.
-Do not rerun freeze or restore a150 allowance on either edition. Current reader commitment **2.1961655**,
-remaining **53.1065295**, unknown0; includes active reservation. Query fresh. Combined commitment is
+Do not rerun freeze or restore a150 allowance on either edition. Current reader commitment **6.4449205**,
+remaining **48.8577745**, unknown0; includes active reservation. Query fresh. Combined commitment is
 94.697304 plus current reader commitment. A new schema is not a new authorization.
 
 No active release lock, export, local critic or provider investigation. Unified sessions79048(lock),

@@ -57,7 +57,7 @@ story effects. Prospective reader-edition records provide direct attribution fro
 The development run is complete. Its allowance was frozen at $94.697304 committed, leaving
 $55.302695 allocated to the fresh reader edition (a fraction of a cent remains unallocated). The
 allocation receipt is tests/receipts/edition-allocation.json. The complete export, reader-edition
-pin, live verification and initial preparation are still in progress. HANDOFF.md records the active operations. The shared
+pin and live verification are finished; initial preparation is in progress. HANDOFF.md records the active operations. The shared
 $150 ceiling must carry across this transition; only its unused portion funds the reader edition.
 
 The complete development export finished with 228 operations, 43 document revisions, 22 saved
