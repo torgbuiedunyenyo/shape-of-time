@@ -238,6 +238,13 @@ Warm openings enter immediately. Cold openings keep the source readable with tru
 
 ### P4 — Prove interruption recovery on Railway
 
+**Execution evidence:** Completed for the current path. A real app restart resumed the same stored
+Astra response and saved its draft once; see tests/receipts/astra-restart.json. The connected new
+corpus, full author context and all media restored into a fresh Railway schema/object namespace
+with every row/object checksum matching. A real full-export size failure was fixed with incremental
+records before that success. See evals/corpus-recovery-2026-09-06.md and its receipt. Mechanical gates
+use real DB/storage and preserve unknown outcomes; this does not certify long-form quality.
+
 **Work:** Exercise failure boundaries on the existing P1–P3 path: after provider dispatch, after returned bytes are saved, after a tool result, during publication, and while a child is opening. Verify restarting, resuming, reconciling unknown requests and stopping new spend. Remove any alternate production path that bypasses these mechanisms.
 
 The user authorized direct production replacement and testing, with no old data to preserve. Use

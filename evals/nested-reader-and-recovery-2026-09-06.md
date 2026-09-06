@@ -76,3 +76,20 @@ Three adjacent paragraphs could also be selected as a single exact exploration q
 submitting a generation request. While the root continuation was pending, opening another image's
 exploration panel hid the continuation status; that separate state defect was reproduced and is
 being corrected in the next release.
+
+On eec8fddb7b837fbb50e3f8bca024a39ff969d88e, root continuation432dad7f-d219-4cf2-ab94-3f46ed642ddd
+remained disabled with its pending status after choosing the pool image for exploration and again
+after reload. No image exploration was purchased for that check. A prepared root→WASH opening then
+created visit8389d3f8-b207-4925-9cc5-4d54cf71e96e; its actual Continue request is
+8c015d8e-d085-4d70-ab8b-cc491d192e65. While that request waited, the prepared wedding-program link
+opened visita77a4527-0834-46c8-9821-8d9eb5f13f15 immediately. Return reached the exact program
+passage in8389d3f8. It did not steal focus to the root or lose the nested continuation.
+
+First live preparation8a820cb7-c57e-40c5-94c5-ce712e7ad5dc began from actual visible root003 reading
+at05:41:06UTC. Root Continue followed at05:42:08, WASH Continue at05:43:47. On seeing both requests,
+the author saved notes/prepare-8a820cb7.md (document85f87088-82cb-464a-8c0a-11b17449783e) and yielded
+without publishing speculative fiction. The note explicitly distinguishes a considered Dee branch
+from canonical events. Root continuation then started; WASH waits next. This demonstrates queue
+awareness and restraint, not a warm continuation or a measured reduction in frontier latency.
+The developer had already read the chapter and navigated faster than ordinary sustained reading.
+A useful prepared continuation remains to be observed without prematurely requesting it.

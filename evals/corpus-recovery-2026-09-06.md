@@ -20,4 +20,11 @@ archive need not fit a single JavaScript string or collection.
 The focused mechanical check preserves multiline/Unicode/nested protocol content, refuses to
 overwrite an existing snapshot file and detects later byte corruption. It is not a literary test
 or a fresh provider call. The real replacement export has passed the previous failure point:
-132operations occupy893MiB of JSONL. Final export and restore evidence are pending.
+132operations occupy893MiB of JSONL. The full replacement export and restore then succeeded. Snapshot
+.local/corpus-nested-renewed-v2-2026-09-06 contains1,011,238,197 table bytes and192,746,639 object
+bytes. Every restored row in ten tables and all171objects matched their checksums in
+world_restore_nested_renewed and its corresponding object namespace, with generation disabled.
+The six publications,14assets, renewed context and all132operations are preserved. The live author
+continued independently after export while restore used that separate schema. No production edition
+was overwritten. Small receipt: tests/receipts/corpus-nested-restore.json. Full27-test/typecheck/lint/
+build gate passed. The revised exporter is deployed in eec8fddb7b837fbb50e3f8bca024a39ff969d88e.

@@ -13,50 +13,57 @@ agent; no subagents or goal tool. The user's implementation and production repla
 
 ## Immediate position
 
-Root continuation `f9d2a6d8-74a9-408b-ae77-1cb2dcb909bb` is DONE. Root now has three
-published chapters, roughly8k words; total connected corpus roughly16–17k. Builder read the final
-prose/revisions, critics, all illustrations and latest root/library notes. Chapter2 completes the
-noodle evening/bus/home and establishes Tuesday swimming. Chapter3 develops Dee's driving goal,
-Tuesday swimming, first kisses, and cooking at Jay's home before his4pm shift. Neither nested
-work advanced in that request. No developer creative edits or manual publication.
+Production **eec8fddb7b837fbb50e3f8bca024a39ff969d88e** is live and exact healthz verified;
+Git deployment4c7d2c63-7c90-44f3-8123-56917776a08a SUCCESS. Preparation is enabled.
 
-Release1778df9944ebcea6a9df6be95506ee35f83d350d is LIVE; exact healthz and Git deployment
-c236168d-ce07-4e7b-a14d-630ee2242b03 SUCCESS. PREPARATION_ENABLED=true is now active.
-Release helper76546 stopped and lock released. First full export12813 FAILED with RangeError: Invalid string length at JSON.stringify(rows)
-for operations (~850MB requests). Partial .local/corpus-nested-renewed-2026-09-06 preserved.
-Revised exporter streams PostgreSQL cursor rows to JSONL and verifies/restores incrementally.
-New export exec34827 writes .local/corpus-nested-renewed-v2-2026-09-06. Keep browser at library
-until it finishes. All27tests, typecheck/lint/build passed in exec1302. Export has saved all tables, including
-132operations/893MiB JSONL; media copying is underway. Source content unchanged.
-Exporter changes are being pushed as a passing checkpoint; verify the new deployment before
-resuming reader QA. See evals/corpus-recovery-2026-09-06.md.
-Then restore to fresh world_restore_nested_renewed while testing live preparation/root/child.
-Browser tab2 is at library, image tabs14/15 closed.
+- Root continuation **432dad7f-d219-4cf2-ab94-3f46ed642ddd RUNNING**. Latest checked Astra
+  operationec501309-3ba0-43ab-b1e7-c02a01683467 began05:51:41UTC; query fresh.
+  New apartment image img-9bc9ca68-c9f7-429f-9b1b-3fdcacbda3a0 is complete and builder-viewed:
+  wide doorway view, Jay dressing for work, Tan reaching for shoe at bed, left wrist band,
+  gray pullover/plum trousers, familiar faces. References dinner/bus. No corresponding draft
+  read yet. Temporary image tab16 was closed.
+- WASH continuation **8c015d8e-d085-4d70-ab8b-cc491d192e65 QUEUED**.
+- WASH preparation715f30a8-cb2f-4845-a999-5001b268dc35 queued after that request; should reuse
+  any available continuation rather than buy another. Don't manually duplicate requests.
+- First root preparation8a820cb7-c57e-40c5-94c5-ce712e7ad5dc DONE. It saw actual requests,
+  saved notes/prepare-8a820cb7.md (doc85f87088-82cb-464a-8c0a-11b17449783e, fully read) and
+  yielded without new fiction/images. A considered Dee branch remained explicitly noncanonical.
+  This proves awareness/restraint, not reduced frontier latency or a successful warm continuation.
+- Browser tab2 at WASH visit8389d3f8-b207-4925-9cc5-4d54cf71e96e near wedding-program source.
+  Its Continue is visibly disabled/pending. Fresh prepared wedding visita77a4527-0834-46c8-9821-
+  8d9eb5f13f15 opened immediately and returned to the exact program while WASH request remained.
+- Root pending continuation survived image exploration and reload on production. The known defect
+  is fixed. Only `tab` exists in the reset CUA session; clicks take [x,y], not objects. Viewport
+  override remains1000x800; reacquire capability docs if changing it. No temporary image tabs open.
 
-Changes in this release:
-- Automatic native renewal between reader requests above250k measured input; complete canonical
-  window/originals retained; same operation reused on resume; uncertainty pauses. Within-turn880k
-  guard remains, no within-turn auto-renewal.
-- Completed renewal replay preserves completion timestamp.
-- Exploration and continuation retain separate status/polling/reload. Production QA remains.
-- Native provider already retained full artistic orientation; avoid appending a duplicate when it
-  does. Regression reproduced and fixed. ALL canonical items remain unchanged.
+**Full corpus restore COMPLETE**, exec50186 exited0. Snapshot
+.local/corpus-nested-renewed-v2-2026-09-06:10tables,3works,6publications,132operations,14assets,
+171objects. Every restored row/object matched in world_restore_nested_renewed, generationfalse,
+automatic schema object prefix. ManifestSHA9a5f0b35a767eec07210aa40c7e50474914e7b22b5a8fcd1891e92c1059ce757.
+Table bytes1,011,238,197; object bytes192,746,639. No active export/release helper. Do not rerun.
+The first export failed at JSON.stringify(all operations) with Invalid string length; preserved
+partial folder .local/corpus-nested-renewed-2026-09-06 is NOT a backup. The fix streams cursor rows
+as JSONL and verifies/restores incrementally. Report evals/corpus-recovery-2026-09-06.md and receipt
+corpus-nested-restore.json. Old-format first-root backup uses the matching historical script.
 
-One-time free maintenance operation `df40fb26-feff-4d3f-9922-ccbd295ea230` already removed only the
-app-added duplicate at index5, while author idle/locked. Preserved all five canonical native items
-and subsequent root conversation, kept full previous input in operation. Step73→74, items74→73.
-Receipt tests/receipts/native-orientation-maintenance.json. **Do not repeat this repair.**
+All **27 tests, typecheck, lint, build passed**, exec1302. Code is committed/deployed. Current
+uncommitted changes are evidence/HANDOFF/PLAN and new corpus receipt only. No gates needed for docs.
+Do not deploy/restart during a direct image purchase. Earlier forced restart/native renewal/repair
+are already proved; don't repeat them. Maintain the shared150 allowance; latest commitment with
+active reserve60.2803325, remaining89.7196675, unknown0. Query fresh via .local/progress.ts.
 
-All **26 tests, typecheck, lint and build passed**, exec2376. No new gates needed until code changes.
-Next: finish full export/restore, then observe preparation and continue root/child.
-Never deploy through a direct image purchase. No duplicate critique/renewal/restart request.
+Next: read actual root/child drafts, images, revisions and criticism as they arrive; extend toward
+substantial connected30–50k study scale within allowance. Let an actual preparation opportunity
+produce useful saved reading without immediately submitting Continue, then observe reuse/latency.
+Automatic renewal threshold250k still needs a naturally crossed request boundary. Initial corpus
+is roughly16–17k; do not claim novel coherence. P1/P2/P4 complete for current path; P3/P5/P6 ongoing.
 
 ## Repositories and production
 
 Active: `/Users/ratpartyserver/git/shape-of-time-agentic`, branch `codex/agentic-world`.
-Normal: `/Users/ratpartyserver/git/shape-of-time`, clean main fast-forwarded to1778df9.
-Remote/deployed SHA: `1778df9944ebcea6a9df6be95506ee35f83d350d`, /healthz verified.
-Successful Git deployment: `c236168d-ce07-4e7b-a14d-630ee2242b03`.
+Normal: `/Users/ratpartyserver/git/shape-of-time`, clean main fast-forwarded toeec8fdd.
+Remote/deployed SHA: `eec8fddb7b837fbb50e3f8bca024a39ff969d88e`, /healthz verified.
+Successful Git deployment: `4c7d2c63-7c90-44f3-8123-56917776a08a`.
 
 Preceding3a10a6c introduced preparation, saved discoveries, exact source return, quiet publication
 refresh and reuse of already-available continuations. b920956 fixes bookmarks losing their containing
@@ -154,7 +161,7 @@ Child visit `c92b10b6-71bc-46a9-a591-a4f6158cda14`; current nested wedding visit
 78da84… remain historical reading records. Pre3a10 visits lack the entered-request marker; their
 ready panel can appear once. Enter through the released control once to record it.
 
-Bindings tab/browser/viewport exist. Temporary sundayScene14, poolScene15 and busScene13 are closed.
+CUA was reset this slice. Only `tab` (2) exists now; click takes [x,y], not object. Reacquire browser/viewport documentation if needed. Temporary sundayScene14, poolScene15 and busScene13 are closed.
 Other image bindings point to closed tabs. Viewport1000x800. Close image tabs before changing viewport;
 reset on completion. Evaluate DOM read-only; no fetch/storage mutation. Use coordinate clicks for
 sticky toolbar controls because locator.click scrolls first. AX returns diffs; avoid dumping novels.
@@ -179,12 +186,12 @@ Receipt tests/receipts/astra-restart.json. Two earlier guarded attempts did noth
 
 First-root backup `.local/corpus-first-reading-2026-09-06` restored exactly to
 `world_restore_first_reading` and its S3 prefix, generationfalse (10tables,29ops,4assets,33objects).
-Need a NEW full snapshot/restore including current corpus, protocol image blobs and renewed window.
+New full snapshot/restore completed as recorded above, including protocol images and renewed window.
 Use scripts/corpus.ts export|restore DIRECTORY. Export requires idle author/no active operations;
 restore uses a fresh world_restore_* schema with generation disabled. Asset keys are automatically
 prefixed with that schema; there is no separate ASSET_PREFIX setting.
 
-All26 current gates pass against real DB/S3 and mechanical fixtures; no ordinary paid calls or
+All27 current gates pass against real DB/S3 and mechanical fixtures; no ordinary paid calls or
 literary scores. They cover persistence, arbitrary length, publication atomicity, replay, budget,
 raw bytes, exact image storage, archive originals, request dedupe/priority, preparation staleness,
 source/bookmark routes, independent pending requests and native-window preservation/uncertainty.
@@ -200,8 +207,8 @@ Predecessor calibration is DONE:64 verbatim pages, source/review/assessment unde
 distinguishing separate editions and nuanced post-resolution behavior. Don't buy it again.
 
 P1 first root continuation and P2 actual nested return are complete. P3 needs live
-preparation and several root/nested continuations with grounded criticism. P4 needs the new corpus
-restore. P5 needs substantial connected reading (30–50k study scale, not a quota), distant recurrence,
+preparation and several root/nested continuations with grounded criticism. P4 corpus
+restore is complete. P5 needs substantial connected reading (30–50k study scale, not a quota), distant recurrence,
 post-resolution development and continued renewal evidence. P6 needs the final production walkthrough
 and honest handoff. Do not declare long-form success from the roughly16–17k connected corpus. Stay within
 $150 and preserve everything already generated.
