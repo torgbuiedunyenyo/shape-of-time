@@ -1,6 +1,6 @@
 # Shape of Time implementation plan
 
-Written September 6, 2026. Status: P0–P5 complete at the recorded evidence scope; P6 initial reader edition complete, final UI release verification pending.
+Written September 6, 2026. Status: P0–P6 complete at the recorded evidence scope. The fresh reader edition is ready for the author’s assessment.
 
 Execution update: the user explicitly authorized implementing and testing directly on the existing
 Railway production project, with no users or old data requiring preservation. This supersedes the
@@ -291,7 +291,12 @@ If retrieval repeatedly misses relevant material, improve source navigation, not
 
 ### P6 — Release and leave a usable handoff
 
-**Current release work:** Record mechanism provenance and preserve the evolving development corpus
+**Completed release:** Eight illustrated sections across three nested narratives are live under one
+pinned mechanism; private development evidence is preserved. The fresh nested journey, mechanical
+gates and Git-triggered application release passed. See HANDOFF.md and the initial-edition receipt.
+The requirements below describe the completed release discipline.
+
+Record mechanism provenance and preserve the evolving development corpus
 privately with its actual interventions and version history. Because the generation mechanism changed
 during development, start a fresh reader edition under the settled process. No development story,
 review, note, reading history or image enters that edition or its creative agent context. Scope browser reading
@@ -333,4 +338,4 @@ Decisions to make from evidence: precise preparation depth, preferred paging/flo
 
 The implementation go-ahead and subsequent Railway instructions authorize the initial combined $150 provider allowance and direct production replacement. On September 6 the author explicitly authorized exceeding $150 if needed. Actual costs, allocation adjustments and pending operations belong in HANDOFF.md. That authorization covers completing the current work; it does not restart deferred operator literary analysis or create a separate study.
 
-Current next action: complete the UI release verification in HANDOFF.md and hand the prepared book to the author. Generation and the fresh nested journey are complete. Do not restart historical diagnosis, literary study or sample expansion.
+Current next action: the author reads and explores the prepared book, then supplies artistic direction. Implementation, initial generation and release verification are complete at the documented scope. Do not restart historical diagnosis, literary study or sample expansion without new direction.

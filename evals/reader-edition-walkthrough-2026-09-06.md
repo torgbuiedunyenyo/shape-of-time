@@ -134,4 +134,11 @@ The failure was reproduced through actual production controls before the change.
 interface against the same saved publications locally (generation disabled), selecting a passage
 still opened its correct quote; closing it cleared the native selection; opening and closing the
 illustration left the selection panel closed. This regression used no generation submission. The
-30-test mechanical suite, typecheck, lint and build also passed. Deployment verification follows.
+30-test mechanical suite, typecheck, lint and build also passed.
+
+Git-triggered Railway deployment `f85531a0-a34d-401f-bf84-66982b0b6a69` succeeded for revision
+`f1bb948d52830cb28bae1d97a6d32f9c1452ebae`; /healthz reported that exact revision. After reloading
+the live page, actual passage selection opened the correct quote. Closing cleared native selection;
+opening and closing Look closer did not reopen the dismissed panel. No generation was submitted.
+The temporary deployment hold was released and its helper exited0; post-release provider state
+remained idle with unchanged spend and unknown0. Later completion-record commits are documentation-only.
