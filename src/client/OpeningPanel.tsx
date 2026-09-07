@@ -12,7 +12,7 @@ export function OpeningPanel({ source, intent, onClose, onRequest, onEnter, erro
   return <aside className="exploration" aria-label="Open as a book">
     <button className="close" aria-label="Close exploration" onClick={onClose}>×</button>
     <p className="eyebrow">An opening</p>
-    <blockquote>{source.quote ?? "A detail of this world, seen from another place."}</blockquote>
+    {source.quote && <blockquote>{source.quote}</blockquote>}
     {intent?.kind === "explore" && intent.result_work_id ? (
       <button className="primary" onClick={() => onEnter(intent)}>Enter the book ↗</button>
     ) : intent?.kind === "explore" && ["queued", "running", "paused", "failed"].includes(intent.status) ? (

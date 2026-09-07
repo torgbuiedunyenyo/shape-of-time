@@ -1,13 +1,14 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import { capturePlace, restorePlace } from "./position.js";
+import { GuideDemonstration } from "./GuideDemonstration.js";
 import { rememberReadingGuide } from "./tour-state.js";
 const steps = [
-  { target: ".book h1", title: "A world to wander through", text: "Read for as long as you like. A passage or picture can lead into another story, and your place will be waiting when you return." },
-  { target: ".page-controls", title: "Find your own pace", text: "Scroll as usual, or use these arrows to move a screen at a time. At the end of the available story, Continue reading asks the book to unfold further." },
-  { target: ".book p[data-block]", title: "Follow a few words", text: "Select a passage, then choose Open as a book to discover a narrative within it. Marked openings already have something ready to read." },
+  { target: ".book h1", title: "Before you begin", text: "A few gestures for reading. You can skip this introduction and return to it with the ? beside the page arrows." },
+  { target: ".page-controls", title: "Find your own pace", text: "Scroll as usual, or use these arrows to move a screen at a time. If the next passage is not ready, Continue reading requests it." },
+  { target: ".book p[data-block]", title: "Follow a few words", text: "Drag over a few words, then choose Open as a book. Marked openings already have something ready to read." },
   { target: ".book .image-button", title: "There is more in a picture", text: "Tap an illustration to look closer. Open the whole image as a book, or choose a detail and draw a box around what interests you." },
   { target: ".type-controls", title: "Make yourself comfortable", text: "A− and A+ change the text size. Save place keeps a passage on your shelf. Your current reading position is remembered as you go." },
-  { target: ".reader-navigation", title: "You can always come back", text: "The library holds your stories and saved places. When you follow an opening, Return brings you back to its exact source. Find this guide again with the ? beside the page arrows." },
+  { target: ".reader-navigation", title: "You can always come back", text: "Contents holds the stories and your saved places. When you follow an opening, Return brings you back to its exact source. Find this guide again with the ? beside the page arrows." },
 ];
 type Rect = {top:number;left:number;width:number;height:number};
 export function ReadingGuide({onClose}:{onClose:()=>void}) {
@@ -64,6 +65,8 @@ export function ReadingGuide({onClose}:{onClose:()=>void}) {
       <p className="eyebrow">A LITTLE ORIENTATION · {index+1} / {available.current.length}</p>
       <h2 id="guide-title">{step.title}</h2>
       <p id="guide-description">{step.text}</p>
+      {step.target === ".book p[data-block]" && <GuideDemonstration key="text" kind="text" />}
+      {step.target === ".book .image-button" && <GuideDemonstration key="image" kind="image" />}
       <div className="guide-actions">
         <button onClick={finish}>Skip guide</button>
         <div>{index>0&&<button onClick={()=>setIndex(index-1)}>Back</button>}

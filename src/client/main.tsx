@@ -217,15 +217,13 @@ function Shelf() {
   };
   return (
     <main className="shelf">
-      <div className="eyebrow">A library unfolding</div>
       <h1>
         The Shape
         <br />
         of Time
       </h1>
       <p className="invitation">
-        A story contains a world.
-        <br />A world contains other stories.
+        A love story.
       </p>
       {error && <p role="alert">{error}</p>}
       {library?.edition.root_work_id ? (
@@ -243,7 +241,7 @@ function Shelf() {
         >
           {library?.generationEnabled
             ? "Begin the book"
-            : "The library is being prepared"}
+            : "The first passage is being prepared"}
         </button>
       )}
       {loadReading().current && (
@@ -253,14 +251,14 @@ function Shelf() {
       )}
       {(library?.edition.root_work_id || Boolean(query) || !!library?.works.length) && (
         <section className="catalogue">
-          <label htmlFor="search">On the shelves</label>
+          <label htmlFor="search">Contents</label>
           <input
             id="search"
-            placeholder="Find a book"
+            placeholder="Find a story"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
-          {library?.works.length === 0 && <p role="status">No books match this search.</p>}
+          {library?.works.length === 0 && <p role="status">No stories match this search.</p>}
           {library?.works.map((w) => (
             <button key={w.id} onClick={() => open(w.id)}>
               {w.title}
@@ -292,11 +290,6 @@ function Shelf() {
         </section>
       )}
       <Discoveries />
-      <p className="small">
-        Follow a passage or an image into another book.
-        <br />
-        Your place is kept for your return.
-      </p>
     </main>
   );
 }
@@ -319,7 +312,7 @@ function Waiting() {
   }, [id]);
   return (
     <main className="waiting">
-      <Link to="/">← The library</Link>
+      <Link to="/">← Contents</Link>
       <h1>
         {intent?.result_work_id
           ? (intent.result_title ?? "Your book is ready.")
@@ -657,7 +650,7 @@ function Reader() {
     return (
       <main className="waiting">
         <h1>This reading place is unavailable.</h1>
-        <Link to="/">Return to the library</Link>
+        <Link to="/">Return to contents</Link>
       </main>
     );
   const render = (b: Block, pub: string) => {
@@ -773,8 +766,8 @@ function Reader() {
               ↶ <span>Return</span>
             </button>
           )}
-          <Link to="/" aria-label="The library">
-            ⌂ <span>The library</span>
+          <Link to="/" aria-label="Contents">
+            ⌂ <span>Contents</span>
           </Link>
         </div>
         <span className="running-title">{book?.work.title}</span>

@@ -86,3 +86,7 @@ Immediately read HANDOFF.md and its current PLAN.md section after compaction. Re
 One-time author exception, September 7: change Astra from xhigh to medium in the existing live
 book, retaining all content and memory. Record the old and new mechanisms and the switch boundary.
 This does not waive the fresh-attempt rule for any other change.
+
+Reader-facing language should serve the literature, not advertise the software or explain its
+medium. The cover says “A love story.” Necessary control and generation-wait explanations belong
+in their immediate context. Guide gestures must be visibly demonstrated, not only described.

@@ -497,3 +497,15 @@ Switch the shared Astra effort to medium (creative agent, critic and renewal), p
 content and memory under the explicit one-time exception. Preserve old/new mechanism records and
 the operation boundary, update the live pin without disabling its guard, run checks, deploy through
 Git and verify the live revision/configuration. Do not restart automatic sampling.
+
+### F9 — Literature-first surroundings and demonstrated controls
+
+Author requested September 7: replace format commentary with story-facing copy (cover: “A love story.”),
+retain necessary waiting/control instructions, verify reader-local history, and animate actual text
+highlighting and image-region drawing in the guide. Use existing prose/images in demonstrations;
+never submit an exploration from the tutorial. Check desktop/narrow/reduced-motion/replay/restore
+and isolated browser storage. Client-only; retain medium mechanism and all existing content.
+
+F9 implementation and local UAT complete; all 46 tests and build gates passed. The reader-history
+check confirms profile-local persistence, not accounts. See evals/reader-interface-2026-09-07.md;
+final release verification is recorded at .local/literature-release.json.

@@ -1,5 +1,14 @@
 # Handoff
 
+## Latest interface work — F9
+
+Literature-first interface copy, demonstrated text/image selection in the guide, and verification of
+browser-profile-local reading history are implemented and locally walked through. All 46 tests,
+type checking, lint and build passed. See evals/reader-interface-2026-09-07.md and the final
+deployment/hold receipt at .local/literature-release.json. No accounts or cross-device history exist. Client-only;
+retain Astra medium, existing content, and the stopped automatic sample. See PLAN.md F9.
+
+
 ## Latest override — Astra medium
 
 The author explicitly requested medium effort and a one-time exemption from resetting the book.

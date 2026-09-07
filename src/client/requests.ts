@@ -15,10 +15,10 @@ export function continuationStatus(intent: Pick<Intent, "status" | "queue">) {
 
 export function openingStatus(intent?: Pick<Intent, "status" | "result_work_id" | "error" | "queue">) {
   if (!intent) return "Checking the opening…";
-  if (intent.result_work_id) return "The opening is ready to read. More can unfold while you read.";
+  if (intent.result_work_id) return "The opening is ready to read.";
   if (["paused", "failed"].includes(intent.status)) return "This opening has paused and needs attention. Your request is saved; you can keep reading elsewhere.";
   if (intent.queue?.blocked) return "New writing is paused while a problem is resolved. Your opening is saved in the queue; you can keep reading elsewhere.";
-  if (intent.status === "queued" && intent.queue?.ahead) return `${intent.queue.ahead === 1 ? "One reading request is" : `${intent.queue.ahead} reading requests are`} ahead of this opening. You can keep reading and find it again under Your openings in the library. Entry appears when its first passage is ready.`;
+  if (intent.status === "queued" && intent.queue?.ahead) return `${intent.queue.ahead === 1 ? "One reading request is" : `${intent.queue.ahead} reading requests are`} ahead of this opening. You can keep reading and find it again under Your openings in Contents. Entry appears when its first passage is ready.`;
   if (intent.status === "queued") return "Waiting to begin. You can keep reading; entry will appear as soon as the first passage is ready.";
   if (intent.status === "running") return "The first passage is taking shape. You can enter as soon as it is ready.";
   return "The opening is not yet ready to read. Your request is saved.";
