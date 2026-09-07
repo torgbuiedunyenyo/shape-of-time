@@ -1,7 +1,53 @@
 # Handoff
 
-Updated September 6, 2026, 22:26 UTC. After compaction, read this active handoff and PLAN.md
+Updated September 7, 2026, 02:12 UTC. After compaction, read this active handoff and PLAN.md
 section 11. PLAN.md is the sole queue; do not create STATUS.md.
+
+### Current recovery checkpoint — supersedes older process/count entries below
+
+The author revoked the previous OpenAI credential and explicitly supplied/authorized its replacement
+in Railway, then renewed the instruction to finish all20requests. Replacement is stored and its
+Astra model access authenticated successfully. No credential is recorded in this document.
+Configuration-triggered deployment **0d3607e3-d58e-4993-a2dc-b5745b029615** succeeded at the same
+application revision1ed691a; health matched and subsequent Astra generation succeeded. This activates the new credential and updated allowance; no source or
+creative mechanism change and no edition reset.
+
+**12 requests are complete in production.** The original driver and monitor exited during the
+conversation interruption. Do not rely on their older session/PID entries. Ledger reconciliation
+through12 completed. The resumed driver is **session31318 / PID87544**; monitor **session79831 / PID86952**.
+**Keep this existing driver running through all20; do not start a duplicate.**
+
+Driver request13 is child continuation30726e4a-1826-45a1-9761-aad618b22c54, queued. The author also
+submitted a real root continuation through the reading interface during the restart:
+23ca1f50-544d-4404-8f26-df852abd72af, currently running. It has been adopted as ledger entry14
+instead of buying the originally planned automatic root continuation. Submission chronology for
+entries13/14 is reversed. Both still count toward20 explicit requests total. Saved ledger explains
+the adoption; no active provider call was interrupted. Check for further actual reader requests
+before final counting so they are not mistaken for preparation or operator requests.
+All43publishedimages across4works/23publications passed availability checks at02:07UTC; receipt
+`.local/review-second/after-twelve-assets.json`.
+
+Context renewal **ad9a0766-935c-400d-8bee-04e842adbba1** settled successfully at02:07:44,
+cost7.448105. Subsequent preparation **2cbeb238-7116-40cf-85b2-4163662b82ae** failed at input-token
+counting with502, before a new paid operation was created. Its saved session may resume after the
+key is active; its existing session was requeued, with failure/recovery evidence saved at
+`.local/review-second/key-rotation-recovery.json`. Other ordinary preparation opportunities are
+queued as the author reads. No ambiguous provider operation needs replay.
+
+**No release lock is held.** Session51684 / PID85125 acquired only after renewal settled, was
+released with SIGINT after deployment, and exited0. Subsequent real Astra operations succeeded.
+
+Edition allowance is now **250**, increased by100 under the author's explicit authorization.
+Prior combined spending remains116.751030; combined operational allowance366.751030. Exact receipt:
+`tests/receipts/second-edition-allowance-extension.json`. Local configuration uses the new credential,
+active schema and allowance, with local generation disabled. No secrets were printed or committed.
+
+At02:10UTC the scope was46,183words including headings/alt,23publications,4works and43publishedimages;
+every operation matched the pin. After the renewal settled, edition cost was128.934298,
+prior116.751030; unknown0. Later generation is additional. Interim receipt:
+`.local/review-second/after-twelve.json` includes the next request reservation. All34mechanical tests
+and real controls/preparation/nested-return checks below remain valid. No code or artistic mechanism
+changed for key rotation; do not rerun paid QA or the literary study.
 
 ## Active follow-up
 
@@ -50,13 +96,18 @@ The durable driver is **session 7881 / PID 58361**. Do not start a duplicate. It
 mise exec node@24.18.0 -- node --import tsx .local/review-second/run.ts
 ```
 
-Requests 1–4 are complete. Request 5 explores an actual passage inside **The Gentle Route**,
-work `work-d99e2e813bc1d7104ac8527f7f340386`, to create the grandchild:
-**610d461f-9234-4107-bbd4-ae68d87c9180**, created 22:03:38 UTC, running. Request 4 completed
-normally after context renewal, adding two sections to that work. The `after-four.json` interim
-receipt records 3 works, 9 publications, 18,814 words including headings/alt and **19 published
-images** (21 saved images, including unused variants). All operations matched the pin. At 22:06,
-active-edition committed spending including the current reservation was 43.432747, unknown 0.
+Requests 1–5 are complete. **Request 6** continues The Second Handle,
+work `work-c1281da55e3c8136afd25dc2de814198`: **62fb89c5-1faf-4163-bb53-cb82f7537b46**, created
+22:27:28 UTC, running. The `after-five.json` interim receipt records **4 works, 10 publications,
+20,602 words including headings/alt and 21 published images** (24 saved images including unused
+variants). Every operation matched the pin. At22:29, active-edition committed spending including
+request6's reservation was51.1700915; remaining98.8299085; unknown0. Prior116.751030 remains separate
+in combined accounting. Current allowance150 is unchanged; increase deliberately if later needed.
+
+Request5 (610d461f-9234-4107-bbd4-ae68d87c9180) completed with the first grandchild section, whose
+actual reader controls and imagery were already verified. No more UI journey is needed absent a
+new defect. Continue the existing driver through20, then finalasset/receipt/accounting checks and
+safe documentation release. Never end at a partial request count merely because generation is slow.
 
 Request 3 was root-image exploration `739762df-9e1b-480e-8364-cea1d567d430`; request 4 was
 continuation `00767a96-f75e-421d-9b8c-84dabf1bda1c`. The root link to The Gentle Route exists:

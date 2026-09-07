@@ -75,8 +75,9 @@ erasing an existing reading-place entry. No provider request was submitted by to
 
 The narrow screenshot is .local/guide-narrow-welcome.png. An initial screenshot command mistook a
 relative path for a selector; the absolute-path capture succeeded. This was a tool issue, not an app
-failure. The client-only tour does not change the mechanism. All34tests, typecheck, lint and build passed for the tour. Production tour/preparation
-verification is pending; final20-request scope and cost belong in the completed handoff.
+failure. The client-only tour does not change the mechanism. All 34 tests, typecheck, lint and build
+passed for the tour. Production verification is recorded below; final 20-request scope and cost
+will be recorded after the run completes.
 
 ## Live release and controls
 

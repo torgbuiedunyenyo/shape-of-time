@@ -8,8 +8,9 @@ This is the evaluation practice for the agentic replacement. Assess what the rea
 
 **Current scope, September 6:** the author asked to stop extended operator literary analysis and
 automatic refinement after the mechanical work and initial coherence evidence. The development
-study is preserved at its actual scope. Prepare roughly 50 reading screens in the fresh edition
-for the author's own assessment; do not treat the longer study below as an outstanding release
+study is preserved at its actual scope. The later follow-up in PLAN.md section 11 requests
+20 completed reader requests in a fresh edition for the author's own assessment; this supersedes
+the earlier approximate screen count. Do not treat the longer study below as an outstanding release
 requirement. The creative agent retains its ordinary option to seek criticism as it develops work.
 
 ## Literary and visual judgment

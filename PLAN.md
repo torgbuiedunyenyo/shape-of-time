@@ -350,8 +350,8 @@ pages of linked books while someone read the current page. Reproduce that benefi
 book: use reading time to prepare coherent text and imagery for linear continuation and linked
 narrative openings, reducing the wait when a reader reaches or chooses them.
 
-Existing support is a starting point, not proof that this experience is already achieved.
-`src/server/agent/preparation.ts` currently offers one preparation opportunity while the reader is
+Initial diagnosis before F1: existing support was a starting point, not proof that this experience
+was achieved. `src/server/agent/preparation.ts` offered one preparation opportunity while the reader was
 in the latest published section; queued preparation requires recent reading activity and waits
 behind explicit requests. The creative agent may continue the current work or develop a nested
 opening. This does not yet establish timely preparation for links encountered in earlier sections,
@@ -414,7 +414,14 @@ compaction. Keep the existing original-world wording and agent-led approach.
    assets load, model/mechanism receipts agree, and no temporary release hold remains. Record final
    costs, publication scope, limitations and the active release. Leave the opening ready for reading.
 
-Current work: F2/F1/F4 deployed under the fresh pin. F3 request1 completed; the durable ledger is
-running through20. Actual desktop/narrow and production tour checks passed, along with all34mechanical
-tests. Live preparation published The Back Label with3images; actual warm entry and exact source return
-passed. Finish20requests and F5 scope/cost/handoff. The prior P0–P6 release is preserved evidence.
+Current work, September 7 at 02:09 UTC: F2/F1/F4 are deployed under the fresh pin. F3 has
+12 completed reader requests; resume the durable ledger through all 20 after the authorized
+OpenAI credential replacement activates. A completed context renewal is preserved; a later
+preparation token-count request failed with a gateway error before another paid operation began.
+HANDOFF.md records the exact recovery, temporary release hold and deployment.
+
+Actual desktop/narrow and production tour checks passed, along with all 34 mechanical tests.
+Live preparation published The Back Label with 3 images; actual warm entry and exact source return
+passed. All 43 currently published images are available. The active allowance was increased to
+$250 under the author's prior authorization, with earlier spending retained. Finish 20 requests
+and F5 scope/cost/handoff. The prior P0–P6 release remains preserved evidence.

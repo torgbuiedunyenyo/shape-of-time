@@ -1,0 +1,21 @@
+{
+  "recordedAt": "2026-09-07T02:08:01.534Z",
+  "schema": "world_reader_20260906_b",
+  "priorCombinedSpending": 116.75103,
+  "before": {
+    "allowance": 150,
+    "committed": 128.93429799999998,
+    "remaining": 21.065702000000016,
+    "unknown": 0
+  },
+  "newEditionAllowance": 250,
+  "combinedOperationalAllowance": 366.75103,
+  "authorization": "The author explicitly permits exceeding $150 as needed and has renewed the instruction to finish all 20 reader requests.",
+  "reason": "Twelve requests completed. Eight remain; $21.07 remained after the context renewal settled. Increase by $100 to support the remaining requests without changing model, mechanism or earlier accounting.",
+  "after": {
+    "allowance": 250,
+    "committed": 128.93429799999998,
+    "remaining": 121.06570200000002,
+    "unknown": 0
+  }
+}
