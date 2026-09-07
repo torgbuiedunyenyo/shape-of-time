@@ -342,6 +342,36 @@ Current next action: execute the authorized follow-up sequence in section 11. Th
 
 ## 11. Follow-up implementation — authorized September 6
 
+### F7 — Narrative momentum and full reader UAT, authorized September 7
+
+The author reports that the entry narrative is promising but slow, with little foreshadowing;
+inset works often describe daily life without a developing plot. The intended experience is a novel
+with inset novels with inset novels, engaging enough for online reading. Revise creative context
+through prompts and permissive nudges, not plot templates, pacing quotas, deterministic literary
+checks, compulsory review stages or hardcoded events. Preserve original world wording, agent choice,
+text/image coherence and each nested work's independent life.
+
+1. Trace the screenshot's “Don't lift it yet” exploration through the actual queue, tool work,
+   publication, polling and entry. Distinguish elapsed queue wait, active generation, and UI defects.
+   Reproduce actual entry instead of treating a status message or a synthetic publication as UAT.
+2. Revise conflicting prompt emphasis: sensory place and ordinary work should sustain an unfolding
+   story; encourage consequential desires, developing situations, foreshadowing and online narrative
+   pull, with room for quiet, humor and surprise. Let the agent determine form, pace and plotting.
+   Give it useful context about waiting readers and invite prompt publication of a worthwhile opening
+   without constructing an entire chapter first. Diagnose mechanical scheduling defects separately.
+3. Run a complete in-app UAT matrix: first entry/tour, forward/back/keyboard/reflow, text and image
+   exploration (including image regions), cold opening through actual entry, warm opening, fresh
+   continuation, background preparation, two-level exact return, reload/resume, bookmarks/shelf/search,
+   pending discoveries after navigating away, and visible failure/retry behavior. Record actual
+   actions, wait durations, expected/observed results and defects. Real paid generation only for UAT
+   journeys needed to prove behavior; the stopped20-request sample stays stopped.
+4. Fix reproduced defects with meaningful regressions and repeat affected UAT. Run ordinary gates.
+   Preserve this edition and the mechanism evidence privately before deploying creative changes;
+   start a fresh pinned edition with only the material required for the UAT/author review. Retain
+   combined spending and provider receipts. No content from this draft enters the fresh edition.
+5. Ship through Git, repeat live affected UAT, and report what actually worked and remaining waits.
+   Do not declare all mechanics complete from green tests, health, or the presence of controls.
+
 **Latest instruction, September 7:** the author stopped the automatically triggered20-request
 sample. F3's target is withdrawn; do not resume the operator driver or submit further sample
 requests. Preserve the13completed requests and let actual reader requests and ordinary preparation

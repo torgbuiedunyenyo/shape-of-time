@@ -398,6 +398,14 @@ export async function recordedTool(
         (Date.now() - new Date(intent.created_at).getTime()) / 1000,
       ),
       new_publication_available: Boolean(publication),
+      waiting_requests: await db
+        .selectFrom("intents")
+        .select(["kind", "work_id", "created_at"])
+        .where("edition_id", "=", ctx.editionId)
+        .where("status", "=", "queued")
+        .where("kind", "!=", "prepare")
+        .orderBy("created_at")
+        .execute(),
       ...(intent.kind === "prepare"
         ? {
             reader_last_seen: intent.payload.last_seen,
@@ -406,14 +414,6 @@ export async function recordedTool(
             prepared_openings_here: intent.payload.prepared_openings_here,
             remaining_characters_in_saved_work:
               intent.payload.remaining_characters_in_saved_work,
-            waiting_requests: await db
-              .selectFrom("intents")
-              .select(["kind", "work_id", "created_at"])
-              .where("edition_id", "=", ctx.editionId)
-              .where("status", "=", "queued")
-              .where("kind", "!=", "prepare")
-              .orderBy("created_at")
-              .execute(),
           }
         : {}),
     };

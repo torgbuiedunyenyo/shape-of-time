@@ -15,10 +15,10 @@ export function OpeningPanel({ source, intent, onClose, onRequest, onEnter, erro
     <blockquote>{source.quote ?? "A detail of this world, seen from another place."}</blockquote>
     {intent?.kind === "explore" && intent.result_work_id ? (
       <button className="primary" onClick={() => onEnter(intent)}>Enter the book ↗</button>
+    ) : intent?.kind === "explore" && ["queued", "running", "paused", "failed"].includes(intent.status) ? (
+      <button className="primary" onClick={onClose}>Keep reading</button>
     ) : (
-      <button className="primary" onClick={onRequest} disabled={intent?.kind === "explore" && ["queued", "running"].includes(intent.status)}>
-        {intent?.status === "queued" ? "Opening requested" : intent?.status === "running" ? "Preparing the opening" : "Open as a book ↗"}
-      </button>
+      <button className="primary" onClick={onRequest}>Open as a book ↗</button>
     )}
     {intent?.kind === "explore" && <p role="status" className="small">
       {openingStatus(intent)}

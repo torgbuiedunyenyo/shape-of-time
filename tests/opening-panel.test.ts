@@ -16,6 +16,16 @@ it("distinguishes a queued opening from one whose first passage is being written
   expect(panel(request)).toContain("Waiting to begin");
   expect(panel({ ...request, status: "running" })).toContain("The first passage is taking shape");
 });
+it("offers a usable way back to reading while an opening waits, and does not offer a duplicate retry after a provider pause", () => {
+  for (const status of ["queued", "running", "paused", "failed"]) {
+    const html = panel({ ...request, status });
+    expect(html).toContain("Keep reading");
+    expect(html).not.toContain("disabled=");
+    expect(html).not.toContain("Open as a book ↗");
+  }
+  expect(panel({ ...request, queue: { ahead: 3, blocked: false } })).toContain("3 reading requests are ahead");
+  expect(panel({ ...request, queue: { ahead: 3, blocked: true } })).toContain("New writing is paused");
+});
 it("enables entry as soon as the first publication is readable while generation continues", () => {
   const html = panel({ ...request, status: "running", result_work_id: "child", latest_publication_id: "first-publication" });
   expect(html).toContain("Enter the book");

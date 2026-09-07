@@ -1,4 +1,4 @@
-import OpenAI from "openai";
+import { providerClient } from "./transport.js";
 import type {
   Response as AstraResponse,
   ResponseInputItem,
@@ -17,10 +17,8 @@ import {
   parsedReceipt,
   Paused,
 } from "./operations.js";
-export const openai = new OpenAI({
+export const { client: openai } = providerClient({
   apiKey: process.env.OPENAI_API_KEY ?? "unconfigured",
-  maxRetries: 0,
-  timeout: 20 * 60 * 1000,
 });
 export function textCost(usage: ResponseUsage) {
   const long = usage.input_tokens > 272000,

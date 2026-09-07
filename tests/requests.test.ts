@@ -1,6 +1,11 @@
 import { expect, it } from "vitest";
-import { explorationKey } from "../src/client/requests.js";
+import { explorationKey, requestNeedsPolling } from "../src/client/requests.js";
 import { bookmarkedVisit, latestVisitRequests, sourceReturn } from "../src/client/visits.js";
+
+it("keeps observing a saved paused or failed request so recovery becomes visible without a duplicate submission", () => {
+  for (const status of ["queued", "running", "failed", "paused"]) expect(requestNeedsPolling(status)).toBe(true);
+  for (const status of ["done", "cancelled"]) expect(requestNeedsPolling(status)).toBe(false);
+});
 
 it("retains a pending continuation while the reader selects or opens another source", () => {
   const continuation = { intentId: "continue-root", visitId: "root-visit" };

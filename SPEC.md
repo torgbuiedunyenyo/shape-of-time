@@ -22,6 +22,11 @@ Read an absorbing illustrated narrative. Follow a passage or image into another 
 
 The reading interface is calm and dependable. Its narratives can unfold at length and contain nested narratives, records, images, places and people worth exploring. Nested works should reward sustained reading rather than merely explain selected nouns.
 
+The author intends a novel with inset novels with inset novels. Each work needs a life that develops,
+with reasons to care about what happens and intimations that can bear fruit later. Prompt context
+encourages scene selection, foreshadowing and narrative movement; the creative agent chooses their
+particular form. No plot template, beat schedule or deterministic literary check enforces them.
+
 The book is implemented as a world exploration harness. Its creative agent can decide what to investigate, create, revisit and develop, supported by persistent context and memory. Generative autopoiesis means that created works become fertile material for further works. It does not require a formal calculus of obligations or a fixed self-modification mechanism.
 
 ## What carries forward

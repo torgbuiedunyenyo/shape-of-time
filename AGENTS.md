@@ -69,4 +69,16 @@ Never delete, prune, truncate or overwrite transcripts under ~/.codex/sessions o
 
 ## Continuity after compaction and at handoff
 
+### Every new attempt starts empty
+
+The author's standing instruction, reaffirmed September 7, 2026:
+
+> We don't need to keep the previous content, it can just go into a stored referenced draft folder like previous. each new attempt has to start from scratch so it has a consistent mechanism throughout the entire book
+
+Before activating changed creative prompts, tools, memory behavior or generation process, preserve
+the previous attempt privately in a referenced draft folder with its mechanism/source and usage
+evidence. Start the new attempt empty and pin its mechanism before generation. Never seed it with
+the previous attempt's fiction, images, notes or session context. Reader interface fixes alone do not
+create a new creative attempt. This is a standing instruction, not a reason to ask again about reset.
+
 Immediately read HANDOFF.md and its current PLAN.md section after compaction. Restate the product's purpose before proceeding. Update HANDOFF.md before a foreseeable compaction and at the end of each coherent slice with actual changes, evidence, costs, unresolved operations, deployment and the single next action.

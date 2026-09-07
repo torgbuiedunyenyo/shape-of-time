@@ -52,6 +52,7 @@ export type Intent = {
   result_work_id: string | null;
   latest_publication_id?: string | null;
   result_title?: string | null;
+  queue?: { ahead: number; blocked: boolean };
   payload: Record<string, unknown>;
   error: string | null;
 };

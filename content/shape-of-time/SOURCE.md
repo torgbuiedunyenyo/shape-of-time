@@ -70,6 +70,18 @@ world-essence remain unchanged. These are artistic context, not quotas or determ
 The supplied screenshots show an unlabeled bottle beside prose describing its oak-drawing label;
 that example is development evidence, not a prescribed object or scene in the new edition.
 
+## September 7 author feedback on narrative movement
+
+The author described slow pacing, little foreshadowing and side narratives drifting through routine
+without a plot. They want “a novel with inset novels with inset novels,” compelling for online
+reading. The added “Novels within novels” guidance preserves that wording and invites consequential
+development, longer intentions, foreshadowing, scene selection and time compression. Two place-seed
+lines are adjusted so immersion leads into a story rather than replacing it. The earlier breathing-room
+guidance now distinguishes richer sentences from documenting every ordinary task. The full original
+world and world-essence remain unchanged. No plotting schema, compulsory beats or deterministic
+literary checks are introduced. Creative-agent orientation separately clarifies early publication
+and attention to waiting readers without prescribing passage size or the order of text and imagery.
+
 ## Other historical material
 
 archive/infinite-book/undertow-77e0c74.md.txt preserves the separate sequel seed from experimental templates.ts at 77e0c74d63c025f2567fcd1d374c284d5ae4e997, SHA-256 9dc8f105dac17a8a751a397026ff9b243d1de529633be1cc1431819e19c55dd3. It is not an automatic addition to the user-selected main source or a required continuation.

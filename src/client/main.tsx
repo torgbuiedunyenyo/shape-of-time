@@ -32,7 +32,7 @@ import { hasSeenReadingGuide } from "./tour-state.js";
 import { ImageDetail } from "./ImageDetail.js";
 import { OpeningPanel } from "./OpeningPanel.js";
 import { capturePlace, restorePlace } from "./position.js";
-import { explorationKey, openingStatus } from "./requests.js";
+import { explorationKey, openingStatus, requestNeedsPolling } from "./requests.js";
 async function api<T>(path: string, body?: unknown): Promise<T> {
   const r = await fetch(
     "/api/" + path,
@@ -78,6 +78,7 @@ function Discoveries() {
       .reverse(),
   );
   const [intents, setIntents] = useState<Record<string, Intent>>({});
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const snapshots = useRef<Record<string, Intent>>({});
   const navigate = useNavigate();
   useEffect(() => {
@@ -88,14 +89,19 @@ function Discoveries() {
           .filter((r) => {
             const current = snapshots.current[r.intentId];
             return (
-              !current || !["done", "failed", "paused"].includes(current.status)
+              !current || requestNeedsPolling(current.status)
             );
           })
           .map(async (r) => {
-            const intent = await api<Intent>("intents/" + r.intentId);
-            if (active) {
-              snapshots.current[r.intentId] = intent;
-              setIntents({ ...snapshots.current });
+            try {
+              const intent = await api<Intent>("intents/" + r.intentId);
+              if (active) {
+                snapshots.current[r.intentId] = intent;
+                setIntents({ ...snapshots.current });
+                setErrors(previous => ({...previous, [r.intentId]: ""}));
+              }
+            } catch {
+              if (active) setErrors(previous => ({...previous, [r.intentId]: "This opening's status could not be loaded. Your request is saved; checking again…"}));
             }
           }),
       );
@@ -140,7 +146,7 @@ function Discoveries() {
             )}
             {!intent?.result_work_id && (
               <p className="small">
-                {openingStatus(intent)}
+                {errors[record.intentId] || openingStatus(intent)}
               </p>
             )}
             <Link
@@ -175,9 +181,11 @@ function Shelf() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
+    let active = true;
     api<typeof library>("library?q=" + encodeURIComponent(query))
-      .then(setLibrary)
-      .catch((e) => setError(e.message));
+      .then(next => { if (active) { setLibrary(next); setError(""); } })
+      .catch((e) => { if (active) setError(e.message); });
+    return () => { active = false; };
   }, [query]);
   const open = (id: string) => navigate("/read/" + enter(id, null));
   const begin = async () => {
@@ -235,7 +243,7 @@ function Shelf() {
           Resume your reading →
         </Link>
       )}
-      {!!library?.works.length && (
+      {(library?.edition.root_work_id || Boolean(query) || !!library?.works.length) && (
         <section className="catalogue">
           <label htmlFor="search">On the shelves</label>
           <input
@@ -244,7 +252,8 @@ function Shelf() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
-          {library.works.map((w) => (
+          {library?.works.length === 0 && <p role="status">No books match this search.</p>}
+          {library?.works.map((w) => (
             <button key={w.id} onClick={() => open(w.id)}>
               {w.title}
               <span>↗</span>
@@ -289,13 +298,16 @@ function Waiting() {
   const [intent, setIntent] = useState<Intent>();
   const [error, setError] = useState("");
   useEffect(() => {
+    let active = true;
+    setIntent(undefined);
+    setError("");
     const poll = () =>
       api<Intent>("intents/" + id)
-        .then(setIntent)
-        .catch((e) => setError(e.message));
+        .then(next => { if (active) { setIntent(next); setError(""); } })
+        .catch((e) => { if (active) setError(e.message); });
     void poll();
     const timer = setInterval(poll, 3000);
-    return () => clearInterval(timer);
+    return () => { active = false; clearInterval(timer); };
   }, [id]);
   return (
     <main className="waiting">
@@ -448,7 +460,7 @@ function Reader() {
   useEffect(() => {
     const pending = [intent, continuation].filter(
       (request): request is Intent =>
-        Boolean(request && !["done", "failed", "paused"].includes(request.status)),
+        Boolean(request && requestNeedsPolling(request.status)),
     );
     if (!pending.length) return;
     let active = true;
@@ -468,6 +480,7 @@ function Reader() {
                 updated = await api<Book>("works/" + visit!.workId);
               if (!active) return;
               if (updated) setBook(updated);
+              setError("");
               if (next.kind === "continue") setContinuation(next);
               else setIntent(next);
             })
@@ -617,11 +630,14 @@ function Reader() {
   };
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if (guiding.current || (e.target as HTMLElement).matches("input,textarea,button")) return;
+      if (guiding.current || document.querySelector("dialog[open]") ||
+          (e.target as HTMLElement).closest("input,textarea,select,[contenteditable=true]")) return;
       if (e.key === "ArrowRight") {
+        e.preventDefault();
         window.scrollBy({ top: window.innerHeight - 150, behavior: "smooth" });
       }
       if (e.key === "ArrowLeft") {
+        e.preventDefault();
         window.scrollBy({ top: -window.innerHeight + 150, behavior: "smooth" });
       }
     };

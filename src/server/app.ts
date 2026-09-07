@@ -24,7 +24,7 @@ const anchor = z.object({
   assetId: z.string().optional(),
   region: region.optional(),
 });
-async function readableIntent<T extends { result_work_id: string | null }>(
+async function readableIntent<T extends { id: string; edition_id: string; status: string; created_at: string | Date; result_work_id: string | null }>(
   intent: T,
 ) {
   const ready = intent.result_work_id
@@ -36,11 +36,22 @@ async function readableIntent<T extends { result_work_id: string | null }>(
         .orderBy("publications.ordinal", "desc")
         .executeTakeFirst()
     : null;
+  const waiting = intent.status === "queued" ? await db.selectFrom("intents")
+    .select(["id", "kind", "status", "created_at"])
+    .where("edition_id", "=", intent.edition_id)
+    .where("id", "!=", intent.id)
+    .where("status", "in", ["queued", "running", "paused", "failed"])
+    .execute() : [];
   return {
     ...intent,
     result_work_id: ready ? intent.result_work_id : null,
     latest_publication_id: ready?.id ?? null,
     result_title: ready?.title ?? null,
+    queue: {
+      ahead: waiting.filter(i => i.kind !== "prepare" &&
+        (i.status !== "queued" || new Date(i.created_at) < new Date(intent.created_at))).length,
+      blocked: waiting.some(i => ["paused", "failed"].includes(i.status)),
+    },
   };
 }
 export const app = new Hono();
@@ -128,28 +139,27 @@ app.get("/api/assets/:id", async (c) => {
 app.get("/api/intents/:id", async (c) => {
   const intent = await db
     .selectFrom("intents")
-    .select(["id", "kind", "status", "work_id", "result_work_id", "error"])
+    .select(["id", "edition_id", "kind", "status", "created_at", "work_id", "result_work_id", "error"])
     .where("id", "=", c.req.param("id"))
     .executeTakeFirstOrThrow();
   return c.json(await readableIntent(intent));
 });
 app.post("/api/intents", async (c) => {
+  const body = z
+    .object({
+      key: z.string().min(8).max(300),
+      kind: z.enum(["begin", "continue", "explore"]),
+      workId: z.string().nullable(),
+      source: anchor.optional(),
+      afterPublicationId: z.string().optional(),
+    })
+    .strict()
+    .parse(await c.req.json());
   if (!config.generationEnabled)
     return c.json(
       { error: "New writing is paused. Saved books remain available." },
       503,
     );
-  const body = z
-    .object({
-      key: z.string().min(8).max(300),
-      kind: z.enum(["begin", "continue", "explore", "title"]),
-      workId: z.string().nullable(),
-      source: anchor.optional(),
-      angle: z.string().max(4000).optional(),
-      title: z.string().max(300).optional(),
-      afterPublicationId: z.string().optional(),
-    })
-    .parse(await c.req.json());
   let source;
   if (body.kind === "explore") {
     if (!body.source)
@@ -165,8 +175,6 @@ app.post("/api/intents", async (c) => {
       .executeTakeFirstOrThrow();
   const payload = {
     ...(source ? { source } : {}),
-    ...(body.angle ? { angle: body.angle } : {}),
-    ...(body.title ? { title: body.title } : {}),
     ...(body.kind === "continue" && body.afterPublicationId
       ? { after_publication_id: body.afterPublicationId }
       : {}),

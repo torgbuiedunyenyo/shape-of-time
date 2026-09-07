@@ -1,5 +1,55 @@
 # Handoff
 
+## Active work — F7 narrative momentum and full reader UAT
+
+**03:25UTC recovery checkpoint:** current uncommitted F7 work lives in this worktree. Prompts now
+invite developing plots, foreshadowing and consequential scene selection without structural quotas.
+All active reader requests now receive the waiting-reader list. API rejects direction/title inputs;
+queue status distinguishes waiting and blocked. Pending panels offer Keep reading. Actual UAT found
+and fixed disappearing empty-search controls and arrow keys disabled by focused page buttons.
+Native font controls retain the same text anchor; an earlier Playwright click scrolled the sticky
+header into view and was an automation artifact, not a product defect.
+
+Old request53618c9d completed; actual browser entered The Late Game while it was still running,
+with one section/two loaded images. Screenshot request3d86fc13 never started. Unstarted old requests
+were cancelled under the standing fresh-attempt instruction; original rows are preserved at
+`.local/review-second/queued-before-retirement.json`. Do not rerun retirement scripts.
+
+An ensuing preparation c2de7eca paused when native compaction9d5eeddd hit Node's default header
+timeout. No response or provider ID was returned. Preserve its uncertain reservation9.7726125;
+do not replay it. The old edition is now frozen at committed153.9349725 including that uncertainty.
+Prior settled116.75103; fresh allowance96.065027 carries unused funds forward without increasing
+combined366.75103. Receipt `.local/third-edition-allocation.json`; old config `.local/reader-second.env`.
+Release helper9395/session21647 exited0. **Snapshot export session98621 completed successfully** to
+`.local/reader-second-preserved-2026-09-07`; do not restart/overwrite it. Old schema remains available
+privately. No new schema/config/release yet. Planned fresh schema `world_reader_20260907`.
+
+Transport fix uses matching Undici fetch/Agent with the SDK's20-minute finite timeout and zero
+retries; tests use a real local HTTP listener for delayed headers/body and no replay on timeout.
+All43tests/typecheck/lint/build passed. All486snapshot objects and10table files were checksum-verified.
+Receipt `tests/receipts/reader-second-preserved.json`. Fresh schema absence verified. Deploy via passing main push
+after setting fresh schema/allowance with --skip-deploys. Generation begins only from empty edition.
+
+Local API session75055/PID9667 and Vite session91674 serve read-only old content at3000/5173;
+stop before switching local config. In-app QA tab27 (`localTab`) remains; user production tab21 stays.
+UAT report `evals/reader-uat-2026-09-07.md` has remaining matrix. No bulk20-request driver.
+These facts supersede obsolete process/lock/queue instructions below.
+
+The author has now requested prompt nudges for an absorbing novel with inset novels, correcting
+slow pacing, missing foreshadowing and plotless daily-life side works. Also do a full actual reader
+UAT, prompted by a10-minute still-queued opening of “Don't lift it yet,” in The Second Handle.
+PLAN.md section11/F7 is the current queue. The automatic20-request run remains stopped.
+
+At diagnosis, exploration53618c9d is actively generating; a49dba98, fb986002 and the screenshot's
+3d86fc13 are queued behind it. The global creative session processes one whole request before the
+next, and active requests do not receive the waiting-reader list that preparation receives. No
+failed operation or stale release lock was found in the initial snapshot. Trace actual first
+publication/entry and broader UAT; don't mistake this preliminary diagnosis for a complete fix.
+New prompt/runtime changes will require privately preserving the current edition and starting an
+empty pinned one under the author's standing instruction, using only necessary UAT generation.
+
+---
+
 ## Current authority — automatic sample stopped at the author's request
 
 On September 7, 2026, the author explicitly said: “Don't continue the 20 reader requests that you

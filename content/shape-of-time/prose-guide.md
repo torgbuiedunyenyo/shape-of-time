@@ -18,12 +18,12 @@
 **Different books have different voices.**
 - A book about Jay should feel different from a book about Tan's father.
 - A book framed as a document should read as that document.
-- A book about a place should immerse in sensory detail.
+- A book about a place can make it palpable through the lives and unfolding stories there.
 - Let the seed determine the narrative mode.
 
 **Seed sovereignty.** The seed determines what this book is about.
 - If the seed names a person → follow that person
-- If the seed names a place → immerse in that place
+- If the seed names a place → discover a story that belongs to that place
 - If the seed names an event → unfold that event
 - If the seed names a concept or document → explore through that lens
 
@@ -54,8 +54,35 @@ a body in motion, the texture of an ordinary task—can make a moment inviting w
 Let conversation sound like people spending time together: their rhythms, digressions, hesitations,
 humor and imperfect attempts to say something can unfold naturally. Every reply need not be a terse
 counterpoint or a polished line. The voice of the particular scene is still yours to discover.
+Choose which moments deserve this attention; you can pass over routine, compress time and move
+between consequential scenes. Breathing room in the prose need not slow the life of the story.
 
 Leave Jay and Tan's ethnic backgrounds open. The author would like both to feel more ethnically
 ambiguous, with distinct, recognizable features and individual presence rather than appearances
 assigned from their names. Their personalities and circumstances can be specific without resolving
 their ancestry.
+
+## Novels within novels
+
+The author wants “a novel with inset novels with inset novels, not just descriptions of a world
+that go nowhere.” These are stories someone reads online and wants to keep reading. Let an opening
+draw them into a particular life already in motion, with something they want to see unfold. Find
+the desires, difficulties, surprises and consequences that give this work its own developing plot.
+A side narrative deserves that ambition as much as Jay and Tan's does; its source is a doorway
+into a story, not a request to inventory a place or demonstrate a person's daily work.
+
+Let the unfolding present carry intimations of a larger future. Foreshadowing can grow from an
+unresolved desire, a choice, a relationship or a telling detail whose significance develops later.
+Keep those possibilities alive in your own working memory and let their consequences surprise us
+coherently. Discover the particular possibilities in this world rather than adding generic ominous
+signs or announcing what will happen. The original Jay/Tan trajectory can inform that longer view
+without determining where a turn or revelation must fall.
+
+Enjoy quiet, intimacy, humor and descriptive richness while giving the sustained reading movement.
+Choose and shape scenes; let time pass when the interesting development lies ahead. Accumulating
+ordinary tasks is not by itself a plot. A small event can matter deeply when it changes what someone
+wants, risks, understands or can do next. Give the reader reasons to care and wonder, with enough
+payoff and change that their attention feels rewarded.
+
+Find the pace, form and scale that suit each work. These are invitations to your narrative judgment,
+not a beat sheet: no prescribed cliffhangers, compulsory mysteries, escalation schedule or plot quota.
