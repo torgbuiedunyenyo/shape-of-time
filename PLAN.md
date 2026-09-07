@@ -490,3 +490,10 @@ request. This is a reading-interface correction; the creative mechanism and curr
 unchanged. Pending real reader requests contain no supplied angle or title. Pause new automatic
 sample requests during the fix, verify mechanically and in the actual reader, safely deploy, then
 resume the remaining requests in F3. Preserve all existing source-return routes and dedupe identities.
+
+### F8 — Author-requested medium effort, September 7
+
+Switch the shared Astra effort to medium (creative agent, critic and renewal), preserving imagery,
+content and memory under the explicit one-time exception. Preserve old/new mechanism records and
+the operation boundary, update the live pin without disabling its guard, run checks, deploy through
+Git and verify the live revision/configuration. Do not restart automatic sampling.

@@ -29,7 +29,7 @@ The active creative inputs are identified by content/shape-of-time/SOURCE.md. Ar
 
 ## Models and creative freedom
 
-- Text, the creative agent and the initial contextual critic use GPT-6 Astra at xhigh through the Responses API.
+- Text, the creative agent and the initial contextual critic use GPT-6 Astra at medium through the Responses API.
 - Generated imagery uses GPT Image 2; the verified initial snapshot is recorded in PLAN.md.
 - No silent model substitution or reduction of reasoning effort.
 - Use the original infinite-book/main world and writing material identified in content/shape-of-time/SOURCE.md, including the full recovered world. Preserve source wording. The illustrated successor's later prose guide is superseded.
@@ -82,3 +82,7 @@ the previous attempt's fiction, images, notes or session context. Reader interfa
 create a new creative attempt. This is a standing instruction, not a reason to ask again about reset.
 
 Immediately read HANDOFF.md and its current PLAN.md section after compaction. Restate the product's purpose before proceeding. Update HANDOFF.md before a foreseeable compaction and at the end of each coherent slice with actual changes, evidence, costs, unresolved operations, deployment and the single next action.
+
+One-time author exception, September 7: change Astra from xhigh to medium in the existing live
+book, retaining all content and memory. Record the old and new mechanisms and the switch boundary.
+This does not waive the fresh-attempt rule for any other change.

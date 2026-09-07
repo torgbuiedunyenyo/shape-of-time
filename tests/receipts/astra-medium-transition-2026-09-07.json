@@ -1,0 +1,561 @@
+{
+  "recordedAt": "2026-09-07T16:10:07.843Z",
+  "authorization": "Author requested Astra medium and explicitly exempted this one transition from starting a fresh book.",
+  "schema": "world_reader_20260907_b",
+  "editionId": "shape-of-time",
+  "rootWorkId": "work-c9d164ad62fcbc3b4627ed165ec84eed",
+  "before": {
+    "hash": "3b1a00a472d152cf481940407ded7116d0c86a1090f99ffa9dc07d8745f10d2c",
+    "files": {
+      ".nvmrc": "55075b5ec4e8b31936cbbc282b8829116d1fd48f2f2f1856dee592a6650700ce",
+      "pnpm-lock.yaml": "416ef698d4ebe1f171919362eb3a67e6a04b1518aeb8687e6cf0177908f265af",
+      "prompts/critic.md": "85e93d468ebeefe8851ec693249021c5f28ac06471ff1381754fe4f2b16a9748",
+      "src/server/app.ts": "ecf80e18c90317c599f0f866d17c92412a96ef5f7ce78e1fadc7f76b365983dd",
+      "src/server/index.ts": "dcc7c018b2e6fe77c13ff296294fbd1030308499a944280359b2d2a01d9747e7",
+      "src/shared/types.ts": "6acbe37e43822d6ad7048d5f32e30eea8896747df393dd028c116376c63bf4a3",
+      "src/server/config.ts": "33209f22e2501efea7d45e43ae42478c4630cee14dca7e156d0c308dbc3b71a8",
+      "src/server/db/index.ts": "d6ed880a2e28d1354487097f069bc9541111cdb79aeff1de85323d0b2d9421ad",
+      "src/server/mechanism.ts": "e22563b9f5bcb7e62e6a45d63cad4af402297f0e9fa05242a36df6197ad8d182",
+      "src/server/db/migrate.ts": "6814f7c0bdaf5b6ddaf78e5cbe294de42fcf91768b0d86ddbe369bdcf7377fcb",
+      "prompts/creative-agent.md": "111eec8b3f761ffcccc191f2505665efc86cbf36ac18466181c3473ef6396ed4",
+      "src/server/agent/tools.ts": "e58219ebb45a7d7c4916e7e16dad78f02e92c3fa8c69bd41023bcebcf934d9c7",
+      "src/server/agent/runner.ts": "43f7ff9f8c8b6169e3dded0b6c92333fcbfbe8c5765853993a0075c2a2c1028f",
+      "src/server/agent/renewal.ts": "98fe79e319797ced04e39886b74c491e9a34eed987b302ece7c065dabd4184fd",
+      "src/server/library/store.ts": "8625851a8d2304c50bf57fa92bc2c0c0fb3d4e436096a5667232959d1476278d",
+      "src/server/library/assets.ts": "c721db9245c015feffa2433f33ed0b746d09d2e821d78c97df3e6442ecf9ee31",
+      "src/server/library/archive.ts": "c5578829d044867e8f65a96618214b1f209a124422c4b61904030befdad09bc5",
+      "src/server/providers/astra.ts": "a6e0af1304f6ced202b1efe35a15b6250c27c3cfd8dbe89d10f4aacd13afc198",
+      "src/server/providers/image.ts": "9d3518e890ef5ed90e5ff320484a19b6d8c46e2f1f525f1b8169d48433c4df6c",
+      "content/shape-of-time/world.md": "e47afa2fc5db4350008f65fcea9bf6b32569e79a6ee4aeb212e066ddd139576c",
+      "src/server/library/snapshot.ts": "530a5f918f7a949750c678ba1bc7305067b1ea551ba86a733e60f5a4ea7b954f",
+      "src/server/agent/preparation.ts": "fbd9090720456902884f08ae0dca9232e8f5428690223a2f07e7aa535792753b",
+      "src/server/providers/protocol.ts": "20bb8a97950429abcde61b30307be7c87b4328d54710dcca90697b4014996fb3",
+      "src/server/library/composition.ts": "dfef698b9bf59e71764d9f37225f1086dc6945c4b812b5ed966832cba4948c8a",
+      "src/server/providers/transport.ts": "2ee064b709bedb1e9c53a06c6acb04a5c16e6a314507a9747c98b71eaf2a014c",
+      "src/server/providers/operations.ts": "f23e5f720f0f8bdd93375e618a425bf6dff1c4608346ad816c202744590f6500",
+      "content/shape-of-time/prose-guide.md": "7989d2ad6f3bf376a2cf97686025570d33d1ce0ed0ccefae93a791bf0bf9a725",
+      "content/shape-of-time/world-essence.md": "d19f53259d8c49d1cb965570d68e48c37a8cc8ad8845aa5c7e629d67f8708693",
+      "content/shape-of-time/visual-direction.md": "0428a08bd5801e2e7be68c4bb4363f919c2411e2d6d7843fa320fdee9e07645c"
+    },
+    "revision": "c1c40d99706a155a09fef7f9d614d1c625f8014b",
+    "configuration": {
+      "effort": "xhigh",
+      "textModel": "gpt-6-astra",
+      "imageModel": "gpt-image-2-2026-04-21",
+      "preparationEnabled": true,
+      "contextRenewalTokens": 250000
+    }
+  },
+  "after": {
+    "hash": "21f659fcad3e8b385a7f72e60f892761c34fc95f86f9075752590ac57451ad90",
+    "files": {
+      "src/server/agent/preparation.ts": "fbd9090720456902884f08ae0dca9232e8f5428690223a2f07e7aa535792753b",
+      "src/server/agent/renewal.ts": "98fe79e319797ced04e39886b74c491e9a34eed987b302ece7c065dabd4184fd",
+      "src/server/agent/runner.ts": "43f7ff9f8c8b6169e3dded0b6c92333fcbfbe8c5765853993a0075c2a2c1028f",
+      "src/server/agent/tools.ts": "e58219ebb45a7d7c4916e7e16dad78f02e92c3fa8c69bd41023bcebcf934d9c7",
+      "src/server/app.ts": "ecf80e18c90317c599f0f866d17c92412a96ef5f7ce78e1fadc7f76b365983dd",
+      "src/server/config.ts": "ce393775fd29c5d6a5e540138cfd6389f5e4a18804eeb943665a7ee274856238",
+      "src/server/db/index.ts": "d6ed880a2e28d1354487097f069bc9541111cdb79aeff1de85323d0b2d9421ad",
+      "src/server/db/migrate.ts": "6814f7c0bdaf5b6ddaf78e5cbe294de42fcf91768b0d86ddbe369bdcf7377fcb",
+      "src/server/index.ts": "dcc7c018b2e6fe77c13ff296294fbd1030308499a944280359b2d2a01d9747e7",
+      "src/server/library/archive.ts": "c5578829d044867e8f65a96618214b1f209a124422c4b61904030befdad09bc5",
+      "src/server/library/assets.ts": "c721db9245c015feffa2433f33ed0b746d09d2e821d78c97df3e6442ecf9ee31",
+      "src/server/library/composition.ts": "dfef698b9bf59e71764d9f37225f1086dc6945c4b812b5ed966832cba4948c8a",
+      "src/server/library/snapshot.ts": "530a5f918f7a949750c678ba1bc7305067b1ea551ba86a733e60f5a4ea7b954f",
+      "src/server/library/store.ts": "8625851a8d2304c50bf57fa92bc2c0c0fb3d4e436096a5667232959d1476278d",
+      "src/server/mechanism.ts": "e22563b9f5bcb7e62e6a45d63cad4af402297f0e9fa05242a36df6197ad8d182",
+      "src/server/providers/astra.ts": "a6e0af1304f6ced202b1efe35a15b6250c27c3cfd8dbe89d10f4aacd13afc198",
+      "src/server/providers/image.ts": "9d3518e890ef5ed90e5ff320484a19b6d8c46e2f1f525f1b8169d48433c4df6c",
+      "src/server/providers/operations.ts": "f23e5f720f0f8bdd93375e618a425bf6dff1c4608346ad816c202744590f6500",
+      "src/server/providers/protocol.ts": "20bb8a97950429abcde61b30307be7c87b4328d54710dcca90697b4014996fb3",
+      "src/server/providers/transport.ts": "2ee064b709bedb1e9c53a06c6acb04a5c16e6a314507a9747c98b71eaf2a014c",
+      "src/shared/types.ts": "6acbe37e43822d6ad7048d5f32e30eea8896747df393dd028c116376c63bf4a3",
+      "prompts/creative-agent.md": "111eec8b3f761ffcccc191f2505665efc86cbf36ac18466181c3473ef6396ed4",
+      "prompts/critic.md": "85e93d468ebeefe8851ec693249021c5f28ac06471ff1381754fe4f2b16a9748",
+      "content/shape-of-time/world.md": "e47afa2fc5db4350008f65fcea9bf6b32569e79a6ee4aeb212e066ddd139576c",
+      "content/shape-of-time/world-essence.md": "d19f53259d8c49d1cb965570d68e48c37a8cc8ad8845aa5c7e629d67f8708693",
+      "content/shape-of-time/prose-guide.md": "7989d2ad6f3bf376a2cf97686025570d33d1ce0ed0ccefae93a791bf0bf9a725",
+      "content/shape-of-time/visual-direction.md": "0428a08bd5801e2e7be68c4bb4363f919c2411e2d6d7843fa320fdee9e07645c",
+      "pnpm-lock.yaml": "416ef698d4ebe1f171919362eb3a67e6a04b1518aeb8687e6cf0177908f265af",
+      ".nvmrc": "55075b5ec4e8b31936cbbc282b8829116d1fd48f2f2f1856dee592a6650700ce"
+    },
+    "configuration": {
+      "textModel": "gpt-6-astra",
+      "effort": "medium",
+      "imageModel": "gpt-image-2-2026-04-21",
+      "preparationEnabled": true,
+      "contextRenewalTokens": 250000
+    },
+    "revision": null
+  },
+  "existingOperations": [
+    {
+      "id": "1c97b058-8d99-4fda-82cd-d09b3177d786",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T03:58:19.438Z",
+      "completed_at": "2026-09-07T03:58:25.734Z"
+    },
+    {
+      "id": "de9fc30d-d50b-4996-bd6c-1fd95fe1b520",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T03:58:26.293Z",
+      "completed_at": "2026-09-07T03:58:32.895Z"
+    },
+    {
+      "id": "929594bf-8731-4bc5-b6df-6610ac32e10d",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T03:58:33.314Z",
+      "completed_at": "2026-09-07T03:59:43.496Z"
+    },
+    {
+      "id": "cbc34017-7b44-482b-889c-d53a1d43bec1",
+      "kind": "image",
+      "status": "complete",
+      "created_at": "2026-09-07T03:59:43.512Z",
+      "completed_at": "2026-09-07T04:01:48.459Z"
+    },
+    {
+      "id": "930b06a1-098c-4bc4-812a-13cec67f2e31",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:01:52.874Z",
+      "completed_at": "2026-09-07T04:03:16.093Z"
+    },
+    {
+      "id": "26cfcc92-85af-410a-8245-291b10276ff9",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:03:17.094Z",
+      "completed_at": "2026-09-07T04:03:25.019Z"
+    },
+    {
+      "id": "81be9c25-d06b-48b0-9fda-aadfd8fb2185",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:03:26.412Z",
+      "completed_at": "2026-09-07T04:04:25.757Z"
+    },
+    {
+      "id": "229aabff-64e1-4d6d-9d69-0d6a3ea80aa4",
+      "kind": "image",
+      "status": "complete",
+      "created_at": "2026-09-07T04:04:25.776Z",
+      "completed_at": "2026-09-07T04:06:20.517Z"
+    },
+    {
+      "id": "2d53fd37-81e7-43c4-8387-951ca1db1d8e",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:06:24.483Z",
+      "completed_at": "2026-09-07T04:07:48.802Z"
+    },
+    {
+      "id": "9eebcd0d-3c21-4066-8b00-1a73165b8053",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:07:50.398Z",
+      "completed_at": "2026-09-07T04:07:58.541Z"
+    },
+    {
+      "id": "aad605e7-fc76-449b-8783-b87b1a3499d9",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:08:00.736Z",
+      "completed_at": "2026-09-07T04:08:43.371Z"
+    },
+    {
+      "id": "4b6691fa-9d8d-402a-8ebe-e4e105554cdd",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:08:45.222Z",
+      "completed_at": "2026-09-07T04:08:53.179Z"
+    },
+    {
+      "id": "2c936e39-5cb5-4db7-9e5c-67103a22dba9",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:08:56.800Z",
+      "completed_at": "2026-09-07T04:09:26.514Z"
+    },
+    {
+      "id": "a380572d-91b7-4fb2-8eba-3a3586734e2b",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:09:28.231Z",
+      "completed_at": "2026-09-07T04:11:27.891Z"
+    },
+    {
+      "id": "4cfc5592-c651-428e-9404-fe47c7f106d4",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:11:29.544Z",
+      "completed_at": "2026-09-07T04:11:40.051Z"
+    },
+    {
+      "id": "0e98e17f-5e93-4fe3-84b8-f27fd604f7fd",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:11:42.011Z",
+      "completed_at": "2026-09-07T04:12:29.683Z"
+    },
+    {
+      "id": "e4860d7f-81a2-4423-a1c4-52d6c9d2fb43",
+      "kind": "image",
+      "status": "complete",
+      "created_at": "2026-09-07T04:12:29.719Z",
+      "completed_at": "2026-09-07T04:14:17.815Z"
+    },
+    {
+      "id": "a71ae005-99fb-4557-bb63-fd8d8cd29518",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:14:20.981Z",
+      "completed_at": "2026-09-07T04:16:07.248Z"
+    },
+    {
+      "id": "adf78e4b-59c8-4003-a20a-500e40835dde",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:16:10.002Z",
+      "completed_at": "2026-09-07T04:16:40.756Z"
+    },
+    {
+      "id": "e37a51bb-065a-4040-9d73-6a1d411af26c",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:16:43.031Z",
+      "completed_at": "2026-09-07T04:17:07.479Z"
+    },
+    {
+      "id": "58852b53-5c0b-4ab6-adc9-070ed0a8e348",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:17:09.681Z",
+      "completed_at": "2026-09-07T04:17:20.306Z"
+    },
+    {
+      "id": "a020f7c1-d613-4e33-82a5-3039a94d916d",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:17:32.395Z",
+      "completed_at": "2026-09-07T04:18:43.540Z"
+    },
+    {
+      "id": "acedf621-a40e-4933-affe-293f0f2f6f5f",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:18:46.370Z",
+      "completed_at": "2026-09-07T04:18:55.433Z"
+    },
+    {
+      "id": "5c9f60a9-518d-4a9e-802e-b6e7ee4fc9e1",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:19:00.961Z",
+      "completed_at": "2026-09-07T04:19:29.856Z"
+    },
+    {
+      "id": "6614ae1e-483c-4445-92da-88409b62b977",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:19:33.286Z",
+      "completed_at": "2026-09-07T04:21:15.460Z"
+    },
+    {
+      "id": "b607c67c-5e91-4982-a99b-0922edbbd999",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:21:18.414Z",
+      "completed_at": "2026-09-07T04:23:11.363Z"
+    },
+    {
+      "id": "1dcf57c9-1d2a-4afe-9f96-868fdd879651",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:23:15.570Z",
+      "completed_at": "2026-09-07T04:23:24.352Z"
+    },
+    {
+      "id": "48014721-af21-4549-84ea-cef361fb94fa",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:23:27.394Z",
+      "completed_at": "2026-09-07T04:24:22.653Z"
+    },
+    {
+      "id": "6d3dde70-0dfd-49ce-997a-638e3915cc0c",
+      "kind": "image",
+      "status": "complete",
+      "created_at": "2026-09-07T04:24:22.710Z",
+      "completed_at": "2026-09-07T04:26:11.146Z"
+    },
+    {
+      "id": "2a93ebcd-18c6-4728-837e-f96949ec19e6",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:26:14.902Z",
+      "completed_at": "2026-09-07T04:28:32.686Z"
+    },
+    {
+      "id": "dab6bf81-874f-4c22-b0d0-adfb0b280a0a",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:28:35.441Z",
+      "completed_at": "2026-09-07T04:29:01.225Z"
+    },
+    {
+      "id": "46e1d3da-1c69-44fb-af40-4dbcbda7737e",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:29:04.235Z",
+      "completed_at": "2026-09-07T04:29:29.536Z"
+    },
+    {
+      "id": "b8354efd-3444-4eed-882c-ded6c59fe3db",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:29:32.605Z",
+      "completed_at": "2026-09-07T04:29:44.210Z"
+    },
+    {
+      "id": "41f41fca-e254-46ff-8e01-6f46ded94d98",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:29:47.851Z",
+      "completed_at": "2026-09-07T04:30:55.988Z"
+    },
+    {
+      "id": "9804e1c7-a5c5-491f-bb6d-d21803a9f08e",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:31:02.932Z",
+      "completed_at": "2026-09-07T04:31:12.853Z"
+    },
+    {
+      "id": "b01375fc-2be5-4247-bd14-a72db3f5e30d",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:31:19.140Z",
+      "completed_at": "2026-09-07T04:31:48.514Z"
+    },
+    {
+      "id": "042bfee3-66fa-43c0-975c-64b3f015eeaa",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:31:52.994Z",
+      "completed_at": "2026-09-07T04:34:54.400Z"
+    },
+    {
+      "id": "75bbe41e-0a9e-4422-85f6-899d6a32cadc",
+      "kind": "image",
+      "status": "complete",
+      "created_at": "2026-09-07T04:34:54.475Z",
+      "completed_at": "2026-09-07T04:36:54.273Z"
+    },
+    {
+      "id": "f6e52d85-70bf-4d78-bd30-be59577bcb1b",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:36:58.200Z",
+      "completed_at": "2026-09-07T04:39:26.583Z"
+    },
+    {
+      "id": "e55dc5b5-8181-4a21-9176-d14066d0c2cf",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:39:30.771Z",
+      "completed_at": "2026-09-07T04:40:16.034Z"
+    },
+    {
+      "id": "a910add0-bfc3-44e5-b362-86c8eec396ea",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:40:20.702Z",
+      "completed_at": "2026-09-07T04:41:07.241Z"
+    },
+    {
+      "id": "0e90f08e-8ad5-471f-828b-38d6cc9c95a1",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:41:11.847Z",
+      "completed_at": "2026-09-07T04:41:22.176Z"
+    },
+    {
+      "id": "eb1e0b0d-1788-4e46-b04d-29a5cdc12d4f",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:41:26.033Z",
+      "completed_at": "2026-09-07T04:42:37.880Z"
+    },
+    {
+      "id": "f7958779-c84b-42ae-af62-6ad6e6558021",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:42:42.389Z",
+      "completed_at": "2026-09-07T04:42:52.539Z"
+    },
+    {
+      "id": "04fc9096-9769-485f-bccc-f3440236fc1b",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:43:06.719Z",
+      "completed_at": "2026-09-07T04:44:39.401Z"
+    },
+    {
+      "id": "01944e82-a4b2-4796-8b16-62b02d2422c2",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:44:44.901Z",
+      "completed_at": "2026-09-07T04:46:59.424Z"
+    },
+    {
+      "id": "cdcbb5d3-d3ac-4ae3-9689-6de67041bdbf",
+      "kind": "image",
+      "status": "complete",
+      "created_at": "2026-09-07T04:46:59.497Z",
+      "completed_at": "2026-09-07T04:48:58.509Z"
+    },
+    {
+      "id": "f9dfb8ae-ca94-465a-8329-7c4a0b1fd6b0",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:49:04.610Z",
+      "completed_at": "2026-09-07T04:51:14.366Z"
+    },
+    {
+      "id": "87eb823f-a594-46e2-95ec-f88300cb32e5",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:51:20.093Z",
+      "completed_at": "2026-09-07T04:51:30.215Z"
+    },
+    {
+      "id": "cfb21497-6690-4daa-b194-5de08ab0b436",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:51:36.583Z",
+      "completed_at": "2026-09-07T04:53:14.665Z"
+    },
+    {
+      "id": "249d6404-3f07-4419-9933-3f293f5a0128",
+      "kind": "image",
+      "status": "complete",
+      "created_at": "2026-09-07T04:53:14.738Z",
+      "completed_at": "2026-09-07T04:55:10.619Z"
+    },
+    {
+      "id": "79f464d3-dc5b-4a72-8383-8a7296b6d48d",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:55:15.576Z",
+      "completed_at": "2026-09-07T04:55:43.884Z"
+    },
+    {
+      "id": "2e4185cf-9e7b-413f-9173-58a26826a782",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:55:49.218Z",
+      "completed_at": "2026-09-07T04:58:15.541Z"
+    },
+    {
+      "id": "092bc774-b2be-4402-98a1-8229db2b22f0",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:58:21.153Z",
+      "completed_at": "2026-09-07T04:59:10.433Z"
+    },
+    {
+      "id": "90681c9a-3cea-4c00-9113-3431c23f98f0",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T04:59:15.782Z",
+      "completed_at": "2026-09-07T05:00:53.238Z"
+    },
+    {
+      "id": "6e547825-5f60-475a-b2da-852c621dc822",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T05:00:59.372Z",
+      "completed_at": "2026-09-07T05:01:15.972Z"
+    },
+    {
+      "id": "9c600650-ba8c-49e7-a87b-270bc22993ed",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T05:01:29.199Z",
+      "completed_at": "2026-09-07T05:02:05.191Z"
+    },
+    {
+      "id": "a2003eb8-279e-469c-acd6-173d3470bb25",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T05:02:05.526Z",
+      "completed_at": "2026-09-07T05:02:17.119Z"
+    },
+    {
+      "id": "a7c2e6ea-3371-4d5a-9ad7-7fa2d149b4cc",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T05:02:20.817Z",
+      "completed_at": "2026-09-07T05:02:59.807Z"
+    },
+    {
+      "id": "58d88dbd-7eb5-41d9-aa35-06c910fe4c5e",
+      "kind": "astra",
+      "status": "complete",
+      "created_at": "2026-09-07T05:03:03.227Z",
+      "completed_at": "2026-09-07T05:07:18.505Z"
+    }
+  ],
+  "existingPublications": [
+    {
+      "id": "55e8ddfb-92a0-4c67-9921-289994007f41",
+      "work_id": "work-c9d164ad62fcbc3b4627ed165ec84eed",
+      "created_at": "2026-09-07T04:03:25.032Z"
+    },
+    {
+      "id": "bd7aef29-9f0d-4e7b-a227-ac87bd78e4e5",
+      "work_id": "work-c9d164ad62fcbc3b4627ed165ec84eed",
+      "created_at": "2026-09-07T04:07:58.556Z"
+    },
+    {
+      "id": "3e6985f7-10dc-4183-afca-dac9be7a88ec",
+      "work_id": "work-c989cdfd80a48e2aa32cfd9517b326b1",
+      "created_at": "2026-09-07T04:11:40.081Z"
+    },
+    {
+      "id": "757764ef-53bc-4386-87a0-183a973dfb24",
+      "work_id": "work-c989cdfd80a48e2aa32cfd9517b326b1",
+      "created_at": "2026-09-07T04:17:20.336Z"
+    },
+    {
+      "id": "81fb28ed-7ce5-428b-86ab-d4afbcb69b0e",
+      "work_id": "work-1829a8ae7c5690472d620b886f48d787",
+      "created_at": "2026-09-07T04:23:24.386Z"
+    },
+    {
+      "id": "04c28ecc-099a-47fe-883c-ee988d757497",
+      "work_id": "work-1829a8ae7c5690472d620b886f48d787",
+      "created_at": "2026-09-07T04:29:44.261Z"
+    },
+    {
+      "id": "0d1403e6-f87e-450f-b335-ad7abcef6341",
+      "work_id": "work-c9d164ad62fcbc3b4627ed165ec84eed",
+      "created_at": "2026-09-07T04:41:22.233Z"
+    },
+    {
+      "id": "e708f0c6-70d8-4776-8e64-70a9558c38cb",
+      "work_id": "work-c9d164ad62fcbc3b4627ed165ec84eed",
+      "created_at": "2026-09-07T04:51:30.277Z"
+    },
+    {
+      "id": "4c7c8ca8-33c4-430f-bc63-542bf52dbd2f",
+      "work_id": "work-c9d164ad62fcbc3b4627ed165ec84eed",
+      "created_at": "2026-09-07T04:59:10.499Z"
+    }
+  ],
+  "retained": "All fiction, images, memories, sessions, reading places and spending; no reset or sample requests."
+}

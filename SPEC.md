@@ -47,7 +47,7 @@ The full source is available to the agent. Its world and root trajectory are con
 
 ## Models
 
-Use GPT-6 Astra at xhigh for the creative agent and prose. The initial LLM critic also uses Astra at xhigh in a separate context. Use GPT Image 2 for imagery. Exact verified API choices are in PLAN.md. Do not silently fall back to Opus/Fable, a different model or a lower effort.
+Use GPT-6 Astra at medium for the creative agent and prose. The initial LLM critic also uses Astra at medium in a separate context. Use GPT Image 2 for imagery. Exact verified API choices are in PLAN.md. Do not silently fall back to Opus/Fable, a different model or a lower effort.
 
 Astra can choose visual references, direct creation, examine returned images and revise unpublished work. The application executes and preserves tool results. It does not predetermine the order of writing, imagery, planning and criticism.
 

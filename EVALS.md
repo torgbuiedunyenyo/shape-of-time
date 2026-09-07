@@ -15,7 +15,7 @@ requirement. The creative agent retains its ordinary option to seek criticism as
 
 ## Literary and visual judgment
 
-Use GPT-6 Astra at xhigh as the initial LLM critic, in a context separate from the creative agent's running conversation. Supply the intended experience, the original infinite-book material and adapted prose-guide.md identified by content/shape-of-time/SOURCE.md, the actual material under review and read-only access to relevant original prose/images. The later illustrated-successor prose guide is superseded. Do not give the critic only summaries, intended image prompts or the creative agent's claims about why the draft succeeds.
+Use GPT-6 Astra at medium as the initial LLM critic, in a context separate from the creative agent's running conversation. Supply the intended experience, the original infinite-book material and adapted prose-guide.md identified by content/shape-of-time/SOURCE.md, the actual material under review and read-only access to relevant original prose/images. The later illustrated-successor prose guide is superseded. Do not give the critic only summaries, intended image prompts or the creative agent's claims about why the draft succeeds.
 
 The critic can investigate. It should explain its conclusions with specific passages, images and source references, distinguish a real contradiction from viewpoint or uncertainty, and say when the available evidence is inadequate. It may request broader context before judging a long-range relationship. Do not impose a maximum source window that prevents the judgment being asked for.
 
@@ -48,7 +48,7 @@ Preserve exact source provenance. Do not tell the critic the expected diagnosis 
 
 Keep complete experimental runs, including rejected drafts and images. Report revisions made before publication and any manual intervention. Do not splice the best paragraphs from several runs and present them as one autonomous result.
 
-The predecessor is an experiential comparison, not a controlled test of architecture: its generating model and other conditions differ. For comparisons among new variants, keep Astra/xhigh, GPT Image 2 and authored source/guide fixed where possible. Conceal variant/model labels from reviewers when useful. The author's reading and preferences remain part of artistic direction.
+The predecessor is an experiential comparison, not a controlled test of architecture: its generating model and other conditions differ. For comparisons among new variants, keep Astra/medium, GPT Image 2 and authored source/guide fixed where possible. Conceal variant/model labels from reviewers when useful. The author's reading and preferences remain part of artistic direction.
 
 ## Progressive reading evidence
 

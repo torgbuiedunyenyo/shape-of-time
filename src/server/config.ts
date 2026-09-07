@@ -7,7 +7,7 @@ export const config = {
   contextRenewalTokens: 250_000,
   budget: Number(process.env.PROVIDER_BUDGET_USD ?? "0"),
   textModel: "gpt-6-astra" as const,
-  effort: "xhigh" as const,
+  effort: "medium" as const,
   imageModel: "gpt-image-2-2026-04-21" as const,
   port: Number(process.env.PORT ?? "3000"),
 };

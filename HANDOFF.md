@@ -1,5 +1,16 @@
 # Handoff
 
+## Latest override — Astra medium
+
+The author explicitly requested medium effort and a one-time exemption from resetting the book.
+Keep all current content and memory. F8 in PLAN.md changes the shared setting to medium;
+tests/receipts/astra-medium-transition-2026-09-07.json records both mechanisms and the boundary
+(60 existing operations, 9 publications). The medium pin is
+21f659fcad3e8b385a7f72e60f892761c34fc95f86f9075752590ac57451ad90.
+.local/medium-release.json records the final deployment verification and released hold. Earlier xhigh UAT and pin
+statements below describe the pre-switch state, not the current effort after this release.
+The automatic sample remains stopped.
+
 ## Current purpose and authority
 
 Build The Shape of Time as a world exploration harness producing sustained, coherent novels nested

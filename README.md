@@ -30,7 +30,7 @@ Configuration is listed in `.env.example`. Required: DATABASE_URL and S3_ENDPOIN
 S3_REGION/S3_ACCESS_KEY_ID/S3_SECRET_ACCESS_KEY. Live generation additionally needs OPENAI_API_KEY,
 GENERATION_ENABLED=true and an explicitly funded PROVIDER_BUDGET_USD. The allowance is stored in the
 edition when first initialized; changing the environment alone does not silently increase it.
-The text model is GPT-6 Astra at xhigh; images use gpt-image-2-2026-04-21. There is no fallback.
+The text model is GPT-6 Astra at medium; images use gpt-image-2-2026-04-21. There is no fallback.
 PREPARATION_ENABLED=true offers preparation while readers spend time in any published section.
 The creative agent receives the actual current text/images, already prepared openings and unread
 continuation. It can prepare more linear reading or a nested opening, or decide enough is available.
@@ -53,7 +53,7 @@ restart, and pauses an uncertain outcome. A single unusually long creative agent
 the880,000-token dispatch guard; inspect it before manual renewal/resume.
 `renew.ts RENEWAL_KEY` also preserves and renews the idle creative agent's context;
 its standalone compaction interface does not expose a reasoning-effort setting. Creative agent/critic
-responses continue to use Astra xhigh. Both paid utilities require generation deliberately enabled.
+responses continue to use Astra medium. Both paid utilities require generation deliberately enabled.
 `corpus.ts export .local/SNAPSHOT` saves all records and original media with checksums while the
 creative agent is idle. `corpus.ts restore .local/SNAPSHOT` verifies and restores to a fresh
 `DATABASE_SCHEMA=world_restore_NAME`, with generation disabled, and checks every restored row/object.
