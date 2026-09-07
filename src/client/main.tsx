@@ -32,7 +32,7 @@ import { hasSeenReadingGuide } from "./tour-state.js";
 import { ImageDetail } from "./ImageDetail.js";
 import { OpeningPanel } from "./OpeningPanel.js";
 import { capturePlace, restorePlace } from "./position.js";
-import { explorationKey, openingStatus, requestNeedsPolling } from "./requests.js";
+import { explorationKey, openingStatus, continuationStatus, requestNeedsPolling } from "./requests.js";
 async function api<T>(path: string, body?: unknown): Promise<T> {
   const r = await fetch(
     "/api/" + path,
@@ -182,10 +182,18 @@ function Shelf() {
   const navigate = useNavigate();
   useEffect(() => {
     let active = true;
-    api<typeof library>("library?q=" + encodeURIComponent(query))
-      .then(next => { if (active) { setLibrary(next); setError(""); } })
-      .catch((e) => { if (active) setError(e.message); });
-    return () => { active = false; };
+    let loading = false;
+    const refresh = () => {
+      if (loading) return;
+      loading = true;
+      api<typeof library>("library?q=" + encodeURIComponent(query))
+        .then(next => { if (active) { setLibrary(next); setError(""); } })
+        .catch((e) => { if (active) setError(e.message); })
+        .finally(() => { loading = false; });
+    };
+    refresh();
+    const timer = setInterval(refresh, 5000);
+    return () => { active = false; clearInterval(timer); };
   }, [query]);
   const open = (id: string) => navigate("/read/" + enter(id, null));
   const begin = async () => {
@@ -861,21 +869,15 @@ function Reader() {
         {book && (
           <footer className="frontier">
             <p>The story continues.</p>
-            <button
+            {(!continuation || !requestNeedsPolling(continuation.status)) && <button
               className="primary"
               onClick={() => request("continue")}
-              disabled={
-                continuation &&
-                ["queued", "running"].includes(continuation.status)
-              }
             >
               Continue reading →
-            </button>
+            </button>}
             {continuation && continuation.status !== "done" && (
               <p className="small" role="status">
-                {["queued", "running"].includes(continuation.status)
-                  ? "The next passage is taking shape. Your place is saved."
-                  : (continuation.error ?? "The continuation is unavailable. Your place is saved.")}
+                {continuationStatus(continuation)}
               </p>
             )}
           </footer>

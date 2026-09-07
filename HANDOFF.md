@@ -2,6 +2,58 @@
 
 ## Active work — F7 narrative momentum and full reader UAT
 
+**03:40UTC:** whole-image request is6a1733a5-3fe7-401f-98eb-a609b2d4c043 (created03:36:24.480UTC).
+Text child The Money on Its Way/work-d9ae39c1231b7918b288bb6695baacc2 became readable and actual
+production shelf button was clicked to enter **8708467d-0dcc-4283-9597-5f0f9399af98** in tab30
+`explorationTab`. Root tab28 stays at scroll3175.5/blockb-dc1745deaa84d3731951 with2sections for the
+append-position check. Local shelf in29 automatically added the new child without reload, verifying
+the pending client refresh fix;29has nowclosed. Local API92326 stillruns generationfalse; stoplater.
+User tab21 remains. Still need text return, warm reentry, wholeimageentry, one actual region-based
+grandchild, continuation append/place and useful ordinary preparation, then clientrelease/finalreport.
+
+**03:37UTC UAT checkpoint:** Begin c0e8aa02 finished,2root publications and1published image.
+First publication d5e14acd at03:28:51.659UTC (148.136s after Begin); second6278fe61 at03:33:58.996UTC.
+Text exploration7e9145a6 running, selected exact visitor-phone paragraph. Actual continuation
+197cad4d queued at03:34:19.985UTC against second publication. Whole-image exploration was just
+submitted through root illustration; get its ID from progress. Necessary UAT only, no sample driver.
+Root visit in tab28 is0b82eb9f-c124-4cb4-9937-6fdffd1bc6a8. Use `.local/uat-progress.ts` for state.
+
+**Client-only follow-up uncommitted, all44gates passed:** shelf refreshes every5s so mounted library
+reflects new works; continuation status explains queue/blockage and never prints provider internals
+or offers a fake retry of a paused request. Production is still2664d40. Do not restart edition for
+these client edits. Deploy safely after UAT requests settle. Local source server session92326 on3000
+serves updated built client with generation=false. Its PID needschecking beforestopping. Tab29
+`recoveryTab` is on local library, watching for actual new works to appear without reload.
+
+Recovery UAT passed: clean local origin automatically showed first guide, Skip/replay/Escape/reload
+worked. Local waiting view was left open, only local API20845 was terminated, visible Failed to fetch
+appeared, then replacement local API restored its ready state automatically. Same saved c0request,
+no duplicate submission; clicking Open actually entered published text. Production wasn't interrupted.
+Two local/prod tabs were involved. Browser `qaBrowser` and `viewport` are available, override reset.
+
+Continuation place check still pending: API payload proves second publication already existed at
+the actual click, and native AX scrolled to its moved frontier; do not report that click's scroll
+change as a proved append defect. Observe next append while remaining at a known text anchor.
+
+**03:27UTC live checkpoint:** F7 application2664d40b829aabf953bf20574db797eaa58a22ce pushed to main.
+Git deployment06022230-9f24-467a-b39d-954b7a2f2bca is live; exact `/healthz` revision verified.
+Production schema `world_reader_20260907`, allowance96.065027, generation/preparation enabled.
+Empty library observed before generation: zero works, created03:25:14.878UTC. No old content copied.
+Actual UI Begin request **c0e8aa02-20cf-419e-a559-5d11aba5bc9d** submitted for UAT. Browser tab28
+`uatTab` is on its waiting view; user old tab21 remains. Local tab27 closed; API9667 and Vite91674
+stopped. `.env` now points at fresh schema with generation=false, for read-only diagnostics.
+`.local/uat-progress.ts` writes current pin/intents/publications/spend to `.local/uat-progress.json`.
+No driver or release hold is running. Do not resume automatic20-request sampling.
+
+Old-corpus actual UAT additionally passed: root→Back Label→Late Game, grandchild reload/page turn,
+return to Back Label's source image and root's clef paragraph. Native font23→25→23 retained anchor.
+Guide all6steps/back/completion restored scroll817; reload retained anchor and guide dismissal.
+Save place→shelf→saved passage restored the anchored text.390×844 narrow reflow retained root source
+block b-d9d899cdb3efaae5736d with no horizontal overflow. Temporary viewport override reset.
+Image region was actually dragged around a bottle and enabled its action; local generation-disabled
+submission showed the truthful saved-reading-available error. Fresh paid image/text/crop entry,
+continuation, pending discovery and preparation are still required before claiming full UAT.
+
 **03:25UTC recovery checkpoint:** current uncommitted F7 work lives in this worktree. Prompts now
 invite developing plots, foreshadowing and consequential scene selection without structural quotas.
 All active reader requests now receive the waiting-reader list. API rejects direction/title inputs;

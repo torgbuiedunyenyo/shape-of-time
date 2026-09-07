@@ -1,6 +1,14 @@
 import { expect, it } from "vitest";
-import { explorationKey, requestNeedsPolling } from "../src/client/requests.js";
+import { explorationKey, requestNeedsPolling, continuationStatus } from "../src/client/requests.js";
 import { bookmarkedVisit, latestVisitRequests, sourceReturn } from "../src/client/visits.js";
+
+it("distinguishes a queued continuation from active writing and explains a blocked queue without provider internals", () => {
+  expect(continuationStatus({status:"queued",queue:{ahead:2,blocked:false}})).toContain("2 reading requests are ahead");
+  expect(continuationStatus({status:"queued",queue:{ahead:0,blocked:false}})).toContain("waiting to begin");
+  expect(continuationStatus({status:"running"})).toContain("will appear here when ready");
+  expect(continuationStatus({status:"queued",queue:{ahead:1,blocked:true}})).toContain("paused and needs attention");
+  for(const status of ["failed","paused"]) expect(continuationStatus({status})).toContain("published story remains available");
+});
 
 it("keeps observing a saved paused or failed request so recovery becomes visible without a duplicate submission", () => {
   for (const status of ["queued", "running", "failed", "paused"]) expect(requestNeedsPolling(status)).toBe(true);

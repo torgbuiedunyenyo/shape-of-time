@@ -3,6 +3,16 @@ import type { Anchor, Intent } from "../shared/types.js";
 // A paused request can recover without a new purchase; keep observing its saved identity.
 export const requestNeedsPolling = (status: string) => !["done", "cancelled"].includes(status);
 
+export function continuationStatus(intent: Pick<Intent, "status" | "queue">) {
+  if (["paused", "failed"].includes(intent.status) || intent.queue?.blocked)
+    return "New writing has paused and needs attention. Your continuation is saved; the published story remains available.";
+  if (intent.status === "queued") return intent.queue?.ahead
+    ? `${intent.queue.ahead === 1 ? "One reading request is" : `${intent.queue.ahead} reading requests are`} ahead of your continuation. Your place is saved.`
+    : "Your continuation is waiting to begin. Your place is saved.";
+  if (intent.status === "running") return "The next passage is taking shape. It will appear here when ready; your place is saved.";
+  return "This continuation is no longer active. Your place is saved.";
+}
+
 export function openingStatus(intent?: Pick<Intent, "status" | "result_work_id" | "error" | "queue">) {
   if (!intent) return "Checking the opening…";
   if (intent.result_work_id) return "The opening is ready to read. More can unfold while you read.";
