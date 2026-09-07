@@ -68,9 +68,9 @@ Keep actual returned images and the references used to create them. A prompt's i
 
 The reading interface presents stable compositions with comfortable typography, image sizing and text-size controls. Pagination adapts to the display; it does not impose story length, paragraph limits or dramatic beats. Familiar forward/back navigation continues within the work without false ending screens.
 
-A few prepared openings invite exploration. Arbitrary text selection, whole-image entry and then image-region entry use the same Open as a book grammar. An optional angle can guide the exploration, but readers need not write a synopsis. Explicit title creation remains available separately from read-only shelf search.
+A few prepared openings invite exploration. Arbitrary text selection, whole-image entry and then image-region entry use the same Open as a book grammar. Readers choose what to explore; they do not supply narrative directions, premises or titles. The reading interface offers no freeform generation controls. Shelf search only searches existing works. The author's artistic direction remains distinct from reader exploration.
 
-Entering a prepared work is immediate. A cold opening keeps the originating material readable with truthful local status. If the reader goes elsewhere, a completed opening is retained without interrupting them. Generation errors do not masquerade as fictional closure.
+Entering a prepared work is immediate. A cold opening keeps the originating material readable with truthful local status, distinguishing waiting to begin from active generation. Entry becomes available as soon as the first published section is readable, even while the creative agent continues working. No request-completion or multi-section threshold delays it. If the reader goes elsewhere, the opening is retained without interrupting them. Generation errors do not masquerade as fictional closure.
 
 The reader's visit trail is separate from work identity and fictional relationships. Preserve exact return through root, child, grandchild and further nesting, including after page turns, reload, shelf visits or reflow. A work entered through two different sources has two different return routes. Save bookmarks, discoveries and current place.
 

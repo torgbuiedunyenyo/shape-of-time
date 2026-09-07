@@ -170,7 +170,7 @@ it("finds the published original without presenting a later unpublished revision
   expect(result.works).toBeUndefined();
 });
 
-it("lets the author develop a side work without replacing the reader-requested root", async () => {
+it("lets the creative agent develop a side work without replacing the reader-requested root", async () => {
   const { executeTool } = await import("../src/server/agent/tools.js");
   const request = await enqueue(edition, "begin", null, {}, randomUUID());
   const context = {
@@ -234,6 +234,20 @@ it("lets the author develop a side work without replacing the reader-requested r
         .executeTakeFirstOrThrow()
     ).root_work_id,
   ).toBe(root.id);
+});
+
+it("exposes the first published section through the reader API before the exploration finishes", async () => {
+  const { app } = await import("../src/server/app.js");
+  const work = await createWork(edition, "An opening still unfolding", {});
+  const intent = await enqueue(edition, "explore", null, {}, randomUUID());
+  await db.updateTable("intents").set({ status: "running", result_work_id: work.id }).where("id", "=", intent.id).execute();
+  const status = async () => (await app.request(`/api/intents/${intent.id}`)).json();
+  expect(await status()).toMatchObject({ status: "running", result_work_id: null, latest_publication_id: null });
+  const draft = await writeDocument(edition, randomUUID() + ".md", "The first readable passage.", 0, randomUUID());
+  const first = await publish(work.id, draft.id);
+  await writeDocument(edition, randomUUID() + ".md", "Further work remains unpublished.", 0, randomUUID());
+  expect(await status()).toMatchObject({ status: "running", result_work_id: work.id, latest_publication_id: first.id, result_title: work.title });
+  expect((await getBook(work.id)).publications.map(p => p.id)).toEqual([first.id]);
 });
 
 it("can follow an archive cursor to the next original instead of silently losing sources beyond the first result page", async () => {

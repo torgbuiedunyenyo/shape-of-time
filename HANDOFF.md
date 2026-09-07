@@ -1,7 +1,53 @@
 # Handoff
 
-Updated September 7, 2026, 02:16 UTC. After compaction, read this active handoff and PLAN.md
+Updated September 7, 2026, 02:31 UTC. After compaction, read this active handoff and PLAN.md
 section 11. PLAN.md is the sole queue; do not create STATUS.md.
+
+### Latest steering: reader controls correction F6 — finish this before resuming the sample
+
+At10:18PM Eastern the author rejected reader narrative direction and asked for entry as soon as
+the first pages exist. Read PLAN.md F6 at the end of section11. Screenshot shows The Back Label's
+second illustration exploration. Both actual explorations53618c9d and a49dba98 are still queued;
+neither has any destination pages yet. They wait behind the root continuation23ca1f50.
+The API already exposes a first publication while its request is running; it does not wait for
+completion or several sections. The misleading status text treated queued and running as identical.
+
+Local changes remove the direction input/outgoing angle, title-premise creation on the shelf and
+guide invitation to direct the narrative. New OpeningPanel distinguishes waiting/working/ready,
+and offers entry immediately on a readable result. Keep reader source exploration and read-only
+search. Existing empty-angle request hashes are retained so reload cannot duplicate an opening.
+All code changes are client-only. The generator and edition pin stay unchanged. No reset is needed.
+The historical raw API schema still has optional angle/title fields; this slice changes the reading
+interface and outgoing requests, not the creative runtime or prior request evidence. No active
+reader request contains an angle or title. Do not claim an API-level rejection was implemented.
+
+All38tests, typecheck, lint and build passed. New real-Postgres/API check establishes first-publication
+entry during a still-running exploration, with later unpublished material excluded. OpeningPanel
+checks cover no narrative input, queued/working distinction and an enabled entry before completion.
+Actual local in-app QA opened The Back Label's same second image: the panel has no text field,
+and the action is visible/usable. No paid QA request was submitted. Local tab24 is temporary.
+
+**Automatic driver session21872/PID89015 is stopped.** `.local/review-second/hold` is present.
+Queued driver request13 **30726e4a-1826-45a1-9761-aad618b22c54** was deliberately marked paused
+for the reader-interface release, while it had no session/provider work. Original status is in
+`.local/review-second/reader-release-hold.json`. This stops the next queue dispatch after the
+current root request finishes. It is maintenance, not a generation failure.
+**Release-lock helper session5345 / PID94405 is waiting** for the current paid work to settle.
+Do not deploy until it reports the lock held and no active operations. Monitor79831/PID86952 runs.
+Local read-only API session43685/PID94117 and Vite session13841 are running for QA; stop after release.
+
+Next: finish local evidence and commit explicit paths; acquire release hold; safely fast-forward
+normal main and push; verify Git deployment and actual live controls. **Before resuming, prioritize
+the author's live exploration:** run `.local/review-second/prioritize-live-reading.ts` with the
+local env while the release lock is held. It archives the old ledger, withdraws the unstarted
+automatic child request13 (retained as cancelled, no work or spending, never counted complete),
+then records actual root23ca as13 and explorations53618c9d/a49dba98 as14/15. This avoids making the
+author wait behind another automatic continuation. The driver now ignores cancelled automatic
+requests and keeps only exact source anchors in the ledger; full original context stays in the DB.
+Then remove the local hold file, restart the ledger driver with `--env-file=.env`, release the
+advisory lock and continue to20. Do not restore/retry the withdrawn automatic child request.
+Finish final scope/images/cost/handoff after all20. Earlier checkpoint below is preserved context;
+this section controls the actual process/hold state.
 
 ### Current recovery checkpoint — supersedes older process/count entries below
 

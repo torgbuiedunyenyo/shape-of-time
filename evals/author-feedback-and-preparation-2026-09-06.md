@@ -145,3 +145,30 @@ Return restored the root image blockb-3c867dcc12b08fa95ab6 at99.97px. Both were 
 visible at their intended source; no alert appeared. Root visit94116ec2 is again active. Grandchild
 opening: opening-f0590077e96078b4f073ca55ac5bb939. This establishes the actual two-level navigation
 and loaded media, not a literary verdict. No additional journey is needed absent a new defect.
+
+## Reader controls correction and first-publication entry
+
+At 10:18 PM Eastern, the author rejected reader-supplied narrative direction and reported a grey
+opening button. The screenshot's exploration was still queued behind the current root continuation;
+it had no destination work or publication. Queued and running requests had shared the same “taking
+shape” message, obscuring that wait. Entry was already tied to the first published section, not
+completion of the full request or a minimum number of sections.
+
+The reading interface now removes the direction input and outgoing angle, the shelf's title-premise
+form, and guide copy inviting direction. Readers select source passages/images or search existing
+works. Opening status distinguishes waiting, writing and readable material in the panel, shelf and
+waiting view. A readable result enables entry while its request is still running. Existing request
+identities and exact return routes remain intact. The raw historical API schema is unchanged; this
+release removes the reader controls and their outgoing directions, rather than introducing API-level
+rejection. No active request supplied a direction or title.
+
+All 38 mechanical tests, typecheck, lint and build passed. A real-Postgres/API check observed no entry
+before publication, then a readable destination after one short publication while the request stayed
+running and a later draft remained unpublished. Component checks cover the removed input, distinct
+queued/running statuses and enabled entry before completion. Actual local in-app QA opened the same
+second Back Label illustration as the screenshot: the simplified panel had its source and opening
+action, with no direction field. No paid request was submitted by that QA.
+
+The local mechanism still exactly matches the edition pin
+`aefcf65a848bbecda3b37c0a26d71e6230712f795c4e268e678bc671408acd4e`. This interface release preserves
+the current reader corpus. Live deployment/verification follows after the active paid work settles.

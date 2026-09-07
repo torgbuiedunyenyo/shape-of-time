@@ -30,8 +30,9 @@ import "./style.css";
 import { ReadingGuide } from "./ReadingGuide.js";
 import { hasSeenReadingGuide } from "./tour-state.js";
 import { ImageDetail } from "./ImageDetail.js";
+import { OpeningPanel } from "./OpeningPanel.js";
 import { capturePlace, restorePlace } from "./position.js";
-import { explorationKey } from "./requests.js";
+import { explorationKey, openingStatus } from "./requests.js";
 async function api<T>(path: string, body?: unknown): Promise<T> {
   const r = await fetch(
     "/api/" + path,
@@ -132,16 +133,14 @@ function Discoveries() {
                 <span>{record.openedVisitId ? "Resume →" : "↗"}</span>
               </button>
             ) : (
-              <p>{record.label ?? "A book is taking shape."}</p>
+              <p>{record.label ?? "An opening"}</p>
             )}
             {record.source?.quote && (
               <blockquote>{record.source.quote}</blockquote>
             )}
             {!intent?.result_work_id && (
               <p className="small">
-                {["failed", "paused"].includes(intent?.status ?? "")
-                  ? "This opening is paused. Your request and saved writing are kept."
-                  : "You can keep reading while this opens."}
+                {openingStatus(intent)}
               </p>
             )}
             <Link
@@ -173,9 +172,6 @@ function Shelf() {
     generationEnabled: boolean;
   }>();
   const [query, setQuery] = useState("");
-  const [title, setTitle] = useState("");
-  const [creating, setCreating] = useState(false);
-  const titleKey = useRef(crypto.randomUUID());
   const [error, setError] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
@@ -279,49 +275,6 @@ function Shelf() {
         </section>
       )}
       <Discoveries />
-      {library?.generationEnabled && (
-        <details className="title-opening">
-          <summary>Begin with a title</summary>
-          <form
-            onSubmit={async (e) => {
-              e.preventDefault();
-              setCreating(true);
-              try {
-                const intent = await api<Intent>("intents", {
-                  kind: "title",
-                  workId: null,
-                  key: "title:" + titleKey.current,
-                  title,
-                });
-                const reading = loadReading();
-                reading.requests[intent.id] = {
-                  intentId: intent.id,
-                  visitId: null,
-                  label: title,
-                };
-                saveReading(reading);
-                navigate("/waiting/" + intent.id);
-              } catch (e) {
-                setError((e as Error).message);
-                setCreating(false);
-              }
-            }}
-          >
-            <label htmlFor="new-title">A book you would like to find</label>
-            <input
-              id="new-title"
-              value={title}
-              onChange={(e) => {
-                setTitle(e.target.value);
-                titleKey.current = crypto.randomUUID();
-              }}
-            />
-            <button type="submit" disabled={creating || !title.trim()}>
-              Open as a book ↗
-            </button>
-          </form>
-        </details>
-      )}
       <p className="small">
         Follow a passage or an image into another book.
         <br />
@@ -353,9 +306,7 @@ function Waiting() {
           : "A book is opening."}
       </h1>
       <p>
-        {intent?.status === "failed" || intent?.status === "paused"
-          ? intent.error
-          : "You can leave this page and come back. Your request is saved."}
+        {openingStatus(intent)}
       </p>
       {error && <p role="alert">{error}</p>}
       {intent?.result_work_id && (
@@ -380,7 +331,6 @@ function Reader() {
   const [book, setBook] = useState<Book>();
   const [error, setError] = useState("");
   const [selected, setSelected] = useState<Anchor>();
-  const [angle, setAngle] = useState("");
   const [intent, setIntent] = useState<Intent>();
   const [font, setFont] = useState(loadReading().fontSize);
   const [continuation, setContinuation] = useState<Intent>();
@@ -634,13 +584,12 @@ function Reader() {
       const key =
         kind === "continue"
           ? `continue:${visit.workId}:${book?.publications.at(-1)?.id ?? "start"}`
-          : await explorationKey(visit.id, source!, angle);
+          : await explorationKey(visit.id, source!);
       const result = await api<Intent>("intents", {
         kind,
         workId: visit.workId,
         key,
         source,
-        angle,
         ...(kind === "continue"
           ? { afterPublicationId: book?.publications.at(-1)?.id }
           : {}),
@@ -943,70 +892,17 @@ function Reader() {
       </nav>
       {guideOpen && book && <ReadingGuide key={visit.id} onClose={() => setGuideOpen(false)} />}
       {selected && (
-        <aside className="exploration" aria-label="Open as a book">
-          <button
-            className="close"
-            aria-label="Close exploration"
-            onClick={() => {
-              window.getSelection()?.removeAllRanges();
-              setSelected(undefined);
-            }}
-          >
-            ×
-          </button>
-          <p className="eyebrow">An opening</p>
-          <blockquote>
-            {selected.quote ??
-              "A detail of this world, seen from another place."}
-          </blockquote>
-          <label htmlFor="angle">A direction, if you have one</label>
-          <input
-            id="angle"
-            value={angle}
-            onChange={(e) => setAngle(e.target.value)}
-            placeholder="Or leave room for discovery"
-          />
-          {intent?.kind === "explore" && intent.result_work_id ? (
-            <button
-              className="primary"
-              onClick={() =>
-                navigate(
-                  "/read/" +
-                    enterRequested(
-                      intent.id,
-                      intent.result_work_id!,
-                      visit.id,
-                      selected,
-                    ),
-                )
-              }
-            >
-              Enter the book ↗
-            </button>
-          ) : (
-            <button
-              className="primary"
-              onClick={() => request("explore")}
-              disabled={
-                intent?.kind === "explore" &&
-                ["queued", "running"].includes(intent.status)
-              }
-            >
-              Open as a book ↗
-            </button>
-          )}
-          {intent?.kind === "explore" && (
-            <p role="status" className="small">
-              {intent.error ??
-                (intent.result_work_id
-                  ? "Your opening is ready."
-                  : ["queued", "running"].includes(intent.status)
-                    ? "A book is taking shape. You can keep reading."
-                    : "Your opening is ready.")}
-            </p>
-          )}
-          {error && <p role="alert">{error}</p>}
-        </aside>
+        <OpeningPanel
+          source={selected}
+          intent={intent}
+          error={error}
+          onClose={() => {
+            window.getSelection()?.removeAllRanges();
+            setSelected(undefined);
+          }}
+          onRequest={() => void request("explore")}
+          onEnter={(ready) => navigate("/read/" + enterRequested(ready.id, ready.result_work_id!, visit.id, selected))}
+        />
       )}
       {enlarged && (
         <ImageDetail

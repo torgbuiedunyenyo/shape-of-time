@@ -4,7 +4,7 @@ import { rememberReadingGuide } from "./tour-state.js";
 const steps = [
   { target: ".book h1", title: "A world to wander through", text: "Read for as long as you like. A passage or picture can lead into another story, and your place will be waiting when you return." },
   { target: ".page-controls", title: "Find your own pace", text: "Scroll as usual, or use these arrows to move a screen at a time. At the end of the available story, Continue reading asks the book to unfold further." },
-  { target: ".book p[data-block]", title: "Follow a few words", text: "Select a passage, then choose Open as a book to explore it. You can suggest a direction or let the opening surprise you. Marked openings already have something ready to read." },
+  { target: ".book p[data-block]", title: "Follow a few words", text: "Select a passage, then choose Open as a book to discover a narrative within it. Marked openings already have something ready to read." },
   { target: ".book .image-button", title: "There is more in a picture", text: "Tap an illustration to look closer. Open the whole image as a book, or choose a detail and draw a box around what interests you." },
   { target: ".type-controls", title: "Make yourself comfortable", text: "A− and A+ change the text size. Save place keeps a passage on your shelf. Your current reading position is remembered as you go." },
   { target: ".reader-navigation", title: "You can always come back", text: "The library holds your stories and saved places. When you follow an opening, Return brings you back to its exact source. Find this guide again with the ? beside the page arrows." },

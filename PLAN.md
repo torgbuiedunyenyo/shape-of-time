@@ -52,7 +52,7 @@ Paths in this table are repository-relative implementation destinations; new fil
 | Provider access | src/server/providers/astra.ts, image.ts, operations.ts | Selected API contracts, actual multimodal tool results, durable receipts, recovery and cost accounting. |
 | Publishing | src/server/library/works.ts, publications.ts, anchors.ts | Independent works, ordered immutable compositions, source addresses and reader intents. |
 | Persistence | src/server/db/migrations/001_agentic_library.ts and focused repositories | New records without repurposing the old folio lifecycle. Use a dedicated replacement database. |
-| Reader API | src/server/reader/routes.ts, intents.ts | Read saved content; request continuation, exploration or explicit title creation; report progress truthfully. |
+| Reader API | src/server/reader/routes.ts, intents.ts | Read saved content; request continuation or source exploration; report progress truthfully. |
 | Reading surface | src/client/reader/BookReader.tsx, Publication.tsx, pagination.ts | Flow/reflow published material, display images, preserve location and support pagewise navigation. |
 | Visits and exploration | src/client/reader/visits.ts, Exploration.tsx, Shelf.tsx | Exact nested return, image/text selection, discovery, bookmarks and resume. |
 | Preparation | src/server/agent/preparation.ts | Supply readers’ interests, available unread work and remaining allowance to bounded background work. |
@@ -98,7 +98,7 @@ Begin with a small capability set:
 
 These are tools the agent can select, not stages it must complete. It may explore visually before writing, produce several drafts, return to a distant scene, continue without a new image, or decide that criticism is useful. Every request uses automatic tool choice. The agent's final conversational message is not automatically published as fiction.
 
-Text/image selection supplies the exact source address, selected text or image region, the surrounding composition, any explicit reader angle and available ancestry. It also supplies access to the rest of the archive. Avoid the old quote-plus-title-only founding prompt. The agent decides which wider relationships matter.
+Text/image selection supplies the exact source address, selected text or image region, the surrounding composition and available ancestry. Readers do not supply a narrative angle or premise. It also supplies access to the rest of the archive. Avoid the old quote-plus-title-only founding prompt. The agent decides which wider relationships matter.
 
 Reader intentions are durable requests. The server can tell the agent that a reader is waiting for a particular opening, what is already prepared and what resources remain. Start with cooperative switching between provider responses. Astra's asynchronous tools or mid-turn steering can be added if measured waiting warrants them; their presence is not a prerequisite for the first creative loop.
 
@@ -197,11 +197,11 @@ Build this as a short sequence of connected commits, not independent subsystems:
 and text selections, after reflow/reload. Bookmarks now preserve that same nested visit. Prepared
 links and saved discoveries reopen available works. See evals/nested-reader-and-recovery-2026-09-06.md.
 
-**Work:** Implement a durable exploration intent carrying source publication/block/selection or image region and optional angle. Give the agent surrounding text and actual source images plus archive access. Create a work with its own title and development, or deliberately reopen a relevant existing work. Reserve requests before generation so repeated clicks/reloads do not duplicate the same intent.
+**Work:** Implement a durable exploration intent carrying source publication/block/selection or image region. Give the agent surrounding text and actual source images plus archive access. Create a work with its own title and development, or deliberately reopen a relevant existing work. Reserve requests before generation so repeated clicks/reloads do not duplicate the same intent.
 
 Build visits as independent records with visit ID, work ID, parent visit, entry source and current reading anchor. Store the full trail in the reading record; route/browser history refers to visits rather than reconstructing ancestry from a title or the current work's parent. Preserve a trail through page turns, reload, shelf visits and returning via a different source.
 
-Use one quiet Open as a book action for text and whole-image exploration. Add region selection once whole-image entry is sound. Preserve the source screen while work is pending; show a saved ready opening if the reader has moved elsewhere. Searching titles is read-only; explicit title creation is a separate deliberate action.
+Use one quiet Open as a book action for text and whole-image exploration. Add region selection once whole-image entry is sound. Preserve the source screen while work is pending; show a saved ready opening if the reader has moved elsewhere. Searching titles is read-only. The author's September 6 correction removes freeform direction and title creation from the reading interface.
 
 **Files:** reader/intents.ts and routes.ts, library/anchors.ts and works.ts, client visits/exploration/shelf components, archive tools.
 
@@ -425,3 +425,13 @@ Live preparation published The Back Label with 3 images; actual warm entry and e
 passed. All 43 currently published images are available. The active allowance was increased to
 $250 under the author's prior authorization, with earlier spending retained. Finish 20 requests
 and F5 scope/cost/handoff. The prior P0–P6 release remains preserved evidence.
+
+**F6 — Reader exploration correction, September 6 at 10:18 PM Eastern.** The author rejects
+reader-provided narrative direction. Remove the direction field, outgoing angle, title-premise
+creation form and guide copy inviting directions. Preserve source selection and read-only search.
+Explain queued versus active opening status; verify the first publication enables entry while the
+request is still running. The screenshot's opening had no pages: it was queued behind another
+request. This is a reading-interface correction; the creative mechanism and current corpus remain
+unchanged. Pending real reader requests contain no supplied angle or title. Pause new automatic
+sample requests during the fix, verify mechanically and in the actual reader, safely deploy, then
+resume the remaining requests in F3. Preserve all existing source-return routes and dedupe identities.

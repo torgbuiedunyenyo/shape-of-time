@@ -32,15 +32,12 @@ it("keeps long cross-paragraph selections inside the request-key limit without c
     endOffset: 8,
     quote: "A selected passage. ".repeat(250),
   };
-  const key = await explorationKey("visit-one", source, "");
+  const key = await explorationKey("visit-one", source);
   expect(key.length).toBeLessThanOrEqual(300);
-  expect(await explorationKey("visit-one", { ...source }, "")).toBe(key);
-  expect(await explorationKey("visit-two", source, "")).not.toBe(key);
+  expect(await explorationKey("visit-one", { ...source })).toBe(key);
+  expect(await explorationKey("visit-two", source)).not.toBe(key);
   expect(
-    await explorationKey("visit-one", source, "A different direction"),
-  ).not.toBe(key);
-  expect(
-    await explorationKey("visit-one", { ...source, offset: 13 }, ""),
+    await explorationKey("visit-one", { ...source, offset: 13 }),
   ).not.toBe(key);
 });
 
