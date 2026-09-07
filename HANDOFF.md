@@ -1,5 +1,15 @@
 # Handoff
 
+## Current follow-up — F10
+
+The cover uses the root book’s first published illustration (Jay and Tan at the shop counter).
+Desktop places it beside the title; mobile places it below “A love story.” The full composition is
+uncropped. Actual local desktop/390×844 checks passed: image 338×225px on mobile, no horizontal
+overflow, and Enter opens The Counter. Final checks/deployment: .local/cover-release.json.
+Client-only; medium, content and reader history remain unchanged. See PLAN.md F10.
+No generation or automatic sample was requested.
+
+
 ## Latest interface work — F9
 
 Literature-first interface copy, demonstrated text/image selection in the guide, and verification of

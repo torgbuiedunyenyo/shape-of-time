@@ -509,3 +509,10 @@ and isolated browser storage. Client-only; retain medium mechanism and all exist
 F9 implementation and local UAT complete; all 46 tests and build gates passed. The reader-history
 check confirms profile-local persistence, not accounts. See evals/reader-interface-2026-09-07.md;
 final release verification is recorded at .local/literature-release.json.
+
+### F10 — Illustrated cover
+
+Add the root book's first published illustration alongside its title and “A love story.” Keep the
+whole composition visible, stack it between title and reading controls on narrow screens, retain
+text-only entry if an image is unavailable. Reuse the book's own imagery; no generation or process
+change. Verify desktop/mobile, original reading links, build gates, and Git-triggered release.

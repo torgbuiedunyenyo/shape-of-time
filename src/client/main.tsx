@@ -177,6 +177,16 @@ function Shelf() {
     works: Work[];
     generationEnabled: boolean;
   }>();
+  const [cover, setCover] = useState<Block>();
+  const rootWorkId = library?.edition.root_work_id;
+  useEffect(() => {
+    if (!rootWorkId) return;
+    let active = true;
+    api<Book>("works/" + rootWorkId).then(book => {
+      if (active) setCover(book.publications.flatMap(p => p.blocks).find(b => b.kind === "figure" && b.assetId));
+    }).catch(() => { /* Reading remains available if the cover cannot be loaded. */ });
+    return () => { active = false; };
+  }, [rootWorkId]);
   const [query, setQuery] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -217,6 +227,8 @@ function Shelf() {
   };
   return (
     <main className="shelf">
+      <header className={"book-cover" + (cover ? " illustrated" : "")}>
+      <div className="cover-title">
       <h1>
         The Shape
         <br />
@@ -225,6 +237,12 @@ function Shelf() {
       <p className="invitation">
         A love story.
       </p>
+      </div>
+      {cover && <figure className="cover-illustration">
+        <img src={"/api/assets/" + cover.assetId} alt={cover.text} width={cover.width} height={cover.height}
+          fetchPriority="high" onError={() => setCover(undefined)} />
+      </figure>}
+      <div className="cover-actions">
       {error && <p role="alert">{error}</p>}
       {library?.edition.root_work_id ? (
         <button
@@ -249,6 +267,8 @@ function Shelf() {
           Resume your reading →
         </Link>
       )}
+      </div>
+      </header>
       {(library?.edition.root_work_id || Boolean(query) || !!library?.works.length) && (
         <section className="catalogue">
           <label htmlFor="search">Contents</label>

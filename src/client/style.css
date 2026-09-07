@@ -584,3 +584,18 @@ input {
   .guide-preview-action { animation: none; opacity: 1; }
   .guide-image-frame .guide-drawn-region { animation: none; left: 27%; top: 25%; width: 42%; height: 43%; opacity: 1; }
 }
+
+/* The title and opening illustration form the cover; the picture is never cropped. */
+.shelf { max-width: 1240px; }
+.book-cover.illustrated { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); grid-template-areas: "title image" "actions image"; gap: 0 54px; align-items: center; }
+.cover-title { grid-area: title; align-self: end; }
+.cover-actions { grid-area: actions; align-self: start; }
+.book-cover.illustrated h1 { font-size: clamp(72px, 8vw, 110px); margin-top: 0; }
+.cover-illustration { grid-area: image; margin: 0; }
+.cover-illustration img { display: block; width: 100%; height: auto; box-shadow: 0 12px 36px #2d332817; }
+@media (max-width: 900px) {
+  .book-cover.illustrated { grid-template-columns: minmax(0, 1fr); grid-template-areas: "title" "image" "actions"; gap: 26px; }
+  .book-cover.illustrated h1 { font-size: clamp(64px, 12vw, 100px); margin-bottom: 22px; }
+  .book-cover .invitation { margin: 0; }
+  .shelf { padding-top: 48px; }
+}
