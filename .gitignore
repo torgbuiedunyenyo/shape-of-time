@@ -15,3 +15,12 @@ playwright-report/
 
 .claude/worktrees/
 .memory/
+
+# Private development state and one-off expansion runs
+/HANDOFF.md
+/operations/reader-buffer-40/
+/evals/
+/archive/reader-attempts/
+/tests/receipts/*
+!/tests/receipts/astra-first-resources.json
+!/tests/receipts/astra-native-renewal.json

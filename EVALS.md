@@ -6,12 +6,8 @@ and development-agent observations are evidence distinct from the author’s own
 
 This is the evaluation practice for the agentic replacement. Assess what the reader experiences and what the agent actually produced. Mechanical checks, provider contracts, artistic judgment and browser observations establish different things.
 
-**Current scope, September 6:** the author asked to stop extended operator literary analysis and
-automatic refinement after the mechanical work and initial coherence evidence. The development
-study is preserved at its actual scope. The later follow-up in PLAN.md section 11 requests
-20 completed reader requests in a fresh edition for the author's own assessment; this supersedes
-the earlier approximate screen count. Do not treat the longer study below as an outstanding release
-requirement. The creative agent retains its ordinary option to seek criticism as it develops work.
+Paid literary studies are deliberate investigations, separate from routine mechanical checks.
+Scope each study to the question being investigated and report the limits of its evidence.
 
 ## Literary and visual judgment
 
@@ -95,7 +91,7 @@ Measure warm navigation, cold opening time, frontier wait, wasted preparation an
 
 ## Evaluation record and completion
 
-Each report identifies the code revision, prompt/source versions, edition/publications, selected and returned model evidence, evaluation scope, actual readers, source material inspected, provider usage, estimated/uncertain costs, failures and conclusions. Keep machine receipts/corpus exports outside Git when large; commit a small report and manifest with retrievable locations.
+Each report identifies the code revision, prompt/source versions, edition/publications, selected and returned model evidence, evaluation scope, actual readers, source material inspected, provider usage, estimated/uncertain costs, failures and conclusions. Keep run-specific reports, spending records and corpus exports in private operational storage. Public test fixtures should contain only the evidence needed for reproducible tests, without personal development history.
 
 Report these separately:
 

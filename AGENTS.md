@@ -4,7 +4,7 @@
 
 Build the book, The Shape of Time, as a world exploration harness that produces sustained, nested image-and-text narratives coherent with themselves as they unfold. The successful infinite-book is the experiential baseline. Give the creative agent context, persistent memory, useful tools and room to decide how to develop its work.
 
-Read SPEC.md, EVALS.md, PLAN.md and HANDOFF.md in that order before product work. The user's current instructions control over these documents. PLAN.md is the sole implementation queue; HANDOFF.md records actual status. Do not create competing plans or a second repository status file.
+Read SPEC.md, EVALS.md and PLAN.md before product work. If a local HANDOFF.md exists, read it for active work and operational constraints. It is intentionally untracked. The user’s current instructions control over these documents.
 
 This branch replaces the July folio design. Everything under archive/, earlier checkouts and the retired art-thing is historical evidence, not current product instructions. Their gates and completed checkboxes do not carry over.
 
@@ -25,7 +25,7 @@ it does not redefine the author. Explain that distinction when citing historical
 
 The previous application is preserved at Git tag archive/folio-prototype-2026-09-06 and in archive/folio-prototype-e1a3dec.tar.gz, with a complete checksum manifest. It has been removed from active source paths. Read archive/README.md for deliberate historical inspection. Do not restore its package scripts, database migrations, prompts, prepared corpus or agent instructions as the new scaffold. Recover a small component only after checking it against the current purpose and plan.
 
-The active creative inputs are identified by content/shape-of-time/SOURCE.md. Archive text is excluded from ordinary searches by .ignore and is never loaded into the creative agent. CLAUDE.md is only a pointer to this file. The new application supplies its own build, start, migration and test commands. Consult README.md and HANDOFF.md for current execution and deployment state.
+The active creative inputs are identified by content/shape-of-time/SOURCE.md. Archive text is excluded from ordinary searches by .ignore and is never loaded into the creative agent. CLAUDE.md is only a pointer to this file. The new application supplies its own build, start, migration and test commands. Consult docs/development.md for setup and operation.
 
 ## Models and creative freedom
 
@@ -41,11 +41,13 @@ The active creative inputs are identified by content/shape-of-time/SOURCE.md. Ar
 
 ## Implementation and evidence
 
-Use a single development agent unless the user explicitly requests delegation. Use the active codex/agentic-world worktree and preserve unrelated changes. Local main also contains the clean checkpoint so the normal checkout gives the same orientation. Earlier B2/D0/reader-first checkouts remain historical. Keep the initial application small: one TypeScript application, Postgres and image storage.
+Use a single development agent unless the user explicitly requests delegation. Preserve unrelated
+changes and use isolated worktrees for independent work. Keep the application small: one TypeScript
+application, Postgres and image storage.
 
 Use tests that establish required behavior. Stateful tests use real persistence; provider-contract and creative evidence use real APIs when funded. Recorded real provider receipts can test replay. A synthetic paragraph can test a database write, not literary quality.
 
-Write meaningful failure-reproducing tests before fixing defects. Run focused checks during development and the complete applicable pnpm run gates before pushing application work. No package manifest or runnable application exists at the clean starting point; P1 creates the new manifest and appropriate gates. For the completed cleanup, source/archive verification and git diff --check are the applicable checks. Ordinary gates must not make paid calls. Do not spend time testing reversible documentation edits or exact file/table counts.
+Write meaningful failure-reproducing tests before fixing defects. Run focused checks during development and the complete applicable pnpm run gates before pushing application work. Ordinary gates must not make paid calls. Do not spend time testing reversible documentation edits or exact file/table counts.
 
 Requirements intentionally superseded by the user's new direction may be retired with an explanation. Never conceal a remaining requirement's failure by weakening its assertion or relabeling synthetic evidence.
 
@@ -57,13 +59,13 @@ Use the in-app Browser for the actual reader journey: sustained reading, prepare
 
 ## Spend, deployment and preservation
 
-The user authorized implementation, the plan's initial $150 combined provider allowance, and direct Railway production replacement. On September 6 the user also explicitly authorized exceeding $150 if needed. HANDOFF.md records the actual allocation, spend and current remainder. Keep creation, imagery, criticism and paid renewal in the same accounting. Increase the operational allowance only as needed for the authorized work, record the increase, and preserve the spending guard. Do not ask again for actions already covered by a recorded authorization. The overrun authorization does not resume the deferred operator literary study.
+Keep paid creation, imagery, criticism and context renewal in the same explicit operational accounting.
+Private allowances, authorizations and allocation receipts belong in local records, not public docs.
 
 Never automatically repeat an ambiguous generation request. Preserve returned output before parsing, keep provider IDs, reconcile pending operations and record uncertain cost.
 
-The user explicitly authorized direct implementation and testing on the existing Railway production project identified in HANDOFF.md. Use its database directly; no Docker or separate staging is needed. Production source deploys come from passing main pushes. Never use railway up, a manual redeploy or Deploy Latest Commit to bypass Git integration.
-
-Preserve historical refs and source material. The user states existing production data need not be preserved; replacement is authorized. Do not reset others' work. Stage explicit paths. Do not commit secrets or raw environment values.
+Follow docs/development.md for deployment. Preserve historical refs and source material. Stage
+explicit paths and never commit secrets, environment values or private operator ledgers.
 
 Never delete, prune, truncate or overwrite transcripts under ~/.codex/sessions or ~/.codex/archived_sessions. This applies regardless of available storage or cleanup suggestions.
 
@@ -81,11 +83,10 @@ evidence. Start the new attempt empty and pin its mechanism before generation. N
 the previous attempt's fiction, images, notes or session context. Reader interface fixes alone do not
 create a new creative attempt. This is a standing instruction, not a reason to ask again about reset.
 
-Immediately read HANDOFF.md and its current PLAN.md section after compaction. Restate the product's purpose before proceeding. Update HANDOFF.md before a foreseeable compaction and at the end of each coherent slice with actual changes, evidence, costs, unresolved operations, deployment and the single next action.
-
-One-time author exception, September 7: change Astra from xhigh to medium in the existing live
-book, retaining all content and memory. Record the old and new mechanisms and the switch boundary.
-This does not waive the fresh-attempt rule for any other change.
+After compaction, read any local HANDOFF.md and the plan it references, then restate the product’s
+purpose. Keep active state, constraints and recovery instructions in that ignored local handoff.
+Do not add personal spending history, temporary generation counts or deployment checkpoints to
+public documentation.
 
 Reader-facing language should serve the literature, not advertise the software or explain its
 medium. The cover says “A love story.” Necessary control and generation-wait explanations belong

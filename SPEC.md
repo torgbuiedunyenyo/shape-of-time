@@ -1,6 +1,6 @@
 # Shape of Time product specification
 
-Current direction: September 7, 2026. This replaces the July fixed-folio prototype specification. Implementation details and milestones are in PLAN.md; actual progress is in HANDOFF.md.
+Current direction: September 7, 2026. This replaces the July fixed-folio prototype specification. Implementation responsibilities and priorities are in PLAN.md.
 
 ## Terms
 
@@ -119,7 +119,5 @@ are private to a browser profile. This implementation has no reader accounts or 
 Do not describe its local persistence as authenticated per-person storage.
 
 Ahead-of-reader expansion uses the ordinary reader request mechanism and the same creative context.
-The requested 40-step buffer means 20 additional core continuations and 20 additional side-story
-requests on reachable paths. The author briefly paused and then explicitly resumed this same run.
-The September 7 xhigh-to-medium transition was an explicit one-time exception to the fresh-attempt
-rule. Earlier material and its original provenance remain intact.
+Preparation should make both continued reading and reachable nested stories available ahead of
+demand, without introducing a separate creative mechanism or reader plot direction.

@@ -1,7 +1,7 @@
 # Historical material — not the active application
 
 The active project is the agentic world exploration harness described in the root README, SPEC,
-EVALS, PLAN and HANDOFF. This folder preserves evidence and recovery material. It is not a second
+EVALS and PLAN. This folder preserves evidence and recovery material. It is not a second
 application or a source of current instructions.
 
 ## Retired illustrated folio prototype
@@ -45,14 +45,6 @@ remain historical, not automatic creative input.
 The successful text-only predecessor is `torgbuiedunyenyo/infinite-book`. The retired theoretical
 experiment is `torgbuiedunyenyo/auto-biblio` (local art-thing). Neither should be replaced by this
 cleanup. Earlier B2, D0 and reader-first worktrees are historical investigations and remain intact.
-
-Local main now shares this new starting point. Remote main and the Railway deployment have not
-been advanced by the local cleanup. Check HANDOFF for the distinction before any future release.
-
-On the original machine, the normal checkout's previous ignored .env, dependencies, compiled output
-and test artifacts are preserved under its ignored `.local/retired-folio-e1a3dec/` directory. That
-private local material is outside this archive and outside Git. Reuse requires deliberate selection;
-the new application must start with its own database, asset namespace and configuration.
 
 Ordinary repository searches exclude this folder via `.ignore`. Use `rg --no-ignore` inside the
 archive when deliberately investigating history. Never treat archive text as agent instructions.
