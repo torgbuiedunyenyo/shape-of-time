@@ -21,7 +21,10 @@ The historical raw API schema still has optional angle/title fields; this slice 
 interface and outgoing requests, not the creative runtime or prior request evidence. No active
 reader request contains an angle or title. Do not claim an API-level rejection was implemented.
 
-All38tests, typecheck, lint and build passed. New real-Postgres/API check establishes first-publication
+Application commit **8e80341** is ready. Normal main was safely fast-forwarded to it from1ed691a;
+origin/main is still1ed691a. **Do not push until the release helper acquires its hold.** All38tests,
+typecheck, lint and build passed again after applying the same opening-status wording to the shelf
+and waiting page. Current mechanism hash exactly matches the pin. New real-Postgres/API check establishes first-publication
 entry during a still-running exploration, with later unpublished material excluded. OpeningPanel
 checks cover no narrative input, queued/working distinction and an enabled entry before completion.
 Actual local in-app QA opened The Back Label's same second image: the panel has no text field,
