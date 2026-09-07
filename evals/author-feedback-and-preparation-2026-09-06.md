@@ -171,4 +171,22 @@ action, with no direction field. No paid request was submitted by that QA.
 
 The local mechanism still exactly matches the edition pin
 `aefcf65a848bbecda3b37c0a26d71e6230712f795c4e268e678bc671408acd4e`. This interface release preserves
-the current reader corpus. Live deployment/verification follows after the active paid work settles.
+the current reader corpus.
+
+Git-triggered deployment31c05e3d-1ab8-4c92-a4f9-50fe95c509f2 succeeded at revision
+b7680997b391f1bd57a87b781d983689f98ff93b; exact health matched. The production root reader was
+refreshed, an illustration's opening panel was opened, and the source description and usable action
+appeared without a direction field. The panel was closed without submitting a request.
+
+The author then stopped the automatically triggered20-request sample. The durable local driver hold
+records that stop; no automatic driver is running. The sample ended with13completed requests. Actual
+reader explorations already submitted remain active independently of the stopped sample. The
+production release-lock helper and read-only monitor both exited0; normal reader requests and
+preparation remain enabled. No creative mechanism or content reset accompanied this correction.
+
+The stopped-run snapshot at02:47:56UTC contains4works,25publications,50,431words including headings
+and alt text, and46publishedimages. All46images passed availability checks. Every operation matches
+the pinned mechanism. Active-edition committed spending143.0089155 includes a reservation for an
+actual reader exploration now running; prior spending116.751030 gives combined259.7599455, unknown0.
+These are live accounting figures, not final charges. The active allowance remains250. Compact
+tracked receipt: `tests/receipts/second-edition-sample-stopped.json`.

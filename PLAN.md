@@ -342,6 +342,15 @@ Current next action: execute the authorized follow-up sequence in section 11. Th
 
 ## 11. Follow-up implementation — authorized September 6
 
+**Latest instruction, September 7:** the author stopped the automatically triggered20-request
+sample. F3's target is withdrawn; do not resume the operator driver or submit further sample
+requests. Preserve the13completed requests and let actual reader requests and ordinary preparation
+operate normally. F2/F1/F4 are deployed. F6 is deployed and live-verified atb768099; all38tests and
+build gates passed. F5 now means recording the stopped-run scope/cost and handing the book back,
+without more operator generation or an extended literary study. The production release hold is
+released; the durable local driver hold remains intentionally in place. This instruction supersedes
+the earlier completion contract and progress entries below.
+
 ### F1 — Prepare upcoming reading while the reader is still reading
 
 **Requested September 6; now authorized for implementation after F2.** The author recalls that the original

@@ -1,9 +1,71 @@
 # Handoff
 
-Updated September 7, 2026, 02:31 UTC. After compaction, read this active handoff and PLAN.md
+## Current authority — automatic sample stopped at the author's request
+
+On September 7, 2026, the author explicitly said: “Don't continue the 20 reader requests that you
+are auto-triggering.” This supersedes every instruction below to resume the driver or reach20.
+**Do not restart `.local/review-second/run.ts`, remove its local hold, or purchase further automatic
+reader requests without a new instruction.** There is no driver running. The ledger retains13
+completed requests and the two actual reader explorations already recorded as14/15; further actual
+reader activity is independent of this stopped sample. The unstarted automatic30726 request remains
+cancelled, with no output/cost. The `.local/review-second/hold` file now records the author's stop.
+
+Build The Shape of Time as a book of sustained, coherent, nested text-and-image narratives, with
+readers exploring sources and the creative agent deciding what unfolds. Readers do not direct
+the narrative. The human user is the author; literary assessment belongs to them.
+
+**F6 is deployed and live-verified.** Git deployment31c05e3d-1ab8-4c92-a4f9-50fe95c509f2 succeeded
+at revisionb7680997b391f1bd57a87b781d983689f98ff93b. After refreshing the production root visit,
+opening an illustration showed only its source description and the opening action, with no direction
+field. The panel was closed without submitting another request. All38tests/typecheck/lint/build
+passed before release. The real-Postgres/API test proves the first publication enables entry while
+the exploration remains running. No minimum section count or completed-request gate exists.
+
+**The production release lock has been released.** HelperPID94405/session5345 exited0 after SIGINT.
+Actual reader requests and normal preparation remain enabled; the local sample hold does not block
+them. Read-only monitorPID86952/session79831 also exited0. Local API and Vite remain stopped.
+Do not use obsolete process/hold instructions in the historical checkpoints below. The new OpenAI
+credential is active and verified; no creative mechanism changed for F6 or credential rotation.
+Current edition pin remainsaefcf65a848bbecda3b37c0a26d71e6230712f795c4e268e678bc671408acd4e.
+
+Stopped-run receipt: `tests/receipts/second-edition-sample-stopped.json`. At02:47:56UTC there were
+4works,25publications,50,431words including headings/alt and46publishedimages. All46assets passed
+availability checks; every operation matched the pin. Active-edition committed143.0089155 includes
+one live reader request's reservation, combined259.7599455 including prior116.751030; unknown0.
+These are a live snapshot, not final charges. Allowance remains250 for the active edition.
+Actual exploration53618c9d is now running; a49dba98 and the later reader explorationfb986002 are
+queued. No automatic sample requests remain pending. Full scope/asset snapshots are in
+`.local/review-second/stopped-run.json` and `stopped-run-assets.json`.
+
+Next action belongs to the author: read and explore the book. Do not wait for20, inject literary
+feedback or create extra paid QA requests. The final documentation checkpoint is committed locally;
+do not interrupt live reader generation just to deploy documentation. The application is already live
+atb768099; synchronize documentation in a future safe release.
+
+---
+
+Historical checkpoints below preserve development evidence. The current authority above controls.
+
+Updated September 7, 2026, 02:41 UTC. After compaction, read this active handoff and PLAN.md
 section 11. PLAN.md is the sole queue; do not create STATUS.md.
 
 ### Latest steering: reader controls correction F6 — finish this before resuming the sample
+
+**Latest release state:** root continuation23ca completed. Release helper **session5345/PID94405
+holds the advisory lock**, with no active provider operation. Normal main push succeeded at
+**b7680997b391f1bd57a87b781d983689f98ff93b**; Git-triggered Railway deployment
+**31c05e3d-1ab8-4c92-a4f9-50fe95c509f2** is waiting/building. Verify success and exact health before
+releasing the lock. Local API/Vite have stopped and temporary local browser tab24 is closed.
+
+Priority reconciliation ran successfully: unstarted automatic child30726e4a is now cancelled,
+preserved with no session/output/cost, and excluded from the sample count. Original ledger and
+reason are preserved in `.local/review-second/ledger-before-reader-priority.json` and
+`reader-priority-receipt.json`. **Ledger now has13complete/15submitted:** actual root23ca is13,
+actual exploration53618c9d is14 and actual explorationa49dba98 is15. Both explorations will run
+before further automatic generation. **Do not rerun prioritize-live-reading.ts or restore30726.**
+After deployment: verify live reader controls; delete only the `.local/review-second/hold` file;
+restart the existing ledger driver with `--env-file=.env`; release helperPID94405 with SIGINT,
+verify exit, and resume generation through20. Monitor79831/PID86952 remains active.
 
 At10:18PM Eastern the author rejected reader narrative direction and asked for entry as soon as
 the first pages exist. Read PLAN.md F6 at the end of section11. Screenshot shows The Back Label's
