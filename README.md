@@ -10,9 +10,10 @@ the reading interface. See SPEC.md for these terms and the distinction between r
 creative-agent turns and reading screens.
 
 Read AGENTS.md, SPEC.md, EVALS.md, PLAN.md and HANDOFF.md for the current intent and actual evidence.
-The book is live at https://shape-of-time-production.up.railway.app. The initial reader edition contains
-eight illustrated sections across three nested narratives. HANDOFF.md records release verification,
-spending, provenance and the remaining cold-generation latency.
+The book is live at [the reading interface](https://shape-of-time-production.up.railway.app).
+HANDOFF.md records the current attempt, release verification, reader testing, spending and remaining
+limitations. Previous attempts are private development evidence; each new attempt starts empty with
+one pinned process. See [the draft archive](archive/reader-attempts/README.md) for preserved references.
 
 ## Running and development
 

@@ -344,6 +344,22 @@ Current next action: execute the authorized follow-up sequence in section 11. Th
 
 ### F7 — Narrative momentum and full reader UAT, authorized September 7
 
+**Completed September 7.** Prompt nudges for plot development, foreshadowing and consequential scene
+selection are deployed with agent discretion intact. Actual reader UAT exposed and repaired queue
+status, reference-image uploads, search, keyboard, shelf refresh and return-panel defects. All 45
+mechanical tests, type checking, lint and build passed. The walkthrough completed Begin, text and
+image exploration, a selected-detail grandchild, nested returns, reopening, reading controls,
+bookmarks/search, failure recovery, ordinary preparation and an explicit continuation through
+completion. See [the labeled UAT evidence](evals/reader-uat-2026-09-07.md) and
+[final receipt](tests/receipts/reader-uat-2026-09-07.json).
+
+The new attempt began empty and is pinned throughout. It contains 3 works, 9 published sections
+and 7 illustrations from 4 explicit UAT requests plus normal preparation. Earlier attempts remain
+private in the referenced draft archive. The automatic 20-request sample remains stopped. Cold
+first reading still took about 5–9 minutes in this pass; that limitation is recorded rather than
+hidden by the passing mechanical checks. Next is the author's reading and literary assessment,
+not an automatic sample, mandatory critic run or another redesign. HANDOFF.md records live state.
+
 The author reports that the entry narrative is promising but slow, with little foreshadowing;
 inset works often describe daily life without a developing plot. The intended experience is a novel
 with inset novels with inset novels, engaging enough for online reading. Revise creative context

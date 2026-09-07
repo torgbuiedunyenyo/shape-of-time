@@ -1,169 +1,163 @@
-# Reader acceptance pass — September 7, 2026
+# Reader acceptance testing — September 7, 2026
 
-This pass responds to the author's failed cold-opening experience and new narrative direction.
-An implemented control, a passing unit test or an available endpoint is not a completed reader
-journey. Record what was actually done in the in-app browser, including waits, failures and fixes.
-The earlier20-request automatic sample remains stopped. Only generation necessary for this pass
-is authorized here; the author judges the resulting prose and imagery.
+This report covers actual reader interactions and the defects they exposed. Mechanical checks do
+not certify literary quality. The author will assess the new fiction; no automatic literary study
+or 20-request sample was resumed.
 
-## Reported failure and diagnosis
+## Current release and attempt
 
-Screenshot: `/Users/ratpartyserver/Desktop/Screenshot 2026-09-06 at 10.51.51 PM.png`.
-The selected quote “Don't lift it yet,” she called. comes from The Second Handle publication
-7a9868d7-f367-4a55-bd81-380caca39016. Its actual exploration3d86fc13-369d-472f-b09b-10e6bac0e435
-was created02:51:33UTC. At02:55:56 it was queued behind three earlier explicit explorations.
-53618c9d was running; a49dba98 and fb986002 were queued. No publication existed for this opening.
+Application revision: `c1c40d99706a155a09fef7f9d614d1c625f8014b`.
+Git-triggered Railway deployment: `09f0e21e-2b00-48d3-b774-f9de96d99dbd`, successful with the exact
+health revision verified. Schema: `world_reader_20260907_b`.
+Pinned mechanism: `3b1a00a472d152cf481940407ded7116d0c86a1090f99ffa9dc07d8745f10d2c`.
+The library was empty before Begin. No earlier fiction, images, notes or session memory were copied.
+Models remain GPT-6 Astra at xhigh and GPT Image 2.
 
-The global creative session runs an entire request before taking the next. Active requests were
-not given the waiting-reader list, although preparation was. The current active exploration had
-made two image requests before publishing any prose. Its long wait included an earlier root
-continuation and a maintenance hold for the previous release. The UI did not explain queue position,
-and its disabled action offered no useful response. A failed/paused request anywhere could also
-stop dispatch while other readers saw only generic waiting text.
+All 45 mechanical tests, type checking, lint and build passed. Stateful checks use real Postgres;
+the transport regressions use a real local HTTP server. Those checks supplement the walkthrough.
 
-At about03:04UTC the live waiting view for53618c9d changed to “The Late Game” and enabled Open the
-book automatically. Clicking it entered the work; the next loaded observation had one section,
-two fully loaded images and no alerts. This establishes that the old publication-to-entry path does
-work once generation publishes, while demonstrating that its cold wait was unacceptable. It does
-not vindicate the earlier claim that the overall mechanics were finished. The selected3d86fc13
-opening never started before retirement; its pending request is preserved as draft evidence.
+## What failed and what changed
 
-The author reaffirmed that every new attempt must start empty. All unstarted old-edition requests
-were retained as cancelled, with their complete previous records in
-`.local/review-second/queued-before-retirement.json`. Active paid work was left to settle.
+The screenshot's old exploration was queued behind earlier reader work. The creative session handles
+one request at a time, and a request could produce a long chapter and illustrations before yielding.
+The interface concealed too much of that distinction. The agent now receives waiting-reader context
+and guidance to make a worthwhile opening available promptly, with discretion over its composition
+and when to finish. No minimum section count or request-completion gate controls entry.
 
-Actual live library UAT reproduced another defect: search “no-such-title-uat” removed the entire
-search field. The corrected local reading interface, using the same saved production material with
-generation disabled, kept the field and showed No books match this search. Clearing restored all
-five works. A brief field remount while clearing was also found and corrected by retaining the
-catalogue whenever a published root exists. Search creates no reader-generation request.
+The walkthrough also exposed two transport failures. Native context renewal hit the network layer's
+five-minute header timeout despite the SDK's longer deadline. The transport now uses one finite
+20-minute deadline, without automatic retries. A subsequent reference-image edit failed because the
+SDK's global FormData and the selected fetch implementation did not match. Matching Undici globals
+fixed it. The regression reproduces multipart submission against a real listener and verifies the
+received file's bytes, name, MIME type and prompt. A reference-based image then completed on the
+actual production provider, and further reference-based child images succeeded.
 
-Local reading-control UAT at a720px-high viewport: Next page moved0→570px, Previous restored0.
-The right-arrow key then failed because the previous-page button retained focus and the keyboard
-handler excluded all buttons. Corrected that exclusion: editable fields and open image dialogs
-retain their keyboard behavior; page controls no longer disable reader arrows. Actual retest with
-Previous page still focused moved0→570px on ArrowRight.
+Reader defects fixed during the walkthrough:
 
-Native font-control clicks retained block b-6322ee45a4a70b663603 through23→25→23px; scroll817→907.5→817.
-An earlier Playwright locator click scrolled the sticky header into view before clicking and changed
-the apparent place; native control interaction disproved this as a product reflow defect.
-All six guide steps were visited, including Back, completion and exact restoration to scroll817.
+- An empty search result removed the search field and its focus.
+- Arrow navigation stopped after a page button received focus.
+- The mounted library did not add newly readable works or update Begin to Enter.
+- Returning from a child reopened an unrelated, previously dismissed opening panel.
+- Pending and paused openings presented an inert action instead of a useful way to keep reading.
+- Continuation errors exposed provider internals, and paused requests could appear retryable.
 
-After the completed exploration, preparationc2de7eca paused on compaction9d5eeddd: Node's default
-five-minute response-header timeout fired despite a20-minute SDK timeout. No provider ID or response
-was saved, so the9.7726125 reservation remains uncertain and is never replayed. The transport now
-uses matching Undici fetch/Agent deadlines. A real local HTTP-server regression exercises delayed
-headers/body and verifies a timed-out call is not retried. This test is transport evidence, not an
-actual paid compaction result.
+The revised panels explain queued, running and blocked states; they retain saved request identities,
+keep polling through recoverable failures and offer entry as soon as a first publication exists.
+Reselecting a source recovers that source's saved request. Readers cannot supply narrative directions,
+angles, titles or premises; library search remains read-only.
 
-## Changes under verification
+## Walkthrough results
 
-Prompts invite an early worthwhile opening, scene selection, foreshadowing, developing plots in
-inset works and finishing a reader request once useful reading is available. No plot scaffolding,
-length quota, forced image order or deterministic literary verdict is added. Tool results give
-the creative agent other waiting readers as context. Public request validation rejects narrative
-direction/title input. Queue status distinguishes work ahead from a blocked queue. A pending panel
-offers Keep reading, retains the discovery, and offers actual entry after the first publication.
-
-Official Astra prompting guidance was fetched from
-https://developers.openai.com/api/docs/guides/latest-model; React cleanup and Kysely query guidance
-were retrieved through Context7. No model or reasoning-effort change is involved.
-
-## Acceptance matrix
-
-| Journey | Required observation | Result/evidence |
+| Journey | Actual observation | Result |
 |---|---|---|
-| First entry and guide | Actual Begin to readable opening; next/back/skip/escape/replay and dismissal survives reload | Passed: live Begin148.136s; clean local origin auto-guide; all six controls/steps on old illustrated work |
-| Reading controls | Forward/back and keyboard; text sizes; desktop and narrow reflow retain place | Passed on corrected local UI; native type23→25→23 and390px reflow retained anchor |
-| Text exploration | Actual selected quote, correct request and destination, source return | Correct quote/submission7e9145a6; awaiting actual child entry |
-| Whole-image exploration | Actual image source, request through first publication and entry | Submitted from live root illustration; awaiting entry |
-| Image-region exploration | Visible drag selection, correct crop/source, usable entry and return | Native bottle drag/panel passed locally; paid nested region journey pending |
-| Cold opening | Submitted through UI; stays usable while waiting; first publication enables entry before whole request completion | Root passed; nested openings pending |
-| Warm opening | Existing link opens with loaded prose/images without another generation request | Root→Back Label→Late Game passed on old corpus with generation disabled; fresh warm re-entry pending |
-| Continuation | Reach frontier, request more, receive appended reading without losing place or duplicating request |197cad4d submitted through frontier after root second publication; watching fixed anchor for next append |
-| Preparation | Ordinary reading prepares continuation or a linked work; material and images become usable | Reading queued preparation; explicit text exploration took priority; prepared result pending |
-| Nested returns | Root→child→grandchild→child→root, including reload and page turns | Passed on real old corpus, including grandchild reload/page turn; fresh region journey pending |
-| Shelf/bookmark/resume | Save place, leave, find saved work, resume exact place; search makes no generation request | Passed; found/fixed disappearing empty-search field; mounted live catalogue refresh fix being verified |
-| Pending discovery | Leave pending panel, use shelf, reopen discovery after it becomes ready | Root waiting→shelf→ready entry passed; pending text/image panels close via Keep reading and persist on shelf |
-| Failure and recovery | Actual unavailable/paused case tells truth, keeps saved reading usable, no false retry or duplicate purchase | Passed using local generation-disabled API and real local API interruption/restart; same request recovered automatically and entered; no paid failure induced |
+| Begin and first entry | Live waiting page enabled entry at the first publication, while the request still ran; prose and illustration loaded | Passed |
+| First-use guide | Clean local origin automatically showed the guide against real saved content; skip, replay, Escape and reload persistence worked. All six steps, Back and completion were exercised on an illustrated work | Passed; local generation disabled |
+| Pages and type controls | Native forward/back, arrow keys after button focus, and text size 23→25→23 retained the reading anchor | Passed |
+| Narrow layout | At 390×844, reflow retained the same passage; controls remained usable and horizontal overflow was zero | Passed; viewport override reset |
+| Text exploration | Selected the complete visitor-phone paragraph; entered its published child, turned pages, reopened and returned to that paragraph | Passed in the preserved third attempt; unchanged path |
+| Whole-image exploration | Requested from the root illustration; left and recovered its panel; entered Three Blue Lines at its first publication | Passed on current production |
+| Warm image entry | Returned to the source image, selected it again, and entered the same saved child visit without another generation request | Passed on current production |
+| Image detail | Enlarged the child illustration, drew a region around the bread bag, and submitted the selected detail | Passed on current production |
+| Deeper cold entry | Left the region panel, found its saved discovery in the library and entered The Early Batch at first publication | Passed on current production |
+| Two-level return | Reopened the deeper visit in a fresh browser document after a page turn; returned to the selected image region and then the root source image | Passed on current production |
+| Appending reading | New prose and a reference-based illustration appeared without changing the settled visible passage | Passed on current production |
+| Explicit continuation | Fresh Continue appended two illustrated passages; both were read and their images opened. The request completed and the normal Continue control returned | Passed on current production |
+| Ordinary preparation | Actual reading triggered preparation; a new illustrated root passage appeared automatically, was entered with Right, and its image was enlarged and read | Passed on current production |
+| Shelf, bookmark and resume | Saved a passage, left, reopened its shelf bookmark and recovered its anchor; search matched, returned no results and cleared without losing the field | Passed |
+| Mounted discovery | The production library added Three Blue Lines and enabled its card without reload; the pending detail later became The Early Batch | Passed on current production |
+| Unavailable service and recovery | Stopped only the local API while its waiting view stayed open; visible connection failure appeared. Restart cleared it automatically, and the same saved request entered published reading without resubmission | Passed; real local outage, production unaffected |
+| Generation paused | A local API with generation disabled showed a truthful pause and retained access to saved reading | Passed; no paid outage induced |
 
-No row is a pass merely because it was implemented or passed a prior attempt. Real database
-regressions supplement these observations. Any unavailable/error scenario exercised using a
-read-only local mirror or fixture must be labeled; do not cause ambiguous paid calls to test failure.
+No result is called a pass merely because a control exists. Earlier local checks are labeled, and
+failed paid journeys are preserved below. A native font-control check also disproved a suspected
+scroll defect: the earlier movement came from an automation click scrolling the sticky header into
+view, rather than from changing the text size.
 
-## Live release and continuing walkthrough
+## Fresh production evidence
 
-Git deployment06022230-9f24-467a-b39d-954b7a2f2bca succeeded at2664d40b829aabf953bf20574db797eaa58a22ce.
-Exact health revision verified. Fresh schema world_reader_20260907 was absent before deployment;
-the published library was then empty at03:25:14.878UTC. Its pin is
-add399808eaa52d8e97889362e1da2b07227f290328ecd694ef25782e2fe75c9.
-All43tests/typecheck/lint/build passed. Actual UI Begin at03:26:23.523UTC created
-c0e8aa02-20cf-419e-a559-5d11aba5bc9d. Leaving its waiting page showed the same live request under
-Your openings in the library, with View this opening linking back to the same identity.
+Begin `3fdbd099-1a96-4e15-8b77-ead5859ee013` was submitted at 03:58:16.711 UTC.
+First publication `55e8ddfb-92a0-4c67-9921-289994007f41` arrived at 04:03:25.032 UTC:
+**5 minutes 8 seconds**, including image-first generation. Actual entry created root visit
+`c32d0e50-8327-4904-850a-6400941586ac`.
 
-Additional old-corpus UAT on the corrected local interface: root→Back Label→Late Game, grandchild
-reload and page turn, then both Return buttons restored the source image and root clef paragraph.
-All paired images loaded. Saving a passage and reopening its shelf bookmark retained the same text
-anchor. At390×844 the root source block remained b-d9d899cdb3efaae5736d and horizontal overflow was0;
-the screenshot showed readable prose, accessible font/page controls and the linked opening. The
-temporary viewport override was reset. A bottle region was drawn with an actual drag, enabled its
-action, and opened the exploration panel. With local generation disabled, its submission showed
-New writing is paused. Saved books remain available. No paid call was submitted by that check.
+The second root image, operation `229aabff-64e1-4d6d-9d69-0d6a3ea80aa4`, used the first as its
+reference and completed at 04:06:20.517 UTC. Its publication arrived while the reader remained at
+scroll 2693, block `b-e7f33cd1e319f28358a3`, top 80.765625. Both images loaded.
 
-Fresh first publication d5e14acd became readable03:28:51.659UTC,148.136seconds after Begin. The
-library's Your openings card enabled entry while the request still ran; clicking entered visit
-0b82eb9f-c124-4cb4-9937-6fdffd1bc6a8 with actual published prose. The main library button still said
-Begin because the catalogue did not refresh while mounted: corrected in the pending client-only
-follow-up by periodically refreshing the shelf without overlapping requests.
+Whole-image request `0bcecbdf-0df2-446e-9376-336d87e9c216` was submitted at 04:04:14.867 UTC.
+Its first publication arrived at 04:11:40.081 UTC: **7 minutes 25 seconds including the queue**.
+Actual entry opened Three Blue Lines, visit `bc074ecf-21b9-4e11-ad72-70d44d556b05`, while generation
+continued. Reopening after a page turn restored scroll 570 and block `b-8470b4e46ce0d3511ef2` at
+76.296875. Return restored the root image at 99.828125; no unrelated panel appeared. Warm entry
+reused that exact child visit. Its illustration also used the root image as a reference.
 
-Actual triple-click selected the visitor-phone paragraph; its complete quote appeared in the panel.
-Clicking Open as a book created exploration7e9145a6-802c-43ab-ad17-17f0870ec8d1 at03:30:30.586UTC.
-The panel showed one request ahead and an enabled Keep reading action, which actually closed it.
-Ordinary reading also queued preparationdad20cfa. It must yield priority to the explicit exploration.
+Region request `06d74e83-b754-4455-84f6-4cff00876406` was submitted at 04:18:29.690 UTC from
+child publication `757764ef-53bc-4386-87a0-183a973dfb24`, image block `b-7a12c5705ce96055f7a0`.
+An actual drag selected the bread bag: normalized x 0.774214, y 0.630189, width 0.193711,
+height 0.354717. First publication arrived at 04:23:24.386 UTC: **4 minutes 55 seconds**.
+The library's saved discovery opened The Early Batch, visit `14150da5-276b-47c8-affe-7ccbc8bda5f1`.
+Its opening concerns the bakery where Bev buys the pictured rolls. This is a bounded source
+connection observation, not a verdict on long-form coherence or literary quality.
 
-First-entry guidance was tested separately on a clean local origin3000, backed by the same real
-published work with generation disabled. The guide appeared automatically; Skip guide, replay,
-Escape and reload were exercised. Dismissal persisted. Only5steps existed before the first image
-was published; the picture step is offered when a published picture exists.
+Reopening that deeper visit after a page turn restored scroll 570 and block
+`b-ea8813e204475ebced5c` at 97.296875. Return placed the child image at -302.796875 with height
+498.6640625, centering the selected region at approximately 100 pixels. The next Return restored
+the root image at 99.828125. The published root images remained loaded.
 
-Local recovery test: waiting page remained open while only the local API was stopped. Failed to
-fetch became visible, while its known ready result remained. Restarting the local API cleared the
-error automatically, without reload or resubmission. Clicking Open entered the actual two-section
-work. This is a real connection-recovery check against the production database with local generation
-disabled; production and its paid requests were not interrupted.
+These cold waits are a remaining experience limitation. Truthful status and early entry fix the
+broken interaction, but do not make serial, high-effort generation instant. The preparation check
+below establishes usable output without guaranteeing that its delay is hidden at normal reading speed.
 
-Text exploration7e9145a6 published207aa170 at03:38:07.361UTC,456.775seconds after submission
-(including waiting behind Begin). Its card became The Money on Its Way and entry was enabled
-while its request still ran. Actual entry loaded the first nested section with no alerts and a
-Return control. The child takes up the visitor payment service named in the selected parent text.
-This is a source/entry observation, not a verdict on sustained literary quality.
+Preparation `adf28fd4-705d-4cc5-b0a7-42149f5b507a` ran from the actual root reading signal and
+published `0d1403e6-f87e-450f-b335-ad7abcef6341` at 04:41:22.233 UTC, before another Continue was
+submitted. The new section, After Nine, includes a restaurant illustration generated with both
+previous root images as references. The existing view remained at scroll 11537.5, block
+`b-dd36cfba57fca488cc81`, top 52.046875. Right entered the prepared prose; its picture was enlarged
+and loaded successfully. Escape closed it. This proves functional preparation of illustrated linear
+reading, not that generation was hidden at a normal reading speed: the walkthrough waited at the
+frontier. The earlier [preparation walkthrough](author-feedback-and-preparation-2026-09-06.md#actual-preparation-and-warm-entry)
+records an actual prepared nested opening and warm entry into The Back Label in a preserved attempt.
 
-The local library automatically added The Money on Its Way while left mounted, confirming the
-client follow-up refresh. Local recovery tab and API were then closed/stopped. Production whole-image
-exploration6a1733a5 was submitted03:36:24.480UTC. Root continuation197cad4d was submitted03:34:19.985UTC
-against6278fe61. Root tab stays at scroll3175.5/blockb-dc1745deaa84d3731951 to observe its next append;
-another tab is used for the nested reading so this check does not manufacture a scroll change.
+After reading the prepared material, final continuation `816026d0-0012-4a6f-b6ec-5e3228078a4c`
+was submitted through Continue at 04:42:54.024 UTC. A newer preparation opportunity yielded to it.
+The fixed position for its append check is scroll 20105, block `b-40924f7c62eb2d28aad4`, top 110.2578125.
+First new publication `e708f0c6-70d8-4776-8e64-70a9558c38cb` arrived at 04:51:30.277 UTC,
+**8 minutes 36 seconds** after Continue. The reader retained the same block with a 12-pixel
+adjustment: scroll 20117, block top 98.2578125. Right entered the new prose, and its lake-walk image
+was opened and loaded. Second publication `4c7c8ca8-33c4-430f-bc63-542bf52dbd2f` arrived at
+04:59:10.499 UTC; its blue-bench illustration was also opened and loaded. By 05:03 UTC, completion
+was confirmed in persistence and the actual interface, where Continue reading was available again.
+The QA reading session was then closed. The full request kept developing after its first readable
+passage; first-publication availability must not be confused with full-request completion.
 
-Fresh nested return after reload/page turn restored visitor-phone blockb-ff1ecbd4fba7f6d08faa at
-96.86px. It also revealed an unrelated last-pending image panel reopening automatically; corrected
-in the further client follow-up by restoring a saved request only when its source is selected.
-Warm shelf Resume reused the same child visit8708467d, loading two sections and its illustration
-without another request. A native triple-click that selected only charging was dismissed, not
-submitted. The original text selection remains the sole text exploration.
+## Preserved failures and scope
 
-Actual image-region UAT: enlarged the child's bakery illustration, clicked Choose a detail,
-dragged a box around its oven/SOLD sign, then used Open this detail and Open as a book. Request
-27716378-2782-44c2-a4bc-f5e2c4cef697 was created03:46:27.885UTC from publication3abf080c,
-blockb-658389ba06eb913565b1, assetimg-30e5bc55-5430-407a-a5a7-7b64024a670b. Its queued panel shows
-two requests ahead and an enabled Keep reading action. This is the last exploration needed for UAT.
-Root continuation has appended a third section while the fixed reader view still shows the same
-block. Settled position after wheel animation is3245.5px, blocktop78.64/bottom112.23; compare the
-next append to these settled measurements.
+The screenshot-era draft remains private in the [second attempt receipt](../tests/receipts/reader-second-preserved.json).
+Its ambiguous native-renewal timeout remains reserved, with no automatic replay or invented zero cost.
+The subsequent UAT draft is preserved in the [third attempt receipt](../tests/receipts/reader-third-preserved.json).
+Its reference upload was proven to fail before HTTP submission; its original operation row is retained
+and that operation's actual cost was reconciled to zero. Neither draft seeds the current book.
 
-At03:48UTC the reference-image edit5f2ac817 failed locally in the SDK's FormData compatibility check.
-The exact failure was reproduced against a real local HTTP listener; no upload reached it. The
-transport now installs matching Undici globals. The new regression verifies the image bytes, file
-name, MIME type and prompt received by the listener. All45tests/typecheck/lint/build passed.
-Actual root append remained atscroll3245.5/blocktop78.640625. Wholeimage6a1733a5 andregion27716378
-never started before the failure, so they are incomplete, not passes. The third attempt is archived
-with27operation receipts and zero-cost reconciliation of the pre-dispatch upload failure.
+The third attempt's text exploration entered The Money on Its Way at first publication, with later
+illustration, exact source return and warm re-entry. Its actual continuation appended a third root
+section at an unchanged settled position, scroll 3245.5 and block top 78.640625. The following upload
+failure prevented completion. Its whole-image and region requests never began and are not counted
+as successful journeys.
+
+Four explicit UAT requests completed in the fresh attempt: Begin, whole-image exploration,
+selected-detail exploration and Continue. The stopped automatic 20-request driver was not restarted.
+The book contains **3 works, 9 published sections and 7 illustrations**. All published assets passed
+the final production HTTP check and were viewed in the reading interface. All 60 provider operations
+match the pinned mechanism. The fresh attempt has no uncertain operations.
+
+Final fresh-attempt spend: **$13.993545**, including ordinary preparation and an optional critic
+chosen by the creative agent. The last preparation settled after reading stopped; its critic was
+part of the book's normal agent-selected tool use, not an operator literary study or a compulsory
+evaluation stage. Remaining allowance: **$78.664460**. Previous committed spending remains preserved;
+combined committed spending is **$288.0865695** against the recorded $366.751030 combined allowance.
+No allowance increase was needed for this pass.
+
+The [final receipt](../tests/receipts/reader-uat-2026-09-07.json) records the work and request identities,
+publication times, asset availability, model settings, mechanism and costs. Earlier paused and failed
+attempts remain separately preserved. These results establish the exercised mechanics and bounded
+source continuity; they do not claim ideal cold-generation latency or novel-length literary success.
