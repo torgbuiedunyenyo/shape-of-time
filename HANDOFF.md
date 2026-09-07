@@ -1,6 +1,6 @@
 # Handoff
 
-Updated September 7, 2026, 02:12 UTC. After compaction, read this active handoff and PLAN.md
+Updated September 7, 2026, 02:16 UTC. After compaction, read this active handoff and PLAN.md
 section 11. PLAN.md is the sole queue; do not create STATUS.md.
 
 ### Current recovery checkpoint — supersedes older process/count entries below
@@ -14,7 +14,7 @@ creative mechanism change and no edition reset.
 
 **12 requests are complete in production.** The original driver and monitor exited during the
 conversation interruption. Do not rely on their older session/PID entries. Ledger reconciliation
-through12 completed. The resumed driver is **session31318 / PID87544**; monitor **session79831 / PID86952**.
+through12 completed. The resumed driver is **session21872 / PID89015**; monitor **session79831 / PID86952**.
 **Keep this existing driver running through all20; do not start a duplicate.**
 
 Driver request13 is child continuation30726e4a-1826-45a1-9761-aad618b22c54, queued. The author also
@@ -24,6 +24,16 @@ instead of buying the originally planned automatic root continuation. Submission
 entries13/14 is reversed. Both still count toward20 explicit requests total. Saved ledger explains
 the adoption; no active provider call was interrupted. Check for further actual reader requests
 before final counting so they are not mistaken for preparation or operator requests.
+
+Entry15 is another actual reader exploration,53618c9d-c645-4283-8138-772a63889f8a, queued. The
+local driver now adopts existing explicit requests made through the interface before creating more
+automatic requests, up to the requested20. This changes only the operator sample driver, not the
+book's mechanism. **The driver now requires `--env-file=.env`** for read-only counting of intents:
+`mise exec node@24.18.0 -- node --env-file=.env --import tsx .local/review-second/run.ts`.
+Driver sessions26753/31318 were deliberately stopped to reconcile the ledger; no service or paid
+operation was interrupted. Do not resume those obsolete sessions. Monitor may temporarily
+under-count completed adopted requests until the driver reaches their ledger slot; query intent
+statuses when giving an exact count. The root continuation is currently generating an image.
 All43publishedimages across4works/23publications passed availability checks at02:07UTC; receipt
 `.local/review-second/after-twelve-assets.json`.
 
