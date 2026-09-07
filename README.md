@@ -1,19 +1,83 @@
 # The Shape of Time
 
-The book is a world exploration harness: read a sustained illustrated narrative, follow a passage or
-image into a nested narrative, and return to your place. The successful text-only infinite-book is the
-experiential baseline. The retired folio prototype is preserved only in `archive/` and Git history.
+*A love story.*
 
-The human creator is the author; people exploring the book are readers. A creative agent develops
-the nested narratives and imagery, and a critic agent can provide contextual feedback. The UI is
-the reading interface. See SPEC.md for these terms and the distinction between reader requests,
-creative-agent turns and reading screens.
+[Read the book](https://shape-of-time-production.up.railway.app/)
 
-Read AGENTS.md, SPEC.md, EVALS.md, PLAN.md and HANDOFF.md for the current intent and actual evidence.
-The book is live at [the reading interface](https://shape-of-time-production.up.railway.app).
-HANDOFF.md records the current attempt, release verification, reader testing, spending and remaining
-limitations. Previous attempts are private development evidence; each new attempt starts empty with
-one pinned process. See [the draft archive](archive/reader-attempts/README.md) for preserved references.
+The Shape of Time begins with Jay and Tan in a world where time works differently. It is an
+illustrated novel that can contain other novels: a passage, a person or a detail in a picture can
+open into a story of its own. Readers can stay with any of these stories, follow another opening,
+and return to the place they left. The ambition is sustained fiction with characters, developing
+plots and visual continuity, at every depth.
+
+## How the book is made
+
+The human author supplies the world, its artistic direction and the judgment of whether the work
+is succeeding. A **creative agent** develops the fiction inside a **harness**: the surrounding
+software that gives it tools, remembers its work and makes published passages available to readers.
+
+The harness gives the agent access to the original worldbuilding, writing and visual guidance,
+published stories and images, and a persistent workspace for drafts and notes. The agent decides
+what to investigate, write, illustrate, revisit and develop. It can look at earlier passages, consult
+its notes, inspect an image, use previous images as references, or ask a separate critic agent for
+feedback. Those are available choices, not a compulsory sequence of production stages.
+
+Text is generated with **GPT-6 Astra at medium reasoning effort**. Illustrations use
+**GPT Image 2**. The creative agent directs the images and can inspect them alongside the prose;
+text and imagery are parts of the same world rather than independent decorations. An optional
+critic also uses Astra at medium, in a separate context with access to the actual material.
+
+One active creative session moves among the connected stories. Its persistent context, saved notes
+and access to originals support continuity across long narratives and nested works. When that
+context needs renewal, the system preserves the original record and renews the working context.
+Plans and notes remain distinct from what has actually appeared in the published fiction.
+
+The engineering provides dependable storage, source links, return paths, a request queue and
+spending records. It does not dictate plot beats, chapter lengths, image quotas or mandatory
+literary reviews. Prompts encourage narrative movement and coherence; creative choices belong to
+the agent, and literary judgment ultimately belongs to the author.
+
+## What readers do
+
+Readers read, continue and explore passages or images. They do **not** give plot directions or
+choose a character's next action. Published stories are shared. Each browser profile keeps its own
+reading places, bookmarks and opening history; there are no accounts or cross-device syncing yet.
+Two people sharing one browser profile share that reading history.
+
+The interface prepares reading ahead when useful, giving the creative agent a chance to develop a
+continuation or a nearby opening while someone reads. Already published material is immediately
+available. An unprepared opening still takes time to generate; preparation reduces that wait but
+cannot eliminate it everywhere. The first readable passage can be entered before the whole request
+has finished. A reader request is not a page: it may produce several passages and illustrations.
+
+The cover uses the opening illustration. A short, replayable guide demonstrates text highlighting
+and drawing a selection box on an image. Beyond necessary controls and waiting messages, the
+reading interface presents the literature rather than explaining the software.
+
+## Current work and project history
+
+The successful text-only [infinite-book](https://github.com/torgbuiedunyenyo/infinite-book) is the
+experiential baseline. This implementation aims to extend it with richer agent freedom, imagery
+and persistent context. The retired illustrated folio prototype is preserved in `archive/` and Git
+history; it is not the active architecture.
+
+The live book retains its current content. The author granted a **one-time exception** to switch
+from Astra xhigh to medium within that book; the exact transition is recorded in
+[the provenance receipt](tests/receipts/astra-medium-transition-2026-09-07.json). Otherwise a changed
+creative attempt starts empty, with the earlier attempt privately preserved and referenced.
+
+The planned buffer of **40 additional reader requests (20 core, 20 side stories) is paused at the
+author's request**. One core request was submitted before the pause; no further automatic requests
+may be submitted until the author resumes it. The operational checkpoint and recovery instructions
+are in [operations/reader-buffer-40](operations/reader-buffer-40/README.md).
+
+- [SPEC.md](SPEC.md): intended experience, creative freedom and product requirements.
+- [PLAN.md](PLAN.md): implementation history and current work queue.
+- [HANDOFF.md](HANDOFF.md): current state, receipts, limitations and continuation instructions.
+- [EVALS.md](EVALS.md): meaningful literary evaluation, separate from mechanical testing.
+- [AGENTS.md](AGENTS.md): working rules and preservation requirements.
+- [Source provenance](content/shape-of-time/SOURCE.md): recovered original world and writing material.
+- [Draft archive](archive/reader-attempts/README.md): references to preserved earlier attempts.
 
 ## Running and development
 

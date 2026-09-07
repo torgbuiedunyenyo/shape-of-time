@@ -516,3 +516,31 @@ Add the root book's first published illustration alongside its title and “A lo
 whole composition visible, stack it between title and reading controls on narrow screens, retain
 text-only entry if an image is unavailable. Reuse the book's own imagery; no generation or process
 change. Verify desktop/mobile, original reading links, build gates, and Git-triggered release.
+
+### F11 — Forty additional reader requests, authorized September 7
+
+Prepare a reading buffer: exactly 20 new core continuations and 20 new side-story requests,
+interleaved. Spread side requests across five reachable paths (existing child/grandchild plus
+three openings from actual unlinked core illustrations, or newly offered reachable openings).
+Request source exploration without narrative direction; then continue each side work to give depth.
+Retain existing medium mechanism, all content and accounting. Prior 20-request driver stays stopped;
+this is a separately authorized run, not a resumption/adoption of its historical requests.
+Durable driver/ledger: .local/reader-buffer-40/. Persist request bodies/keys before dispatch, use
+application-level idempotency, never replay ambiguous provider operations. Pause for unresolved
+provider failures or insufficient allowance; earlier permission allows extending the budget as needed.
+Verify all 40 complete (20/20), published growth, source reachability, asset availability and mechanism
+provenance. Leave literary judgment to the author. No new generation mechanism, mandatory critic or
+plot guidance. No deployment needed to run the existing reader API.
+
+**F11 paused by author, September 7:** conserve usage credits and prioritize the GitHub handoff.
+One core request was submitted; leave it intact and do not submit another. The durable hold is
+.local/reader-buffer-40/hold. A tracked recovery snapshot is in operations/reader-buffer-40/.
+Before resuming, reconcile its request ID with production and update the ledger, then remove only
+this run's hold after explicit authorization. Never restart the older review-second driver.
+
+### F12 — GitHub handoff
+
+Update the human-readable README with the creative agent, harness, imagery, persistence, reader
+experience and limitations; synchronize spec and plan; preserve the paused run's driver/checkpoint
+without secrets; commit and push to GitHub. Allow the in-flight provider work to settle before a
+Git-triggered deployment and release any temporary lock afterward. No extra reader requests.

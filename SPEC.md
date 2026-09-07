@@ -1,6 +1,6 @@
 # Shape of Time product specification
 
-Current direction: September 6, 2026. This replaces the July fixed-folio prototype specification. Implementation details and milestones are in PLAN.md; actual progress is in HANDOFF.md.
+Current direction: September 7, 2026. This replaces the July fixed-folio prototype specification. Implementation details and milestones are in PLAN.md; actual progress is in HANDOFF.md.
 
 ## Terms
 
@@ -106,3 +106,20 @@ provenance and release discipline, not a prescribed story or a constraint on the
 Use contextual LLM-as-judge, informed by actual sustained reading. Judges can inspect the work, request relevant history/images and explain their judgments. The agent can use criticism to improve its drafts without mandatory per-page approval.
 
 Observe a genuinely generated illustrated root, child, grandchild, exact return and coherent continuation. Extend the same corpus into long-form development and through context renewal. A beautiful opening, a static demo or green mechanical tests cannot alone establish that experience. EVALS.md defines the evidence practice.
+
+## Reading interface and preparation buffer
+
+The cover presents the title, “A love story.” and an illustration from the book. Reader-facing
+copy serves the fiction; explanations of the medium belong only where needed to use controls or
+understand generation waits. The optional guide visibly demonstrates selecting words and drawing
+an image region, without submitting requests or changing the narrative.
+
+Published works are shared; reading positions, bookmarks, guide dismissal and saved opening history
+are private to a browser profile. This implementation has no reader accounts or cross-device sync.
+Do not describe its local persistence as authenticated per-person storage.
+
+Ahead-of-reader expansion uses the ordinary reader request mechanism and the same creative context.
+The requested 40-step buffer means 20 additional core continuations and 20 additional side-story
+requests on reachable paths. It is currently paused by the author; resumption requires a new instruction.
+The September 7 xhigh-to-medium transition was an explicit one-time exception to the fresh-attempt
+rule. Earlier material and its original provenance remain intact.

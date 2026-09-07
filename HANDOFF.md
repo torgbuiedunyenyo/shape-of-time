@@ -1,5 +1,24 @@
 # Handoff
 
+## Latest instruction — buffer PAUSED; GitHub handoff
+
+The author paused the 40-request buffer to prioritize usage credits. Do not submit further requests.
+.local/reader-buffer-40/hold is present. Request dfc0bd14-e86b-45a4-9edb-b5969c9e4d1b was already
+submitted; preserve and reconcile it, never duplicate it. See operations/reader-buffer-40/README.md
+for the tracked checkpoint/driver. The remaining 39 submissions await explicit resumption.
+This instruction supersedes the active-run wording below. README/SPEC/PLAN are updated for handoff.
+
+
+## Active work — F11 reading buffer
+
+The author now explicitly authorizes 40 ADDITIONAL reader requests: 20 core continuations and
+20 across reachable side stories, to defer cold-generation waits for new readers. This supersedes
+the blanket no-sampling restriction ONLY for this new run. Do not resume the old review-second
+driver or change its hold. New durable ledger/driver: .local/reader-buffer-40/. See PLAN.md F11.
+Keep Astra medium and the current content. Initial budget: $13.993545 spent, $78.664460 remaining.
+No generated text, imagery or narrative instructions are being replaced.
+
+
 ## Current follow-up — F10
 
 The cover uses the root book’s first published illustration (Jay and Tan at the shop counter).

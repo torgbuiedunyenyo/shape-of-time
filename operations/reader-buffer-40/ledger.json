@@ -1,0 +1,30 @@
+{
+  "createdAt": "2026-09-07T16:44:10.042Z",
+  "mechanism": "21f659fcad3e8b385a7f72e60f892761c34fc95f86f9075752590ac57451ad90",
+  "editionKey": "shape-of-time:2026-09-07T03:57:03.265Z",
+  "rootWorkId": "work-c9d164ad62fcbc3b4627ed165ec84eed",
+  "groups": {
+    "0": {
+      "workId": "work-c989cdfd80a48e2aa32cfd9517b326b1"
+    },
+    "1": {
+      "workId": "work-1829a8ae7c5690472d620b886f48d787"
+    }
+  },
+  "entries": [
+    {
+      "number": 1,
+      "category": "core",
+      "body": {
+        "key": "reader-buffer-40-20260907-01",
+        "kind": "continue",
+        "workId": "work-c9d164ad62fcbc3b4627ed165ec84eed",
+        "afterPublicationId": "4c7c8ca8-33c4-430f-bc63-542bf52dbd2f"
+      },
+      "submittedAt": "2026-09-07T16:44:11.233Z",
+      "id": "dfc0bd14-e86b-45a4-9edb-b5969c9e4d1b",
+      "status": "running"
+    }
+  ],
+  "complete": false
+}
