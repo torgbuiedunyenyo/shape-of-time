@@ -1,5 +1,15 @@
 # Handoff
 
+## Latest instruction — F11 RESUMED
+
+The author explicitly resumed the same 40-request expansion. One core request is complete
+(dfc0bd14-e86b-45a4-9edb-b5969c9e4d1b): first passage after 6m09s, full request about 16m17s,
+two publications. Continue the remaining 19 core and 20 side requests using the existing ledger.
+The pause wording below is historical. Finish the documentation push to main while the release
+lock is held, then release it and remove ONLY .local/reader-buffer-40/hold.
+Current checkpoint spending: $19.171629 of $92.658005; $73.486376 remaining.
+
+
 ## Latest instruction — buffer PAUSED; GitHub handoff
 
 The author paused the 40-request buffer to prioritize usage credits. Do not submit further requests.

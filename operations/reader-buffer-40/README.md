@@ -1,7 +1,8 @@
-# Paused reading buffer
+# Reading buffer
 
-The author requested 40 additional reader requests: 20 core and 20 side-story requests, then paused
-the run to prioritize usage credits. **Do not resume without their instruction.**
+The author requested 40 additional reader requests: 20 core and 20 side-story requests, briefly paused
+the run to prioritize usage credits, then explicitly resumed it. One core request is complete at
+this checkpoint. The live local ledger is authoritative; do not run a second driver.
 
 `ledger.json` is a checkpoint, not live state. The active local ledger is
 `.local/reader-buffer-40/ledger.json`; a `hold` file beside it prevents further submissions.

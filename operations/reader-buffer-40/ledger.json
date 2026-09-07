@@ -23,7 +23,13 @@
       },
       "submittedAt": "2026-09-07T16:44:11.233Z",
       "id": "dfc0bd14-e86b-45a4-9edb-b5969c9e4d1b",
-      "status": "running"
+      "status": "done",
+      "resultWorkId": "work-c9d164ad62fcbc3b4627ed165ec84eed",
+      "completedAt": "2026-09-07T17:00:28.114Z",
+      "newPublications": [
+        "6d411a14-c8f2-4229-99db-807c821f1c2b",
+        "1dc2b0ce-614e-4c29-aa71-3bf642add64c"
+      ]
     }
   ],
   "complete": false

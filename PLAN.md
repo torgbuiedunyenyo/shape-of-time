@@ -544,3 +544,6 @@ Update the human-readable README with the creative agent, harness, imagery, pers
 experience and limitations; synchronize spec and plan; preserve the paused run's driver/checkpoint
 without secrets; commit and push to GitHub. Allow the in-flight provider work to settle before a
 Git-triggered deployment and release any temporary lock afterward. No extra reader requests.
+
+**F11 resumed explicitly by author:** same ledger, one completed core request (two publications),
+19 core and 20 side requests remain. Preserve medium and existing content. Earlier pause is superseded.

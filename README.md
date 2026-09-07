@@ -66,10 +66,10 @@ from Astra xhigh to medium within that book; the exact transition is recorded in
 [the provenance receipt](tests/receipts/astra-medium-transition-2026-09-07.json). Otherwise a changed
 creative attempt starts empty, with the earlier attempt privately preserved and referenced.
 
-The planned buffer of **40 additional reader requests (20 core, 20 side stories) is paused at the
-author's request**. One core request was submitted before the pause; no further automatic requests
-may be submitted until the author resumes it. The operational checkpoint and recovery instructions
-are in [operations/reader-buffer-40](operations/reader-buffer-40/README.md).
+The buffer of **40 additional reader requests (20 core, 20 side stories)** was briefly paused
+and then explicitly resumed by the author. Its first core request completed with two publications;
+39 requests remain at this checkpoint. Progress and recovery instructions are in
+[operations/reader-buffer-40](operations/reader-buffer-40/README.md).
 
 - [SPEC.md](SPEC.md): intended experience, creative freedom and product requirements.
 - [PLAN.md](PLAN.md): implementation history and current work queue.

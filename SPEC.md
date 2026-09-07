@@ -120,6 +120,6 @@ Do not describe its local persistence as authenticated per-person storage.
 
 Ahead-of-reader expansion uses the ordinary reader request mechanism and the same creative context.
 The requested 40-step buffer means 20 additional core continuations and 20 additional side-story
-requests on reachable paths. It is currently paused by the author; resumption requires a new instruction.
+requests on reachable paths. The author briefly paused and then explicitly resumed this same run.
 The September 7 xhigh-to-medium transition was an explicit one-time exception to the fresh-attempt
 rule. Earlier material and its original provenance remain intact.
