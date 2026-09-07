@@ -143,3 +143,27 @@ client follow-up refresh. Local recovery tab and API were then closed/stopped. P
 exploration6a1733a5 was submitted03:36:24.480UTC. Root continuation197cad4d was submitted03:34:19.985UTC
 against6278fe61. Root tab stays at scroll3175.5/blockb-dc1745deaa84d3731951 to observe its next append;
 another tab is used for the nested reading so this check does not manufacture a scroll change.
+
+Fresh nested return after reload/page turn restored visitor-phone blockb-ff1ecbd4fba7f6d08faa at
+96.86px. It also revealed an unrelated last-pending image panel reopening automatically; corrected
+in the further client follow-up by restoring a saved request only when its source is selected.
+Warm shelf Resume reused the same child visit8708467d, loading two sections and its illustration
+without another request. A native triple-click that selected only charging was dismissed, not
+submitted. The original text selection remains the sole text exploration.
+
+Actual image-region UAT: enlarged the child's bakery illustration, clicked Choose a detail,
+dragged a box around its oven/SOLD sign, then used Open this detail and Open as a book. Request
+27716378-2782-44c2-a4bc-f5e2c4cef697 was created03:46:27.885UTC from publication3abf080c,
+blockb-658389ba06eb913565b1, assetimg-30e5bc55-5430-407a-a5a7-7b64024a670b. Its queued panel shows
+two requests ahead and an enabled Keep reading action. This is the last exploration needed for UAT.
+Root continuation has appended a third section while the fixed reader view still shows the same
+block. Settled position after wheel animation is3245.5px, blocktop78.64/bottom112.23; compare the
+next append to these settled measurements.
+
+At03:48UTC the reference-image edit5f2ac817 failed locally in the SDK's FormData compatibility check.
+The exact failure was reproduced against a real local HTTP listener; no upload reached it. The
+transport now installs matching Undici globals. The new regression verifies the image bytes, file
+name, MIME type and prompt received by the listener. All45tests/typecheck/lint/build passed.
+Actual root append remained atscroll3245.5/blocktop78.640625. Wholeimage6a1733a5 andregion27716378
+never started before the failure, so they are incomplete, not passes. The third attempt is archived
+with27operation receipts and zero-cost reconciliation of the pre-dispatch upload failure.

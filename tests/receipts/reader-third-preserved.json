@@ -1,0 +1,99 @@
+{
+  "recordedAt": "2026-09-07T03:54:31.518Z",
+  "schema": "world_reader_20260907",
+  "path": "/Users/ratpartyserver/git/shape-of-time-agentic/.local/reader-third-preserved-2026-09-07",
+  "manifestSha256": "d59a79330440f56a86a0f59fe2be23540ec7a68b2880cf6d95de6648b4ae8233",
+  "tables": [
+    {
+      "name": "editions",
+      "count": 1
+    },
+    {
+      "name": "works",
+      "count": 2
+    },
+    {
+      "name": "documents",
+      "count": 7
+    },
+    {
+      "name": "publications",
+      "count": 5
+    },
+    {
+      "name": "sessions",
+      "count": 1
+    },
+    {
+      "name": "intents",
+      "count": 9
+    },
+    {
+      "name": "operations",
+      "count": 27
+    },
+    {
+      "name": "assets",
+      "count": 2
+    },
+    {
+      "name": "tool_results",
+      "count": 25
+    },
+    {
+      "name": "openings",
+      "count": 1
+    }
+  ],
+  "objects": 31,
+  "mechanism": {
+    "hash": "add399808eaa52d8e97889362e1da2b07227f290328ecd694ef25782e2fe75c9",
+    "files": {
+      ".nvmrc": "55075b5ec4e8b31936cbbc282b8829116d1fd48f2f2f1856dee592a6650700ce",
+      "pnpm-lock.yaml": "416ef698d4ebe1f171919362eb3a67e6a04b1518aeb8687e6cf0177908f265af",
+      "prompts/critic.md": "85e93d468ebeefe8851ec693249021c5f28ac06471ff1381754fe4f2b16a9748",
+      "src/server/app.ts": "ecf80e18c90317c599f0f866d17c92412a96ef5f7ce78e1fadc7f76b365983dd",
+      "src/server/index.ts": "dcc7c018b2e6fe77c13ff296294fbd1030308499a944280359b2d2a01d9747e7",
+      "src/shared/types.ts": "6acbe37e43822d6ad7048d5f32e30eea8896747df393dd028c116376c63bf4a3",
+      "src/server/config.ts": "33209f22e2501efea7d45e43ae42478c4630cee14dca7e156d0c308dbc3b71a8",
+      "src/server/db/index.ts": "d6ed880a2e28d1354487097f069bc9541111cdb79aeff1de85323d0b2d9421ad",
+      "src/server/mechanism.ts": "e22563b9f5bcb7e62e6a45d63cad4af402297f0e9fa05242a36df6197ad8d182",
+      "src/server/db/migrate.ts": "6814f7c0bdaf5b6ddaf78e5cbe294de42fcf91768b0d86ddbe369bdcf7377fcb",
+      "prompts/creative-agent.md": "111eec8b3f761ffcccc191f2505665efc86cbf36ac18466181c3473ef6396ed4",
+      "src/server/agent/tools.ts": "e58219ebb45a7d7c4916e7e16dad78f02e92c3fa8c69bd41023bcebcf934d9c7",
+      "src/server/agent/runner.ts": "43f7ff9f8c8b6169e3dded0b6c92333fcbfbe8c5765853993a0075c2a2c1028f",
+      "src/server/agent/renewal.ts": "98fe79e319797ced04e39886b74c491e9a34eed987b302ece7c065dabd4184fd",
+      "src/server/library/store.ts": "8625851a8d2304c50bf57fa92bc2c0c0fb3d4e436096a5667232959d1476278d",
+      "src/server/library/assets.ts": "c721db9245c015feffa2433f33ed0b746d09d2e821d78c97df3e6442ecf9ee31",
+      "src/server/library/archive.ts": "c5578829d044867e8f65a96618214b1f209a124422c4b61904030befdad09bc5",
+      "src/server/providers/astra.ts": "a6e0af1304f6ced202b1efe35a15b6250c27c3cfd8dbe89d10f4aacd13afc198",
+      "src/server/providers/image.ts": "9d3518e890ef5ed90e5ff320484a19b6d8c46e2f1f525f1b8169d48433c4df6c",
+      "content/shape-of-time/world.md": "e47afa2fc5db4350008f65fcea9bf6b32569e79a6ee4aeb212e066ddd139576c",
+      "src/server/library/snapshot.ts": "530a5f918f7a949750c678ba1bc7305067b1ea551ba86a733e60f5a4ea7b954f",
+      "src/server/agent/preparation.ts": "fbd9090720456902884f08ae0dca9232e8f5428690223a2f07e7aa535792753b",
+      "src/server/providers/protocol.ts": "20bb8a97950429abcde61b30307be7c87b4328d54710dcca90697b4014996fb3",
+      "src/server/library/composition.ts": "dfef698b9bf59e71764d9f37225f1086dc6945c4b812b5ed966832cba4948c8a",
+      "src/server/providers/transport.ts": "2c019cbb5b7b7b03d347f70254402a276e7a99fef6bdd40a9ba45a4249bb0eab",
+      "src/server/providers/operations.ts": "f23e5f720f0f8bdd93375e618a425bf6dff1c4608346ad816c202744590f6500",
+      "content/shape-of-time/prose-guide.md": "7989d2ad6f3bf376a2cf97686025570d33d1ce0ed0ccefae93a791bf0bf9a725",
+      "content/shape-of-time/world-essence.md": "d19f53259d8c49d1cb965570d68e48c37a8cc8ad8845aa5c7e629d67f8708693",
+      "content/shape-of-time/visual-direction.md": "0428a08bd5801e2e7be68c4bb4363f919c2411e2d6d7843fa320fdee9e07645c"
+    },
+    "revision": "2664d40b829aabf953bf20574db797eaa58a22ce",
+    "configuration": {
+      "effort": "xhigh",
+      "textModel": "gpt-6-astra",
+      "imageModel": "gpt-image-2-2026-04-21",
+      "preparationEnabled": true,
+      "contextRenewalTokens": 250000
+    }
+  },
+  "committedUsd": 3.4070220000000004,
+  "uploadFailure": {
+    "operationId": "5f2ac817-f5dd-4d5f-9399-d2edea4a3696",
+    "actualUsd": 0,
+    "reason": "SDK rejected FormData in createForm before constructing/sending the HTTP request. Exact failure reproduced against a local listener; no provider purchase occurred. Preserve original row here, actual cost zero; no replay."
+  },
+  "nextSchema": "world_reader_20260907_b",
+  "nextAllowance": 92.658005
+}

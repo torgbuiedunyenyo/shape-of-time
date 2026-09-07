@@ -2,6 +2,42 @@
 
 ## Active work — F7 narrative momentum and full reader UAT
 
+**03:55UTC — supersedes earlier live-continuation checkpoints:** third attempt paused when reference
+image edit5f2ac817 failed in the SDK's FormData support check before HTTP submission. Exact failure
+reproduced with local multipart listener; corrected by installing matching Undici globals alongside
+its fetch. All45tests/typecheck/lint/build passed, including exact uploaded file bytes/type/name and
+prompt, delayed headers/body and no timeout replay. Client followups are included, not live yet.
+The old failed row is preserved in `.local/fourth-edition-allocation.json`; actual cost reconciled0
+because the SDK rejected before sending. No replay. Old schema world_reader_20260907 frozen at
+3.407022;6queuedrequests retired. New schema world_reader_20260907_b allowance92.658005 pending.
+Private export runs in session41455 to `.local/reader-third-preserved-2026-09-07`; verify every checksum,
+record receipt, then configure fresh schema/allowance with skip-deploys and push passing main.
+No locks/local API/sample driver running. QA28/30closed. Only user oldtab21 remains.
+Root append actual settled position remained3245.5/blocktop78.640625; pass. Text warm entry/return
+passed. Wholeimage/region never began before local upload failure, so those are incomplete.
+After fresh release, use minimum actual UI journeys for Begin→wholeimagechild→regiongrandchild,
+ordinary useful preparation and continuation/returns. Prior text and general-control UAT stand as
+evidence for unchanged paths; no need to repurchase a separate text child. Never resume20sample.
+
+**03:48UTC:** text child completed with2sections/1loadedimage. Shelf Resume reused exact visit8708467d.
+Actual child image was enlarged, Choose a detail clicked, and a native drag from[794,143]→[914,310]
+selected its oven/SOLD sign. Open this detail→Open as a book submitted one grandchild exploration;
+get its ID/normalized anchor from `.local/uat-sources.ts`. It is the LAST extra UAT exploration
+needed: do not add more sample requests. Whole-image6a1733a5 still awaits root continuation ahead.
+Root tab28nowhas3sections after actual append and still blockb-dc1745deaa84d3731951. Settled
+scroll3245.5, blocktop78.640625/bottom112.234375. Earlier3175.5wascapturedbeforewheelsettled;
+observe next append against the settled values. Tab30remains grandchild pendingpanel/Keepreading.
+
+**03:45UTC checkpoint:** client follow-up committed **6f8ff9c**, not pushed/deployed. A further
+client-only fix is uncommitted: returning from a child reopened an unrelated last pending panel.
+Reader now recovers only an explicitly selected source's saved request, enabling warm-image
+reselection without another POST. Build passed; final gates and live retest still needed.
+Text child return after reload/page turn restored visitor-phone blockb-ff1ecbd4fba7f6d08faa at~100px.
+A repeat native tripleclick unexpectedly selected only the word charging; **it was dismissed without
+submitting**, not another UAT request. Tab30 is now production shelf for warm child resume.
+Local API22613/session92326 has been stopped; all local servers and local QA tabs are closed.
+Do not rerun prior process kill commands. Root tab28stillholds fixed append observation.
+
 **03:40UTC:** whole-image request is6a1733a5-3fe7-401f-98eb-a609b2d4c043 (created03:36:24.480UTC).
 Text child The Money on Its Way/work-d9ae39c1231b7918b288bb6695baacc2 became readable and actual
 production shelf button was clicked to enter **8708467d-0dcc-4283-9597-5f0f9399af98** in tab30

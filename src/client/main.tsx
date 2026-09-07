@@ -379,18 +379,6 @@ function Reader() {
     state.current = visit.id;
     saveReading(state);
     const requests = latestVisitRequests(state.requests, visit.id);
-    const savedRequest = requests.opening;
-    if (savedRequest) {
-      if (savedRequest.source && !savedRequest.openedVisitId)
-        setSelected(savedRequest.source);
-      api<Intent>("intents/" + savedRequest.intentId)
-        .then((next) => {
-          if (active) setIntent(next);
-        })
-        .catch((e) => {
-          if (active) setError(e.message);
-        });
-    }
     if (requests.continuation)
       api<Intent>("intents/" + requests.continuation.intentId)
         .then((next) => {
@@ -410,6 +398,19 @@ function Reader() {
       active = false;
     };
   }, [id, visit?.workId]);
+  useEffect(() => {
+    if (!selected || !id) return;
+    let active = true;
+    // Recover only the opening the reader actually selected. Returning to a work
+    // must not reopen a different, previously dismissed exploration panel.
+    void explorationKey(id, selected).then(async key => {
+      const saved = loadReading().requests[key];
+      if (!saved) return;
+      const result = await api<Intent>("intents/" + saved.intentId);
+      if (active) setIntent(result);
+    }).catch(e => { if (active) setError(e.message); });
+    return () => { active = false; };
+  }, [id, selected]);
   useLayoutEffect(() => {
     if (!book || restored.current) return;
     const place = visit?.place;

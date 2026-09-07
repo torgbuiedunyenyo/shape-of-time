@@ -35,3 +35,16 @@ before retirement remain in `.local/review-second/queued-before-retirement.json`
 
 The successor starts from an empty schema with its own pin, original authored world and updated
 guidance. No generated content, plans, images or memory from this draft seed that book.
+
+## Third illustrated reader attempt — UAT transport failure, September 7, 2026
+
+This fresh F7 attempt produced2works,5publications and2images during actual reader UAT. A reference
+image upload failed locally because installed Undici fetch and Node's global FormData did not match.
+The SDK rejected before HTTP submission; the exact failure was reproduced and its reserved cost
+reconciled to zero, without replay. Completed spend was3.407022. The old queue is preserved privately.
+
+Full snapshot: `/Users/ratpartyserver/git/shape-of-time-agentic/.local/reader-third-preserved-2026-09-07`.
+Receipt: [reader-third-preserved.json](../../tests/receipts/reader-third-preserved.json).
+Every table/object checksum was verified. Schema `world_reader_20260907` remains frozen. The next
+attempt starts empty with the corrected transport and the same F7 artistic guidance; none of this
+draft's generated content or memory is reused.
