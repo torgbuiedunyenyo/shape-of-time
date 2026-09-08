@@ -49,6 +49,7 @@ export function loadReading(): Reading {
 }
 export function saveReading(state: Reading) {
   localStorage.setItem(storageKey(), JSON.stringify(state));
+  if (typeof window !== "undefined") window.dispatchEvent(new Event("reading-changed"));
 }
 export function enter(workId: string, parentId: string | null, entry?: Anchor) {
   const state = loadReading(),

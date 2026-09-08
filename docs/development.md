@@ -111,3 +111,13 @@ a shared password before reading. Keep both in environment variables. The server
 image and generation endpoints; the browser remembers access with an HttpOnly cookie for 30 days.
 Changing either value invalidates existing access cookies. This gate lives outside the creative
 runtime and does not change its mechanism. Leave the password unset for an open book.
+
+## Reading wait estimates
+
+The read-only `/api/reading-wait/:id` endpoint is registered by the same reading-interface preload,
+behind the password middleware. It reads recent first-publication timings from the current edition,
+grouped by request kind; already-readable entries are excluded. The central 20–80% range is rounded
+to whole, coarse minutes, with an approximate 6–12 minute fallback when fewer than five samples are
+available. Slow samples remain in the data; the range describes typical experience, not a promise.
+It is cached for one minute. No provider calls, creative instructions or additional workflow stages
+are involved. Request status and first-publication readiness always take precedence over estimates.

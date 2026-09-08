@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import {
   createBrowserRouter,
   Link,
+  Outlet,
   useNavigate,
   useParams,
 } from "react-router";
@@ -32,7 +33,9 @@ import { hasSeenReadingGuide } from "./tour-state.js";
 import { ImageDetail } from "./ImageDetail.js";
 import { OpeningPanel } from "./OpeningPanel.js";
 import { capturePlace, restorePlace } from "./position.js";
-import { explorationKey, openingStatus, continuationStatus, requestNeedsPolling } from "./requests.js";
+import { explorationKey, requestNeedsPolling } from "./requests.js";
+import { RequestWait } from "./RequestWait.js";
+import { OpeningTray } from "./OpeningTray.js";
 class PasswordRequired extends Error {}
 async function api<T>(path: string, body?: unknown): Promise<T> {
   const r = await fetch(
@@ -42,8 +45,9 @@ async function api<T>(path: string, body?: unknown): Promise<T> {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
+          signal: AbortSignal.timeout(15_000),
         }
-      : undefined,
+      : { signal: AbortSignal.timeout(15_000) },
   );
   const data = await r.json();
   if (r.status === 401) throw new PasswordRequired(data.error);
@@ -147,9 +151,7 @@ function Discoveries() {
               <blockquote>{record.source.quote}</blockquote>
             )}
             {!intent?.result_work_id && (
-              <p className="small">
-                {errors[record.intentId] || openingStatus(intent)}
-              </p>
+              <RequestWait intent={intent} disconnected={Boolean(errors[record.intentId])} />
             )}
             <Link
               className="small"
@@ -340,9 +342,7 @@ function Waiting() {
           ? (intent.result_title ?? "Your book is ready.")
           : "A book is opening."}
       </h1>
-      <p>
-        {openingStatus(intent)}
-      </p>
+      <RequestWait intent={intent} disconnected={Boolean(error)} />
       {error && <p role="alert">{error}</p>}
       {intent?.result_work_id && (
         <button
@@ -892,9 +892,7 @@ function Reader() {
               Continue reading →
             </button>}
             {continuation && continuation.status !== "done" && (
-              <p className="small" role="status">
-                {continuationStatus(continuation)}
-              </p>
+              <RequestWait intent={continuation} disconnected={Boolean(error)} />
             )}
           </footer>
         )}
@@ -975,11 +973,13 @@ function BookLink() {
 }
 function readingRouter() {
   return createBrowserRouter([
+  { element: <><Outlet /><OpeningTray /></>, children: [
   { path: "/", element: <Shelf /> },
   { path: "/read/:id", element: <Reader /> },
   { path: "/book/:workId", element: <BookLink /> },
   { path: "/waiting/:id", element: <Waiting /> },
   { path: "*", element: <Shelf /> },
+  ] },
 ]);
 }
 const root = createRoot(document.getElementById("root")!);

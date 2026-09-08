@@ -1,5 +1,5 @@
 import type { Anchor, Intent } from "../shared/types.js";
-import { openingStatus } from "./requests.js";
+import { RequestWait } from "./RequestWait.js";
 
 export function OpeningPanel({ source, intent, onClose, onRequest, onEnter, error }: {
   source: Anchor;
@@ -20,9 +20,7 @@ export function OpeningPanel({ source, intent, onClose, onRequest, onEnter, erro
     ) : (
       <button className="primary" onClick={onRequest}>Open as a book ↗</button>
     )}
-    {intent?.kind === "explore" && <p role="status" className="small">
-      {openingStatus(intent)}
-    </p>}
+    {intent?.kind === "explore" && <RequestWait intent={intent} disconnected={Boolean(error)} />}
     {error && <p role="alert">{error}</p>}
   </aside>;
 }

@@ -370,6 +370,53 @@ input {
 .waiting p {
   line-height: 1.7;
 }
+.request-wait {
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #677468;
+  margin: 20px 0 8px;
+}
+.request-wait p { margin: 0 0 6px; }
+.request-wait .wait-estimate { color: #677468; }
+.wait-line {
+  display: block;
+  height: 1px;
+  margin-top: 18px;
+  background: #d4d9c9;
+  position: relative;
+  overflow: hidden;
+}
+.wait-line::after {
+  content: "";
+  display: block;
+  height: 1px;
+  background: #677468;
+  opacity: .7;
+  animation: wait-breath 3.5s ease-in-out infinite alternate;
+}
+@keyframes wait-breath { from { opacity: .15; } to { opacity: .75; } }
+@media (prefers-reduced-motion: reduce) { .wait-line::after { animation: none; opacity: .45; } }
+.opening-tray {
+  position: fixed;
+  bottom: max(20px, env(safe-area-inset-bottom));
+  left: 20px;
+  z-index: 9;
+  max-width: min(360px, calc(100vw - 190px));
+  background: #fffdf5;
+  border: 1px solid #d4d9c9;
+  border-radius: 3px;
+  box-shadow: 0 4px 24px #263f3412;
+}
+.opening-tray-toggle { border: 0; display: flex; align-items: center; gap: 16px; width: 100%; text-align: left; font-size: 12px; }
+.opening-tray-toggle > span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.wait-summary { display: block; margin-top: 3px; color: #677468; font-size: 11px; }
+.opening-tray-list { max-height: min(65dvh, 520px); overflow: auto; padding: 0 20px 20px; }
+.opening-tray-list section + section { margin-top: 22px; border-top: 1px solid #d4d9c9; }
+.opening-tray-list h2 { font: 24px/1.2 "EB Garamond", Georgia, serif; margin: 20px 0 12px; }
+.opening-tray-list blockquote { font: 18px/1.35 "EB Garamond", Georgia, serif; margin: 12px 0; max-height: 75px; overflow: auto; }
+.opening-tray:has(.opening-tray-list) { width: min(360px, calc(100vw - 40px)); max-width: calc(100vw - 40px); bottom: 80px; }
+body:has(.exploration, .lightbox, .reading-guide) .opening-tray { visibility: hidden; }
 .notice {
   font-family: "DM Sans", sans-serif;
   font-size: 14px;

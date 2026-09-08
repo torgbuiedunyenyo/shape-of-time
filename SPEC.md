@@ -81,6 +81,15 @@ The reader's visit trail is separate from work identity and fictional relationsh
 
 Normal reading shows stable published material, not token streaming or agent diagnostics. Agent work and operation details are available to the operator outside the reading surface.
 
+Waiting offers a coarse, approximate range based on recent comparable requests' first readable
+publications. It measures availability to the reader, not completion of the creative agent's work.
+Queueing, active writing, unusual delay, disconnection and paused work remain distinct. A fine
+activity line may accompany active writing; it never claims a percentage. The estimate is a typical
+range, not a deadline or countdown. Published passages become available immediately, including when
+later work pauses. A quiet browser-local indicator keeps unentered openings accessible while the
+reader explores elsewhere, with direct entry once ready. No creative stages are added to provide
+these signals.
+
 ## Reliability and scope
 
 Preserve returned work before validating or publishing it. Published compositions refer only to available stored assets and retain stable addresses. Drafts are freely revisable; published corrections preserve prior versions.

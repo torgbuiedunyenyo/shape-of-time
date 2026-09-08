@@ -23,7 +23,7 @@ it("offers a usable way back to reading while an opening waits, and does not off
     expect(html).not.toContain("disabled=");
     expect(html).not.toContain("Open as a book ↗");
   }
-  expect(panel({ ...request, queue: { ahead: 3, blocked: false } })).toContain("3 reading requests are ahead");
+  expect(panel({ ...request, queue: { ahead: 3, blocked: false } })).toContain("waiting its turn");
   expect(panel({ ...request, queue: { ahead: 3, blocked: true } })).toContain("New writing is paused");
 });
 it("enables entry as soon as the first publication is readable while generation continues", () => {
