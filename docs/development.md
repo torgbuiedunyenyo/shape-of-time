@@ -103,3 +103,11 @@ Keep credentials, local handoffs, corpus snapshots, spending allocations and run
 outside version control. Preserve uncertain provider costs and carry committed spending across
 edition transitions; a fresh edition must not silently renew the operator’s allowance. Explicit
 funding changes should retain an allocation receipt and the operational spending guard.
+
+## Optional reading password
+
+Set `READER_PASSWORD` and a random `READER_COOKIE_SECRET` of at least 32 characters to require
+a shared password before reading. Keep both in environment variables. The server protects story,
+image and generation endpoints; the browser remembers access with an HttpOnly cookie for 30 days.
+Changing either value invalidates existing access cookies. This gate lives outside the creative
+runtime and does not change its mechanism. Leave the password unset for an open book.

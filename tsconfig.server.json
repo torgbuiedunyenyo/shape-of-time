@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
     "target": "ES2023",
-    "lib": ["ES2023", "DOM"],
+    "lib": [
+      "ES2023",
+      "DOM"
+    ],
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "strict": true,
@@ -11,5 +14,5 @@
     "types": ["node"],
     "verbatimModuleSyntax": true
   },
-  "include": ["src/server", "src/shared"]
+  "include": ["src/server", "src/shared", "src/access.ts"]
 }

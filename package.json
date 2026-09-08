@@ -9,9 +9,9 @@
   "packageManager": "pnpm@11.15.0",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
-    "server": "tsx watch --env-file=.env src/server/index.ts",
+    "server": "tsx watch --env-file=.env --import ./src/access.ts src/server/index.ts",
     "build": "vite build && tsc -p tsconfig.server.json && tsx scripts/record-mechanism.ts",
-    "start": "node dist/server/server/index.js",
+    "start": "node --import ./dist/server/access.js dist/server/server/index.js",
     "db:migrate": "tsx src/server/db/migrate.ts",
     "typecheck": "tsc --noEmit && tsc -p tsconfig.server.json --noEmit",
     "test": "vitest run",

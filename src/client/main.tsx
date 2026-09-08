@@ -33,6 +33,7 @@ import { ImageDetail } from "./ImageDetail.js";
 import { OpeningPanel } from "./OpeningPanel.js";
 import { capturePlace, restorePlace } from "./position.js";
 import { explorationKey, openingStatus, continuationStatus, requestNeedsPolling } from "./requests.js";
+class PasswordRequired extends Error {}
 async function api<T>(path: string, body?: unknown): Promise<T> {
   const r = await fetch(
     "/api/" + path,
@@ -45,6 +46,7 @@ async function api<T>(path: string, body?: unknown): Promise<T> {
       : undefined,
   );
   const data = await r.json();
+  if (r.status === 401) throw new PasswordRequired(data.error);
   if (!r.ok) throw new Error(data.error ?? "This could not be loaded.");
   return data;
 }
@@ -982,12 +984,33 @@ function readingRouter() {
 }
 const root = createRoot(document.getElementById("root")!);
 root.render(<main className="waiting">Opening the book…</main>);
+function PasswordCover() {
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [busy, setBusy] = useState(false);
+  return <main className="shelf password-cover"><header className="book-cover">
+    <h1>The Shape<br />of Time</h1><p className="invitation">A love story.</p>
+    <form onSubmit={async event => {
+      event.preventDefault(); setBusy(true); setError("");
+      try { await api("access", { password }); await startReading(); }
+      catch (e) { setError(e instanceof Error ? e.message : "Please try again."); }
+      finally { setBusy(false); }
+    }}>
+      <label htmlFor="book-password">Password</label>
+      <input id="book-password" type="password" autoComplete="current-password" required
+        value={password} onChange={e => setPassword(e.target.value)} aria-describedby={error ? "password-error" : undefined} />
+      {error && <p id="password-error" role="alert">{error}</p>}
+      <button className="primary" disabled={busy}>{busy ? "Opening…" : "Enter the book"}</button>
+    </form>
+  </header></main>;
+}
 async function startReading() {
   try {
     const library = await api<{ edition: { reading_key: string } }>("library");
     selectReadingEdition(library.edition.reading_key);
     root.render(<RouterProvider router={readingRouter()} />);
-  } catch {
+  } catch (error) {
+    if (error instanceof PasswordRequired) { root.render(<PasswordCover />); return; }
     root.render(<main className="waiting"><p>The book could not be opened.</p>
       <button onClick={() => void startReading()}>Try again</button></main>);
   }

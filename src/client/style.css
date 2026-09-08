@@ -599,3 +599,8 @@ input {
   .book-cover .invitation { margin: 0; }
   .shelf { padding-top: 48px; }
 }
+
+.password-cover { max-width: 920px; margin: auto; padding: 64px 28px; }
+.password-cover form { max-width: 360px; display: grid; gap: 16px; margin-top: 40px; }
+.password-cover input { width: 100%; box-sizing: border-box; font: inherit; padding: 12px; border: 1px solid #7b877b; background: #fffdf5; }
+.password-cover h1 { font-size: clamp(64px, 10vw, 110px); }
